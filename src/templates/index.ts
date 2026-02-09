@@ -16,6 +16,10 @@ import blackboardTemplate from './blackboard.json';
 import adventureTemplate from './adventure.json';
 import warmthTemplate from './warmth.json';
 import gameuiTemplate from './gameui.json';
+// 亲子教育主题
+import parentChildTemplate from './parent-child.json';
+import teacherTemplate from './teacher.json';
+import kindergartenTemplate from './kindergarten.json';
 
 export const templates = {
     default: defaultTemplate,
@@ -35,4 +39,8 @@ export const templates = {
     adventure: adventureTemplate,
     warmth: warmthTemplate,
     gameui: gameuiTemplate,
+    // 亲子教育主题
+    'parent-child': parentChildTemplate,
+    teacher: teacherTemplate,
+    kindergarten: kindergartenTemplate,
 };

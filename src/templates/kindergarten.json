@@ -1,0 +1,85 @@
+{
+    "id": "kindergarten",
+    "name": "幼教童趣",
+    "styles": {
+        "container": "",
+        "title": {
+            "h1": {
+                "base": "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
+                "content": "display: inline-block; font-weight: bold; color: #fff; background: linear-gradient(135deg, #E91E63 0%, #FF5722 50%, #FFC107 100%); padding: 10px 28px; border-radius: 30px; box-shadow: 0 4px 12px rgba(233,30,99,0.3);",
+                "after": ""
+            },
+            "h2": {
+                "base": "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5;",
+                "content": "font-weight: bold; color: #4CAF50; border-bottom: 3px dotted #81C784; padding-bottom: 6px;",
+                "after": ""
+            },
+            "h3": {
+                "base": "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+                "content": "font-weight: bold; color: #FF9800; padding-left: 10px; border-left: 4px solid #FFB74D;",
+                "after": ""
+            },
+            "base": {
+                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+                "content": "font-weight: bold; color: #9C27B0;",
+                "after": ""
+            }
+        },
+        "paragraph": "line-height: 2; margin-top: 1em; font-size: 1.05em; color: #424242;",
+        "list": {
+            "container": "padding-left: 32px; color: #424242;",
+            "item": "font-size: 1.05em; color: #424242; line-height: 2;",
+            "taskList": "list-style: none; font-size: 1.05em; color: #424242; line-height: 2;"
+        },
+        "code": {
+            "header": {
+                "container": "margin-bottom: 1em; display: flex; gap: 6px;",
+                "dot": "width: 14px; height: 14px; border-radius: 50%;",
+                "colors": [
+                    "#E91E63",
+                    "#FFC107",
+                    "#4CAF50"
+                ]
+            },
+            "block": "color: #37474F; background: #FFF9C4; border-radius: 16px; border: 2px dashed #FFD54F; margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
+            "inline": "background: #F8BBD9; padding: 3px 10px; border-radius: 15px; color: #C2185B; font-size: 14px; border: none;",
+            "syntax": {
+                "comment": "color: #9E9E9E;",
+                "keyword": "color: #E91E63;",
+                "string": "color: #4CAF50;",
+                "function": "color: #9C27B0;",
+                "number": "color: #FF9800;",
+                "operator": "color: #E91E63;",
+                "class-name": "color: #9C27B0;",
+                "variable": "color: #FF5722;",
+                "constant": "color: #FF9800;",
+                "property": "color: #2196F3;",
+                "punctuation": "color: #424242;",
+                "boolean": "color: #FF9800;",
+                "tag": "color: #4CAF50;",
+                "attr-name": "color: #9C27B0;",
+                "attr-value": "color: #4CAF50;",
+                "regex": "color: #4CAF50;",
+                "selector": "color: #4CAF50;"
+            }
+        },
+        "quote": "border: 3px solid transparent; border-image: linear-gradient(135deg, #E91E63, #FF9800, #4CAF50, #2196F3) 1; border-radius: 0; padding: 15px 20px; background: linear-gradient(135deg, #FCE4EC 0%, #FFF8E1 50%, #E8F5E9 100%); margin: 0.8em 0; color: #5D4037; font-style: normal;",
+        "image": "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 16px; border: 4px solid #FFCC80; box-shadow: 0 6px 16px rgba(0,0,0,0.15);",
+        "link": "color: #E91E63; text-decoration: none; border-bottom: 2px dotted #F48FB1; font-weight: bold;",
+        "emphasis": {
+            "strong": "font-weight: bold; color: #E91E63;",
+            "em": "font-style: italic; color: #9C27B0;",
+            "del": "text-decoration: line-through; color: #BDBDBD;"
+        },
+        "table": {
+            "container": "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #81C784; border-radius: 16px; overflow: hidden;",
+            "header": "background: linear-gradient(135deg, #C8E6C9 0%, #DCEDC8 100%); font-weight: bold; color: #2E7D32; font-size: 1.05em;",
+            "cell": "border-bottom: 1px solid #C8E6C9; padding: 12px; color: #424242; font-size: 1em;"
+        },
+        "hr": "border: none; border-top: 3px dashed #FFCC80; margin: 28px 0;",
+        "footnote": {
+            "ref": "color: #E91E63; text-decoration: none; font-size: 0.9em; font-weight: bold;",
+            "backref": "color: #E91E63; text-decoration: none; font-size: 0.9em; font-weight: bold;"
+        }
+    }
+}
