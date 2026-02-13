@@ -27,3 +27,4 @@
 - [x] Modern, Minimalist, Responsive UI Redesign (Toolbar, Preview Area, Floating Actions)
 - [x] Verify and Release v1.6.0 (Done)
 - [x] Verify and Release v1.6.2 (Fix build error) (Done)
+- [x] Verify and Release v1.6.3 (Logic fix) (Done)

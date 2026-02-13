@@ -1,6 +1,6 @@
 import { Notice } from 'obsidian';
 // @ts-ignore
-import pangu from 'pangu';
+import pangu from 'pangu/dist/browser/pangu';
 
 export class CopyManager {
     private static cleanupHtml(element: HTMLElement): string {
