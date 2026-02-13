@@ -74,6 +74,30 @@ export class MPView extends ItemView {
         const controlsGroup = toolbar.createEl('div', { cls: 'mp-controls-group' });
         const actionGroup = toolbar.createEl('div', { cls: 'mp-actions-group' }); // Right side actions
 
+        // Inject Header
+        const headerBtn = actionGroup.createEl('button', {
+            cls: 'mp-action-button',
+            attr: { 'aria-label': '插入自定义头部', 'title': '插入自定义头部' }
+        });
+        setIcon(headerBtn, 'arrow-down-to-line');
+        headerBtn.addEventListener('click', () => this.toggleHeader());
+
+        // Inject Footer
+        const footerBtn = actionGroup.createEl('button', {
+            cls: 'mp-action-button',
+            attr: { 'aria-label': '插入自定义尾部', 'title': '插入自定义尾部' }
+        });
+        setIcon(footerBtn, 'arrow-up-to-line');
+        footerBtn.addEventListener('click', () => this.toggleFooter());
+
+        // Lock Button
+        this.lockButton = actionGroup.createEl('button', {
+            cls: 'mp-lock-button',
+            attr: { 'aria-label': '开启实时预览状态' }
+        });
+        setIcon(this.lockButton, 'unlock'); // Default unlocked
+        this.lockButton.addEventListener('click', () => this.togglePreviewLock());
+
         // 添加背景选择器
         const backgroundOptions = [
             { value: '', label: '无背景' },
@@ -231,32 +255,7 @@ export class MPView extends ItemView {
             text: '+'
         });
 
-        // --- Actions Group ---
-        const actionGroup = toolbar.createEl('div', { cls: 'mp-actions-group' });
 
-        // Inject Header
-        const headerBtn = actionGroup.createEl('button', {
-            cls: 'mp-action-button',
-            attr: { 'aria-label': '插入自定义头部', 'title': '插入自定义头部' }
-        });
-        setIcon(headerBtn, 'arrow-down-to-line');
-        headerBtn.addEventListener('click', () => this.toggleHeader());
-
-        // Inject Footer
-        const footerBtn = actionGroup.createEl('button', {
-            cls: 'mp-action-button',
-            attr: { 'aria-label': '插入自定义尾部', 'title': '插入自定义尾部' }
-        });
-        setIcon(footerBtn, 'arrow-up-to-line');
-        footerBtn.addEventListener('click', () => this.toggleFooter());
-
-        // Lock Button
-        this.lockButton = actionGroup.createEl('button', {
-            cls: 'mp-lock-button',
-            attr: { 'aria-label': '开启实时预览状态' }
-        });
-        setIcon(this.lockButton, 'unlock'); // Default unlocked
-        this.lockButton.addEventListener('click', () => this.togglePreviewLock());
 
         // 恢复设置状态
         const settings = this.settingsManager.getSettings();
