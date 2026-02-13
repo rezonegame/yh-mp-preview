@@ -156,7 +156,7 @@ export class MPView extends ItemView {
                 const option = backgroundOptions.find(o => o.value === settings.backgroundId);
                 if (option) {
                     backgroundSelect.textContent = option.label;
-                    (this.customBackgroundSelect.querySelector('.custom-select') as HTMLElement)?.setAttribute('data-value', option.value);
+                    (this.customBackgroundSelect.querySelector('.custom-select') as HTMLElement)?.setAttribute('data-value', option.value || '');
                     backgroundDropdown.querySelectorAll('.select-item').forEach(el => {
                         if (el.getAttribute('data-value') === option.value) {
                             el.classList.add('selected');
@@ -178,7 +178,7 @@ export class MPView extends ItemView {
                 const selected = option.find(o => o.value === settings.templateId);
                 if (selected) {
                     templateSelect.textContent = selected.label;
-                    (this.customTemplateSelect.querySelector('.custom-select') as HTMLElement)?.setAttribute('data-value', selected.value);
+                    (this.customTemplateSelect.querySelector('.custom-select') as HTMLElement)?.setAttribute('data-value', selected.value || '');
                     templateDropdown.querySelectorAll('.select-item').forEach(el => {
                         if (el.getAttribute('data-value') === selected.value) {
                             el.classList.add('selected');
@@ -199,7 +199,7 @@ export class MPView extends ItemView {
                 const selected = option.find(o => o.value === settings.fontFamily);
                 if (selected) {
                     fontSelect.textContent = selected.label;
-                    (this.customFontSelect.querySelector('.custom-select') as HTMLElement)?.setAttribute('data-value', selected.value);
+                    (this.customFontSelect.querySelector('.custom-select') as HTMLElement)?.setAttribute('data-value', selected.value || '');
                     fontDropdown.querySelectorAll('.select-item').forEach(el => {
                         if (el.getAttribute('data-value') === selected.value) {
                             el.classList.add('selected');
