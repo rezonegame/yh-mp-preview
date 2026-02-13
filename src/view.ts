@@ -526,6 +526,12 @@ export class MPView extends ItemView {
         );
 
         MPConverter.formatContent(this.previewEl);
+
+        // Apply manual header/footer content if settings allow
+        // Note: The structure requires buttons to inject these into the preview DOM
+        // but user might want them to persist. 
+        // For now, these methods below mimic 'injection' by interacting with the preview content.
+
         this.templateManager.applyTemplate(this.previewEl);
         this.backgroundManager.applyBackground(this.previewEl);
 
@@ -536,6 +542,52 @@ export class MPView extends ItemView {
         } else {
             const heightDiff = this.previewEl.scrollHeight - prevHeight;
             this.previewEl.scrollTop = scrollPosition + heightDiff;
+        }
+    }
+
+    private toggleHeader() {
+        const headerContent = this.settingsManager.getSettings().customHeader;
+        if (!headerContent) {
+            // Optionally notify user no header content is set
+            return;
+        }
+
+        const existingHeader = this.previewEl.querySelector('.mp-custom-header');
+        if (existingHeader) {
+            existingHeader.remove();
+        } else {
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'mp-custom-header';
+            headerDiv.innerHTML = headerContent;
+
+            // Add click to remove
+            const removeBtn = document.createElement('button');
+            removeBtn.style.cssText = 'position:absolute; top:-10px; right:10px; font-size:10px; cursor:pointer; padding:2px 6px; border-radius:4px; border:none; background:var(--text-muted); color:white;';
+            removeBtn.innerText = '移除头部';
+            removeBtn.onclick = (e) => {
+                e.stopPropagation();
+                headerDiv.remove();
+            };
+            // Actually the CSS ::after handles the visual label, we just need functionality if we want explicit btn,
+            // but for now let's just insert content.
+            // The requirement was simple toggle.
+
+            this.previewEl.prepend(headerDiv);
+        }
+    }
+
+    private toggleFooter() {
+        const footerContent = this.settingsManager.getSettings().customFooter;
+        if (!footerContent) return;
+
+        const existingFooter = this.previewEl.querySelector('.mp-custom-footer');
+        if (existingFooter) {
+            existingFooter.remove();
+        } else {
+            const footerDiv = document.createElement('div');
+            footerDiv.className = 'mp-custom-footer';
+            footerDiv.innerHTML = footerContent;
+            this.previewEl.append(footerDiv);
         }
     }
 
