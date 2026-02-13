@@ -20,3 +20,9 @@
 - [x] UI Buttons to Inject/Remove Header/Footer in Preview
 - [x] Text Cleaner (pangu.js + quote fixer) on Copy
 - [x] Verify and Release v1.5.0 (Done)
+
+### v1.6.0: Modern UI Overhaul & Fixes
+- [x] Fix Manual Header/Footer Injection (Ensure buttons are visible/working)
+- [x] Remove "About Author" / Donate button
+- [x] Modern, Minimalist, Responsive UI Redesign (Toolbar, Preview Area, Floating Actions)
+- [x] Verify and Release v1.6.0 (Done)

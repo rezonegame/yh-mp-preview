@@ -48,392 +48,399 @@ export class MPView extends ItemView {
         super(leaf);
         this.templateManager = templateManager;
         this.settingsManager = settingsManager;
-        getDisplayText() {
-            return '公众号预览';
-        }
+        this.backgroundManager = new BackgroundManager(this.settingsManager);
+    }
 
-        getIcon() {
-            return 'eye';
-        }
+    getViewType() {
+        return VIEW_TYPE_MP;
+    }
+
+    getDisplayText() {
+        return '公众号预览';
+    }
+
+    getIcon() {
+        return 'eye';
+    }
 
     async onOpen() {
-            const container = this.containerEl.children[1];
-            container.empty();
-            container.classList.remove('view-content');
-            container.classList.add('mp-view-content');
+        const container = this.containerEl.children[1];
+        container.empty();
+        container.classList.remove('view-content');
+        container.classList.add('mp-view-content');
 
-            // 顶部工具栏
-            const toolbar = container.createEl('div', { cls: 'mp-toolbar' });
-            const controlsGroup = toolbar.createEl('div', { cls: 'mp-controls-group' });
-            const actionGroup = toolbar.createEl('div', { cls: 'mp-actions-group' }); // Right side actions
+        // 顶部工具栏
+        const toolbar = container.createEl('div', { cls: 'mp-toolbar' });
+        const controlsGroup = toolbar.createEl('div', { cls: 'mp-controls-group' });
+        const actionGroup = toolbar.createEl('div', { cls: 'mp-actions-group' }); // Right side actions
 
-            // 添加背景选择器
-            const backgroundOptions = [
-                { value: '', label: '无背景' },
-                ...(this.settingsManager.getVisibleBackgrounds()?.map(bg => ({
-                    value: bg.id,
-                    label: bg.name
-                })) || [])
-            ];
+        // 添加背景选择器
+        const backgroundOptions = [
+            { value: '', label: '无背景' },
+            ...(this.settingsManager.getVisibleBackgrounds()?.map(bg => ({
+                value: bg.id,
+                label: bg.name
+            })) || [])
+        ];
 
-            this.customBackgroundSelect = this.createCustomSelect(
-                controlsGroup, // Append to main controls
-                'mp-background-select',
-                backgroundOptions,
-                async (value) => {
-                    this.backgroundManager.setBackground(value);
-                    await this.settingsManager.updateSettings({
-                        backgroundId: value
-                    });
-                    this.backgroundManager.applyBackground(this.previewEl);
-                }
-            );
-
-            // --- 主题选择区域逻辑优化 ---
-
-            // 1. 获取所有可选主题
-            const allTemplates = await this.getTemplateOptions();
-
-            // 2. 提取系列列表
-            const seriesSet = new Set<string>();
-            seriesSet.add('全部'); // 默认选项
-
-            allTemplates.forEach(t => {
-                if (t.header) {
-                    // 如果已经是 header 项，跳过，或者作为系列名（如果我们的 getTemplateOptions 已经返回了分组结构）
-                    // 现有的 getTemplateOptions 返回的是带 header 的扁平列表
-                    // 我们需要解析一下系列名
-                    seriesSet.add(t.label);
-                }
-            });
-
-            // 由于 getTemplateOptions 返回的是混合了 header 和 item 的扁平数组，
-            // 我们最好有一个更原始的数据源或者重新处理一下 logic。
-            // 为了方便，我们这里重新定义一下获取系列的逻辑。
-
-            const seriesOptions: SelectOption[] = [
-                { label: '全部系列', value: 'all' },
-                { label: '基础主题', value: '基础主题' },
-                { label: 'Minimal', value: 'Minimal 系列' },
-                { label: 'Focus', value: 'Focus 系列' },
-                { label: 'Elegant', value: 'Elegant 系列' },
-                { label: 'Bold', value: 'Bold 系列' },
-                { label: '其他', value: '其他主题' }
-            ];
-
-            // 3. 创建系列筛选器
-            this.customSeriesSelect = this.createCustomSelect(
-                controlsGroup,
-                'mp-series-select',
-                seriesOptions,
-                (seriesValue) => {
-                    // 筛选主题
-                    let filteredOptions: SelectOption[] = [];
-                    if (seriesValue === 'all') {
-                        filteredOptions = allTemplates;
-                    } else {
-                        // 找到对应的 ranges
-                        // 简单的做法: 遍历 allTemplates，找到 headers，匹配 current header，然后收集 subsequent items until next header
-                        let capturing = false;
-                        for (const opt of allTemplates) {
-                            if (opt.header) {
-                                capturing = (opt.label === seriesValue);
-                                // 如果只显示特定系列，我们不需要 header 本身，只需要 items
-                                // 或者保留 header 也可以，但单一系列没必要显示 header
-                                continue;
-                            }
-                            if (capturing) {
-                                filteredOptions.push(opt);
-                            }
-                        }
-                    }
-
-                    // 更新主题选择器的选项
-                    this.customTemplateSelect.updateOptions(filteredOptions);
-
-                    // 如果当前选中的主题不在新列表中，选中第一个
-                    // (CustomSelect 内部逻辑处理，或者在这里显式处理)
-                    if (filteredOptions.length > 0) {
-                        // 尝试保持当前选中值，如果不在新列表中，则选中第一个
-                        // 这里需要 access current value，暂时简化为选中第一个
-                        // 更好的体验是：检查 settings.templateId 是否在 filteredOptions 中
-                        const currentTemplateId = this.settingsManager.getSettings().templateId;
-                        const exists = filteredOptions.find(o => o.value === currentTemplateId);
-                        if (!exists) {
-                            const firstVal = filteredOptions[0].value;
-                            if (firstVal) {
-                                this.customTemplateSelect.setValue(firstVal);
-                                // 触发变更
-                                this.templateManager.setCurrentTemplate(firstVal);
-                                this.settingsManager.updateSettings({ templateId: firstVal });
-                                this.templateManager.applyTemplate(this.previewEl);
-                            }
-                        }
-                    }
-                }
-            );
-            // 设置系列选择器样式，稍微窄一点
-            this.customSeriesSelect.container.style.width = '100px';
-
-            // 4. 创建主题选择器 (初始显示全部)
-            this.customTemplateSelect = this.createCustomSelect(
-                controlsGroup,
-                'mp-template-select',
-                allTemplates,
-                async (value) => {
-                    this.templateManager.setCurrentTemplate(value);
-                    await this.settingsManager.updateSettings({
-                        templateId: value
-                    });
-                    this.templateManager.applyTemplate(this.previewEl);
-                }
-            );
-            this.customTemplateSelect.container.id = 'template-select';
-
-            // 字体选择器
-            this.customFontSelect = this.createCustomSelect(
-                controlsGroup,
-                'mp-font-select',
-                this.getFontOptions(),
-                async (value) => {
-                    this.templateManager.setFont(value);
-                    await this.settingsManager.updateSettings({
-                        fontFamily: value
-                    });
-                    this.templateManager.applyTemplate(this.previewEl);
-                }
-            );
-            this.customFontSelect.container.id = 'font-select';
-
-            // 字号调整
-            const fontSizeGroup = controlsGroup.createEl('div', { cls: 'mp-font-size-group' });
-            const decreaseButton = fontSizeGroup.createEl('button', {
-                cls: 'mp-font-size-btn',
-                text: '-'
-            });
-            this.fontSizeSelect = fontSizeGroup.createEl('input', {
-                cls: 'mp-font-size-input',
-                type: 'text',
-                value: '16',
-                attr: {
-                    style: 'border: none; outline: none; background: transparent;'
-                }
-            });
-            const increaseButton = fontSizeGroup.createEl('button', {
-                cls: 'mp-font-size-btn',
-                text: '+'
-            });
-
-            // --- Actions Group ---
-            const actionGroup = toolbar.createEl('div', { cls: 'mp-actions-group' });
-
-            // Inject Header
-            const headerBtn = actionGroup.createEl('button', {
-                cls: 'mp-action-button',
-                attr: { 'aria-label': '插入自定义头部', 'title': '插入自定义头部' }
-            });
-            setIcon(headerBtn, 'arrow-down-to-line');
-            headerBtn.addEventListener('click', () => this.toggleHeader());
-
-            // Inject Footer
-            const footerBtn = actionGroup.createEl('button', {
-                cls: 'mp-action-button',
-                attr: { 'aria-label': '插入自定义尾部', 'title': '插入自定义尾部' }
-            });
-            setIcon(footerBtn, 'arrow-up-to-line');
-            footerBtn.addEventListener('click', () => this.toggleFooter());
-
-            // Lock Button
-            this.lockButton = actionGroup.createEl('button', {
-                cls: 'mp-lock-button',
-                attr: { 'aria-label': '开启实时预览状态' }
-            });
-            setIcon(this.lockButton, 'unlock'); // Default unlocked
-            this.lockButton.addEventListener('click', () => this.togglePreviewLock());
-
-            // 恢复设置状态
-            const settings = this.settingsManager.getSettings();
-
-            // 恢复背景
-            if (settings.backgroundId) {
-                this.customBackgroundSelect.setValue(settings.backgroundId);
-                this.backgroundManager.setBackground(settings.backgroundId);
-            }
-
-            // 恢复主题和系列
-            if (settings.templateId) {
-                // 1. 找到该主题所属的系列
-                let targetSeries = 'all';
-                const templateId = settings.templateId;
-
-                // 简单的判断逻辑 (复用 getTemplateOptions 里的逻辑或者直接在这里check)
-                if (templateId.startsWith('minimal-')) targetSeries = 'Minimal 系列';
-                else if (templateId.startsWith('focus-')) targetSeries = 'Focus 系列';
-                else if (templateId.startsWith('elegant-')) targetSeries = 'Elegant 系列';
-                else if (templateId.startsWith('bold-')) targetSeries = 'Bold 系列';
-                // 其他归类为基础或其他，为了简单，我们可以保持系列为 'all' 或者尝试匹配
-                // 如果我们想让用户知道当前属于哪个系列，可以设置 seriesSelect
-                // 但如果用户之前选的是 "全部" 下的某个主题，强制切到子系列可能会感到突兀
-                // 策略：默认保留在 "全部系列" (value='all')，除非我们想强制联动。
-                // 鉴于用户体验，保持 'All' 是最安全的，只有用户主动筛选时才变。
-                // 所以这里只设置 templateSelect
-
-                this.customTemplateSelect.setValue(settings.templateId);
-                this.templateManager.setCurrentTemplate(settings.templateId);
-            }
-
-            // 恢复字体
-            if (settings.fontFamily) {
-                this.customFontSelect.setValue(settings.fontFamily);
-                this.templateManager.setFont(settings.fontFamily);
-            }
-
-            if (settings.fontSize) {
-                this.fontSizeSelect.value = settings.fontSize.toString();
-                this.templateManager.setFontSize(settings.fontSize);
-            }
-
-            // 更新字号调整事件
-            const updateFontSize = async () => {
-                const size = parseInt(this.fontSizeSelect.value);
-                this.templateManager.setFontSize(size);
+        this.customBackgroundSelect = this.createCustomSelect(
+            controlsGroup, // Append to main controls
+            'mp-background-select',
+            backgroundOptions,
+            async (value) => {
+                this.backgroundManager.setBackground(value);
                 await this.settingsManager.updateSettings({
-                    fontSize: size
+                    backgroundId: value
+                });
+                this.backgroundManager.applyBackground(this.previewEl);
+            }
+        );
+
+        // --- 主题选择区域逻辑优化 ---
+
+        // 1. 获取所有可选主题
+        const allTemplates = await this.getTemplateOptions();
+
+        // 2. 提取系列列表
+        const seriesSet = new Set<string>();
+        seriesSet.add('全部'); // 默认选项
+
+        allTemplates.forEach(t => {
+            if (t.header) {
+                // 如果已经是 header 项，跳过，或者作为系列名（如果我们的 getTemplateOptions 已经返回了分组结构）
+                // 现有的 getTemplateOptions 返回的是带 header 的扁平列表
+                // 我们需要解析一下系列名
+                seriesSet.add(t.label);
+            }
+        });
+
+        // 由于 getTemplateOptions 返回的是混合了 header 和 item 的扁平数组，
+        // 我们最好有一个更原始的数据源或者重新处理一下 logic。
+        // 为了方便，我们这里重新定义一下获取系列的逻辑。
+
+        const seriesOptions: SelectOption[] = [
+            { label: '全部系列', value: 'all' },
+            { label: '基础主题', value: '基础主题' },
+            { label: 'Minimal', value: 'Minimal 系列' },
+            { label: 'Focus', value: 'Focus 系列' },
+            { label: 'Elegant', value: 'Elegant 系列' },
+            { label: 'Bold', value: 'Bold 系列' },
+            { label: '其他', value: '其他主题' }
+        ];
+
+        // 3. 创建系列筛选器
+        this.customSeriesSelect = this.createCustomSelect(
+            controlsGroup,
+            'mp-series-select',
+            seriesOptions,
+            (seriesValue) => {
+                // 筛选主题
+                let filteredOptions: SelectOption[] = [];
+                if (seriesValue === 'all') {
+                    filteredOptions = allTemplates;
+                } else {
+                    // 找到对应的 ranges
+                    // 简单的做法: 遍历 allTemplates，找到 headers，匹配 current header，然后收集 subsequent items until next header
+                    let capturing = false;
+                    for (const opt of allTemplates) {
+                        if (opt.header) {
+                            capturing = (opt.label === seriesValue);
+                            // 如果只显示特定系列，我们不需要 header 本身，只需要 items
+                            // 或者保留 header 也可以，但单一系列没必要显示 header
+                            continue;
+                        }
+                        if (capturing) {
+                            filteredOptions.push(opt);
+                        }
+                    }
+                }
+
+                // 更新主题选择器的选项
+                this.customTemplateSelect.updateOptions(filteredOptions);
+
+                // 如果当前选中的主题不在新列表中，选中第一个
+                // (CustomSelect 内部逻辑处理，或者在这里显式处理)
+                if (filteredOptions.length > 0) {
+                    // 尝试保持当前选中值，如果不在新列表中，则选中第一个
+                    // 这里需要 access current value，暂时简化为选中第一个
+                    // 更好的体验是：检查 settings.templateId 是否在 filteredOptions 中
+                    const currentTemplateId = this.settingsManager.getSettings().templateId;
+                    const exists = filteredOptions.find(o => o.value === currentTemplateId);
+                    if (!exists) {
+                        const firstVal = filteredOptions[0].value;
+                        if (firstVal) {
+                            this.customTemplateSelect.setValue(firstVal);
+                            // 触发变更
+                            this.templateManager.setCurrentTemplate(firstVal);
+                            this.settingsManager.updateSettings({ templateId: firstVal });
+                            this.templateManager.applyTemplate(this.previewEl);
+                        }
+                    }
+                }
+            }
+        );
+        // 设置系列选择器样式，稍微窄一点
+        this.customSeriesSelect.container.style.width = '100px';
+
+        // 4. 创建主题选择器 (初始显示全部)
+        this.customTemplateSelect = this.createCustomSelect(
+            controlsGroup,
+            'mp-template-select',
+            allTemplates,
+            async (value) => {
+                this.templateManager.setCurrentTemplate(value);
+                await this.settingsManager.updateSettings({
+                    templateId: value
                 });
                 this.templateManager.applyTemplate(this.previewEl);
-            };
+            }
+        );
+        this.customTemplateSelect.container.id = 'template-select';
 
-            // 字号调整按钮事件
-            decreaseButton.addEventListener('click', () => {
-                const currentSize = parseInt(this.fontSizeSelect.value);
-                if (currentSize > 12) {
-                    this.fontSizeSelect.value = (currentSize - 1).toString();
-                    updateFontSize();
-                }
+        // 字体选择器
+        this.customFontSelect = this.createCustomSelect(
+            controlsGroup,
+            'mp-font-select',
+            this.getFontOptions(),
+            async (value) => {
+                this.templateManager.setFont(value);
+                await this.settingsManager.updateSettings({
+                    fontFamily: value
+                });
+                this.templateManager.applyTemplate(this.previewEl);
+            }
+        );
+        this.customFontSelect.container.id = 'font-select';
+
+        // 字号调整
+        const fontSizeGroup = controlsGroup.createEl('div', { cls: 'mp-font-size-group' });
+        const decreaseButton = fontSizeGroup.createEl('button', {
+            cls: 'mp-font-size-btn',
+            text: '-'
+        });
+        this.fontSizeSelect = fontSizeGroup.createEl('input', {
+            cls: 'mp-font-size-input',
+            type: 'text',
+            value: '16',
+            attr: {
+                style: 'border: none; outline: none; background: transparent;'
+            }
+        });
+        const increaseButton = fontSizeGroup.createEl('button', {
+            cls: 'mp-font-size-btn',
+            text: '+'
+        });
+
+        // --- Actions Group ---
+        const actionGroup = toolbar.createEl('div', { cls: 'mp-actions-group' });
+
+        // Inject Header
+        const headerBtn = actionGroup.createEl('button', {
+            cls: 'mp-action-button',
+            attr: { 'aria-label': '插入自定义头部', 'title': '插入自定义头部' }
+        });
+        setIcon(headerBtn, 'arrow-down-to-line');
+        headerBtn.addEventListener('click', () => this.toggleHeader());
+
+        // Inject Footer
+        const footerBtn = actionGroup.createEl('button', {
+            cls: 'mp-action-button',
+            attr: { 'aria-label': '插入自定义尾部', 'title': '插入自定义尾部' }
+        });
+        setIcon(footerBtn, 'arrow-up-to-line');
+        footerBtn.addEventListener('click', () => this.toggleFooter());
+
+        // Lock Button
+        this.lockButton = actionGroup.createEl('button', {
+            cls: 'mp-lock-button',
+            attr: { 'aria-label': '开启实时预览状态' }
+        });
+        setIcon(this.lockButton, 'unlock'); // Default unlocked
+        this.lockButton.addEventListener('click', () => this.togglePreviewLock());
+
+        // 恢复设置状态
+        const settings = this.settingsManager.getSettings();
+
+        // 恢复背景
+        if (settings.backgroundId) {
+            this.customBackgroundSelect.setValue(settings.backgroundId);
+            this.backgroundManager.setBackground(settings.backgroundId);
+        }
+
+        // 恢复主题和系列
+        if (settings.templateId) {
+            // 1. 找到该主题所属的系列
+            let targetSeries = 'all';
+            const templateId = settings.templateId;
+
+            // 简单的判断逻辑 (复用 getTemplateOptions 里的逻辑或者直接在这里check)
+            if (templateId.startsWith('minimal-')) targetSeries = 'Minimal 系列';
+            else if (templateId.startsWith('focus-')) targetSeries = 'Focus 系列';
+            else if (templateId.startsWith('elegant-')) targetSeries = 'Elegant 系列';
+            else if (templateId.startsWith('bold-')) targetSeries = 'Bold 系列';
+            // 其他归类为基础或其他，为了简单，我们可以保持系列为 'all' 或者尝试匹配
+            // 如果我们想让用户知道当前属于哪个系列，可以设置 seriesSelect
+            // 但如果用户之前选的是 "全部" 下的某个主题，强制切到子系列可能会感到突兀
+            // 策略：默认保留在 "全部系列" (value='all')，除非我们想强制联动。
+            // 鉴于用户体验，保持 'All' 是最安全的，只有用户主动筛选时才变。
+            // 所以这里只设置 templateSelect
+
+            this.customTemplateSelect.setValue(settings.templateId);
+            this.templateManager.setCurrentTemplate(settings.templateId);
+        }
+
+        // 恢复字体
+        if (settings.fontFamily) {
+            this.customFontSelect.setValue(settings.fontFamily);
+            this.templateManager.setFont(settings.fontFamily);
+        }
+
+        if (settings.fontSize) {
+            this.fontSizeSelect.value = settings.fontSize.toString();
+            this.templateManager.setFontSize(settings.fontSize);
+        }
+
+        // 更新字号调整事件
+        const updateFontSize = async () => {
+            const size = parseInt(this.fontSizeSelect.value);
+            this.templateManager.setFontSize(size);
+            await this.settingsManager.updateSettings({
+                fontSize: size
             });
+            this.templateManager.applyTemplate(this.previewEl);
+        };
 
-            increaseButton.addEventListener('click', () => {
-                const currentSize = parseInt(this.fontSizeSelect.value);
-                if (currentSize < 30) {
-                    this.fontSizeSelect.value = (currentSize + 1).toString();
-                    updateFontSize();
-                }
-            });
+        // 字号调整按钮事件
+        decreaseButton.addEventListener('click', () => {
+            const currentSize = parseInt(this.fontSizeSelect.value);
+            if (currentSize > 12) {
+                this.fontSizeSelect.value = (currentSize - 1).toString();
+                updateFontSize();
+            }
+        });
 
-            this.fontSizeSelect.addEventListener('change', updateFontSize);
-            // 预览区域
-            this.previewEl = container.createEl('div', { cls: 'mp-preview-area' });
+        increaseButton.addEventListener('click', () => {
+            const currentSize = parseInt(this.fontSizeSelect.value);
+            if (currentSize < 30) {
+                this.fontSizeSelect.value = (currentSize + 1).toString();
+                updateFontSize();
+            }
+        });
 
-            // 底部工具栏
-            const bottomBar = container.createEl('div', { cls: 'mp-bottom-bar' });
-            // 创建中间控件容器
-            const bottomControlsGroup = bottomBar.createEl('div', { cls: 'mp-controls-group' });
-            // 帮助按钮
-            const helpButton = bottomControlsGroup.createEl('button', {
-                cls: 'mp-help-button',
-                attr: { 'aria-label': '使用指南' }
-            });
-            setIcon(helpButton, 'help');
-            // 帮助提示框
-            bottomControlsGroup.createEl('div', {
-                cls: 'mp-help-tooltip',
-                text: `使用指南：
+        this.fontSizeSelect.addEventListener('change', updateFontSize);
+        // 预览区域
+        this.previewEl = container.createEl('div', { cls: 'mp-preview-area' });
+
+        // 底部工具栏
+        const bottomBar = container.createEl('div', { cls: 'mp-bottom-bar' });
+        // 创建中间控件容器
+        const bottomControlsGroup = bottomBar.createEl('div', { cls: 'mp-controls-group' });
+        // 帮助按钮
+        const helpButton = bottomControlsGroup.createEl('button', {
+            cls: 'mp-help-button',
+            attr: { 'aria-label': '使用指南' }
+        });
+        setIcon(helpButton, 'help');
+        // 帮助提示框
+        bottomControlsGroup.createEl('div', {
+            cls: 'mp-help-tooltip',
+            text: `使用指南：
                 1. 左侧选择「系列」快速过滤
                 2. 右侧选择「主题」预览效果
                 3. 调整字体和字号
                 4. 点击【复制按钮】即可粘贴到公众号
                 `
-            });
+        });
 
 
 
-            const buttonGroup = bottomControlsGroup.createEl('div', { cls: 'mp-button-group' });
+        const buttonGroup = bottomControlsGroup.createEl('div', { cls: 'mp-button-group' });
 
-            // 复制按钮
-            this.copyButton = buttonGroup.createEl('button', {
-                text: 'Pub 复制', // Shortened text
-                cls: 'mp-copy-button',
-                attr: { style: 'margin-right: 8px;' }
-            });
+        // 复制按钮
+        this.copyButton = buttonGroup.createEl('button', {
+            text: 'Pub 复制', // Shortened text
+            cls: 'mp-copy-button',
+            attr: { style: 'margin-right: 8px;' }
+        });
 
-            // 导出长图按钮
-            const exportImageButton = buttonGroup.createEl('button', {
-                text: '导出长图',
-                cls: 'mp-export-button'
-            });
+        // 导出长图按钮
+        const exportImageButton = buttonGroup.createEl('button', {
+            text: '导出长图',
+            cls: 'mp-export-button'
+        });
 
-            // 导出逻辑
-            exportImageButton.addEventListener('click', async () => {
-                if (this.previewEl) {
-                    exportImageButton.disabled = true;
-                    const originalText = exportImageButton.innerText;
-                    exportImageButton.setText('生成中...');
+        // 导出逻辑
+        exportImageButton.addEventListener('click', async () => {
+            if (this.previewEl) {
+                exportImageButton.disabled = true;
+                const originalText = exportImageButton.innerText;
+                exportImageButton.setText('生成中...');
 
-                    try {
-                        // @ts-ignore
-                        const canvas = await html2canvas(this.previewEl, {
-                            useCORS: true,
-                            allowTaint: true,
-                            backgroundColor: '#ffffff', // 强制白色背景，避免透明
-                            scale: 2 // 提高清晰度
-                        });
+                try {
+                    // @ts-ignore
+                    const canvas = await html2canvas(this.previewEl, {
+                        useCORS: true,
+                        allowTaint: true,
+                        backgroundColor: '#ffffff', // 强制白色背景，避免透明
+                        scale: 2 // 提高清晰度
+                    });
 
-                        const link = document.createElement('a');
-                        link.download = `mp-preview-${Date.now()}.png`;
-                        link.href = canvas.toDataURL('image/png');
-                        link.click();
+                    const link = document.createElement('a');
+                    link.download = `mp-preview-${Date.now()}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
 
-                        exportImageButton.setText('导出成功');
-                    } catch (error) {
-                        console.error('导出失败:', error);
-                        exportImageButton.setText('导出失败');
-                    } finally {
-                        setTimeout(() => {
-                            exportImageButton.disabled = false;
-                            exportImageButton.setText(originalText);
-                        }, 2000);
-                    }
+                    exportImageButton.setText('导出成功');
+                } catch (error) {
+                    console.error('导出失败:', error);
+                    exportImageButton.setText('导出失败');
+                } finally {
+                    setTimeout(() => {
+                        exportImageButton.disabled = false;
+                        exportImageButton.setText(originalText);
+                    }, 2000);
                 }
-            });
+            }
+        });
 
-            // 添加复制按钮点击事件
-            this.copyButton.addEventListener('click', async () => {
-                if (this.previewEl) {
-                    this.copyButton.disabled = true;
-                    this.copyButton.setText('复制中...');
+        // 添加复制按钮点击事件
+        this.copyButton.addEventListener('click', async () => {
+            if (this.previewEl) {
+                this.copyButton.disabled = true;
+                this.copyButton.setText('复制中...');
 
-                    try {
-                        await CopyManager.copyToClipboard(this.previewEl);
-                        this.copyButton.setText('复制成功');
+                try {
+                    await CopyManager.copyToClipboard(this.previewEl);
+                    this.copyButton.setText('复制成功');
 
-                        setTimeout(() => {
-                            this.copyButton.disabled = false;
-                            this.copyButton.setText('复制为公众号格式');
-                        }, 2000);
-                    } catch (error) {
-                        this.copyButton.setText('复制失败');
-                        setTimeout(() => {
-                            this.copyButton.disabled = false;
-                            this.copyButton.setText('复制为公众号格式');
-                        }, 2000);
-                    }
+                    setTimeout(() => {
+                        this.copyButton.disabled = false;
+                        this.copyButton.setText('复制为公众号格式');
+                    }, 2000);
+                } catch (error) {
+                    this.copyButton.setText('复制失败');
+                    setTimeout(() => {
+                        this.copyButton.disabled = false;
+                        this.copyButton.setText('复制为公众号格式');
+                    }, 2000);
                 }
-            });
+            }
+        });
 
-            // 监听文档变化
-            this.registerEvent(
-                this.app.workspace.on('file-open', this.onFileOpen.bind(this))
-            );
+        // 监听文档变化
+        this.registerEvent(
+            this.app.workspace.on('file-open', this.onFileOpen.bind(this))
+        );
 
-            // 监听文档内容变化
-            this.registerEvent(
-                this.app.vault.on('modify', this.onFileModify.bind(this))
-            );
+        // 监听文档内容变化
+        this.registerEvent(
+            this.app.vault.on('modify', this.onFileModify.bind(this))
+        );
 
-            // 检查当前打开的文件
-            const currentFile = this.app.workspace.getActiveFile();
-            await this.onFileOpen(currentFile);
-        }
+        // 检查当前打开的文件
+        const currentFile = this.app.workspace.getActiveFile();
+        await this.onFileOpen(currentFile);
+    }
 
     private updateControlsState(enabled: boolean) {
         this.lockButton.disabled = !enabled;
