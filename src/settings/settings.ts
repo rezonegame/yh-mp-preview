@@ -59,21 +59,24 @@ export class SettingsManager {
         }));
 
         // 如果没有保存的模板数据，直接使用代码中的模板
-        if (!savedData.templates || savedData.templates.length === 0) {
+        if (!savedData.templates || !Array.isArray(savedData.templates) || savedData.templates.length === 0) {
             savedData.templates = codeTemplates;
         } else {
             // 如果有保存的数据，合并新模板
-            // 1. 保留已保存模板的设置（如是否可见）
-            // 2. 添加新增加的模板
-            const savedTemplatesMap = new Map(savedData.templates.map((t: Template) => [t.id, t]));
+            const savedTemplatesMap = new Map<string, any>();
+            savedData.templates.forEach((t: any) => {
+                if (t && t.id) savedTemplatesMap.set(t.id, t);
+            });
 
             savedData.templates = codeTemplates.map(codeTemplate => {
                 const savedTemplate = savedTemplatesMap.get(codeTemplate.id);
                 if (savedTemplate) {
                     // 保留用户对预设模板的修改（目前只有 isVisible）
+                    // 确保 isVisible 存在，如果不存在默认为 true
+                    const isVisible = savedTemplate.isVisible !== undefined ? savedTemplate.isVisible : true;
                     return {
                         ...codeTemplate,
-                        isVisible: savedTemplate.isVisible
+                        isVisible: isVisible
                     };
                 }
                 // 新增的模板
@@ -96,16 +99,21 @@ export class SettingsManager {
             isVisible: true
         }));
 
-        if (!savedData.backgrounds || savedData.backgrounds.length === 0) {
+        if (!savedData.backgrounds || !Array.isArray(savedData.backgrounds) || savedData.backgrounds.length === 0) {
             savedData.backgrounds = codeBackgrounds;
         } else {
-            const savedBackgroundsMap = new Map(savedData.backgrounds.map((b: Background) => [b.id, b]));
+            const savedBackgroundsMap = new Map<string, any>();
+            savedData.backgrounds.forEach((b: any) => {
+                if (b && b.id) savedBackgroundsMap.set(b.id, b);
+            });
+
             savedData.backgrounds = codeBackgrounds.map(codeBackground => {
                 const savedBackground = savedBackgroundsMap.get(codeBackground.id);
                 if (savedBackground) {
+                    const isVisible = savedBackground.isVisible !== undefined ? savedBackground.isVisible : true;
                     return {
                         ...codeBackground,
-                        isVisible: savedBackground.isVisible
+                        isVisible: isVisible
                     };
                 }
                 return codeBackground;
