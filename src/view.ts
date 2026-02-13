@@ -5,6 +5,7 @@ import type { TemplateManager } from './templateManager';
 import { DonateManager } from './donateManager';
 import type { SettingsManager } from './settings/settings';
 import { BackgroundManager } from './backgroundManager';
+import html2canvas from 'html2canvas';
 export const VIEW_TYPE_MP = 'mp-preview';
 
 interface SelectOption {
@@ -348,12 +349,54 @@ export class MPView extends ItemView {
             DonateManager.showDonateModal(this.containerEl);
         });
 
+        const buttonGroup = bottomControlsGroup.createEl('div', { cls: 'mp-button-group' });
+
         // 复制按钮
-        this.copyButton = bottomControlsGroup.createEl('button', {
+        this.copyButton = buttonGroup.createEl('button', {
             text: '复制到公众号',
-            cls: 'mp-copy-button'
+            cls: 'mp-copy-button',
+            attr: { style: 'margin-right: 8px;' }
         });
-        //新功能按钮
+
+        // 导出长图按钮
+        const exportImageButton = buttonGroup.createEl('button', {
+            text: '导出长图',
+            cls: 'mp-export-button'
+        });
+
+        // 导出逻辑
+        exportImageButton.addEventListener('click', async () => {
+            if (this.previewEl) {
+                exportImageButton.disabled = true;
+                const originalText = exportImageButton.innerText;
+                exportImageButton.setText('生成中...');
+
+                try {
+                    // @ts-ignore
+                    const canvas = await html2canvas(this.previewEl, {
+                        useCORS: true,
+                        allowTaint: true,
+                        backgroundColor: '#ffffff', // 强制白色背景，避免透明
+                        scale: 2 // 提高清晰度
+                    });
+
+                    const link = document.createElement('a');
+                    link.download = `mp-preview-${Date.now()}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+
+                    exportImageButton.setText('导出成功');
+                } catch (error) {
+                    console.error('导出失败:', error);
+                    exportImageButton.setText('导出失败');
+                } finally {
+                    setTimeout(() => {
+                        exportImageButton.disabled = false;
+                        exportImageButton.setText(originalText);
+                    }, 2000);
+                }
+            }
+        });
 
         // 添加复制按钮点击事件
         this.copyButton.addEventListener('click', async () => {

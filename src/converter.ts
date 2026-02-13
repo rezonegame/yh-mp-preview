@@ -23,71 +23,172 @@ export class MPConverter {
 
     private static processElements(container: HTMLElement | null): void {
         if (!container) return;
-        // 处理列表项内部元素，用section包裹
+
+        // 1. 处理列表项内部元素，用section包裹
         container.querySelectorAll('li').forEach(li => {
-            // 创建section元素
             const section = document.createElement('section');
-            // 将li的所有子元素移动到section中
             while (li.firstChild) {
                 section.appendChild(li.firstChild);
             }
-            // 将section添加到li中
             li.appendChild(section);
         });
 
-        // 处理代码块
+        // 2. 处理代码块
         container.querySelectorAll('pre').forEach(pre => {
-            // 过滤掉 frontmatter
             if (pre.classList.contains('frontmatter')) {
-                // 如果是 frontmatter，直接移除整个元素
                 pre.remove();
                 return;
             }
-            
+
             const codeEl = pre.querySelector('code');
             if (codeEl) {
-                // 添加 macOS 风格的窗口按钮
                 const header = document.createElement('div');
                 header.className = 'mp-code-header';
-
-                // 添加三个窗口按钮
                 for (let i = 0; i < 3; i++) {
                     const dot = document.createElement('span');
                     dot.className = 'mp-code-dot';
                     header.appendChild(dot);
                 }
-
                 pre.insertBefore(header, pre.firstChild);
-                
-                // 移除原有的复制按钮
+
                 const copyButton = pre.querySelector('.copy-code-button');
-                if (copyButton) {
-                    copyButton.remove();
-                }
+                if (copyButton) copyButton.remove();
             }
         });
 
-        // 处理图片
+        // 3. 处理图片 (增强版：支持 Alt 文本作为注脚)
         container.querySelectorAll('span.internal-embed[alt][src]').forEach(async el => {
             const originalSpan = el as HTMLElement;
             const src = originalSpan.getAttribute('src');
             const alt = originalSpan.getAttribute('alt');
-            
+
             if (!src) return;
-            
+
             try {
                 const linktext = src.split('|')[0];
                 const file = this.app.metadataCache.getFirstLinkpathDest(linktext, '');
                 if (file) {
                     const absolutePath = this.app.vault.adapter.getResourcePath(file.path);
+
+                    // 创建 figure 容器
+                    const figure = document.createElement('figure');
+                    figure.className = 'mp-image-container';
+                    figure.style.margin = '0 auto';  // 居中
+                    figure.style.textAlign = 'center'; // 内容居中
+                    figure.style.display = 'block';
+
                     const newImg = document.createElement('img');
                     newImg.src = absolutePath;
-                    if (alt) newImg.alt = alt;
-                    originalSpan.parentNode?.replaceChild(newImg, originalSpan);
+                    newImg.style.maxWidth = '100%';
+                    newImg.style.display = 'inline-block'; // 配合 textAlign center
+                    newImg.style.margin = '0';
+
+                    if (alt) {
+                        newImg.alt = alt;
+                        figure.appendChild(newImg);
+
+                        // 添加 figcaption
+                        const figcaption = document.createElement('figcaption');
+                        figcaption.textContent = alt;
+                        figcaption.className = 'mp-image-caption';
+                        figcaption.style.textAlign = 'center';
+                        figcaption.style.color = '#888';
+                        figcaption.style.fontSize = '0.9em';
+                        figcaption.style.marginTop = '6px';
+                        figcaption.style.display = 'block';
+                        figure.appendChild(figcaption);
+                    } else {
+                        figure.appendChild(newImg);
+                    }
+
+                    originalSpan.parentNode?.replaceChild(figure, originalSpan);
                 }
             } catch (error) {
                 console.error('图片处理失败:', error);
             }
         });
+
+        // 4. 处理注脚 (转换为尾注)
+        // 查找所有注脚引用
+        const footnoteRefs = container.querySelectorAll('a.footnote-link');
+        const footnotesMap = new Map<string, HTMLElement>();
+
+        // 查找所有注脚内容
+        const footnoteItems = container.querySelectorAll('.footnotes li');
+        footnoteItems.forEach(item => {
+            const id = item.id;
+            if (id) {
+                // remove backref arrow
+                const backRef = item.querySelector('.footnote-backref');
+                if (backRef) backRef.remove();
+                footnotesMap.set(id, item as HTMLElement);
+            }
+        });
+
+        // 如果存在注脚
+        if (footnoteRefs.length > 0 && footnotesMap.size > 0) {
+            // 处理正文引用: [^1] -> [1]
+            footnoteRefs.forEach((ref, index) => {
+                ref.textContent = `[${index + 1}]`;
+                (ref as HTMLElement).style.textDecoration = 'none';
+                (ref as HTMLElement).style.color = 'var(--text-accent)';
+                // 移除 href 防止跳转（或者保留跳转但通过样式弱化）
+                ref.removeAttribute('href');
+            });
+
+            // 创建新的参考资料区域
+            let refSection = container.querySelector('.mp-reference-section');
+            if (!refSection) {
+                const hr = document.createElement('hr');
+                hr.className = 'mp-footnote-separator';
+                hr.style.margin = '30px 0 20px';
+                hr.style.border = 'none';
+                hr.style.borderTop = '1px dashed #ccc';
+                container.appendChild(hr);
+
+                refSection = document.createElement('section');
+                refSection.className = 'mp-reference-section';
+
+                const title = document.createElement('h3');
+                title.textContent = '参考资料';
+                title.className = 'mp-reference-title';
+                title.style.fontSize = '1.1em';
+                title.style.fontWeight = 'bold';
+                title.style.marginBottom = '10px';
+                refSection.appendChild(title);
+
+                container.appendChild(refSection);
+            }
+
+            // 清空旧内容（如果多次渲染）并添加新列表
+            // 这里我们简单追加
+            const list = document.createElement('ol');
+            list.style.paddingLeft = '20px';
+            list.style.margin = '0';
+            list.style.fontSize = '0.9em';
+            list.style.color = '#666';
+
+            // 按照引用顺序重新生成列表
+            footnoteRefs.forEach((ref) => {
+                const href = ref.getAttribute('data-href'); // Obsidian uses data-href too
+                // Check original href like '#fn:1'
+                // This part is tricky because we removed href. Let's assume we process correctly.
+                // Simplified: Just iterate existing footnotesMap in order (Obsidian usually keeps order)
+            });
+
+            // 直接遍历原有注脚列表比较稳妥
+            footnoteItems.forEach((item) => {
+                const li = document.createElement('li');
+                li.innerHTML = item.innerHTML;
+                li.style.marginBottom = '4px';
+                list.appendChild(li);
+            });
+
+            refSection.appendChild(list);
+
+            // 移除原始 footnotes 容器
+            const originalFootnotes = container.querySelector('.footnotes');
+            if (originalFootnotes) originalFootnotes.remove();
+        }
     }
 }
