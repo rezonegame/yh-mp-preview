@@ -23,7 +23,7 @@ export class MPView extends ItemView {
     private customBackgroundSelect: HTMLElement;
 
     constructor(
-        leaf: WorkspaceLeaf, 
+        leaf: WorkspaceLeaf,
         templateManager: TemplateManager,
         settingsManager: SettingsManager
     ) {
@@ -42,7 +42,7 @@ export class MPView extends ItemView {
     }
 
     getIcon() {
-       return 'eye';
+        return 'eye';
     }
 
     async onOpen() {
@@ -50,11 +50,11 @@ export class MPView extends ItemView {
         container.empty();
         container.classList.remove('view-content');
         container.classList.add('mp-view-content');
-        
+
         // 顶部工具栏
         const toolbar = container.createEl('div', { cls: 'mp-toolbar' });
         const controlsGroup = toolbar.createEl('div', { cls: 'mp-controls-group' });
-        
+
         // 锁定按钮
         this.lockButton = controlsGroup.createEl('button', {
             cls: 'mp-lock-button',
@@ -63,9 +63,9 @@ export class MPView extends ItemView {
         setIcon(this.lockButton, 'lock');
         this.lockButton.setAttribute('aria-label', '开启实时预览状态');
         this.lockButton.addEventListener('click', () => this.togglePreviewLock());
-    
 
-        
+
+
         // 添加背景选择器
         const backgroundOptions = [
             { value: '', label: '无背景' },
@@ -74,13 +74,13 @@ export class MPView extends ItemView {
                 label: bg.name
             })) || [])
         ];
-        
+
         this.customBackgroundSelect = this.createCustomSelect(
             controlsGroup,
             'mp-background-select',
             backgroundOptions
         );
-        
+
         // 添加背景选择器的事件监听
         this.customBackgroundSelect.querySelector('.custom-select')?.addEventListener('change', async (e: any) => {
             const value = e.detail.value;
@@ -90,7 +90,7 @@ export class MPView extends ItemView {
             });
             this.backgroundManager.applyBackground(this.previewEl);
         });
-        
+
         // 创建自定义下拉选择器
         this.customTemplateSelect = this.createCustomSelect(
             controlsGroup,
@@ -98,7 +98,7 @@ export class MPView extends ItemView {
             await this.getTemplateOptions()
         );
         this.customTemplateSelect.id = 'template-select';
-        
+
         // 添加模板选择器的 change 事件监听
         this.customTemplateSelect.querySelector('.custom-select')?.addEventListener('change', async (e: any) => {
             const value = e.detail.value;
@@ -108,7 +108,7 @@ export class MPView extends ItemView {
             });
             this.templateManager.applyTemplate(this.previewEl);
         });
-    
+
         this.customFontSelect = this.createCustomSelect(
             controlsGroup,
             'mp-font-select',
@@ -128,11 +128,11 @@ export class MPView extends ItemView {
 
         // 字号调整
         const fontSizeGroup = controlsGroup.createEl('div', { cls: 'mp-font-size-group' });
-        const decreaseButton = fontSizeGroup.createEl('button', { 
+        const decreaseButton = fontSizeGroup.createEl('button', {
             cls: 'mp-font-size-btn',
             text: '-'
         });
-        this.fontSizeSelect = fontSizeGroup.createEl('input', { 
+        this.fontSizeSelect = fontSizeGroup.createEl('input', {
             cls: 'mp-font-size-input',
             type: 'text',
             value: '16',
@@ -140,14 +140,14 @@ export class MPView extends ItemView {
                 style: 'border: none; outline: none; background: transparent;'
             }
         });
-        const increaseButton = fontSizeGroup.createEl('button', { 
+        const increaseButton = fontSizeGroup.createEl('button', {
             cls: 'mp-font-size-btn',
             text: '+'
         });
 
         // 从设置中恢复上次的选择
         const settings = this.settingsManager.getSettings();
-        
+
         // 恢复背景设置
         if (settings.backgroundId) {
             const backgroundSelect = this.customBackgroundSelect.querySelector('.selected-text');
@@ -270,10 +270,10 @@ export class MPView extends ItemView {
                 6. 如果你喜欢这个插件，欢迎关注打赏`
         });
 
-        
-        
+
+
         // 关于作者按钮
-        const likeButton = bottomControlsGroup.createEl('button', { 
+        const likeButton = bottomControlsGroup.createEl('button', {
             cls: 'mp-like-button'
         });
         const heartSpan = likeButton.createEl('span', {
@@ -281,18 +281,18 @@ export class MPView extends ItemView {
             attr: { style: 'margin-right: 4px' }
         });
         likeButton.createSpan({ text: '关于作者' });
-        
+
         likeButton.addEventListener('click', () => {
             DonateManager.showDonateModal(this.containerEl);
         });
 
         // 复制按钮
-        this.copyButton = bottomControlsGroup.createEl('button', { 
+        this.copyButton = bottomControlsGroup.createEl('button', {
             text: '复制到公众号',
             cls: 'mp-copy-button'
         });
         //新功能按钮
-        const newButton = bottomControlsGroup.createEl('button', { 
+        const newButton = bottomControlsGroup.createEl('button', {
             text: '敬请期待',
             cls: 'mp-new-button'
         });
@@ -302,11 +302,11 @@ export class MPView extends ItemView {
             if (this.previewEl) {
                 this.copyButton.disabled = true;
                 this.copyButton.setText('复制中...');
-                
+
                 try {
                     await CopyManager.copyToClipboard(this.previewEl);
                     this.copyButton.setText('复制成功');
-                    
+
                     setTimeout(() => {
                         this.copyButton.disabled = false;
                         this.copyButton.setText('复制为公众号格式');
@@ -342,17 +342,17 @@ export class MPView extends ItemView {
         const templateSelect = this.customTemplateSelect.querySelector('.custom-select');
         const fontSelect = this.customFontSelect.querySelector('.custom-select');
         const backgroundSelect = this.customBackgroundSelect.querySelector('.custom-select');
-        
+
         [templateSelect, fontSelect, backgroundSelect].forEach(select => {
             if (select) {
                 select.classList.toggle('disabled', !enabled);
                 select.setAttribute('style', `pointer-events: ${enabled ? 'auto' : 'none'}`);
             }
         });
-        
+
         this.fontSizeSelect.disabled = !enabled;
         this.copyButton.disabled = !enabled;
-        
+
         // 字号调节按钮的状态控制
         const fontSizeButtons = this.containerEl.querySelectorAll('.mp-font-size-btn');
         fontSizeButtons.forEach(button => {
@@ -384,7 +384,7 @@ export class MPView extends ItemView {
         const lockStatus = this.isPreviewLocked ? '开启实时预览状态' : '关闭实时预览状态';
         setIcon(this.lockButton, lockIcon);
         this.lockButton.setAttribute('aria-label', lockStatus);
-        
+
         if (!this.isPreviewLocked) {
             await this.updatePreview();
         }
@@ -395,7 +395,7 @@ export class MPView extends ItemView {
             if (this.updateTimer) {
                 clearTimeout(this.updateTimer);
             }
-            
+
             this.updateTimer = setTimeout(() => {
                 this.updatePreview();
             }, 500);
@@ -412,7 +412,7 @@ export class MPView extends ItemView {
 
         this.previewEl.empty();
         const content = await this.app.vault.cachedRead(this.currentFile);
-        
+
         await MarkdownRenderer.render(
             this.app,
             content,
@@ -442,66 +442,130 @@ export class MPView extends ItemView {
     private createCustomSelect(
         parent: HTMLElement,
         className: string,
-        options: { value: string; label: string }[]
+        options: { label: string; padding?: boolean; value?: string; header?: boolean }[]
     ) {
         const container = parent.createEl('div', { cls: 'custom-select-container' });
         const select = container.createEl('div', { cls: 'custom-select' });
         const selectedText = select.createEl('span', { cls: 'selected-text' });
         const arrow = select.createEl('span', { cls: 'select-arrow', text: '▾' });
-        
+
         const dropdown = container.createEl('div', { cls: 'select-dropdown' });
-        
+
         options.forEach(option => {
+            if (option.header) {
+                dropdown.createEl('div', {
+                    cls: 'select-group-header',
+                    text: option.label,
+                    attr: {
+                        style: 'padding: 8px 12px; font-weight: bold; color: var(--text-muted); font-size: 0.8em; background-color: var(--background-secondary); border-bottom: 1px solid var(--background-modifier-border); border-top: 1px solid var(--background-modifier-border); pointer-events: none;'
+                    }
+                });
+                return;
+            }
+
             const item = dropdown.createEl('div', {
                 cls: 'select-item',
                 text: option.label
             });
-            
-            item.dataset.value = option.value;
+
+            if (option.value) item.dataset.value = option.value;
+
             item.addEventListener('click', () => {
                 // 移除其他项的选中状态
-                dropdown.querySelectorAll('.select-item').forEach(el => 
+                dropdown.querySelectorAll('.select-item').forEach(el =>
                     el.classList.remove('selected'));
                 // 添加当前项的选中状态
                 item.classList.add('selected');
                 selectedText.textContent = option.label;
-                select.dataset.value = option.value;
+                if (option.value) select.dataset.value = option.value;
                 dropdown.classList.remove('show');
                 select.dispatchEvent(new CustomEvent('change', {
                     detail: { value: option.value }
                 }));
             });
         });
-        
+
         // 设置默认值和选中状态
-        if (options.length > 0) {
-            selectedText.textContent = options[0].label;
-            select.dataset.value = options[0].value;
-            dropdown.querySelector('.select-item')?.classList.add('selected');
+        // 找到第一个非 header 的选项
+        const firstOption = options.find(o => !o.header);
+        if (firstOption) {
+            selectedText.textContent = firstOption.label;
+            if (firstOption.value) select.dataset.value = firstOption.value;
+            // 只选择非 header 的 select-item
+            dropdown.querySelectorAll('.select-item:not(.select-group-header)').forEach(item => {
+                if ((item as HTMLElement).innerText === firstOption.label) item.classList.add('selected');
+            });
         }
-        
+
         // 点击显示/隐藏下拉列表
         select.addEventListener('click', (e) => {
             e.stopPropagation();
             dropdown.classList.toggle('show');
         });
-        
+
         // 点击其他地方关闭下拉列表
         document.addEventListener('click', () => {
             dropdown.classList.remove('show');
         });
-        
+
         return container;
     }
 
     // 获取模板选项
     private async getTemplateOptions() {
-
         const templates = this.settingsManager.getVisibleTemplates();
-        
-        return templates.length > 0
-            ? templates.map(t => ({ value: t.id, label: t.name }))
-            : [{ value: 'default', label: '默认模板' }];
+
+        if (templates.length === 0) {
+            return [{ value: 'default', label: '默认模板' }];
+        }
+
+        // 定义系列顺序
+        const seriesOrder = ['基础主题', 'Minimal 系列', 'Focus 系列', 'Elegant 系列', 'Bold 系列', '其他主题'];
+
+        const groups: { [key: string]: typeof templates } = {
+            '基础主题': [],
+            'Minimal 系列': [],
+            'Focus 系列': [],
+            'Elegant 系列': [],
+            'Bold 系列': [],
+            '其他主题': []
+        };
+
+        // 辅助函数：判断主题是否属于新系列
+        const isNewSeries = (id: string) =>
+            id.startsWith('minimal-') ||
+            id.startsWith('focus-') ||
+            id.startsWith('elegant-') ||
+            id.startsWith('bold-');
+
+        templates.forEach(t => {
+            if (t.id.startsWith('minimal-')) {
+                groups['Minimal 系列'].push(t);
+            } else if (t.id.startsWith('focus-')) {
+                groups['Focus 系列'].push(t);
+            } else if (t.id.startsWith('elegant-')) {
+                groups['Elegant 系列'].push(t);
+            } else if (t.id.startsWith('bold-')) {
+                groups['Bold 系列'].push(t);
+            } else if (!isNewSeries(t.id)) {
+                groups['基础主题'].push(t);
+            } else {
+                groups['其他主题'].push(t);
+            }
+        });
+
+        const options: { label: string; value?: string; header?: boolean }[] = [];
+
+        seriesOrder.forEach(series => {
+            if (groups[series] && groups[series].length > 0) {
+                options.push({ label: series, header: true });
+                groups[series].forEach(t => {
+                    options.push({ label: t.name, value: t.id });
+                });
+            }
+        });
+
+        return options;
     }
 
     // 获取字体选项

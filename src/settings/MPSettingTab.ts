@@ -4,7 +4,7 @@ import { CreateTemplateModal } from './CreateTemplateModal';
 import { CreateFontModal } from './CreateFontModal';
 import { CreateBackgroundModal } from './CreateBackgroundModal'; // 添加导入
 import { ConfirmModal } from './ConfirmModal';
-import { TemplatePreviewModal }  from './templatePreviewModal'; // 添加导入
+import { TemplatePreviewModal } from './templatePreviewModal'; // 添加导入
 export class MPSettingTab extends PluginSettingTab {
     plugin: MPPlugin; // 修改插件类型以匹配类名
     private expandedSections: Set<string> = new Set();
@@ -51,7 +51,9 @@ export class MPSettingTab extends PluginSettingTab {
         containerEl.empty();
         containerEl.addClass('mp-settings');
 
-        containerEl.createEl('h2', { text: 'MP Preview' });
+        const header = containerEl.createDiv({ cls: 'mp-settings-header' });
+        header.createEl('h2', { text: 'MP Preview', attr: { style: 'display: inline-block; margin-bottom: 0;' } });
+        header.createEl('span', { text: ` v${this.plugin.manifest.version}`, attr: { style: 'font-size: 0.8em; color: var(--text-muted); margin-left: 10px;' } });
 
         this.createSection(containerEl, '基本选项', el => this.renderBasicSettings(el));
         this.createSection(containerEl, '模板选项', el => this.renderTemplateSettings(el));
@@ -266,7 +268,7 @@ export class MPSettingTab extends PluginSettingTab {
                 new Setting(templateItem)
                     .setName(template.name)
                     .setDesc(template.description)
-                    .addExtraButton(btn => 
+                    .addExtraButton(btn =>
                         btn.setIcon('eye')
                             .setTooltip('预览')
                             .onClick(() => {
@@ -482,7 +484,7 @@ export class MPSettingTab extends PluginSettingTab {
                                     }
                                 ).open();
                             }));
-                
+
                 // 添加背景预览
                 const previewEl = backgroundItem.createDiv('background-preview');
                 previewEl.setAttribute('style', background.style);
