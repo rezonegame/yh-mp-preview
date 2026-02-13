@@ -1,6 +1,16 @@
 export const backgrounds = {
     backgrounds: [
         {
+            id: "default",
+            name: "默认",
+            style: "box-sizing: border-box; margin: 0; padding: 0; background-color: #f8f8f8;"
+        },
+        {
+            id: "none",
+            name: "无背景",
+            style: "box-sizing: border-box; margin: 0; padding: 0; background-color: #ffffff;"
+        },
+        {
             id: "grid",
             name: "网格",
             style: "box-sizing: border-box; margin: 0; padding: 0; background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.03) 2%, rgba(0, 0, 0, 0) 2%), linear-gradient(360deg, rgba(50, 0, 0, 0.03) 2%, rgba(0, 0, 0, 0) 2%); background-size: 20px 20px; background-position: center center;"

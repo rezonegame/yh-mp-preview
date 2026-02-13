@@ -1,0 +1,86 @@
+{
+    "id": "bold-red",
+    "name": "Bold 系列 - 红色",
+    "description": "粗壮醒目，红色系",
+    "styles": {
+        "container": "",
+        "title": {
+            "h1": {
+                "base": "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #e74c3c; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
+                "content": "font-weight: 900; color: #fff;",
+                "after": ""
+            },
+            "h2": {
+                "base": "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #e74c3c; padding-bottom: 8px;",
+                "content": "font-weight: 800; color: #e74c3c;",
+                "after": ""
+            },
+            "h3": {
+                "base": "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #e74c3c;",
+                "content": "font-weight: bold; color: #c0392b;",
+                "after": ""
+            },
+            "base": {
+                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
+                "content": "color: #a93226;",
+                "after": ""
+            }
+        },
+        "paragraph": "line-height: 1.8; margin: 1em 0; font-size: 1em; color: #2c3e50; font-weight: 500; text-align: justify;",
+        "list": {
+            "container": "padding-left: 32px; color: #2c3e50;",
+            "item": "font-size: 1em; color: #2c3e50; line-height: 1.8; font-weight: 500;",
+            "taskList": "list-style: none; font-size: 1em; color: #2c3e50; line-height: 1.8;"
+        },
+        "code": {
+            "header": {
+                "container": "margin-bottom: 1em; display: flex; gap: 6px;",
+                "dot": "width: 12px; height: 12px; border-radius: 50%;",
+                "colors": [
+                    "#ff5f56",
+                    "#ffbd2e",
+                    "#27c93f"
+                ]
+            },
+            "block": "color: #e0e0e0; background: #2c3e50; border-radius: 8px; border: 1px solid #1a252f; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
+            "inline": "background: #fdedec; padding: 2px 6px; border-radius: 4px; color: #c0392b; font-size: 14px; border: 1px solid #f5b7b1; font-weight: bold;",
+            "syntax": {
+                "comment": "color: #7f8c8d;",
+                "keyword": "color: #e74c3c;",
+                "string": "color: #f1c40f;",
+                "function": "color: #3498db;",
+                "number": "color: #e67e22;",
+                "operator": "color: #e74c3c;",
+                "class-name": "color: #e67e22;",
+                "variable": "color: #f39c12;",
+                "constant": "color: #9b59b6;",
+                "property": "color: #3498db;",
+                "punctuation": "color: #ecf0f1;",
+                "boolean": "color: #e67e22;",
+                "tag": "color: #f39c12;",
+                "attr-name": "color: #f1c40f;",
+                "attr-value": "color: #2ecc71;",
+                "regex": "color: #e67e22;",
+                "selector": "color: #f39c12;"
+            }
+        },
+        "quote": "border-left: 6px solid #e74c3c; border-radius: 4px; padding: 15px; background: #fdfefe; margin: 1em 0; color: #641e16; font-style: italic; font-weight: 600;",
+        "image": "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.15);",
+        "link": "color: #e74c3c; text-decoration: none; border-bottom: 2px solid #e74c3c; font-weight: bold;",
+        "emphasis": {
+            "strong": "font-weight: 900; color: #e74c3c; background: rgba(231,76,60,0.15); padding: 0 4px; border-radius: 2px;",
+            "em": "font-style: italic; color: #2c3e50; font-weight: bold;",
+            "del": "text-decoration: line-through; color: #7f8c8d;"
+        },
+        "table": {
+            "container": "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #e74c3c; border-radius: 6px; overflow: hidden;",
+            "header": "background: #e74c3c; font-weight: 900; color: #fff; padding: 10px; font-size: 1em; text-align: center;",
+            "cell": "border: 1px solid #eee; padding: 10px; color: #2c3e50; font-size: 1em; font-weight: 500;"
+        },
+        "hr": "border: none; border-top: 4px solid #e74c3c; margin: 30px 0; border-radius: 2px;",
+        "footnote": {
+            "ref": "color: #e74c3c; text-decoration: none; font-size: 0.9em; font-weight: bold;",
+            "backref": "color: #e74c3c; text-decoration: none; font-size: 0.9em; font-weight: bold;"
+        }
+    }
+}

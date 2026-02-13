@@ -1,0 +1,86 @@
+{
+    "id": "elegant-sky",
+    "name": "Elegant 系列 - 天蓝",
+    "description": "层次丰富，天蓝色系",
+    "styles": {
+        "container": "",
+        "title": {
+            "h1": {
+                "base": "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #56c2e6; padding: 10px 15px; background: linear-gradient(to right, rgba(86,194,230,0.1), transparent); border-radius: 0 4px 4px 0;",
+                "content": "font-weight: bold; color: #2e8fab;",
+                "after": ""
+            },
+            "h2": {
+                "base": "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #56c2e6; padding: 8px 12px; background: linear-gradient(to right, rgba(86,194,230,0.1), transparent); border-radius: 0 4px 4px 0;",
+                "content": "font-weight: bold; color: #2e8fab;",
+                "after": ""
+            },
+            "h3": {
+                "base": "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #56c2e6; padding: 5px 10px;",
+                "content": "font-weight: bold; color: #56c2e6;",
+                "after": ""
+            },
+            "base": {
+                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #56c2e6; padding: 4px 8px;",
+                "content": "font-weight: bold; color: #2e8fab;",
+                "after": ""
+            }
+        },
+        "paragraph": "line-height: 1.8; margin: 1em 0; font-size: 1em; color: #4a4a4a; text-align: justify;",
+        "list": {
+            "container": "padding-left: 32px; color: #4a4a4a;",
+            "item": "font-size: 1em; color: #4a4a4a; line-height: 1.8;",
+            "taskList": "list-style: none; font-size: 1em; color: #4a4a4a; line-height: 1.8;"
+        },
+        "code": {
+            "header": {
+                "container": "margin-bottom: 1em; display: flex; gap: 6px;",
+                "dot": "width: 12px; height: 12px; border-radius: 50%;",
+                "colors": [
+                    "#ff5f56",
+                    "#ffbd2e",
+                    "#27c93f"
+                ]
+            },
+            "block": "color: #333; background: #fafafa; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
+            "inline": "background: #fafafa; padding: 2px 6px; border-radius: 4px; color: #333; font-size: 14px; border: 1px solid #eee;",
+            "syntax": {
+                "comment": "color: #6a737d;",
+                "keyword": "color: #56c2e6;",
+                "string": "color: #032f62;",
+                "function": "color: #6f42c1;",
+                "number": "color: #005cc5;",
+                "operator": "color: #56c2e6;",
+                "class-name": "color: #6f42c1;",
+                "variable": "color: #e36209;",
+                "constant": "color: #005cc5;",
+                "property": "color: #005cc5;",
+                "punctuation": "color: #24292e;",
+                "boolean": "color: #005cc5;",
+                "tag": "color: #22863a;",
+                "attr-name": "color: #6f42c1;",
+                "attr-value": "color: #032f62;",
+                "regex": "color: #032f62;",
+                "selector": "color: #22863a;"
+            }
+        },
+        "quote": "border-left: 4px solid #56c2e6; border-radius: 6px; padding: 10px 10px; background: rgba(86,194,230,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        "image": "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);",
+        "link": "color: #56c2e6; text-decoration: none; border-bottom: 1px solid #56c2e6;",
+        "emphasis": {
+            "strong": "font-weight: bold; color: #56c2e6;",
+            "em": "font-style: italic; color: #404040;",
+            "del": "text-decoration: line-through; color: #595959;"
+        },
+        "table": {
+            "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
+            "header": "background: rgba(86,194,230,0.1); font-weight: bold; color: #2e8fab; border-bottom: 2px solid #56c2e6; font-size: 1em; text-align: left;",
+            "cell": "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: left;"
+        },
+        "hr": "border: none; border-top: 1px solid #56c2e6; margin: 20px 0; opacity: 0.3;",
+        "footnote": {
+            "ref": "color: #56c2e6; text-decoration: none; font-size: 0.9em;",
+            "backref": "color: #56c2e6; text-decoration: none; font-size: 0.9em;"
+        }
+    }
+}
