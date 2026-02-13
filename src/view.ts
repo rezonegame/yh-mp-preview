@@ -73,6 +73,24 @@ export class MPView extends ItemView {
         const toolbar = container.createEl('div', { cls: 'mp-toolbar' });
         const controlsGroup = toolbar.createEl('div', { cls: 'mp-controls-group' });
 
+        // 注入头部按钮
+        const headerBtn = controlsGroup.createEl('button', {
+            cls: 'mp-action-button',
+            attr: { 'aria-label': '插入自定义头部', 'title': '插入自定义头部' }
+        });
+        setIcon(headerBtn, 'arrow-down-to-line'); // Icon for inject header
+        headerBtn.addEventListener('click', () => this.toggleHeader());
+
+        // 注入尾部按钮
+        const footerBtn = controlsGroup.createEl('button', {
+            cls: 'mp-action-button',
+            attr: { 'aria-label': '插入自定义尾部', 'title': '插入自定义尾部' }
+        });
+        setIcon(footerBtn, 'arrow-up-to-line'); // Icon for inject footer
+        footerBtn.addEventListener('click', () => this.toggleFooter());
+
+        // 锁定按钮
+
         // 锁定按钮
         this.lockButton = controlsGroup.createEl('button', {
             cls: 'mp-lock-button',

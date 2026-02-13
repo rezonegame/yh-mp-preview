@@ -58,6 +58,7 @@ export class MPSettingTab extends PluginSettingTab {
         this.createSection(containerEl, '基本选项', el => this.renderBasicSettings(el));
         this.createSection(containerEl, '模板选项', el => this.renderTemplateSettings(el));
         this.createSection(containerEl, '背景选项', el => this.renderBackgroundSettings(el));
+        this.createSection(containerEl, '高级选项', el => this.renderAdvancedSettings(el));
     }
 
     private renderBasicSettings(containerEl: HTMLElement): void {
@@ -505,6 +506,31 @@ export class MPSettingTab extends PluginSettingTab {
                             new Notice('背景已创建');
                         }
                     ).open();
+                }));
+    }
+
+    // Add createSection helper if it was removed or not accessible, but it seems to be private in class
+    // We need to render a new section for Advanced Settings
+
+    private renderAdvancedSettings(containerEl: HTMLElement): void {
+        new Setting(containerEl)
+            .setName('自定义头部 (HTML)')
+            .setDesc('在文章顶部插入的 HTML 代码（如关注引导）')
+            .addTextArea(text => text
+                .setPlaceholder('<div>...</div>')
+                .setValue(this.plugin.settingsManager.getSettings().customHeader || '')
+                .onChange(async (value) => {
+                    await this.plugin.settingsManager.updateSettings({ customHeader: value });
+                }));
+
+        new Setting(containerEl)
+            .setName('自定义尾部 (HTML)')
+            .setDesc('在文章底部插入的 HTML 代码（如二维码）')
+            .addTextArea(text => text
+                .setPlaceholder('<div>...</div>')
+                .setValue(this.plugin.settingsManager.getSettings().customFooter || '')
+                .onChange(async (value) => {
+                    await this.plugin.settingsManager.updateSettings({ customFooter: value });
                 }));
     }
 }

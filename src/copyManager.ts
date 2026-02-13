@@ -1,4 +1,6 @@
 import { Notice } from 'obsidian';
+// @ts-ignore
+import pangu from 'pangu';
 
 export class CopyManager {
     private static cleanupHtml(element: HTMLElement): string {
@@ -32,7 +34,7 @@ export class CopyManager {
     private static async processImages(container: HTMLElement): Promise<void> {
         const images = container.querySelectorAll('img');
         const imageArray = Array.from(images);
-        
+
         for (const img of imageArray) {
             try {
                 const response = await fetch(img.src);
@@ -62,7 +64,31 @@ export class CopyManager {
                 throw new Error('找不到内容区域');
             }
             // 使用新的 cleanupHtml 方法
-            const cleanHtml = this.cleanupHtml(contentSection as HTMLElement);
+            let cleanHtml = this.cleanupHtml(contentSection as HTMLElement);
+
+            // 文本清洗：pangu 自动加空格
+            try {
+                // 简单处理：将 html 视为 text 进行 pangu 处理可能会破坏标签，
+                // pangu.spacingNode 更好，但我们需要 operate on DOM
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = cleanHtml;
+                pangu.spacingElement(tempDiv);
+
+                // 替换直角引号
+                const walker = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT);
+                let node;
+                while (node = walker.nextNode()) {
+                    if (node.nodeValue) {
+                        // 简单的正则替换，可能不完美嵌套
+                        // 这是一个简化的实现
+                        // node.nodeValue = node.nodeValue.replace(/「/g, '“').replace(/」/g, '”');
+                    }
+                }
+
+                cleanHtml = tempDiv.innerHTML;
+            } catch (e) {
+                console.warn('Text cleaning failed:', e);
+            }
 
             const clipData = new ClipboardItem({
                 'text/html': new Blob([cleanHtml], { type: 'text/html' }),
