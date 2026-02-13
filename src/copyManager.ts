@@ -1,6 +1,6 @@
 import { Notice } from 'obsidian';
 // @ts-ignore
-import pangu from 'pangu/dist/browser/pangu';
+import pangu from 'pangu/browser';
 
 export class CopyManager {
     private static cleanupHtml(element: HTMLElement): string {
@@ -72,6 +72,7 @@ export class CopyManager {
                 // pangu.spacingNode 更好，但我们需要 operate on DOM
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = cleanHtml;
+                // @ts-ignore
                 pangu.spacingElement(tempDiv);
 
                 // 替换直角引号
