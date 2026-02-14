@@ -57,7 +57,7 @@ export class MPConverter {
         });
 
         // 3. 处理图片 (增强版：支持 Alt 文本作为注脚)
-        container.querySelectorAll('span.internal-embed[alt][src]').forEach(async el => {
+        container.querySelectorAll('span.internal-embed[src]').forEach(async el => {
             const originalSpan = el as HTMLElement;
             const src = originalSpan.getAttribute('src');
             const alt = originalSpan.getAttribute('alt');
