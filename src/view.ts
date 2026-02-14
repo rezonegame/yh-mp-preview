@@ -348,12 +348,15 @@ export class MPView extends ItemView {
                 // Let's use a custom modal for better UX as "Super Simple GUI".
                 // Actually, let's just use `window.prompt`. It IS a super simple GUI.
 
+                // Prompt user for new alt text
                 const newAlt = window.prompt('编辑图片注释 (Alt Text):', currentAlt);
 
                 if (newAlt !== null && newAlt !== currentAlt) {
+                    console.log(`[MP Preview] Updating Alt Text: "${currentAlt}" -> "${newAlt}" for src: "${currentSrc}"`);
                     // Update File Content
                     try {
                         let fileContent = await this.app.vault.read(this.currentFile);
+
 
                         // Need to find the image in markdown.
                         // Common formats: ![alt](src) or ![[src|alt]] (Obsidian internal)
@@ -394,42 +397,64 @@ export class MPView extends ItemView {
                         let newFileContent = fileContent;
                         let replaced = false;
 
-                        // Escape regex special chars in currentAlt
-                        const escapedAlt = currentAlt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        // 1. Try to use linktext for WikiLinks (Robust)
+                        const linktext = img.dataset.linktext;
 
-                        // 1. Standard Markdown: ![alt](src)
-                        // If alt is empty, look for ![] associated with... we don't know src easily.
-                        // Let's try to match the alt text.
+                        if (linktext) {
+                            // It's a WikiLink: ![[linktext]] or ![[linktext|alt]]
+                            // Escape linktext for regex
+                            const escapedLinktext = linktext.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-                        // Pattern: `![currentAlt](`
-                        const stdRegex = new RegExp(`!\\[${escapedAlt}\\]\\(`, ''); // Non-global? First match?
-                        if (stdRegex.test(newFileContent)) {
-                            newFileContent = newFileContent.replace(stdRegex, `![${newAlt}](`);
-                            replaced = true;
-                        } else {
-                            // 2. Wikilink: ![[filename|alt]] or ![[filename]] (if alt is empty, effectively filename is alt-ish in renderer?)
-                            // Actually obsidian renders ![[filename]] as alt="filename" often if not specified.
-                            // If user explicitly set alt: ![[filename|currentAlt]]
+                            console.log(`[MP Preview] Found WikiLink linktext: "${linktext}"`);
 
-                            if (currentAlt) {
-                                const wikiRegex = new RegExp(`\\|${escapedAlt}\\]\\]`, '');
-                                if (wikiRegex.test(newFileContent)) {
-                                    newFileContent = newFileContent.replace(wikiRegex, `|${newAlt}]]`);
+                            // Regex to find ![[linktext]] or ![[linktext|oldAlt]]
+                            // We look for ![[ followed by linktext, then optional pipe and anything, then ]]
+                            // Note: We use 'g' to replace all? Or just first? 
+                            // If user edits one image, we probably want to edit that specific one.
+                            // But detecting "which one" is hard without index.
+                            // For "Super Simple GUI", let's replace the first one or all?
+                            // Let's replace the first occurrence that matches.
+
+                            const wikiRegex = new RegExp(`!\\[\\[\\s*${escapedLinktext}\\s*(?:\\|.*?)?\\]\\]`);
+
+                            if (wikiRegex.test(newFileContent)) {
+                                newFileContent = newFileContent.replace(wikiRegex, `![[${linktext}|${newAlt}]]`);
+                                replaced = true;
+                                console.log('[MP Preview] Replaced WikiLink via linktext match');
+                            }
+                        }
+
+                        // 2. If not replaced (Standard Markdown OR WikiLink fallback), try Alt Text matching
+                        if (!replaced) {
+                            // Escape regex special chars in currentAlt
+                            const escapedAlt = currentAlt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+                            // Standard Markdown: ![alt](src)
+                            // Regex: !\[ (escapedAlt) \] \(
+                            const stdRegex = new RegExp(`!\\[\\s*${escapedAlt}\\s*\\]\\(`, '');
+
+                            if (stdRegex.test(newFileContent)) {
+                                newFileContent = newFileContent.replace(stdRegex, `![${newAlt}](`);
+                                replaced = true;
+                                console.log('[MP Preview] Replaced Standard Markdown via Alt Text');
+                            } else if (currentAlt) {
+                                // Fallback for WikiLink if linktext failed or missing
+                                // Try finding simple `|alt]]` end of wikilink
+                                const wikiAltRegex = new RegExp(`\\|\\s*${escapedAlt}\\s*\\]\\]`, '');
+                                if (wikiAltRegex.test(newFileContent)) {
+                                    newFileContent = newFileContent.replace(wikiAltRegex, `|${newAlt}]]`);
                                     replaced = true;
+                                    console.log('[MP Preview] Replaced WikiLink via Alt Text pipe');
                                 }
-                            } else {
-                                // Empty alt case for wikilink: ![[filename]] -> ![[filename|newAlt]]
-                                // We don't know filename from DOM easily without reversing URL.
-                                // For now, handle Standard Markdown primary case or Explicit Wikilink case.
                             }
                         }
 
                         if (replaced) {
                             await this.app.vault.modify(this.currentFile, newFileContent);
                             new Notice('图片注释已更新');
-                            // Preview will auto-refresh due to file modify event
                         } else {
-                            new Notice('无法在文档中精确定位此图片，请手动修改。');
+                            console.warn(`[MP Preview] Update failed. Linktext: ${linktext}, Alt: ${currentAlt}`);
+                            new Notice('无法在文档中精确定位此图片，请检查是否为标准格式。');
                         }
 
                     } catch (err) {

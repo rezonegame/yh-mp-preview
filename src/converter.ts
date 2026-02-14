@@ -79,6 +79,7 @@ export class MPConverter {
 
                     const newImg = document.createElement('img');
                     newImg.src = absolutePath;
+                    newImg.dataset.linktext = linktext; // Store original linktext for editing
                     newImg.style.maxWidth = '100%';
                     newImg.style.display = 'inline-block'; // 配合 textAlign center
                     newImg.style.margin = '0';
