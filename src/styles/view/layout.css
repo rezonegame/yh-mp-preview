@@ -3,10 +3,14 @@
     height: 100%;
     padding: 10px 10px 0 10px;
     overflow: auto;
+    position: relative;
+    z-index: 1;
+    /* Ensure base layer */
 }
 
 /* ===== 工具栏 ===== */
-.mp-toolbar, .mp-bottom-bar {
+.mp-toolbar,
+.mp-bottom-bar {
     padding: 15px 0;
     max-width: 580px;
     background: var(--background-secondary);
@@ -22,6 +26,9 @@
     bottom: 0;
     border-radius: 8px;
     border-top: 2px solid var(--background-modifier-border);
+    position: relative;
+    z-index: 10;
+    /* Ensure controls are above content if they overlap */
 }
 
 /* 控件组布局 */
@@ -30,7 +37,8 @@
     gap: 12px;
     align-items: center;
     width: 100%;
-    justify-content: flex-start;  /* 改为靠左对齐 */
+    justify-content: flex-start;
+    /* 改为靠左对齐 */
     flex-wrap: nowrap;
     min-width: 0;
 }
@@ -79,7 +87,7 @@
     width: 36px;
     padding: 0;
     margin: 0 20px 0 10px;
-    flex: none ;
+    flex: none;
 }
 
 .mp-controls-group .mp-copy-button {
@@ -87,6 +95,7 @@
     color: var(--text-on-accent);
     border: none;
 }
+
 .mp-controls-group .mp-copy-button:hover {
     color: var(--text-on-accent);
     background-color: var(--text-accent);
@@ -117,6 +126,7 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
 .selected-text {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -124,6 +134,7 @@
     flex: 1;
     min-width: 0;
 }
+
 .custom-select:hover {
     background: var(--background-modifier-hover);
     box-shadow: 0 2px 6px var(--background-modifier-box-shadow);
@@ -206,12 +217,13 @@
 /* ===== 帮助提示 ===== */
 .mp-help-tooltip {
     position: absolute;
-    left: 30px;  
-    bottom: 80px;
-    width: 300px;
+    left: 0;
+    bottom: 50px;
+    /* Position above button */
+    width: 280px;
     padding: 12px 16px;
     background: var(--background-primary);
-    border: 2px solid var(--background-modifier-border);
+    border: 1px solid var(--background-modifier-border);
     border-radius: 8px;
     box-shadow: 0 4px 12px var(--background-modifier-box-shadow);
     font-size: 13px;
@@ -219,16 +231,17 @@
     color: var(--text-normal);
     display: none;
     white-space: pre-line;
-    z-index: 1001;  /* 提高层级 */
-    pointer-events: none;  /* 防止tooltip影响鼠标事件 */
+    z-index: 1000;
+    pointer-events: none;
 }
 
 /* 修改触发方式 */
 .mp-controls-group .mp-help-button {
-    position: relative;  /* 添加相对定位 */
+    position: relative;
+    /* 添加相对定位 */
 }
 
-.mp-help-button:hover + .mp-help-tooltip {
+.mp-help-button:hover+.mp-help-tooltip {
     display: block;
 }
 
@@ -345,7 +358,7 @@
     letter-spacing: 0.2px;
 }
 
-.mp-about-role, 
+.mp-about-role,
 .mp-about-desc {
     font-size: 14.5px;
     color: var(--text-normal);

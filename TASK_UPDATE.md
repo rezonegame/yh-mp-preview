@@ -35,3 +35,4 @@
 - [x] Release v1.7.1 (Fix missing Notice import) (Done)
 - [x] Release v1.7.2 (Fix Image Alt Editing logic) (Done)
 - [x] Release v1.7.3 (Fix editing for no-alt images & Update Docs) (Done)
+- [x] Release v1.7.4 (Force Apply Logic Fix) (Done)

@@ -507,425 +507,427 @@ export class MPView extends ItemView {
         });
         setIcon(helpButton, 'help');
         // 帮助提示框
-        bottomControlsGroup.createEl('div', {
-            cls: 'mp-help-tooltip',
+        cls: 'mp-help-tooltip',
             text: `使用指南：
                 1. 左侧选择「系列」快速过滤
                 2. 右侧选择「主题」预览效果
                 3. 调整字体和字号
                 4. 点击【复制按钮】即可粘贴到公众号
                 `
-        });
+    });
+
+        // Ensure help button container has relative positioning for tooltip
+        helpButton.style.position = 'relative';
 
 
 
-        const buttonGroup = bottomControlsGroup.createEl('div', { cls: 'mp-button-group' });
+    const buttonGroup = bottomControlsGroup.createEl('div', { cls: 'mp-button-group' });
 
         // 复制按钮
         this.copyButton = buttonGroup.createEl('button', {
-            text: 'Pub 复制', // Shortened text
-            cls: 'mp-copy-button',
-            attr: { style: 'margin-right: 8px;' }
-        });
+        text: 'Pub 复制', // Shortened text
+        cls: 'mp-copy-button',
+        attr: { style: 'margin-right: 8px;' }
+    });
 
-        // 导出长图按钮
-        const exportImageButton = buttonGroup.createEl('button', {
-            text: '导出长图',
-            cls: 'mp-export-button'
-        });
+// 导出长图按钮
+const exportImageButton = buttonGroup.createEl('button', {
+    text: '导出长图',
+    cls: 'mp-export-button'
+});
 
-        // 导出逻辑
-        exportImageButton.addEventListener('click', async () => {
-            if (this.previewEl) {
-                exportImageButton.disabled = true;
-                const originalText = exportImageButton.innerText;
-                exportImageButton.setText('生成中...');
+// 导出逻辑
+exportImageButton.addEventListener('click', async () => {
+    if (this.previewEl) {
+        exportImageButton.disabled = true;
+        const originalText = exportImageButton.innerText;
+        exportImageButton.setText('生成中...');
 
-                try {
-                    // @ts-ignore
-                    const canvas = await html2canvas(this.previewEl, {
-                        useCORS: true,
-                        allowTaint: true,
-                        backgroundColor: '#ffffff', // 强制白色背景，避免透明
-                        scale: 2 // 提高清晰度
-                    });
+        try {
+            // @ts-ignore
+            const canvas = await html2canvas(this.previewEl, {
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff', // 强制白色背景，避免透明
+                scale: 2 // 提高清晰度
+            });
 
-                    const link = document.createElement('a');
-                    link.download = `mp-preview-${Date.now()}.png`;
-                    link.href = canvas.toDataURL('image/png');
-                    link.click();
+            const link = document.createElement('a');
+            link.download = `mp-preview-${Date.now()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
 
-                    exportImageButton.setText('导出成功');
-                } catch (error) {
-                    console.error('导出失败:', error);
-                    exportImageButton.setText('导出失败');
-                } finally {
-                    setTimeout(() => {
-                        exportImageButton.disabled = false;
-                        exportImageButton.setText(originalText);
-                    }, 2000);
-                }
-            }
-        });
+            exportImageButton.setText('导出成功');
+        } catch (error) {
+            console.error('导出失败:', error);
+            exportImageButton.setText('导出失败');
+        } finally {
+            setTimeout(() => {
+                exportImageButton.disabled = false;
+                exportImageButton.setText(originalText);
+            }, 2000);
+        }
+    }
+});
 
-        // 添加复制按钮点击事件
-        this.copyButton.addEventListener('click', async () => {
-            if (this.previewEl) {
-                this.copyButton.disabled = true;
-                this.copyButton.setText('复制中...');
+// 添加复制按钮点击事件
+this.copyButton.addEventListener('click', async () => {
+    if (this.previewEl) {
+        this.copyButton.disabled = true;
+        this.copyButton.setText('复制中...');
 
-                try {
-                    await CopyManager.copyToClipboard(this.previewEl);
-                    this.copyButton.setText('复制成功');
+        try {
+            await CopyManager.copyToClipboard(this.previewEl);
+            this.copyButton.setText('复制成功');
 
-                    setTimeout(() => {
-                        this.copyButton.disabled = false;
-                        this.copyButton.setText('Pub 复制'); // Fixed: Consistent text reset
-                    }, 2000);
-                } catch (error) {
-                    this.copyButton.setText('复制失败');
-                    setTimeout(() => {
-                        this.copyButton.disabled = false;
-                        this.copyButton.setText('Pub 复制'); // Fixed: Consistent text reset
-                    }, 2000);
-                }
-            }
-        });
+            setTimeout(() => {
+                this.copyButton.disabled = false;
+                this.copyButton.setText('Pub 复制'); // Fixed: Consistent text reset
+            }, 2000);
+        } catch (error) {
+            this.copyButton.setText('复制失败');
+            setTimeout(() => {
+                this.copyButton.disabled = false;
+                this.copyButton.setText('Pub 复制'); // Fixed: Consistent text reset
+            }, 2000);
+        }
+    }
+});
 
-        // 监听文档变化
-        this.registerEvent(
-            this.app.workspace.on('file-open', this.onFileOpen.bind(this))
-        );
+// 监听文档变化
+this.registerEvent(
+    this.app.workspace.on('file-open', this.onFileOpen.bind(this))
+);
 
-        // 监听文档内容变化
-        this.registerEvent(
-            this.app.vault.on('modify', this.onFileModify.bind(this))
-        );
+// 监听文档内容变化
+this.registerEvent(
+    this.app.vault.on('modify', this.onFileModify.bind(this))
+);
 
-        // 检查当前打开的文件
-        const currentFile = this.app.workspace.getActiveFile();
-        await this.onFileOpen(currentFile);
+// 检查当前打开的文件
+const currentFile = this.app.workspace.getActiveFile();
+await this.onFileOpen(currentFile);
     }
 
     private updateControlsState(enabled: boolean) {
-        this.lockButton.disabled = !enabled;
+    this.lockButton.disabled = !enabled;
 
-        // 更新所有自定义选择器
-        [this.customTemplateSelect, this.customFontSelect, this.customBackgroundSelect, this.customSeriesSelect].forEach(ctrl => {
-            if (ctrl && ctrl.container) {
-                const selectEl = ctrl.container.querySelector('.custom-select');
-                if (selectEl) {
-                    selectEl.classList.toggle('disabled', !enabled);
-                    selectEl.setAttribute('style', `pointer-events: ${enabled ? 'auto' : 'none'}`);
-                }
+    // 更新所有自定义选择器
+    [this.customTemplateSelect, this.customFontSelect, this.customBackgroundSelect, this.customSeriesSelect].forEach(ctrl => {
+        if (ctrl && ctrl.container) {
+            const selectEl = ctrl.container.querySelector('.custom-select');
+            if (selectEl) {
+                selectEl.classList.toggle('disabled', !enabled);
+                selectEl.setAttribute('style', `pointer-events: ${enabled ? 'auto' : 'none'}`);
             }
-        });
+        }
+    });
 
-        this.fontSizeSelect.disabled = !enabled;
-        this.copyButton.disabled = !enabled;
+    this.fontSizeSelect.disabled = !enabled;
+    this.copyButton.disabled = !enabled;
 
-        const fontSizeButtons = this.containerEl.querySelectorAll('.mp-font-size-btn');
-        fontSizeButtons.forEach(button => {
-            (button as HTMLButtonElement).disabled = !enabled;
-        });
-    }
+    const fontSizeButtons = this.containerEl.querySelectorAll('.mp-font-size-btn');
+    fontSizeButtons.forEach(button => {
+        (button as HTMLButtonElement).disabled = !enabled;
+    });
+}
 
     async onFileOpen(file: TFile | null) {
-        this.currentFile = file;
-        if (!file || file.extension !== 'md') {
-            this.previewEl.empty();
-            this.previewEl.createEl('div', {
-                text: '只能预览 markdown 文本文档',
-                cls: 'mp-empty-message'
-            });
-            this.updateControlsState(false);
-            return;
-        }
-
-        this.updateControlsState(true);
-        this.isPreviewLocked = false;
-        setIcon(this.lockButton, 'unlock');
-        await this.updatePreview();
+    this.currentFile = file;
+    if (!file || file.extension !== 'md') {
+        this.previewEl.empty();
+        this.previewEl.createEl('div', {
+            text: '只能预览 markdown 文本文档',
+            cls: 'mp-empty-message'
+        });
+        this.updateControlsState(false);
+        return;
     }
+
+    this.updateControlsState(true);
+    this.isPreviewLocked = false;
+    setIcon(this.lockButton, 'unlock');
+    await this.updatePreview();
+}
 
     private async togglePreviewLock() {
-        this.isPreviewLocked = !this.isPreviewLocked;
-        const lockIcon = this.isPreviewLocked ? 'lock' : 'unlock';
-        const lockStatus = this.isPreviewLocked ? '开启实时预览状态' : '关闭实时预览状态';
-        setIcon(this.lockButton, lockIcon);
-        this.lockButton.setAttribute('aria-label', lockStatus);
+    this.isPreviewLocked = !this.isPreviewLocked;
+    const lockIcon = this.isPreviewLocked ? 'lock' : 'unlock';
+    const lockStatus = this.isPreviewLocked ? '开启实时预览状态' : '关闭实时预览状态';
+    setIcon(this.lockButton, lockIcon);
+    this.lockButton.setAttribute('aria-label', lockStatus);
 
-        if (!this.isPreviewLocked) {
-            await this.updatePreview();
-        }
+    if (!this.isPreviewLocked) {
+        await this.updatePreview();
     }
+}
 
     async onFileModify(file: TFile) {
-        if (file === this.currentFile && !this.isPreviewLocked) {
-            if (this.updateTimer) {
-                clearTimeout(this.updateTimer);
-            }
-
-            this.updateTimer = setTimeout(() => {
-                this.updatePreview();
-            }, 500);
+    if (file === this.currentFile && !this.isPreviewLocked) {
+        if (this.updateTimer) {
+            clearTimeout(this.updateTimer);
         }
+
+        this.updateTimer = setTimeout(() => {
+            this.updatePreview();
+        }, 500);
     }
+}
 
     async updatePreview() {
-        if (!this.currentFile) return;
+    if (!this.currentFile) return;
 
-        // 保存当前滚动位置和内容高度
-        const scrollPosition = this.previewEl.scrollTop;
-        const prevHeight = this.previewEl.scrollHeight;
-        const isAtBottom = (this.previewEl.scrollHeight - this.previewEl.scrollTop) <= (this.previewEl.clientHeight + 100);
+    // 保存当前滚动位置和内容高度
+    const scrollPosition = this.previewEl.scrollTop;
+    const prevHeight = this.previewEl.scrollHeight;
+    const isAtBottom = (this.previewEl.scrollHeight - this.previewEl.scrollTop) <= (this.previewEl.clientHeight + 100);
 
-        this.previewEl.empty();
-        const content = await this.app.vault.cachedRead(this.currentFile);
+    this.previewEl.empty();
+    const content = await this.app.vault.cachedRead(this.currentFile);
 
-        await MarkdownRenderer.render(
-            this.app,
-            content,
-            this.previewEl,
-            this.currentFile.path,
-            this
-        );
+    await MarkdownRenderer.render(
+        this.app,
+        content,
+        this.previewEl,
+        this.currentFile.path,
+        this
+    );
 
-        MPConverter.formatContent(this.previewEl);
+    MPConverter.formatContent(this.previewEl);
 
-        // Apply manual header/footer content if settings allow
-        // Note: The structure requires buttons to inject these into the preview DOM
-        // but user might want them to persist. 
-        // For now, these methods below mimic 'injection' by interacting with the preview content.
+    // Apply manual header/footer content if settings allow
+    // Note: The structure requires buttons to inject these into the preview DOM
+    // but user might want them to persist. 
+    // For now, these methods below mimic 'injection' by interacting with the preview content.
 
-        this.templateManager.applyTemplate(this.previewEl);
-        this.backgroundManager.applyBackground(this.previewEl);
+    this.templateManager.applyTemplate(this.previewEl);
+    this.backgroundManager.applyBackground(this.previewEl);
 
-        if (isAtBottom) {
-            requestAnimationFrame(() => {
-                this.previewEl.scrollTop = this.previewEl.scrollHeight;
-            });
-        } else {
-            const heightDiff = this.previewEl.scrollHeight - prevHeight;
-            this.previewEl.scrollTop = scrollPosition + heightDiff;
-        }
+    if (isAtBottom) {
+        requestAnimationFrame(() => {
+            this.previewEl.scrollTop = this.previewEl.scrollHeight;
+        });
+    } else {
+        const heightDiff = this.previewEl.scrollHeight - prevHeight;
+        this.previewEl.scrollTop = scrollPosition + heightDiff;
     }
+}
 
     private toggleHeader() {
-        const headerContent = this.settingsManager.getSettings().customHeader;
-        if (!headerContent) {
-            // Optionally notify user no header content is set
-            return;
-        }
-
-        const existingHeader = this.previewEl.querySelector('.mp-custom-header');
-        if (existingHeader) {
-            existingHeader.remove();
-        } else {
-            const headerDiv = document.createElement('div');
-            headerDiv.className = 'mp-custom-header';
-            headerDiv.innerHTML = headerContent;
-
-            // Add click to remove
-            const removeBtn = document.createElement('button');
-            removeBtn.style.cssText = 'position:absolute; top:-10px; right:10px; font-size:10px; cursor:pointer; padding:2px 6px; border-radius:4px; border:none; background:var(--text-muted); color:white;';
-            removeBtn.innerText = '移除头部';
-            removeBtn.onclick = (e) => {
-                e.stopPropagation();
-                headerDiv.remove();
-            };
-            // Actually the CSS ::after handles the visual label, we just need functionality if we want explicit btn,
-            // but for now let's just insert content.
-            // The requirement was simple toggle.
-
-            this.previewEl.prepend(headerDiv);
-        }
+    const headerContent = this.settingsManager.getSettings().customHeader;
+    if (!headerContent) {
+        // Optionally notify user no header content is set
+        return;
     }
+
+    const existingHeader = this.previewEl.querySelector('.mp-custom-header');
+    if (existingHeader) {
+        existingHeader.remove();
+    } else {
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'mp-custom-header';
+        headerDiv.innerHTML = headerContent;
+
+        // Add click to remove
+        const removeBtn = document.createElement('button');
+        removeBtn.style.cssText = 'position:absolute; top:-10px; right:10px; font-size:10px; cursor:pointer; padding:2px 6px; border-radius:4px; border:none; background:var(--text-muted); color:white;';
+        removeBtn.innerText = '移除头部';
+        removeBtn.onclick = (e) => {
+            e.stopPropagation();
+            headerDiv.remove();
+        };
+        // Actually the CSS ::after handles the visual label, we just need functionality if we want explicit btn,
+        // but for now let's just insert content.
+        // The requirement was simple toggle.
+
+        this.previewEl.prepend(headerDiv);
+    }
+}
 
     private toggleFooter() {
-        const footerContent = this.settingsManager.getSettings().customFooter;
-        if (!footerContent) return;
+    const footerContent = this.settingsManager.getSettings().customFooter;
+    if (!footerContent) return;
 
-        const existingFooter = this.previewEl.querySelector('.mp-custom-footer');
-        if (existingFooter) {
-            existingFooter.remove();
-        } else {
-            const footerDiv = document.createElement('div');
-            footerDiv.className = 'mp-custom-footer';
-            footerDiv.innerHTML = footerContent;
-            this.previewEl.append(footerDiv);
-        }
+    const existingFooter = this.previewEl.querySelector('.mp-custom-footer');
+    if (existingFooter) {
+        existingFooter.remove();
+    } else {
+        const footerDiv = document.createElement('div');
+        footerDiv.className = 'mp-custom-footer';
+        footerDiv.innerHTML = footerContent;
+        this.previewEl.append(footerDiv);
     }
+}
 
     // Refactored createCustomSelect to return a controller
     private createCustomSelect(
-        parent: HTMLElement,
-        className: string,
-        initialOptions: SelectOption[],
-        onChange: (value: string) => void
+    parent: HTMLElement,
+    className: string,
+    initialOptions: SelectOption[],
+    onChange: (value: string) => void
     ): CustomSelectControl {
-        const container = parent.createEl('div', { cls: 'custom-select-container' });
-        if (className) container.classList.add(className);
+    const container = parent.createEl('div', { cls: 'custom-select-container' });
+    if (className) container.classList.add(className);
 
-        const select = container.createEl('div', { cls: 'custom-select' });
-        const selectedText = select.createEl('span', { cls: 'selected-text' });
-        const arrow = select.createEl('span', { cls: 'select-arrow', text: '▾' });
+    const select = container.createEl('div', { cls: 'custom-select' });
+    const selectedText = select.createEl('span', { cls: 'selected-text' });
+    const arrow = select.createEl('span', { cls: 'select-arrow', text: '▾' });
 
-        const dropdown = container.createEl('div', { cls: 'select-dropdown' });
+    const dropdown = container.createEl('div', { cls: 'select-dropdown' });
 
-        let currentOptions = initialOptions;
-        let currentValue = '';
+    let currentOptions = initialOptions;
+    let currentValue = '';
 
-        // Function to render options
-        const renderOptions = (opts: SelectOption[]) => {
-            dropdown.empty();
-            opts.forEach(option => {
-                if (option.header) {
-                    dropdown.createEl('div', {
-                        cls: 'select-group-header',
-                        text: option.label,
-                        attr: {
-                            style: 'padding: 8px 12px; font-weight: bold; color: var(--text-muted); font-size: 0.8em; background-color: var(--background-secondary); border-bottom: 1px solid var(--background-modifier-border); border-top: 1px solid var(--background-modifier-border); pointer-events: none;'
-                        }
-                    });
-                    return;
-                }
-
-                const item = dropdown.createEl('div', {
-                    cls: 'select-item',
-                    text: option.label
-                });
-
-                item.dataset.value = option.value;
-                if (option.value === currentValue) {
-                    item.classList.add('selected');
-                }
-
-                item.addEventListener('click', () => {
-                    setValue(option.value);
-                    dropdown.classList.remove('show');
-                    onChange(option.value);
-                });
-            });
-        };
-
-        // Function to set value programmatically
-        const setValue = (value: string) => {
-            const option = currentOptions.find(o => o.value === value && !o.header);
-            if (option) {
-                currentValue = value;
-                selectedText.textContent = option.label;
-                select.dataset.value = value;
-
-                // Update active class in dropdown
-                dropdown.querySelectorAll('.select-item').forEach(el => {
-                    if ((el as HTMLElement).dataset.value === value) {
-                        el.classList.add('selected');
-                    } else {
-                        el.classList.remove('selected');
+    // Function to render options
+    const renderOptions = (opts: SelectOption[]) => {
+        dropdown.empty();
+        opts.forEach(option => {
+            if (option.header) {
+                dropdown.createEl('div', {
+                    cls: 'select-group-header',
+                    text: option.label,
+                    attr: {
+                        style: 'padding: 8px 12px; font-weight: bold; color: var(--text-muted); font-size: 0.8em; background-color: var(--background-secondary); border-bottom: 1px solid var(--background-modifier-border); border-top: 1px solid var(--background-modifier-border); pointer-events: none;'
                     }
                 });
+                return;
             }
-        };
 
-        // Initial render
-        renderOptions(currentOptions);
-
-        // Set initial default (first filtered non-header option)
-        const firstOption = currentOptions.find(o => !o.header);
-        if (firstOption && firstOption.value) {
-            setValue(firstOption.value);
-        }
-
-        // Event listeners
-        select.addEventListener('click', (e) => {
-            e.stopPropagation();
-            // Close other dropdowns
-            document.querySelectorAll('.select-dropdown.show').forEach(el => {
-                if (el !== dropdown) el.classList.remove('show');
+            const item = dropdown.createEl('div', {
+                cls: 'select-item',
+                text: option.label
             });
-            dropdown.classList.toggle('show');
-        });
 
-        document.addEventListener('click', () => {
-            dropdown.classList.remove('show');
-        });
+            item.dataset.value = option.value;
+            if (option.value === currentValue) {
+                item.classList.add('selected');
+            }
 
-        return {
-            container,
-            updateOptions: (newOptions: SelectOption[]) => {
-                currentOptions = newOptions;
-                renderOptions(newOptions);
-                // Try to keep current value if it exists in new options, else select first
-                if (currentOptions.length > 0) {
-                    const exists = currentOptions.find(o => o.value === currentValue && !o.header);
-                    if (!exists) {
-                        const first = currentOptions.find(o => !o.header);
-                        if (first) setValue(first.value);
-                    } else {
-                        setValue(currentValue); // Re-render selection state
-                    }
+            item.addEventListener('click', () => {
+                setValue(option.value);
+                dropdown.classList.remove('show');
+                onChange(option.value);
+            });
+        });
+    };
+
+    // Function to set value programmatically
+    const setValue = (value: string) => {
+        const option = currentOptions.find(o => o.value === value && !o.header);
+        if (option) {
+            currentValue = value;
+            selectedText.textContent = option.label;
+            select.dataset.value = value;
+
+            // Update active class in dropdown
+            dropdown.querySelectorAll('.select-item').forEach(el => {
+                if ((el as HTMLElement).dataset.value === value) {
+                    el.classList.add('selected');
+                } else {
+                    el.classList.remove('selected');
                 }
-            },
-            setValue
-        };
+            });
+        }
+    };
+
+    // Initial render
+    renderOptions(currentOptions);
+
+    // Set initial default (first filtered non-header option)
+    const firstOption = currentOptions.find(o => !o.header);
+    if (firstOption && firstOption.value) {
+        setValue(firstOption.value);
     }
 
-    private async getTemplateOptions(): Promise<SelectOption[]> {
-        const templates = this.settingsManager.getVisibleTemplates();
-
-        if (templates.length === 0) {
-            return [{ value: 'default', label: '默认模板' }];
-        }
-
-        const seriesOrder = ['基础主题', 'Minimal 系列', 'Focus 系列', 'Elegant 系列', 'Bold 系列', '其他主题'];
-
-        const groups: { [key: string]: typeof templates } = {
-            '基础主题': [],
-            'Minimal 系列': [],
-            'Focus 系列': [],
-            'Elegant 系列': [],
-            'Bold 系列': [],
-            '其他主题': []
-        };
-
-        const isNewSeries = (id: string) =>
-            id.startsWith('minimal-') ||
-            id.startsWith('focus-') ||
-            id.startsWith('elegant-') ||
-            id.startsWith('bold-');
-
-        templates.forEach(t => {
-            if (t.id.startsWith('minimal-')) {
-                groups['Minimal 系列'].push(t);
-            } else if (t.id.startsWith('focus-')) {
-                groups['Focus 系列'].push(t);
-            } else if (t.id.startsWith('elegant-')) {
-                groups['Elegant 系列'].push(t);
-            } else if (t.id.startsWith('bold-')) {
-                groups['Bold 系列'].push(t);
-            } else if (!isNewSeries(t.id)) {
-                groups['基础主题'].push(t);
-            } else {
-                groups['其他主题'].push(t);
-            }
+    // Event listeners
+    select.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Close other dropdowns
+        document.querySelectorAll('.select-dropdown.show').forEach(el => {
+            if (el !== dropdown) el.classList.remove('show');
         });
+        dropdown.classList.toggle('show');
+    });
 
-        const options: SelectOption[] = [];
+    document.addEventListener('click', () => {
+        dropdown.classList.remove('show');
+    });
 
-        seriesOrder.forEach(series => {
-            if (groups[series] && groups[series].length > 0) {
-                options.push({ label: series, value: '', header: true });
-                groups[series].forEach(t => {
-                    options.push({ label: t.name, value: t.id });
-                });
+    return {
+        container,
+        updateOptions: (newOptions: SelectOption[]) => {
+            currentOptions = newOptions;
+            renderOptions(newOptions);
+            // Try to keep current value if it exists in new options, else select first
+            if (currentOptions.length > 0) {
+                const exists = currentOptions.find(o => o.value === currentValue && !o.header);
+                if (!exists) {
+                    const first = currentOptions.find(o => !o.header);
+                    if (first) setValue(first.value);
+                } else {
+                    setValue(currentValue); // Re-render selection state
+                }
             }
-        });
+        },
+        setValue
+    };
+}
 
-        return options;
+    private async getTemplateOptions(): Promise < SelectOption[] > {
+    const templates = this.settingsManager.getVisibleTemplates();
+
+    if(templates.length === 0) {
+    return [{ value: 'default', label: '默认模板' }];
+}
+
+const seriesOrder = ['基础主题', 'Minimal 系列', 'Focus 系列', 'Elegant 系列', 'Bold 系列', '其他主题'];
+
+const groups: { [key: string]: typeof templates } = {
+    '基础主题': [],
+    'Minimal 系列': [],
+    'Focus 系列': [],
+    'Elegant 系列': [],
+    'Bold 系列': [],
+    '其他主题': []
+};
+
+const isNewSeries = (id: string) =>
+    id.startsWith('minimal-') ||
+    id.startsWith('focus-') ||
+    id.startsWith('elegant-') ||
+    id.startsWith('bold-');
+
+templates.forEach(t => {
+    if (t.id.startsWith('minimal-')) {
+        groups['Minimal 系列'].push(t);
+    } else if (t.id.startsWith('focus-')) {
+        groups['Focus 系列'].push(t);
+    } else if (t.id.startsWith('elegant-')) {
+        groups['Elegant 系列'].push(t);
+    } else if (t.id.startsWith('bold-')) {
+        groups['Bold 系列'].push(t);
+    } else if (!isNewSeries(t.id)) {
+        groups['基础主题'].push(t);
+    } else {
+        groups['其他主题'].push(t);
+    }
+});
+
+const options: SelectOption[] = [];
+
+seriesOrder.forEach(series => {
+    if (groups[series] && groups[series].length > 0) {
+        options.push({ label: series, value: '', header: true });
+        groups[series].forEach(t => {
+            options.push({ label: t.name, value: t.id });
+        });
+    }
+});
+
+return options;
     }
 
     private getFontOptions(): SelectOption[] {
-        return this.settingsManager.getFontOptions();
-    }
+    return this.settingsManager.getFontOptions();
+}
 }
