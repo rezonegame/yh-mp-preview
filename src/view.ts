@@ -1,4 +1,4 @@
-import { ItemView, WorkspaceLeaf, MarkdownRenderer, TFile, setIcon } from 'obsidian';
+import { ItemView, WorkspaceLeaf, MarkdownRenderer, TFile, setIcon, Notice } from 'obsidian';
 import { MPConverter } from './converter';
 import { CopyManager } from './copyManager';
 import type { TemplateManager } from './templateManager';
