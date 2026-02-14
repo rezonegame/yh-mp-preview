@@ -1,3 +1,9 @@
+# Latest Update (v1.7.x)
+- **Image Editing**: Click any image in the preview to edit its Alt Text/Caption directly. Now supports both WikiLinks (`![[image.png]]`) and standard Markdown images, even if they initially had no caption.
+- **UI Refinements**: Moved Header/Footer/Lock actions to a new floating bottom bar for better accessibility.
+- **Improved UX**: Fixed "Pub Copy" button text consistency and removed duplicate background options.
+
+---
 # MP Preview
 一键将 Obsidian 笔记转换为微信公众号格式的插件。
 
