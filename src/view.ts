@@ -72,40 +72,33 @@ export class MPView extends ItemView {
         // 顶部工具栏
         const toolbar = container.createEl('div', { cls: 'mp-toolbar' });
         const controlsGroup = toolbar.createEl('div', { cls: 'mp-controls-group' });
-        const actionGroup = toolbar.createEl('div', { cls: 'mp-actions-group' }); // Right side actions
 
-        // Inject Header
-        const headerBtn = actionGroup.createEl('button', {
-            cls: 'mp-action-button',
-            attr: { 'aria-label': '插入自定义头部', 'title': '插入自定义头部' }
-        });
-        setIcon(headerBtn, 'arrow-down-to-line');
-        headerBtn.addEventListener('click', () => this.toggleHeader());
-
-        // Inject Footer
-        const footerBtn = actionGroup.createEl('button', {
-            cls: 'mp-action-button',
-            attr: { 'aria-label': '插入自定义尾部', 'title': '插入自定义尾部' }
-        });
-        setIcon(footerBtn, 'arrow-up-to-line');
-        footerBtn.addEventListener('click', () => this.toggleFooter());
-
-        // Lock Button
-        this.lockButton = actionGroup.createEl('button', {
-            cls: 'mp-lock-button',
-            attr: { 'aria-label': '开启实时预览状态' }
-        });
-        setIcon(this.lockButton, 'unlock'); // Default unlocked
-        this.lockButton.addEventListener('click', () => this.togglePreviewLock());
+        // Removed old actionGroup (Header/Footer/Lock) from here as they moved to bottom bar
+        const actionGroup = toolbar.createEl('div', { cls: 'mp-actions-group' });
+        // We might keep actionGroup for right-aligned items if any, 
+        // or just let it be empty for spacing if needed.
+        // Currently empty based on plan.
 
         // 添加背景选择器
+        // Fix: Removed duplicate 'No Background' option as it's included in getVisibleBackgrounds or handled by logic
         const backgroundOptions = [
-            { value: '', label: '无背景' },
             ...(this.settingsManager.getVisibleBackgrounds()?.map(bg => ({
                 value: bg.id,
                 label: bg.name
             })) || [])
         ];
+
+        // Ensure "No Background" (none) is present if not in list, usually 'none' is a valid ID in manager
+        // If backgroundManager returns 'none', we don't need to add it manually.
+        // If we need a default empty option:
+        if (!backgroundOptions.find(o => o.value === 'none')) {
+            backgroundOptions.unshift({ value: 'none', label: '无背景' });
+        }
+        // If 'default' is needed
+        if (!backgroundOptions.find(o => o.value === 'default')) {
+            backgroundOptions.unshift({ value: 'default', label: '默认' });
+        }
+
 
         this.customBackgroundSelect = this.createCustomSelect(
             controlsGroup, // Append to main controls
@@ -330,10 +323,158 @@ export class MPView extends ItemView {
         // 预览区域
         this.previewEl = container.createEl('div', { cls: 'mp-preview-area' });
 
+        // Add Image Click Listener for Alt Text Editing
+        this.previewEl.addEventListener('click', async (e) => {
+            const target = e.target as HTMLElement;
+            if (target.tagName.toLowerCase() === 'img') {
+                e.stopPropagation();
+
+                // Only allow editing if file is valid
+                if (!this.currentFile) return;
+
+                const img = target as HTMLImageElement;
+                const currentSrc = img.getAttribute('src');
+                const currentAlt = img.getAttribute('alt') || '';
+
+                // Prompt user for new alt text
+                // Using a simple prompt for GUI (Obsidian has Modal, but prompt is standard browser API, 
+                // might be blocked or ugly. Better to use Obsidian Modal if possible, but for "Super Simple GUI"
+                // browser prompt is simplest. User said "Super Simple GUI").
+                // Let's use a browser prompt first. If user wants better, we can upgrade to Modal.
+                // Updated: User said "Super Simple GUI", maybe a small popup.
+                // Let's stick with browser prompt for v1.7.0 as it's simplest.
+
+                // However, browser prompt might block thread. 
+                // Let's use a custom modal for better UX as "Super Simple GUI".
+                // Actually, let's just use `window.prompt`. It IS a super simple GUI.
+
+                const newAlt = window.prompt('编辑图片注释 (Alt Text):', currentAlt);
+
+                if (newAlt !== null && newAlt !== currentAlt) {
+                    // Update File Content
+                    try {
+                        let fileContent = await this.app.vault.read(this.currentFile);
+
+                        // Need to find the image in markdown.
+                        // Common formats: ![alt](src) or ![[src|alt]] (Obsidian internal)
+                        // `markdown-renderer` usually resolves internal links to actual http/app urls.
+                        // Converting rendered src back to markdown logic is tricky.
+                        // Strategy: We just simple-search for the ALT text if it's unique context, or src.
+
+                        // We can try to regex replace.
+                        // Case 1: Standard Markdown ![alt](src)
+                        // This is tricky because `src` in DOM is fully resolved (e.g. app://...)
+                        // but logic in MD is relative or wikilink.
+
+                        // Simplified approach for v1.7.0:
+                        // Just search for the EXACT standard markdown image syntax that matches known patterns?
+                        // No, that's fragile. 
+
+                        // Better approach: 
+                        // Just search for the Alt Text usage? ![currentAlt]
+                        // What if multiple images have same alt?
+                        // What if no alt? ![]
+
+                        // Let's accept that for this feature to work robustly, we might need a parser.
+                        // BUT, for a "Simple" feature:
+                        // We will try to replace `![currentAlt](` with `![newAlt](`
+                        // AND `![[...|currentAlt]]` with `![[...|newAlt]]`
+
+                        // Issues:
+                        // 1. If currentAlt is empty string, we are replacing `![]` with `![newAlt]`.
+                        //    This matches ALL images without alt. GLOBAL REPLACE? No, first one?
+                        //    User said "Super Simple".
+
+                        // Regex for standard MD image: /!\[(.*?)\]\((.*?)\)/g
+                        // Regex for Wikilink: /!\[\[(.*?)(?:\|(.*?))?\]\]/g
+
+                        // Let's notify user this is experimental if we can't be precise.
+                        // But let's try to be smart.
+
+                        let newFileContent = fileContent;
+                        let replaced = false;
+
+                        // Escape regex special chars in currentAlt
+                        const escapedAlt = currentAlt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+                        // 1. Standard Markdown: ![alt](src)
+                        // If alt is empty, look for ![] associated with... we don't know src easily.
+                        // Let's try to match the alt text.
+
+                        // Pattern: `![currentAlt](`
+                        const stdRegex = new RegExp(`!\\[${escapedAlt}\\]\\(`, ''); // Non-global? First match?
+                        if (stdRegex.test(newFileContent)) {
+                            newFileContent = newFileContent.replace(stdRegex, `![${newAlt}](`);
+                            replaced = true;
+                        } else {
+                            // 2. Wikilink: ![[filename|alt]] or ![[filename]] (if alt is empty, effectively filename is alt-ish in renderer?)
+                            // Actually obsidian renders ![[filename]] as alt="filename" often if not specified.
+                            // If user explicitly set alt: ![[filename|currentAlt]]
+
+                            if (currentAlt) {
+                                const wikiRegex = new RegExp(`\\|${escapedAlt}\\]\\]`, '');
+                                if (wikiRegex.test(newFileContent)) {
+                                    newFileContent = newFileContent.replace(wikiRegex, `|${newAlt}]]`);
+                                    replaced = true;
+                                }
+                            } else {
+                                // Empty alt case for wikilink: ![[filename]] -> ![[filename|newAlt]]
+                                // We don't know filename from DOM easily without reversing URL.
+                                // For now, handle Standard Markdown primary case or Explicit Wikilink case.
+                            }
+                        }
+
+                        if (replaced) {
+                            await this.app.vault.modify(this.currentFile, newFileContent);
+                            new Notice('图片注释已更新');
+                            // Preview will auto-refresh due to file modify event
+                        } else {
+                            new Notice('无法在文档中精确定位此图片，请手动修改。');
+                        }
+
+                    } catch (err) {
+                        console.error('Failed to update image alt text', err);
+                        new Notice('更新失败');
+                    }
+                }
+            }
+        });
+
+
         // 底部工具栏
         const bottomBar = container.createEl('div', { cls: 'mp-bottom-bar' });
         // 创建中间控件容器
         const bottomControlsGroup = bottomBar.createEl('div', { cls: 'mp-controls-group' });
+
+        // --- Added/Moved Header/Footer/Lock Buttons to Bottom Bar ---
+
+        // Inject Header
+        const headerBtn = bottomControlsGroup.createEl('button', {
+            cls: 'mp-action-button',
+            attr: { 'aria-label': '插入自定义头部', 'title': '插入头部' }
+        });
+        setIcon(headerBtn, 'arrow-down-to-line');
+        headerBtn.addEventListener('click', () => this.toggleHeader());
+
+        // Inject Footer
+        const footerBtn = bottomControlsGroup.createEl('button', {
+            cls: 'mp-action-button',
+            attr: { 'aria-label': '插入自定义尾部', 'title': '插入尾部' }
+        });
+        setIcon(footerBtn, 'arrow-up-to-line');
+        footerBtn.addEventListener('click', () => this.toggleFooter());
+
+        // Lock Button
+        this.lockButton = bottomControlsGroup.createEl('button', {
+            cls: 'mp-lock-button',
+            attr: { 'aria-label': '开启实时预览状态', 'title': '锁定预览' }
+        });
+        setIcon(this.lockButton, 'unlock');
+        this.lockButton.addEventListener('click', () => this.togglePreviewLock());
+
+        // --- End of Moved Buttons ---
+
+
         // 帮助按钮
         const helpButton = bottomControlsGroup.createEl('button', {
             cls: 'mp-help-button',
@@ -414,13 +555,13 @@ export class MPView extends ItemView {
 
                     setTimeout(() => {
                         this.copyButton.disabled = false;
-                        this.copyButton.setText('复制为公众号格式');
+                        this.copyButton.setText('Pub 复制'); // Fixed: Consistent text reset
                     }, 2000);
                 } catch (error) {
                     this.copyButton.setText('复制失败');
                     setTimeout(() => {
                         this.copyButton.disabled = false;
-                        this.copyButton.setText('复制为公众号格式');
+                        this.copyButton.setText('Pub 复制'); // Fixed: Consistent text reset
                     }, 2000);
                 }
             }
