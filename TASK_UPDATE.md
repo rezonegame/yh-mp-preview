@@ -33,3 +33,5 @@
 - [x] Release v1.7.0 (UX Refinements & Image Editor) (Done)
 - [x] Release v1.7.1 (Fix missing Notice import) (Done)
 - [x] Release v1.7.1 (Fix missing Notice import) (Done)
+- [x] Release v1.7.2 (Fix Image Alt Editing logic) (Done)
+- [x] Release v1.7.3 (Fix editing for no-alt images & Update Docs) (Done)
