@@ -5,6 +5,7 @@ import type { TemplateManager } from './templateManager';
 
 import type { SettingsManager } from './settings/settings';
 import { BackgroundManager } from './backgroundManager';
+// @ts-ignore - html2canvas has no type declarations
 import html2canvas from 'html2canvas';
 export const VIEW_TYPE_MP = 'mp-preview';
 
@@ -25,7 +26,9 @@ export class MPView extends ItemView {
     private currentFile: TFile | null = null;
     private updateTimer: NodeJS.Timeout | null = null;
     private isPreviewLocked: boolean = false;
+    private isEditMode: boolean = false;
     private lockButton: HTMLButtonElement;
+    private editButton: HTMLButtonElement;
     private copyButton: HTMLButtonElement;
     private templateManager: TemplateManager;
     private settingsManager: SettingsManager;
@@ -497,6 +500,22 @@ export class MPView extends ItemView {
         setIcon(this.lockButton, 'unlock');
         this.lockButton.addEventListener('click', () => this.togglePreviewLock());
 
+        // Edit Mode Button (新增)
+        this.editButton = bottomControlsGroup.createEl('button', {
+            cls: 'mp-action-button',
+            attr: { 'aria-label': '编辑模式', 'title': '编辑预览内容' }
+        });
+        setIcon(this.editButton, 'pencil');
+        this.editButton.addEventListener('click', () => this.toggleEditMode());
+
+        // SEO Hidden Text Button (新增)
+        const seoButton = bottomControlsGroup.createEl('button', {
+            cls: 'mp-action-button',
+            attr: { 'aria-label': 'SEO 隐藏文字', 'title': '插入 SEO 隐藏关键词' }
+        });
+        setIcon(seoButton, 'search');
+        seoButton.addEventListener('click', () => this.insertSeoText());
+
         // --- End of Moved Buttons ---
 
 
@@ -663,6 +682,72 @@ export class MPView extends ItemView {
         }
     }
 
+    private toggleEditMode() {
+        this.isEditMode = !this.isEditMode;
+
+        if (this.isEditMode) {
+            // 进入编辑模式
+            this.previewEl.contentEditable = 'true';
+            this.previewEl.classList.add('mp-edit-mode');
+            setIcon(this.editButton, 'pencil-off');
+            this.editButton.setAttribute('title', '退出编辑模式');
+
+            // 自动锁定预览（防止编辑内容被刷新覆盖）
+            if (!this.isPreviewLocked) {
+                this.isPreviewLocked = true;
+                setIcon(this.lockButton, 'lock');
+                this.lockButton.setAttribute('aria-label', '开启实时预览状态');
+            }
+
+            new Notice('已进入编辑模式 — 修改仅影响复制内容');
+        } else {
+            // 退出编辑模式
+            this.previewEl.contentEditable = 'false';
+            this.previewEl.classList.remove('mp-edit-mode');
+            setIcon(this.editButton, 'pencil');
+            this.editButton.setAttribute('title', '编辑预览内容');
+
+            new Notice('已退出编辑模式');
+        }
+    }
+
+    private insertSeoText() {
+        const seoText = window.prompt('输入 SEO 隐藏关键词（复制到公众号后不可见，但可被搜索引擎索引）：', '');
+
+        if (seoText === null || seoText.trim() === '') return;
+
+        // 查找现有 SEO 块并更新，或创建新的
+        let seoSection = this.previewEl.querySelector('.mp-seo-hidden') as HTMLElement;
+
+        if (seoSection) {
+            // 追加内容
+            seoSection.textContent = (seoSection.textContent || '') + ' ' + seoText.trim();
+        } else {
+            // 创建新的 SEO 隐藏块
+            seoSection = document.createElement('section');
+            seoSection.className = 'mp-seo-hidden';
+            seoSection.style.cssText = 'font-size: 0; color: transparent; line-height: 0; height: 0; overflow: hidden; opacity: 0; position: absolute; left: -9999px;';
+            seoSection.textContent = seoText.trim();
+
+            // 插入到预览内容末尾
+            const contentSection = this.previewEl.querySelector('.mp-content-section');
+            if (contentSection) {
+                contentSection.appendChild(seoSection);
+            } else {
+                this.previewEl.appendChild(seoSection);
+            }
+        }
+
+        // 自动锁定防止刷新丢失
+        if (!this.isPreviewLocked) {
+            this.isPreviewLocked = true;
+            setIcon(this.lockButton, 'lock');
+            this.lockButton.setAttribute('aria-label', '开启实时预览状态');
+        }
+
+        new Notice('SEO 隐藏文字已插入');
+    }
+
     async onFileModify(file: TFile) {
         if (file === this.currentFile && !this.isPreviewLocked) {
             if (this.updateTimer) {
@@ -678,10 +763,10 @@ export class MPView extends ItemView {
     async updatePreview() {
         if (!this.currentFile) return;
 
-        // 保存当前滚动位置和内容高度
-        const scrollPosition = this.previewEl.scrollTop;
-        const prevHeight = this.previewEl.scrollHeight;
-        const isAtBottom = (this.previewEl.scrollHeight - this.previewEl.scrollTop) <= (this.previewEl.clientHeight + 100);
+        // 保存当前滚动位置（使用百分比以应对 DOM 重建后高度变化）
+        const scrollHeight = this.previewEl.scrollHeight;
+        const scrollRatio = scrollHeight > 0 ? this.previewEl.scrollTop / scrollHeight : 0;
+        const isAtBottom = (scrollHeight - this.previewEl.scrollTop) <= (this.previewEl.clientHeight + 100);
 
         this.previewEl.empty();
         const content = await this.app.vault.cachedRead(this.currentFile);
@@ -694,7 +779,7 @@ export class MPView extends ItemView {
             this
         );
 
-        MPConverter.formatContent(this.previewEl);
+        MPConverter.formatContent(this.previewEl, content, this.settingsManager);
 
         // Apply manual header/footer content if settings allow
         // Note: The structure requires buttons to inject these into the preview DOM
@@ -704,14 +789,14 @@ export class MPView extends ItemView {
         this.templateManager.applyTemplate(this.previewEl);
         this.backgroundManager.applyBackground(this.previewEl);
 
-        if (isAtBottom) {
-            requestAnimationFrame(() => {
+        // 恢复滚动位置
+        requestAnimationFrame(() => {
+            if (isAtBottom) {
                 this.previewEl.scrollTop = this.previewEl.scrollHeight;
-            });
-        } else {
-            const heightDiff = this.previewEl.scrollHeight - prevHeight;
-            this.previewEl.scrollTop = scrollPosition + heightDiff;
-        }
+            } else {
+                this.previewEl.scrollTop = scrollRatio * this.previewEl.scrollHeight;
+            }
+        });
     }
 
     private toggleHeader() {

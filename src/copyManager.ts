@@ -31,6 +31,10 @@ export class CopyManager {
         return serializer.serializeToString(clone);
     }
 
+    public static async processImagesForExport(container: HTMLElement): Promise<void> {
+        return this.processImages(container);
+    }
+
     private static async processImages(container: HTMLElement): Promise<void> {
         const images = container.querySelectorAll('img');
         const imageArray = Array.from(images);
@@ -66,23 +70,25 @@ export class CopyManager {
             // 使用新的 cleanupHtml 方法
             let cleanHtml = this.cleanupHtml(contentSection as HTMLElement);
 
-            // 文本清洗：pangu 自动加空格
+            // 文本清洗：pangu 自动加空格 + 智能引号转换
             try {
-                // 简单处理：将 html 视为 text 进行 pangu 处理可能会破坏标签，
-                // pangu.spacingNode 更好，但我们需要 operate on DOM
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = cleanHtml;
+
+                // 1. 使用 pangu 在 DOM 级别安全地为中英文之间添加空格
                 // @ts-ignore
                 pangu.spacingElement(tempDiv);
 
-                // 替换直角引号
+                // 2. 使用 TreeWalker 遍历纯文本节点进行引号转换
+                //    只操作文本节点，绝不会破坏 HTML 标签
                 const walker = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT);
                 let node;
                 while (node = walker.nextNode()) {
                     if (node.nodeValue) {
-                        // 简单的正则替换，可能不完美嵌套
-                        // 这是一个简化的实现
-                        // node.nodeValue = node.nodeValue.replace(/「/g, '“').replace(/」/g, '”');
+                        // 直角引号 → 弯引号（微信公众号常见排版规范）
+                        node.nodeValue = node.nodeValue
+                            .replace(/「/g, '\u201c').replace(/」/g, '\u201d')   // 「」→ ""
+                            .replace(/『/g, '\u2018').replace(/』/g, '\u2019');  // 『』→ ''
                     }
                 }
 

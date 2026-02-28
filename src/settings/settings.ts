@@ -13,6 +13,7 @@ interface MPSettings {
     customFonts: { value: string; label: string; isPreset?: boolean }[];
     customHeader: string;
     customFooter: string;
+    enableFrontMatterCard: boolean;
 }
 
 const DEFAULT_SETTINGS: MPSettings = {
@@ -26,6 +27,7 @@ const DEFAULT_SETTINGS: MPSettings = {
     customBackgrounds: [],
     customHeader: '',
     customFooter: '',
+    enableFrontMatterCard: false,
     customFonts: [
         {
             value: 'Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, "PingFang SC", Cambria, Cochin, Georgia, Times, "Times New Roman", serif',

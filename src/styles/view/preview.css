@@ -85,7 +85,64 @@
     line-height: inherit;
 }
 
+/* ===== 深色模式隔离 ===== */
+/* 确保预览区始终使用浅色背景，不受 Obsidian 主题影响 */
+.theme-dark .mp-preview-area {
+    background: #fcfcfc !important;
+    color: #333 !important;
+    color-scheme: light;
+}
+.theme-dark .mp-preview-area * {
+    color: inherit;
+}
+.theme-dark .mp-preview-area a {
+    color: #576b95;
+}
+.theme-dark .mp-preview-area code {
+    color: #c7254e;
+}
+.theme-dark .mp-preview-area .mp-callout-title {
+    color: inherit;
+}
 
+/* ===== 编辑模式 ===== */
+.mp-preview-area.mp-edit-mode {
+    border: 2px dashed var(--text-accent) !important;
+    cursor: text;
+}
+.mp-preview-area.mp-edit-mode::before {
+    content: '✏️ 编辑模式 — 修改仅影响复制内容';
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-accent);
+    padding: 4px 0 8px 0;
+    opacity: 0.7;
+}
+
+/* ===== SEO 隐藏文字（预览内可见提示） ===== */
+.mp-preview-area .mp-seo-hidden {
+    position: relative !important;
+    left: auto !important;
+    height: auto !important;
+    font-size: 12px !important;
+    color: #999 !important;
+    opacity: 0.6 !important;
+    line-height: 1.4 !important;
+    overflow: visible !important;
+    border: 1px dashed #ccc;
+    padding: 8px 12px;
+    margin-top: 16px;
+    border-radius: 4px;
+}
+.mp-preview-area .mp-seo-hidden::before {
+    content: '🔍 SEO 隐藏文字（复制后不可见）';
+    display: block;
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: #aaa;
+    font-size: 11px;
+}
 
 .mp-empty-message {
     display: flex;
