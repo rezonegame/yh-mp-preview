@@ -28,19 +28,44 @@
     border-top: 2px solid var(--background-modifier-border);
     position: relative;
     z-index: 10;
-    /* Ensure controls are above content if they overlap */
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 /* 控件组布局 */
 .mp-controls-group {
     display: flex;
-    gap: 12px;
+    gap: 8px;
     align-items: center;
     width: 100%;
     justify-content: flex-start;
-    /* 改为靠左对齐 */
     flex-wrap: nowrap;
     min-width: 0;
+}
+
+/* 第一行：主要操作按钮 */
+.mp-primary-row {
+    gap: 8px;
+}
+
+/* 第二行：辅助图标按钮 */
+.mp-secondary-row {
+    gap: 6px;
+    justify-content: center;
+}
+
+/* 固定尺寸的图标按钮 */
+.mp-icon-btn {
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    flex: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
 
 /* ===== 按钮基础样式 ===== */

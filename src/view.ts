@@ -1,4 +1,4 @@
-import { ItemView, WorkspaceLeaf, MarkdownRenderer, TFile, setIcon, Notice } from 'obsidian';
+import { ItemView, WorkspaceLeaf, MarkdownRenderer, TFile, setIcon, Notice, Modal } from 'obsidian';
 import { MPConverter } from './converter';
 import { CopyManager } from './copyManager';
 import type { TemplateManager } from './templateManager';
@@ -471,89 +471,83 @@ export class MPView extends ItemView {
 
         // 底部工具栏
         const bottomBar = container.createEl('div', { cls: 'mp-bottom-bar' });
-        // 创建中间控件容器
-        const bottomControlsGroup = bottomBar.createEl('div', { cls: 'mp-controls-group' });
 
-        // --- Added/Moved Header/Footer/Lock Buttons to Bottom Bar ---
+        // === 第一行：主要操作（复制 + 导出） ===
+        const primaryRow = bottomBar.createEl('div', { cls: 'mp-controls-group mp-primary-row' });
+
+        // 复制按钮
+        this.copyButton = primaryRow.createEl('button', {
+            text: 'Pub 复制',
+            cls: 'mp-copy-button',
+        });
+
+        // 导出长图按钮
+        const exportImageButton = primaryRow.createEl('button', {
+            text: '导出长图',
+            cls: 'mp-export-button'
+        });
+
+        // === 第二行：辅助工具（图标按钮） ===
+        const secondaryRow = bottomBar.createEl('div', { cls: 'mp-controls-group mp-secondary-row' });
 
         // Inject Header
-        const headerBtn = bottomControlsGroup.createEl('button', {
-            cls: 'mp-action-button',
+        const headerBtn = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
             attr: { 'aria-label': '插入自定义头部', 'title': '插入头部' }
         });
         setIcon(headerBtn, 'arrow-down-to-line');
         headerBtn.addEventListener('click', () => this.toggleHeader());
 
         // Inject Footer
-        const footerBtn = bottomControlsGroup.createEl('button', {
-            cls: 'mp-action-button',
+        const footerBtn = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
             attr: { 'aria-label': '插入自定义尾部', 'title': '插入尾部' }
         });
         setIcon(footerBtn, 'arrow-up-to-line');
         footerBtn.addEventListener('click', () => this.toggleFooter());
 
         // Lock Button
-        this.lockButton = bottomControlsGroup.createEl('button', {
-            cls: 'mp-lock-button',
+        this.lockButton = secondaryRow.createEl('button', {
+            cls: 'mp-lock-button mp-icon-btn',
             attr: { 'aria-label': '开启实时预览状态', 'title': '锁定预览' }
         });
         setIcon(this.lockButton, 'unlock');
         this.lockButton.addEventListener('click', () => this.togglePreviewLock());
 
-        // Edit Mode Button (新增)
-        this.editButton = bottomControlsGroup.createEl('button', {
-            cls: 'mp-action-button',
+        // Edit Mode Button
+        this.editButton = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
             attr: { 'aria-label': '编辑模式', 'title': '编辑预览内容' }
         });
         setIcon(this.editButton, 'pencil');
         this.editButton.addEventListener('click', () => this.toggleEditMode());
 
-        // SEO Hidden Text Button (新增)
-        const seoButton = bottomControlsGroup.createEl('button', {
-            cls: 'mp-action-button',
+        // SEO Hidden Text Button
+        const seoButton = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
             attr: { 'aria-label': 'SEO 隐藏文字', 'title': '插入 SEO 隐藏关键词' }
         });
         setIcon(seoButton, 'search');
         seoButton.addEventListener('click', () => this.insertSeoText());
 
-        // --- End of Moved Buttons ---
-
-
         // 帮助按钮
-        const helpButton = bottomControlsGroup.createEl('button', {
-            cls: 'mp-help-button',
+        const helpButton = secondaryRow.createEl('button', {
+            cls: 'mp-help-button mp-icon-btn',
             attr: { 'aria-label': '使用指南' }
         });
         setIcon(helpButton, 'help');
+        helpButton.style.position = 'relative';
         // 帮助提示框
-        bottomControlsGroup.createEl('div', {
+        secondaryRow.createEl('div', {
             cls: 'mp-help-tooltip',
             text: `使用指南：
                 1. 左侧选择「系列」快速过滤
                 2. 右侧选择「主题」预览效果
                 3. 调整字体和字号
                 4. 点击【复制按钮】即可粘贴到公众号
+                5. ✏️ 编辑模式可直接修改预览文字
+                6. 🔍 SEO 按钮可插入隐藏关键词
                 `
-        });
-
-        // Ensure help button container has relative positioning for tooltip
-        helpButton.style.position = 'relative';
-
-
-
-        const buttonGroup = bottomControlsGroup.createEl('div', { cls: 'mp-button-group' });
-
-        // 复制按钮
-        this.copyButton = buttonGroup.createEl('button', {
-            text: 'Pub 复制', // Shortened text
-            cls: 'mp-copy-button',
-            attr: { style: 'margin-right: 8px;' }
-        });
-
-        // 导出长图按钮
-        const exportImageButton = buttonGroup.createEl('button', {
-            text: '导出长图',
-            cls: 'mp-export-button'
         });
 
         // 导出逻辑
@@ -712,22 +706,82 @@ export class MPView extends ItemView {
     }
 
     private insertSeoText() {
-        const seoText = window.prompt('输入 SEO 隐藏关键词（复制到公众号后不可见，但可被搜索引擎索引）：', '');
+        // 使用 Obsidian Modal 替代 window.prompt
+        const modal = new class extends Modal {
+            result: string = '';
+            view: MPView;
 
-        if (seoText === null || seoText.trim() === '') return;
+            constructor(view: MPView) {
+                super(view.app);
+                this.view = view;
+            }
 
+            onOpen() {
+                const { contentEl } = this;
+                contentEl.createEl('h3', { text: '🔍 插入 SEO 隐藏关键词' });
+                contentEl.createEl('p', {
+                    text: '输入的文字复制到公众号后不可见，但可被搜索引擎索引。',
+                    attr: { style: 'color: #888; font-size: 13px; margin-bottom: 12px;' }
+                });
+
+                const textarea = contentEl.createEl('textarea', {
+                    attr: {
+                        placeholder: '输入 SEO 关键词，多个关键词用空格分隔...',
+                        rows: '3',
+                        style: 'width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--background-modifier-border); font-size: 14px; resize: vertical;'
+                    }
+                });
+                textarea.focus();
+
+                const btnContainer = contentEl.createEl('div', {
+                    attr: { style: 'display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px;' }
+                });
+
+                const cancelBtn = btnContainer.createEl('button', { text: '取消' });
+                cancelBtn.addEventListener('click', () => this.close());
+
+                const submitBtn = btnContainer.createEl('button', {
+                    text: '插入',
+                    attr: { style: 'background: var(--text-accent); color: var(--text-on-accent); border: none; padding: 6px 16px; border-radius: 6px; cursor: pointer;' }
+                });
+                submitBtn.addEventListener('click', () => {
+                    this.result = textarea.value;
+                    this.close();
+                });
+
+                // Enter 键提交
+                textarea.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.result = textarea.value;
+                        this.close();
+                    }
+                });
+            }
+
+            onClose() {
+                if (this.result.trim()) {
+                    this.view.applySeoText(this.result.trim());
+                }
+            }
+        }(this);
+
+        modal.open();
+    }
+
+    public applySeoText(seoText: string) {
         // 查找现有 SEO 块并更新，或创建新的
         let seoSection = this.previewEl.querySelector('.mp-seo-hidden') as HTMLElement;
 
         if (seoSection) {
             // 追加内容
-            seoSection.textContent = (seoSection.textContent || '') + ' ' + seoText.trim();
+            seoSection.textContent = (seoSection.textContent || '') + ' ' + seoText;
         } else {
             // 创建新的 SEO 隐藏块
             seoSection = document.createElement('section');
             seoSection.className = 'mp-seo-hidden';
             seoSection.style.cssText = 'font-size: 0; color: transparent; line-height: 0; height: 0; overflow: hidden; opacity: 0; position: absolute; left: -9999px;';
-            seoSection.textContent = seoText.trim();
+            seoSection.textContent = seoText;
 
             // 插入到预览内容末尾
             const contentSection = this.previewEl.querySelector('.mp-content-section');
