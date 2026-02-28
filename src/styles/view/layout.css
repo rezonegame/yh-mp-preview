@@ -5,35 +5,37 @@
     overflow: auto;
     position: relative;
     z-index: 1;
-    /* Ensure base layer */
+    display: flex;
+    flex-direction: column;
 }
 
 /* ===== 工具栏 ===== */
 .mp-toolbar,
 .mp-bottom-bar {
-    padding: 15px 0;
+    padding: 12px 8px;
     max-width: 580px;
     background: var(--background-secondary);
 }
 
 .mp-toolbar {
     top: 0;
-    border-radius: 8px;
-    border-bottom: 2px solid var(--background-modifier-border);
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid var(--background-modifier-border);
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 }
 
 .mp-bottom-bar {
-    bottom: 0;
-    border-radius: 8px;
-    border-top: 2px solid var(--background-modifier-border);
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid var(--background-modifier-border);
     position: relative;
     z-index: 10;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 14px;
 }
 
 /* 控件组布局 */
@@ -47,28 +49,42 @@
     min-width: 0;
 }
 
-/* 第一行：主要操作按钮 */
+/* 主要操作按钮行 */
 .mp-primary-row {
-    gap: 8px;
+    gap: 10px;
 }
 
-/* 第二行：辅助图标按钮 */
+/* 辅助图标按钮行 */
 .mp-secondary-row {
-    gap: 6px;
+    gap: 4px;
     justify-content: center;
+    padding-top: 2px;
 }
 
 /* 固定尺寸的图标按钮 */
 .mp-icon-btn {
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
+    width: 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
+    height: 34px !important;
     padding: 0 !important;
     flex: none !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
+    border-radius: 8px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.mp-icon-btn:hover {
+    background: var(--background-modifier-hover) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 3px 8px var(--background-modifier-box-shadow) !important;
+}
+
+.mp-icon-btn:active {
+    transform: translateY(0) scale(0.95) !important;
+    box-shadow: none !important;
 }
 
 /* ===== 按钮基础样式 ===== */
@@ -83,6 +99,8 @@
     flex: 1;
     white-space: nowrap;
     overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 按钮文本样式 */
@@ -99,6 +117,11 @@
     box-shadow: 0 4px 12px var(--background-modifier-box-shadow);
 }
 
+.mp-controls-group button:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 1px 2px var(--background-modifier-box-shadow);
+}
+
 .mp-controls-group button:disabled {
     opacity: 0.5;
     background: var(--background-primary) !important;
@@ -110,23 +133,37 @@
 }
 
 /* 特殊按钮样式 */
-.mp-controls-group .mp-lock-button,
-.mp-controls-group .mp-help-button {
-    width: 36px;
-    padding: 0;
-    margin: 0 20px 0 10px;
-    flex: none;
-}
 
+/* 复制按钮 - 主CTA */
 .mp-controls-group .mp-copy-button {
-    background-color: var(--text-accent);
+    background: linear-gradient(135deg, var(--text-accent), color-mix(in srgb, var(--text-accent) 80%, #000));
     color: var(--text-on-accent);
     border: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--text-accent) 40%, transparent);
 }
 
 .mp-controls-group .mp-copy-button:hover {
     color: var(--text-on-accent);
-    background-color: var(--text-accent);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--text-accent) 90%, #fff), var(--text-accent));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--text-accent) 50%, transparent);
+}
+
+.mp-controls-group .mp-copy-button:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 1px 4px color-mix(in srgb, var(--text-accent) 30%, transparent);
+}
+
+/* 导出按钮 */
+.mp-controls-group .mp-export-button {
+    font-weight: 500;
+}
+
+.mp-controls-group .mp-export-button:hover {
+    border-color: var(--text-accent);
+    color: var(--text-accent);
 }
 
 /* ===== 下拉选择器 ===== */
