@@ -76,11 +76,68 @@ export class MPView extends ItemView {
         const toolbar = container.createEl('div', { cls: 'mp-toolbar' });
         const controlsGroup = toolbar.createEl('div', { cls: 'mp-controls-group' });
 
-        // Removed old actionGroup (Header/Footer/Lock) from here as they moved to bottom bar
-        const actionGroup = toolbar.createEl('div', { cls: 'mp-actions-group' });
-        // We might keep actionGroup for right-aligned items if any, 
-        // or just let it be empty for spacing if needed.
-        // Currently empty based on plan.
+        // === 辅助工具行（图标按钮，位于顶部工具栏下方） ===
+        const secondaryRow = toolbar.createEl('div', { cls: 'mp-controls-group mp-secondary-row' });
+
+        // Inject Header
+        const headerBtn = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
+            attr: { 'aria-label': '插入自定义头部', 'title': '插入头部' }
+        });
+        setIcon(headerBtn, 'arrow-down-to-line');
+        headerBtn.addEventListener('click', () => this.toggleHeader());
+
+        // Inject Footer
+        const footerBtn = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
+            attr: { 'aria-label': '插入自定义尾部', 'title': '插入尾部' }
+        });
+        setIcon(footerBtn, 'arrow-up-to-line');
+        footerBtn.addEventListener('click', () => this.toggleFooter());
+
+        // Lock Button
+        this.lockButton = secondaryRow.createEl('button', {
+            cls: 'mp-lock-button mp-icon-btn',
+            attr: { 'aria-label': '开启实时预览状态', 'title': '锁定预览' }
+        });
+        setIcon(this.lockButton, 'unlock');
+        this.lockButton.addEventListener('click', () => this.togglePreviewLock());
+
+        // Edit Mode Button
+        this.editButton = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
+            attr: { 'aria-label': '编辑模式', 'title': '编辑预览内容' }
+        });
+        setIcon(this.editButton, 'pencil');
+        this.editButton.addEventListener('click', () => this.toggleEditMode());
+
+        // SEO Hidden Text Button
+        const seoButton = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
+            attr: { 'aria-label': 'SEO 隐藏文字', 'title': '插入 SEO 隐藏关键词' }
+        });
+        setIcon(seoButton, 'search');
+        seoButton.addEventListener('click', () => this.insertSeoText());
+
+        // 帮助按钮
+        const helpButton = secondaryRow.createEl('button', {
+            cls: 'mp-help-button mp-icon-btn',
+            attr: { 'aria-label': '使用指南' }
+        });
+        setIcon(helpButton, 'help');
+        helpButton.style.position = 'relative';
+        // 帮助提示框
+        secondaryRow.createEl('div', {
+            cls: 'mp-help-tooltip',
+            text: `使用指南：
+                1. 左侧选择「系列」快速过滤
+                2. 右侧选择「主题」预览效果
+                3. 调整字体和字号
+                4. 点击【复制按钮】即可粘贴到公众号
+                5. ✏️ 编辑模式可直接修改预览文字
+                6. 🔍 SEO 按钮可插入隐藏关键词
+                `
+        });
 
         // 添加背景选择器
         // Fix: Removed duplicate 'No Background' option as it's included in getVisibleBackgrounds or handled by logic
@@ -472,7 +529,7 @@ export class MPView extends ItemView {
         // 底部工具栏
         const bottomBar = container.createEl('div', { cls: 'mp-bottom-bar' });
 
-        // === 第一行：主要操作（复制 + 导出） ===
+        // === 主要操作（复制 + 导出） ===
         const primaryRow = bottomBar.createEl('div', { cls: 'mp-controls-group mp-primary-row' });
 
         // 复制按钮
@@ -485,69 +542,6 @@ export class MPView extends ItemView {
         const exportImageButton = primaryRow.createEl('button', {
             text: '导出长图',
             cls: 'mp-export-button'
-        });
-
-        // === 第二行：辅助工具（图标按钮） ===
-        const secondaryRow = bottomBar.createEl('div', { cls: 'mp-controls-group mp-secondary-row' });
-
-        // Inject Header
-        const headerBtn = secondaryRow.createEl('button', {
-            cls: 'mp-action-button mp-icon-btn',
-            attr: { 'aria-label': '插入自定义头部', 'title': '插入头部' }
-        });
-        setIcon(headerBtn, 'arrow-down-to-line');
-        headerBtn.addEventListener('click', () => this.toggleHeader());
-
-        // Inject Footer
-        const footerBtn = secondaryRow.createEl('button', {
-            cls: 'mp-action-button mp-icon-btn',
-            attr: { 'aria-label': '插入自定义尾部', 'title': '插入尾部' }
-        });
-        setIcon(footerBtn, 'arrow-up-to-line');
-        footerBtn.addEventListener('click', () => this.toggleFooter());
-
-        // Lock Button
-        this.lockButton = secondaryRow.createEl('button', {
-            cls: 'mp-lock-button mp-icon-btn',
-            attr: { 'aria-label': '开启实时预览状态', 'title': '锁定预览' }
-        });
-        setIcon(this.lockButton, 'unlock');
-        this.lockButton.addEventListener('click', () => this.togglePreviewLock());
-
-        // Edit Mode Button
-        this.editButton = secondaryRow.createEl('button', {
-            cls: 'mp-action-button mp-icon-btn',
-            attr: { 'aria-label': '编辑模式', 'title': '编辑预览内容' }
-        });
-        setIcon(this.editButton, 'pencil');
-        this.editButton.addEventListener('click', () => this.toggleEditMode());
-
-        // SEO Hidden Text Button
-        const seoButton = secondaryRow.createEl('button', {
-            cls: 'mp-action-button mp-icon-btn',
-            attr: { 'aria-label': 'SEO 隐藏文字', 'title': '插入 SEO 隐藏关键词' }
-        });
-        setIcon(seoButton, 'search');
-        seoButton.addEventListener('click', () => this.insertSeoText());
-
-        // 帮助按钮
-        const helpButton = secondaryRow.createEl('button', {
-            cls: 'mp-help-button mp-icon-btn',
-            attr: { 'aria-label': '使用指南' }
-        });
-        setIcon(helpButton, 'help');
-        helpButton.style.position = 'relative';
-        // 帮助提示框
-        secondaryRow.createEl('div', {
-            cls: 'mp-help-tooltip',
-            text: `使用指南：
-                1. 左侧选择「系列」快速过滤
-                2. 右侧选择「主题」预览效果
-                3. 调整字体和字号
-                4. 点击【复制按钮】即可粘贴到公众号
-                5. ✏️ 编辑模式可直接修改预览文字
-                6. 🔍 SEO 按钮可插入隐藏关键词
-                `
         });
 
         // 导出逻辑

@@ -20,6 +20,9 @@
     top: 0;
     border-radius: 8px;
     border-bottom: 2px solid var(--background-modifier-border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .mp-bottom-bar {
