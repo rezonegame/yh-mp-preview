@@ -95,6 +95,17 @@ export class MPView extends ItemView {
         setIcon(footerBtn, 'arrow-up-to-line');
         footerBtn.addEventListener('click', () => this.toggleFooter());
 
+        // 刷新按钮
+        const refreshButton = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
+            attr: { 'aria-label': '刷新预览', 'title': '刷新预览' }
+        });
+        setIcon(refreshButton, 'refresh-cw');
+        refreshButton.addEventListener('click', async () => {
+            await this.updatePreview();
+            new Notice('预览已刷新');
+        });
+
         // Lock Button
         this.lockButton = secondaryRow.createEl('button', {
             cls: 'mp-lock-button mp-icon-btn',
