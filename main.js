@@ -17615,7 +17615,8 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       if (count === 0)
         continue;
       const btn = container.createEl("button", {
-        cls: `mp-gallery-category-btn ${this.selectedCategory === category ? "active" : ""}`
+        cls: `mp-gallery-category-btn ${this.selectedCategory === category ? "active" : ""}`,
+        attr: { title: config2.description }
       });
       const colorDot = btn.createEl("span", { cls: "mp-category-color" });
       colorDot.style.backgroundColor = config2.color;

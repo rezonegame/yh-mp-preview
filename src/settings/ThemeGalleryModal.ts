@@ -175,7 +175,8 @@ export class ThemeGalleryModal extends Modal {
             if (count === 0) continue;
 
             const btn = container.createEl('button', {
-                cls: `mp-gallery-category-btn ${this.selectedCategory === category ? 'active' : ''}`
+                cls: `mp-gallery-category-btn ${this.selectedCategory === category ? 'active' : ''}`,
+                attr: { title: config.description }
             });
 
             // 颜色指示器
