@@ -6,6 +6,7 @@ import type { TemplateManager } from './templateManager';
 import type { SettingsManager } from './settings/settings';
 import { BackgroundManager } from './backgroundManager';
 import { analyzeContent, type AnalysisResult } from './ai';
+import { ThemeGalleryModal } from './settings/ThemeGalleryModal';
 // @ts-ignore - html2canvas has no type declarations
 import html2canvas from 'html2canvas';
 export const VIEW_TYPE_MP = 'mp-preview';
@@ -293,6 +294,14 @@ export class MPView extends ItemView {
             }
         );
         this.customTemplateSelect.container.id = 'template-select';
+
+        // 主题画廊按钮
+        const galleryBtn = controlsGroup.createEl('button', {
+            cls: 'mp-gallery-btn',
+            attr: { 'aria-label': '打开主题画廊', 'title': '主题画廊' }
+        });
+        setIcon(galleryBtn, 'palette');
+        galleryBtn.addEventListener('click', () => this.openThemeGallery());
 
         // 字体选择器
         this.customFontSelect = this.createCustomSelect(
@@ -1188,6 +1197,51 @@ export class MPView extends ItemView {
                 contentEl.empty();
             }
         }(this, results);
+
+        modal.open();
+    }
+
+    /**
+     * 打开主题画廊弹窗
+     */
+    private openThemeGallery() {
+        const currentTemplateId = this.settingsManager.getSettings().templateId;
+
+        const modal = new ThemeGalleryModal(
+            this.app,
+            this.settingsManager,
+            currentTemplateId,
+            // onSelect 回调
+            async (templateId: string) => {
+                this.templateManager.setCurrentTemplate(templateId);
+                await this.settingsManager.updateSettings({ templateId });
+                this.templateManager.applyTemplate(this.previewEl);
+
+                // 同步更新下拉选择器
+                this.customTemplateSelect.setValue(templateId);
+
+                // 如果系列选择器需要更新
+                const template = this.settingsManager.getTemplate(templateId);
+                if (template) {
+                    // 根据主题ID判断系列
+                    let series = '全部';
+                    if (template.id.startsWith('minimal-')) series = 'Minimal 系列';
+                    else if (template.id.startsWith('focus-')) series = 'Focus 系列';
+                    else if (template.id.startsWith('elegant-')) series = 'Elegant 系列';
+                    else if (template.id.startsWith('bold-')) series = 'Bold 系列';
+                    else if (template.id.startsWith('xiaohu-')) series = 'xiaohu 主题';
+
+                    this.customSeriesSelect.setValue(series);
+                }
+
+                new Notice(`已应用主题: ${template?.name || templateId}`);
+            },
+            // previewCallback 回调 - 实时预览
+            (templateId: string) => {
+                this.templateManager.setCurrentTemplate(templateId);
+                this.templateManager.applyTemplate(this.previewEl);
+            }
+        );
 
         modal.open();
     }

@@ -491,3 +491,33 @@
     height: 100%;
     object-fit: contain;
 }
+
+/* ===== 主题画廊按钮 ===== */
+.mp-gallery-btn {
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    flex: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px !important;
+    background: linear-gradient(135deg, var(--text-accent), color-mix(in srgb, var(--text-accent) 70%, #6366f1)) !important;
+    color: var(--text-on-accent) !important;
+    border: none !important;
+    cursor: pointer;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--text-accent) 30%, transparent);
+}
+
+.mp-gallery-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--text-accent) 40%, transparent) !important;
+    filter: brightness(1.1);
+}
+
+.mp-gallery-btn:active {
+    transform: translateY(0) scale(0.95) !important;
+}
