@@ -350,18 +350,37 @@ export class ThemeGalleryModal extends Modal {
      * 获取预览文字
      */
     private getPreviewText(template: Template): string {
-        // 提取主题名称的关键字
+        // 提取主题名称，去掉来源标记
         const name = template.name.replace(/\s*\(xiaohu\)\s*/i, '');
-        // 取前2-3个字符或第一个词
+
+        // 优先匹配主题类型关键词
+        const keywords = ['聚焦', '精致', '字节', '赤陶', '中国', '报纸', '墨韵', '暗夜',
+                         '运动', '包豪斯', '薄荷', '日落', '薰衣草', '咖啡', '杂志',
+                         '优雅', '醒目', '极简'];
+
+        for (const kw of keywords) {
+            if (name.includes(kw)) {
+                return kw;
+            }
+        }
+
+        // 如果名称很短，直接返回
         if (name.length <= 3) return name;
-        // 如果有英文，优先取中文
-        const cnMatch = name.match(/[\u4e00-\u9fa5]{2,3}/);
-        if (cnMatch) return cnMatch[0];
+
+        // 尝试匹配前3个中文字符（不包含"系列"）
+        const cnMatch = name.match(/[\u4e00-\u9fa5]/g);
+        if (cnMatch) {
+            // 过滤掉"系列"，取前两个字
+            const chars = cnMatch.filter(c => c !== '系' && c !== '列').slice(0, 2);
+            if (chars.length >= 2) return chars.join('');
+        }
+
         // 否则取前两个大写字母或前3个字符
         const enMatch = name.match(/[A-Z][a-z]?/g);
         if (enMatch && enMatch.length >= 2) {
             return enMatch.slice(0, 2).join('');
         }
+
         return name.slice(0, 3);
     }
 

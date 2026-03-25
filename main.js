@@ -17750,11 +17750,39 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
    */
   getPreviewText(template) {
     const name = template.name.replace(/\s*\(xiaohu\)\s*/i, "");
+    const keywords = [
+      "\u805A\u7126",
+      "\u7CBE\u81F4",
+      "\u5B57\u8282",
+      "\u8D64\u9676",
+      "\u4E2D\u56FD",
+      "\u62A5\u7EB8",
+      "\u58A8\u97F5",
+      "\u6697\u591C",
+      "\u8FD0\u52A8",
+      "\u5305\u8C6A\u65AF",
+      "\u8584\u8377",
+      "\u65E5\u843D",
+      "\u85B0\u8863\u8349",
+      "\u5496\u5561",
+      "\u6742\u5FD7",
+      "\u4F18\u96C5",
+      "\u9192\u76EE",
+      "\u6781\u7B80"
+    ];
+    for (const kw of keywords) {
+      if (name.includes(kw)) {
+        return kw;
+      }
+    }
     if (name.length <= 3)
       return name;
-    const cnMatch = name.match(/[\u4e00-\u9fa5]{2,3}/);
-    if (cnMatch)
-      return cnMatch[0];
+    const cnMatch = name.match(/[\u4e00-\u9fa5]/g);
+    if (cnMatch) {
+      const chars = cnMatch.filter((c) => c !== "\u7CFB" && c !== "\u5217").slice(0, 2);
+      if (chars.length >= 2)
+        return chars.join("");
+    }
     const enMatch = name.match(/[A-Z][a-z]?/g);
     if (enMatch && enMatch.length >= 2) {
       return enMatch.slice(0, 2).join("");
