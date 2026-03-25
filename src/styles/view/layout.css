@@ -1,47 +1,51 @@
-/* ===== 基础布局 ===== */
+/* ===== 基础布局 - 优化版 ===== */
 .mp-view-content {
     height: 100%;
-    padding: 10px 10px 0 10px;
+    padding: 12px 12px 0 12px;
     overflow: auto;
     position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(180deg, var(--background-secondary) 0%, var(--background-primary) 100%);
 }
 
-/* ===== 工具栏 ===== */
+/* ===== 工具栏 - 玻璃拟态优化 ===== */
 .mp-toolbar,
 .mp-bottom-bar {
-    padding: 12px 8px;
-    max-width: 580px;
-    background: var(--background-secondary);
+    padding: 14px 12px;
+    max-width: 600px;
+    background: rgba(var(--background-secondary-rgb, 45, 45, 45), 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--background-modifier-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .mp-toolbar {
     top: 0;
-    border-radius: 10px 10px 0 0;
+    border-radius: 12px 12px 0 0;
     border-bottom: 1px solid var(--background-modifier-border);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .mp-bottom-bar {
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 12px 12px;
     border-top: 1px solid var(--background-modifier-border);
     position: relative;
     z-index: 10;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 12px;
-    padding-bottom: 14px;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 16px;
 }
 
-/* 控件组布局 */
+/* 控件组布局 - 增加间距 */
 .mp-controls-group {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     align-items: center;
     width: 100%;
     justify-content: flex-start;
@@ -51,40 +55,47 @@
 
 /* 主要操作按钮行 */
 .mp-primary-row {
-    gap: 10px;
+    gap: 12px;
 }
 
 /* 辅助图标按钮行 */
 .mp-secondary-row {
-    gap: 4px;
+    gap: 6px;
     justify-content: center;
-    padding-top: 2px;
+    padding-top: 4px;
 }
 
-/* 固定尺寸的图标按钮 */
+/* 固定尺寸的图标按钮 - 增大尺寸 */
 .mp-icon-btn {
-    width: 34px !important;
-    min-width: 34px !important;
-    max-width: 34px !important;
-    height: 34px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
     padding: 0 !important;
     flex: none !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
-    border-radius: 8px !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-radius: 10px !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .mp-icon-btn:hover {
     background: var(--background-modifier-hover) !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 3px 8px var(--background-modifier-box-shadow) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px var(--background-modifier-box-shadow) !important;
 }
 
 .mp-icon-btn:active {
     transform: translateY(0) scale(0.95) !important;
     box-shadow: none !important;
+}
+
+/* 图标按钮激活状态 */
+.mp-icon-btn.active {
+    background: var(--interactive-accent) !important;
+    color: var(--text-on-accent) !important;
+    border-color: var(--interactive-accent) !important;
 }
 
 /* ===== 按钮基础样式 ===== */
@@ -492,32 +503,49 @@
     object-fit: contain;
 }
 
-/* ===== 主题画廊按钮 ===== */
+/* ===== 主题画廊按钮 - 优化版 ===== */
 .mp-gallery-btn {
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 36px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
     padding: 0 !important;
     flex: none !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
-    border-radius: 8px !important;
-    background: linear-gradient(135deg, var(--text-accent), color-mix(in srgb, var(--text-accent) 70%, #6366f1)) !important;
+    border-radius: 10px !important;
+    background: linear-gradient(135deg, var(--interactive-accent) 0%, #6366f1 50%, var(--interactive-accent-hover) 100%) !important;
     color: var(--text-on-accent) !important;
     border: none !important;
     cursor: pointer;
-    transition: all 0.2s ease !important;
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--text-accent) 30%, transparent);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+.mp-gallery-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
 }
 
 .mp-gallery-btn:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--text-accent) 40%, transparent) !important;
-    filter: brightness(1.1);
+    transform: translateY(-2px) scale(1.05) !important;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45) !important;
+    filter: brightness(1.05);
+}
+
+.mp-gallery-btn:hover::before {
+    left: 100%;
 }
 
 .mp-gallery-btn:active {
-    transform: translateY(0) scale(0.95) !important;
+    transform: translateY(0) scale(0.98) !important;
 }

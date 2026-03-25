@@ -17689,8 +17689,17 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       cls: `mp-theme-card ${isSelected ? "selected" : ""}`
     });
     const accentColor = template.styles.accentColor || this.extractAccentColor(template);
-    const colorBar = card.createEl("div", { cls: "mp-theme-color-bar" });
+    const isGradient = this.isGradientTemplate(template);
+    const colorBarWrapper = card.createEl("div", { cls: "mp-theme-color-bar-wrapper" });
+    const colorBar = colorBarWrapper.createEl("div", { cls: "mp-theme-color-bar" });
     colorBar.style.background = this.createColorGradient(accentColor);
+    if (isGradient) {
+      const previewText = colorBarWrapper.createEl("div", {
+        cls: "mp-theme-color-text",
+        text: this.getPreviewText(template)
+      });
+      previewText.style.color = this.getContrastColor(accentColor);
+    }
     const info = card.createEl("div", { cls: "mp-theme-info" });
     info.createEl("div", { text: template.name, cls: "mp-theme-name" });
     if (template.source === "xiaohu") {
@@ -17726,6 +17735,41 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
    */
   createColorGradient(accentColor) {
     return `linear-gradient(135deg, ${accentColor} 0%, ${this.lightenColor(accentColor, 20)} 100%)`;
+  }
+  /**
+   * 判断是否为渐变主题（Focus/Elegant系列）
+   */
+  isGradientTemplate(template) {
+    const id = template.id.toLowerCase();
+    const name = template.name.toLowerCase();
+    return id.includes("focus") || id.includes("elegant") || name.includes("\u805A\u7126") || name.includes("\u7CBE\u81F4") || id.includes("bytedance") || name.includes("\u5B57\u8282");
+  }
+  /**
+   * 获取预览文字
+   */
+  getPreviewText(template) {
+    const name = template.name.replace(/\s*\(xiaohu\)\s*/i, "");
+    if (name.length <= 3)
+      return name;
+    const cnMatch = name.match(/[\u4e00-\u9fa5]{2,3}/);
+    if (cnMatch)
+      return cnMatch[0];
+    const enMatch = name.match(/[A-Z][a-z]?/g);
+    if (enMatch && enMatch.length >= 2) {
+      return enMatch.slice(0, 2).join("");
+    }
+    return name.slice(0, 3);
+  }
+  /**
+   * 根据背景色获取对比文字颜色
+   */
+  getContrastColor(hexColor) {
+    const hex = hexColor.replace("#", "");
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1e3;
+    return brightness > 128 ? "#1a1a2e" : "#ffffff";
   }
   /**
    * 颜色变亮

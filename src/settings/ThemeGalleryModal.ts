@@ -269,10 +269,24 @@ export class ThemeGalleryModal extends Modal {
 
         // 获取主题颜色
         const accentColor = template.styles.accentColor || this.extractAccentColor(template);
+        const isGradient = this.isGradientTemplate(template);
+
+        // 颜色预览条容器
+        const colorBarWrapper = card.createEl('div', { cls: 'mp-theme-color-bar-wrapper' });
 
         // 颜色预览条
-        const colorBar = card.createEl('div', { cls: 'mp-theme-color-bar' });
+        const colorBar = colorBarWrapper.createEl('div', { cls: 'mp-theme-color-bar' });
         colorBar.style.background = this.createColorGradient(accentColor);
+
+        // 渐变主题显示预览文字
+        if (isGradient) {
+            const previewText = colorBarWrapper.createEl('div', {
+                cls: 'mp-theme-color-text',
+                text: this.getPreviewText(template)
+            });
+            // 根据背景亮度调整文字颜色
+            previewText.style.color = this.getContrastColor(accentColor);
+        }
 
         // 主题信息
         const info = card.createEl('div', { cls: 'mp-theme-info' });
@@ -318,6 +332,50 @@ export class ThemeGalleryModal extends Modal {
      */
     private createColorGradient(accentColor: string): string {
         return `linear-gradient(135deg, ${accentColor} 0%, ${this.lightenColor(accentColor, 20)} 100%)`;
+    }
+
+    /**
+     * 判断是否为渐变主题（Focus/Elegant系列）
+     */
+    private isGradientTemplate(template: Template): boolean {
+        const id = template.id.toLowerCase();
+        const name = template.name.toLowerCase();
+        return id.includes('focus') || id.includes('elegant') ||
+               name.includes('聚焦') || name.includes('精致') ||
+               id.includes('bytedance') || name.includes('字节');
+    }
+
+    /**
+     * 获取预览文字
+     */
+    private getPreviewText(template: Template): string {
+        // 提取主题名称的关键字
+        const name = template.name.replace(/\s*\(xiaohu\)\s*/i, '');
+        // 取前2-3个字符或第一个词
+        if (name.length <= 3) return name;
+        // 如果有英文，优先取中文
+        const cnMatch = name.match(/[\u4e00-\u9fa5]{2,3}/);
+        if (cnMatch) return cnMatch[0];
+        // 否则取前两个大写字母或前3个字符
+        const enMatch = name.match(/[A-Z][a-z]?/g);
+        if (enMatch && enMatch.length >= 2) {
+            return enMatch.slice(0, 2).join('');
+        }
+        return name.slice(0, 3);
+    }
+
+    /**
+     * 根据背景色获取对比文字颜色
+     */
+    private getContrastColor(hexColor: string): string {
+        // 简单的亮度判断
+        const hex = hexColor.replace('#', '');
+        const r = parseInt(hex.substr(0, 2), 16);
+        const g = parseInt(hex.substr(2, 2), 16);
+        const b = parseInt(hex.substr(4, 2), 16);
+        // 计算亮度 (YIQ公式)
+        const brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        return brightness > 128 ? '#1a1a2e' : '#ffffff';
     }
 
     /**

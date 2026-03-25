@@ -206,6 +206,37 @@
     overflow: hidden;
 }
 
+/* 颜色预览条容器（支持文字叠加） */
+.mp-theme-color-bar-wrapper {
+    position: relative;
+    height: 70px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.mp-theme-color-bar-wrapper .mp-theme-color-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* 渐变主题文字预览 */
+.mp-theme-color-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 2;
+}
+
 .mp-theme-color-bar::after {
     content: '';
     position: absolute;
