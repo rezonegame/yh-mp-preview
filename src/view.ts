@@ -38,8 +38,6 @@ export class MPView extends ItemView {
     // Updated to use the controller interface
     private customFontSelect: CustomSelectControl;
     private customBackgroundSelect: CustomSelectControl;
-    // New Series Select
-    private customSeriesSelect: CustomSelectControl;
 
     private fontSizeSelect: HTMLInputElement;
     private backgroundManager: BackgroundManager;
@@ -225,19 +223,7 @@ export class MPView extends ItemView {
             { label: '其他', value: '其他主题' }
         ];
 
-        // 3. 创建系列筛选器（已弃用，保留位置）
-        this.customSeriesSelect = this.createCustomSelect(
-            controlsGroup,
-            'mp-series-select',
-            seriesOptions,
-            (_seriesValue) => {
-                // 系列筛选器已弃用，主题画廊自带分类
-            }
-        );
-        // 设置系列选择器样式，稍微窄一点
-        this.customSeriesSelect.container.style.width = '100px';
-
-        // 4. 主题画廊按钮
+        // 3. 主题画廊按钮
         const galleryBtn = controlsGroup.createEl('button', {
             cls: 'mp-gallery-btn',
             attr: { 'aria-label': '打开主题画廊', 'title': '主题画廊' }
@@ -590,7 +576,7 @@ export class MPView extends ItemView {
         this.lockButton.disabled = !enabled;
 
         // 更新所有自定义选择器
-        [this.customFontSelect, this.customBackgroundSelect, this.customSeriesSelect].forEach(ctrl => {
+        [this.customFontSelect, this.customBackgroundSelect].forEach(ctrl => {
             if (ctrl && ctrl.container) {
                 const selectEl = ctrl.container.querySelector('.custom-select');
                 if (selectEl) {

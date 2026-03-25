@@ -174,13 +174,22 @@ ${dialogueContent}
   const quotes = detectQuotes(lines);
   const keyPoints = quotes.filter((q) => q.isKeyPoint);
   if (keyPoints.length > 0) {
+    const convertedQuotes = keyPoints.map((q) => {
+      if (q.content.length < 50) {
+        return `> [!important] \u6838\u5FC3\u89C2\u70B9
+> ${q.content}`;
+      } else {
+        return `> ${q.content}`;
+      }
+    }).join("\n\n");
     results.push({
       type: "keypoint",
       startLine: keyPoints[0].lineNumber,
       endLine: keyPoints[keyPoints.length - 1].lineNumber,
       content: keyPoints.map((q) => q.content).join("\n"),
       confidence: 0.8,
-      suggestedAction: `\u68C0\u6D4B\u5230 ${keyPoints.length} \u5904\u6838\u5FC3\u89C2\u70B9`
+      suggestedAction: `\u68C0\u6D4B\u5230 ${keyPoints.length} \u5904\u6838\u5FC3\u89C2\u70B9\uFF0C\u70B9\u51FB\u5E94\u7528\u53EF\u8F6C\u6362\u4E3A\u5F15\u7528\u683C\u5F0F`,
+      convertedContent: convertedQuotes
     });
   }
   return results;
@@ -17878,14 +17887,6 @@ var MPView = class extends import_obsidian3.ItemView {
       { label: "Bold", value: "Bold \u7CFB\u5217" },
       { label: "\u5176\u4ED6", value: "\u5176\u4ED6\u4E3B\u9898" }
     ];
-    this.customSeriesSelect = this.createCustomSelect(
-      controlsGroup,
-      "mp-series-select",
-      seriesOptions,
-      (_seriesValue) => {
-      }
-    );
-    this.customSeriesSelect.container.style.width = "100px";
     const galleryBtn = controlsGroup.createEl("button", {
       cls: "mp-gallery-btn",
       attr: { "aria-label": "\u6253\u5F00\u4E3B\u9898\u753B\u5ECA", "title": "\u4E3B\u9898\u753B\u5ECA" }
@@ -18100,7 +18101,7 @@ var MPView = class extends import_obsidian3.ItemView {
   }
   updateControlsState(enabled) {
     this.lockButton.disabled = !enabled;
-    [this.customFontSelect, this.customBackgroundSelect, this.customSeriesSelect].forEach((ctrl) => {
+    [this.customFontSelect, this.customBackgroundSelect].forEach((ctrl) => {
       if (ctrl && ctrl.container) {
         const selectEl = ctrl.container.querySelector(".custom-select");
         if (selectEl) {

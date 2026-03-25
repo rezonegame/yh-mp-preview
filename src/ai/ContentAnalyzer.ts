@@ -265,13 +265,24 @@ export function analyzeContent(markdown: string): AnalysisResult[] {
     const quotes = detectQuotes(lines);
     const keyPoints = quotes.filter(q => q.isKeyPoint);
     if (keyPoints.length > 0) {
+        // 生成转换后的内容（转为引用块或Callout）
+        const convertedQuotes = keyPoints.map(q => {
+            // 如果是短句（<50字符），转为Callout；否则转为引用块
+            if (q.content.length < 50) {
+                return `> [!important] 核心观点\n> ${q.content}`;
+            } else {
+                return `> ${q.content}`;
+            }
+        }).join('\n\n');
+
         results.push({
             type: 'keypoint',
             startLine: keyPoints[0].lineNumber,
             endLine: keyPoints[keyPoints.length - 1].lineNumber,
             content: keyPoints.map(q => q.content).join('\n'),
             confidence: 0.8,
-            suggestedAction: `检测到 ${keyPoints.length} 处核心观点`
+            suggestedAction: `检测到 ${keyPoints.length} 处核心观点，点击应用可转换为引用格式`,
+            convertedContent: convertedQuotes
         });
     }
 
