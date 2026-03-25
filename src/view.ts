@@ -36,7 +36,6 @@ export class MPView extends ItemView {
     private settingsManager: SettingsManager;
 
     // Updated to use the controller interface
-    private customTemplateSelect: CustomSelectControl;
     private customFontSelect: CustomSelectControl;
     private customBackgroundSelect: CustomSelectControl;
     // New Series Select
@@ -226,76 +225,19 @@ export class MPView extends ItemView {
             { label: '其他', value: '其他主题' }
         ];
 
-        // 3. 创建系列筛选器
+        // 3. 创建系列筛选器（已弃用，保留位置）
         this.customSeriesSelect = this.createCustomSelect(
             controlsGroup,
             'mp-series-select',
             seriesOptions,
-            (seriesValue) => {
-                // 筛选主题
-                let filteredOptions: SelectOption[] = [];
-                if (seriesValue === 'all') {
-                    filteredOptions = allTemplates;
-                } else {
-                    // 找到对应的 ranges
-                    // 简单的做法: 遍历 allTemplates，找到 headers，匹配 current header，然后收集 subsequent items until next header
-                    let capturing = false;
-                    for (const opt of allTemplates) {
-                        if (opt.header) {
-                            capturing = (opt.label === seriesValue);
-                            // 如果只显示特定系列，我们不需要 header 本身，只需要 items
-                            // 或者保留 header 也可以，但单一系列没必要显示 header
-                            continue;
-                        }
-                        if (capturing) {
-                            filteredOptions.push(opt);
-                        }
-                    }
-                }
-
-                // 更新主题选择器的选项
-                this.customTemplateSelect.updateOptions(filteredOptions);
-
-                // 如果当前选中的主题不在新列表中，选中第一个
-                // (CustomSelect 内部逻辑处理，或者在这里显式处理)
-                if (filteredOptions.length > 0) {
-                    // 尝试保持当前选中值，如果不在新列表中，则选中第一个
-                    // 这里需要 access current value，暂时简化为选中第一个
-                    // 更好的体验是：检查 settings.templateId 是否在 filteredOptions 中
-                    const currentTemplateId = this.settingsManager.getSettings().templateId;
-                    const exists = filteredOptions.find(o => o.value === currentTemplateId);
-                    if (!exists) {
-                        const firstVal = filteredOptions[0].value;
-                        if (firstVal) {
-                            this.customTemplateSelect.setValue(firstVal);
-                            // 触发变更
-                            this.templateManager.setCurrentTemplate(firstVal);
-                            this.settingsManager.updateSettings({ templateId: firstVal });
-                            this.templateManager.applyTemplate(this.previewEl);
-                        }
-                    }
-                }
+            (_seriesValue) => {
+                // 系列筛选器已弃用，主题画廊自带分类
             }
         );
         // 设置系列选择器样式，稍微窄一点
         this.customSeriesSelect.container.style.width = '100px';
 
-        // 4. 创建主题选择器 (初始显示全部)
-        this.customTemplateSelect = this.createCustomSelect(
-            controlsGroup,
-            'mp-template-select',
-            allTemplates,
-            async (value) => {
-                this.templateManager.setCurrentTemplate(value);
-                await this.settingsManager.updateSettings({
-                    templateId: value
-                });
-                this.templateManager.applyTemplate(this.previewEl);
-            }
-        );
-        this.customTemplateSelect.container.id = 'template-select';
-
-        // 主题画廊按钮
+        // 4. 主题画廊按钮
         const galleryBtn = controlsGroup.createEl('button', {
             cls: 'mp-gallery-btn',
             attr: { 'aria-label': '打开主题画廊', 'title': '主题画廊' }
@@ -364,9 +306,7 @@ export class MPView extends ItemView {
             // 但如果用户之前选的是 "全部" 下的某个主题，强制切到子系列可能会感到突兀
             // 策略：默认保留在 "全部系列" (value='all')，除非我们想强制联动。
             // 鉴于用户体验，保持 'All' 是最安全的，只有用户主动筛选时才变。
-            // 所以这里只设置 templateSelect
 
-            this.customTemplateSelect.setValue(settings.templateId);
             this.templateManager.setCurrentTemplate(settings.templateId);
         }
 
@@ -650,7 +590,7 @@ export class MPView extends ItemView {
         this.lockButton.disabled = !enabled;
 
         // 更新所有自定义选择器
-        [this.customTemplateSelect, this.customFontSelect, this.customBackgroundSelect, this.customSeriesSelect].forEach(ctrl => {
+        [this.customFontSelect, this.customBackgroundSelect, this.customSeriesSelect].forEach(ctrl => {
             if (ctrl && ctrl.container) {
                 const selectEl = ctrl.container.querySelector('.custom-select');
                 if (selectEl) {
@@ -1133,6 +1073,7 @@ export class MPView extends ItemView {
         const modal = new class extends Modal {
             results: AnalysisResult[];
             view: MPView;
+            appliedChanges: boolean = false;
 
             constructor(view: MPView, results: AnalysisResult[]) {
                 super(view.app);
@@ -1181,15 +1122,95 @@ export class MPView extends ItemView {
                             attr: { style: 'font-size: 12px; color: #666; margin-top: 4px;' }
                         });
                     }
+
+                    // 应用按钮（仅对话类型有转换内容时显示）
+                    if (result.convertedContent) {
+                        const applyBtn = item.createEl('button', {
+                            text: '应用转换',
+                            attr: { style: 'margin-top: 8px; padding: 4px 12px; font-size: 12px; background: var(--interactive-accent); color: var(--text-on-accent); border: none; border-radius: 4px; cursor: pointer;' }
+                        });
+                        applyBtn.addEventListener('click', () => {
+                            this.applyResult(result);
+                            applyBtn.textContent = '已应用 ✓';
+                            (applyBtn as HTMLButtonElement).disabled = true;
+                        });
+                    }
                 });
 
-                // 按钮
+                // 底部按钮
                 const btnContainer = contentEl.createEl('div', {
-                    attr: { style: 'display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px;' }
+                    attr: { style: 'display: flex; justify-content: space-between; margin-top: 16px;' }
                 });
 
-                const closeBtn = btnContainer.createEl('button', { text: '关闭' });
+                // 回退按钮
+                const revertBtn = btnContainer.createEl('button', {
+                    text: '回退更改',
+                    attr: { style: 'padding: 6px 16px; border: 1px solid var(--background-modifier-border); border-radius: 6px; background: transparent; cursor: pointer;' }
+                });
+                revertBtn.addEventListener('click', () => {
+                    this.revertChanges();
+                });
+
+                const rightBtns = btnContainer.createEl('div', { attr: { style: 'display: flex; gap: 8px;' } });
+
+                const closeBtn = rightBtns.createEl('button', { text: '关闭' });
                 closeBtn.addEventListener('click', () => this.close());
+            }
+
+            /**
+             * 应用单个分析结果
+             */
+            async applyResult(result: AnalysisResult) {
+                if (!result.convertedContent) return;
+
+                const file = this.view.currentFile;
+                if (!file) return;
+
+                try {
+                    // 保存原始内容到历史
+                    const { ContentHistory } = await import('./ai');
+                    const originalContent = await this.view.app.vault.read(file);
+                    ContentHistory.getInstance().saveOriginal(file.path, originalContent);
+
+                    // 替换内容
+                    const lines = originalContent.split('\n');
+                    const newLines = [
+                        ...lines.slice(0, result.startLine - 1),
+                        result.convertedContent,
+                        ...lines.slice(result.endLine)
+                    ];
+
+                    await this.view.app.vault.modify(file, newLines.join('\n'));
+                    this.appliedChanges = true;
+
+                    new Notice('已应用更改，可点击「回退更改」恢复');
+                } catch (error) {
+                    console.error('应用更改失败:', error);
+                    new Notice('应用失败');
+                }
+            }
+
+            /**
+             * 回退更改
+             */
+            async revertChanges() {
+                const file = this.view.currentFile;
+                if (!file) return;
+
+                const { ContentHistory } = await import('./ai');
+                const history = ContentHistory.getInstance();
+
+                if (!history.hasHistory(file.path)) {
+                    new Notice('没有可回退的更改');
+                    return;
+                }
+
+                const original = history.getOriginal(file.path);
+                if (original) {
+                    await this.view.app.vault.modify(file, original);
+                    history.clearHistory(file.path);
+                    new Notice('已回退到原始内容');
+                }
             }
 
             onClose() {
@@ -1217,23 +1238,7 @@ export class MPView extends ItemView {
                 await this.settingsManager.updateSettings({ templateId });
                 this.templateManager.applyTemplate(this.previewEl);
 
-                // 同步更新下拉选择器
-                this.customTemplateSelect.setValue(templateId);
-
-                // 如果系列选择器需要更新
                 const template = this.settingsManager.getTemplate(templateId);
-                if (template) {
-                    // 根据主题ID判断系列
-                    let series = '全部';
-                    if (template.id.startsWith('minimal-')) series = 'Minimal 系列';
-                    else if (template.id.startsWith('focus-')) series = 'Focus 系列';
-                    else if (template.id.startsWith('elegant-')) series = 'Elegant 系列';
-                    else if (template.id.startsWith('bold-')) series = 'Bold 系列';
-                    else if (template.id.startsWith('xiaohu-')) series = 'xiaohu 主题';
-
-                    this.customSeriesSelect.setValue(series);
-                }
-
                 new Notice(`已应用主题: ${template?.name || templateId}`);
             },
             // previewCallback 回调 - 实时预览

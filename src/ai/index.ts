@@ -10,6 +10,7 @@ export {
     detectQuotes,
     convertToDialogueContainer,
     generateDialogueContainer,
+    ContentHistory,
     type AnalysisResult,
     type DialogueDetection,
     type QuoteDetection

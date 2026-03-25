@@ -10,6 +10,8 @@ export interface AnalysisResult {
     content: string;
     confidence: number;
     suggestedAction?: string;
+    // 新增：转换后的内容
+    convertedContent?: string;
 }
 
 export interface DialogueDetection {
@@ -22,6 +24,62 @@ export interface QuoteDetection {
     content: string;
     lineNumber: number;
     isKeyPoint: boolean;
+}
+
+/**
+ * 历史记录管理器
+ */
+export class ContentHistory {
+    private static instance: ContentHistory;
+    private history: Map<string, { original: string; timestamp: number }> = new Map();
+    private maxHistory = 10;
+
+    static getInstance(): ContentHistory {
+        if (!ContentHistory.instance) {
+            ContentHistory.instance = new ContentHistory();
+        }
+        return ContentHistory.instance;
+    }
+
+    /**
+     * 保存原始内容
+     */
+    saveOriginal(filePath: string, content: string): void {
+        this.history.set(filePath, {
+            original: content,
+            timestamp: Date.now()
+        });
+
+        // 清理旧历史
+        if (this.history.size > this.maxHistory) {
+            const oldest = [...this.history.entries()]
+                .sort((a, b) => a[1].timestamp - b[1].timestamp)[0];
+            if (oldest) {
+                this.history.delete(oldest[0]);
+            }
+        }
+    }
+
+    /**
+     * 获取原始内容
+     */
+    getOriginal(filePath: string): string | null {
+        return this.history.get(filePath)?.original || null;
+    }
+
+    /**
+     * 检查是否有历史
+     */
+    hasHistory(filePath: string): boolean {
+        return this.history.has(filePath);
+    }
+
+    /**
+     * 清除历史
+     */
+    clearHistory(filePath: string): void {
+        this.history.delete(filePath);
+    }
 }
 
 /**
@@ -188,13 +246,18 @@ export function analyzeContent(markdown: string): AnalysisResult[] {
         const startLine = dialogue.lines[0].lineNumber;
         const endLine = dialogue.lines[dialogue.lines.length - 1].lineNumber;
 
+        // 生成转换后的内容
+        const dialogueContent = dialogue.lines.map(l => `${l.speaker}：${l.content}`).join('\n');
+        const convertedContent = `\`\`\`dialogue\n${dialogueContent}\n\`\`\``;
+
         results.push({
             type: 'dialogue',
             startLine,
             endLine,
             content: dialogue.lines.map(l => `${l.speaker}：${l.content}`).join('\n'),
             confidence: dialogue.confidence,
-            suggestedAction: `检测到 ${dialogue.speakers.length} 人对话，建议使用 \`\`\`dialogue 容器包裹`
+            suggestedAction: `检测到 ${dialogue.speakers.length} 人对话，点击应用可转换为 dialogue 容器`,
+            convertedContent
         });
     }
 
