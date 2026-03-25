@@ -1,0 +1,88 @@
+{
+    "id": "xiaohu-bauhaus",
+    "name": "包豪斯 (xiaohu)",
+    "description": "红蓝黄三原色 #E30613/#004D9F/#F5A623，粗黑边框，几何构成主义风格，适合设计师、创意类内容",
+    "isPreset": true,
+    "isVisible": true,
+    "source": "xiaohu",
+    "styles": {
+        "container": "background-color: #ffffff; padding: 16px",
+        "title": {
+            "h1": {
+                "base": "font-size: 31px; font-weight: 900; color: #ffffff; text-transform: uppercase; line-height: 1.16; letter-spacing: -0.02em; padding: 10px 14px 9px; background: linear-gradient(90deg, #E30613 0%, #E30613 64%, #004D9F 64%, #004D9F 86%, #F5A623 86%, #F5A623 100%); border: 3px solid #1a1a1a; box-shadow: 6px 6px 0 #1a1a1a; margin-top: 36px; margin-bottom: 18px",
+                "content": "color: #ffffff",
+                "after": ""
+            },
+            "h2": {
+                "base": "font-size: 22px; font-weight: 800; color: #1a1a1a; text-transform: uppercase; line-height: 1.35; letter-spacing: 0.08em; padding: 8px 16px; background: linear-gradient(90deg, #F5A623 0%, #F5A623 68%, #ffffff 68%, #ffffff 100%); border-left: 10px solid #004D9F; border-top: 3px solid #1a1a1a; border-bottom: 3px solid #1a1a1a; margin-top: 34px; margin-bottom: 18px",
+                "content": "color: #1a1a1a",
+                "after": ""
+            },
+            "h3": {
+                "base": "font-size: 20px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; line-height: 1.45; letter-spacing: 0.05em; padding: 6px 12px; background: #ffffff; border-left: 3px solid #E30613; margin-top: 28px; margin-bottom: 14px",
+                "content": "color: #1a1a1a",
+                "after": ""
+            },
+            "base": {
+                "base": "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #E30613; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+                "content": "color: #1a1a1a",
+                "after": ""
+            }
+        },
+        "paragraph": "font-size: 15px; color: #1a1a1a; line-height: 1.65; margin-top: 0; margin-bottom: 18px; letter-spacing: 0.5px; text-align: left",
+        "list": {
+            "container": "margin-top: 16px; margin-bottom: 16px",
+            "item": "font-size: 15px; color: #1a1a1a; line-height: 1.65; letter-spacing: 0.5px",
+            "taskList": "list-style: none; padding-left: 0;"
+        },
+        "quote": "border-left: 6px solid #F5A623; border-right: 2px solid #004D9F; border-top: 2px solid #1a1a1a; background: linear-gradient(135deg, #fff4d6 0%, #fff8ea 100%); padding: 16px 20px; margin-top: 24px; margin-bottom: 24px; border-radius: 0; font-size: 16px; color: #333333; line-height: 1.65",
+        "code": {
+            "header": {
+                "container": "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #e0e0e0",
+                "dot": "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+                "colors": [
+                    "#ff5f56",
+                    "#ffbd2e",
+                    "#27ca40"
+                ]
+            },
+            "block": "background: #f0f0f0; border-radius: 0; margin-top: 24px; margin-bottom: 24px; overflow: hidden; border-left: 6px solid #E30613",
+            "inline": "background: #f0f0f0; padding: 3px 6px; border-radius: 0; font-size: 13px; color: #004D9F; font-family: 'SF Mono', Consolas, monospace"
+        },
+        "image": "max-width: 100%; border-radius: 0; display: block; box-shadow: 4px 4px 0 #1a1a1a; border: 2px solid #1a1a1a",
+        "link": "color: #004D9F; text-decoration: none",
+        "emphasis": {
+            "strong": "font-weight: 900; color: #ffffff; background: #E30613; padding: 0 6px; display: inline",
+            "em": "font-style: italic; color: #555555",
+            "del": "text-decoration: line-through; color: #999;"
+        },
+        "table": {
+            "container": "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 0; overflow: hidden",
+            "header": "background: #004D9F; padding: 16px 16px; border: 3px solid #1a1a1a; text-align: left; font-weight: 700; color: #ffffff",
+            "cell": "padding: 16px 16px; border: 3px solid #1a1a1a; color: #1a1a1a; font-weight: 500"
+        },
+        "hr": "margin-top: 36px; margin-bottom: 36px; height: 6px; background: linear-gradient(90deg, #E30613 0%, #E30613 33.33%, #004D9F 33.33%, #004D9F 66.66%, #F5A623 66.66%, #F5A623 100%); border: none",
+        "footnote": {
+            "ref": "font-size: 12px; color: #E30613; vertical-align: super; margin-left: 2px",
+            "backref": "color: #999; text-decoration: none;"
+        },
+        "containers": {
+            "dialogue": {
+                "container": "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+                "title": "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+                "bubbleLeft": "max-width: 80%; background: #fff; border-left: 3px solid #E30613; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+                "bubbleRight": "max-width: 80%; background: #E3061314; border-right: 3px solid #E30613; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+                "speaker": "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+                "text": "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+            },
+            "gallery": {
+                "container": "margin: 20px 0;",
+                "title": "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+                "scroll": "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+                "item": "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #E3061320;",
+                "image": "width: 100%; height: 100%; object-fit: cover;"
+            }
+        },
+        "accentColor": "#E30613"
+    }
+}

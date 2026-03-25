@@ -1,7 +1,7 @@
 {
 	"id": "mp-preview",
 	"name": "MP Preview",
-	"version": "1.8.4",
+	"version": "1.9.0",
 	"minAppVersion": "0.15.0",
 	"description": "Preview and convert Markdown files to MP format",
 	"author": "Yeban",

@@ -12520,6 +12520,2925 @@ var init_bold_sky = __esm({
   }
 });
 
+// src/templates/xiaohu/bauhaus.json
+var bauhaus_default;
+var init_bauhaus = __esm({
+  "src/templates/xiaohu/bauhaus.json"() {
+    bauhaus_default = {
+      id: "xiaohu-bauhaus",
+      name: "\u5305\u8C6A\u65AF (xiaohu)",
+      description: "\u7EA2\u84DD\u9EC4\u4E09\u539F\u8272 #E30613/#004D9F/#F5A623\uFF0C\u7C97\u9ED1\u8FB9\u6846\uFF0C\u51E0\u4F55\u6784\u6210\u4E3B\u4E49\u98CE\u683C\uFF0C\u9002\u5408\u8BBE\u8BA1\u5E08\u3001\u521B\u610F\u7C7B\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 31px; font-weight: 900; color: #ffffff; text-transform: uppercase; line-height: 1.16; letter-spacing: -0.02em; padding: 10px 14px 9px; background: linear-gradient(90deg, #E30613 0%, #E30613 64%, #004D9F 64%, #004D9F 86%, #F5A623 86%, #F5A623 100%); border: 3px solid #1a1a1a; box-shadow: 6px 6px 0 #1a1a1a; margin-top: 36px; margin-bottom: 18px",
+            content: "color: #ffffff",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 800; color: #1a1a1a; text-transform: uppercase; line-height: 1.35; letter-spacing: 0.08em; padding: 8px 16px; background: linear-gradient(90deg, #F5A623 0%, #F5A623 68%, #ffffff 68%, #ffffff 100%); border-left: 10px solid #004D9F; border-top: 3px solid #1a1a1a; border-bottom: 3px solid #1a1a1a; margin-top: 34px; margin-bottom: 18px",
+            content: "color: #1a1a1a",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; line-height: 1.45; letter-spacing: 0.05em; padding: 6px 12px; background: #ffffff; border-left: 3px solid #E30613; margin-top: 28px; margin-bottom: 14px",
+            content: "color: #1a1a1a",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #E30613; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #1a1a1a",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #1a1a1a; line-height: 1.65; margin-top: 0; margin-bottom: 18px; letter-spacing: 0.5px; text-align: left",
+        list: {
+          container: "margin-top: 16px; margin-bottom: 16px",
+          item: "font-size: 15px; color: #1a1a1a; line-height: 1.65; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 6px solid #F5A623; border-right: 2px solid #004D9F; border-top: 2px solid #1a1a1a; background: linear-gradient(135deg, #fff4d6 0%, #fff8ea 100%); padding: 16px 20px; margin-top: 24px; margin-bottom: 24px; border-radius: 0; font-size: 16px; color: #333333; line-height: 1.65",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #e0e0e0",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #f0f0f0; border-radius: 0; margin-top: 24px; margin-bottom: 24px; overflow: hidden; border-left: 6px solid #E30613",
+          inline: "background: #f0f0f0; padding: 3px 6px; border-radius: 0; font-size: 13px; color: #004D9F; font-family: 'SF Mono', Consolas, monospace"
+        },
+        image: "max-width: 100%; border-radius: 0; display: block; box-shadow: 4px 4px 0 #1a1a1a; border: 2px solid #1a1a1a",
+        link: "color: #004D9F; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 900; color: #ffffff; background: #E30613; padding: 0 6px; display: inline",
+          em: "font-style: italic; color: #555555",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 0; overflow: hidden",
+          header: "background: #004D9F; padding: 16px 16px; border: 3px solid #1a1a1a; text-align: left; font-weight: 700; color: #ffffff",
+          cell: "padding: 16px 16px; border: 3px solid #1a1a1a; color: #1a1a1a; font-weight: 500"
+        },
+        hr: "margin-top: 36px; margin-bottom: 36px; height: 6px; background: linear-gradient(90deg, #E30613 0%, #E30613 33.33%, #004D9F 33.33%, #004D9F 66.66%, #F5A623 66.66%, #F5A623 100%); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #E30613; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #E30613; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #E3061314; border-right: 3px solid #E30613; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #E3061320;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#E30613"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/bold-blue.json
+var bold_blue_default2;
+var init_bold_blue2 = __esm({
+  "src/templates/xiaohu/bold-blue.json"() {
+    bold_blue_default2 = {
+      id: "xiaohu-bold-blue",
+      name: "\u9192\u76EE\xB7\u84DD (xiaohu)",
+      description: "\u9192\u76EE\u84DD #4B6EF5 \u586B\u5145\u6807\u9898+\u8272\u5757h3\uFF0C\u9002\u5408\u65B0\u95FB/\u516C\u544A/\u91CD\u70B9\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #ffffff; background-color: #4B6EF5; padding: 16px 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(75,110,245,0.25); margin-top: 0; margin-bottom: 28px; line-height: 1.4",
+            content: "color: #ffffff",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 600; color: #4B6EF5; padding-left: 12px; border-left: 4px solid #4B6EF5; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            content: "color: #4B6EF5",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #4B6EF5; padding: 6px 12px; background-color: rgba(75,110,245,0.1); border-radius: 6px; border-left: 3px solid #4B6EF5; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            content: "color: #4B6EF5",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #4B6EF5",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.8; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #4B6EF5; background: linear-gradient(135deg, rgba(75,110,245,0.05), rgba(75,110,245,0.02)); padding: 16px 8px 1px 8px; border-radius: 0 8px 8px 0; margin-top: 4px; margin-bottom: 20px; font-size: 15px; color: #555555; line-height: 1.8",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(75,110,245,0.06); padding: 2px 6px; border-radius: 4px; font-size: 90%; color: rgba(75,110,245,0.85); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #4B6EF5; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 600; color: #4B6EF5",
+          em: "font-style: italic; color: #444444",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(75,110,245,0.04), 0 4px 12px rgba(75,110,245,0.03)",
+          header: "background: linear-gradient(180deg, rgba(75,110,245,0.15) 0%, rgba(75,110,245,0.08) 100%); padding: 20px 28px; text-align: left; font-weight: 600; color: #4B6EF5; border: 1px solid rgba(75,110,245,0.2); border-top: 3px solid #4B6EF5; font-size: 12px; letter-spacing: 1.2px",
+          cell: "padding: 20px 28px; font-size: 15px; line-height: 1.75; background: #ffffff; color: #3a3a3a; border: 1px solid rgba(75,110,245,0.12)"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; width: 50%; background: linear-gradient(to right, transparent, rgba(75,110,245,0.3), rgba(75,110,245,0.3), transparent); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #4B6EF5; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #4B6EF5; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #4B6EF514; border-right: 3px solid #4B6EF5; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #4B6EF520;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#4B6EF5"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/bold-green.json
+var bold_green_default2;
+var init_bold_green2 = __esm({
+  "src/templates/xiaohu/bold-green.json"() {
+    bold_green_default2 = {
+      id: "xiaohu-bold-green",
+      name: "\u9192\u76EE\xB7\u7EFF (xiaohu)",
+      description: "\u9192\u76EE\u7EFF #2BAE85 \u586B\u5145\u6807\u9898+\u8272\u5757h3\uFF0C\u9002\u5408\u65B0\u95FB/\u516C\u544A/\u91CD\u70B9\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #ffffff; background-color: #2BAE85; padding: 16px 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(43,174,133,0.25); margin-top: 0; margin-bottom: 28px; line-height: 1.4",
+            content: "color: #ffffff",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 600; color: #2BAE85; padding-left: 12px; border-left: 4px solid #2BAE85; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            content: "color: #2BAE85",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #2BAE85; padding: 6px 12px; background-color: rgba(43,174,133,0.1); border-radius: 6px; border-left: 3px solid #2BAE85; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            content: "color: #2BAE85",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #2BAE85; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #2BAE85",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.8; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #2BAE85; background: linear-gradient(135deg, rgba(43,174,133,0.05), rgba(43,174,133,0.02)); padding: 16px 8px 1px 8px; border-radius: 0 8px 8px 0; margin-top: 4px; margin-bottom: 20px; font-size: 15px; color: #555555; line-height: 1.8",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(43,174,133,0.06); padding: 2px 6px; border-radius: 4px; font-size: 90%; color: rgba(43,174,133,0.85); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #2BAE85; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 600; color: #2BAE85",
+          em: "font-style: italic; color: #444444",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(43,174,133,0.04), 0 4px 12px rgba(43,174,133,0.03)",
+          header: "background: linear-gradient(180deg, rgba(43,174,133,0.15) 0%, rgba(43,174,133,0.08) 100%); padding: 20px 28px; text-align: left; font-weight: 600; color: #2BAE85; border: 1px solid rgba(43,174,133,0.2); border-top: 3px solid #2BAE85; font-size: 12px; letter-spacing: 1.2px",
+          cell: "padding: 20px 28px; font-size: 15px; line-height: 1.75; background: #ffffff; color: #3a3a3a; border: 1px solid rgba(43,174,133,0.12)"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; width: 50%; background: linear-gradient(to right, transparent, rgba(43,174,133,0.3), rgba(43,174,133,0.3), transparent); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #2BAE85; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #2BAE85; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #2BAE8514; border-right: 3px solid #2BAE85; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #2BAE8520;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#2BAE85"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/bold-navy.json
+var bold_navy_default2;
+var init_bold_navy2 = __esm({
+  "src/templates/xiaohu/bold-navy.json"() {
+    bold_navy_default2 = {
+      id: "xiaohu-bold-navy",
+      name: "\u9192\u76EE\xB7\u85CF\u9752 (xiaohu)",
+      description: "\u9192\u76EE\u85CF\u9752 #1F4F8A \u586B\u5145\u6807\u9898+\u8272\u5757h3\uFF0C\u9002\u5408\u65B0\u95FB/\u516C\u544A/\u91CD\u70B9\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #ffffff; background-color: #1F4F8A; padding: 16px 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(31,79,138,0.25); margin-top: 0; margin-bottom: 28px; line-height: 1.4",
+            content: "color: #ffffff",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 600; color: #1F4F8A; padding-left: 12px; border-left: 4px solid #1F4F8A; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            content: "color: #1F4F8A",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #1F4F8A; padding: 6px 12px; background-color: rgba(31,79,138,0.1); border-radius: 6px; border-left: 3px solid #1F4F8A; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            content: "color: #1F4F8A",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #1F4F8A; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #1F4F8A",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.8; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #1F4F8A; background: linear-gradient(135deg, rgba(31,79,138,0.05), rgba(31,79,138,0.02)); padding: 16px 8px 1px 8px; border-radius: 0 8px 8px 0; margin-top: 4px; margin-bottom: 20px; font-size: 15px; color: #555555; line-height: 1.8",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(31,79,138,0.06); padding: 2px 6px; border-radius: 4px; font-size: 90%; color: rgba(31,79,138,0.85); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #1F4F8A; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 600; color: #1F4F8A",
+          em: "font-style: italic; color: #444444",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(31,79,138,0.04), 0 4px 12px rgba(31,79,138,0.03)",
+          header: "background: linear-gradient(180deg, rgba(31,79,138,0.15) 0%, rgba(31,79,138,0.08) 100%); padding: 20px 28px; text-align: left; font-weight: 600; color: #1F4F8A; border: 1px solid rgba(31,79,138,0.2); border-top: 3px solid #1F4F8A; font-size: 12px; letter-spacing: 1.2px",
+          cell: "padding: 20px 28px; font-size: 15px; line-height: 1.75; background: #ffffff; color: #3a3a3a; border: 1px solid rgba(31,79,138,0.12)"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; width: 50%; background: linear-gradient(to right, transparent, rgba(31,79,138,0.3), rgba(31,79,138,0.3), transparent); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #1F4F8A; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #1F4F8A; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #1F4F8A14; border-right: 3px solid #1F4F8A; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #1F4F8A20;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#1F4F8A"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/bytedance.json
+var bytedance_default;
+var init_bytedance = __esm({
+  "src/templates/xiaohu/bytedance.json"() {
+    bytedance_default = {
+      id: "xiaohu-bytedance",
+      name: "\u5B57\u8282\u84DD (xiaohu)",
+      description: "\u5B57\u8282\u84DD\u9752\u6E10\u53D8 #1677FF/#05D4CD\uFF0C\u6E10\u53D8\u80F6\u56CA\u6807\u9898\uFF0C\u79D1\u6280\u5546\u52A1\u611F\uFF0C\u9002\u5408 SaaS \u4EA7\u54C1\u3001\u6280\u672F\u65B9\u6848\u4ECB\u7ECD",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 22px; font-weight: 600; color: #1d2129; text-align: center; letter-spacing: 0.1em; line-height: 1.2; padding: 10px 24px; background: linear-gradient(to right, rgba(22,119,255,0.02), rgba(5,212,205,0.05), rgba(22,119,255,0.02)); border-radius: 4px; border-top: 3px solid #1677FF; border-bottom: 1px solid rgba(5,212,205,0.5); margin-top: 24px; margin-bottom: 24px",
+            content: "color: #1d2129",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 20px; font-weight: 600; color: #ffffff; text-align: center; letter-spacing: 0.1em; line-height: 1.4; padding: 6px 22px; background: linear-gradient(135deg, #1677FF, #05D4CD); border-radius: 8px 24px 8px 24px; box-shadow: 0 4px 12px rgba(5,212,205,0.15); margin-top: 48px; margin-bottom: 24px",
+            content: "color: #ffffff",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 18px; font-weight: 600; color: #1677FF; line-height: 1.6; padding: 8px 16px 8px 12px; border-left: 3px solid #1677FF; border-radius: 6px; background: linear-gradient(to right, rgba(22,119,255,0.08), rgba(5,212,205,0.03)); border-right: 1px solid rgba(22,119,255,0.1); border-top: 1px solid rgba(22,119,255,0.1); margin-top: 32px; margin-bottom: 12px",
+            content: "color: #1677FF",
+            after: ""
+          },
+          base: {
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #1677FF; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #1677FF",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #4e5969; line-height: 1.8; margin-top: 0; margin-bottom: 19px; letter-spacing: 0.5px; text-align: left",
+        list: {
+          container: "margin-top: 24px; margin-bottom: 24px",
+          item: "font-size: 15px; color: #4e5969; line-height: 1.6; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #05D4CD; background: #f2f3f5; padding: 16px 16px 16px 32px; margin-top: 24px; margin-bottom: 24px; border-radius: 6px; font-size: 15px; color: #4e5969; line-height: 1.8; border-bottom: 0.2px solid rgba(5,212,205,0.1); border-top: 0.2px solid rgba(5,212,205,0.1); border-right: 0.2px solid rgba(5,212,205,0.1)",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 3px; padding: 0; background: linear-gradient(to right, #1677FF, #05D4CD)",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #f7f8fa; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 8px rgba(22,119,255,0.1)",
+          inline: "background: rgba(5,212,205,0.1); padding: 3px 6px; border-radius: 4px; font-size: 90%; color: #05D4CD; font-family: 'SFMono-Regular', Consolas, Menlo, monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(22,119,255,0.1)",
+        link: "color: #1677FF; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 600; color: #1677FF",
+          em: "font-style: italic; color: #05D4CD",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05)",
+          header: "background: linear-gradient(to right, rgba(22,119,255,0.05), rgba(5,212,205,0.05)); padding: 12px 16px; border-bottom: 1px solid rgba(5,212,205,0.1); text-align: left; font-weight: 600; color: #1677FF",
+          cell: "padding: 10px 16px; border-bottom: 1px solid rgba(0,0,0,0.05); color: #4e5969"
+        },
+        hr: "margin-top: 40px; margin-bottom: 40px; height: 2px; background: linear-gradient(to right, rgba(22,119,255,0), #1677FF, #05D4CD, rgba(5,212,205,0)); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #1677FF; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #1677FF; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #1677FF14; border-right: 3px solid #1677FF; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #1677FF20;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#1677FF"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/chinese.json
+var chinese_default;
+var init_chinese = __esm({
+  "src/templates/xiaohu/chinese.json"() {
+    chinese_default = {
+      id: "xiaohu-chinese",
+      name: "\u4E2D\u56FD\u98CE (xiaohu)",
+      description: "\u4E2D\u56FD\u7EA2 #8B1E22 \u5F3A\u8C03\uFF0C\u6977\u4F53\u6807\u9898\uFF0C\u5BA3\u7EB8\u8272\u80CC\u666F\uFF0C\u53E4\u5178\u6587\u5316\u611F\uFF0C\u9002\u5408\u4F20\u7EDF\u6587\u5316\u3001\u56FD\u6F6E\u3001\u4E2D\u5F0F\u7F8E\u5B66\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 22px; font-weight: bold; color: #8B1E22; text-align: center; letter-spacing: 0.1em; line-height: 1.2; padding: 12px 24px; background-image: repeating-linear-gradient(45deg, rgba(139,30,34,0.03), rgba(139,30,34,0.03) 2px, transparent 2px, transparent 8px); border-top: 2px solid #8B1E22; border-bottom: 2px solid #8B1E22; width: 80%; margin-top: 24px; margin-bottom: 24px; margin-left: auto; margin-right: auto",
+            content: "color: #8B1E22",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 20px; font-weight: bold; color: #8B1E22; line-height: 1.2; letter-spacing: 0.1em; padding: 0 0 8px 12px; border-left: 4px solid #8B1E22; border-bottom: 1px dashed rgba(139,30,34,0.4); margin-top: 32px; margin-bottom: 12px",
+            content: "color: #8B1E22",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 18px; font-weight: 600; color: #8B1E22; line-height: 1.6; padding: 0 0 6px 12px; border-left: 3px solid #8B1E22; margin-top: 32px; margin-bottom: 12px",
+            content: "color: #8B1E22",
+            after: ""
+          },
+          base: {
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #8B1E22; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #8B1E22",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #333333; line-height: 2; margin-top: 0; margin-bottom: 19px; letter-spacing: 0.5px; text-align: left",
+        list: {
+          container: "margin-top: 16px; margin-bottom: 16px",
+          item: "font-size: 15px; color: #333333; line-height: 1.8; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #8B1E22; background: rgba(139,30,34,0.03); padding: 8px 16px; margin-top: 19px; margin-bottom: 19px; border-radius: 0; font-size: 15px; color: #666666; line-height: 2",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #f0ece5",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #faf8f5; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; border-top: 3px solid #8B1E22; box-shadow: 0 2px 8px rgba(139,30,34,0.1)",
+          inline: "background: rgba(139,30,34,0.1); padding: 3px 6px; border-radius: 4px; font-size: 90%; color: #8B1E22; font-family: 'Source Code Pro', monospace"
+        },
+        image: "max-width: 100%; border-radius: 4px; display: block; box-shadow: 0 2px 8px rgba(139,30,34,0.1)",
+        link: "color: #8B1E22; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: bold; color: #8B1E22",
+          em: "font-style: italic; color: #555555",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 0; overflow: hidden; border: 1px solid rgba(139,30,34,0.3)",
+          header: "background: linear-gradient(to bottom, rgba(139,30,34,0.15), rgba(139,30,34,0.05)); padding: 12px; border-bottom: 2px solid rgba(139,30,34,0.5); text-align: left; font-weight: bold; color: #8B1E22",
+          cell: "padding: 12px; border-bottom: 1px solid rgba(139,30,34,0.1); color: #333333"
+        },
+        hr: "margin-top: 40px; margin-bottom: 40px; height: 1px; background: linear-gradient(to right, rgba(139,30,34,0), rgba(139,30,34,0.5), rgba(139,30,34,0)); border: none; width: 80%; margin-left: auto; margin-right: auto",
+        footnote: {
+          ref: "font-size: 12px; color: #8B1E22; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #8B1E22; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #8B1E2214; border-right: 3px solid #8B1E22; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #8B1E2220;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#8B1E22"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/coffee-house.json
+var coffee_house_default;
+var init_coffee_house = __esm({
+  "src/templates/xiaohu/coffee-house.json"() {
+    coffee_house_default = {
+      id: "xiaohu-coffee-house",
+      name: "\u5496\u5561 (xiaohu)",
+      description: "\u5496\u5561\u68D5 #8d6e63 \u6C89\u7A33\u6E29\u6696\uFF0C\u886C\u7EBF\u5B57\u4F53\u611F\uFF0C\u9002\u5408\u8BFB\u4E66/\u6587\u5316/\u6DF1\u5EA6\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 29px; font-weight: 700; color: #4a302a; line-height: 1.32; margin-top: 36px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #8d6e63; border-radius: 12px; background: linear-gradient(180deg, rgba(236,226,212,0.92) 0%, rgba(245,239,230,0.94) 100%); border: 1px solid rgba(161,136,127,0.3)",
+            content: "color: #4a302a",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 700; color: #5d4037; line-height: 1.45; margin-top: 34px; margin-bottom: 18px; padding: 0 0 8px; border-left: none; border-radius: 0; border-bottom: 1px solid rgba(161,136,127,0.36); background: none",
+            content: "color: #5d4037",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #4e342e; line-height: 1.45; margin-top: 28px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(141,110,99,0.7)",
+            content: "color: #4e342e",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #8d6e63; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #4e342e",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #3e2723; line-height: 1.75; margin-top: 0; margin-bottom: 18px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #3e2723; line-height: 1.75; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #8d6e63; background: linear-gradient(180deg, rgba(236,226,212,0.96) 0%, rgba(245,239,230,0.96) 100%); padding: 16px 20px; border-radius: 12px; margin-top: 24px; margin-bottom: 24px; font-size: 15px; color: rgba(141,110,99,0.7); line-height: 1.75",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: rgba(141,110,99,0.15)",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #ece2d4; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden",
+          inline: "background: #ece2d4; padding: 3px 6px; border-radius: 4px; font-size: 90%; color: #8d6e63; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #8d6e63; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #5d4037; background: linear-gradient(180deg, rgba(93,64,55,0) 0%, rgba(93,64,55,0) 58%, rgba(161,136,127,0.22) 58%, rgba(161,136,127,0.22) 100%); padding: 0 2px",
+          em: "font-style: italic; color: #795548",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: #ece2d4; padding: 12px 16px; text-align: left; font-weight: 600; color: #3e2723; border: 1px solid #d7ccc8",
+          cell: "padding: 12px 16px; border: 1px solid #d7ccc8; color: #3e2723"
+        },
+        hr: "margin-top: 38px; margin-bottom: 38px; height: 2px; width: 54%; background: linear-gradient(90deg, rgba(215,204,200,0) 0%, rgba(141,110,99,0.2) 18%, rgba(141,110,99,0.64) 50%, rgba(141,110,99,0.2) 82%, rgba(215,204,200,0) 100%); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #8d6e63; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #8d6e63; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #8d6e6314; border-right: 3px solid #8d6e63; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #8d6e6320;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#8d6e63"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/elegant-blue.json
+var elegant_blue_default2;
+var init_elegant_blue2 = __esm({
+  "src/templates/xiaohu/elegant-blue.json"() {
+    elegant_blue_default2 = {
+      id: "xiaohu-elegant-blue",
+      name: "\u7CBE\u81F4\xB7\u84DD (xiaohu)",
+      description: "\u7CBE\u81F4\u84DD #4B6EF5 \u5DE6\u4FA7\u53CC\u7EBF\u8FB9\u6846+\u6E10\u53D8\u8868\u5934\uFF0C\u9002\u5408\u6742\u5FD7/\u8BBE\u8BA1/\u9AD8\u7AEF\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #4B6EF5; padding-left: 8px; padding-bottom: 4px; letter-spacing: 0.5px; border-left: 5px solid #4B6EF5; border-bottom: 1px solid #4B6EF5; margin-top: 0; margin-bottom: 28px; line-height: 1.4",
+            content: "color: #4B6EF5",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 600; color: #4B6EF5; padding-left: 10px; border-left: 4px double #4B6EF5; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            content: "color: #4B6EF5",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #4B6EF5; padding-left: 10px; border-left: 3px solid #4B6EF5; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            content: "color: #4B6EF5",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #4B6EF5",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.8; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #4B6EF5; background: linear-gradient(135deg, rgba(75,110,245,0.05), rgba(75,110,245,0.02)); padding: 16px 8px 1px 8px; border-radius: 0 8px 8px 0; margin-top: 4px; margin-bottom: 20px; font-size: 15px; color: #555555; line-height: 1.8",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(75,110,245,0.06); padding: 2px 6px; border-radius: 4px; font-size: 90%; color: rgba(75,110,245,0.85); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #4B6EF5; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 600; color: #4B6EF5",
+          em: "font-style: italic; color: #444444",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(75,110,245,0.04), 0 4px 12px rgba(75,110,245,0.03)",
+          header: "background: linear-gradient(180deg, rgba(75,110,245,0.15) 0%, rgba(75,110,245,0.08) 100%); padding: 20px 28px; text-align: left; font-weight: 600; color: #4B6EF5; border: 1px solid rgba(75,110,245,0.2); border-top: 3px solid #4B6EF5; font-size: 12px; letter-spacing: 1.2px",
+          cell: "padding: 20px 28px; font-size: 15px; line-height: 1.75; background: #ffffff; color: #3a3a3a; border: 1px solid rgba(75,110,245,0.12)"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; width: 50%; background: linear-gradient(to right, transparent, rgba(75,110,245,0.3), rgba(75,110,245,0.3), transparent); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #4B6EF5; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #4B6EF5; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #4B6EF514; border-right: 3px solid #4B6EF5; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #4B6EF520;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#4B6EF5"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/elegant-green.json
+var elegant_green_default2;
+var init_elegant_green2 = __esm({
+  "src/templates/xiaohu/elegant-green.json"() {
+    elegant_green_default2 = {
+      id: "xiaohu-elegant-green",
+      name: "\u7CBE\u81F4\xB7\u7EFF (xiaohu)",
+      description: "\u7CBE\u81F4\u7EFF #2BAE85 \u5DE6\u4FA7\u53CC\u7EBF\u8FB9\u6846+\u6E10\u53D8\u8868\u5934\uFF0C\u9002\u5408\u6742\u5FD7/\u8BBE\u8BA1/\u9AD8\u7AEF\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #2BAE85; padding-left: 8px; padding-bottom: 4px; letter-spacing: 0.5px; border-left: 5px solid #2BAE85; border-bottom: 1px solid #2BAE85; margin-top: 0; margin-bottom: 28px; line-height: 1.4",
+            content: "color: #2BAE85",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 600; color: #2BAE85; padding-left: 10px; border-left: 4px double #2BAE85; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            content: "color: #2BAE85",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #2BAE85; padding-left: 10px; border-left: 3px solid #2BAE85; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            content: "color: #2BAE85",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #2BAE85; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #2BAE85",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.8; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #2BAE85; background: linear-gradient(135deg, rgba(43,174,133,0.05), rgba(43,174,133,0.02)); padding: 16px 8px 1px 8px; border-radius: 0 8px 8px 0; margin-top: 4px; margin-bottom: 20px; font-size: 15px; color: #555555; line-height: 1.8",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(43,174,133,0.06); padding: 2px 6px; border-radius: 4px; font-size: 90%; color: rgba(43,174,133,0.85); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #2BAE85; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 600; color: #2BAE85",
+          em: "font-style: italic; color: #444444",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(43,174,133,0.04), 0 4px 12px rgba(43,174,133,0.03)",
+          header: "background: linear-gradient(180deg, rgba(43,174,133,0.15) 0%, rgba(43,174,133,0.08) 100%); padding: 20px 28px; text-align: left; font-weight: 600; color: #2BAE85; border: 1px solid rgba(43,174,133,0.2); border-top: 3px solid #2BAE85; font-size: 12px; letter-spacing: 1.2px",
+          cell: "padding: 20px 28px; font-size: 15px; line-height: 1.75; background: #ffffff; color: #3a3a3a; border: 1px solid rgba(43,174,133,0.12)"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; width: 50%; background: linear-gradient(to right, transparent, rgba(43,174,133,0.3), rgba(43,174,133,0.3), transparent); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #2BAE85; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #2BAE85; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #2BAE8514; border-right: 3px solid #2BAE85; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #2BAE8520;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#2BAE85"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/elegant-navy.json
+var elegant_navy_default2;
+var init_elegant_navy2 = __esm({
+  "src/templates/xiaohu/elegant-navy.json"() {
+    elegant_navy_default2 = {
+      id: "xiaohu-elegant-navy",
+      name: "\u7CBE\u81F4\xB7\u85CF\u9752 (xiaohu)",
+      description: "\u7CBE\u81F4\u85CF\u9752 #1F4F8A \u5DE6\u4FA7\u53CC\u7EBF\u8FB9\u6846+\u6E10\u53D8\u8868\u5934\uFF0C\u9002\u5408\u6742\u5FD7/\u8BBE\u8BA1/\u9AD8\u7AEF\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #1F4F8A; padding-left: 8px; padding-bottom: 4px; letter-spacing: 0.5px; border-left: 5px solid #1F4F8A; border-bottom: 1px solid #1F4F8A; margin-top: 0; margin-bottom: 28px; line-height: 1.4",
+            content: "color: #1F4F8A",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 600; color: #1F4F8A; padding-left: 10px; border-left: 4px double #1F4F8A; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            content: "color: #1F4F8A",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #1F4F8A; padding-left: 10px; border-left: 3px solid #1F4F8A; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            content: "color: #1F4F8A",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #1F4F8A; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #1F4F8A",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.8; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #1F4F8A; background: linear-gradient(135deg, rgba(31,79,138,0.05), rgba(31,79,138,0.02)); padding: 16px 8px 1px 8px; border-radius: 0 8px 8px 0; margin-top: 4px; margin-bottom: 20px; font-size: 15px; color: #555555; line-height: 1.8",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(31,79,138,0.06); padding: 2px 6px; border-radius: 4px; font-size: 90%; color: rgba(31,79,138,0.85); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #1F4F8A; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 600; color: #1F4F8A",
+          em: "font-style: italic; color: #444444",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(31,79,138,0.04), 0 4px 12px rgba(31,79,138,0.03)",
+          header: "background: linear-gradient(180deg, rgba(31,79,138,0.15) 0%, rgba(31,79,138,0.08) 100%); padding: 20px 28px; text-align: left; font-weight: 600; color: #1F4F8A; border: 1px solid rgba(31,79,138,0.2); border-top: 3px solid #1F4F8A; font-size: 12px; letter-spacing: 1.2px",
+          cell: "padding: 20px 28px; font-size: 15px; line-height: 1.75; background: #ffffff; color: #3a3a3a; border: 1px solid rgba(31,79,138,0.12)"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; width: 50%; background: linear-gradient(to right, transparent, rgba(31,79,138,0.3), rgba(31,79,138,0.3), transparent); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #1F4F8A; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #1F4F8A; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #1F4F8A14; border-right: 3px solid #1F4F8A; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #1F4F8A20;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#1F4F8A"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/focus-blue.json
+var focus_blue_default2;
+var init_focus_blue2 = __esm({
+  "src/templates/xiaohu/focus-blue.json"() {
+    focus_blue_default2 = {
+      id: "xiaohu-focus-blue",
+      name: "\u805A\u7126\xB7\u84DD (xiaohu)",
+      description: "\u805A\u7126\u84DD #4B6EF5 \u5C45\u4E2D\u6807\u9898+\u4E0A\u4E0B\u7EBF\uFF0C\u9002\u5408\u54C1\u724C/\u5C55\u793A/\u8425\u9500\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #4B6EF5; text-align: center; padding: 16px 0; line-height: 1.4; margin-top: 0; margin-bottom: 28px; background-image: linear-gradient(rgba(75,110,245,0.35), rgba(75,110,245,0.35)), linear-gradient(rgba(75,110,245,0.35), rgba(75,110,245,0.35)); background-size: 100% 1px, 100% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            content: "color: #4B6EF5",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 700; color: #4B6EF5; text-align: center; padding: 12px 0; line-height: 1.35; margin-top: 36px; margin-bottom: 24px; background-image: linear-gradient(rgba(75,110,245,0.3), rgba(75,110,245,0.3)), linear-gradient(rgba(75,110,245,0.3), rgba(75,110,245,0.3)); background-size: 80% 1px, 80% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            content: "color: #4B6EF5",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #4B6EF5; text-align: center; padding: 10px 0; line-height: 1.4; margin-top: 28px; margin-bottom: 20px; background-image: linear-gradient(rgba(75,110,245,0.25), rgba(75,110,245,0.25)), linear-gradient(rgba(75,110,245,0.25), rgba(75,110,245,0.25)); background-size: 70% 1px, 70% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            content: "color: #4B6EF5",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #4B6EF5",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.7; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 5px solid #4B6EF5; background-color: rgba(75,110,245,0.05); padding: 16px 8px 1px 8px; margin-top: 4px; margin-bottom: 20px; font-style: italic; line-height: 1.7",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(75,110,245,0.1); padding: 2px 6px; border-radius: 4px; font-size: 90%; color: #4B6EF5; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #4B6EF5; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #4B6EF5",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: #4B6EF5; padding: 12px 16px; text-align: center; font-weight: 600; color: #ffffff; border: 1px solid rgba(75,110,245,0.2)",
+          cell: "padding: 12px 16px; border: 1px solid rgba(75,110,245,0.15); color: #333333"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 3px; width: 60%; background: #4B6EF5; border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #4B6EF5; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #4B6EF5; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #4B6EF514; border-right: 3px solid #4B6EF5; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #4B6EF520;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#4B6EF5"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/focus-gold.json
+var focus_gold_default2;
+var init_focus_gold2 = __esm({
+  "src/templates/xiaohu/focus-gold.json"() {
+    focus_gold_default2 = {
+      id: "xiaohu-focus-gold",
+      name: "\u805A\u7126\xB7\u91D1 (xiaohu)",
+      description: "\u805A\u7126\u91D1 #C8A062 \u5C45\u4E2D\u6807\u9898+\u4E0A\u4E0B\u7EBF\uFF0C\u9002\u5408\u54C1\u724C/\u5C55\u793A/\u8425\u9500\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #C8A062; text-align: center; padding: 16px 0; line-height: 1.4; margin-top: 0; margin-bottom: 28px; background-image: linear-gradient(rgba(200,160,98,0.35), rgba(200,160,98,0.35)), linear-gradient(rgba(200,160,98,0.35), rgba(200,160,98,0.35)); background-size: 100% 1px, 100% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            content: "color: #C8A062",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 700; color: #C8A062; text-align: center; padding: 12px 0; line-height: 1.35; margin-top: 36px; margin-bottom: 24px; background-image: linear-gradient(rgba(200,160,98,0.3), rgba(200,160,98,0.3)), linear-gradient(rgba(200,160,98,0.3), rgba(200,160,98,0.3)); background-size: 80% 1px, 80% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            content: "color: #C8A062",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #C8A062; text-align: center; padding: 10px 0; line-height: 1.4; margin-top: 28px; margin-bottom: 20px; background-image: linear-gradient(rgba(200,160,98,0.25), rgba(200,160,98,0.25)), linear-gradient(rgba(200,160,98,0.25), rgba(200,160,98,0.25)); background-size: 70% 1px, 70% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            content: "color: #C8A062",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #C8A062; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #C8A062",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.7; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 5px solid #C8A062; background-color: rgba(200,160,98,0.05); padding: 16px 8px 1px 8px; margin-top: 4px; margin-bottom: 20px; font-style: italic; line-height: 1.7",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(200,160,98,0.1); padding: 2px 6px; border-radius: 4px; font-size: 90%; color: #C8A062; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #C8A062; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #C8A062",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: #C8A062; padding: 12px 16px; text-align: center; font-weight: 600; color: #ffffff; border: 1px solid rgba(200,160,98,0.2)",
+          cell: "padding: 12px 16px; border: 1px solid rgba(200,160,98,0.15); color: #333333"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 3px; width: 60%; background: #C8A062; border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #C8A062; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #C8A062; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #C8A06214; border-right: 3px solid #C8A062; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #C8A06220;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#C8A062"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/focus-red.json
+var focus_red_default2;
+var init_focus_red2 = __esm({
+  "src/templates/xiaohu/focus-red.json"() {
+    focus_red_default2 = {
+      id: "xiaohu-focus-red",
+      name: "\u805A\u7126\xB7\u7EA2 (xiaohu)",
+      description: "\u805A\u7126\u7EA2 #F25C54 \u5C45\u4E2D\u6807\u9898+\u4E0A\u4E0B\u7EBF\uFF0C\u9002\u5408\u54C1\u724C/\u5C55\u793A/\u8425\u9500\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #F25C54; text-align: center; padding: 16px 0; line-height: 1.4; margin-top: 0; margin-bottom: 28px; background-image: linear-gradient(rgba(242,92,84,0.35), rgba(242,92,84,0.35)), linear-gradient(rgba(242,92,84,0.35), rgba(242,92,84,0.35)); background-size: 100% 1px, 100% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            content: "color: #F25C54",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 700; color: #F25C54; text-align: center; padding: 12px 0; line-height: 1.35; margin-top: 36px; margin-bottom: 24px; background-image: linear-gradient(rgba(242,92,84,0.3), rgba(242,92,84,0.3)), linear-gradient(rgba(242,92,84,0.3), rgba(242,92,84,0.3)); background-size: 80% 1px, 80% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            content: "color: #F25C54",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #F25C54; text-align: center; padding: 10px 0; line-height: 1.4; margin-top: 28px; margin-bottom: 20px; background-image: linear-gradient(rgba(242,92,84,0.25), rgba(242,92,84,0.25)), linear-gradient(rgba(242,92,84,0.25), rgba(242,92,84,0.25)); background-size: 70% 1px, 70% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            content: "color: #F25C54",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #F25C54; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #F25C54",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.7; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 5px solid #F25C54; background-color: rgba(242,92,84,0.05); padding: 16px 8px 1px 8px; margin-top: 4px; margin-bottom: 20px; font-style: italic; line-height: 1.7",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(242,92,84,0.1); padding: 2px 6px; border-radius: 4px; font-size: 90%; color: #F25C54; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #F25C54; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #F25C54",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: #F25C54; padding: 12px 16px; text-align: center; font-weight: 600; color: #ffffff; border: 1px solid rgba(242,92,84,0.2)",
+          cell: "padding: 12px 16px; border: 1px solid rgba(242,92,84,0.15); color: #333333"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 3px; width: 60%; background: #F25C54; border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #F25C54; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #F25C54; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #F25C5414; border-right: 3px solid #F25C54; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #F25C5420;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#F25C54"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/github.json
+var github_default;
+var init_github = __esm({
+  "src/templates/xiaohu/github.json"() {
+    github_default = {
+      id: "xiaohu-github",
+      name: "GitHub (xiaohu)",
+      description: "GitHub \u84DD #0969DA \u5F3A\u8C03\uFF0C\u7070\u8272\u8FB9\u6846\u7CFB\u7EDF\uFF0C\u767D\u5E95\u5F00\u53D1\u8005\u98CE\u683C\uFF0C\u9002\u5408\u6280\u672F\u535A\u5BA2\u3001\u4EE3\u7801\u5206\u4EAB",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 29px; font-weight: 700; color: #1f2328; line-height: 1.26; padding: 12px 16px 11px; border: 1px solid #d8dee4; border-left: 5px solid #0969da; border-radius: 10px; background: linear-gradient(180deg, #f8fbff 0%, #f6f8fa 100%); box-shadow: 0 1px 0 rgba(31,35,40,0.04); margin-top: 36px; margin-bottom: 18px",
+            content: "color: #1f2328",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 23px; font-weight: 700; color: #1f2328; line-height: 1.35; padding: 0 0 10px 0; border-bottom: 2px solid #d8dee4; box-shadow: inset 0 -2px 0 #0969da; margin-top: 34px; margin-bottom: 18px",
+            content: "color: #1f2328",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 21px; font-weight: 600; color: #1f2328; line-height: 1.4; padding-left: 12px; border-left: 3px solid #218bff; letter-spacing: 0.01em; margin-top: 28px; margin-bottom: 14px",
+            content: "color: #1f2328",
+            after: ""
+          },
+          base: {
+            base: "font-size: 19px; font-weight: bold; color: #555555; border-left: 2px solid #0969da; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #1f2328",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #1f2328; line-height: 1.6; margin-top: 0; margin-bottom: 16px; letter-spacing: 0.5px; text-align: left",
+        list: {
+          container: "margin-top: 16px; margin-bottom: 16px",
+          item: "font-size: 15px; color: #1f2328; line-height: 1.6; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border: 1px solid #d8dee4; border-left: 4px solid #218bff; background: #f6f8fa; padding: 14px 16px; margin-top: 18px; margin-bottom: 18px; border-radius: 10px; font-size: 16px; color: #57606a; line-height: 1.6",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #eef1f4",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #f6f8fa; border-radius: 6px; margin-top: 16px; margin-bottom: 16px; overflow: hidden",
+          inline: "background: rgba(175,184,193,0.2); padding: 3px 6px; border-radius: 6px; font-size: 13px; color: #1f2328; font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace"
+        },
+        image: "max-width: 100%; border-radius: 6px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #0969da; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 600; color: #0550ae; background: linear-gradient(180deg, rgba(9,105,218,0) 0%, rgba(9,105,218,0) 58%, rgba(9,105,218,0.14) 58%, rgba(9,105,218,0.14) 100%); padding: 0 2px; display: inline",
+          em: "font-style: italic; color: #1f2328",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: #f6f8fa; padding: 8px 16px; border: 1px solid #d1d9e0; text-align: left; font-weight: 600; color: #1f2328",
+          cell: "padding: 8px 16px; border: 1px solid #d1d9e0; color: #1f2328"
+        },
+        hr: "margin-top: 34px; margin-bottom: 34px; height: 1px; background: linear-gradient(90deg, rgba(209,217,224,0) 0%, rgba(209,217,224,1) 16%, #0969da 50%, rgba(209,217,224,1) 84%, rgba(209,217,224,0) 100%); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #0969da; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #0969da; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #0969da14; border-right: 3px solid #0969da; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #0969da20;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#0969da"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/ink.json
+var ink_default;
+var init_ink = __esm({
+  "src/templates/xiaohu/ink.json"() {
+    ink_default = {
+      id: "xiaohu-ink",
+      name: "\u58A8\u97F5 (xiaohu)",
+      description: "\u7EAF\u9ED1 #000000 \u5F3A\u8C03\uFF0CGeorgia \u886C\u7EBF\u4F53\uFF0C\u6781\u7B80\u9ED1\u767D\u7070\uFF0C\u9002\u5408\u6DF1\u5EA6\u957F\u6587\u3001\u6587\u5B66\u8BC4\u8BBA\u3001\u4E25\u8083\u5199\u4F5C",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 29px; font-weight: 700; color: #000000; line-height: 1.3; letter-spacing: -0.02em; padding: 0 0 10px; border-bottom: 2px solid #000000; margin-top: 36px; margin-bottom: 18px",
+            content: "color: #000000",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 700; color: #111111; line-height: 1.45; padding-left: 12px; border-left: 3px solid #000000; margin-top: 34px; margin-bottom: 18px",
+            content: "color: #111111",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #222222; line-height: 1.45; padding-bottom: 6px; margin-top: 28px; margin-bottom: 14px",
+            content: "color: #222222",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #000000; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #222222",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #111111; line-height: 1.8; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.5px; text-align: left",
+        list: {
+          container: "margin-top: 16px; margin-bottom: 16px",
+          item: "font-size: 15px; color: #111111; line-height: 1.8; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #000000; background: #fafafa; padding: 16px 18px; margin-top: 24px; margin-bottom: 24px; border-radius: 0; font-size: 16px; color: #333333; line-height: 1.8",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #e8e8e8",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #f5f5f5; border-radius: 2px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; border: 1px solid #e0e0e0",
+          inline: "background: #f0f0f0; padding: 3px 6px; border-radius: 2px; font-size: 13px; color: #000000; font-family: 'SF Mono', Consolas, monospace"
+        },
+        image: "max-width: 100%; border-radius: 2px; display: block; box-shadow: 0 2px 8px rgba(0,0,0,0.1)",
+        link: "color: #000000; text-decoration: underline",
+        emphasis: {
+          strong: "font-weight: 700; color: #000000",
+          em: "font-style: italic; color: #555555",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 0; overflow: hidden",
+          header: "background: #f5f5f5; padding: 12px 16px; border: 1px solid #cccccc; text-align: left; font-weight: 700; color: #000000",
+          cell: "padding: 12px 16px; border: 1px solid #cccccc; color: #111111"
+        },
+        hr: "margin-top: 38px; margin-bottom: 38px; height: 1px; background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.88) 28%, rgba(0,0,0,0.88) 72%, rgba(0,0,0,0) 100%); border: none; width: 34%; margin-left: auto; margin-right: auto",
+        footnote: {
+          ref: "font-size: 12px; color: #000000; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #000000; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #00000014; border-right: 3px solid #000000; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #00000020;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#000000"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/lavender-dream.json
+var lavender_dream_default;
+var init_lavender_dream = __esm({
+  "src/templates/xiaohu/lavender-dream.json"() {
+    lavender_dream_default = {
+      id: "xiaohu-lavender-dream",
+      name: "\u85B0\u8863\u8349 (xiaohu)",
+      description: "\u85B0\u8863\u8349\u7D2B #9b7fd4 \u68A6\u5E7B\u4F18\u96C5\uFF0C\u6E10\u53D8\u80CC\u666F\uFF0C\u9002\u5408\u7F8E\u5986/\u827A\u672F/\u7075\u611F\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 29px; font-weight: 700; color: #5f4688; line-height: 1.32; margin-top: 36px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #9b7fd4; border-radius: 13px; background: linear-gradient(180deg, rgba(236,228,255,0.98) 0%, rgba(245,240,255,0.98) 100%); border: 1px solid rgba(155,127,212,0.22)",
+            content: "color: #5f4688",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 700; color: #6b4c9a; line-height: 1.4; margin-top: 34px; margin-bottom: 18px; padding: 9px 14px; border-left: 3px solid #9b7fd4; border-radius: 12px; background: linear-gradient(90deg, rgba(236,228,255,0.94) 0%, rgba(236,228,255,0.2) 74%, rgba(236,228,255,0) 100%)",
+            content: "color: #6b4c9a",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #4a3c67; line-height: 1.45; margin-top: 28px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(155,127,212,0.6)",
+            content: "color: #4a3c67",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #9b7fd4; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #4a3c67",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #3d3155; line-height: 1.75; margin-top: 0; margin-bottom: 18px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #3d3155; line-height: 1.75; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #9b7fd4; background: linear-gradient(180deg, rgba(236,228,255,0.98) 0%, rgba(245,240,255,0.9) 100%); padding: 16px 20px; border-radius: 12px; margin-top: 24px; margin-bottom: 24px; font-size: 15px; color: rgba(155,127,212,0.7); line-height: 1.75",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: rgba(155,127,212,0.15)",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #ece4ff; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden",
+          inline: "background: #ece4ff; padding: 3px 6px; border-radius: 4px; font-size: 90%; color: #9b7fd4; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #9b7fd4; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #6b4c9a; background: linear-gradient(180deg, rgba(107,76,154,0) 0%, rgba(107,76,154,0) 58%, rgba(155,127,212,0.2) 58%, rgba(155,127,212,0.2) 100%); padding: 0 2px",
+          em: "font-style: italic; color: #8a6dba",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: #ece4ff; padding: 12px 16px; text-align: left; font-weight: 600; color: #3d3155; border: 1px solid #ddd0f0",
+          cell: "padding: 12px 16px; border: 1px solid #ddd0f0; color: #3d3155"
+        },
+        hr: "margin-top: 36px; margin-bottom: 36px; height: 2px; width: 56%; background: linear-gradient(90deg, rgba(221,208,240,0) 0%, rgba(155,127,212,0.2) 20%, rgba(155,127,212,0.65) 50%, rgba(155,127,212,0.2) 80%, rgba(221,208,240,0) 100%); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #9b7fd4; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #9b7fd4; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #9b7fd414; border-right: 3px solid #9b7fd4; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #9b7fd420;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#9b7fd4"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/magazine.json
+var magazine_default;
+var init_magazine = __esm({
+  "src/templates/xiaohu/magazine.json"() {
+    magazine_default = {
+      id: "xiaohu-magazine",
+      name: "\u6742\u5FD7 (xiaohu)",
+      description: "Apple \u84DD\u7D2B\u6E10\u53D8 #007AFF/#5856D6\uFF0C\u5706\u89D2\u6E10\u53D8\u6807\u7B7E\uFF0C\u73B0\u4EE3\u6742\u5FD7\u98CE\u683C\uFF0C\u9002\u5408\u4EA7\u54C1\u8BC4\u6D4B\u3001\u79D1\u6280\u8D44\u8BAF",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 22px; font-weight: 700; color: #ffffff; text-align: center; letter-spacing: 0.1em; line-height: 1.2; background: linear-gradient(135deg, #007AFF 0%, #5856D6 50%, #FF2D55 100%); border-radius: 12px; padding: 12px 24px; box-shadow: 0 4px 15px rgba(0,122,255,0.2); margin-top: 22px; margin-bottom: 16px",
+            content: "color: #ffffff",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 20px; font-weight: 600; color: #1d1d1f; line-height: 1.4; padding: 6px 0 8px 12px; border-left: 3px solid #007AFF; border-image: linear-gradient(to bottom, #007AFF, #5856D6) 1; margin-top: 28px; margin-bottom: 16px",
+            content: "color: #1d1d1f",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 18px; font-weight: 600; color: #1d1d1f; line-height: 1.4; padding: 5px 0 6px 10px; border-left: 3px solid #5856D6; border-image: linear-gradient(to bottom, #34c759, #5856D6) 1; margin-top: 24px; margin-bottom: 12px",
+            content: "color: #1d1d1f",
+            after: ""
+          },
+          base: {
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #007AFF; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #1d1d1f",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #333333; line-height: 1.8; margin-top: 0; margin-bottom: 19px; letter-spacing: 0.5px; text-align: left",
+        list: {
+          container: "margin-top: 19px; margin-bottom: 19px",
+          item: "font-size: 15px; color: #333333; line-height: 1.7; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #007AFF; border-image: linear-gradient(to bottom, #007AFF, #5856D6, #FF2D55) 1; background: rgba(0,0,0,0.02); padding: 16px 19px; margin-top: 24px; margin-bottom: 24px; border-radius: 8px; font-size: 15px; color: #333333; line-height: 1.7",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 3px; padding: 0; background: linear-gradient(to right, #007AFF, #5856D6, #FF2D55)",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #fbfbfd; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 4px 15px rgba(88,86,214,0.1)",
+          inline: "background: rgba(88,86,214,0.1); padding: 3px 6px; border-radius: 4px; font-size: 90%; color: #5856D6; font-family: 'SFMono-Regular', Consolas, Menlo, monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 15px rgba(0,0,0,0.08)",
+        link: "color: #007AFF; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 600; color: #0550ae",
+          em: "font-style: italic; color: #333333",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08)",
+          header: "background: #fbfbfd; padding: 12px 15px; border-bottom: 1.5px solid rgba(0,0,0,0.1); text-align: left; font-weight: 600; color: #1d1d1f",
+          cell: "padding: 10px 15px; border-bottom: 1px solid rgba(0,0,0,0.05); color: #333333"
+        },
+        hr: "margin-top: 40px; margin-bottom: 40px; height: 2px; background: linear-gradient(to right, rgba(0,122,255,0), #007AFF, #5856D6, #FF2D55, rgba(255,45,85,0)); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #007AFF; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #007AFF; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #007AFF14; border-right: 3px solid #007AFF; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #007AFF20;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#007AFF"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/midnight.json
+var midnight_default;
+var init_midnight = __esm({
+  "src/templates/xiaohu/midnight.json"() {
+    midnight_default = {
+      id: "xiaohu-midnight",
+      name: "\u6697\u591C (xiaohu)",
+      description: "\u7C89\u7D2B\u84DD\u6E10\u53D8 #F472B6/#8B5CF6/#60A5FA\uFF0C\u8D5B\u535A\u670B\u514B\u9713\u8679\u5149\u6548\uFF0C\u9002\u5408 AI/Web3/\u79D1\u6280\u524D\u6CBF\u8BDD\u9898",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 22px; font-weight: 700; color: #ffffff; text-align: center; letter-spacing: 0.1em; line-height: 1.2; background: linear-gradient(135deg, #F472B6 0%, #8B5CF6 50%, #60A5FA 100%); border-radius: 16px; padding: 12px 24px; box-shadow: 0 6px 20px rgba(244,114,182,0.25), 0 2px 8px rgba(139,92,246,0.15); margin-top: 22px; margin-bottom: 16px",
+            content: "color: #ffffff",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 20px; font-weight: 600; color: #1d1d1f; line-height: 1.2; padding: 8px 8px 8px 15px; border-bottom: 1px dashed #8B5CF6; border-radius: 4px; background: radial-gradient(80.23% 80.23% at 50% 88.37%, rgba(174,78,245,0.22) 0%, rgba(174,78,245,0) 100%); box-shadow: 0 0 15px rgba(174,78,245,0.15), inset 3px 0 0 0 #F472B6, inset 2px 0 0 0 #8B5CF6, inset 1px 0 0 0 #60A5FA; margin-top: 32px; margin-bottom: 12px",
+            content: "color: #1d1d1f",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 18px; font-weight: 600; color: #1d1d1f; line-height: 1.2; padding: 6px 6px 6px 13px; border-radius: 3px; background: radial-gradient(80.23% 80.23% at 50% 88.37%, rgba(139,92,246,0.18) 0%, rgba(139,92,246,0) 100%); box-shadow: 0 0 12px rgba(139,92,246,0.12), inset 2.5px 0 0 0 #8B5CF6, inset 1.5px 0 0 0 #60A5FA; margin-top: 28px; margin-bottom: 12px",
+            content: "color: #1d1d1f",
+            after: ""
+          },
+          base: {
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #8B5CF6; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #1d1d1f",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #333333; line-height: 1.8; margin-top: 0; margin-bottom: 19px; letter-spacing: 0.5px; text-align: left",
+        list: {
+          container: "margin-top: 19px; margin-bottom: 19px",
+          item: "font-size: 15px; color: #333333; line-height: 1.7; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #8B5CF6; border-image: linear-gradient(to bottom, #F472B6, #8B5CF6, #60A5FA) 1; background: linear-gradient(135deg, rgba(244,114,182,0.05), rgba(168,85,247,0.02)); padding: 16px 19px; margin-top: 24px; margin-bottom: 24px; border-radius: 8px; font-size: 15px; color: #333333; line-height: 1.7",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 3px; padding: 0; background: linear-gradient(to right, #F472B6, #8B5CF6, #60A5FA)",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #fbfbfd; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 4px 15px rgba(168,85,247,0.1)",
+          inline: "background: rgba(139,92,246,0.1); padding: 3px 6px; border-radius: 4px; font-size: 90%; color: #8B5CF6; font-family: 'SFMono-Regular', Consolas, Menlo, monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 15px rgba(139,92,246,0.12)",
+        link: "color: #8B5CF6; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 600; color: #7C3AED",
+          em: "font-style: italic; color: #8B5CF6",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(168,85,247,0.08)",
+          header: "background: linear-gradient(135deg, rgba(244,114,182,0.03), rgba(168,85,247,0.02)); padding: 12px 15px; border-bottom: 1.5px solid rgba(168,85,247,0.1); text-align: left; font-weight: 600; color: #1d1d1f",
+          cell: "padding: 10px 15px; border-bottom: 1px solid rgba(168,85,247,0.05); color: #333333"
+        },
+        hr: "margin-top: 40px; margin-bottom: 40px; height: 2px; background: linear-gradient(to right, rgba(244,114,182,0), #F472B6, #8B5CF6, #60A5FA, rgba(96,165,250,0)); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #8B5CF6; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #8B5CF6; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #8B5CF614; border-right: 3px solid #8B5CF6; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #8B5CF620;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#8B5CF6"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/minimal-blue.json
+var minimal_blue_default2;
+var init_minimal_blue2 = __esm({
+  "src/templates/xiaohu/minimal-blue.json"() {
+    minimal_blue_default2 = {
+      id: "xiaohu-minimal-blue",
+      name: "\u7B80\u7EA6\xB7\u84DD (xiaohu)",
+      description: "\u7B80\u7EA6\u84DD #4B6EF5 \u6781\u7B80\u98CE\u683C\uFF0C\u65E0\u88C5\u9970\u6807\u9898\uFF0C\u9002\u5408\u5546\u52A1/\u79D1\u6280/\u4E13\u4E1A\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 28px; font-weight: 800; color: #4B6EF5; margin-top: 0; margin-bottom: 28px; line-height: 1.4; letter-spacing: -0.03em",
+            content: "color: #4B6EF5",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 24px; font-weight: 700; color: #4B6EF5; margin-top: 36px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
+            content: "color: #4B6EF5",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 22px; font-weight: 700; color: #4B6EF5; margin-top: 28px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
+            content: "color: #4B6EF5",
+            after: ""
+          },
+          base: {
+            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #4B6EF5",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.6; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #4B6EF5; padding: 16px 8px 1px 8px; margin-top: 4px; margin-bottom: 20px; font-style: italic; font-size: 15px; color: #555555; line-height: 1.75",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(0,0,0,0.05); padding: 2px 4px; border-radius: 2px; font-size: 90%; color: #333333; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #4B6EF5; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #4B6EF5",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "padding: 12px 16px; text-align: left; font-weight: 700; border-bottom: 2px solid rgba(0,0,0,0.15); color: #333333",
+          cell: "padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.08); color: #333333"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; background: rgba(75,110,245, 0.2); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #4B6EF5; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #4B6EF5; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #4B6EF514; border-right: 3px solid #4B6EF5; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #4B6EF520;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#4B6EF5"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/minimal-gold.json
+var minimal_gold_default2;
+var init_minimal_gold2 = __esm({
+  "src/templates/xiaohu/minimal-gold.json"() {
+    minimal_gold_default2 = {
+      id: "xiaohu-minimal-gold",
+      name: "\u7B80\u7EA6\xB7\u91D1 (xiaohu)",
+      description: "\u7B80\u7EA6\u91D1 #C8A062 \u6781\u7B80\u98CE\u683C\uFF0C\u65E0\u88C5\u9970\u6807\u9898\uFF0C\u9002\u5408\u5546\u52A1/\u79D1\u6280/\u4E13\u4E1A\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 28px; font-weight: 800; color: #C8A062; margin-top: 0; margin-bottom: 28px; line-height: 1.4; letter-spacing: -0.03em",
+            content: "color: #C8A062",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 24px; font-weight: 700; color: #C8A062; margin-top: 36px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
+            content: "color: #C8A062",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 22px; font-weight: 700; color: #C8A062; margin-top: 28px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
+            content: "color: #C8A062",
+            after: ""
+          },
+          base: {
+            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #C8A062; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #C8A062",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.6; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #C8A062; padding: 16px 8px 1px 8px; margin-top: 4px; margin-bottom: 20px; font-style: italic; font-size: 15px; color: #555555; line-height: 1.75",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(0,0,0,0.05); padding: 2px 4px; border-radius: 2px; font-size: 90%; color: #333333; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #C8A062; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #C8A062",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "padding: 12px 16px; text-align: left; font-weight: 700; border-bottom: 2px solid rgba(0,0,0,0.15); color: #333333",
+          cell: "padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.08); color: #333333"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; background: rgba(200,160,98, 0.2); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #C8A062; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #C8A062; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #C8A06214; border-right: 3px solid #C8A062; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #C8A06220;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#C8A062"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/minimal-gray.json
+var minimal_gray_default2;
+var init_minimal_gray2 = __esm({
+  "src/templates/xiaohu/minimal-gray.json"() {
+    minimal_gray_default2 = {
+      id: "xiaohu-minimal-gray",
+      name: "\u7B80\u7EA6\xB7\u7070 (xiaohu)",
+      description: "\u7B80\u7EA6\u7070 #4E5969 \u6781\u7B80\u98CE\u683C\uFF0C\u65E0\u88C5\u9970\u6807\u9898\uFF0C\u9002\u5408\u5546\u52A1/\u79D1\u6280/\u4E13\u4E1A\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 28px; font-weight: 800; color: #4E5969; margin-top: 0; margin-bottom: 28px; line-height: 1.4; letter-spacing: -0.03em",
+            content: "color: #4E5969",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 24px; font-weight: 700; color: #4E5969; margin-top: 36px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
+            content: "color: #4E5969",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 22px; font-weight: 700; color: #4E5969; margin-top: 28px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
+            content: "color: #4E5969",
+            after: ""
+          },
+          base: {
+            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #4E5969; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #4E5969",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.6; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #4E5969; padding: 16px 8px 1px 8px; margin-top: 4px; margin-bottom: 20px; font-style: italic; font-size: 15px; color: #555555; line-height: 1.75",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(0,0,0,0.05); padding: 2px 4px; border-radius: 2px; font-size: 90%; color: #333333; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #4E5969; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #4E5969",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "padding: 12px 16px; text-align: left; font-weight: 700; border-bottom: 2px solid rgba(0,0,0,0.15); color: #333333",
+          cell: "padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.08); color: #333333"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; background: rgba(78,89,105, 0.2); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #4E5969; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #4E5969; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #4E596914; border-right: 3px solid #4E5969; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #4E596920;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#4E5969"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/minimal-navy.json
+var minimal_navy_default2;
+var init_minimal_navy2 = __esm({
+  "src/templates/xiaohu/minimal-navy.json"() {
+    minimal_navy_default2 = {
+      id: "xiaohu-minimal-navy",
+      name: "\u7B80\u7EA6\xB7\u85CF\u9752 (xiaohu)",
+      description: "\u7B80\u7EA6\u85CF\u9752 #1F4F8A \u6781\u7B80\u98CE\u683C\uFF0C\u65E0\u88C5\u9970\u6807\u9898\uFF0C\u9002\u5408\u5546\u52A1/\u79D1\u6280/\u4E13\u4E1A\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 28px; font-weight: 800; color: #1F4F8A; margin-top: 0; margin-bottom: 28px; line-height: 1.4; letter-spacing: -0.03em",
+            content: "color: #1F4F8A",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 24px; font-weight: 700; color: #1F4F8A; margin-top: 36px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
+            content: "color: #1F4F8A",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 22px; font-weight: 700; color: #1F4F8A; margin-top: 28px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
+            content: "color: #1F4F8A",
+            after: ""
+          },
+          base: {
+            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #1F4F8A; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #1F4F8A",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.6; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #1F4F8A; padding: 16px 8px 1px 8px; margin-top: 4px; margin-bottom: 20px; font-style: italic; font-size: 15px; color: #555555; line-height: 1.75",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(0,0,0,0.05); padding: 2px 4px; border-radius: 2px; font-size: 90%; color: #333333; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #1F4F8A; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #1F4F8A",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "padding: 12px 16px; text-align: left; font-weight: 700; border-bottom: 2px solid rgba(0,0,0,0.15); color: #333333",
+          cell: "padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.08); color: #333333"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; background: rgba(31,79,138, 0.2); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #1F4F8A; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #1F4F8A; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #1F4F8A14; border-right: 3px solid #1F4F8A; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #1F4F8A20;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#1F4F8A"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/minimal-red.json
+var minimal_red_default2;
+var init_minimal_red2 = __esm({
+  "src/templates/xiaohu/minimal-red.json"() {
+    minimal_red_default2 = {
+      id: "xiaohu-minimal-red",
+      name: "\u7B80\u7EA6\xB7\u7EA2 (xiaohu)",
+      description: "\u7B80\u7EA6\u7EA2 #F25C54 \u6781\u7B80\u98CE\u683C\uFF0C\u65E0\u88C5\u9970\u6807\u9898\uFF0C\u9002\u5408\u5546\u52A1/\u79D1\u6280/\u4E13\u4E1A\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 28px; font-weight: 800; color: #F25C54; margin-top: 0; margin-bottom: 28px; line-height: 1.4; letter-spacing: -0.03em",
+            content: "color: #F25C54",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 24px; font-weight: 700; color: #F25C54; margin-top: 36px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
+            content: "color: #F25C54",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 22px; font-weight: 700; color: #F25C54; margin-top: 28px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
+            content: "color: #F25C54",
+            after: ""
+          },
+          base: {
+            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #F25C54; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #F25C54",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.6; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 3px solid #F25C54; padding: 16px 8px 1px 8px; margin-top: 4px; margin-bottom: 20px; font-style: italic; font-size: 15px; color: #555555; line-height: 1.75",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #1e1e1e",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #282c34; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.15)",
+          inline: "background: rgba(0,0,0,0.05); padding: 2px 4px; border-radius: 2px; font-size: 90%; color: #333333; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #F25C54; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #F25C54",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "padding: 12px 16px; text-align: left; font-weight: 700; border-bottom: 2px solid rgba(0,0,0,0.15); color: #333333",
+          cell: "padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.08); color: #333333"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; background: rgba(242,92,84, 0.2); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #F25C54; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #F25C54; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #F25C5414; border-right: 3px solid #F25C54; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #F25C5420;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#F25C54"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/mint-fresh.json
+var mint_fresh_default;
+var init_mint_fresh = __esm({
+  "src/templates/xiaohu/mint-fresh.json"() {
+    mint_fresh_default = {
+      id: "xiaohu-mint-fresh",
+      name: "\u8584\u8377 (xiaohu)",
+      description: "\u8584\u8377\u7EFF #1a7a5a \u6E05\u65B0\u81EA\u7136\uFF0C\u5706\u89D2\u5361\u7247\uFF0C\u9002\u5408\u751F\u6D3B/\u5065\u5EB7/\u6E05\u65B0\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 29px; font-weight: 700; color: #1d5e49; line-height: 1.32; margin-top: 36px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #1a7a5a; border-radius: 13px; background: linear-gradient(180deg, rgba(224,245,236,0.95) 0%, rgba(240,250,245,0.95) 100%); border: 1px solid rgba(26,122,90,0.18)",
+            content: "color: #1d5e49",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 22px; font-weight: 700; color: #1a7a5a; line-height: 1.4; margin-top: 34px; margin-bottom: 18px; padding: 6px 14px; border-left: none; border-radius: 999px; background-color: rgba(224,245,236,0.95); border: 1px solid rgba(26,122,90,0.16); text-align: center; display: block; width: fit-content",
+            content: "color: #1a7a5a",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 20px; font-weight: 600; color: #1d5e49; line-height: 1.45; margin-top: 28px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(26,122,90,0.75)",
+            content: "color: #1d5e49",
+            after: ""
+          },
+          base: {
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #1a7a5a; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #1d5e49",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2d4a3e; line-height: 1.75; margin-top: 0; margin-bottom: 18px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2d4a3e; line-height: 1.75; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #1a7a5a; background: linear-gradient(180deg, rgba(224,245,236,0.96) 0%, rgba(240,250,245,0.96) 100%); padding: 16px 20px; border-radius: 12px; margin-top: 24px; margin-bottom: 24px; font-size: 15px; color: rgba(26,122,90,0.7); line-height: 1.75",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: rgba(26,122,90,0.15)",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #e0f5ec; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden",
+          inline: "background: #e0f5ec; padding: 3px 6px; border-radius: 4px; font-size: 90%; color: #1a7a5a; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #1a7a5a; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #1a7a5a; background: linear-gradient(180deg, rgba(26,122,90,0) 0%, rgba(26,122,90,0) 58%, rgba(26,122,90,0.14) 58%, rgba(26,122,90,0.14) 100%); padding: 0 2px",
+          em: "font-style: italic; color: #5a8a72",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: #e0f5ec; padding: 12px 16px; text-align: left; font-weight: 600; color: #2d4a3e; border: 1px solid #c8e6d8",
+          cell: "padding: 12px 16px; border: 1px solid #c8e6d8; color: #2d4a3e"
+        },
+        hr: "margin-top: 36px; margin-bottom: 36px; height: 2px; width: 58%; background: linear-gradient(90deg, rgba(26,122,90,0) 0%, rgba(26,122,90,0.2) 20%, rgba(26,122,90,0.65) 50%, rgba(26,122,90,0.2) 80%, rgba(26,122,90,0) 100%); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #1a7a5a; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #1a7a5a; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #1a7a5a14; border-right: 3px solid #1a7a5a; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #1a7a5a20;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#1a7a5a"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/newspaper.json
+var newspaper_default;
+var init_newspaper = __esm({
+  "src/templates/xiaohu/newspaper.json"() {
+    newspaper_default = {
+      id: "xiaohu-newspaper",
+      name: "\u62A5\u7EB8 (xiaohu)",
+      description: "\u7EBD\u7EA6\u65F6\u62A5\u98CE #326891 \u84DD\u7070\uFF0CGeorgia \u886C\u7EBF\u4F53\uFF0C\u5C45\u4E2D\u53CC\u7EBF\u6807\u9898\uFF0C\u9002\u5408\u65B0\u95FB\u8BC4\u8BBA\u3001\u884C\u4E1A\u5206\u6790",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 29px; font-weight: 700; color: #111111; line-height: 1.3; letter-spacing: -0.015em; padding: 10px 0 9px; border-top: 2px solid #111111; border-bottom: 1px solid #111111; text-align: left; margin-top: 38px; margin-bottom: 16px",
+            content: "color: #111111",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 19px; font-weight: 700; color: #111111; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.12em; text-align: center; padding: 10px 0; border-top: 1px solid rgba(17,17,17,0.85); border-bottom: 1px solid rgba(17,17,17,0.85); margin-top: 38px; margin-bottom: 18px",
+            content: "color: #111111",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 17px; font-weight: 700; color: #111111; line-height: 1.45; letter-spacing: 0.04em; padding-bottom: 6px; margin-top: 28px; margin-bottom: 14px",
+            content: "color: #111111",
+            after: ""
+          },
+          base: {
+            base: "font-size: 15px; font-weight: bold; color: #555555; border-left: 2px solid #326891; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #111111",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #000000; line-height: 1.7; margin-top: 0; margin-bottom: 18px; letter-spacing: 0.5px; text-align: left",
+        list: {
+          container: "margin-top: 16px; margin-bottom: 16px",
+          item: "font-size: 15px; color: #000000; line-height: 1.7; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-top: 1px solid #d5cfc5; border-bottom: 1px solid #d5cfc5; background: #f7f3ee; padding: 18px 20px; margin-top: 24px; margin-bottom: 24px; border-radius: 0; font-size: 16px; color: #555555; line-height: 1.7; font-style: italic; box-shadow: inset 0 1px 0 rgba(255,255,255,0.6)",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #e5e0d8",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #f0ede8; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden",
+          inline: "background: #f0ede8; padding: 3px 6px; border-radius: 4px; font-size: 12px; color: #326891; font-family: 'SF Mono', Consolas, monospace"
+        },
+        image: "max-width: 100%; border-radius: 2px; display: block; box-shadow: 0 2px 8px rgba(0,0,0,0.1)",
+        link: "color: #326891; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #111111; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 62%, rgba(50,104,145,0.1) 62%, rgba(50,104,145,0.1) 100%); display: inline",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 0; overflow: hidden",
+          header: "background: #f0ede8; padding: 12px 16px; border: 1px solid #d5cfc5; text-align: left; font-weight: 600; color: #000000",
+          cell: "padding: 12px 16px; border: 1px solid #d5cfc5; color: #000000"
+        },
+        hr: "margin-top: 40px; margin-bottom: 40px; height: 1px; background: linear-gradient(90deg, rgba(213,207,197,0) 0%, rgba(17,17,17,0.9) 26%, rgba(17,17,17,0.9) 74%, rgba(213,207,197,0) 100%); border: none; width: 38%; margin-left: auto; margin-right: auto",
+        footnote: {
+          ref: "font-size: 12px; color: #326891; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #326891; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #32689114; border-right: 3px solid #326891; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #32689120;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#326891"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/sports.json
+var sports_default;
+var init_sports = __esm({
+  "src/templates/xiaohu/sports.json"() {
+    sports_default = {
+      id: "xiaohu-sports",
+      name: "\u8FD0\u52A8 (xiaohu)",
+      description: "\u8FD0\u52A8\u7EFF #00A968 + \u6E10\u53D8\u8272\u5E26\uFF0C\u6D3B\u529B\u52A8\u611F\uFF0C\u9002\u5408\u4F53\u80B2/\u5065\u8EAB/\u6237\u5916\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 22px; font-weight: 700; color: #ffffff; text-align: center; letter-spacing: 0.12em; line-height: 1.4; background: linear-gradient(120deg, #00A968, #008A56, #00A968); border-radius: 50px; padding: 12px 24px; box-shadow: 0 8px 20px rgba(0, 169, 104, 0.3); margin-top: 24px; margin-bottom: 12px",
+            content: "color: #ffffff",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 20px; font-weight: 600; color: #00A968; text-align: left; letter-spacing: 0.06em; line-height: 1.4; background: linear-gradient(to right, rgba(0, 169, 104, 0.05), rgba(56, 198, 244, 0.05)); border-left: 4px solid; border-image: linear-gradient(to bottom, #FF6600, #00A968, #38C6F4) 1; border-radius: 0 12px 12px 0; padding: 8px 16px; box-shadow: 0 3px 8px rgba(0, 169, 104, 0.12); margin-top: 32px; margin-bottom: 12px",
+            content: "color: #00A968",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 18px; font-weight: 600; color: #00A968; letter-spacing: 0.08em; border-left: 4px solid; border-image: linear-gradient(to bottom, #FF6600, #00A968, #38C6F4) 1; background: linear-gradient(to right, rgba(255, 102, 0, 0.05), rgba(0, 169, 104, 0.05)); border-radius: 0 25px 25px 0; padding: 8px 20px; margin-top: 28px; margin-bottom: 12px; line-height: 1.4",
+            content: "color: #00A968",
+            after: ""
+          },
+          base: {
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #00A968; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #00A968",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #2c2c2c; line-height: 1.8; margin-top: 0; margin-bottom: 16px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #2c2c2c; line-height: 1.8; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 5px solid; border-image: linear-gradient(to bottom, #FF6600, #00A968, #38C6F4) 1; background: #f8f8f8; padding: 16px 20px; border-radius: 0 8px 8px 0; margin-top: 24px; margin-bottom: 24px; font-size: 15px; color: #3c3c3e; line-height: 1.8",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: linear-gradient(to right, #FF6600, #00A968, #38C6F4)",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #ffffff; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.2)",
+          inline: "background: linear-gradient(135deg, rgba(0,169,104,0.1), rgba(56,198,244,0.1)); padding: 3px 6px; border-radius: 4px; font-size: 90%; color: #00A968; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #00A968; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #00A968",
+          em: "font-style: italic; color: #00A968",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: linear-gradient(135deg, rgba(255,102,0,0.1), rgba(0,169,104,0.1)); padding: 12px 16px; text-align: left; font-weight: bold; color: #00A968; border-bottom: 2px solid rgba(255,102,0,0.2)",
+          cell: "padding: 10px 16px; border-bottom: 1px solid rgba(0,0,0,0.08); color: #2c2c2c"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 3px; background: linear-gradient(to right, rgba(255,102,0,0), #FF6600, #00A968, #38C6F4, rgba(56,198,244,0)); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #00A968; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #00A968; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #00A96814; border-right: 3px solid #00A968; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #00A96820;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#00A968"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/sspai.json
+var sspai_default;
+var init_sspai = __esm({
+  "src/templates/xiaohu/sspai.json"() {
+    sspai_default = {
+      id: "xiaohu-sspai",
+      name: "\u5C11\u6570\u6D3E (xiaohu)",
+      description: "\u5C11\u6570\u6D3E\u7EA2 #D71A1B \u5F3A\u8C03\uFF0C\u886C\u7EBF\u4F53\u6807\u9898\uFF0C\u6E05\u723D\u767D\u5E95\uFF0C\u9002\u5408\u6570\u7801\u8BC4\u6D4B\u3001\u6548\u7387\u5DE5\u5177\u5206\u4EAB",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 29px; font-weight: 700; color: #2d2d2d; line-height: 1.32; letter-spacing: -0.015em; padding: 11px 16px 10px; border-top: 3px solid #D71A1B; border-bottom: 1px solid #e8dede; background: linear-gradient(180deg, rgba(215,26,27,0.05) 0%, rgba(255,255,255,1) 100%); margin-top: 36px; margin-bottom: 18px",
+            content: "color: #2d2d2d",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 21px; font-weight: 700; color: #2d2d2d; line-height: 1.45; padding: 8px 0 8px 14px; border-left: 4px solid #D71A1B; letter-spacing: 0.01em; margin-top: 34px; margin-bottom: 18px",
+            content: "color: #2d2d2d",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 19px; font-weight: 700; color: #444444; line-height: 1.45; padding-bottom: 6px; margin-top: 28px; margin-bottom: 14px",
+            content: "color: #444444",
+            after: ""
+          },
+          base: {
+            base: "font-size: 17px; font-weight: bold; color: #555555; border-left: 2px solid #D71A1B; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #444444",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #333333; line-height: 1.8; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.5px; text-align: left",
+        list: {
+          container: "margin-top: 16px; margin-bottom: 16px",
+          item: "font-size: 15px; color: #333333; line-height: 1.8; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #D71A1B; border-right: 1px solid #f0e0e0; background: linear-gradient(180deg, #fff8f8 0%, #fffdfd 100%); padding: 16px 20px; margin-top: 24px; margin-bottom: 24px; border-radius: 10px; font-size: 16px; color: #5b5555; line-height: 1.8",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #f0f0f0",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #fafafa; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; border: 1px solid #f0f0f0",
+          inline: "background: #fff5f5; padding: 3px 6px; border-radius: 4px; font-size: 13px; color: #D71A1B; font-family: 'SF Mono', Consolas, monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #D71A1B; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #c51718; background: linear-gradient(180deg, rgba(215,26,27,0) 0%, rgba(215,26,27,0) 60%, rgba(215,26,27,0.14) 60%, rgba(215,26,27,0.14) 100%); padding: 0 2px; display: inline",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: #fef7f7; padding: 12px 16px; border: 1px solid #f0e0e0; text-align: left; font-weight: 600; color: #333333",
+          cell: "padding: 12px 16px; border: 1px solid #f0e0e0; color: #333333"
+        },
+        hr: "margin-top: 38px; margin-bottom: 38px; height: 1px; background: linear-gradient(90deg, rgba(238,238,238,0) 0%, rgba(215,26,27,0.22) 18%, rgba(215,26,27,0.78) 50%, rgba(215,26,27,0.22) 82%, rgba(238,238,238,0) 100%); border: none; width: 62%; margin-left: auto; margin-right: auto",
+        footnote: {
+          ref: "font-size: 12px; color: #D71A1B; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #D71A1B; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #D71A1B14; border-right: 3px solid #D71A1B; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #D71A1B20;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#D71A1B"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/sunset-amber.json
+var sunset_amber_default;
+var init_sunset_amber = __esm({
+  "src/templates/xiaohu/sunset-amber.json"() {
+    sunset_amber_default = {
+      id: "xiaohu-sunset-amber",
+      name: "\u65E5\u843D (xiaohu)",
+      description: "\u65E5\u843D\u7425\u73C0 #d37a45 \u6E29\u6696\u6D53\u90C1\uFF0C\u6E10\u53D8\u80CC\u666F\uFF0C\u9002\u5408\u6545\u4E8B/\u60C5\u611F/\u65C5\u884C\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 29px; font-weight: 700; color: #8d4d2e; line-height: 1.32; margin-top: 36px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #d37a45; border-radius: 13px; background: linear-gradient(180deg, rgba(255,243,227,0.94) 0%, rgba(248,228,201,0.8) 100%); border: 1px solid rgba(224,174,112,0.4); box-shadow: 0 6px 16px rgba(166,102,56,0.06)",
+            content: "color: #8d4d2e",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 23px; font-weight: 700; color: #a45a33; line-height: 1.4; margin-top: 34px; margin-bottom: 18px; padding: 10px 14px; border-left: 3px solid #d78a54; border-radius: 12px; background: linear-gradient(90deg, rgba(236,191,132,0.24) 0%, rgba(236,191,132,0.08) 72%, rgba(236,191,132,0) 100%)",
+            content: "color: #a45a33",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 21px; font-weight: 600; color: #5c402b; line-height: 1.45; margin-top: 28px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(215,138,84,0.9); padding: 0 0 6px 12px",
+            content: "color: #5c402b",
+            after: ""
+          },
+          base: {
+            base: "font-size: 19px; font-weight: bold; color: #555555; border-left: 2px solid #d37a45; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #5c402b",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #3d2c1e; line-height: 1.75; margin-top: 0; margin-bottom: 18px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #3d2c1e; line-height: 1.75; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #d78a54; background: linear-gradient(180deg, rgba(249,236,217,0.96) 0%, rgba(247,228,204,0.88) 100%); padding: 16px 20px; border-radius: 12px; margin-top: 24px; margin-bottom: 24px; font-size: 15px; color: rgba(211,122,69,0.7); line-height: 1.75",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: rgba(211,122,69,0.15)",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #f5e6d0; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden",
+          inline: "background: #f5e6d0; padding: 3px 6px; border-radius: 4px; font-size: 90%; color: #d37a45; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #d37a45; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #a45a33; background: linear-gradient(180deg, rgba(212,122,69,0) 0%, rgba(212,122,69,0) 60%, rgba(236,191,132,0.35) 60%, rgba(236,191,132,0.35) 100%); padding: 0 2px",
+          em: "font-style: italic; color: #8a6d4b",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: #f5e6d0; padding: 12px 16px; text-align: left; font-weight: 600; color: #3d2c1e; border: 1px solid #e8d4b8",
+          cell: "padding: 12px 16px; border: 1px solid #e8d4b8; color: #3d2c1e"
+        },
+        hr: "margin-top: 38px; margin-bottom: 38px; height: 2px; width: 58%; background: linear-gradient(90deg, rgba(232,212,184,0) 0%, rgba(215,138,84,0.22) 20%, rgba(215,138,84,0.75) 50%, rgba(215,138,84,0.22) 80%, rgba(232,212,184,0) 100%); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #d37a45; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #d37a45; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #d37a4514; border-right: 3px solid #d37a45; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #d37a4520;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#d37a45"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/terracotta.json
+var terracotta_default;
+var init_terracotta = __esm({
+  "src/templates/xiaohu/terracotta.json"() {
+    terracotta_default = {
+      id: "xiaohu-terracotta",
+      name: "\u8D64\u9676 (xiaohu)",
+      description: "\u8D64\u9676\u6A59 #C86442 \u5F3A\u8C03\uFF0C\u6696\u7070\u6587\u5B57\uFF0C\u767D\u5E95\u7EB9\u7406\uFF0C\u9002\u5408\u77E5\u8BC6\u5206\u4EAB\u3001\u81EA\u5A92\u4F53\u5E72\u8D27",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 22px; font-weight: bold; color: #ffffff; text-align: center; background: #C86442; border-radius: 8px; padding: 12px 24px; margin-top: 24px; margin-bottom: 12px; line-height: 1.2; box-shadow: 0 2px 8px rgba(200,100,66,0.2)",
+            content: "color: #ffffff",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 20px; font-weight: bold; color: #3F3F3F; border-left: 4px solid #C86442; border-bottom: 1px dashed #C86442; padding: 0 0 8px 12px; margin-top: 32px; margin-bottom: 12px; line-height: 1.2",
+            content: "color: #3F3F3F",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 18px; font-weight: bold; color: #3F3F3F; border-left: 3px solid #C86442; padding: 0 0 6px 12px; margin-top: 32px; margin-bottom: 12px; line-height: 1.2",
+            content: "color: #3F3F3F",
+            after: ""
+          },
+          base: {
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #C86442; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #3F3F3F",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #222222; line-height: 1.75; margin-top: 0; margin-bottom: 20px; letter-spacing: 0.5px; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #3F3F3F; line-height: 1.75; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #C86442; background: #f6f6f4; padding: 16px 16px 16px 32px; margin-top: 24px; margin-bottom: 32px; border-radius: 6px; font-size: 15px; color: rgba(0,0,0,0.6); line-height: 1.75; font-style: italic; box-shadow: 0 4px 6px rgba(0,0,0,0.05)",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: #f0efed",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #fafaf9; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden; border-top: 3px solid #C86442; box-shadow: 0 2px 8px rgba(200,100,66,0.1)",
+          inline: "background: rgba(200,100,66,0.1); padding: 3px 6px; border-radius: 4px; font-size: 90%; color: #C86442; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #C86442; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: bold; color: #C86442",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: #f6f6f4; padding: 8px 12px; border: 1px solid #e5e5e5; text-align: left; font-weight: bold; color: #3F3F3F",
+          cell: "padding: 8px 12px; border: 1px solid #e5e5e5; color: #3F3F3F"
+        },
+        hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; background: linear-gradient(to right, rgba(200,100,66,0), rgba(200,100,66,0.6), rgba(200,100,66,0)); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #C86442; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #C86442; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #C8644214; border-right: 3px solid #C86442; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #C8644220;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#C86442"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/wechat-native.json
+var wechat_native_default;
+var init_wechat_native = __esm({
+  "src/templates/xiaohu/wechat-native.json"() {
+    wechat_native_default = {
+      id: "xiaohu-wechat-native",
+      name: "\u5FAE\u4FE1\u539F\u751F (xiaohu)",
+      description: "\u5FAE\u4FE1\u7EFF #07c160 \u539F\u751F\u98CE\u683C\uFF0C\u9002\u5408\u5B98\u65B9/\u6B63\u5F0F/\u901A\u7528\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "xiaohu",
+      styles: {
+        container: "background-color: #ffffff; padding: 16px",
+        title: {
+          h1: {
+            base: "font-size: 29px; font-weight: 700; color: #163325; line-height: 1.32; margin-top: 36px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #07c160; border-radius: 12px; background: linear-gradient(180deg, rgba(7,193,96,0.08) 0%, rgba(7,193,96,0.03) 100%); border-bottom: 1px dashed rgba(22,51,37,0.2); box-shadow: 0 6px 14px rgba(7,193,96,0.05)",
+            content: "color: #163325",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 23px; font-weight: 700; color: #067647; line-height: 1.4; margin-top: 34px; margin-bottom: 18px; padding: 10px 14px; border-left: 4px solid #07c160; border-radius: 12px; background: linear-gradient(90deg, rgba(7,193,96,0.12) 0%, rgba(7,193,96,0.03) 70%, rgba(7,193,96,0) 100%)",
+            content: "color: #067647",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 21px; font-weight: 600; color: #1f3d2d; line-height: 1.45; margin-top: 28px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(7,193,96,0.9); padding: 0 0 6px 12px",
+            content: "color: #1f3d2d",
+            after: ""
+          },
+          base: {
+            base: "font-size: 19px; font-weight: bold; color: #555555; border-left: 2px solid #07c160; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            content: "color: #1f3d2d",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #333333; line-height: 1.75; margin-top: 0; margin-bottom: 18px; letter-spacing: 0.02em; text-align: left",
+        list: {
+          container: "margin-top: 15px; margin-bottom: 15px",
+          item: "font-size: 15px; color: #333333; line-height: 1.75; letter-spacing: 0.5px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #07c160; background: linear-gradient(135deg, #f0f7f2 0%, #f8fcf9 100%); padding: 16px 20px; border-radius: 12px; margin-top: 24px; margin-bottom: 24px; font-size: 15px; color: rgba(7,193,96,0.7); line-height: 1.75",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 36px; padding: 0 12px; background: rgba(7,193,96,0.15)",
+            dot: "width: 10px; height: 10px; border-radius: 50%; margin-right: 6px;",
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27ca40"
+            ]
+          },
+          block: "background: #f0f7f2; border-radius: 8px; margin-top: 24px; margin-bottom: 24px; overflow: hidden",
+          inline: "background: #f0f7f2; padding: 3px 6px; border-radius: 4px; font-size: 90%; color: #07c160; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace"
+        },
+        image: "max-width: 100%; border-radius: 8px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.08)",
+        link: "color: #07c160; text-decoration: none",
+        emphasis: {
+          strong: "font-weight: 700; color: #067647; background: linear-gradient(180deg, rgba(7,193,96,0) 0%, rgba(7,193,96,0) 58%, rgba(7,193,96,0.16) 58%, rgba(7,193,96,0.16) 100%); padding: 0 3px",
+          em: "font-style: italic; color: #666666",
+          del: "text-decoration: line-through; color: #999;"
+        },
+        table: {
+          container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
+          header: "background: #f0f7f2; padding: 12px 16px; text-align: left; font-weight: 600; color: #333333; border: 1px solid #d8e8dc",
+          cell: "padding: 12px 16px; border: 1px solid #d8e8dc; color: #333333"
+        },
+        hr: "margin-top: 36px; margin-bottom: 36px; height: 2px; width: 62%; background: linear-gradient(90deg, rgba(7,193,96,0) 0%, rgba(7,193,96,0.22) 20%, rgba(7,193,96,0.68) 50%, rgba(7,193,96,0.22) 80%, rgba(7,193,96,0) 100%); border: none",
+        footnote: {
+          ref: "font-size: 12px; color: #07c160; vertical-align: super; margin-left: 2px",
+          backref: "color: #999; text-decoration: none;"
+        },
+        containers: {
+          dialogue: {
+            container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            bubbleLeft: "max-width: 80%; background: #fff; border-left: 3px solid #07c160; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0;",
+            bubbleRight: "max-width: 80%; background: #07c16014; border-right: 3px solid #07c160; border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto;",
+            speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+            text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;"
+          },
+          gallery: {
+            container: "margin: 20px 0;",
+            title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+            scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory;",
+            item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; border: 2px solid #07c16020;",
+            image: "width: 100%; height: 100%; object-fit: cover;"
+          }
+        },
+        accentColor: "#07c160"
+      }
+    };
+  }
+});
+
+// src/templates/xiaohu/index.ts
+var xiaohuThemes;
+var init_xiaohu = __esm({
+  "src/templates/xiaohu/index.ts"() {
+    init_bauhaus();
+    init_bold_blue2();
+    init_bold_green2();
+    init_bold_navy2();
+    init_bytedance();
+    init_chinese();
+    init_coffee_house();
+    init_elegant_blue2();
+    init_elegant_green2();
+    init_elegant_navy2();
+    init_focus_blue2();
+    init_focus_gold2();
+    init_focus_red2();
+    init_github();
+    init_ink();
+    init_lavender_dream();
+    init_magazine();
+    init_midnight();
+    init_minimal_blue2();
+    init_minimal_gold2();
+    init_minimal_gray2();
+    init_minimal_navy2();
+    init_minimal_red2();
+    init_mint_fresh();
+    init_newspaper();
+    init_sports();
+    init_sspai();
+    init_sunset_amber();
+    init_terracotta();
+    init_wechat_native();
+    xiaohuThemes = {
+      "xiaohu-bauhaus": bauhaus_default,
+      "xiaohu-bold-blue": bold_blue_default2,
+      "xiaohu-bold-green": bold_green_default2,
+      "xiaohu-bold-navy": bold_navy_default2,
+      "xiaohu-bytedance": bytedance_default,
+      "xiaohu-chinese": chinese_default,
+      "xiaohu-coffee-house": coffee_house_default,
+      "xiaohu-elegant-blue": elegant_blue_default2,
+      "xiaohu-elegant-green": elegant_green_default2,
+      "xiaohu-elegant-navy": elegant_navy_default2,
+      "xiaohu-focus-blue": focus_blue_default2,
+      "xiaohu-focus-gold": focus_gold_default2,
+      "xiaohu-focus-red": focus_red_default2,
+      "xiaohu-github": github_default,
+      "xiaohu-ink": ink_default,
+      "xiaohu-lavender-dream": lavender_dream_default,
+      "xiaohu-magazine": magazine_default,
+      "xiaohu-midnight": midnight_default,
+      "xiaohu-minimal-blue": minimal_blue_default2,
+      "xiaohu-minimal-gold": minimal_gold_default2,
+      "xiaohu-minimal-gray": minimal_gray_default2,
+      "xiaohu-minimal-navy": minimal_navy_default2,
+      "xiaohu-minimal-red": minimal_red_default2,
+      "xiaohu-mint-fresh": mint_fresh_default,
+      "xiaohu-newspaper": newspaper_default,
+      "xiaohu-sports": sports_default,
+      "xiaohu-sspai": sspai_default,
+      "xiaohu-sunset-amber": sunset_amber_default,
+      "xiaohu-terracotta": terracotta_default,
+      "xiaohu-wechat-native": wechat_native_default
+    };
+  }
+});
+
 // src/templates/index.ts
 var templates_exports = {};
 __export(templates_exports, {
@@ -12579,6 +15498,7 @@ var init_templates = __esm({
     init_bold_navy();
     init_bold_gray();
     init_bold_sky();
+    init_xiaohu();
     templates = {
       default: default_default,
       minimal: minimal_default,
@@ -12636,7 +15556,9 @@ var init_templates = __esm({
       "bold-red": bold_red_default,
       "bold-navy": bold_navy_default,
       "bold-gray": bold_gray_default,
-      "bold-sky": bold_sky_default
+      "bold-sky": bold_sky_default,
+      // xiaohu 主题
+      ...xiaohuThemes
     };
   }
 });
@@ -12707,6 +15629,191 @@ var import_obsidian9 = require("obsidian");
 // src/view.ts
 var import_obsidian2 = require("obsidian");
 
+// src/containers/ContainerParser.ts
+function parseMetadata(line) {
+  const match = line.match(/^```(\w+)(?:\s*\{[^}]*title=["']([^"']+)["'][^}]*\})?\s*$/);
+  if (match) {
+    return {
+      type: match[1],
+      title: match[2] || ""
+    };
+  }
+  return { type: "", title: "" };
+}
+function parseDialogueContent(lines) {
+  const result = [];
+  const dialoguePattern = /^(.+?)\s*[：:]\s*(.+)$/;
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed)
+      continue;
+    const match = trimmed.match(dialoguePattern);
+    if (match) {
+      result.push({
+        speaker: match[1].trim(),
+        content: match[2].trim()
+      });
+    }
+  }
+  return result;
+}
+function parseGalleryContent(lines) {
+  const images = [];
+  for (const line of lines) {
+    const wikiLinkPattern = /!\[\[([^\]]+)\]\]/g;
+    const mdLinkPattern = /!\[([^\]]*)\]\(([^)]+)\)/g;
+    let match;
+    while ((match = wikiLinkPattern.exec(line)) !== null) {
+      images.push(match[1]);
+    }
+    while ((match = mdLinkPattern.exec(line)) !== null) {
+      images.push(match[2]);
+    }
+  }
+  return images;
+}
+function parseContainers(markdown) {
+  const containers = [];
+  const lines = markdown.split("\n");
+  let inCodeBlock = false;
+  let currentType = "";
+  let currentTitle = "";
+  let contentLines = [];
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (line.startsWith("```")) {
+      if (!inCodeBlock) {
+        const meta = parseMetadata(line);
+        if (meta.type === "dialogue" || meta.type === "gallery") {
+          inCodeBlock = true;
+          currentType = meta.type;
+          currentTitle = meta.title;
+          contentLines = [];
+        }
+      } else {
+        if (currentType === "dialogue") {
+          const dialogueLines = parseDialogueContent(contentLines);
+          if (dialogueLines.length > 0) {
+            containers.push({
+              type: "dialogue",
+              title: currentTitle,
+              lines: dialogueLines
+            });
+          }
+        } else if (currentType === "gallery") {
+          const images = parseGalleryContent(contentLines);
+          if (images.length > 0) {
+            containers.push({
+              type: "gallery",
+              title: currentTitle,
+              images
+            });
+          }
+        }
+        inCodeBlock = false;
+        currentType = "";
+        currentTitle = "";
+        contentLines = [];
+      }
+    } else if (inCodeBlock) {
+      contentLines.push(line);
+    }
+  }
+  return containers;
+}
+
+// src/containers/DialogueRenderer.ts
+var DEFAULT_STYLE = {
+  container: "margin: 20px 0; padding: 16px; background: #f8f9fa; border-radius: 12px;",
+  title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+  bubbleLeft: "max-width: 80%; background: #fff; border-radius: 0 12px 12px 12px; padding: 10px 14px; margin: 8px auto 8px 0; box-shadow: 0 1px 2px rgba(0,0,0,0.05);",
+  bubbleRight: "max-width: 80%; background: rgba(66, 133, 244, 0.08); border-radius: 12px 0 12px 12px; padding: 10px 14px; margin: 8px 0 8px auto; box-shadow: 0 1px 2px rgba(0,0,0,0.05);",
+  speaker: "font-size: 12px; color: #999; margin: 0 0 4px 0;",
+  text: "font-size: 15px; color: #333; line-height: 1.6; margin: 0;",
+  accentColor: "#4285f4"
+};
+function assignSides(lines) {
+  const speakerOrder = [];
+  const sides = /* @__PURE__ */ new Map();
+  for (const line of lines) {
+    if (!speakerOrder.includes(line.speaker)) {
+      speakerOrder.push(line.speaker);
+    }
+    const index = speakerOrder.indexOf(line.speaker);
+    sides.set(line.speaker, index % 2 === 0 ? "left" : "right");
+  }
+  return sides;
+}
+function hexToRgba(hex, alpha) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (result) {
+    const r = parseInt(result[1], 16);
+    const g = parseInt(result[2], 16);
+    const b = parseInt(result[3], 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+  return hex;
+}
+function renderDialogue(dialogue, style = {}) {
+  const finalStyle = { ...DEFAULT_STYLE, ...style };
+  const sides = assignSides(dialogue.lines);
+  const bubblesHtml = dialogue.lines.map((line) => {
+    const side = sides.get(line.speaker) || "left";
+    const bubbleStyle = side === "left" ? finalStyle.bubbleLeft : finalStyle.bubbleRight;
+    const finalBubbleStyle = side === "right" ? bubbleStyle.replace("rgba(66, 133, 244, 0.08)", hexToRgba(finalStyle.accentColor, 0.08)) : bubbleStyle;
+    return `
+            <section data-container="dialogue-bubble" data-side="${side}" style="${finalBubbleStyle}">
+                <p data-container="dialogue-speaker" style="${finalStyle.speaker}">${line.speaker}</p>
+                <p data-container="dialogue-text" style="${finalStyle.text}">${line.content}</p>
+            </section>
+        `;
+  }).join("");
+  const titleHtml = dialogue.title ? `<p data-container="dialogue-title" style="${finalStyle.title}">${dialogue.title}</p>` : "";
+  return `
+        <section data-container="dialogue" style="${finalStyle.container}">
+            ${titleHtml}
+            ${bubblesHtml}
+        </section>
+    `;
+}
+
+// src/containers/GalleryRenderer.ts
+var DEFAULT_STYLE2 = {
+  container: "margin: 20px 0;",
+  title: "text-align: center; font-size: 14px; color: #999; margin: 0 0 12px 0;",
+  scroll: "display: flex; overflow-x: auto; gap: 12px; padding: 4px 0; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;",
+  item: "flex: 0 0 auto; width: 200px; height: 200px; scroll-snap-align: start; overflow: hidden; border-radius: 8px; background: #f0f0f0;",
+  image: "width: 100%; height: 100%; object-fit: cover; display: block;"
+};
+function renderGallery(gallery, style = {}) {
+  const finalStyle = { ...DEFAULT_STYLE2, ...style };
+  const itemsHtml = gallery.images.map((imagePath) => `
+        <figure data-container="gallery-item" style="${finalStyle.item}">
+            <img data-container="gallery-image" src="${imagePath}" alt="" style="${finalStyle.image}" />
+        </figure>
+    `).join("");
+  const titleHtml = gallery.title ? `<p data-container="gallery-title" style="${finalStyle.title}">${gallery.title}</p>` : "";
+  return `
+        <section data-container="gallery" style="${finalStyle.container}">
+            ${titleHtml}
+            <section data-container="gallery-scroll" style="${finalStyle.scroll}">
+                ${itemsHtml}
+            </section>
+        </section>
+    `;
+}
+function resolveImagePath(linktext, app) {
+  try {
+    const file = app.metadataCache.getFirstLinkpathDest(linktext.split("|")[0], "");
+    if (file) {
+      return app.vault.adapter.getResourcePath(file.path);
+    }
+  } catch (error) {
+    console.error("\u56FE\u7247\u89E3\u6790\u5931\u8D25:", error);
+  }
+  return null;
+}
+
 // src/converter.ts
 var MPConverter = class {
   static initialize(app) {
@@ -12724,6 +15831,9 @@ var MPConverter = class {
       if (settings.enableFrontMatterCard) {
         this.insertFrontMatterCard(section, markdownContent);
       }
+    }
+    if (markdownContent) {
+      this.processContainerBlocks(section, markdownContent);
     }
     this.processElements(section);
   }
@@ -12762,6 +15872,55 @@ var MPConverter = class {
       card.appendChild(metaEl);
     }
     container.prepend(card);
+  }
+  /**
+   * 处理容器代码块 (```dialogue, ```gallery)
+   * 将代码块转换为对应的容器 HTML
+   */
+  static processContainerBlocks(container, markdown) {
+    const containers = parseContainers(markdown);
+    container.querySelectorAll("pre > code").forEach((codeEl, index) => {
+      var _a;
+      const pre = codeEl.parentElement;
+      if (!pre)
+        return;
+      const classList = codeEl.className.split(" ");
+      const isDialogue = classList.includes("language-dialogue");
+      const isGallery = classList.includes("language-gallery");
+      if (!isDialogue && !isGallery)
+        return;
+      const containerData = containers.find((c, i) => {
+        const codeContent = codeEl.textContent || "";
+        if (c.type === "dialogue" && isDialogue) {
+          return codeContent.includes(":") || codeContent.includes("\uFF1A");
+        }
+        if (c.type === "gallery" && isGallery) {
+          return codeContent.includes("![");
+        }
+        return false;
+      });
+      if (!containerData)
+        return;
+      let containerHtml = "";
+      if (containerData.type === "dialogue") {
+        containerHtml = renderDialogue(containerData, { accentColor: "#4285f4" });
+      } else if (containerData.type === "gallery") {
+        const resolvedImages = containerData.images.map((img) => {
+          if (!img.startsWith("http") && !img.startsWith("data:")) {
+            const resolved = resolveImagePath(img, this.app);
+            return resolved || img;
+          }
+          return img;
+        });
+        containerHtml = renderGallery({ ...containerData, images: resolvedImages });
+      }
+      if (containerHtml) {
+        const template = document.createElement("template");
+        template.innerHTML = containerHtml.trim();
+        const newElement = template.content.firstChild;
+        (_a = pre.parentNode) == null ? void 0 : _a.replaceChild(newElement, pre);
+      }
+    });
   }
   static processElements(container) {
     if (!container)
@@ -14817,6 +17976,61 @@ var TemplateManager = class {
       const img = el;
       el.setAttribute("style", styles.image);
     });
+    if (styles.containers) {
+      if (styles.containers.dialogue) {
+        element.querySelectorAll('[data-container="dialogue"]').forEach((el) => {
+          const dialogueEl = el;
+          if (styles.containers.dialogue.container) {
+            dialogueEl.setAttribute("style", styles.containers.dialogue.container);
+          }
+          const titleEl = dialogueEl.querySelector('[data-container="dialogue-title"]');
+          if (titleEl && styles.containers.dialogue.title) {
+            titleEl.setAttribute("style", styles.containers.dialogue.title);
+          }
+          dialogueEl.querySelectorAll('[data-container="dialogue-bubble"]').forEach((bubble) => {
+            const side = bubble.getAttribute("data-side");
+            const bubbleStyle = side === "left" ? styles.containers.dialogue.bubbleLeft : styles.containers.dialogue.bubbleRight;
+            if (bubbleStyle) {
+              bubble.setAttribute("style", bubbleStyle);
+            }
+            const speakerEl = bubble.querySelector('[data-container="dialogue-speaker"]');
+            if (speakerEl && styles.containers.dialogue.speaker) {
+              speakerEl.setAttribute("style", styles.containers.dialogue.speaker);
+            }
+            const textEl = bubble.querySelector('[data-container="dialogue-text"]');
+            if (textEl && styles.containers.dialogue.text) {
+              textEl.setAttribute("style", styles.containers.dialogue.text);
+            }
+          });
+        });
+      }
+      if (styles.containers.gallery) {
+        element.querySelectorAll('[data-container="gallery"]').forEach((el) => {
+          const galleryEl = el;
+          if (styles.containers.gallery.container) {
+            galleryEl.setAttribute("style", styles.containers.gallery.container);
+          }
+          const titleEl = galleryEl.querySelector('[data-container="gallery-title"]');
+          if (titleEl && styles.containers.gallery.title) {
+            titleEl.setAttribute("style", styles.containers.gallery.title);
+          }
+          const scrollEl = galleryEl.querySelector('[data-container="gallery-scroll"]');
+          if (scrollEl && styles.containers.gallery.scroll) {
+            scrollEl.setAttribute("style", styles.containers.gallery.scroll);
+          }
+          galleryEl.querySelectorAll('[data-container="gallery-item"]').forEach((item) => {
+            if (styles.containers.gallery.item) {
+              item.setAttribute("style", styles.containers.gallery.item);
+            }
+          });
+          galleryEl.querySelectorAll('[data-container="gallery-image"]').forEach((img) => {
+            if (styles.containers.gallery.image) {
+              img.setAttribute("style", styles.containers.gallery.image);
+            }
+          });
+        });
+      }
+    }
   }
 };
 

@@ -1,5 +1,6 @@
 import { App } from 'obsidian';
 import type { SettingsManager } from './settings/settings';
+import { parseContainers, renderDialogue, renderGallery, resolveImagePath, type ParsedContainer } from './containers';
 
 export class MPConverter {
     private static app: App;
@@ -24,6 +25,11 @@ export class MPConverter {
             if (settings.enableFrontMatterCard) {
                 this.insertFrontMatterCard(section, markdownContent);
             }
+        }
+
+        // 处理容器代码块 (```dialogue, ```gallery)
+        if (markdownContent) {
+            this.processContainerBlocks(section, markdownContent);
         }
 
         // 处理元素
@@ -70,6 +76,68 @@ export class MPConverter {
         }
 
         container.prepend(card);
+    }
+
+    /**
+     * 处理容器代码块 (```dialogue, ```gallery)
+     * 将代码块转换为对应的容器 HTML
+     */
+    private static processContainerBlocks(container: HTMLElement, markdown: string): void {
+        const containers = parseContainers(markdown);
+
+        // 查找所有代码块
+        container.querySelectorAll('pre > code').forEach((codeEl, index) => {
+            const pre = codeEl.parentElement;
+            if (!pre) return;
+
+            // 检查是否是对话或画廊代码块
+            const classList = codeEl.className.split(' ');
+            const isDialogue = classList.includes('language-dialogue');
+            const isGallery = classList.includes('language-gallery');
+
+            if (!isDialogue && !isGallery) return;
+
+            // 查找对应的解析结果
+            const containerData = containers.find((c, i) => {
+                // 通过代码块内容匹配
+                const codeContent = codeEl.textContent || '';
+                if (c.type === 'dialogue' && isDialogue) {
+                    return codeContent.includes(':') || codeContent.includes('：');
+                }
+                if (c.type === 'gallery' && isGallery) {
+                    return codeContent.includes('![');
+                }
+                return false;
+            });
+
+            if (!containerData) return;
+
+            // 创建容器元素
+            let containerHtml = '';
+
+            if (containerData.type === 'dialogue') {
+                containerHtml = renderDialogue(containerData, { accentColor: '#4285f4' });
+            } else if (containerData.type === 'gallery') {
+                // 解析图片路径
+                const resolvedImages = containerData.images.map(img => {
+                    // 如果是 wikilink 格式，尝试解析
+                    if (!img.startsWith('http') && !img.startsWith('data:')) {
+                        const resolved = resolveImagePath(img, this.app);
+                        return resolved || img;
+                    }
+                    return img;
+                });
+                containerHtml = renderGallery({ ...containerData, images: resolvedImages });
+            }
+
+            // 替换代码块
+            if (containerHtml) {
+                const template = document.createElement('template');
+                template.innerHTML = containerHtml.trim();
+                const newElement = template.content.firstChild as HTMLElement;
+                pre.parentNode?.replaceChild(newElement, pre);
+            }
+        });
     }
 
     private static processElements(container: HTMLElement | null): void {

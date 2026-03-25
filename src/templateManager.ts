@@ -1,5 +1,6 @@
 import { App } from 'obsidian';
 import { SettingsManager } from './settings/settings';
+import type { DialogueStyle, GalleryStyle } from './containers';
 
 export interface Template {
     id: string;
@@ -7,6 +8,7 @@ export interface Template {
     description: string;
     isPreset?: boolean;
     isVisible?: boolean;
+    source?: string;  // 来源标记：'mp-preview' | 'xiaohu'
     styles: {
         container: string;
         title: {
@@ -67,6 +69,13 @@ export interface Template {
             ref: string;
             backref: string;
         };
+        // 容器样式（对话气泡、图片画廊）
+        containers?: {
+            dialogue?: Partial<DialogueStyle>;
+            gallery?: Partial<GalleryStyle>;
+        };
+        // 主题强调色（用于对话气泡等）
+        accentColor?: string;
     };
 }
 
@@ -246,6 +255,78 @@ export class TemplateManager {
             const img = el as HTMLImageElement;
             el.setAttribute('style', styles.image);
         });
+
+        // 应用容器样式（对话气泡、图片画廊）
+        if (styles.containers) {
+            // 对话气泡样式
+            if (styles.containers.dialogue) {
+                element.querySelectorAll('[data-container="dialogue"]').forEach(el => {
+                    const dialogueEl = el as HTMLElement;
+                    // 容器样式
+                    if (styles.containers!.dialogue!.container) {
+                        dialogueEl.setAttribute('style', styles.containers!.dialogue!.container!);
+                    }
+                    // 标题样式
+                    const titleEl = dialogueEl.querySelector('[data-container="dialogue-title"]');
+                    if (titleEl && styles.containers!.dialogue!.title) {
+                        titleEl.setAttribute('style', styles.containers!.dialogue!.title!);
+                    }
+                    // 气泡样式
+                    dialogueEl.querySelectorAll('[data-container="dialogue-bubble"]').forEach(bubble => {
+                        const side = bubble.getAttribute('data-side');
+                        const bubbleStyle = side === 'left'
+                            ? styles.containers!.dialogue!.bubbleLeft
+                            : styles.containers!.dialogue!.bubbleRight;
+                        if (bubbleStyle) {
+                            bubble.setAttribute('style', bubbleStyle);
+                        }
+                        // 说话人样式
+                        const speakerEl = bubble.querySelector('[data-container="dialogue-speaker"]');
+                        if (speakerEl && styles.containers!.dialogue!.speaker) {
+                            speakerEl.setAttribute('style', styles.containers!.dialogue!.speaker!);
+                        }
+                        // 文本样式
+                        const textEl = bubble.querySelector('[data-container="dialogue-text"]');
+                        if (textEl && styles.containers!.dialogue!.text) {
+                            textEl.setAttribute('style', styles.containers!.dialogue!.text!);
+                        }
+                    });
+                });
+            }
+
+            // 图片画廊样式
+            if (styles.containers.gallery) {
+                element.querySelectorAll('[data-container="gallery"]').forEach(el => {
+                    const galleryEl = el as HTMLElement;
+                    // 容器样式
+                    if (styles.containers!.gallery!.container) {
+                        galleryEl.setAttribute('style', styles.containers!.gallery!.container!);
+                    }
+                    // 标题样式
+                    const titleEl = galleryEl.querySelector('[data-container="gallery-title"]');
+                    if (titleEl && styles.containers!.gallery!.title) {
+                        titleEl.setAttribute('style', styles.containers!.gallery!.title!);
+                    }
+                    // 滚动容器样式
+                    const scrollEl = galleryEl.querySelector('[data-container="gallery-scroll"]');
+                    if (scrollEl && styles.containers!.gallery!.scroll) {
+                        scrollEl.setAttribute('style', styles.containers!.gallery!.scroll!);
+                    }
+                    // 图片项样式
+                    galleryEl.querySelectorAll('[data-container="gallery-item"]').forEach(item => {
+                        if (styles.containers!.gallery!.item) {
+                            item.setAttribute('style', styles.containers!.gallery!.item!);
+                        }
+                    });
+                    // 图片样式
+                    galleryEl.querySelectorAll('[data-container="gallery-image"]').forEach(img => {
+                        if (styles.containers!.gallery!.image) {
+                            img.setAttribute('style', styles.containers!.gallery!.image!);
+                        }
+                    });
+                });
+            }
+        }
     }
 }
 

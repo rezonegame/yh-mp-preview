@@ -61,6 +61,9 @@ import boldNavyTemplate from './bold-navy.json';
 import boldGrayTemplate from './bold-gray.json';
 import boldSkyTemplate from './bold-sky.json';
 
+// xiaohu 主题（来自 xiaohu-wechat-format）
+import { xiaohuThemes } from './xiaohu/index';
+
 export const templates = {
     default: defaultTemplate,
     minimal: minimalTemplate,
@@ -123,4 +126,7 @@ export const templates = {
     'bold-navy': boldNavyTemplate,
     'bold-gray': boldGrayTemplate,
     'bold-sky': boldSkyTemplate,
+
+    // xiaohu 主题
+    ...xiaohuThemes,
 };
