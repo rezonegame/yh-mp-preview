@@ -15956,7 +15956,7 @@ var MPConverter = class {
         "failure": { color: "#f44336", icon: "\u274C" },
         "bug": { color: "#f44336", icon: "\u{1F41B}" }
       };
-      const config = calloutConfig[calloutType] || { color: "#448aff", icon: "\u{1F4DD}" };
+      const config2 = calloutConfig[calloutType] || { color: "#448aff", icon: "\u{1F4DD}" };
       const titleEl = calloutEl.querySelector(".callout-title-inner");
       const titleText = (titleEl == null ? void 0 : titleEl.textContent) || calloutType.charAt(0).toUpperCase() + calloutType.slice(1);
       const contentEl = calloutEl.querySelector(".callout-content");
@@ -15964,11 +15964,11 @@ var MPConverter = class {
       const calloutDiv = document.createElement("div");
       calloutDiv.className = "mp-callout";
       calloutDiv.setAttribute("data-callout-type", calloutType);
-      calloutDiv.style.cssText = `border-left: 4px solid ${config.color}; background: ${config.color}11; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;`;
+      calloutDiv.style.cssText = `border-left: 4px solid ${config2.color}; background: ${config2.color}11; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;`;
       const titleDiv = document.createElement("div");
       titleDiv.className = "mp-callout-title";
-      titleDiv.style.cssText = `font-weight: bold; color: ${config.color}; margin-bottom: 8px; font-size: 1em; display: flex; align-items: center; gap: 6px;`;
-      titleDiv.innerHTML = `<span>${config.icon}</span><span>${titleText}</span>`;
+      titleDiv.style.cssText = `font-weight: bold; color: ${config2.color}; margin-bottom: 8px; font-size: 1em; display: flex; align-items: center; gap: 6px;`;
+      titleDiv.innerHTML = `<span>${config2.icon}</span><span>${titleText}</span>`;
       calloutDiv.appendChild(titleDiv);
       if (contentHtml) {
         const contentDiv = document.createElement("div");
@@ -16539,8 +16539,8 @@ var TaskScheduler = class {
   clear() {
     this.taskQueue.clear();
   }
-  updateConfig(config) {
-    Object.assign(this.config, config);
+  updateConfig(config2) {
+    Object.assign(this.config, config2);
   }
 };
 var VisibilityDetector = class {
@@ -16640,10 +16640,10 @@ var VisibilityDetector = class {
     }
     return false;
   }
-  updateConfig(config) {
-    Object.assign(this.config, config);
-    if (config.commonHiddenPatterns) {
-      Object.assign(this.config.commonHiddenPatterns, config.commonHiddenPatterns);
+  updateConfig(config2) {
+    Object.assign(this.config, config2);
+    if (config2.commonHiddenPatterns) {
+      Object.assign(this.config.commonHiddenPatterns, config2.commonHiddenPatterns);
     }
   }
 };
@@ -17112,6 +17112,158 @@ var BackgroundManager = class {
   }
 };
 
+// src/ai/ContentAnalyzer.ts
+function detectDialogue(lines) {
+  const dialoguePattern = /^(.+?)\s*[：:]\s*(.+)$/;
+  const detectedLines = [];
+  const speakers = /* @__PURE__ */ new Set();
+  let consecutiveMatches = 0;
+  let maxConsecutive = 0;
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) {
+      consecutiveMatches = 0;
+      continue;
+    }
+    const match = line.match(dialoguePattern);
+    if (match) {
+      const speaker = match[1].trim();
+      const content = match[2].trim();
+      if (isValidDialogueSpeaker(speaker, content)) {
+        detectedLines.push({ speaker, content, lineNumber: i + 1 });
+        speakers.add(speaker);
+        consecutiveMatches++;
+        maxConsecutive = Math.max(maxConsecutive, consecutiveMatches);
+      }
+    } else {
+      consecutiveMatches = 0;
+    }
+  }
+  if (detectedLines.length >= 3 && speakers.size >= 2 && maxConsecutive >= 2) {
+    return {
+      speakers: Array.from(speakers),
+      lines: detectedLines,
+      confidence: calculateDialogueConfidence(detectedLines.length, speakers.size, maxConsecutive)
+    };
+  }
+  return null;
+}
+function isValidDialogueSpeaker(speaker, content) {
+  if (speaker.length > 10)
+    return false;
+  const invalidPatterns = [
+    /^https?/i,
+    // URL
+    /^\d+$/,
+    // 纯数字
+    /^第[一二三四五六七八九十\d]+/,
+    // 章节
+    /^[（(]/
+    // 括号开头
+  ];
+  for (const pattern of invalidPatterns) {
+    if (pattern.test(speaker))
+      return false;
+  }
+  if (content.length < 2 || content.length > 500)
+    return false;
+  return true;
+}
+function calculateDialogueConfidence(lineCount, speakerCount, maxConsecutive) {
+  let confidence = 0.5;
+  if (lineCount >= 5)
+    confidence += 0.2;
+  else if (lineCount >= 3)
+    confidence += 0.1;
+  if (speakerCount === 2)
+    confidence += 0.15;
+  else if (speakerCount >= 3)
+    confidence += 0.1;
+  if (maxConsecutive >= 4)
+    confidence += 0.15;
+  else if (maxConsecutive >= 2)
+    confidence += 0.1;
+  return Math.min(confidence, 0.95);
+}
+function detectQuotes(lines) {
+  const quotes = [];
+  const quotePattern = /^>\s*(.+)$/;
+  const boldPattern = /\*\*([^*]+)\*\*/g;
+  const calloutPattern = /^>\s*\[!(important|tip|note|warning)\]\s*(.*)$/i;
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line)
+      continue;
+    const calloutMatch = line.match(calloutPattern);
+    if (calloutMatch) {
+      quotes.push({
+        content: calloutMatch[2] || line,
+        lineNumber: i + 1,
+        isKeyPoint: calloutMatch[1].toLowerCase() === "important"
+      });
+      continue;
+    }
+    const quoteMatch = line.match(quotePattern);
+    if (quoteMatch && !line.startsWith(">[!")) {
+      quotes.push({
+        content: quoteMatch[1],
+        lineNumber: i + 1,
+        isKeyPoint: false
+      });
+    }
+    const boldMatches = line.match(boldPattern);
+    if (boldMatches && boldMatches.length === 1 && line.length < 100) {
+      const boldContent = boldMatches[0].replace(/\*\*/g, "");
+      if (boldContent.length / line.replace(/\*\*/g, "").length > 0.7) {
+        quotes.push({
+          content: boldContent,
+          lineNumber: i + 1,
+          isKeyPoint: true
+        });
+      }
+    }
+  }
+  return quotes;
+}
+function analyzeContent(markdown) {
+  const results = [];
+  const lines = markdown.split("\n");
+  const dialogue = detectDialogue(lines);
+  if (dialogue && dialogue.confidence >= 0.6) {
+    const startLine = dialogue.lines[0].lineNumber;
+    const endLine = dialogue.lines[dialogue.lines.length - 1].lineNumber;
+    results.push({
+      type: "dialogue",
+      startLine,
+      endLine,
+      content: dialogue.lines.map((l) => `${l.speaker}\uFF1A${l.content}`).join("\n"),
+      confidence: dialogue.confidence,
+      suggestedAction: `\u68C0\u6D4B\u5230 ${dialogue.speakers.length} \u4EBA\u5BF9\u8BDD\uFF0C\u5EFA\u8BAE\u4F7F\u7528 \`\`\`dialogue \u5BB9\u5668\u5305\u88F9`
+    });
+  }
+  const quotes = detectQuotes(lines);
+  const keyPoints = quotes.filter((q) => q.isKeyPoint);
+  if (keyPoints.length > 0) {
+    results.push({
+      type: "keypoint",
+      startLine: keyPoints[0].lineNumber,
+      endLine: keyPoints[keyPoints.length - 1].lineNumber,
+      content: keyPoints.map((q) => q.content).join("\n"),
+      confidence: 0.8,
+      suggestedAction: `\u68C0\u6D4B\u5230 ${keyPoints.length} \u5904\u6838\u5FC3\u89C2\u70B9`
+    });
+  }
+  return results;
+}
+
+// src/ai/AIProvider.ts
+var DEFAULT_CONFIG = {
+  enabled: false,
+  provider: "openai",
+  model: "gpt-3.5-turbo"
+};
+var config = { ...DEFAULT_CONFIG };
+
 // src/view.ts
 var import_html2canvas = __toESM(require_html2canvas());
 var VIEW_TYPE_MP = "mp-preview";
@@ -17183,6 +17335,12 @@ var MPView = class extends import_obsidian2.ItemView {
     });
     (0, import_obsidian2.setIcon)(seoButton, "search");
     seoButton.addEventListener("click", () => this.insertSeoText());
+    const aiButton = secondaryRow.createEl("button", {
+      cls: "mp-action-button mp-icon-btn",
+      attr: { "aria-label": "AI \u5185\u5BB9\u5206\u6790", "title": "\u5206\u6790\u5185\u5BB9\u7ED3\u6784\uFF0C\u8BC6\u522B\u5BF9\u8BDD\u548C\u91D1\u53E5" }
+    });
+    (0, import_obsidian2.setIcon)(aiButton, "sparkles");
+    aiButton.addEventListener("click", () => this.analyzeWithAI());
     const helpButton = secondaryRow.createEl("button", {
       cls: "mp-help-button mp-icon-btn",
       attr: { "aria-label": "\u4F7F\u7528\u6307\u5357" }
@@ -17839,6 +17997,84 @@ var MPView = class extends import_obsidian2.ItemView {
       }
     });
     return options;
+  }
+  /**
+   * AI 内容分析
+   * 分析当前文档，识别对话和金句
+   */
+  async analyzeWithAI() {
+    if (!this.currentFile) {
+      new import_obsidian2.Notice("\u8BF7\u5148\u6253\u5F00\u4E00\u4E2A Markdown \u6587\u4EF6");
+      return;
+    }
+    try {
+      const content = await this.app.vault.read(this.currentFile);
+      const notice = new import_obsidian2.Notice("\u{1F50D} \u6B63\u5728\u5206\u6790\u5185\u5BB9...", 0);
+      const results = analyzeContent(content);
+      notice.hide();
+      if (results.length === 0) {
+        new import_obsidian2.Notice("\u672A\u68C0\u6D4B\u5230\u53EF\u4F18\u5316\u7684\u5185\u5BB9\u7ED3\u6784");
+        return;
+      }
+      this.showAnalysisResults(results);
+    } catch (error) {
+      console.error("AI \u5206\u6790\u5931\u8D25:", error);
+      new import_obsidian2.Notice("\u5206\u6790\u5931\u8D25\uFF0C\u8BF7\u67E5\u770B\u63A7\u5236\u53F0");
+    }
+  }
+  /**
+   * 显示分析结果弹窗
+   */
+  showAnalysisResults(results) {
+    const modal = new class extends import_obsidian2.Modal {
+      constructor(view, results2) {
+        super(view.app);
+        this.view = view;
+        this.results = results2;
+      }
+      onOpen() {
+        const { contentEl } = this;
+        contentEl.createEl("h3", { text: "\u2728 AI \u5185\u5BB9\u5206\u6790\u7ED3\u679C" });
+        contentEl.createEl("p", {
+          text: "\u68C0\u6D4B\u5230\u4EE5\u4E0B\u53EF\u4F18\u5316\u7684\u5185\u5BB9\u7ED3\u6784\uFF1A",
+          attr: { style: "color: #888; font-size: 13px; margin-bottom: 16px;" }
+        });
+        const list = contentEl.createEl("div", {
+          attr: { style: "max-height: 300px; overflow-y: auto;" }
+        });
+        this.results.forEach((result, index) => {
+          const item = list.createEl("div", {
+            attr: { style: "padding: 12px; border: 1px solid var(--background-modifier-border); border-radius: 8px; margin-bottom: 8px;" }
+          });
+          const typeLabel = result.type === "dialogue" ? "\u{1F4AC} \u5BF9\u8BDD" : result.type === "keypoint" ? "\u{1F4A1} \u91D1\u53E5" : "\u{1F4DD} \u5F15\u7528";
+          item.createEl("div", {
+            text: `${typeLabel} (\u884C ${result.startLine}-${result.endLine})`,
+            attr: { style: "font-weight: bold; margin-bottom: 4px;" }
+          });
+          const confidence = Math.round(result.confidence * 100);
+          item.createEl("div", {
+            text: `\u7F6E\u4FE1\u5EA6: ${confidence}%`,
+            attr: { style: `font-size: 12px; color: ${confidence >= 70 ? "#4caf50" : "#ff9800"};` }
+          });
+          if (result.suggestedAction) {
+            item.createEl("div", {
+              text: result.suggestedAction,
+              attr: { style: "font-size: 12px; color: #666; margin-top: 4px;" }
+            });
+          }
+        });
+        const btnContainer = contentEl.createEl("div", {
+          attr: { style: "display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px;" }
+        });
+        const closeBtn = btnContainer.createEl("button", { text: "\u5173\u95ED" });
+        closeBtn.addEventListener("click", () => this.close());
+      }
+      onClose() {
+        const { contentEl } = this;
+        contentEl.empty();
+      }
+    }(this, results);
+    modal.open();
   }
   getFontOptions() {
     return this.settingsManager.getFontOptions();

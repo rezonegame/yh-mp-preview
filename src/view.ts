@@ -5,6 +5,7 @@ import type { TemplateManager } from './templateManager';
 
 import type { SettingsManager } from './settings/settings';
 import { BackgroundManager } from './backgroundManager';
+import { analyzeContent, type AnalysisResult } from './ai';
 // @ts-ignore - html2canvas has no type declarations
 import html2canvas from 'html2canvas';
 export const VIEW_TYPE_MP = 'mp-preview';
@@ -129,6 +130,14 @@ export class MPView extends ItemView {
         });
         setIcon(seoButton, 'search');
         seoButton.addEventListener('click', () => this.insertSeoText());
+
+        // AI 分析按钮
+        const aiButton = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
+            attr: { 'aria-label': 'AI 内容分析', 'title': '分析内容结构，识别对话和金句' }
+        });
+        setIcon(aiButton, 'sparkles');
+        aiButton.addEventListener('click', () => this.analyzeWithAI());
 
         // 帮助按钮
         const helpButton = secondaryRow.createEl('button', {
@@ -1070,6 +1079,117 @@ export class MPView extends ItemView {
         });
 
         return options;
+    }
+
+    /**
+     * AI 内容分析
+     * 分析当前文档，识别对话和金句
+     */
+    private async analyzeWithAI() {
+        if (!this.currentFile) {
+            new Notice('请先打开一个 Markdown 文件');
+            return;
+        }
+
+        try {
+            // 读取文件内容
+            const content = await this.app.vault.read(this.currentFile);
+
+            // 显示分析中提示
+            const notice = new Notice('🔍 正在分析内容...', 0);
+
+            // 调用分析器
+            const results = analyzeContent(content);
+
+            notice.hide();
+
+            if (results.length === 0) {
+                new Notice('未检测到可优化的内容结构');
+                return;
+            }
+
+            // 显示分析结果
+            this.showAnalysisResults(results);
+
+        } catch (error) {
+            console.error('AI 分析失败:', error);
+            new Notice('分析失败，请查看控制台');
+        }
+    }
+
+    /**
+     * 显示分析结果弹窗
+     */
+    private showAnalysisResults(results: AnalysisResult[]) {
+        const modal = new class extends Modal {
+            results: AnalysisResult[];
+            view: MPView;
+
+            constructor(view: MPView, results: AnalysisResult[]) {
+                super(view.app);
+                this.view = view;
+                this.results = results;
+            }
+
+            onOpen() {
+                const { contentEl } = this;
+                contentEl.createEl('h3', { text: '✨ AI 内容分析结果' });
+                contentEl.createEl('p', {
+                    text: '检测到以下可优化的内容结构：',
+                    attr: { style: 'color: #888; font-size: 13px; margin-bottom: 16px;' }
+                });
+
+                // 结果列表
+                const list = contentEl.createEl('div', {
+                    attr: { style: 'max-height: 300px; overflow-y: auto;' }
+                });
+
+                this.results.forEach((result, index) => {
+                    const item = list.createEl('div', {
+                        attr: { style: 'padding: 12px; border: 1px solid var(--background-modifier-border); border-radius: 8px; margin-bottom: 8px;' }
+                    });
+
+                    // 类型标签
+                    const typeLabel = result.type === 'dialogue' ? '💬 对话' :
+                                      result.type === 'keypoint' ? '💡 金句' : '📝 引用';
+
+                    item.createEl('div', {
+                        text: `${typeLabel} (行 ${result.startLine}-${result.endLine})`,
+                        attr: { style: 'font-weight: bold; margin-bottom: 4px;' }
+                    });
+
+                    // 置信度
+                    const confidence = Math.round(result.confidence * 100);
+                    item.createEl('div', {
+                        text: `置信度: ${confidence}%`,
+                        attr: { style: `font-size: 12px; color: ${confidence >= 70 ? '#4caf50' : '#ff9800'};` }
+                    });
+
+                    // 建议
+                    if (result.suggestedAction) {
+                        item.createEl('div', {
+                            text: result.suggestedAction,
+                            attr: { style: 'font-size: 12px; color: #666; margin-top: 4px;' }
+                        });
+                    }
+                });
+
+                // 按钮
+                const btnContainer = contentEl.createEl('div', {
+                    attr: { style: 'display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px;' }
+                });
+
+                const closeBtn = btnContainer.createEl('button', { text: '关闭' });
+                closeBtn.addEventListener('click', () => this.close());
+            }
+
+            onClose() {
+                const { contentEl } = this;
+                contentEl.empty();
+            }
+        }(this, results);
+
+        modal.open();
     }
 
     private getFontOptions(): SelectOption[] {
