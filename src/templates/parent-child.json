@@ -1,6 +1,6 @@
 {
     "id": "parent-child",
-    "name": "亲子时光",
+    "name": "教育系列 - 亲子",
     "styles": {
         "container": "",
         "title": {
@@ -35,7 +35,11 @@
             "header": {
                 "container": "margin-bottom: 1em; display: flex; gap: 6px;",
                 "dot": "width: 12px; height: 12px; border-radius: 50%;",
-                "colors": ["#FF8A65", "#FFD54F", "#AED581"]
+                "colors": [
+                    "#FF8A65",
+                    "#FFD54F",
+                    "#AED581"
+                ]
             },
             "block": "color: #5D4037; background: #FFF8E1; border-radius: 12px; border: 1px solid #FFE0B2; margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
             "inline": "background: #FFE0B2; padding: 2px 8px; border-radius: 10px; color: #E65100; font-size: 14px; border: none;",

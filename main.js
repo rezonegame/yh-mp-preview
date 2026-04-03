@@ -8340,7 +8340,7 @@ var init_minimal = __esm({
   "src/templates/minimal.json"() {
     minimal_default = {
       id: "minimal",
-      name: "\u6781\u7B80\u4E3B\u9898",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u6807\u51C6",
       styles: {
         container: "",
         title: {
@@ -8432,7 +8432,7 @@ var init_scarlet = __esm({
   "src/templates/scarlet.json"() {
     scarlet_default = {
       id: "scarlet",
-      name: "\u7EA2\u7EEF\u4E3B\u9898",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u7EEF\u7EA2",
       styles: {
         container: "",
         title: {
@@ -8708,7 +8708,7 @@ var init_dark = __esm({
   "src/templates/dark.json"() {
     dark_default = {
       id: "dark",
-      name: "\u6DF1\u8272\u4E3B\u9898",
+      name: "\u6697\u591C\u7CFB\u5217 - \u6781\u7B80",
       styles: {
         container: "",
         title: {
@@ -8892,7 +8892,7 @@ var init_yeban = __esm({
   "src/templates/yeban.json"() {
     yeban_default = {
       id: "yeban",
-      name: "\u591C\u534A\u4E3B\u9898",
+      name: "\u53F6\u4F34\u7CFB\u5217 - \u7ECF\u5178",
       styles: {
         container: "",
         title: {
@@ -8927,7 +8927,11 @@ var init_yeban = __esm({
           header: {
             container: "margin-bottom: 1em; display: flex; gap: 6px;",
             dot: "width: 12px; height: 12px; border-radius: 50%;",
-            colors: ["#ff5f56", "#ffbd2e", "#27c93f"]
+            colors: [
+              "#ff5f56",
+              "#ffbd2e",
+              "#27c93f"
+            ]
           },
           block: "color: #333; background: #f8f9fc; border-radius: 8px; border: 1px solid #eef0f7; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
           inline: "background: #f8f9fc; padding: 2px 6px; border-radius: 4px; color: #333; font-size: 14px; border: 1px solid #eef0f7;",
@@ -8980,7 +8984,7 @@ var init_yeban_orange = __esm({
   "src/templates/yeban-orange.json"() {
     yeban_orange_default = {
       id: "yeban-orange",
-      name: "\u591C\u534A\u6A59\u5FC3",
+      name: "\u53F6\u4F34\u7CFB\u5217 - \u6D3B\u529B",
       styles: {
         container: "",
         title: {
@@ -9256,7 +9260,7 @@ var init_playful = __esm({
   "src/templates/playful.json"() {
     playful_default = {
       id: "playful",
-      name: "\u7AE5\u8DA3\u4E50\u56ED",
+      name: "\u521B\u610F\u7CFB\u5217 - \u6D3B\u6CFC",
       styles: {
         container: "",
         title: {
@@ -9291,7 +9295,11 @@ var init_playful = __esm({
           header: {
             container: "margin-bottom: 1em; display: flex; gap: 6px;",
             dot: "width: 12px; height: 12px; border-radius: 50%;",
-            colors: ["#FF8A65", "#FFD54F", "#AED581"]
+            colors: [
+              "#FF8A65",
+              "#FFD54F",
+              "#AED581"
+            ]
           },
           block: "color: #5D4037; background: #FFF3E0; border-radius: 12px; border: 2px solid #FFE0B2; margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
           inline: "background: #E1F5FE; padding: 2px 8px; border-radius: 12px; color: #0288D1; font-size: 14px; border: none;",
@@ -9336,7 +9344,7 @@ var init_blackboard = __esm({
   "src/templates/blackboard.json"() {
     blackboard_default = {
       id: "blackboard",
-      name: "\u667A\u6167\u8BB2\u53F0",
+      name: "\u521B\u610F\u7CFB\u5217 - \u9ED1\u677F",
       styles: {
         container: "",
         title: {
@@ -9371,7 +9379,11 @@ var init_blackboard = __esm({
           header: {
             container: "margin-bottom: 1em; display: flex; gap: 6px;",
             dot: "width: 12px; height: 12px; border-radius: 50%;",
-            colors: ["#ef5350", "#ffca28", "#66bb6a"]
+            colors: [
+              "#ef5350",
+              "#ffca28",
+              "#66bb6a"
+            ]
           },
           block: "color: #e0e0e0; background: #263238; border-radius: 4px; border: 4px solid #37474F; margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.6; white-space: pre-wrap; font-family: Consolas, Monaco, monospace;",
           inline: "background: #E8F5E9; padding: 2px 6px; border-radius: 2px; color: #1B5E20; font-size: 14px; border: 1px solid #C8E6C9;",
@@ -9416,7 +9428,7 @@ var init_adventure = __esm({
   "src/templates/adventure.json"() {
     adventure_default = {
       id: "adventure",
-      name: "\u5192\u9669\u65E5\u5FD7",
+      name: "\u521B\u610F\u7CFB\u5217 - \u63A2\u9669",
       styles: {
         container: "",
         title: {
@@ -9451,7 +9463,11 @@ var init_adventure = __esm({
           header: {
             container: "margin-bottom: 1em; display: flex; gap: 6px;",
             dot: "width: 12px; height: 12px; border-radius: 50%;",
-            colors: ["#8D6E63", "#A1887F", "#BCAAA4"]
+            colors: [
+              "#8D6E63",
+              "#A1887F",
+              "#BCAAA4"
+            ]
           },
           block: "color: #3E2723; background: #D7CCC8; border-radius: 2px; border: 1px solid #A1887F; margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.6; white-space: pre-wrap; box-shadow: inset 0 0 10px rgba(0,0,0,0.1);",
           inline: "background: #EFEBE9; padding: 2px 6px; border-radius: 2px; color: #5D4037; font-size: 14px; border: 1px solid #D7CCC8;",
@@ -9496,7 +9512,7 @@ var init_warmth = __esm({
   "src/templates/warmth.json"() {
     warmth_default = {
       id: "warmth",
-      name: "\u6E29\u99A8\u65F6\u5149",
+      name: "\u521B\u610F\u7CFB\u5217 - \u6E29\u6696",
       styles: {
         container: "",
         title: {
@@ -9531,7 +9547,11 @@ var init_warmth = __esm({
           header: {
             container: "margin-bottom: 1em; display: flex; gap: 6px;",
             dot: "width: 12px; height: 12px; border-radius: 50%; opacity: 0.6;",
-            colors: ["#e57373", "#ffb74d", "#81c784"]
+            colors: [
+              "#e57373",
+              "#ffb74d",
+              "#81c784"
+            ]
           },
           block: "color: #5D4037; background: #FAF9F8; border-radius: 8px; border: 1px solid #EFEBE9; margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
           inline: "background: #FBE9E7; padding: 2px 8px; border-radius: 10px; color: #8D6E63; font-size: 14px; border: none;",
@@ -9576,7 +9596,7 @@ var init_gameui = __esm({
   "src/templates/gameui.json"() {
     gameui_default = {
       id: "gameui",
-      name: "\u6781\u5BA2\u73A9\u5BB6",
+      name: "\u521B\u610F\u7CFB\u5217 - \u6E38\u620FUI",
       styles: {
         container: "",
         title: {
@@ -9611,7 +9631,11 @@ var init_gameui = __esm({
           header: {
             container: "margin-bottom: 1em; display: flex; gap: 6px; background: #263238; padding: 8px 10px; border-top-left-radius: 6px; border-top-right-radius: 6px;",
             dot: "width: 10px; height: 10px; border-radius: 50%;",
-            colors: ["#FF5252", "#FFD740", "#69F0AE"]
+            colors: [
+              "#FF5252",
+              "#FFD740",
+              "#69F0AE"
+            ]
           },
           block: "color: #ECEFF1; background: #263238; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; margin: 0 0 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.6; white-space: pre-wrap; margin-top: -1em;",
           inline: "background: #EDE7F6; padding: 2px 6px; border-radius: 4px; color: #6200EA; font-size: 14px; border: 1px solid #D1C4E9; font-weight: bold;",
@@ -9656,7 +9680,7 @@ var init_parent_child = __esm({
   "src/templates/parent-child.json"() {
     parent_child_default = {
       id: "parent-child",
-      name: "\u4EB2\u5B50\u65F6\u5149",
+      name: "\u6559\u80B2\u7CFB\u5217 - \u4EB2\u5B50",
       styles: {
         container: "",
         title: {
@@ -9691,7 +9715,11 @@ var init_parent_child = __esm({
           header: {
             container: "margin-bottom: 1em; display: flex; gap: 6px;",
             dot: "width: 12px; height: 12px; border-radius: 50%;",
-            colors: ["#FF8A65", "#FFD54F", "#AED581"]
+            colors: [
+              "#FF8A65",
+              "#FFD54F",
+              "#AED581"
+            ]
           },
           block: "color: #5D4037; background: #FFF8E1; border-radius: 12px; border: 1px solid #FFE0B2; margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
           inline: "background: #FFE0B2; padding: 2px 8px; border-radius: 10px; color: #E65100; font-size: 14px; border: none;",
@@ -9744,7 +9772,7 @@ var init_teacher = __esm({
   "src/templates/teacher.json"() {
     teacher_default = {
       id: "teacher",
-      name: "\u6559\u5E08\u7B14\u8BB0",
+      name: "\u6559\u80B2\u7CFB\u5217 - \u6559\u5E08",
       styles: {
         container: "",
         title: {
@@ -9836,7 +9864,7 @@ var init_kindergarten = __esm({
   "src/templates/kindergarten.json"() {
     kindergarten_default = {
       id: "kindergarten",
-      name: "\u5E7C\u6559\u7AE5\u8DA3",
+      name: "\u6559\u80B2\u7CFB\u5217 - \u5E7C\u513F\u56ED",
       styles: {
         container: "",
         title: {
@@ -9968,7 +9996,11 @@ var init_academic_pro = __esm({
           header: {
             container: "display: flex; align-items: center; height: 32px; padding: 0 12px; background: #eaedf1",
             dot: "width: 8px; height: 8px; border-radius: 50%; margin-right: 5px",
-            colors: ["#1a1a2e", "#2c3e50", "#3d4e5f"]
+            colors: [
+              "#1a1a2e",
+              "#2c3e50",
+              "#3d4e5f"
+            ]
           },
           block: "background: #f4f6f8; border-radius: 4px; margin: 24px 0; overflow: hidden; border: 1px solid #e1e4e8",
           inline: "background: #eaedf1; padding: 2px 5px; border-radius: 3px; font-size: 85%; color: #1a1a2e; font-family: 'SFMono-Regular', Consolas, monospace"
@@ -10104,7 +10136,11 @@ var init_zen_essence = __esm({
           header: {
             container: "display: none",
             dot: "display: none",
-            colors: ["#ccc", "#ccc", "#ccc"]
+            colors: [
+              "#ccc",
+              "#ccc",
+              "#ccc"
+            ]
           },
           block: "background: #fdfdfd; border: 0.5px solid #eee; border-radius: 2px; margin: 30px 0; padding: 20px; text-align: left",
           inline: "background: #fdfdfd; border-bottom: 0.5px solid #ccc; padding: 1px 3px; font-size: 90%; color: #333"
@@ -10145,7 +10181,14 @@ var init_zen_essence_sakura = __esm({
       source: "mp-preview",
       styles: {
         container: "background-color: #fffafb; padding: 32px 24px",
-        title: { h1: { base: "color: #9d3a43" }, h2: { base: "color: #9d3a43; border-bottom: 0.5px solid #ffccd1" } },
+        title: {
+          h1: {
+            base: "color: #9d3a43"
+          },
+          h2: {
+            base: "color: #9d3a43; border-bottom: 0.5px solid #ffccd1"
+          }
+        },
         accentColor: "#9d3a43"
       }
     };
@@ -10165,7 +10208,14 @@ var init_zen_essence_teal = __esm({
       source: "mp-preview",
       styles: {
         container: "background-color: #f7fcfc",
-        title: { h1: { base: "color: #316d7a" }, h2: { base: "color: #316d7a; border-bottom: 0.5px solid #bdd7db" } },
+        title: {
+          h1: {
+            base: "color: #316d7a"
+          },
+          h2: {
+            base: "color: #316d7a; border-bottom: 0.5px solid #bdd7db"
+          }
+        },
         accentColor: "#316d7a"
       }
     };
@@ -10218,7 +10268,11 @@ var init_modern_report = __esm({
           header: {
             container: "display: flex; align-items: center; height: 32px; padding: 0 12px; background: #333",
             dot: "width: 8px; height: 8px; border-radius: 50%; margin-right: 5px",
-            colors: ["#fff", "#eee", "#ddd"]
+            colors: [
+              "#fff",
+              "#eee",
+              "#ddd"
+            ]
           },
           block: "background: #1e1e1e; border-radius: 6px; margin: 24px 0; overflow: hidden; color: #d4d4d4",
           inline: "background: #f3f3f3; padding: 2px 5px; border-radius: 3px; font-size: 85%; color: #c7254e; font-family: Consolas, monospace"
@@ -10259,7 +10313,14 @@ var init_modern_report_navy = __esm({
       source: "mp-preview",
       styles: {
         container: "background-color: #ffffff; padding: 20px",
-        title: { h1: { base: "color: #001f3f; border-bottom-color: #001f3f" }, h2: { base: "border-left-color: #001f3f; color: #001f3f" } },
+        title: {
+          h1: {
+            base: "color: #001f3f; border-bottom-color: #001f3f"
+          },
+          h2: {
+            base: "border-left-color: #001f3f; color: #001f3f"
+          }
+        },
         accentColor: "#001f3f"
       }
     };
@@ -10272,7 +10333,7 @@ var init_minimal_gold = __esm({
   "src/templates/minimal-gold.json"() {
     minimal_gold_default = {
       id: "minimal-gold",
-      name: "Minimal \u7CFB\u5217 - \u91D1\u8272",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u91D1\u8272",
       description: "\u5E72\u51C0\u514B\u5236\uFF0C\u91D1\u8272\u7CFB",
       styles: {
         container: "",
@@ -10365,7 +10426,7 @@ var init_minimal_green = __esm({
   "src/templates/minimal-green.json"() {
     minimal_green_default = {
       id: "minimal-green",
-      name: "Minimal \u7CFB\u5217 - \u7EFF\u8272",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u7EFF\u8272",
       description: "\u5E72\u51C0\u514B\u5236\uFF0C\u7EFF\u8272\u7CFB",
       styles: {
         container: "",
@@ -10458,7 +10519,7 @@ var init_minimal_blue = __esm({
   "src/templates/minimal-blue.json"() {
     minimal_blue_default = {
       id: "minimal-blue",
-      name: "Minimal \u7CFB\u5217 - \u84DD\u8272",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u84DD\u8272",
       description: "\u5E72\u51C0\u514B\u5236\uFF0C\u84DD\u8272\u7CFB",
       styles: {
         container: "",
@@ -10551,7 +10612,7 @@ var init_minimal_orange = __esm({
   "src/templates/minimal-orange.json"() {
     minimal_orange_default = {
       id: "minimal-orange",
-      name: "Minimal \u7CFB\u5217 - \u6A59\u8272",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u6A59\u8272",
       description: "\u5E72\u51C0\u514B\u5236\uFF0C\u6A59\u8272\u7CFB",
       styles: {
         container: "",
@@ -10644,7 +10705,7 @@ var init_minimal_red = __esm({
   "src/templates/minimal-red.json"() {
     minimal_red_default = {
       id: "minimal-red",
-      name: "Minimal \u7CFB\u5217 - \u7EA2\u8272",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u7EA2\u8272",
       description: "\u5E72\u51C0\u514B\u5236\uFF0C\u7EA2\u8272\u7CFB",
       styles: {
         container: "",
@@ -10737,7 +10798,7 @@ var init_minimal_navy = __esm({
   "src/templates/minimal-navy.json"() {
     minimal_navy_default = {
       id: "minimal-navy",
-      name: "Minimal \u7CFB\u5217 - \u85CF\u9752",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u85CF\u9752",
       description: "\u5E72\u51C0\u514B\u5236\uFF0C\u85CF\u9752\u8272\u7CFB",
       styles: {
         container: "",
@@ -10830,7 +10891,7 @@ var init_minimal_gray = __esm({
   "src/templates/minimal-gray.json"() {
     minimal_gray_default = {
       id: "minimal-gray",
-      name: "Minimal \u7CFB\u5217 - \u7070\u8272",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u7070\u8272",
       description: "\u5E72\u51C0\u514B\u5236\uFF0C\u7070\u8272\u7CFB",
       styles: {
         container: "",
@@ -10923,7 +10984,7 @@ var init_minimal_sky = __esm({
   "src/templates/minimal-sky.json"() {
     minimal_sky_default = {
       id: "minimal-sky",
-      name: "Minimal \u7CFB\u5217 - \u5929\u84DD",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u5929\u84DD",
       description: "\u5E72\u51C0\u514B\u5236\uFF0C\u5929\u84DD\u8272\u7CFB",
       styles: {
         container: "",
@@ -11016,7 +11077,7 @@ var init_focus_gold = __esm({
   "src/templates/focus-gold.json"() {
     focus_gold_default = {
       id: "focus-gold",
-      name: "Focus \u7CFB\u5217 - \u91D1\u8272",
+      name: "\u805A\u7126\u7CFB\u5217 - \u91D1\u8272",
       description: "\u5C45\u4E2D\u5BF9\u79F0\uFF0C\u91D1\u8272\u7CFB",
       styles: {
         container: "",
@@ -11109,7 +11170,7 @@ var init_focus_green = __esm({
   "src/templates/focus-green.json"() {
     focus_green_default = {
       id: "focus-green",
-      name: "Focus \u7CFB\u5217 - \u7EFF\u8272",
+      name: "\u805A\u7126\u7CFB\u5217 - \u7EFF\u8272",
       description: "\u5C45\u4E2D\u5BF9\u79F0\uFF0C\u7EFF\u8272\u7CFB",
       styles: {
         container: "",
@@ -11202,7 +11263,7 @@ var init_focus_blue = __esm({
   "src/templates/focus-blue.json"() {
     focus_blue_default = {
       id: "focus-blue",
-      name: "Focus \u7CFB\u5217 - \u84DD\u8272",
+      name: "\u805A\u7126\u7CFB\u5217 - \u84DD\u8272",
       description: "\u5C45\u4E2D\u5BF9\u79F0\uFF0C\u84DD\u8272\u7CFB",
       styles: {
         container: "",
@@ -11295,7 +11356,7 @@ var init_focus_orange = __esm({
   "src/templates/focus-orange.json"() {
     focus_orange_default = {
       id: "focus-orange",
-      name: "Focus \u7CFB\u5217 - \u6A59\u8272",
+      name: "\u805A\u7126\u7CFB\u5217 - \u6A59\u8272",
       description: "\u5C45\u4E2D\u5BF9\u79F0\uFF0C\u6A59\u8272\u7CFB",
       styles: {
         container: "",
@@ -11388,7 +11449,7 @@ var init_focus_red = __esm({
   "src/templates/focus-red.json"() {
     focus_red_default = {
       id: "focus-red",
-      name: "Focus \u7CFB\u5217 - \u7EA2\u8272",
+      name: "\u805A\u7126\u7CFB\u5217 - \u7EA2\u8272",
       description: "\u5C45\u4E2D\u5BF9\u79F0\uFF0C\u7EA2\u8272\u7CFB",
       styles: {
         container: "",
@@ -11481,7 +11542,7 @@ var init_focus_navy = __esm({
   "src/templates/focus-navy.json"() {
     focus_navy_default = {
       id: "focus-navy",
-      name: "Focus \u7CFB\u5217 - \u85CF\u9752",
+      name: "\u805A\u7126\u7CFB\u5217 - \u85CF\u9752",
       description: "\u5C45\u4E2D\u5BF9\u79F0\uFF0C\u85CF\u9752\u8272\u7CFB",
       styles: {
         container: "",
@@ -11574,7 +11635,7 @@ var init_focus_gray = __esm({
   "src/templates/focus-gray.json"() {
     focus_gray_default = {
       id: "focus-gray",
-      name: "Focus \u7CFB\u5217 - \u7070\u8272",
+      name: "\u805A\u7126\u7CFB\u5217 - \u7070\u8272",
       description: "\u5C45\u4E2D\u5BF9\u79F0\uFF0C\u7070\u8272\u7CFB",
       styles: {
         container: "",
@@ -11667,7 +11728,7 @@ var init_focus_sky = __esm({
   "src/templates/focus-sky.json"() {
     focus_sky_default = {
       id: "focus-sky",
-      name: "Focus \u7CFB\u5217 - \u5929\u84DD",
+      name: "\u805A\u7126\u7CFB\u5217 - \u5929\u84DD",
       description: "\u5C45\u4E2D\u5BF9\u79F0\uFF0C\u5929\u84DD\u8272\u7CFB",
       styles: {
         container: "",
@@ -11760,7 +11821,7 @@ var init_elegant_gold = __esm({
   "src/templates/elegant-gold.json"() {
     elegant_gold_default = {
       id: "elegant-gold",
-      name: "Elegant \u7CFB\u5217 - \u91D1\u8272",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u91D1\u8272",
       description: "\u5C42\u6B21\u4E30\u5BCC\uFF0C\u91D1\u8272\u7CFB",
       styles: {
         container: "",
@@ -11853,7 +11914,7 @@ var init_elegant_green = __esm({
   "src/templates/elegant-green.json"() {
     elegant_green_default = {
       id: "elegant-green",
-      name: "Elegant \u7CFB\u5217 - \u7EFF\u8272",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u7EFF\u8272",
       description: "\u5C42\u6B21\u4E30\u5BCC\uFF0C\u7EFF\u8272\u7CFB",
       styles: {
         container: "",
@@ -11946,7 +12007,7 @@ var init_elegant_blue = __esm({
   "src/templates/elegant-blue.json"() {
     elegant_blue_default = {
       id: "elegant-blue",
-      name: "Elegant \u7CFB\u5217 - \u84DD\u8272",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u84DD\u8272",
       description: "\u5C42\u6B21\u4E30\u5BCC\uFF0C\u84DD\u8272\u7CFB",
       styles: {
         container: "",
@@ -12039,7 +12100,7 @@ var init_elegant_orange = __esm({
   "src/templates/elegant-orange.json"() {
     elegant_orange_default = {
       id: "elegant-orange",
-      name: "Elegant \u7CFB\u5217 - \u6A59\u8272",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u6A59\u8272",
       description: "\u5C42\u6B21\u4E30\u5BCC\uFF0C\u6A59\u8272\u7CFB",
       styles: {
         container: "",
@@ -12132,7 +12193,7 @@ var init_elegant_red = __esm({
   "src/templates/elegant-red.json"() {
     elegant_red_default = {
       id: "elegant-red",
-      name: "Elegant \u7CFB\u5217 - \u7EA2\u8272",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u7EA2\u8272",
       description: "\u5C42\u6B21\u4E30\u5BCC\uFF0C\u7EA2\u8272\u7CFB",
       styles: {
         container: "",
@@ -12225,7 +12286,7 @@ var init_elegant_navy = __esm({
   "src/templates/elegant-navy.json"() {
     elegant_navy_default = {
       id: "elegant-navy",
-      name: "Elegant \u7CFB\u5217 - \u85CF\u9752",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u85CF\u9752",
       description: "\u5C42\u6B21\u4E30\u5BCC\uFF0C\u85CF\u9752\u8272\u7CFB",
       styles: {
         container: "",
@@ -12318,7 +12379,7 @@ var init_elegant_gray = __esm({
   "src/templates/elegant-gray.json"() {
     elegant_gray_default = {
       id: "elegant-gray",
-      name: "Elegant \u7CFB\u5217 - \u7070\u8272",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u7070\u8272",
       description: "\u5C42\u6B21\u4E30\u5BCC\uFF0C\u7070\u8272\u7CFB",
       styles: {
         container: "",
@@ -12411,7 +12472,7 @@ var init_elegant_sky = __esm({
   "src/templates/elegant-sky.json"() {
     elegant_sky_default = {
       id: "elegant-sky",
-      name: "Elegant \u7CFB\u5217 - \u5929\u84DD",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u5929\u84DD",
       description: "\u5C42\u6B21\u4E30\u5BCC\uFF0C\u5929\u84DD\u8272\u7CFB",
       styles: {
         container: "",
@@ -12504,7 +12565,7 @@ var init_bold_gold = __esm({
   "src/templates/bold-gold.json"() {
     bold_gold_default = {
       id: "bold-gold",
-      name: "Bold \u7CFB\u5217 - \u91D1\u8272",
+      name: "\u9192\u76EE\u7CFB\u5217 - \u91D1\u8272",
       description: "\u7C97\u58EE\u9192\u76EE\uFF0C\u91D1\u8272\u7CFB",
       styles: {
         container: "",
@@ -12597,7 +12658,7 @@ var init_bold_green = __esm({
   "src/templates/bold-green.json"() {
     bold_green_default = {
       id: "bold-green",
-      name: "Bold \u7CFB\u5217 - \u7EFF\u8272",
+      name: "\u9192\u76EE\u7CFB\u5217 - \u7EFF\u8272",
       description: "\u7C97\u58EE\u9192\u76EE\uFF0C\u7EFF\u8272\u7CFB",
       styles: {
         container: "",
@@ -12690,7 +12751,7 @@ var init_bold_blue = __esm({
   "src/templates/bold-blue.json"() {
     bold_blue_default = {
       id: "bold-blue",
-      name: "Bold \u7CFB\u5217 - \u84DD\u8272",
+      name: "\u9192\u76EE\u7CFB\u5217 - \u84DD\u8272",
       description: "\u7C97\u58EE\u9192\u76EE\uFF0C\u84DD\u8272\u7CFB",
       styles: {
         container: "",
@@ -12783,7 +12844,7 @@ var init_bold_orange = __esm({
   "src/templates/bold-orange.json"() {
     bold_orange_default = {
       id: "bold-orange",
-      name: "Bold \u7CFB\u5217 - \u6A59\u8272",
+      name: "\u9192\u76EE\u7CFB\u5217 - \u6A59\u8272",
       description: "\u7C97\u58EE\u9192\u76EE\uFF0C\u6A59\u8272\u7CFB",
       styles: {
         container: "",
@@ -12876,7 +12937,7 @@ var init_bold_red = __esm({
   "src/templates/bold-red.json"() {
     bold_red_default = {
       id: "bold-red",
-      name: "Bold \u7CFB\u5217 - \u7EA2\u8272",
+      name: "\u9192\u76EE\u7CFB\u5217 - \u7EA2\u8272",
       description: "\u7C97\u58EE\u9192\u76EE\uFF0C\u7EA2\u8272\u7CFB",
       styles: {
         container: "",
@@ -12969,7 +13030,7 @@ var init_bold_navy = __esm({
   "src/templates/bold-navy.json"() {
     bold_navy_default = {
       id: "bold-navy",
-      name: "Bold \u7CFB\u5217 - \u85CF\u9752",
+      name: "\u9192\u76EE\u7CFB\u5217 - \u85CF\u9752",
       description: "\u7C97\u58EE\u9192\u76EE\uFF0C\u85CF\u9752\u8272\u7CFB",
       styles: {
         container: "",
@@ -13062,7 +13123,7 @@ var init_bold_gray = __esm({
   "src/templates/bold-gray.json"() {
     bold_gray_default = {
       id: "bold-gray",
-      name: "Bold \u7CFB\u5217 - \u7070\u8272",
+      name: "\u9192\u76EE\u7CFB\u5217 - \u7070\u8272",
       description: "\u7C97\u58EE\u9192\u76EE\uFF0C\u7070\u8272\u7CFB",
       styles: {
         container: "",
@@ -13155,7 +13216,7 @@ var init_bold_sky = __esm({
   "src/templates/bold-sky.json"() {
     bold_sky_default = {
       id: "bold-sky",
-      name: "Bold \u7CFB\u5217 - \u5929\u84DD",
+      name: "\u9192\u76EE\u7CFB\u5217 - \u5929\u84DD",
       description: "\u7C97\u58EE\u9192\u76EE\uFF0C\u5929\u84DD\u8272\u7CFB",
       styles: {
         container: "",
@@ -13248,7 +13309,7 @@ var init_bauhaus = __esm({
   "src/templates/xiaohu/bauhaus.json"() {
     bauhaus_default = {
       id: "xiaohu-bauhaus",
-      name: "\u5305\u8C6A\u65AF (xiaohu)",
+      name: "\u5305\u8C6A\u65AF - \u590D\u53E4",
       description: "\u7EA2\u84DD\u9EC4\u4E09\u539F\u8272 #E30613/#004D9F/#F5A623\uFF0C\u7C97\u9ED1\u8FB9\u6846\uFF0C\u51E0\u4F55\u6784\u6210\u4E3B\u4E49\u98CE\u683C\uFF0C\u9002\u5408\u8BBE\u8BA1\u5E08\u3001\u521B\u610F\u7C7B\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -13343,7 +13404,7 @@ var init_bold_blue2 = __esm({
   "src/templates/xiaohu/bold-blue.json"() {
     bold_blue_default2 = {
       id: "xiaohu-bold-blue",
-      name: "\u9192\u76EE\xB7\u84DD (xiaohu)",
+      name: "\u9192\u76EE\u7CFB\u5217 - \u79D1\u6280\u84DD",
       description: "\u9192\u76EE\u84DD #4B6EF5 \u586B\u5145\u6807\u9898+\u8272\u5757h3\uFF0C\u9002\u5408\u65B0\u95FB/\u516C\u544A/\u91CD\u70B9\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -13438,7 +13499,7 @@ var init_bold_green2 = __esm({
   "src/templates/xiaohu/bold-green.json"() {
     bold_green_default2 = {
       id: "xiaohu-bold-green",
-      name: "\u9192\u76EE\xB7\u7EFF (xiaohu)",
+      name: "\u9192\u76EE\u7CFB\u5217 - \u6D3B\u529B\u7EFF",
       description: "\u9192\u76EE\u7EFF #2BAE85 \u586B\u5145\u6807\u9898+\u8272\u5757h3\uFF0C\u9002\u5408\u65B0\u95FB/\u516C\u544A/\u91CD\u70B9\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -13533,7 +13594,7 @@ var init_bold_navy2 = __esm({
   "src/templates/xiaohu/bold-navy.json"() {
     bold_navy_default2 = {
       id: "xiaohu-bold-navy",
-      name: "\u9192\u76EE\xB7\u85CF\u9752 (xiaohu)",
+      name: "\u9192\u76EE\u7CFB\u5217 - \u6DF1\u9083\u84DD",
       description: "\u9192\u76EE\u85CF\u9752 #1F4F8A \u586B\u5145\u6807\u9898+\u8272\u5757h3\uFF0C\u9002\u5408\u65B0\u95FB/\u516C\u544A/\u91CD\u70B9\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -13628,7 +13689,7 @@ var init_bytedance = __esm({
   "src/templates/xiaohu/bytedance.json"() {
     bytedance_default = {
       id: "xiaohu-bytedance",
-      name: "\u5B57\u8282\u84DD (xiaohu)",
+      name: "\u5B57\u8282\u8DF3\u52A8 - \u6807\u51C6",
       description: "\u5B57\u8282\u84DD\u9752\u6E10\u53D8 #1677FF/#05D4CD\uFF0C\u6E10\u53D8\u80F6\u56CA\u6807\u9898\uFF0C\u79D1\u6280\u5546\u52A1\u611F\uFF0C\u9002\u5408 SaaS \u4EA7\u54C1\u3001\u6280\u672F\u65B9\u6848\u4ECB\u7ECD",
       isPreset: true,
       isVisible: true,
@@ -13723,7 +13784,7 @@ var init_chinese = __esm({
   "src/templates/xiaohu/chinese.json"() {
     chinese_default = {
       id: "xiaohu-chinese",
-      name: "\u4E2D\u56FD\u98CE (xiaohu)",
+      name: "\u4E2D\u5F0F\u7F8E\u5B66 - \u74F7\u9752",
       description: "\u4E2D\u56FD\u7EA2 #8B1E22 \u5F3A\u8C03\uFF0C\u6977\u4F53\u6807\u9898\uFF0C\u5BA3\u7EB8\u8272\u80CC\u666F\uFF0C\u53E4\u5178\u6587\u5316\u611F\uFF0C\u9002\u5408\u4F20\u7EDF\u6587\u5316\u3001\u56FD\u6F6E\u3001\u4E2D\u5F0F\u7F8E\u5B66\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -13818,7 +13879,7 @@ var init_coffee_house = __esm({
   "src/templates/xiaohu/coffee-house.json"() {
     coffee_house_default = {
       id: "xiaohu-coffee-house",
-      name: "\u5496\u5561 (xiaohu)",
+      name: "\u6587\u827A\u7CFB\u5217 - \u5496\u5561",
       description: "\u5496\u5561\u68D5 #8d6e63 \u6C89\u7A33\u6E29\u6696\uFF0C\u886C\u7EBF\u5B57\u4F53\u611F\uFF0C\u9002\u5408\u8BFB\u4E66/\u6587\u5316/\u6DF1\u5EA6\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -13913,7 +13974,7 @@ var init_elegant_blue2 = __esm({
   "src/templates/xiaohu/elegant-blue.json"() {
     elegant_blue_default2 = {
       id: "xiaohu-elegant-blue",
-      name: "\u7CBE\u81F4\xB7\u84DD (xiaohu)",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u84DD\u8272",
       description: "\u7CBE\u81F4\u84DD #4B6EF5 \u5DE6\u4FA7\u53CC\u7EBF\u8FB9\u6846+\u6E10\u53D8\u8868\u5934\uFF0C\u9002\u5408\u6742\u5FD7/\u8BBE\u8BA1/\u9AD8\u7AEF\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -14008,7 +14069,7 @@ var init_elegant_green2 = __esm({
   "src/templates/xiaohu/elegant-green.json"() {
     elegant_green_default2 = {
       id: "xiaohu-elegant-green",
-      name: "\u7CBE\u81F4\xB7\u7EFF (xiaohu)",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u7EFF\u8272",
       description: "\u7CBE\u81F4\u7EFF #2BAE85 \u5DE6\u4FA7\u53CC\u7EBF\u8FB9\u6846+\u6E10\u53D8\u8868\u5934\uFF0C\u9002\u5408\u6742\u5FD7/\u8BBE\u8BA1/\u9AD8\u7AEF\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -14103,7 +14164,7 @@ var init_elegant_navy2 = __esm({
   "src/templates/xiaohu/elegant-navy.json"() {
     elegant_navy_default2 = {
       id: "xiaohu-elegant-navy",
-      name: "\u7CBE\u81F4\xB7\u85CF\u9752 (xiaohu)",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u85CF\u9752",
       description: "\u7CBE\u81F4\u85CF\u9752 #1F4F8A \u5DE6\u4FA7\u53CC\u7EBF\u8FB9\u6846+\u6E10\u53D8\u8868\u5934\uFF0C\u9002\u5408\u6742\u5FD7/\u8BBE\u8BA1/\u9AD8\u7AEF\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -14198,7 +14259,7 @@ var init_focus_blue2 = __esm({
   "src/templates/xiaohu/focus-blue.json"() {
     focus_blue_default2 = {
       id: "xiaohu-focus-blue",
-      name: "\u805A\u7126\xB7\u84DD (xiaohu)",
+      name: "\u805A\u7126\u7CFB\u5217 - \u84DD\u8272",
       description: "\u805A\u7126\u84DD #4B6EF5 \u5C45\u4E2D\u6807\u9898+\u4E0A\u4E0B\u7EBF\uFF0C\u9002\u5408\u54C1\u724C/\u5C55\u793A/\u8425\u9500\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -14293,7 +14354,7 @@ var init_focus_gold2 = __esm({
   "src/templates/xiaohu/focus-gold.json"() {
     focus_gold_default2 = {
       id: "xiaohu-focus-gold",
-      name: "\u805A\u7126\xB7\u91D1 (xiaohu)",
+      name: "\u805A\u7126\u7CFB\u5217 - \u91D1\u8272",
       description: "\u805A\u7126\u91D1 #C8A062 \u5C45\u4E2D\u6807\u9898+\u4E0A\u4E0B\u7EBF\uFF0C\u9002\u5408\u54C1\u724C/\u5C55\u793A/\u8425\u9500\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -14388,7 +14449,7 @@ var init_focus_red2 = __esm({
   "src/templates/xiaohu/focus-red.json"() {
     focus_red_default2 = {
       id: "xiaohu-focus-red",
-      name: "\u805A\u7126\xB7\u7EA2 (xiaohu)",
+      name: "\u805A\u7126\u7CFB\u5217 - \u7EA2\u8272",
       description: "\u805A\u7126\u7EA2 #F25C54 \u5C45\u4E2D\u6807\u9898+\u4E0A\u4E0B\u7EBF\uFF0C\u9002\u5408\u54C1\u724C/\u5C55\u793A/\u8425\u9500\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -14483,7 +14544,7 @@ var init_github = __esm({
   "src/templates/xiaohu/github.json"() {
     github_default = {
       id: "xiaohu-github",
-      name: "GitHub (xiaohu)",
+      name: "GitHub - \u7B80\u6D01",
       description: "GitHub \u84DD #0969DA \u5F3A\u8C03\uFF0C\u7070\u8272\u8FB9\u6846\u7CFB\u7EDF\uFF0C\u767D\u5E95\u5F00\u53D1\u8005\u98CE\u683C\uFF0C\u9002\u5408\u6280\u672F\u535A\u5BA2\u3001\u4EE3\u7801\u5206\u4EAB",
       isPreset: true,
       isVisible: true,
@@ -14578,7 +14639,7 @@ var init_ink = __esm({
   "src/templates/xiaohu/ink.json"() {
     ink_default = {
       id: "xiaohu-ink",
-      name: "\u58A8\u97F5 (xiaohu)",
+      name: "\u6697\u591C\u7CFB\u5217 - \u58A8\u97F5",
       description: "\u7EAF\u9ED1 #000000 \u5F3A\u8C03\uFF0CGeorgia \u886C\u7EBF\u4F53\uFF0C\u6781\u7B80\u9ED1\u767D\u7070\uFF0C\u9002\u5408\u6DF1\u5EA6\u957F\u6587\u3001\u6587\u5B66\u8BC4\u8BBA\u3001\u4E25\u8083\u5199\u4F5C",
       isPreset: true,
       isVisible: true,
@@ -14673,7 +14734,7 @@ var init_lavender_dream = __esm({
   "src/templates/xiaohu/lavender-dream.json"() {
     lavender_dream_default = {
       id: "xiaohu-lavender-dream",
-      name: "\u85B0\u8863\u8349 (xiaohu)",
+      name: "\u6587\u827A\u7CFB\u5217 - \u85B0\u8863\u8349",
       description: "\u85B0\u8863\u8349\u7D2B #9b7fd4 \u68A6\u5E7B\u4F18\u96C5\uFF0C\u6E10\u53D8\u80CC\u666F\uFF0C\u9002\u5408\u7F8E\u5986/\u827A\u672F/\u7075\u611F\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -14768,7 +14829,7 @@ var init_magazine = __esm({
   "src/templates/xiaohu/magazine.json"() {
     magazine_default = {
       id: "xiaohu-magazine",
-      name: "\u6742\u5FD7 (xiaohu)",
+      name: "\u65F6\u5C1A\u6742\u5FD7 - \u5C01\u9762",
       description: "Apple \u84DD\u7D2B\u6E10\u53D8 #007AFF/#5856D6\uFF0C\u5706\u89D2\u6E10\u53D8\u6807\u7B7E\uFF0C\u73B0\u4EE3\u6742\u5FD7\u98CE\u683C\uFF0C\u9002\u5408\u4EA7\u54C1\u8BC4\u6D4B\u3001\u79D1\u6280\u8D44\u8BAF",
       isPreset: true,
       isVisible: true,
@@ -14863,7 +14924,7 @@ var init_midnight = __esm({
   "src/templates/xiaohu/midnight.json"() {
     midnight_default = {
       id: "xiaohu-midnight",
-      name: "\u6697\u591C (xiaohu)",
+      name: "\u6697\u591C\u7CFB\u5217 - \u5348\u591C",
       description: "\u7C89\u7D2B\u84DD\u6E10\u53D8 #F472B6/#8B5CF6/#60A5FA\uFF0C\u8D5B\u535A\u670B\u514B\u9713\u8679\u5149\u6548\uFF0C\u9002\u5408 AI/Web3/\u79D1\u6280\u524D\u6CBF\u8BDD\u9898",
       isPreset: true,
       isVisible: true,
@@ -14958,7 +15019,7 @@ var init_minimal_blue2 = __esm({
   "src/templates/xiaohu/minimal-blue.json"() {
     minimal_blue_default2 = {
       id: "xiaohu-minimal-blue",
-      name: "\u7B80\u7EA6\xB7\u84DD (xiaohu)",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u7ECF\u5178\u84DD",
       description: "\u7B80\u7EA6\u84DD #4B6EF5 \u6781\u7B80\u98CE\u683C\uFF0C\u65E0\u88C5\u9970\u6807\u9898\uFF0C\u9002\u5408\u5546\u52A1/\u79D1\u6280/\u4E13\u4E1A\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -15053,7 +15114,7 @@ var init_minimal_gold2 = __esm({
   "src/templates/xiaohu/minimal-gold.json"() {
     minimal_gold_default2 = {
       id: "xiaohu-minimal-gold",
-      name: "\u7B80\u7EA6\xB7\u91D1 (xiaohu)",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u96C5\u91D1",
       description: "\u7B80\u7EA6\u91D1 #C8A062 \u6781\u7B80\u98CE\u683C\uFF0C\u65E0\u88C5\u9970\u6807\u9898\uFF0C\u9002\u5408\u5546\u52A1/\u79D1\u6280/\u4E13\u4E1A\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -15148,7 +15209,7 @@ var init_minimal_gray2 = __esm({
   "src/templates/xiaohu/minimal-gray.json"() {
     minimal_gray_default2 = {
       id: "xiaohu-minimal-gray",
-      name: "\u7B80\u7EA6\xB7\u7070 (xiaohu)",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u94C5\u7070",
       description: "\u7B80\u7EA6\u7070 #4E5969 \u6781\u7B80\u98CE\u683C\uFF0C\u65E0\u88C5\u9970\u6807\u9898\uFF0C\u9002\u5408\u5546\u52A1/\u79D1\u6280/\u4E13\u4E1A\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -15243,7 +15304,7 @@ var init_minimal_navy2 = __esm({
   "src/templates/xiaohu/minimal-navy.json"() {
     minimal_navy_default2 = {
       id: "xiaohu-minimal-navy",
-      name: "\u7B80\u7EA6\xB7\u85CF\u9752 (xiaohu)",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u85CF\u9752",
       description: "\u7B80\u7EA6\u85CF\u9752 #1F4F8A \u6781\u7B80\u98CE\u683C\uFF0C\u65E0\u88C5\u9970\u6807\u9898\uFF0C\u9002\u5408\u5546\u52A1/\u79D1\u6280/\u4E13\u4E1A\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -15338,7 +15399,7 @@ var init_minimal_red2 = __esm({
   "src/templates/xiaohu/minimal-red.json"() {
     minimal_red_default2 = {
       id: "xiaohu-minimal-red",
-      name: "\u7B80\u7EA6\xB7\u7EA2 (xiaohu)",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u80ED\u8102",
       description: "\u7B80\u7EA6\u7EA2 #F25C54 \u6781\u7B80\u98CE\u683C\uFF0C\u65E0\u88C5\u9970\u6807\u9898\uFF0C\u9002\u5408\u5546\u52A1/\u79D1\u6280/\u4E13\u4E1A\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -15433,7 +15494,7 @@ var init_mint_fresh = __esm({
   "src/templates/xiaohu/mint-fresh.json"() {
     mint_fresh_default = {
       id: "xiaohu-mint-fresh",
-      name: "\u8584\u8377 (xiaohu)",
+      name: "\u6587\u827A\u7CFB\u5217 - \u8584\u8377",
       description: "\u8584\u8377\u7EFF #1a7a5a \u6E05\u65B0\u81EA\u7136\uFF0C\u5706\u89D2\u5361\u7247\uFF0C\u9002\u5408\u751F\u6D3B/\u5065\u5EB7/\u6E05\u65B0\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -15528,7 +15589,7 @@ var init_newspaper = __esm({
   "src/templates/xiaohu/newspaper.json"() {
     newspaper_default = {
       id: "xiaohu-newspaper",
-      name: "\u62A5\u7EB8 (xiaohu)",
+      name: "\u7ECF\u5178\u62A5\u7EB8 - \u7EBD\u7EA6\u65F6\u62A5",
       description: "\u7EBD\u7EA6\u65F6\u62A5\u98CE #326891 \u84DD\u7070\uFF0CGeorgia \u886C\u7EBF\u4F53\uFF0C\u5C45\u4E2D\u53CC\u7EBF\u6807\u9898\uFF0C\u9002\u5408\u65B0\u95FB\u8BC4\u8BBA\u3001\u884C\u4E1A\u5206\u6790",
       isPreset: true,
       isVisible: true,
@@ -15623,7 +15684,7 @@ var init_sports = __esm({
   "src/templates/xiaohu/sports.json"() {
     sports_default = {
       id: "xiaohu-sports",
-      name: "\u8FD0\u52A8 (xiaohu)",
+      name: "\u8FD0\u52A8\u98CE - \u52A8\u611F",
       description: "\u8FD0\u52A8\u7EFF #00A968 + \u6E10\u53D8\u8272\u5E26\uFF0C\u6D3B\u529B\u52A8\u611F\uFF0C\u9002\u5408\u4F53\u80B2/\u5065\u8EAB/\u6237\u5916\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -15718,7 +15779,7 @@ var init_sspai = __esm({
   "src/templates/xiaohu/sspai.json"() {
     sspai_default = {
       id: "xiaohu-sspai",
-      name: "\u5C11\u6570\u6D3E (xiaohu)",
+      name: "\u5C11\u6570\u6D3E - \u7ECF\u5178",
       description: "\u5C11\u6570\u6D3E\u7EA2 #D71A1B \u5F3A\u8C03\uFF0C\u886C\u7EBF\u4F53\u6807\u9898\uFF0C\u6E05\u723D\u767D\u5E95\uFF0C\u9002\u5408\u6570\u7801\u8BC4\u6D4B\u3001\u6548\u7387\u5DE5\u5177\u5206\u4EAB",
       isPreset: true,
       isVisible: true,
@@ -15813,7 +15874,7 @@ var init_sunset_amber = __esm({
   "src/templates/xiaohu/sunset-amber.json"() {
     sunset_amber_default = {
       id: "xiaohu-sunset-amber",
-      name: "\u65E5\u843D (xiaohu)",
+      name: "\u6587\u827A\u7CFB\u5217 - \u65E5\u843D",
       description: "\u65E5\u843D\u7425\u73C0 #d37a45 \u6E29\u6696\u6D53\u90C1\uFF0C\u6E10\u53D8\u80CC\u666F\uFF0C\u9002\u5408\u6545\u4E8B/\u60C5\u611F/\u65C5\u884C\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -15908,7 +15969,7 @@ var init_terracotta = __esm({
   "src/templates/xiaohu/terracotta.json"() {
     terracotta_default = {
       id: "xiaohu-terracotta",
-      name: "\u8D64\u9676 (xiaohu)",
+      name: "\u4E2D\u5F0F\u7F8E\u5B66 - \u8D64\u9676",
       description: "\u8D64\u9676\u6A59 #C86442 \u5F3A\u8C03\uFF0C\u6696\u7070\u6587\u5B57\uFF0C\u767D\u5E95\u7EB9\u7406\uFF0C\u9002\u5408\u77E5\u8BC6\u5206\u4EAB\u3001\u81EA\u5A92\u4F53\u5E72\u8D27",
       isPreset: true,
       isVisible: true,

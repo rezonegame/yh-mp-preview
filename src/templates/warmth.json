@@ -1,6 +1,6 @@
 {
     "id": "warmth",
-    "name": "温馨时光",
+    "name": "创意系列 - 温暖",
     "styles": {
         "container": "",
         "title": {
@@ -35,7 +35,11 @@
             "header": {
                 "container": "margin-bottom: 1em; display: flex; gap: 6px;",
                 "dot": "width: 12px; height: 12px; border-radius: 50%; opacity: 0.6;",
-                "colors": ["#e57373", "#ffb74d", "#81c784"]
+                "colors": [
+                    "#e57373",
+                    "#ffb74d",
+                    "#81c784"
+                ]
             },
             "block": "color: #5D4037; background: #FAF9F8; border-radius: 8px; border: 1px solid #EFEBE9; margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
             "inline": "background: #FBE9E7; padding: 2px 8px; border-radius: 10px; color: #8D6E63; font-size: 14px; border: none;",

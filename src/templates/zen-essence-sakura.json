@@ -7,7 +7,14 @@
     "source": "mp-preview",
     "styles": {
         "container": "background-color: #fffafb; padding: 32px 24px",
-        "title": { "h1": { "base": "color: #9d3a43" }, "h2": { "base": "color: #9d3a43; border-bottom: 0.5px solid #ffccd1" } },
+        "title": {
+            "h1": {
+                "base": "color: #9d3a43"
+            },
+            "h2": {
+                "base": "color: #9d3a43; border-bottom: 0.5px solid #ffccd1"
+            }
+        },
         "accentColor": "#9d3a43"
     }
 }

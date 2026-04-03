@@ -1,6 +1,6 @@
 {
     "id": "playful",
-    "name": "童趣乐园",
+    "name": "创意系列 - 活泼",
     "styles": {
         "container": "",
         "title": {
@@ -35,7 +35,11 @@
             "header": {
                 "container": "margin-bottom: 1em; display: flex; gap: 6px;",
                 "dot": "width: 12px; height: 12px; border-radius: 50%;",
-                "colors": ["#FF8A65", "#FFD54F", "#AED581"]
+                "colors": [
+                    "#FF8A65",
+                    "#FFD54F",
+                    "#AED581"
+                ]
             },
             "block": "color: #5D4037; background: #FFF3E0; border-radius: 12px; border: 2px solid #FFE0B2; margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
             "inline": "background: #E1F5FE; padding: 2px 8px; border-radius: 12px; color: #0288D1; font-size: 14px; border: none;",

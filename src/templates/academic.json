@@ -39,15 +39,15 @@
         },
         "code": {
             "header": {
-            "container": "margin-bottom: 1em; display: flex; gap: 6px;",
-            "dot": "width: 12px; height: 12px; border-radius: 50%;",
-            "colors": [
-              "#ff5f56",
-              "#ffbd2e",
-              "#27c93f"
-            ]
-          },
-          "block": "color: #5D4037; background: #EFEBE9; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
+                "container": "margin-bottom: 1em; display: flex; gap: 6px;",
+                "dot": "width: 12px; height: 12px; border-radius: 50%;",
+                "colors": [
+                    "#ff5f56",
+                    "#ffbd2e",
+                    "#27c93f"
+                ]
+            },
+            "block": "color: #5D4037; background: #EFEBE9; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
             "inline": "background: #EFEBE9; padding: 2px 6px; border-radius: 4px; color: #5D4037; font-size: 14px; border: 1px solid #8D6E63;",
             "syntax": {
                 "comment": "color: #6a737d;",

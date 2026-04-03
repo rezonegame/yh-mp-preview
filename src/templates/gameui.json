@@ -1,6 +1,6 @@
 {
     "id": "gameui",
-    "name": "极客玩家",
+    "name": "创意系列 - 游戏UI",
     "styles": {
         "container": "",
         "title": {
@@ -35,7 +35,11 @@
             "header": {
                 "container": "margin-bottom: 1em; display: flex; gap: 6px; background: #263238; padding: 8px 10px; border-top-left-radius: 6px; border-top-right-radius: 6px;",
                 "dot": "width: 10px; height: 10px; border-radius: 50%;",
-                "colors": ["#FF5252", "#FFD740", "#69F0AE"]
+                "colors": [
+                    "#FF5252",
+                    "#FFD740",
+                    "#69F0AE"
+                ]
             },
             "block": "color: #ECEFF1; background: #263238; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; margin: 0 0 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.6; white-space: pre-wrap; margin-top: -1em;",
             "inline": "background: #EDE7F6; padding: 2px 6px; border-radius: 4px; color: #6200EA; font-size: 14px; border: 1px solid #D1C4E9; font-weight: bold;",

@@ -1,6 +1,6 @@
 {
     "id": "yeban-orange",
-    "name": "夜半橙心",
+    "name": "叶伴系列 - 活力",
     "styles": {
         "container": "",
         "title": {
@@ -33,15 +33,15 @@
         },
         "code": {
             "header": {
-            "container": "margin-bottom: 1em; display: flex; gap: 6px;",
-            "dot": "width: 12px; height: 12px; border-radius: 50%;",
-            "colors": [
-              "#ff5f56",
-              "#ffbd2e",
-              "#27c93f"
-            ]
-          },
-          "block": "color: #333; background: #fff8f7; border-radius: 8px; border: 1px solid #ffe8e6; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
+                "container": "margin-bottom: 1em; display: flex; gap: 6px;",
+                "dot": "width: 12px; height: 12px; border-radius: 50%;",
+                "colors": [
+                    "#ff5f56",
+                    "#ffbd2e",
+                    "#27c93f"
+                ]
+            },
+            "block": "color: #333; background: #fff8f7; border-radius: 8px; border: 1px solid #ffe8e6; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
             "inline": "background: #fff8f7; padding: 2px 6px; border-radius: 4px; color: #333; font-size: 14px; border: 1px solid #ffe8e6;",
             "syntax": {
                 "comment": "color: #6a737d;",
@@ -64,7 +64,6 @@
             }
         },
         "quote": "border-left: 4px solid #7a7da0; border-radius: 6px; padding: 10px 10px; background: #fff8f7; margin: 0.8em 0; color: #d64b3b; font-style: italic; word-wrap: break-word;",
-        
         "image": "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         "link": "color: #ef7060; text-decoration: none; border-bottom: 1px solid #ef7060; transition: all 0.2s ease;",
         "emphasis": {
