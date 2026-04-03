@@ -20,6 +20,10 @@ import gameuiTemplate from './gameui.json';
 import parentChildTemplate from './parent-child.json';
 import teacherTemplate from './teacher.json';
 import kindergartenTemplate from './kindergarten.json';
+// 新增专业与极简系列
+import academicProTemplate from './academic-pro.json';
+import zenEssenceTemplate from './zen-essence.json';
+import modernReportTemplate from './modern-report.json';
 
 // Minimal Series (8 themes)
 import minimalGoldTemplate from './minimal-gold.json';
@@ -86,6 +90,9 @@ export const templates = {
     'parent-child': parentChildTemplate,
     teacher: teacherTemplate,
     kindergarten: kindergartenTemplate,
+    'academic-pro': academicProTemplate,
+    'zen-essence': zenEssenceTemplate,
+    'modern-report': modernReportTemplate,
 
     // Minimal Series
     'minimal-gold': minimalGoldTemplate,

@@ -1,0 +1,67 @@
+{
+    "id": "modern-report",
+    "name": "现代报告",
+    "description": "简约现代的报告风格，高对比度黑白灰，配合精致的边框装饰，适合深度调研、周报总结、商业规划",
+    "isPreset": true,
+    "isVisible": true,
+    "source": "mp-preview",
+    "styles": {
+        "container": "background-color: #ffffff; padding: 20px; color: #1a1a1a",
+        "title": {
+            "h1": {
+                "base": "font-size: 24px; font-weight: 800; color: #000000; text-align: left; padding: 0 0 10px 0; border-bottom: 4px solid #000000; margin-top: 40px; margin-bottom: 24px; letter-spacing: -0.02em",
+                "content": "color: #000000",
+                "after": ""
+            },
+            "h2": {
+                "base": "font-size: 19px; font-weight: 700; color: #000000; background: #f0f0f0; padding: 8px 12px; margin-top: 36px; margin-bottom: 16px; border-left: 6px solid #000000",
+                "content": "color: #000000",
+                "after": ""
+            },
+            "h3": {
+                "base": "font-size: 17px; font-weight: 600; color: #333333; margin-top: 28px; margin-bottom: 12px; text-decoration: underline; text-underline-offset: 6px",
+                "content": "color: #333333",
+                "after": ""
+            },
+            "base": {
+                "base": "font-size: 16px; font-weight: bold; color: #000000; margin-top: 20px; margin-bottom: 8px",
+                "content": "color: #000000",
+                "after": ""
+            }
+        },
+        "paragraph": "font-size: 16px; color: #333333; line-height: 1.75; margin-top: 0; margin-bottom: 20px; text-align: left",
+        "list": {
+            "container": "margin-top: 16px; margin-bottom: 16px; padding-left: 20px",
+            "item": "font-size: 15px; color: #333333; line-height: 1.75; margin-bottom: 10px",
+            "taskList": "list-style: none; padding-left: 0;"
+        },
+        "quote": "background: #f9f9f9; border-radius: 8px; padding: 20px; margin: 24px 0; color: #444444; font-size: 15px; line-height: 1.75; border: 1px solid #eeeeee",
+        "code": {
+            "header": {
+                "container": "display: flex; align-items: center; height: 32px; padding: 0 12px; background: #333",
+                "dot": "width: 8px; height: 8px; border-radius: 50%; margin-right: 5px",
+                "colors": ["#fff", "#eee", "#ddd"]
+            },
+            "block": "background: #1e1e1e; border-radius: 6px; margin: 24px 0; overflow: hidden; color: #d4d4d4",
+            "inline": "background: #f3f3f3; padding: 2px 5px; border-radius: 3px; font-size: 85%; color: #c7254e; font-family: Consolas, monospace"
+        },
+        "image": "max-width: 100%; border-radius: 4px; display: block; border: 1px solid #ddd; margin: 0 auto",
+        "link": "color: #000; text-decoration: underline; font-weight: 600",
+        "emphasis": {
+            "strong": "font-weight: 800; color: #000; background: #ffff0033",
+            "em": "font-style: italic; color: #444",
+            "del": "text-decoration: line-through; color: #bbb"
+        },
+        "table": {
+            "container": "width: 100%; border-collapse: collapse; margin: 24px 0",
+            "header": "padding: 12px; text-align: left; font-weight: 700; color: #fff; background: #333",
+            "cell": "padding: 12px; border: 1px solid #eee; color: #333"
+        },
+        "hr": "margin: 40px 0; height: 2px; background: #000; border: none; width: 100%",
+        "footnote": {
+            "ref": "font-size: 11px; color: #666; vertical-align: super",
+            "backref": "color: #999; text-decoration: none"
+        },
+        "accentColor": "#000000"
+    }
+}

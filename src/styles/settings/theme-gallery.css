@@ -73,8 +73,8 @@
 
 /* 左侧分类栏 - 优化 */
 .mp-gallery-sidebar {
-    width: 200px;
-    padding: 16px;
+    width: 150px; /* 缩小分类栏宽度 */
+    padding: 16px 12px;
     border-right: 1px solid var(--background-modifier-border);
     background: var(--background-secondary);
     overflow-y: auto;
@@ -156,16 +156,79 @@
     border-radius: 10px;
 }
 
-/* 右侧主题网格 - 优化布局 */
+/* 中间排版结构栏 */
+.mp-gallery-layouts {
+    width: 260px;
+    padding: 16px;
+    border-right: 1px solid var(--background-modifier-border);
+    background: var(--background-primary);
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.mp-gallery-layout-header {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    padding-left: 4px;
+}
+
+.mp-gallery-layout-btn {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 8px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 12px;
+    background: var(--background-primary);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: left;
+}
+
+.mp-gallery-layout-btn:hover {
+    border-color: var(--text-accent);
+    background: var(--background-modifier-hover);
+    transform: translateX(2px);
+}
+
+.mp-gallery-layout-btn.active {
+    border-color: var(--interactive-accent);
+    background: rgba(var(--interactive-accent-rgb, 66, 133, 244), 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.mp-layout-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-normal);
+    margin-bottom: 4px;
+}
+
+.mp-layout-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 右侧颜色/变体网格 */
 .mp-gallery-grid {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
     align-content: start;
-    background: var(--background-primary);
+    background: var(--background-secondary-alt);
 }
 
 /* 主题卡片 - 全新设计 */
@@ -419,6 +482,12 @@
 }
 
 /* 响应式 - 优化 */
+@media (max-width: 900px) {
+    .mp-gallery-layouts {
+        width: 200px;
+    }
+}
+
 @media (max-width: 768px) {
     .mp-theme-gallery-modal {
         width: 96vw !important;
@@ -432,33 +501,54 @@
 
     .mp-gallery-sidebar {
         width: 100%;
-        max-height: 120px;
+        max-height: none;
+        height: auto;
         border-right: none;
         border-bottom: 1px solid var(--background-modifier-border);
         display: flex;
-        flex-wrap: wrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 8px 12px;
         gap: 8px;
-        padding: 12px;
+    }
+
+    .mp-gallery-sidebar::-webkit-scrollbar {
+        height: 4px;
     }
 
     .mp-gallery-category-btn {
         width: auto;
-        padding: 8px 14px;
+        white-space: nowrap;
+        margin-bottom: 0;
+        padding: 8px 12px;
+    }
+
+    .mp-gallery-layouts {
+        width: 100%;
+        max-height: 200px;
+        border-right: none;
+        border-bottom: 1px solid var(--background-modifier-border);
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .mp-gallery-layouts::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .mp-gallery-layout-btn {
+        width: 180px;
+        flex-shrink: 0;
         margin-bottom: 0;
     }
 
     .mp-gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 12px;
-        padding: 16px;
-    }
-
-    .mp-gallery-search {
-        width: 180px;
-    }
-
-    .mp-theme-color-bar {
-        height: 60px;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+        padding: 12px;
     }
 }
 

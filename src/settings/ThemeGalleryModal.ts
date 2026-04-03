@@ -13,7 +13,7 @@ import type { Template } from '../templateManager';
 export const STYLE_CATEGORIES = {
     '极简': {
         description: '简洁干净，注重内容',
-        keywords: ['minimal', '简约'],
+        keywords: ['minimal', '简约', 'zen', 'essence', 'academic', '极简', '禅意', '学术'],
         color: '#636e72'
     },
     '渐变': {
@@ -23,7 +23,7 @@ export const STYLE_CATEGORIES = {
     },
     '醒目': {
         description: '大胆配色，视觉冲击',
-        keywords: ['bold', 'sports', 'bauhaus', '醒目', '运动', '包豪斯'],
+        keywords: ['bold', 'sports', 'bauhaus', 'modern-report', '醒目', '运动', '包豪斯', '报告', '黑白'],
         color: '#d63031'
     },
     '深色': {
@@ -43,7 +43,7 @@ export const STYLE_CATEGORIES = {
     },
     '文艺': {
         description: '柔和配色，文艺清新',
-        keywords: ['lavender', 'mint', 'sunset', 'coffee', '薰衣草', '薄荷', '日落', '咖啡'],
+        keywords: ['lavender', 'mint', 'sunset', 'coffee', 'magazine', '薰衣草', '薄荷', '日落', '咖啡', '画刊', '杂志'],
         color: '#a29bfe'
     },
     '其他': {
@@ -87,12 +87,14 @@ export class ThemeGalleryModal extends Modal {
     private previewCallback: (templateId: string) => void;
 
     private selectedCategory: StyleCategory = '极简';
+    private selectedLayoutFamily: string = '';
     private searchQuery: string = '';
-    private filteredTemplates: Template[] = [];
 
+    private layoutContainer: HTMLElement | null = null;
     private gridContainer: HTMLElement | null = null;
     private searchInput: HTMLInputElement | null = null;
     private categoryButtons: Map<StyleCategory, HTMLElement> = new Map();
+    private layoutButtons: Map<string, HTMLElement> = new Map();
 
     constructor(
         app: any,
@@ -107,12 +109,27 @@ export class ThemeGalleryModal extends Modal {
         this.currentTemplateId = currentTemplateId;
         this.onSelect = onSelect;
         this.previewCallback = previewCallback;
+
+        // 初始化默认选中的分类和布局
+        this.initializeDefaults();
+    }
+
+    private initializeDefaults() {
+        const currentTemplate = this.templates.find(t => t.id === this.currentTemplateId);
+        if (currentTemplate) {
+            this.selectedCategory = getThemeCategory(currentTemplate);
+            this.selectedLayoutFamily = this.parseTemplateFamily(currentTemplate).family;
+        } else {
+            this.selectedCategory = '极简';
+            const catTemplates = this.templates.filter(t => getThemeCategory(t) === '极简');
+            if (catTemplates.length > 0) {
+                this.selectedLayoutFamily = this.parseTemplateFamily(catTemplates[0]).family;
+            }
+        }
     }
 
     onOpen() {
         const { contentEl, modalEl } = this;
-
-        // 设置弹窗大小
         modalEl.addClass('mp-theme-gallery-modal');
         contentEl.empty();
 
@@ -120,31 +137,32 @@ export class ThemeGalleryModal extends Modal {
         const header = contentEl.createEl('div', { cls: 'mp-gallery-header' });
         header.createEl('h2', { text: '🎨 主题画廊' });
 
-        // 搜索框
         this.searchInput = header.createEl('input', {
             cls: 'mp-gallery-search',
-            attr: {
-                type: 'text',
-                placeholder: '搜索主题...',
-            }
+            attr: { type: 'text', placeholder: '搜索主题...' }
         });
         this.searchInput.addEventListener('input', () => {
             this.searchQuery = this.searchInput!.value.toLowerCase();
+            this.renderLayoutList();
             this.renderGrid();
         });
 
         // 主内容区
         const mainContent = contentEl.createEl('div', { cls: 'mp-gallery-main' });
 
-        // 左侧分类列表
+        // 1. 分类栏 (左)
         const sidebar = mainContent.createEl('div', { cls: 'mp-gallery-sidebar' });
         this.renderSidebar(sidebar);
 
-        // 右侧主题网格
+        // 2. 布局栏 (中)
+        this.layoutContainer = mainContent.createEl('div', { cls: 'mp-gallery-layouts' });
+        this.renderLayoutList();
+
+        // 3. 变体网格 (右)
         this.gridContainer = mainContent.createEl('div', { cls: 'mp-gallery-grid' });
         this.renderGrid();
 
-        // 底部操作栏
+        // 底部
         const footer = contentEl.createEl('div', { cls: 'mp-gallery-footer' });
         const cancelBtn = footer.createEl('button', { text: '取消', cls: 'mp-gallery-btn-cancel' });
         cancelBtn.addEventListener('click', () => this.close());
@@ -159,37 +177,40 @@ export class ThemeGalleryModal extends Modal {
     }
 
     onClose() {
-        const { contentEl } = this;
-        contentEl.empty();
+        this.contentEl.empty();
     }
 
-    /**
-     * 渲染左侧分类列表
-     */
     private renderSidebar(container: HTMLElement) {
-        // 分类统计
+        container.empty();
         const categoryCounts = this.getCategoryCounts();
 
         for (const [category, config] of Object.entries(STYLE_CATEGORIES)) {
             const count = categoryCounts[category] || 0;
-            if (count === 0) continue;
+            if (count === 0 && category !== '其他') continue;
 
             const btn = container.createEl('button', {
                 cls: `mp-gallery-category-btn ${this.selectedCategory === category ? 'active' : ''}`,
                 attr: { title: config.description }
             });
 
-            // 颜色指示器
             const colorDot = btn.createEl('span', { cls: 'mp-category-color' });
             colorDot.style.backgroundColor = config.color;
 
-            // 分类名和数量
             btn.createEl('span', { text: category, cls: 'mp-category-name' });
-            btn.createEl('span', { text: `${count}`, cls: 'mp-category-count' });
+            if (count > 0) {
+                btn.createEl('span', { text: `${count}`, cls: 'mp-category-count' });
+            }
 
             btn.addEventListener('click', () => {
                 this.selectedCategory = category as StyleCategory;
                 this.updateCategoryButtons();
+                
+                const catTemplates = this.templates.filter(t => getThemeCategory(t) === this.selectedCategory);
+                if (catTemplates.length > 0) {
+                    this.selectedLayoutFamily = this.parseTemplateFamily(catTemplates[0]).family;
+                }
+                
+                this.renderLayoutList();
                 this.renderGrid();
             });
 
@@ -197,69 +218,105 @@ export class ThemeGalleryModal extends Modal {
         }
     }
 
-    /**
-     * 更新分类按钮状态
-     */
     private updateCategoryButtons() {
         for (const [category, btn] of this.categoryButtons) {
-            if (category === this.selectedCategory) {
-                btn.addClass('active');
-            } else {
-                btn.removeClass('active');
-            }
+            if (category === this.selectedCategory) btn.addClass('active');
+            else btn.removeClass('active');
         }
     }
 
-    /**
-     * 渲染主题网格
-     */
+    private renderLayoutList() {
+        if (!this.layoutContainer) return;
+        this.layoutContainer.empty();
+        this.layoutButtons.clear();
+
+        this.layoutContainer.createEl('div', { text: '排版结构', cls: 'mp-gallery-layout-header' });
+
+        const families = this.getLayoutFamilies();
+        if (families.length === 0) {
+            this.layoutContainer.createEl('div', { text: '暂无结构', cls: 'mp-gallery-empty-small' });
+            return;
+        }
+
+        if (!families.some(f => f.name === this.selectedLayoutFamily)) {
+            this.selectedLayoutFamily = families[0].name;
+        }
+
+        for (const family of families) {
+            const btn = this.layoutContainer.createEl('button', {
+                cls: `mp-gallery-layout-btn ${this.selectedLayoutFamily === family.name ? 'active' : ''}`
+            });
+
+            btn.createEl('div', { text: family.name, cls: 'mp-layout-name' });
+            btn.createEl('div', { text: family.description, cls: 'mp-layout-desc' });
+
+            btn.addEventListener('click', () => {
+                this.selectedLayoutFamily = family.name;
+                this.updateLayoutButtons();
+                this.renderGrid();
+            });
+
+            this.layoutButtons.set(family.name, btn);
+        }
+    }
+
+    private updateLayoutButtons() {
+        for (const [name, btn] of this.layoutButtons) {
+            if (name === this.selectedLayoutFamily) btn.addClass('active');
+            else btn.removeClass('active');
+        }
+    }
+
+    private getLayoutFamilies() {
+        const categoryTemplates = this.templates.filter(t => {
+            if (this.searchQuery) {
+                const searchable = `${t.id} ${t.name} ${t.description}`.toLowerCase();
+                return searchable.includes(this.searchQuery);
+            }
+            return getThemeCategory(t) === this.selectedCategory;
+        });
+
+        const familyMap = new Map<string, { description: string, templates: Template[] }>();
+        for (const t of categoryTemplates) {
+            const { family } = this.parseTemplateFamily(t);
+            if (!familyMap.has(family)) {
+                familyMap.set(family, { description: t.description.split('，')[0], templates: [] });
+            }
+            familyMap.get(family)!.templates.push(t);
+        }
+
+        return Array.from(familyMap.entries()).map(([name, data]) => ({
+            name,
+            description: data.description,
+            templates: data.templates
+        }));
+    }
+
     private renderGrid() {
         if (!this.gridContainer) return;
         this.gridContainer.empty();
 
-        // 过滤主题
-        this.filteredTemplates = this.templates.filter(t => {
-            // 搜索过滤
+        const familyTemplates = this.templates.filter(t => {
+            const { family } = this.parseTemplateFamily(t);
             if (this.searchQuery) {
                 const searchable = `${t.id} ${t.name} ${t.description}`.toLowerCase();
                 if (!searchable.includes(this.searchQuery)) return false;
+            } else {
+                if (getThemeCategory(t) !== this.selectedCategory) return false;
             }
-
-            // 分类过滤
-            if (this.selectedCategory !== '其他' || this.searchQuery) {
-                const category = getThemeCategory(t);
-                if (category !== this.selectedCategory) return false;
-            }
-
-            return true;
+            return family === this.selectedLayoutFamily;
         });
 
-        // 如果没有搜索且选择"其他"，显示所有未分类的主题
-        if (!this.searchQuery && this.selectedCategory === '其他') {
-            this.filteredTemplates = this.templates.filter(t => {
-                const category = getThemeCategory(t);
-                return category === '其他';
-            });
-        }
-
-        // 无结果提示
-        if (this.filteredTemplates.length === 0) {
-            this.gridContainer.createEl('div', {
-                cls: 'mp-gallery-empty',
-                text: '没有找到匹配的主题'
-            });
+        if (familyTemplates.length === 0) {
+            this.gridContainer.createEl('div', { cls: 'mp-gallery-empty', text: '该结构下无颜色变体' });
             return;
         }
 
-        // 渲染主题卡片
-        for (const template of this.filteredTemplates) {
+        for (const template of familyTemplates) {
             this.renderThemeCard(template);
         }
     }
 
-    /**
-     * 渲染单个主题卡片
-     */
     private renderThemeCard(template: Template) {
         if (!this.gridContainer) return;
 
@@ -268,140 +325,95 @@ export class ThemeGalleryModal extends Modal {
             cls: `mp-theme-card ${isSelected ? 'selected' : ''}`
         });
 
-        // 获取主题颜色
         const accentColor = template.styles.accentColor || this.extractAccentColor(template);
-        const isGradient = this.isGradientTemplate(template);
+        const { variant } = this.parseTemplateFamily(template);
 
-        // 颜色预览条容器
         const colorBarWrapper = card.createEl('div', { cls: 'mp-theme-color-bar-wrapper' });
-
-        // 颜色预览条
         const colorBar = colorBarWrapper.createEl('div', { cls: 'mp-theme-color-bar' });
         colorBar.style.background = this.createColorGradient(accentColor);
 
-        // 渐变主题显示预览文字
-        if (isGradient) {
-            const previewText = colorBarWrapper.createEl('div', {
-                cls: 'mp-theme-color-text',
-                text: this.getPreviewText(template)
-            });
-            // 根据背景亮度调整文字颜色
-            previewText.style.color = this.getContrastColor(accentColor);
-        }
+        const previewText = colorBarWrapper.createEl('div', {
+            cls: 'mp-theme-color-text',
+            text: variant === '默认' ? this.getPreviewText(template) : variant
+        });
+        previewText.style.color = this.getContrastColor(accentColor);
 
-        // 主题信息
         const info = card.createEl('div', { cls: 'mp-theme-info' });
-        info.createEl('div', { text: template.name, cls: 'mp-theme-name' });
+        info.createEl('div', { text: variant === '默认' ? template.name : variant, cls: 'mp-theme-name' });
 
-        // 来源标签
         if (template.source === 'xiaohu') {
             info.createEl('span', { text: 'xiaohu', cls: 'mp-theme-source' });
         }
 
-        // 选中指示
         if (isSelected) {
             const checkmark = card.createEl('div', { cls: 'mp-theme-checkmark' });
             setIcon(checkmark, 'check');
         }
 
-        // 点击事件
         card.addEventListener('click', () => {
             this.currentTemplateId = template.id;
             this.previewCallback(template.id);
             this.renderGrid();
         });
 
-        // 双击应用
         card.addEventListener('dblclick', () => {
             this.onSelect(template.id);
             this.close();
         });
     }
 
-    /**
-     * 从模板样式中提取强调色
-     */
+    private parseTemplateFamily(template: Template): { family: string, variant: string } {
+        const name = template.name.replace(/\s*\(xiaohu\)\s*/i, '');
+        const parts = name.split(' - ');
+        if (parts.length > 1) {
+            return { family: parts[0], variant: parts[1] };
+        }
+        return { family: name, variant: '默认' };
+    }
+
     private extractAccentColor(template: Template): string {
         const h2Style = template.styles.title?.h2?.base || '';
         const match = h2Style.match(/(?:color|background):\s*([#\w]+)/);
         if (match) return match[1];
-        return '#4285f4'; // 默认蓝色
+        return '#4285f4';
     }
 
-    /**
-     * 创建颜色渐变
-     */
     private createColorGradient(accentColor: string): string {
         return `linear-gradient(135deg, ${accentColor} 0%, ${this.lightenColor(accentColor, 20)} 100%)`;
     }
 
-    /**
-     * 判断是否为渐变主题（Focus/Elegant系列）
-     */
-    private isGradientTemplate(template: Template): boolean {
-        const id = template.id.toLowerCase();
-        const name = template.name.toLowerCase();
-        return id.includes('focus') || id.includes('elegant') ||
-               name.includes('聚焦') || name.includes('精致') ||
-               id.includes('bytedance') || name.includes('字节');
-    }
-
-    /**
-     * 获取预览文字
-     */
     private getPreviewText(template: Template): string {
-        // 提取主题名称，去掉来源标记
         const name = template.name.replace(/\s*\(xiaohu\)\s*/i, '');
-
-        // 优先匹配主题类型关键词
         const keywords = ['聚焦', '精致', '字节', '赤陶', '中国', '报纸', '墨韵', '暗夜',
                          '运动', '包豪斯', '薄荷', '日落', '薰衣草', '咖啡', '杂志',
                          '优雅', '醒目', '极简'];
 
         for (const kw of keywords) {
-            if (name.includes(kw)) {
-                return kw;
-            }
+            if (name.includes(kw)) return kw;
         }
 
-        // 如果名称很短，直接返回
         if (name.length <= 3) return name;
-
-        // 尝试匹配前3个中文字符（不包含"系列"）
         const cnMatch = name.match(/[\u4e00-\u9fa5]/g);
         if (cnMatch) {
-            // 过滤掉"系列"，取前两个字
             const chars = cnMatch.filter(c => c !== '系' && c !== '列').slice(0, 2);
             if (chars.length >= 2) return chars.join('');
         }
-
-        // 否则取前两个大写字母或前3个字符
-        const enMatch = name.match(/[A-Z][a-z]?/g);
-        if (enMatch && enMatch.length >= 2) {
-            return enMatch.slice(0, 2).join('');
-        }
-
         return name.slice(0, 3);
     }
 
-    /**
-     * 根据背景色获取对比文字颜色
-     */
     private getContrastColor(hexColor: string): string {
-        // 简单的亮度判断
+        if (!hexColor || !hexColor.startsWith('#')) return '#ffffff';
         const hex = hexColor.replace('#', '');
+        if (hex.length < 6) return '#ffffff';
         const r = parseInt(hex.substr(0, 2), 16);
         const g = parseInt(hex.substr(2, 2), 16);
         const b = parseInt(hex.substr(4, 2), 16);
-        // 计算亮度 (YIQ公式)
         const brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000;
         return brightness > 128 ? '#1a1a2e' : '#ffffff';
     }
 
-    /**
-     * 颜色变亮
-     */
     private lightenColor(hex: string, percent: number): string {
+        if (!hex || !hex.startsWith('#')) return hex;
         const num = parseInt(hex.replace('#', ''), 16);
         const amt = Math.round(2.55 * percent);
         const R = Math.min(255, (num >> 16) + amt);
@@ -410,17 +422,12 @@ export class ThemeGalleryModal extends Modal {
         return `#${(0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1)}`;
     }
 
-    /**
-     * 获取各分类的主题数量
-     */
     private getCategoryCounts(): Record<string, number> {
         const counts: Record<string, number> = {};
-
         for (const template of this.templates) {
             const category = getThemeCategory(template);
             counts[category] = (counts[category] || 0) + 1;
         }
-
         return counts;
     }
 }

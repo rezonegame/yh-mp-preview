@@ -9922,6 +9922,228 @@ var init_kindergarten = __esm({
   }
 });
 
+// src/templates/academic-pro.json
+var academic_pro_default;
+var init_academic_pro = __esm({
+  "src/templates/academic-pro.json"() {
+    academic_pro_default = {
+      id: "academic-pro",
+      name: "\u5B66\u672F\u4E13\u4E1A",
+      description: "\u4E13\u4E1A\u5B66\u672F\u8BBA\u6587\u98CE\u683C\uFF0C\u886C\u7EBF\u4F53\u6807\u9898\uFF0C\u84DD\u9ED1\u914D\u8272\uFF0C\u4E25\u8C28\u6392\u7248\uFF0C\u9002\u5408\u8BBA\u6587\u6458\u8981\u3001\u524D\u6CBF\u6280\u672F\u7814\u7A76",
+      isPreset: true,
+      isVisible: true,
+      source: "mp-preview",
+      styles: {
+        container: "background-color: #ffffff; padding: 24px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #1a1a2e; text-align: center; border-bottom: 2.5px solid #1a1a2e; padding-bottom: 12px; margin-top: 40px; margin-bottom: 30px; letter-spacing: 0.05em",
+            content: "color: #1a1a2e",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 20px; font-weight: 700; color: #1a1a2e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 36px; margin-bottom: 16px; display: block; width: 100%",
+            content: "color: #1a1a2e",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 18px; font-weight: 600; color: #2c3e50; margin-top: 28px; margin-bottom: 12px; font-style: italic",
+            content: "color: #2c3e50",
+            after: ""
+          },
+          base: {
+            base: "font-size: 16px; font-weight: bold; color: #1a1a2e; margin-top: 20px; margin-bottom: 8px",
+            content: "color: #1a1a2e",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 16px; color: #2c3e50; line-height: 1.8; margin-top: 0; margin-bottom: 18px; text-align: justify; text-indent: 0",
+        list: {
+          container: "margin-top: 16px; margin-bottom: 16px; padding-left: 24px",
+          item: "font-size: 15px; color: #2c3e50; line-height: 1.8; margin-bottom: 8px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border-left: 4px solid #1a1a2e; background: #f8f9fb; padding: 16px 20px; margin: 24px 0; color: #5a6a7a; font-size: 15px; line-height: 1.8; font-style: normal",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 32px; padding: 0 12px; background: #eaedf1",
+            dot: "width: 8px; height: 8px; border-radius: 50%; margin-right: 5px",
+            colors: ["#1a1a2e", "#2c3e50", "#3d4e5f"]
+          },
+          block: "background: #f4f6f8; border-radius: 4px; margin: 24px 0; overflow: hidden; border: 1px solid #e1e4e8",
+          inline: "background: #eaedf1; padding: 2px 5px; border-radius: 3px; font-size: 85%; color: #1a1a2e; font-family: 'SFMono-Regular', Consolas, monospace"
+        },
+        image: "max-width: 100%; border-radius: 2px; display: block; border: 1px solid #eee; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05)",
+        link: "color: #1a1a2e; text-decoration: underline; font-weight: 500",
+        emphasis: {
+          strong: "font-weight: 700; color: #000",
+          em: "font-style: italic; color: #2c3e50",
+          del: "text-decoration: line-through; color: #999"
+        },
+        table: {
+          container: "width: 100%; border-collapse: collapse; margin: 24px 0; border-top: 2px solid #1a1a2e; border-bottom: 2px solid #1a1a2e",
+          header: "padding: 10px; border-bottom: 1px solid #1a1a2e; text-align: left; font-weight: 700; color: #1a1a2e; background: #f8f9fb",
+          cell: "padding: 10px; border-bottom: 1px solid #eee; color: #2c3e50"
+        },
+        hr: "margin: 40px auto; height: 1px; background: #e0e0e0; border: none; width: 60%",
+        footnote: {
+          ref: "font-size: 11px; color: #1a1a2e; vertical-align: super",
+          backref: "color: #999; text-decoration: none"
+        },
+        accentColor: "#1a1a2e"
+      }
+    };
+  }
+});
+
+// src/templates/zen-essence.json
+var zen_essence_default;
+var init_zen_essence = __esm({
+  "src/templates/zen-essence.json"() {
+    zen_essence_default = {
+      id: "zen-essence",
+      name: "\u7985\u610F\u6781\u7B80",
+      description: "\u751A\u81F3\u6BD4\u6781\u7B80\u66F4\u7B80\uFF0C\u767D\u8336\u914D\u6DE1\u58A8\uFF0C\u7559\u767D\u827A\u672F\u611F\uFF0C\u9002\u5408\u751F\u6D3B\u65B9\u5F0F\u3001\u601D\u8003\u609F\u9053\u3001\u51A5\u60F3\u7597\u6108\u5185\u5BB9",
+      isPreset: true,
+      isVisible: true,
+      source: "mp-preview",
+      styles: {
+        container: "background-color: #ffffff; padding: 32px 24px; color: #555555",
+        title: {
+          h1: {
+            base: "font-size: 20px; font-weight: 300; color: #333333; text-align: center; margin-top: 50px; margin-bottom: 40px; letter-spacing: 0.3em; text-transform: uppercase",
+            content: "color: #333333",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 17px; font-weight: 300; color: #333333; text-align: center; margin-top: 40px; margin-bottom: 20px; border-bottom: 0.5px solid #e0e0e0; padding-bottom: 15px; width: 30%; margin-left: auto; margin-right: auto",
+            content: "color: #333333",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 16px; font-weight: 400; color: #666666; text-align: center; margin-top: 30px; margin-bottom: 15px; letter-spacing: 0.1em",
+            content: "color: #666666",
+            after: ""
+          },
+          base: {
+            base: "font-size: 15px; font-weight: 400; color: #888888; text-align: center",
+            content: "color: #888888",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 15px; color: #666666; line-height: 2.2; margin-top: 0; margin-bottom: 24px; text-align: center; font-weight: 300; letter-spacing: 0.8px",
+        list: {
+          container: "margin: 20px auto; padding-left: 0; list-style: none; text-align: center",
+          item: "font-size: 14px; color: #777777; line-height: 2.2; margin-bottom: 10px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "border: none; background: transparent; padding: 20px 40px; margin: 40px 0; font-size: 14px; color: #888888; line-height: 2.4; font-style: italic; position: relative; text-align: center",
+        code: {
+          header: {
+            container: "display: none",
+            dot: "display: none",
+            colors: ["#ccc", "#ccc", "#ccc"]
+          },
+          block: "background: #fdfdfd; border: 0.5px solid #eee; border-radius: 2px; margin: 30px 0; padding: 20px; text-align: left",
+          inline: "background: #fdfdfd; border-bottom: 0.5px solid #ccc; padding: 1px 3px; font-size: 90%; color: #333"
+        },
+        image: "max-width: 90%; margin: 10px auto 40px auto; display: block; border-radius: 0; filter: grayscale(10%) contrast(90%); opacity: 0.95",
+        link: "color: #aaa; text-decoration: none; border-bottom: 1px solid #eee",
+        emphasis: {
+          strong: "font-weight: 400; color: #333; background: linear-gradient(0deg, #f0f0f0 30%, transparent 30%)",
+          em: "font-style: italic; color: #999",
+          del: "text-decoration: line-through; color: #ccc"
+        },
+        table: {
+          container: "width: 80%; border-collapse: collapse; margin: 40px auto; font-size: 14px; border-bottom: 0.5px solid #eee; border-top: 0.5px solid #eee",
+          header: "padding: 15px 10px; text-align: center; border-bottom: 0.5px solid #f0f0f0; color: #333; font-weight: 300",
+          cell: "padding: 15px 10px; color: #888; text-align: center; font-weight: 300"
+        },
+        hr: "margin: 60px auto; width: 40px; height: 1px; background: #ddd; border: none",
+        footnote: {
+          ref: "font-size: 10px; color: #aaa; vertical-align: super",
+          backref: "color: #ccc; text-decoration: none"
+        },
+        accentColor: "#888888"
+      }
+    };
+  }
+});
+
+// src/templates/modern-report.json
+var modern_report_default;
+var init_modern_report = __esm({
+  "src/templates/modern-report.json"() {
+    modern_report_default = {
+      id: "modern-report",
+      name: "\u73B0\u4EE3\u62A5\u544A",
+      description: "\u7B80\u7EA6\u73B0\u4EE3\u7684\u62A5\u544A\u98CE\u683C\uFF0C\u9AD8\u5BF9\u6BD4\u5EA6\u9ED1\u767D\u7070\uFF0C\u914D\u5408\u7CBE\u81F4\u7684\u8FB9\u6846\u88C5\u9970\uFF0C\u9002\u5408\u6DF1\u5EA6\u8C03\u7814\u3001\u5468\u62A5\u603B\u7ED3\u3001\u5546\u4E1A\u89C4\u5212",
+      isPreset: true,
+      isVisible: true,
+      source: "mp-preview",
+      styles: {
+        container: "background-color: #ffffff; padding: 20px; color: #1a1a1a",
+        title: {
+          h1: {
+            base: "font-size: 24px; font-weight: 800; color: #000000; text-align: left; padding: 0 0 10px 0; border-bottom: 4px solid #000000; margin-top: 40px; margin-bottom: 24px; letter-spacing: -0.02em",
+            content: "color: #000000",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 19px; font-weight: 700; color: #000000; background: #f0f0f0; padding: 8px 12px; margin-top: 36px; margin-bottom: 16px; border-left: 6px solid #000000",
+            content: "color: #000000",
+            after: ""
+          },
+          h3: {
+            base: "font-size: 17px; font-weight: 600; color: #333333; margin-top: 28px; margin-bottom: 12px; text-decoration: underline; text-underline-offset: 6px",
+            content: "color: #333333",
+            after: ""
+          },
+          base: {
+            base: "font-size: 16px; font-weight: bold; color: #000000; margin-top: 20px; margin-bottom: 8px",
+            content: "color: #000000",
+            after: ""
+          }
+        },
+        paragraph: "font-size: 16px; color: #333333; line-height: 1.75; margin-top: 0; margin-bottom: 20px; text-align: left",
+        list: {
+          container: "margin-top: 16px; margin-bottom: 16px; padding-left: 20px",
+          item: "font-size: 15px; color: #333333; line-height: 1.75; margin-bottom: 10px",
+          taskList: "list-style: none; padding-left: 0;"
+        },
+        quote: "background: #f9f9f9; border-radius: 8px; padding: 20px; margin: 24px 0; color: #444444; font-size: 15px; line-height: 1.75; border: 1px solid #eeeeee",
+        code: {
+          header: {
+            container: "display: flex; align-items: center; height: 32px; padding: 0 12px; background: #333",
+            dot: "width: 8px; height: 8px; border-radius: 50%; margin-right: 5px",
+            colors: ["#fff", "#eee", "#ddd"]
+          },
+          block: "background: #1e1e1e; border-radius: 6px; margin: 24px 0; overflow: hidden; color: #d4d4d4",
+          inline: "background: #f3f3f3; padding: 2px 5px; border-radius: 3px; font-size: 85%; color: #c7254e; font-family: Consolas, monospace"
+        },
+        image: "max-width: 100%; border-radius: 4px; display: block; border: 1px solid #ddd; margin: 0 auto",
+        link: "color: #000; text-decoration: underline; font-weight: 600",
+        emphasis: {
+          strong: "font-weight: 800; color: #000; background: #ffff0033",
+          em: "font-style: italic; color: #444",
+          del: "text-decoration: line-through; color: #bbb"
+        },
+        table: {
+          container: "width: 100%; border-collapse: collapse; margin: 24px 0",
+          header: "padding: 12px; text-align: left; font-weight: 700; color: #fff; background: #333",
+          cell: "padding: 12px; border: 1px solid #eee; color: #333"
+        },
+        hr: "margin: 40px 0; height: 2px; background: #000; border: none; width: 100%",
+        footnote: {
+          ref: "font-size: 11px; color: #666; vertical-align: super",
+          backref: "color: #999; text-decoration: none"
+        },
+        accentColor: "#000000"
+      }
+    };
+  }
+});
+
 // src/templates/minimal-gold.json
 var minimal_gold_default;
 var init_minimal_gold = __esm({
@@ -15844,6 +16066,9 @@ var init_templates = __esm({
     init_parent_child();
     init_teacher();
     init_kindergarten();
+    init_academic_pro();
+    init_zen_essence();
+    init_modern_report();
     init_minimal_gold();
     init_minimal_green();
     init_minimal_blue();
@@ -15899,6 +16124,9 @@ var init_templates = __esm({
       "parent-child": parent_child_default,
       teacher: teacher_default,
       kindergarten: kindergarten_default,
+      "academic-pro": academic_pro_default,
+      "zen-essence": zen_essence_default,
+      "modern-report": modern_report_default,
       // Minimal Series
       "minimal-gold": minimal_gold_default,
       "minimal-green": minimal_green_default,
@@ -17498,7 +17726,7 @@ var import_obsidian2 = require("obsidian");
 var STYLE_CATEGORIES = {
   "\u6781\u7B80": {
     description: "\u7B80\u6D01\u5E72\u51C0\uFF0C\u6CE8\u91CD\u5185\u5BB9",
-    keywords: ["minimal", "\u7B80\u7EA6"],
+    keywords: ["minimal", "\u7B80\u7EA6", "zen", "essence", "academic", "\u6781\u7B80", "\u7985\u610F", "\u5B66\u672F"],
     color: "#636e72"
   },
   "\u6E10\u53D8": {
@@ -17508,7 +17736,7 @@ var STYLE_CATEGORIES = {
   },
   "\u9192\u76EE": {
     description: "\u5927\u80C6\u914D\u8272\uFF0C\u89C6\u89C9\u51B2\u51FB",
-    keywords: ["bold", "sports", "bauhaus", "\u9192\u76EE", "\u8FD0\u52A8", "\u5305\u8C6A\u65AF"],
+    keywords: ["bold", "sports", "bauhaus", "modern-report", "\u9192\u76EE", "\u8FD0\u52A8", "\u5305\u8C6A\u65AF", "\u62A5\u544A", "\u9ED1\u767D"],
     color: "#d63031"
   },
   "\u6DF1\u8272": {
@@ -17528,7 +17756,7 @@ var STYLE_CATEGORIES = {
   },
   "\u6587\u827A": {
     description: "\u67D4\u548C\u914D\u8272\uFF0C\u6587\u827A\u6E05\u65B0",
-    keywords: ["lavender", "mint", "sunset", "coffee", "\u85B0\u8863\u8349", "\u8584\u8377", "\u65E5\u843D", "\u5496\u5561"],
+    keywords: ["lavender", "mint", "sunset", "coffee", "magazine", "\u85B0\u8863\u8349", "\u8584\u8377", "\u65E5\u843D", "\u5496\u5561", "\u753B\u520A", "\u6742\u5FD7"],
     color: "#a29bfe"
   },
   "\u5176\u4ED6": {
@@ -17557,16 +17785,32 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
   constructor(app, settingsManager, currentTemplateId, onSelect, previewCallback) {
     super(app);
     this.selectedCategory = "\u6781\u7B80";
+    this.selectedLayoutFamily = "";
     this.searchQuery = "";
-    this.filteredTemplates = [];
+    this.layoutContainer = null;
     this.gridContainer = null;
     this.searchInput = null;
     this.categoryButtons = /* @__PURE__ */ new Map();
+    this.layoutButtons = /* @__PURE__ */ new Map();
     this.settingsManager = settingsManager;
     this.templates = settingsManager.getVisibleTemplates();
     this.currentTemplateId = currentTemplateId;
     this.onSelect = onSelect;
     this.previewCallback = previewCallback;
+    this.initializeDefaults();
+  }
+  initializeDefaults() {
+    const currentTemplate = this.templates.find((t) => t.id === this.currentTemplateId);
+    if (currentTemplate) {
+      this.selectedCategory = getThemeCategory(currentTemplate);
+      this.selectedLayoutFamily = this.parseTemplateFamily(currentTemplate).family;
+    } else {
+      this.selectedCategory = "\u6781\u7B80";
+      const catTemplates = this.templates.filter((t) => getThemeCategory(t) === "\u6781\u7B80");
+      if (catTemplates.length > 0) {
+        this.selectedLayoutFamily = this.parseTemplateFamily(catTemplates[0]).family;
+      }
+    }
   }
   onOpen() {
     const { contentEl, modalEl } = this;
@@ -17576,18 +17820,18 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     header.createEl("h2", { text: "\u{1F3A8} \u4E3B\u9898\u753B\u5ECA" });
     this.searchInput = header.createEl("input", {
       cls: "mp-gallery-search",
-      attr: {
-        type: "text",
-        placeholder: "\u641C\u7D22\u4E3B\u9898..."
-      }
+      attr: { type: "text", placeholder: "\u641C\u7D22\u4E3B\u9898..." }
     });
     this.searchInput.addEventListener("input", () => {
       this.searchQuery = this.searchInput.value.toLowerCase();
+      this.renderLayoutList();
       this.renderGrid();
     });
     const mainContent = contentEl.createEl("div", { cls: "mp-gallery-main" });
     const sidebar = mainContent.createEl("div", { cls: "mp-gallery-sidebar" });
     this.renderSidebar(sidebar);
+    this.layoutContainer = mainContent.createEl("div", { cls: "mp-gallery-layouts" });
+    this.renderLayoutList();
     this.gridContainer = mainContent.createEl("div", { cls: "mp-gallery-grid" });
     this.renderGrid();
     const footer = contentEl.createEl("div", { cls: "mp-gallery-footer" });
@@ -17602,17 +17846,14 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     });
   }
   onClose() {
-    const { contentEl } = this;
-    contentEl.empty();
+    this.contentEl.empty();
   }
-  /**
-   * 渲染左侧分类列表
-   */
   renderSidebar(container) {
+    container.empty();
     const categoryCounts = this.getCategoryCounts();
     for (const [category, config2] of Object.entries(STYLE_CATEGORIES)) {
       const count = categoryCounts[category] || 0;
-      if (count === 0)
+      if (count === 0 && category !== "\u5176\u4ED6")
         continue;
       const btn = container.createEl("button", {
         cls: `mp-gallery-category-btn ${this.selectedCategory === category ? "active" : ""}`,
@@ -17621,67 +17862,112 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       const colorDot = btn.createEl("span", { cls: "mp-category-color" });
       colorDot.style.backgroundColor = config2.color;
       btn.createEl("span", { text: category, cls: "mp-category-name" });
-      btn.createEl("span", { text: `${count}`, cls: "mp-category-count" });
+      if (count > 0) {
+        btn.createEl("span", { text: `${count}`, cls: "mp-category-count" });
+      }
       btn.addEventListener("click", () => {
         this.selectedCategory = category;
         this.updateCategoryButtons();
+        const catTemplates = this.templates.filter((t) => getThemeCategory(t) === this.selectedCategory);
+        if (catTemplates.length > 0) {
+          this.selectedLayoutFamily = this.parseTemplateFamily(catTemplates[0]).family;
+        }
+        this.renderLayoutList();
         this.renderGrid();
       });
       this.categoryButtons.set(category, btn);
     }
   }
-  /**
-   * 更新分类按钮状态
-   */
   updateCategoryButtons() {
     for (const [category, btn] of this.categoryButtons) {
-      if (category === this.selectedCategory) {
+      if (category === this.selectedCategory)
         btn.addClass("active");
-      } else {
+      else
         btn.removeClass("active");
-      }
     }
   }
-  /**
-   * 渲染主题网格
-   */
+  renderLayoutList() {
+    if (!this.layoutContainer)
+      return;
+    this.layoutContainer.empty();
+    this.layoutButtons.clear();
+    this.layoutContainer.createEl("div", { text: "\u6392\u7248\u7ED3\u6784", cls: "mp-gallery-layout-header" });
+    const families = this.getLayoutFamilies();
+    if (families.length === 0) {
+      this.layoutContainer.createEl("div", { text: "\u6682\u65E0\u7ED3\u6784", cls: "mp-gallery-empty-small" });
+      return;
+    }
+    if (!families.some((f) => f.name === this.selectedLayoutFamily)) {
+      this.selectedLayoutFamily = families[0].name;
+    }
+    for (const family of families) {
+      const btn = this.layoutContainer.createEl("button", {
+        cls: `mp-gallery-layout-btn ${this.selectedLayoutFamily === family.name ? "active" : ""}`
+      });
+      btn.createEl("div", { text: family.name, cls: "mp-layout-name" });
+      btn.createEl("div", { text: family.description, cls: "mp-layout-desc" });
+      btn.addEventListener("click", () => {
+        this.selectedLayoutFamily = family.name;
+        this.updateLayoutButtons();
+        this.renderGrid();
+      });
+      this.layoutButtons.set(family.name, btn);
+    }
+  }
+  updateLayoutButtons() {
+    for (const [name, btn] of this.layoutButtons) {
+      if (name === this.selectedLayoutFamily)
+        btn.addClass("active");
+      else
+        btn.removeClass("active");
+    }
+  }
+  getLayoutFamilies() {
+    const categoryTemplates = this.templates.filter((t) => {
+      if (this.searchQuery) {
+        const searchable = `${t.id} ${t.name} ${t.description}`.toLowerCase();
+        return searchable.includes(this.searchQuery);
+      }
+      return getThemeCategory(t) === this.selectedCategory;
+    });
+    const familyMap = /* @__PURE__ */ new Map();
+    for (const t of categoryTemplates) {
+      const { family } = this.parseTemplateFamily(t);
+      if (!familyMap.has(family)) {
+        familyMap.set(family, { description: t.description.split("\uFF0C")[0], templates: [] });
+      }
+      familyMap.get(family).templates.push(t);
+    }
+    return Array.from(familyMap.entries()).map(([name, data]) => ({
+      name,
+      description: data.description,
+      templates: data.templates
+    }));
+  }
   renderGrid() {
     if (!this.gridContainer)
       return;
     this.gridContainer.empty();
-    this.filteredTemplates = this.templates.filter((t) => {
+    const familyTemplates = this.templates.filter((t) => {
+      const { family } = this.parseTemplateFamily(t);
       if (this.searchQuery) {
         const searchable = `${t.id} ${t.name} ${t.description}`.toLowerCase();
         if (!searchable.includes(this.searchQuery))
           return false;
-      }
-      if (this.selectedCategory !== "\u5176\u4ED6" || this.searchQuery) {
-        const category = getThemeCategory(t);
-        if (category !== this.selectedCategory)
+      } else {
+        if (getThemeCategory(t) !== this.selectedCategory)
           return false;
       }
-      return true;
+      return family === this.selectedLayoutFamily;
     });
-    if (!this.searchQuery && this.selectedCategory === "\u5176\u4ED6") {
-      this.filteredTemplates = this.templates.filter((t) => {
-        const category = getThemeCategory(t);
-        return category === "\u5176\u4ED6";
-      });
-    }
-    if (this.filteredTemplates.length === 0) {
-      this.gridContainer.createEl("div", {
-        cls: "mp-gallery-empty",
-        text: "\u6CA1\u6709\u627E\u5230\u5339\u914D\u7684\u4E3B\u9898"
-      });
+    if (familyTemplates.length === 0) {
+      this.gridContainer.createEl("div", { cls: "mp-gallery-empty", text: "\u8BE5\u7ED3\u6784\u4E0B\u65E0\u989C\u8272\u53D8\u4F53" });
       return;
     }
-    for (const template of this.filteredTemplates) {
+    for (const template of familyTemplates) {
       this.renderThemeCard(template);
     }
   }
-  /**
-   * 渲染单个主题卡片
-   */
   renderThemeCard(template) {
     if (!this.gridContainer)
       return;
@@ -17690,19 +17976,17 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       cls: `mp-theme-card ${isSelected ? "selected" : ""}`
     });
     const accentColor = template.styles.accentColor || this.extractAccentColor(template);
-    const isGradient = this.isGradientTemplate(template);
+    const { variant } = this.parseTemplateFamily(template);
     const colorBarWrapper = card.createEl("div", { cls: "mp-theme-color-bar-wrapper" });
     const colorBar = colorBarWrapper.createEl("div", { cls: "mp-theme-color-bar" });
     colorBar.style.background = this.createColorGradient(accentColor);
-    if (isGradient) {
-      const previewText = colorBarWrapper.createEl("div", {
-        cls: "mp-theme-color-text",
-        text: this.getPreviewText(template)
-      });
-      previewText.style.color = this.getContrastColor(accentColor);
-    }
+    const previewText = colorBarWrapper.createEl("div", {
+      cls: "mp-theme-color-text",
+      text: variant === "\u9ED8\u8BA4" ? this.getPreviewText(template) : variant
+    });
+    previewText.style.color = this.getContrastColor(accentColor);
     const info = card.createEl("div", { cls: "mp-theme-info" });
-    info.createEl("div", { text: template.name, cls: "mp-theme-name" });
+    info.createEl("div", { text: variant === "\u9ED8\u8BA4" ? template.name : variant, cls: "mp-theme-name" });
     if (template.source === "xiaohu") {
       info.createEl("span", { text: "xiaohu", cls: "mp-theme-source" });
     }
@@ -17720,9 +18004,14 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       this.close();
     });
   }
-  /**
-   * 从模板样式中提取强调色
-   */
+  parseTemplateFamily(template) {
+    const name = template.name.replace(/\s*\(xiaohu\)\s*/i, "");
+    const parts = name.split(" - ");
+    if (parts.length > 1) {
+      return { family: parts[0], variant: parts[1] };
+    }
+    return { family: name, variant: "\u9ED8\u8BA4" };
+  }
   extractAccentColor(template) {
     var _a, _b;
     const h2Style = ((_b = (_a = template.styles.title) == null ? void 0 : _a.h2) == null ? void 0 : _b.base) || "";
@@ -17731,23 +18020,9 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       return match[1];
     return "#4285f4";
   }
-  /**
-   * 创建颜色渐变
-   */
   createColorGradient(accentColor) {
     return `linear-gradient(135deg, ${accentColor} 0%, ${this.lightenColor(accentColor, 20)} 100%)`;
   }
-  /**
-   * 判断是否为渐变主题（Focus/Elegant系列）
-   */
-  isGradientTemplate(template) {
-    const id = template.id.toLowerCase();
-    const name = template.name.toLowerCase();
-    return id.includes("focus") || id.includes("elegant") || name.includes("\u805A\u7126") || name.includes("\u7CBE\u81F4") || id.includes("bytedance") || name.includes("\u5B57\u8282");
-  }
-  /**
-   * 获取预览文字
-   */
   getPreviewText(template) {
     const name = template.name.replace(/\s*\(xiaohu\)\s*/i, "");
     const keywords = [
@@ -17771,9 +18046,8 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       "\u6781\u7B80"
     ];
     for (const kw of keywords) {
-      if (name.includes(kw)) {
+      if (name.includes(kw))
         return kw;
-      }
     }
     if (name.length <= 3)
       return name;
@@ -17783,27 +18057,23 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       if (chars.length >= 2)
         return chars.join("");
     }
-    const enMatch = name.match(/[A-Z][a-z]?/g);
-    if (enMatch && enMatch.length >= 2) {
-      return enMatch.slice(0, 2).join("");
-    }
     return name.slice(0, 3);
   }
-  /**
-   * 根据背景色获取对比文字颜色
-   */
   getContrastColor(hexColor) {
+    if (!hexColor || !hexColor.startsWith("#"))
+      return "#ffffff";
     const hex = hexColor.replace("#", "");
+    if (hex.length < 6)
+      return "#ffffff";
     const r = parseInt(hex.substr(0, 2), 16);
     const g = parseInt(hex.substr(2, 2), 16);
     const b = parseInt(hex.substr(4, 2), 16);
     const brightness = (r * 299 + g * 587 + b * 114) / 1e3;
     return brightness > 128 ? "#1a1a2e" : "#ffffff";
   }
-  /**
-   * 颜色变亮
-   */
   lightenColor(hex, percent) {
+    if (!hex || !hex.startsWith("#"))
+      return hex;
     const num = parseInt(hex.replace("#", ""), 16);
     const amt = Math.round(2.55 * percent);
     const R = Math.min(255, (num >> 16) + amt);
@@ -17811,9 +18081,6 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     const B = Math.min(255, (num & 255) + amt);
     return `#${(16777216 + R * 65536 + G * 256 + B).toString(16).slice(1)}`;
   }
-  /**
-   * 获取各分类的主题数量
-   */
   getCategoryCounts() {
     const counts = {};
     for (const template of this.templates) {

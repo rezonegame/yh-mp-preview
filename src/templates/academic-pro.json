@@ -1,0 +1,67 @@
+{
+    "id": "academic-pro",
+    "name": "学术专业",
+    "description": "专业学术论文风格，衬线体标题，蓝黑配色，严谨排版，适合论文摘要、前沿技术研究",
+    "isPreset": true,
+    "isVisible": true,
+    "source": "mp-preview",
+    "styles": {
+        "container": "background-color: #ffffff; padding: 24px",
+        "title": {
+            "h1": {
+                "base": "font-size: 26px; font-weight: 700; color: #1a1a2e; text-align: center; border-bottom: 2.5px solid #1a1a2e; padding-bottom: 12px; margin-top: 40px; margin-bottom: 30px; letter-spacing: 0.05em",
+                "content": "color: #1a1a2e",
+                "after": ""
+            },
+            "h2": {
+                "base": "font-size: 20px; font-weight: 700; color: #1a1a2e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 36px; margin-bottom: 16px; display: block; width: 100%",
+                "content": "color: #1a1a2e",
+                "after": ""
+            },
+            "h3": {
+                "base": "font-size: 18px; font-weight: 600; color: #2c3e50; margin-top: 28px; margin-bottom: 12px; font-style: italic",
+                "content": "color: #2c3e50",
+                "after": ""
+            },
+            "base": {
+                "base": "font-size: 16px; font-weight: bold; color: #1a1a2e; margin-top: 20px; margin-bottom: 8px",
+                "content": "color: #1a1a2e",
+                "after": ""
+            }
+        },
+        "paragraph": "font-size: 16px; color: #2c3e50; line-height: 1.8; margin-top: 0; margin-bottom: 18px; text-align: justify; text-indent: 0",
+        "list": {
+            "container": "margin-top: 16px; margin-bottom: 16px; padding-left: 24px",
+            "item": "font-size: 15px; color: #2c3e50; line-height: 1.8; margin-bottom: 8px",
+            "taskList": "list-style: none; padding-left: 0;"
+        },
+        "quote": "border-left: 4px solid #1a1a2e; background: #f8f9fb; padding: 16px 20px; margin: 24px 0; color: #5a6a7a; font-size: 15px; line-height: 1.8; font-style: normal",
+        "code": {
+            "header": {
+                "container": "display: flex; align-items: center; height: 32px; padding: 0 12px; background: #eaedf1",
+                "dot": "width: 8px; height: 8px; border-radius: 50%; margin-right: 5px",
+                "colors": ["#1a1a2e", "#2c3e50", "#3d4e5f"]
+            },
+            "block": "background: #f4f6f8; border-radius: 4px; margin: 24px 0; overflow: hidden; border: 1px solid #e1e4e8",
+            "inline": "background: #eaedf1; padding: 2px 5px; border-radius: 3px; font-size: 85%; color: #1a1a2e; font-family: 'SFMono-Regular', Consolas, monospace"
+        },
+        "image": "max-width: 100%; border-radius: 2px; display: block; border: 1px solid #eee; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05)",
+        "link": "color: #1a1a2e; text-decoration: underline; font-weight: 500",
+        "emphasis": {
+            "strong": "font-weight: 700; color: #000",
+            "em": "font-style: italic; color: #2c3e50",
+            "del": "text-decoration: line-through; color: #999"
+        },
+        "table": {
+            "container": "width: 100%; border-collapse: collapse; margin: 24px 0; border-top: 2px solid #1a1a2e; border-bottom: 2px solid #1a1a2e",
+            "header": "padding: 10px; border-bottom: 1px solid #1a1a2e; text-align: left; font-weight: 700; color: #1a1a2e; background: #f8f9fb",
+            "cell": "padding: 10px; border-bottom: 1px solid #eee; color: #2c3e50"
+        },
+        "hr": "margin: 40px auto; height: 1px; background: #e0e0e0; border: none; width: 60%",
+        "footnote": {
+            "ref": "font-size: 11px; color: #1a1a2e; vertical-align: super",
+            "backref": "color: #999; text-decoration: none"
+        },
+        "accentColor": "#1a1a2e"
+    }
+}
