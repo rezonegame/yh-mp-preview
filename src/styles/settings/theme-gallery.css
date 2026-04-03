@@ -73,8 +73,8 @@
 
 /* 左侧分类栏 - 优化 */
 .mp-gallery-sidebar {
-    width: 150px; /* 缩小分类栏宽度 */
-    padding: 16px 12px;
+    width: 180px; 
+    padding: 16px 14px;
     border-right: 1px solid var(--background-modifier-border);
     background: var(--background-secondary);
     overflow-y: auto;
@@ -158,8 +158,8 @@
 
 /* 中间排版结构栏 */
 .mp-gallery-layouts {
-    width: 260px;
-    padding: 16px;
+    width: 320px;
+    padding: 20px 16px;
     border-right: 1px solid var(--background-modifier-border);
     background: var(--background-primary);
     overflow-y: auto;
@@ -222,11 +222,11 @@
 /* 右侧颜色/变体网格 */
 .mp-gallery-grid {
     flex: 1;
-    padding: 20px;
+    padding: 24px;
     overflow-y: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 16px;
     align-content: start;
     background: var(--background-secondary-alt);
 }

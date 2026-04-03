@@ -22,8 +22,13 @@ import teacherTemplate from './teacher.json';
 import kindergartenTemplate from './kindergarten.json';
 // 新增专业与极简系列
 import academicProTemplate from './academic-pro.json';
+import academicProSlateTemplate from './academic-pro-slate.json';
+import academicProForestTemplate from './academic-pro-forest.json';
 import zenEssenceTemplate from './zen-essence.json';
+import zenEssenceSakuraTemplate from './zen-essence-sakura.json';
+import zenEssenceTealTemplate from './zen-essence-teal.json';
 import modernReportTemplate from './modern-report.json';
+import modernReportNavyTemplate from './modern-report-navy.json';
 
 // Minimal Series (8 themes)
 import minimalGoldTemplate from './minimal-gold.json';
@@ -91,8 +96,13 @@ export const templates = {
     teacher: teacherTemplate,
     kindergarten: kindergartenTemplate,
     'academic-pro': academicProTemplate,
+    'academic-pro-slate': academicProSlateTemplate,
+    'academic-pro-forest': academicProForestTemplate,
     'zen-essence': zenEssenceTemplate,
+    'zen-essence-sakura': zenEssenceSakuraTemplate,
+    'zen-essence-teal': zenEssenceTealTemplate,
     'modern-report': modernReportTemplate,
+    'modern-report-navy': modernReportNavyTemplate,
 
     // Minimal Series
     'minimal-gold': minimalGoldTemplate,

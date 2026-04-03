@@ -1,0 +1,13 @@
+{
+    "id": "modern-report-navy",
+    "name": "现代报告 - 深空蓝",
+    "description": "现代报告风格的深空蓝变体",
+    "isPreset": true,
+    "isVisible": true,
+    "source": "mp-preview",
+    "styles": {
+        "container": "background-color: #ffffff; padding: 20px",
+        "title": { "h1": { "base": "color: #001f3f; border-bottom-color: #001f3f" }, "h2": { "base": "border-left-color: #001f3f; color: #001f3f" } },
+        "accentColor": "#001f3f"
+    }
+}

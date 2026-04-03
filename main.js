@@ -9928,7 +9928,7 @@ var init_academic_pro = __esm({
   "src/templates/academic-pro.json"() {
     academic_pro_default = {
       id: "academic-pro",
-      name: "\u5B66\u672F\u4E13\u4E1A",
+      name: "\u5B66\u672F\u4E13\u4E1A - \u58A8\u97F5",
       description: "\u4E13\u4E1A\u5B66\u672F\u8BBA\u6587\u98CE\u683C\uFF0C\u886C\u7EBF\u4F53\u6807\u9898\uFF0C\u84DD\u9ED1\u914D\u8272\uFF0C\u4E25\u8C28\u6392\u7248\uFF0C\u9002\u5408\u8BBA\u6587\u6458\u8981\u3001\u524D\u6CBF\u6280\u672F\u7814\u7A76",
       isPreset: true,
       isVisible: true,
@@ -9996,13 +9996,75 @@ var init_academic_pro = __esm({
   }
 });
 
+// src/templates/academic-pro-slate.json
+var academic_pro_slate_default;
+var init_academic_pro_slate = __esm({
+  "src/templates/academic-pro-slate.json"() {
+    academic_pro_slate_default = {
+      id: "academic-pro-slate",
+      name: "\u5B66\u672F\u4E13\u4E1A - \u77F3\u677F\u7070",
+      description: "\u4E13\u4E1A\u5B66\u672F\u98CE\u683C\u7684\u77F3\u677F\u7070\u989C\u8272\u53D8\u4F53",
+      isPreset: true,
+      isVisible: true,
+      source: "mp-preview",
+      styles: {
+        container: "background-color: #ffffff; padding: 24px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #34495e; text-align: center; border-bottom: 2.5px solid #34495e; padding-bottom: 12px; margin-top: 40px; margin-bottom: 30px; letter-spacing: 0.05em",
+            content: "color: #34495e",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 20px; font-weight: 700; color: #34495e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 36px; margin-bottom: 16px; display: block; width: 100%",
+            content: "color: #34495e",
+            after: ""
+          },
+          accentColor: "#34495e"
+        }
+      }
+    };
+  }
+});
+
+// src/templates/academic-pro-forest.json
+var academic_pro_forest_default;
+var init_academic_pro_forest = __esm({
+  "src/templates/academic-pro-forest.json"() {
+    academic_pro_forest_default = {
+      id: "academic-pro-forest",
+      name: "\u5B66\u672F\u4E13\u4E1A - \u68EE\u7EFF",
+      description: "\u4E13\u4E1A\u5B66\u672F\u98CE\u683C\u7684\u68EE\u7EFF\u989C\u8272\u53D8\u4F53",
+      isPreset: true,
+      isVisible: true,
+      source: "mp-preview",
+      styles: {
+        container: "background-color: #ffffff; padding: 24px",
+        title: {
+          h1: {
+            base: "font-size: 26px; font-weight: 700; color: #1b4d3e; text-align: center; border-bottom: 2.5px solid #1b4d3e; padding-bottom: 12px; margin-top: 40px; margin-bottom: 30px; letter-spacing: 0.05em",
+            content: "color: #1b4d3e",
+            after: ""
+          },
+          h2: {
+            base: "font-size: 20px; font-weight: 700; color: #1b4d3e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 36px; margin-bottom: 16px; display: block; width: 100%",
+            content: "color: #1b4d3e",
+            after: ""
+          },
+          accentColor: "#1b4d3e"
+        }
+      }
+    };
+  }
+});
+
 // src/templates/zen-essence.json
 var zen_essence_default;
 var init_zen_essence = __esm({
   "src/templates/zen-essence.json"() {
     zen_essence_default = {
       id: "zen-essence",
-      name: "\u7985\u610F\u6781\u7B80",
+      name: "\u7985\u610F\u6781\u7B80 - \u7559\u767D",
       description: "\u751A\u81F3\u6BD4\u6781\u7B80\u66F4\u7B80\uFF0C\u767D\u8336\u914D\u6DE1\u58A8\uFF0C\u7559\u767D\u827A\u672F\u611F\uFF0C\u9002\u5408\u751F\u6D3B\u65B9\u5F0F\u3001\u601D\u8003\u609F\u9053\u3001\u51A5\u60F3\u7597\u6108\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
@@ -10070,13 +10132,53 @@ var init_zen_essence = __esm({
   }
 });
 
+// src/templates/zen-essence-sakura.json
+var zen_essence_sakura_default;
+var init_zen_essence_sakura = __esm({
+  "src/templates/zen-essence-sakura.json"() {
+    zen_essence_sakura_default = {
+      id: "zen-essence-sakura",
+      name: "\u7985\u610F\u6781\u7B80 - \u6A31\u7EA2",
+      description: "\u7985\u610F\u6781\u7B80\u98CE\u683C\u7684\u6A31\u7EA2\u53D8\u4F53",
+      isPreset: true,
+      isVisible: true,
+      source: "mp-preview",
+      styles: {
+        container: "background-color: #fffafb; padding: 32px 24px",
+        title: { h1: { base: "color: #9d3a43" }, h2: { base: "color: #9d3a43; border-bottom: 0.5px solid #ffccd1" } },
+        accentColor: "#9d3a43"
+      }
+    };
+  }
+});
+
+// src/templates/zen-essence-teal.json
+var zen_essence_teal_default;
+var init_zen_essence_teal = __esm({
+  "src/templates/zen-essence-teal.json"() {
+    zen_essence_teal_default = {
+      id: "zen-essence-teal",
+      name: "\u7985\u610F\u6781\u7B80 - \u6697\u9752",
+      description: "\u7985\u610F\u6781\u7B80\u98CE\u683C\u7684\u6697\u9752\u53D8\u4F53",
+      isPreset: true,
+      isVisible: true,
+      source: "mp-preview",
+      styles: {
+        container: "background-color: #f7fcfc",
+        title: { h1: { base: "color: #316d7a" }, h2: { base: "color: #316d7a; border-bottom: 0.5px solid #bdd7db" } },
+        accentColor: "#316d7a"
+      }
+    };
+  }
+});
+
 // src/templates/modern-report.json
 var modern_report_default;
 var init_modern_report = __esm({
   "src/templates/modern-report.json"() {
     modern_report_default = {
       id: "modern-report",
-      name: "\u73B0\u4EE3\u62A5\u544A",
+      name: "\u73B0\u4EE3\u62A5\u544A - \u9ED1\u767D",
       description: "\u7B80\u7EA6\u73B0\u4EE3\u7684\u62A5\u544A\u98CE\u683C\uFF0C\u9AD8\u5BF9\u6BD4\u5EA6\u9ED1\u767D\u7070\uFF0C\u914D\u5408\u7CBE\u81F4\u7684\u8FB9\u6846\u88C5\u9970\uFF0C\u9002\u5408\u6DF1\u5EA6\u8C03\u7814\u3001\u5468\u62A5\u603B\u7ED3\u3001\u5546\u4E1A\u89C4\u5212",
       isPreset: true,
       isVisible: true,
@@ -10139,6 +10241,26 @@ var init_modern_report = __esm({
           backref: "color: #999; text-decoration: none"
         },
         accentColor: "#000000"
+      }
+    };
+  }
+});
+
+// src/templates/modern-report-navy.json
+var modern_report_navy_default;
+var init_modern_report_navy = __esm({
+  "src/templates/modern-report-navy.json"() {
+    modern_report_navy_default = {
+      id: "modern-report-navy",
+      name: "\u73B0\u4EE3\u62A5\u544A - \u6DF1\u7A7A\u84DD",
+      description: "\u73B0\u4EE3\u62A5\u544A\u98CE\u683C\u7684\u6DF1\u7A7A\u84DD\u53D8\u4F53",
+      isPreset: true,
+      isVisible: true,
+      source: "mp-preview",
+      styles: {
+        container: "background-color: #ffffff; padding: 20px",
+        title: { h1: { base: "color: #001f3f; border-bottom-color: #001f3f" }, h2: { base: "border-left-color: #001f3f; color: #001f3f" } },
+        accentColor: "#001f3f"
       }
     };
   }
@@ -16067,8 +16189,13 @@ var init_templates = __esm({
     init_teacher();
     init_kindergarten();
     init_academic_pro();
+    init_academic_pro_slate();
+    init_academic_pro_forest();
     init_zen_essence();
+    init_zen_essence_sakura();
+    init_zen_essence_teal();
     init_modern_report();
+    init_modern_report_navy();
     init_minimal_gold();
     init_minimal_green();
     init_minimal_blue();
@@ -16125,8 +16252,13 @@ var init_templates = __esm({
       teacher: teacher_default,
       kindergarten: kindergarten_default,
       "academic-pro": academic_pro_default,
+      "academic-pro-slate": academic_pro_slate_default,
+      "academic-pro-forest": academic_pro_forest_default,
       "zen-essence": zen_essence_default,
+      "zen-essence-sakura": zen_essence_sakura_default,
+      "zen-essence-teal": zen_essence_teal_default,
       "modern-report": modern_report_default,
+      "modern-report-navy": modern_report_navy_default,
       // Minimal Series
       "minimal-gold": minimal_gold_default,
       "minimal-green": minimal_green_default,
@@ -17868,9 +18000,11 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       btn.addEventListener("click", () => {
         this.selectedCategory = category;
         this.updateCategoryButtons();
-        const catTemplates = this.templates.filter((t) => getThemeCategory(t) === this.selectedCategory);
-        if (catTemplates.length > 0) {
-          this.selectedLayoutFamily = this.parseTemplateFamily(catTemplates[0]).family;
+        const families = this.getLayoutFamilies();
+        if (families.length > 0) {
+          this.selectedLayoutFamily = families[0].name;
+        } else {
+          this.selectedLayoutFamily = "";
         }
         this.renderLayoutList();
         this.renderGrid();
@@ -18083,9 +18217,17 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
   }
   getCategoryCounts() {
     const counts = {};
+    const categoryFamilies = /* @__PURE__ */ new Map();
     for (const template of this.templates) {
       const category = getThemeCategory(template);
-      counts[category] = (counts[category] || 0) + 1;
+      const { family } = this.parseTemplateFamily(template);
+      if (!categoryFamilies.has(category)) {
+        categoryFamilies.set(category, /* @__PURE__ */ new Set());
+      }
+      categoryFamilies.get(category).add(family);
+    }
+    for (const [category, families] of categoryFamilies.entries()) {
+      counts[category] = families.size;
     }
     return counts;
   }

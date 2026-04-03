@@ -205,9 +205,12 @@ export class ThemeGalleryModal extends Modal {
                 this.selectedCategory = category as StyleCategory;
                 this.updateCategoryButtons();
                 
-                const catTemplates = this.templates.filter(t => getThemeCategory(t) === this.selectedCategory);
-                if (catTemplates.length > 0) {
-                    this.selectedLayoutFamily = this.parseTemplateFamily(catTemplates[0]).family;
+                // 重置布局：选择该分类下的第一个排版结构
+                const families = this.getLayoutFamilies();
+                if (families.length > 0) {
+                    this.selectedLayoutFamily = families[0].name;
+                } else {
+                    this.selectedLayoutFamily = '';
                 }
                 
                 this.renderLayoutList();
@@ -424,10 +427,24 @@ export class ThemeGalleryModal extends Modal {
 
     private getCategoryCounts(): Record<string, number> {
         const counts: Record<string, number> = {};
+        
+        // 分组统计：大类 -> 排版结构数量
+        const categoryFamilies = new Map<string, Set<string>>();
+
         for (const template of this.templates) {
             const category = getThemeCategory(template);
-            counts[category] = (counts[category] || 0) + 1;
+            const { family } = this.parseTemplateFamily(template);
+            
+            if (!categoryFamilies.has(category)) {
+                categoryFamilies.set(category, new Set());
+            }
+            categoryFamilies.get(category)!.add(family);
         }
+
+        for (const [category, families] of categoryFamilies.entries()) {
+            counts[category] = families.size;
+        }
+
         return counts;
     }
 }

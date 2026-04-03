@@ -1425,8 +1425,8 @@ ol {
   overflow: hidden;
 }
 .mp-gallery-sidebar {
-  width: 150px;
-  padding: 16px 12px;
+  width: 180px;
+  padding: 16px 14px;
   border-right: 1px solid var(--background-modifier-border);
   background: var(--background-secondary);
   overflow-y: auto;
@@ -1499,8 +1499,8 @@ ol {
   border-radius: 10px;
 }
 .mp-gallery-layouts {
-  width: 260px;
-  padding: 16px;
+  width: 320px;
+  padding: 20px 16px;
   border-right: 1px solid var(--background-modifier-border);
   background: var(--background-primary);
   overflow-y: auto;
@@ -1555,11 +1555,11 @@ ol {
 }
 .mp-gallery-grid {
   flex: 1;
-  padding: 20px;
+  padding: 24px;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 16px;
   align-content: start;
   background: var(--background-secondary-alt);
 }
