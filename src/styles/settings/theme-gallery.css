@@ -1,569 +1,654 @@
-/* 主题画廊弹窗样式 - 优化版 */
+/* 主题画廊弹窗样式 */
 
-/* 弹窗容器 */
 .mp-theme-gallery-modal {
-    width: 92vw !important;
-    max-width: 1100px !important;
-    height: 85vh !important;
-    max-height: 800px !important;
-    border-radius: 16px !important;
+    width: min(1200px, 94vw) !important;
+    max-width: 1200px !important;
+    height: min(860px, 88vh) !important;
+    max-height: 860px !important;
+    border-radius: 20px !important;
     overflow: hidden !important;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.24) !important;
 }
 
 .mp-theme-gallery-modal .modal-content {
+    --mp-gallery-accent-soft: color-mix(in srgb, var(--interactive-accent) 12%, transparent);
+    --mp-gallery-accent-border: color-mix(in srgb, var(--interactive-accent) 28%, var(--background-modifier-border));
+    --mp-gallery-surface: color-mix(in srgb, var(--background-primary) 88%, var(--background-secondary));
+    --mp-gallery-surface-alt: color-mix(in srgb, var(--background-secondary) 78%, var(--background-primary));
+    --mp-gallery-stroke: color-mix(in srgb, var(--background-modifier-border) 88%, transparent);
     display: flex;
     flex-direction: column;
     height: 100%;
     padding: 0;
-    background: var(--background-primary);
+    background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--interactive-accent) 10%, transparent), transparent 38%),
+        linear-gradient(180deg, var(--background-primary), var(--background-secondary));
 }
 
-/* 头部 - 玻璃拟态效果 */
 .mp-gallery-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--background-modifier-border);
-    background: var(--background-secondary);
+    gap: 16px;
+    padding: 22px 24px 18px;
+    border-bottom: 1px solid var(--mp-gallery-stroke);
+    background:
+        linear-gradient(180deg, color-mix(in srgb, var(--background-secondary) 92%, transparent), color-mix(in srgb, var(--background-primary) 92%, transparent));
+    backdrop-filter: blur(10px);
     position: relative;
-    z-index: 10;
+    z-index: 2;
 }
 
 .mp-gallery-header h2 {
     margin: 0;
-    font-size: 1.4em;
-    font-weight: 600;
-    background: linear-gradient(135deg, var(--text-accent) 0%, var(--text-accent-hover) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: var(--text-normal);
 }
 
-/* 搜索框 - 现代风格 */
 .mp-gallery-search {
-    padding: 10px 16px;
-    border: 2px solid var(--background-modifier-border);
-    border-radius: 12px;
-    background: var(--background-primary);
+    width: min(320px, 100%);
+    padding: 11px 15px;
+    border: 1px solid var(--mp-gallery-stroke);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--background-primary) 92%, transparent);
     color: var(--text-normal);
-    font-size: 14px;
-    width: 260px;
+    font-size: 13px;
+    line-height: 1.2;
     outline: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.mp-gallery-search:hover {
+    border-color: color-mix(in srgb, var(--interactive-accent) 20%, var(--background-modifier-border));
 }
 
 .mp-gallery-search:focus {
-    border-color: var(--text-accent);
-    box-shadow: 0 0 0 3px rgba(var(--text-accent-rgb, 66, 133, 244), 0.15);
+    border-color: var(--interactive-accent);
+    background: var(--background-primary);
+    box-shadow:
+        0 0 0 4px color-mix(in srgb, var(--interactive-accent) 16%, transparent),
+        0 10px 26px rgba(15, 23, 42, 0.08);
+    transform: translateY(-1px);
 }
 
 .mp-gallery-search::placeholder {
     color: var(--text-muted);
-    opacity: 0.6;
+    opacity: 0.9;
 }
 
-/* 主内容区 */
 .mp-gallery-main {
-    display: flex;
+    display: grid;
+    grid-template-columns: 180px 300px minmax(0, 1fr);
     flex: 1;
+    min-height: 0;
     overflow: hidden;
 }
 
-/* 左侧分类栏 - 优化 */
+.mp-gallery-sidebar,
+.mp-gallery-layouts,
+.mp-gallery-grid {
+    min-height: 0;
+}
+
 .mp-gallery-sidebar {
-    width: 180px; 
-    padding: 16px 14px;
-    border-right: 1px solid var(--background-modifier-border);
-    background: var(--background-secondary);
+    padding: 16px 12px;
+    border-right: 1px solid var(--mp-gallery-stroke);
+    background: color-mix(in srgb, var(--background-secondary) 80%, transparent);
     overflow-y: auto;
-    flex-shrink: 0;
 }
 
 .mp-gallery-category-btn {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 12px 14px;
+    min-height: 44px;
+    padding: 10px 12px;
     margin-bottom: 6px;
-    border: none;
-    border-radius: 10px;
+    border: 1px solid transparent;
+    border-radius: 14px;
     background: transparent;
     color: var(--text-normal);
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+        transform 0.18s ease,
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        color 0.18s ease;
     text-align: left;
-    position: relative;
-    overflow: hidden;
-}
-
-.mp-gallery-category-btn::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--interactive-accent) 0%, var(--interactive-accent-hover) 100%);
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    z-index: 0;
 }
 
 .mp-gallery-category-btn:hover {
-    transform: translateX(4px);
-    background: var(--background-modifier-hover);
+    background: color-mix(in srgb, var(--background-modifier-hover) 76%, transparent);
+    border-color: var(--mp-gallery-stroke);
+    transform: translateX(2px);
 }
 
 .mp-gallery-category-btn.active {
-    color: var(--text-on-accent);
-    transform: translateX(4px);
-}
-
-.mp-gallery-category-btn.active::before {
-    opacity: 1;
-}
-
-.mp-gallery-category-btn > * {
-    position: relative;
-    z-index: 1;
+    background:
+        linear-gradient(135deg, color-mix(in srgb, var(--interactive-accent) 22%, var(--background-primary)), color-mix(in srgb, var(--interactive-accent-hover) 16%, var(--background-primary)));
+    border-color: var(--mp-gallery-accent-border);
+    color: var(--text-normal);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
 }
 
 .mp-category-color {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 12px;
+    width: 11px;
+    height: 11px;
+    border-radius: 999px;
+    margin-right: 10px;
     flex-shrink: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--background-primary) 80%, transparent);
 }
 
 .mp-category-name {
     flex: 1;
+    min-width: 0;
 }
 
 .mp-category-count {
-    font-size: 11px;
-    opacity: 0.7;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
     margin-left: 8px;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.15);
-    padding: 2px 8px;
-    border-radius: 10px;
+    padding: 0 7px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--background-primary) 84%, transparent);
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
 }
 
-/* 中间排版结构栏 */
+.mp-gallery-category-btn.active .mp-category-count {
+    background: color-mix(in srgb, var(--interactive-accent) 16%, var(--background-primary));
+    color: var(--text-normal);
+}
+
 .mp-gallery-layouts {
-    width: 320px;
-    padding: 20px 16px;
-    border-right: 1px solid var(--background-modifier-border);
-    background: var(--background-primary);
+    padding: 18px 14px;
+    border-right: 1px solid var(--mp-gallery-stroke);
+    background: color-mix(in srgb, var(--background-primary) 90%, transparent);
     overflow-y: auto;
-    flex-shrink: 0;
 }
 
 .mp-gallery-layout-header {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 1;
     margin-bottom: 12px;
-    letter-spacing: 1px;
-    padding-left: 4px;
+    padding: 2px 4px 10px;
+    background: linear-gradient(180deg, var(--background-primary), color-mix(in srgb, var(--background-primary) 84%, transparent));
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
 }
 
 .mp-gallery-layout-btn {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 14px;
-    margin-bottom: 8px;
-    border: 1px solid var(--background-modifier-border);
-    border-radius: 12px;
-    background: var(--background-primary);
+    padding: 14px 14px 13px;
+    margin-bottom: 10px;
+    border: 1px solid var(--mp-gallery-stroke);
+    border-radius: 16px;
+    background:
+        linear-gradient(180deg, color-mix(in srgb, var(--background-primary) 96%, transparent), color-mix(in srgb, var(--background-secondary) 55%, var(--background-primary)));
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease;
     text-align: left;
 }
 
 .mp-gallery-layout-btn:hover {
-    border-color: var(--text-accent);
-    background: var(--background-modifier-hover);
-    transform: translateX(2px);
+    border-color: color-mix(in srgb, var(--interactive-accent) 28%, var(--background-modifier-border));
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
 }
 
 .mp-gallery-layout-btn.active {
-    border-color: var(--interactive-accent);
-    background: rgba(var(--interactive-accent-rgb, 66, 133, 244), 0.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-color: var(--mp-gallery-accent-border);
+    background:
+        linear-gradient(180deg, color-mix(in srgb, var(--interactive-accent) 10%, var(--background-primary)), color-mix(in srgb, var(--interactive-accent) 4%, var(--background-primary)));
+    box-shadow:
+        inset 0 0 0 1px color-mix(in srgb, var(--interactive-accent) 16%, transparent),
+        0 14px 28px rgba(15, 23, 42, 0.08);
 }
 
 .mp-layout-name {
+    margin-bottom: 5px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-normal);
-    margin-bottom: 4px;
+    line-height: 1.3;
 }
 
 .mp-layout-desc {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-muted);
-    line-height: 1.4;
+    line-height: 1.45;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-/* 右侧颜色/变体网格 */
 .mp-gallery-grid {
-    flex: 1;
-    padding: 24px;
+    padding: 22px;
     overflow-y: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+    gap: 18px;
     align-content: start;
-    background: var(--background-secondary-alt);
+    background:
+        linear-gradient(180deg, color-mix(in srgb, var(--background-secondary-alt) 88%, transparent), color-mix(in srgb, var(--background-primary) 92%, transparent));
 }
 
-/* 主题卡片 - 全新设计 */
 .mp-theme-card {
     position: relative;
-    border: 2px solid transparent;
-    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 148px;
+    border: 1px solid var(--mp-gallery-stroke);
+    border-radius: 18px;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    background: var(--background-primary);
-    box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.08),
-        0 0 0 1px var(--background-modifier-border);
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        background-color 0.22s ease;
+    background:
+        linear-gradient(180deg, color-mix(in srgb, var(--background-primary) 98%, transparent), color-mix(in srgb, var(--background-secondary) 50%, var(--background-primary)));
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
 }
 
 .mp-theme-card:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.15),
-        0 0 0 2px var(--text-accent);
-    z-index: 5;
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--interactive-accent) 32%, var(--background-modifier-border));
+    box-shadow: 0 18px 38px rgba(15, 23, 42, 0.14);
+    z-index: 2;
 }
 
 .mp-theme-card.selected {
     border-color: var(--interactive-accent);
     box-shadow:
-        0 0 0 3px var(--interactive-accent-hover),
-        0 8px 24px rgba(var(--interactive-accent-rgb, 66, 133, 244), 0.25);
+        0 0 0 4px color-mix(in srgb, var(--interactive-accent) 14%, transparent),
+        0 18px 42px rgba(15, 23, 42, 0.16);
 }
 
-/* 颜色预览条 - 渐变效果 */
-.mp-theme-color-bar {
-    height: 70px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-/* 颜色预览条容器（支持文字叠加） */
 .mp-theme-color-bar-wrapper {
     position: relative;
-    height: 70px;
+    height: 78px;
     width: 100%;
     overflow: hidden;
 }
 
-.mp-theme-color-bar-wrapper .mp-theme-color-bar {
+.mp-theme-color-bar {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
 }
 
-/* 渐变主题文字预览 */
-.mp-theme-color-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    pointer-events: none;
-    white-space: nowrap;
-    z-index: 2;
-}
-
-.mp-theme-color-bar::after {
+.mp-theme-color-bar::before {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 30%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+    inset: 0;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.24), transparent 32%),
+        linear-gradient(180deg, transparent 46%, rgba(0, 0, 0, 0.14) 100%);
     pointer-events: none;
 }
 
-/* 主题信息 - 优化排版 */
+.mp-theme-color-text {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 12px;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+    pointer-events: none;
+    z-index: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .mp-theme-info {
-    padding: 14px;
-    background: var(--background-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex: 1;
+    padding: 13px 14px 14px;
+    background: transparent;
 }
 
 .mp-theme-name {
+    min-height: 34px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
+    line-height: 1.3;
     color: var(--text-normal);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-bottom: 6px;
-    letter-spacing: 0.3px;
 }
 
 .mp-theme-source {
     display: inline-flex;
     align-items: center;
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 20px;
-    background: var(--background-secondary);
+    width: fit-content;
+    min-height: 22px;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--background-secondary) 84%, transparent);
     color: var(--text-muted);
-    font-weight: 500;
-    letter-spacing: 0.5px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
 }
 
 .mp-theme-source::before {
-    content: '●';
-    margin-right: 4px;
-    font-size: 8px;
+    content: '';
+    width: 6px;
+    height: 6px;
+    margin-right: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.7;
 }
 
-/* 选中标记 - 优化动画 */
 .mp-theme-checkmark {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--interactive-accent) 0%, var(--interactive-accent-hover) 100%);
+    top: 10px;
+    right: 10px;
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--background-primary) 28%, var(--interactive-accent));
     color: var(--text-on-accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    animation: checkmark-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.24);
+    backdrop-filter: blur(8px);
+    animation: mp-gallery-checkmark-pop 0.22s ease-out;
 }
 
-@keyframes checkmark-pop {
-    0% { transform: scale(0); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+@keyframes mp-gallery-checkmark-pop {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
-/* 预览提示 */
 .mp-theme-card::after {
-    content: '点击预览 · 双击应用';
+    content: '单击预览  双击应用';
     position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 4px 10px;
-    border-radius: 20px;
+    left: 12px;
+    right: 12px;
+    bottom: 10px;
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.76);
+    color: rgba(255, 255, 255, 0.94);
     font-size: 10px;
-    font-weight: 500;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
     opacity: 0;
-    transition: all 0.3s ease;
+    transform: translateY(8px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
     pointer-events: none;
-    white-space: nowrap;
 }
 
 .mp-theme-card:hover::after {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
 }
 
-/* 空状态 - 优化 */
+.mp-gallery-empty,
+.mp-gallery-empty-small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--mp-gallery-stroke);
+    border-radius: 18px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
 .mp-gallery-empty {
     grid-column: 1 / -1;
-    text-align: center;
-    padding: 60px 40px;
-    color: var(--text-muted);
+    min-height: 220px;
+    padding: 32px;
+    background: color-mix(in srgb, var(--background-primary) 82%, transparent);
+    font-size: 14px;
+    line-height: 1.6;
 }
 
-.mp-gallery-empty::before {
-    content: '🔍';
-    font-size: 48px;
-    display: block;
-    margin-bottom: 16px;
-    opacity: 0.5;
+.mp-gallery-empty-small {
+    min-height: 96px;
+    padding: 18px 14px;
+    background: color-mix(in srgb, var(--background-secondary) 72%, transparent);
+    font-size: 12px;
+    line-height: 1.5;
 }
 
-/* 底部操作栏 - 优化 */
 .mp-gallery-footer {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
-    padding: 18px 24px;
-    border-top: 1px solid var(--background-modifier-border);
-    background: var(--background-secondary);
+    padding: 16px 24px 18px;
+    border-top: 1px solid var(--mp-gallery-stroke);
+    background: color-mix(in srgb, var(--background-secondary) 86%, transparent);
+}
+
+.mp-gallery-btn-cancel,
+.mp-gallery-btn-apply {
+    min-height: 40px;
+    padding: 0 18px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        border-color 0.16s ease,
+        background-color 0.16s ease;
 }
 
 .mp-gallery-btn-cancel {
-    padding: 10px 24px;
-    border: 2px solid var(--background-modifier-border);
-    border-radius: 10px;
-    background: transparent;
+    border: 1px solid var(--mp-gallery-stroke);
+    background: color-mix(in srgb, var(--background-primary) 86%, transparent);
     color: var(--text-normal);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.25s ease;
 }
 
 .mp-gallery-btn-cancel:hover {
+    border-color: color-mix(in srgb, var(--text-muted) 40%, var(--background-modifier-border));
     background: var(--background-modifier-hover);
-    border-color: var(--text-muted);
     transform: translateY(-1px);
 }
 
 .mp-gallery-btn-apply {
-    padding: 10px 28px;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--interactive-accent) 0%, var(--interactive-accent-hover) 100%);
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, var(--interactive-accent), var(--interactive-accent-hover));
     color: var(--text-on-accent);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 12px rgba(var(--interactive-accent-rgb, 66, 133, 244), 0.3);
+    box-shadow: 0 12px 24px color-mix(in srgb, var(--interactive-accent) 30%, transparent);
 }
 
 .mp-gallery-btn-apply:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(var(--interactive-accent-rgb, 66, 133, 244), 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 16px 30px color-mix(in srgb, var(--interactive-accent) 36%, transparent);
 }
 
-.mp-gallery-btn-apply:active {
+.mp-gallery-btn-apply:active,
+.mp-gallery-btn-cancel:active {
     transform: translateY(0);
 }
 
-/* 滚动条美化 */
 .mp-gallery-sidebar::-webkit-scrollbar,
+.mp-gallery-layouts::-webkit-scrollbar,
 .mp-gallery-grid::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
+    height: 8px;
 }
 
 .mp-gallery-sidebar::-webkit-scrollbar-track,
+.mp-gallery-layouts::-webkit-scrollbar-track,
 .mp-gallery-grid::-webkit-scrollbar-track {
     background: transparent;
 }
 
 .mp-gallery-sidebar::-webkit-scrollbar-thumb,
+.mp-gallery-layouts::-webkit-scrollbar-thumb,
 .mp-gallery-grid::-webkit-scrollbar-thumb {
-    background: var(--background-modifier-border);
-    border-radius: 3px;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--background-modifier-border) 90%, transparent);
+    background-clip: padding-box;
 }
 
 .mp-gallery-sidebar::-webkit-scrollbar-thumb:hover,
+.mp-gallery-layouts::-webkit-scrollbar-thumb:hover,
 .mp-gallery-grid::-webkit-scrollbar-thumb:hover {
-    background: var(--text-muted);
+    background: color-mix(in srgb, var(--text-muted) 44%, transparent);
+    background-clip: padding-box;
 }
 
-/* 响应式 - 优化 */
-@media (max-width: 900px) {
-    .mp-gallery-layouts {
-        width: 200px;
+@media (max-width: 960px) {
+    .mp-theme-gallery-modal {
+        width: 96vw !important;
+        height: 90vh !important;
+    }
+
+    .mp-gallery-main {
+        grid-template-columns: 160px 260px minmax(0, 1fr);
+    }
+
+    .mp-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+        gap: 14px;
+        padding: 18px;
     }
 }
 
 @media (max-width: 768px) {
     .mp-theme-gallery-modal {
-        width: 96vw !important;
-        height: 90vh !important;
-        max-height: none !important;
-    }
-
-    .mp-gallery-main {
-        flex-direction: column;
-    }
-
-    .mp-gallery-sidebar {
-        width: 100%;
-        max-height: none;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--background-modifier-border);
-        display: flex;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 8px 12px;
-        gap: 8px;
-    }
-
-    .mp-gallery-sidebar::-webkit-scrollbar {
-        height: 4px;
-    }
-
-    .mp-gallery-category-btn {
-        width: auto;
-        white-space: nowrap;
-        margin-bottom: 0;
-        padding: 8px 12px;
-    }
-
-    .mp-gallery-layouts {
-        width: 100%;
-        max-height: 200px;
-        border-right: none;
-        border-bottom: 1px solid var(--background-modifier-border);
-        display: flex;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 12px;
-        gap: 12px;
-    }
-
-    .mp-gallery-layouts::-webkit-scrollbar {
-        height: 4px;
-    }
-
-    .mp-gallery-layout-btn {
-        width: 180px;
-        flex-shrink: 0;
-        margin-bottom: 0;
-    }
-
-    .mp-gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 10px;
-        padding: 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .mp-gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
+        height: 92vh !important;
+        border-radius: 16px !important;
     }
 
     .mp-gallery-header {
         flex-direction: column;
-        gap: 12px;
-        padding: 16px;
+        align-items: stretch;
+        padding: 18px 18px 16px;
     }
 
     .mp-gallery-search {
         width: 100%;
+    }
+
+    .mp-gallery-main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mp-gallery-sidebar {
+        display: flex;
+        gap: 8px;
+        padding: 10px 12px;
+        border-right: none;
+        border-bottom: 1px solid var(--mp-gallery-stroke);
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .mp-gallery-category-btn {
+        width: auto;
+        min-width: max-content;
+        margin-bottom: 0;
+        padding: 9px 12px;
+    }
+
+    .mp-gallery-layouts {
+        display: flex;
+        gap: 10px;
+        padding: 14px 12px;
+        border-right: none;
+        border-bottom: 1px solid var(--mp-gallery-stroke);
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .mp-gallery-layout-header {
+        position: static;
+        width: auto;
+        min-width: max-content;
+        margin: 0;
+        padding: 10px 0 0 2px;
+        background: transparent;
+    }
+
+    .mp-gallery-layout-btn {
+        width: 196px;
+        min-width: 196px;
+        margin-bottom: 0;
+    }
+
+    .mp-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .mp-gallery-footer {
+        padding: 14px;
+    }
+}
+
+@media (max-width: 520px) {
+    .mp-gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mp-theme-card {
+        min-height: 142px;
+    }
+
+    .mp-theme-color-bar-wrapper {
+        height: 72px;
+    }
+
+    .mp-gallery-btn-cancel,
+    .mp-gallery-btn-apply {
+        flex: 1;
+        justify-content: center;
     }
 }

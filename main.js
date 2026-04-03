@@ -17928,21 +17928,13 @@ var STYLE_CATEGORIES = {
   "\u5176\u4ED6": { description: "\u5176\u4ED6\u98CE\u683C\u4E3B\u9898", color: "#95a5a6" }
 };
 var CATEGORY_RULES = [
-  // 深色 — 必须优先于极简，否则 dark.json 的名字"暗夜系列 - 极简"会被"极简"抢走
   { category: "\u6DF1\u8272", idPrefixes: ["dark", "xiaohu-ink", "xiaohu-midnight"], nameContains: ["\u6697\u591C"] },
-  // 教育
-  { category: "\u6559\u80B2", idPrefixes: ["parent-child", "teacher", "kindergarten"], nameContains: ["\u6559\u80B2\u7CFB\u5217"] },
-  // 渐变 — focus/elegant/bytedance 系列（'elegant' 独立 ID 也要匹配）
+  { category: "\u6559\u80B2", idPrefixes: ["parent-child", "teacher", "kindergarten", "blackboard"], nameContains: ["\u6559\u80B2\u7CFB\u5217", "\u9ED1\u677F"] },
   { category: "\u6E10\u53D8", idPrefixes: ["focus-", "focus", "elegant", "xiaohu-focus", "xiaohu-elegant", "xiaohu-bytedance"], nameContains: ["\u805A\u7126\u7CFB\u5217", "\u7CBE\u81F4\u7CFB\u5217", "\u5B57\u8282\u8DF3\u52A8"] },
-  // 醒目 — bold 系列 + bauhaus + sports + modern-report
-  { category: "\u9192\u76EE", idPrefixes: ["bold-", "bold", "xiaohu-bold", "xiaohu-bauhaus", "xiaohu-sports", "modern-report"], nameContains: ["\u9192\u76EE\u7CFB\u5217", "\u5305\u8C6A\u65AF", "\u8FD0\u52A8\u98CE", "\u73B0\u4EE3\u62A5\u544A"] },
-  // 古典
+  { category: "\u9192\u76EE", idPrefixes: ["bold-", "bold", "xiaohu-bold", "xiaohu-bauhaus", "xiaohu-sports", "modern-report", "playful", "adventure"], nameContains: ["\u9192\u76EE\u7CFB\u5217", "\u5305\u8C6A\u65AF", "\u8FD0\u52A8\u98CE", "\u73B0\u4EE3\u62A5\u544A", "\u6D3B\u6CFC", "\u63A2\u9669"] },
   { category: "\u53E4\u5178", idPrefixes: ["xiaohu-chinese", "xiaohu-terracotta", "xiaohu-newspaper"], nameContains: ["\u4E2D\u5F0F\u7F8E\u5B66", "\u7ECF\u5178\u62A5\u7EB8"] },
-  // 科技
-  { category: "\u79D1\u6280", idPrefixes: ["xiaohu-github", "xiaohu-sspai"], nameContains: ["GitHub", "\u5C11\u6570\u6D3E"] },
-  // 文艺
-  { category: "\u6587\u827A", idPrefixes: ["xiaohu-lavender", "xiaohu-mint", "xiaohu-sunset", "xiaohu-coffee", "xiaohu-magazine"], nameContains: ["\u6587\u827A\u7CFB\u5217", "\u85B0\u8863\u8349", "\u8584\u8377", "\u65E5\u843D", "\u5496\u5561", "\u65F6\u5C1A\u6742\u5FD7"] },
-  // 极简 — 放在最后一组精确匹配里，避免吞掉别人
+  { category: "\u79D1\u6280", idPrefixes: ["xiaohu-github", "xiaohu-sspai", "gameui"], nameContains: ["GitHub", "\u5C11\u6570\u6D3E", "\u6E38\u620FUI"] },
+  { category: "\u6587\u827A", idPrefixes: ["xiaohu-lavender", "xiaohu-mint", "xiaohu-sunset", "xiaohu-coffee", "xiaohu-magazine", "warmth"], nameContains: ["\u6587\u827A\u7CFB\u5217", "\u85B0\u8863\u8349", "\u8584\u8377", "\u65E5\u843D", "\u5496\u5561", "\u65F6\u5C1A\u6742\u5FD7", "\u6E29\u6696"] },
   { category: "\u6781\u7B80", idPrefixes: ["minimal", "xiaohu-minimal", "default", "scarlet", "academic", "zen-essence", "orange", "yeban", "brown", "xiaohu-wechat"], nameContains: ["\u6781\u7B80\u7CFB\u5217", "\u9ED8\u8BA4\u6A21\u677F", "\u5B66\u672F\u4E13\u4E1A", "\u7985\u610F\u6781\u7B80", "\u53F6\u4F34\u7CFB\u5217"] }
 ];
 function getThemeCategory(template) {
@@ -17951,7 +17943,15 @@ function getThemeCategory(template) {
   for (const rule of CATEGORY_RULES) {
     if (rule.idPrefixes) {
       for (const prefix of rule.idPrefixes) {
-        if (id === prefix.toLowerCase() || id.startsWith(prefix.toLowerCase())) {
+        const normalizedPrefix = prefix.toLowerCase();
+        if (id === normalizedPrefix || id.startsWith(normalizedPrefix)) {
+          return rule.category;
+        }
+      }
+    }
+    if (rule.idContains) {
+      for (const keyword of rule.idContains) {
+        if (id.includes(keyword.toLowerCase())) {
           return rule.category;
         }
       }
@@ -17985,17 +17985,45 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     this.initializeDefaults();
   }
   initializeDefaults() {
-    const currentTemplate = this.templates.find((t) => t.id === this.currentTemplateId);
+    const currentTemplate = this.templates.find((template) => template.id === this.currentTemplateId);
     if (currentTemplate) {
       this.selectedCategory = getThemeCategory(currentTemplate);
       this.selectedLayoutFamily = this.parseTemplateFamily(currentTemplate).family;
-    } else {
-      this.selectedCategory = "\u6781\u7B80";
-      const catTemplates = this.templates.filter((t) => getThemeCategory(t) === "\u6781\u7B80");
-      if (catTemplates.length > 0) {
-        this.selectedLayoutFamily = this.parseTemplateFamily(catTemplates[0]).family;
-      }
+      return;
     }
+    this.selectedCategory = this.getFirstAvailableCategory();
+    const categoryTemplates = this.getTemplatesForCategory(this.selectedCategory);
+    this.selectedLayoutFamily = categoryTemplates.length > 0 ? this.parseTemplateFamily(categoryTemplates[0]).family : "";
+  }
+  getFirstAvailableCategory() {
+    const categories = Object.keys(STYLE_CATEGORIES);
+    return categories.find((category) => this.getTemplatesForCategory(category).length > 0) || "\u5176\u4ED6";
+  }
+  getTemplatesForCategory(category) {
+    return this.templates.filter((template) => getThemeCategory(template) === category);
+  }
+  matchesSearch(template) {
+    if (!this.searchQuery)
+      return true;
+    const searchable = [
+      template.id,
+      template.name,
+      template.description || "",
+      this.parseTemplateFamily(template).family
+    ].join(" ").toLowerCase();
+    return searchable.includes(this.searchQuery);
+  }
+  getTemplateDescription(template) {
+    var _a;
+    const description = (_a = template.description) == null ? void 0 : _a.trim();
+    if (description) {
+      return description.split("\uFF08")[0].trim();
+    }
+    const { family, variant } = this.parseTemplateFamily(template);
+    if (variant !== "\u9ED8\u8BA4") {
+      return `${variant}\u914D\u8272`;
+    }
+    return `${family}\u4E3B\u9898`;
   }
   onOpen() {
     const { contentEl, modalEl } = this;
@@ -18035,6 +18063,7 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
   }
   renderSidebar(container) {
     container.empty();
+    this.categoryButtons.clear();
     const categoryCounts = this.getCategoryCounts();
     for (const [category, config2] of Object.entries(STYLE_CATEGORIES)) {
       const count = categoryCounts[category] || 0;
@@ -18054,11 +18083,7 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
         this.selectedCategory = category;
         this.updateCategoryButtons();
         const families = this.getLayoutFamilies();
-        if (families.length > 0) {
-          this.selectedLayoutFamily = families[0].name;
-        } else {
-          this.selectedLayoutFamily = "";
-        }
+        this.selectedLayoutFamily = families.length > 0 ? families[0].name : "";
         this.renderLayoutList();
         this.renderGrid();
       });
@@ -18084,7 +18109,7 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       this.layoutContainer.createEl("div", { text: "\u6682\u65E0\u7ED3\u6784", cls: "mp-gallery-empty-small" });
       return;
     }
-    if (!families.some((f) => f.name === this.selectedLayoutFamily)) {
+    if (!families.some((family) => family.name === this.selectedLayoutFamily)) {
       this.selectedLayoutFamily = families[0].name;
     }
     for (const family of families) {
@@ -18110,20 +18135,17 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     }
   }
   getLayoutFamilies() {
-    const categoryTemplates = this.templates.filter((t) => {
-      if (this.searchQuery) {
-        const searchable = `${t.id} ${t.name} ${t.description}`.toLowerCase();
-        return searchable.includes(this.searchQuery);
-      }
-      return getThemeCategory(t) === this.selectedCategory;
-    });
+    const categoryTemplates = this.getTemplatesForCategory(this.selectedCategory).filter((template) => this.matchesSearch(template));
     const familyMap = /* @__PURE__ */ new Map();
-    for (const t of categoryTemplates) {
-      const { family } = this.parseTemplateFamily(t);
+    for (const template of categoryTemplates) {
+      const { family } = this.parseTemplateFamily(template);
       if (!familyMap.has(family)) {
-        familyMap.set(family, { description: t.description.split("\uFF0C")[0], templates: [] });
+        familyMap.set(family, {
+          description: this.getTemplateDescription(template),
+          templates: []
+        });
       }
-      familyMap.get(family).templates.push(t);
+      familyMap.get(family).templates.push(template);
     }
     return Array.from(familyMap.entries()).map(([name, data]) => ({
       name,
@@ -18135,16 +18157,10 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     if (!this.gridContainer)
       return;
     this.gridContainer.empty();
-    const familyTemplates = this.templates.filter((t) => {
-      const { family } = this.parseTemplateFamily(t);
-      if (this.searchQuery) {
-        const searchable = `${t.id} ${t.name} ${t.description}`.toLowerCase();
-        if (!searchable.includes(this.searchQuery))
-          return false;
-      } else {
-        if (getThemeCategory(t) !== this.selectedCategory)
-          return false;
-      }
+    const familyTemplates = this.getTemplatesForCategory(this.selectedCategory).filter((template) => {
+      if (!this.matchesSearch(template))
+        return false;
+      const { family } = this.parseTemplateFamily(template);
       return family === this.selectedLayoutFamily;
     });
     if (familyTemplates.length === 0) {
@@ -18212,35 +18228,16 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
   }
   getPreviewText(template) {
     const name = template.name.replace(/\s*\(xiaohu\)\s*/i, "");
-    const keywords = [
-      "\u805A\u7126",
-      "\u7CBE\u81F4",
-      "\u5B57\u8282",
-      "\u8D64\u9676",
-      "\u4E2D\u56FD",
-      "\u62A5\u7EB8",
-      "\u58A8\u97F5",
-      "\u6697\u591C",
-      "\u8FD0\u52A8",
-      "\u5305\u8C6A\u65AF",
-      "\u8584\u8377",
-      "\u65E5\u843D",
-      "\u85B0\u8863\u8349",
-      "\u5496\u5561",
-      "\u6742\u5FD7",
-      "\u4F18\u96C5",
-      "\u9192\u76EE",
-      "\u6781\u7B80"
-    ];
-    for (const kw of keywords) {
-      if (name.includes(kw))
-        return kw;
+    const keywords = ["\u805A\u7126", "\u7CBE\u81F4", "\u5B57\u8282", "\u5175\u9A6C\u4FD1", "\u4E2D\u56FD", "\u62A5\u7EB8", "\u58A8\u97F5", "\u6697\u591C", "\u8FD0\u52A8", "\u5305\u8C6A\u65AF", "\u8584\u8377", "\u65E5\u843D", "\u85B0\u8863\u8349", "\u5496\u5561", "\u6742\u5FD7", "\u4F18\u96C5", "\u9192\u76EE", "\u6781\u7B80"];
+    for (const keyword of keywords) {
+      if (name.includes(keyword))
+        return keyword;
     }
     if (name.length <= 3)
       return name;
     const cnMatch = name.match(/[\u4e00-\u9fa5]/g);
     if (cnMatch) {
-      const chars = cnMatch.filter((c) => c !== "\u7CFB" && c !== "\u5217").slice(0, 2);
+      const chars = cnMatch.filter((char) => char !== "\u7CFB" && char !== "\u5217").slice(0, 2);
       if (chars.length >= 2)
         return chars.join("");
     }
@@ -18252,9 +18249,9 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     const hex = hexColor.replace("#", "");
     if (hex.length < 6)
       return "#ffffff";
-    const r = parseInt(hex.substr(0, 2), 16);
-    const g = parseInt(hex.substr(2, 2), 16);
-    const b = parseInt(hex.substr(4, 2), 16);
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
     const brightness = (r * 299 + g * 587 + b * 114) / 1e3;
     return brightness > 128 ? "#1a1a2e" : "#ffffff";
   }
@@ -18263,10 +18260,10 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       return hex;
     const num = parseInt(hex.replace("#", ""), 16);
     const amt = Math.round(2.55 * percent);
-    const R = Math.min(255, (num >> 16) + amt);
-    const G = Math.min(255, (num >> 8 & 255) + amt);
-    const B = Math.min(255, (num & 255) + amt);
-    return `#${(16777216 + R * 65536 + G * 256 + B).toString(16).slice(1)}`;
+    const r = Math.min(255, (num >> 16) + amt);
+    const g = Math.min(255, (num >> 8 & 255) + amt);
+    const b = Math.min(255, (num & 255) + amt);
+    return `#${(16777216 + r * 65536 + g * 256 + b).toString(16).slice(1)}`;
   }
   getCategoryCounts() {
     const counts = {};

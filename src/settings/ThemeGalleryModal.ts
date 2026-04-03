@@ -1,15 +1,12 @@
 /**
  * 主题画廊弹窗
- * 左侧分类列表，右侧主题网格预览
+ * 左侧分类列表，中间排版结构，右侧颜色变体
  */
 
-import { Modal, setIcon, Notice } from 'obsidian';
+import { Modal, setIcon } from 'obsidian';
 import type { SettingsManager } from './settings';
 import type { Template } from '../templateManager';
 
-/**
- * 风格分组定义（仅用于显示信息）
- */
 export const STYLE_CATEGORIES = {
     '极简': { description: '简洁干净，注重内容', color: '#636e72' },
     '渐变': { description: '渐变色标题，现代感', color: '#0984e3' },
@@ -24,46 +21,46 @@ export const STYLE_CATEGORIES = {
 
 export type StyleCategory = keyof typeof STYLE_CATEGORIES;
 
-/**
- * 显式的分类映射表（按 ID 前缀精确匹配，避免关键词互抢）
- * 规则按优先级从高到低排列，使用 ID 前缀匹配
- */
-const CATEGORY_RULES: Array<{ category: StyleCategory; idPrefixes?: string[]; idContains?: string[]; nameContains?: string[] }> = [
-    // 深色 — 必须优先于极简，否则 dark.json 的名字"暗夜系列 - 极简"会被"极简"抢走
+type CategoryRule = {
+    category: StyleCategory;
+    idPrefixes?: string[];
+    idContains?: string[];
+    nameContains?: string[];
+};
+
+const CATEGORY_RULES: CategoryRule[] = [
     { category: '深色', idPrefixes: ['dark', 'xiaohu-ink', 'xiaohu-midnight'], nameContains: ['暗夜'] },
-    // 教育
-    { category: '教育', idPrefixes: ['parent-child', 'teacher', 'kindergarten'], nameContains: ['教育系列'] },
-    // 渐变 — focus/elegant/bytedance 系列（'elegant' 独立 ID 也要匹配）
+    { category: '教育', idPrefixes: ['parent-child', 'teacher', 'kindergarten', 'blackboard'], nameContains: ['教育系列', '黑板'] },
     { category: '渐变', idPrefixes: ['focus-', 'focus', 'elegant', 'xiaohu-focus', 'xiaohu-elegant', 'xiaohu-bytedance'], nameContains: ['聚焦系列', '精致系列', '字节跳动'] },
-    // 醒目 — bold 系列 + bauhaus + sports + modern-report
-    { category: '醒目', idPrefixes: ['bold-', 'bold', 'xiaohu-bold', 'xiaohu-bauhaus', 'xiaohu-sports', 'modern-report'], nameContains: ['醒目系列', '包豪斯', '运动风', '现代报告'] },
-    // 古典
+    { category: '醒目', idPrefixes: ['bold-', 'bold', 'xiaohu-bold', 'xiaohu-bauhaus', 'xiaohu-sports', 'modern-report', 'playful', 'adventure'], nameContains: ['醒目系列', '包豪斯', '运动风', '现代报告', '活泼', '探险'] },
     { category: '古典', idPrefixes: ['xiaohu-chinese', 'xiaohu-terracotta', 'xiaohu-newspaper'], nameContains: ['中式美学', '经典报纸'] },
-    // 科技
-    { category: '科技', idPrefixes: ['xiaohu-github', 'xiaohu-sspai'], nameContains: ['GitHub', '少数派'] },
-    // 文艺
-    { category: '文艺', idPrefixes: ['xiaohu-lavender', 'xiaohu-mint', 'xiaohu-sunset', 'xiaohu-coffee', 'xiaohu-magazine'], nameContains: ['文艺系列', '薰衣草', '薄荷', '日落', '咖啡', '时尚杂志'] },
-    // 极简 — 放在最后一组精确匹配里，避免吞掉别人
+    { category: '科技', idPrefixes: ['xiaohu-github', 'xiaohu-sspai', 'gameui'], nameContains: ['GitHub', '少数派', '游戏UI'] },
+    { category: '文艺', idPrefixes: ['xiaohu-lavender', 'xiaohu-mint', 'xiaohu-sunset', 'xiaohu-coffee', 'xiaohu-magazine', 'warmth'], nameContains: ['文艺系列', '薰衣草', '薄荷', '日落', '咖啡', '时尚杂志', '温暖'] },
     { category: '极简', idPrefixes: ['minimal', 'xiaohu-minimal', 'default', 'scarlet', 'academic', 'zen-essence', 'orange', 'yeban', 'brown', 'xiaohu-wechat'], nameContains: ['极简系列', '默认模板', '学术专业', '禅意极简', '叶伴系列'] },
 ];
 
-/**
- * 根据主题 ID 精确判断其风格分类
- */
 export function getThemeCategory(template: Template): StyleCategory {
     const id = (template.id || '').toLowerCase();
-    const name = (template.name || '');
+    const name = template.name || '';
 
     for (const rule of CATEGORY_RULES) {
-        // 检查 ID 前缀
         if (rule.idPrefixes) {
             for (const prefix of rule.idPrefixes) {
-                if (id === prefix.toLowerCase() || id.startsWith(prefix.toLowerCase())) {
+                const normalizedPrefix = prefix.toLowerCase();
+                if (id === normalizedPrefix || id.startsWith(normalizedPrefix)) {
                     return rule.category;
                 }
             }
         }
-        // 检查名称包含
+
+        if (rule.idContains) {
+            for (const keyword of rule.idContains) {
+                if (id.includes(keyword.toLowerCase())) {
+                    return rule.category;
+                }
+            }
+        }
+
         if (rule.nameContains) {
             for (const keyword of rule.nameContains) {
                 if (name.includes(keyword)) {
@@ -76,9 +73,6 @@ export function getThemeCategory(template: Template): StyleCategory {
     return '其他';
 }
 
-/**
- * 主题画廊弹窗
- */
 export class ThemeGalleryModal extends Modal {
     private settingsManager: SettingsManager;
     private templates: Template[];
@@ -87,8 +81,8 @@ export class ThemeGalleryModal extends Modal {
     private previewCallback: (templateId: string) => void;
 
     private selectedCategory: StyleCategory = '极简';
-    private selectedLayoutFamily: string = '';
-    private searchQuery: string = '';
+    private selectedLayoutFamily = '';
+    private searchQuery = '';
 
     private layoutContainer: HTMLElement | null = null;
     private gridContainer: HTMLElement | null = null;
@@ -110,22 +104,58 @@ export class ThemeGalleryModal extends Modal {
         this.onSelect = onSelect;
         this.previewCallback = previewCallback;
 
-        // 初始化默认选中的分类和布局
         this.initializeDefaults();
     }
 
     private initializeDefaults() {
-        const currentTemplate = this.templates.find(t => t.id === this.currentTemplateId);
+        const currentTemplate = this.templates.find(template => template.id === this.currentTemplateId);
         if (currentTemplate) {
             this.selectedCategory = getThemeCategory(currentTemplate);
             this.selectedLayoutFamily = this.parseTemplateFamily(currentTemplate).family;
-        } else {
-            this.selectedCategory = '极简';
-            const catTemplates = this.templates.filter(t => getThemeCategory(t) === '极简');
-            if (catTemplates.length > 0) {
-                this.selectedLayoutFamily = this.parseTemplateFamily(catTemplates[0]).family;
-            }
+            return;
         }
+
+        this.selectedCategory = this.getFirstAvailableCategory();
+        const categoryTemplates = this.getTemplatesForCategory(this.selectedCategory);
+        this.selectedLayoutFamily = categoryTemplates.length > 0
+            ? this.parseTemplateFamily(categoryTemplates[0]).family
+            : '';
+    }
+
+    private getFirstAvailableCategory(): StyleCategory {
+        const categories = Object.keys(STYLE_CATEGORIES) as StyleCategory[];
+        return categories.find(category => this.getTemplatesForCategory(category).length > 0) || '其他';
+    }
+
+    private getTemplatesForCategory(category: StyleCategory): Template[] {
+        return this.templates.filter(template => getThemeCategory(template) === category);
+    }
+
+    private matchesSearch(template: Template): boolean {
+        if (!this.searchQuery) return true;
+
+        const searchable = [
+            template.id,
+            template.name,
+            template.description || '',
+            this.parseTemplateFamily(template).family,
+        ].join(' ').toLowerCase();
+
+        return searchable.includes(this.searchQuery);
+    }
+
+    private getTemplateDescription(template: Template): string {
+        const description = template.description?.trim();
+        if (description) {
+            return description.split('（')[0].trim();
+        }
+
+        const { family, variant } = this.parseTemplateFamily(template);
+        if (variant !== '默认') {
+            return `${variant}配色`;
+        }
+
+        return `${family}主题`;
     }
 
     onOpen() {
@@ -133,7 +163,6 @@ export class ThemeGalleryModal extends Modal {
         modalEl.addClass('mp-theme-gallery-modal');
         contentEl.empty();
 
-        // 头部
         const header = contentEl.createEl('div', { cls: 'mp-gallery-header' });
         header.createEl('h2', { text: '🎨 主题画廊' });
 
@@ -147,22 +176,17 @@ export class ThemeGalleryModal extends Modal {
             this.renderGrid();
         });
 
-        // 主内容区
         const mainContent = contentEl.createEl('div', { cls: 'mp-gallery-main' });
 
-        // 1. 分类栏 (左)
         const sidebar = mainContent.createEl('div', { cls: 'mp-gallery-sidebar' });
         this.renderSidebar(sidebar);
 
-        // 2. 布局栏 (中)
         this.layoutContainer = mainContent.createEl('div', { cls: 'mp-gallery-layouts' });
         this.renderLayoutList();
 
-        // 3. 变体网格 (右)
         this.gridContainer = mainContent.createEl('div', { cls: 'mp-gallery-grid' });
         this.renderGrid();
 
-        // 底部
         const footer = contentEl.createEl('div', { cls: 'mp-gallery-footer' });
         const cancelBtn = footer.createEl('button', { text: '取消', cls: 'mp-gallery-btn-cancel' });
         cancelBtn.addEventListener('click', () => this.close());
@@ -182,6 +206,8 @@ export class ThemeGalleryModal extends Modal {
 
     private renderSidebar(container: HTMLElement) {
         container.empty();
+        this.categoryButtons.clear();
+
         const categoryCounts = this.getCategoryCounts();
 
         for (const [category, config] of Object.entries(STYLE_CATEGORIES)) {
@@ -204,15 +230,10 @@ export class ThemeGalleryModal extends Modal {
             btn.addEventListener('click', () => {
                 this.selectedCategory = category as StyleCategory;
                 this.updateCategoryButtons();
-                
-                // 重置布局：选择该分类下的第一个排版结构
+
                 const families = this.getLayoutFamilies();
-                if (families.length > 0) {
-                    this.selectedLayoutFamily = families[0].name;
-                } else {
-                    this.selectedLayoutFamily = '';
-                }
-                
+                this.selectedLayoutFamily = families.length > 0 ? families[0].name : '';
+
                 this.renderLayoutList();
                 this.renderGrid();
             });
@@ -230,6 +251,7 @@ export class ThemeGalleryModal extends Modal {
 
     private renderLayoutList() {
         if (!this.layoutContainer) return;
+
         this.layoutContainer.empty();
         this.layoutButtons.clear();
 
@@ -241,7 +263,7 @@ export class ThemeGalleryModal extends Modal {
             return;
         }
 
-        if (!families.some(f => f.name === this.selectedLayoutFamily)) {
+        if (!families.some(family => family.name === this.selectedLayoutFamily)) {
             this.selectedLayoutFamily = families[0].name;
         }
 
@@ -271,21 +293,19 @@ export class ThemeGalleryModal extends Modal {
     }
 
     private getLayoutFamilies() {
-        const categoryTemplates = this.templates.filter(t => {
-            if (this.searchQuery) {
-                const searchable = `${t.id} ${t.name} ${t.description}`.toLowerCase();
-                return searchable.includes(this.searchQuery);
-            }
-            return getThemeCategory(t) === this.selectedCategory;
-        });
+        const categoryTemplates = this.getTemplatesForCategory(this.selectedCategory)
+            .filter(template => this.matchesSearch(template));
 
-        const familyMap = new Map<string, { description: string, templates: Template[] }>();
-        for (const t of categoryTemplates) {
-            const { family } = this.parseTemplateFamily(t);
+        const familyMap = new Map<string, { description: string; templates: Template[] }>();
+        for (const template of categoryTemplates) {
+            const { family } = this.parseTemplateFamily(template);
             if (!familyMap.has(family)) {
-                familyMap.set(family, { description: t.description.split('，')[0], templates: [] });
+                familyMap.set(family, {
+                    description: this.getTemplateDescription(template),
+                    templates: []
+                });
             }
-            familyMap.get(family)!.templates.push(t);
+            familyMap.get(family)!.templates.push(template);
         }
 
         return Array.from(familyMap.entries()).map(([name, data]) => ({
@@ -297,16 +317,12 @@ export class ThemeGalleryModal extends Modal {
 
     private renderGrid() {
         if (!this.gridContainer) return;
+
         this.gridContainer.empty();
 
-        const familyTemplates = this.templates.filter(t => {
-            const { family } = this.parseTemplateFamily(t);
-            if (this.searchQuery) {
-                const searchable = `${t.id} ${t.name} ${t.description}`.toLowerCase();
-                if (!searchable.includes(this.searchQuery)) return false;
-            } else {
-                if (getThemeCategory(t) !== this.selectedCategory) return false;
-            }
+        const familyTemplates = this.getTemplatesForCategory(this.selectedCategory).filter(template => {
+            if (!this.matchesSearch(template)) return false;
+            const { family } = this.parseTemplateFamily(template);
             return family === this.selectedLayoutFamily;
         });
 
@@ -365,12 +381,13 @@ export class ThemeGalleryModal extends Modal {
         });
     }
 
-    private parseTemplateFamily(template: Template): { family: string, variant: string } {
+    private parseTemplateFamily(template: Template): { family: string; variant: string } {
         const name = template.name.replace(/\s*\(xiaohu\)\s*/i, '');
         const parts = name.split(' - ');
         if (parts.length > 1) {
             return { family: parts[0], variant: parts[1] };
         }
+
         return { family: name, variant: '默认' };
     }
 
@@ -387,54 +404,57 @@ export class ThemeGalleryModal extends Modal {
 
     private getPreviewText(template: Template): string {
         const name = template.name.replace(/\s*\(xiaohu\)\s*/i, '');
-        const keywords = ['聚焦', '精致', '字节', '赤陶', '中国', '报纸', '墨韵', '暗夜',
-                         '运动', '包豪斯', '薄荷', '日落', '薰衣草', '咖啡', '杂志',
-                         '优雅', '醒目', '极简'];
+        const keywords = ['聚焦', '精致', '字节', '兵马俑', '中国', '报纸', '墨韵', '暗夜', '运动', '包豪斯', '薄荷', '日落', '薰衣草', '咖啡', '杂志', '优雅', '醒目', '极简'];
 
-        for (const kw of keywords) {
-            if (name.includes(kw)) return kw;
+        for (const keyword of keywords) {
+            if (name.includes(keyword)) return keyword;
         }
 
         if (name.length <= 3) return name;
+
         const cnMatch = name.match(/[\u4e00-\u9fa5]/g);
         if (cnMatch) {
-            const chars = cnMatch.filter(c => c !== '系' && c !== '列').slice(0, 2);
+            const chars = cnMatch.filter(char => char !== '系' && char !== '列').slice(0, 2);
             if (chars.length >= 2) return chars.join('');
         }
+
         return name.slice(0, 3);
     }
 
     private getContrastColor(hexColor: string): string {
         if (!hexColor || !hexColor.startsWith('#')) return '#ffffff';
+
         const hex = hexColor.replace('#', '');
         if (hex.length < 6) return '#ffffff';
-        const r = parseInt(hex.substr(0, 2), 16);
-        const g = parseInt(hex.substr(2, 2), 16);
-        const b = parseInt(hex.substr(4, 2), 16);
+
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
         const brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+
         return brightness > 128 ? '#1a1a2e' : '#ffffff';
     }
 
     private lightenColor(hex: string, percent: number): string {
         if (!hex || !hex.startsWith('#')) return hex;
+
         const num = parseInt(hex.replace('#', ''), 16);
         const amt = Math.round(2.55 * percent);
-        const R = Math.min(255, (num >> 16) + amt);
-        const G = Math.min(255, ((num >> 8) & 0x00FF) + amt);
-        const B = Math.min(255, (num & 0x0000FF) + amt);
-        return `#${(0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1)}`;
+        const r = Math.min(255, (num >> 16) + amt);
+        const g = Math.min(255, ((num >> 8) & 0x00ff) + amt);
+        const b = Math.min(255, (num & 0x0000ff) + amt);
+
+        return `#${(0x1000000 + r * 0x10000 + g * 0x100 + b).toString(16).slice(1)}`;
     }
 
     private getCategoryCounts(): Record<string, number> {
         const counts: Record<string, number> = {};
-        
-        // 分组统计：大类 -> 排版结构数量
         const categoryFamilies = new Map<string, Set<string>>();
 
         for (const template of this.templates) {
             const category = getThemeCategory(template);
             const { family } = this.parseTemplateFamily(template);
-            
+
             if (!categoryFamilies.has(category)) {
                 categoryFamilies.set(category, new Set());
             }
