@@ -17919,12 +17919,12 @@ var import_obsidian2 = require("obsidian");
 var STYLE_CATEGORIES = {
   "\u6781\u7B80": {
     description: "\u7B80\u6D01\u5E72\u51C0\uFF0C\u6CE8\u91CD\u5185\u5BB9",
-    keywords: ["minimal", "\u7B80\u7EA6", "zen", "essence", "academic", "\u6781\u7B80", "\u7985\u610F", "\u5B66\u672F"],
+    keywords: ["minimal", "standard", "classic", "default", "\u7B80\u7EA6", "zen", "essence", "academic", "\u6781\u7B80", "\u7985\u610F", "\u5B66\u672F", "\u6807\u51C6", "\u9ED8\u8BA4"],
     color: "#636e72"
   },
   "\u6E10\u53D8": {
     description: "\u6E10\u53D8\u8272\u6807\u9898\uFF0C\u73B0\u4EE3\u611F",
-    keywords: ["focus", "elegant", "bytedance", "\u805A\u7126", "\u7CBE\u81F4"],
+    keywords: ["focus", "elegant", "bytedance", "gradient", "\u805A\u7126", "\u7CBE\u81F4", "\u6E10\u53D8", "\u5B57\u8282"],
     color: "#0984e3"
   },
   "\u9192\u76EE": {
@@ -17934,23 +17934,28 @@ var STYLE_CATEGORIES = {
   },
   "\u6DF1\u8272": {
     description: "\u6DF1\u8272/\u6697\u591C\u98CE\u683C",
-    keywords: ["dark", "ink", "midnight", "\u58A8\u97F5", "\u6697\u591C"],
+    keywords: ["dark", "ink", "midnight", "night", "deep", "\u9ED1\u97F5", "\u58A8\u97F5", "\u6DF1\u8272", "\u6697\u591C", "\u5348\u591C"],
     color: "#2d3436"
   },
   "\u53E4\u5178": {
     description: "\u4F20\u7EDF\u6587\u5316\uFF0C\u4E2D\u5F0F\u7F8E\u5B66",
-    keywords: ["chinese", "terracotta", "newspaper", "\u4E2D\u56FD", "\u8D64\u9676", "\u62A5\u7EB8"],
+    keywords: ["chinese", "terracotta", "newspaper", "retro", "\u4E2D\u56FD", "\u8D64\u9676", "\u62A5\u7EB8", "\u53E4\u5178"],
     color: "#b7410e"
   },
   "\u79D1\u6280": {
     description: "\u79D1\u6280\u611F\uFF0C\u5F00\u53D1\u8005\u98CE\u683C",
-    keywords: ["github", "sspai", "GitHub", "\u5C11\u6570\u6D3E"],
+    keywords: ["github", "sspai", "tech", "developer", "GitHub", "\u5C11\u6570\u6D3E", "\u79D1\u6280"],
     color: "#27c3b4"
   },
   "\u6587\u827A": {
     description: "\u67D4\u548C\u914D\u8272\uFF0C\u6587\u827A\u6E05\u65B0",
-    keywords: ["lavender", "mint", "sunset", "coffee", "magazine", "\u85B0\u8863\u8349", "\u8584\u8377", "\u65E5\u843D", "\u5496\u5561", "\u753B\u520A", "\u6742\u5FD7"],
+    keywords: ["lavender", "mint", "sunset", "coffee", "magazine", "floral", "\u85B0\u8863\u8349", "\u8584\u8377", "\u65E5\u843D", "\u5496\u5561", "\u753B\u520A", "\u6742\u5FD7", "\u6587\u827A"],
     color: "#a29bfe"
+  },
+  "\u6559\u80B2": {
+    description: "\u9002\u5408\u5B66\u4E60\u4E0E\u6559\u5B66\u5185\u5BB9",
+    keywords: ["teacher", "kindergarten", "child", "education", "\u6559\u5E08", "\u6559\u80B2", "\u5E7C\u513F\u56ED", "\u4EB2\u5B50"],
+    color: "#fdcb6e"
   },
   "\u5176\u4ED6": {
     description: "\u5176\u4ED6\u98CE\u683C\u4E3B\u9898",
@@ -17959,15 +17964,16 @@ var STYLE_CATEGORIES = {
   }
 };
 function getThemeCategory(template) {
-  var _a;
-  const id = template.id.toLowerCase();
-  const name = template.name.toLowerCase();
-  const source = ((_a = template.source) == null ? void 0 : _a.toLowerCase()) || "";
+  const id = (template.id || "").toLowerCase();
+  const name = (template.name || "").toLowerCase();
+  const source = (template.source || "").toLowerCase();
+  const desc = (template.description || "").toLowerCase();
   for (const [category, config2] of Object.entries(STYLE_CATEGORIES)) {
     if (category === "\u5176\u4ED6")
       continue;
     for (const keyword of config2.keywords) {
-      if (id.includes(keyword.toLowerCase()) || name.includes(keyword.toLowerCase())) {
+      const lowKeyword = keyword.toLowerCase();
+      if (id.includes(lowKeyword) || name.includes(lowKeyword) || desc.includes(lowKeyword)) {
         return category;
       }
     }

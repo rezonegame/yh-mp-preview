@@ -13,12 +13,12 @@ import type { Template } from '../templateManager';
 export const STYLE_CATEGORIES = {
     '极简': {
         description: '简洁干净，注重内容',
-        keywords: ['minimal', '简约', 'zen', 'essence', 'academic', '极简', '禅意', '学术'],
+        keywords: ['minimal', 'standard', 'classic', 'default', '简约', 'zen', 'essence', 'academic', '极简', '禅意', '学术', '标准', '默认'],
         color: '#636e72'
     },
     '渐变': {
         description: '渐变色标题，现代感',
-        keywords: ['focus', 'elegant', 'bytedance', '聚焦', '精致'],
+        keywords: ['focus', 'elegant', 'bytedance', 'gradient', '聚焦', '精致', '渐变', '字节'],
         color: '#0984e3'
     },
     '醒目': {
@@ -28,23 +28,28 @@ export const STYLE_CATEGORIES = {
     },
     '深色': {
         description: '深色/暗夜风格',
-        keywords: ['dark', 'ink', 'midnight', '墨韵', '暗夜'],
+        keywords: ['dark', 'ink', 'midnight', 'night', 'deep', '黑韵', '墨韵', '深色', '暗夜', '午夜'],
         color: '#2d3436'
     },
     '古典': {
         description: '传统文化，中式美学',
-        keywords: ['chinese', 'terracotta', 'newspaper', '中国', '赤陶', '报纸'],
+        keywords: ['chinese', 'terracotta', 'newspaper', 'retro', '中国', '赤陶', '报纸', '古典'],
         color: '#b7410e'
     },
     '科技': {
         description: '科技感，开发者风格',
-        keywords: ['github', 'sspai', 'GitHub', '少数派'],
+        keywords: ['github', 'sspai', 'tech', 'developer', 'GitHub', '少数派', '科技'],
         color: '#27c3b4'
     },
     '文艺': {
         description: '柔和配色，文艺清新',
-        keywords: ['lavender', 'mint', 'sunset', 'coffee', 'magazine', '薰衣草', '薄荷', '日落', '咖啡', '画刊', '杂志'],
+        keywords: ['lavender', 'mint', 'sunset', 'coffee', 'magazine', 'floral', '薰衣草', '薄荷', '日落', '咖啡', '画刊', '杂志', '文艺'],
         color: '#a29bfe'
+    },
+    '教育': {
+        description: '适合学习与教学内容',
+        keywords: ['teacher', 'kindergarten', 'child', 'education', '教师', '教育', '幼儿园', '亲子'],
+        color: '#fdcb6e'
     },
     '其他': {
         description: '其他风格主题',
@@ -59,15 +64,18 @@ export type StyleCategory = keyof typeof STYLE_CATEGORIES;
  * 根据主题 ID 判断其风格分类
  */
 export function getThemeCategory(template: Template): StyleCategory {
-    const id = template.id.toLowerCase();
-    const name = template.name.toLowerCase();
-    const source = template.source?.toLowerCase() || '';
+    const id = (template.id || '').toLowerCase();
+    const name = (template.name || '').toLowerCase();
+    const source = (template.source || '').toLowerCase();
+    const desc = (template.description || '').toLowerCase();
 
+    // 优先匹配各分类关键词
     for (const [category, config] of Object.entries(STYLE_CATEGORIES)) {
         if (category === '其他') continue;
 
         for (const keyword of config.keywords) {
-            if (id.includes(keyword.toLowerCase()) || name.includes(keyword.toLowerCase())) {
+            const lowKeyword = keyword.toLowerCase();
+            if (id.includes(lowKeyword) || name.includes(lowKeyword) || desc.includes(lowKeyword)) {
                 return category as StyleCategory;
             }
         }
