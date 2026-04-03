@@ -1,0 +1,44 @@
+=== 极简 === (6 families, 24 templates)
+  [学术专业] (3): ['academic-pro-forest', 'academic-pro-slate', 'academic-pro']
+  [学术主题] (1): ['academic']
+  [极简系列] (15): ['minimal-blue', 'minimal-gold', 'minimal-gray', 'minimal-green', 'minimal-navy', 'minimal-orange', 'minimal-red', 'minimal-sky', 'minimal', 'scarlet', 'xiaohu-minimal-blue', 'xiaohu-minimal-gold', 'xiaohu-minimal-gray', 'xiaohu-minimal-navy', 'xiaohu-minimal-red']
+  [橙心主题] (1): ['orange']
+  [禅意极简] (3): ['zen-essence-sakura', 'zen-essence-teal', 'zen-essence']
+  [默认模板] (1): ['default']
+
+=== 渐变 === (4 families, 24 templates)
+  [优雅主题] (1): ['elegant']
+  [字节跳动] (1): ['xiaohu-bytedance']
+  [精致系列] (11): ['elegant-blue', 'elegant-gold', 'elegant-gray', 'elegant-green', 'elegant-navy', 'elegant-orange', 'elegant-red', 'elegant-sky', 'xiaohu-elegant-blue', 'xiaohu-elegant-green', 'xiaohu-elegant-navy']
+  [聚焦系列] (11): ['focus-blue', 'focus-gold', 'focus-gray', 'focus-green', 'focus-navy', 'focus-orange', 'focus-red', 'focus-sky', 'xiaohu-focus-blue', 'xiaohu-focus-gold', 'xiaohu-focus-red']
+
+=== 醒目 === (4 families, 15 templates)
+  [包豪斯] (1): ['xiaohu-bauhaus']
+  [现代报告] (2): ['modern-report-navy', 'modern-report']
+  [运动风] (1): ['xiaohu-sports']
+  [醒目系列] (11): ['bold-blue', 'bold-gold', 'bold-gray', 'bold-green', 'bold-navy', 'bold-orange', 'bold-red', 'bold-sky', 'xiaohu-bold-blue', 'xiaohu-bold-green', 'xiaohu-bold-navy']
+
+=== 深色 === (2 families, 4 templates)
+  [墨绿主题] (1): ['darkgreen']
+  [暗夜系列] (3): ['dark', 'xiaohu-ink', 'xiaohu-midnight']
+
+=== 古典 === (2 families, 3 templates)
+  [中式美学] (2): ['xiaohu-chinese', 'xiaohu-terracotta']
+  [经典报纸] (1): ['xiaohu-newspaper']
+
+=== 科技 === (2 families, 2 templates)
+  [GitHub] (1): ['xiaohu-github']
+  [少数派] (1): ['xiaohu-sspai']
+
+=== 文艺 === (2 families, 5 templates)
+  [文艺系列] (4): ['xiaohu-coffee-house', 'xiaohu-lavender-dream', 'xiaohu-mint-fresh', 'xiaohu-sunset-amber']
+  [时尚杂志] (1): ['xiaohu-magazine']
+
+=== 教育 === (1 families, 3 templates)
+  [教育系列] (3): ['kindergarten', 'parent-child', 'teacher']
+
+=== 其他 === (4 families, 9 templates)
+  [创意系列] (5): ['adventure', 'blackboard', 'gameui', 'playful', 'warmth']
+  [叶伴系列] (2): ['yeban-orange', 'yeban']
+  [微信原生] (1): ['xiaohu-wechat-native']
+  [悦灵雅棕] (1): ['brown']

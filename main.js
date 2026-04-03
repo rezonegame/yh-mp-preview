@@ -8248,7 +8248,7 @@ var init_default = __esm({
   "src/templates/default.json"() {
     default_default = {
       id: "default",
-      name: "\u9ED8\u8BA4\u6A21\u677F",
+      name: "\u9ED8\u8BA4\u6A21\u677F - \u6807\u51C6",
       styles: {
         container: "",
         title: {
@@ -8524,7 +8524,7 @@ var init_orange = __esm({
   "src/templates/orange.json"() {
     orange_default = {
       id: "orange",
-      name: "\u6A59\u5FC3\u4E3B\u9898",
+      name: "\u6781\u7B80\u7CFB\u5217 - \u6A59\u8272",
       styles: {
         container: "",
         title: {
@@ -8616,7 +8616,7 @@ var init_elegant = __esm({
   "src/templates/elegant.json"() {
     elegant_default = {
       id: "elegant",
-      name: "\u4F18\u96C5\u4E3B\u9898",
+      name: "\u7CBE\u81F4\u7CFB\u5217 - \u7ECF\u5178",
       styles: {
         container: "",
         title: {
@@ -8800,7 +8800,7 @@ var init_academic = __esm({
   "src/templates/academic.json"() {
     academic_default = {
       id: "academic",
-      name: "\u5B66\u672F\u4E3B\u9898",
+      name: "\u5B66\u672F\u4E13\u4E1A - \u7ECF\u5178",
       styles: {
         container: "",
         title: {
@@ -9076,7 +9076,7 @@ var init_darkgreen = __esm({
   "src/templates/darkgreen.json"() {
     darkgreen_default = {
       id: "darkgreen",
-      name: "\u58A8\u7EFF\u4E3B\u9898",
+      name: "\u6697\u591C\u7CFB\u5217 - \u58A8\u7EFF",
       styles: {
         container: "",
         title: {
@@ -9168,7 +9168,7 @@ var init_brown = __esm({
   "src/templates/brown.json"() {
     brown_default = {
       id: "brown",
-      name: "\u60A6\u7075\u96C5\u68D5",
+      name: "\u53F6\u4F34\u7CFB\u5217 - \u96C5\u68D5",
       styles: {
         container: "",
         title: {
@@ -17917,64 +17917,50 @@ init_ai();
 // src/settings/ThemeGalleryModal.ts
 var import_obsidian2 = require("obsidian");
 var STYLE_CATEGORIES = {
-  "\u6781\u7B80": {
-    description: "\u7B80\u6D01\u5E72\u51C0\uFF0C\u6CE8\u91CD\u5185\u5BB9",
-    keywords: ["minimal", "standard", "classic", "default", "\u7B80\u7EA6", "zen", "essence", "academic", "\u6781\u7B80", "\u7985\u610F", "\u5B66\u672F", "\u6807\u51C6", "\u9ED8\u8BA4"],
-    color: "#636e72"
-  },
-  "\u6E10\u53D8": {
-    description: "\u6E10\u53D8\u8272\u6807\u9898\uFF0C\u73B0\u4EE3\u611F",
-    keywords: ["focus", "elegant", "bytedance", "gradient", "\u805A\u7126", "\u7CBE\u81F4", "\u6E10\u53D8", "\u5B57\u8282"],
-    color: "#0984e3"
-  },
-  "\u9192\u76EE": {
-    description: "\u5927\u80C6\u914D\u8272\uFF0C\u89C6\u89C9\u51B2\u51FB",
-    keywords: ["bold", "sports", "bauhaus", "modern-report", "\u9192\u76EE", "\u8FD0\u52A8", "\u5305\u8C6A\u65AF", "\u62A5\u544A", "\u9ED1\u767D"],
-    color: "#d63031"
-  },
-  "\u6DF1\u8272": {
-    description: "\u6DF1\u8272/\u6697\u591C\u98CE\u683C",
-    keywords: ["dark", "ink", "midnight", "night", "deep", "\u9ED1\u97F5", "\u58A8\u97F5", "\u6DF1\u8272", "\u6697\u591C", "\u5348\u591C"],
-    color: "#2d3436"
-  },
-  "\u53E4\u5178": {
-    description: "\u4F20\u7EDF\u6587\u5316\uFF0C\u4E2D\u5F0F\u7F8E\u5B66",
-    keywords: ["chinese", "terracotta", "newspaper", "retro", "\u4E2D\u56FD", "\u8D64\u9676", "\u62A5\u7EB8", "\u53E4\u5178"],
-    color: "#b7410e"
-  },
-  "\u79D1\u6280": {
-    description: "\u79D1\u6280\u611F\uFF0C\u5F00\u53D1\u8005\u98CE\u683C",
-    keywords: ["github", "sspai", "tech", "developer", "GitHub", "\u5C11\u6570\u6D3E", "\u79D1\u6280"],
-    color: "#27c3b4"
-  },
-  "\u6587\u827A": {
-    description: "\u67D4\u548C\u914D\u8272\uFF0C\u6587\u827A\u6E05\u65B0",
-    keywords: ["lavender", "mint", "sunset", "coffee", "magazine", "floral", "\u85B0\u8863\u8349", "\u8584\u8377", "\u65E5\u843D", "\u5496\u5561", "\u753B\u520A", "\u6742\u5FD7", "\u6587\u827A"],
-    color: "#a29bfe"
-  },
-  "\u6559\u80B2": {
-    description: "\u9002\u5408\u5B66\u4E60\u4E0E\u6559\u5B66\u5185\u5BB9",
-    keywords: ["teacher", "kindergarten", "child", "education", "\u6559\u5E08", "\u6559\u80B2", "\u5E7C\u513F\u56ED", "\u4EB2\u5B50"],
-    color: "#fdcb6e"
-  },
-  "\u5176\u4ED6": {
-    description: "\u5176\u4ED6\u98CE\u683C\u4E3B\u9898",
-    keywords: [],
-    color: "#95a5a6"
-  }
+  "\u6781\u7B80": { description: "\u7B80\u6D01\u5E72\u51C0\uFF0C\u6CE8\u91CD\u5185\u5BB9", color: "#636e72" },
+  "\u6E10\u53D8": { description: "\u6E10\u53D8\u8272\u6807\u9898\uFF0C\u73B0\u4EE3\u611F", color: "#0984e3" },
+  "\u9192\u76EE": { description: "\u5927\u80C6\u914D\u8272\uFF0C\u89C6\u89C9\u51B2\u51FB", color: "#d63031" },
+  "\u6DF1\u8272": { description: "\u6DF1\u8272/\u6697\u591C\u98CE\u683C", color: "#2d3436" },
+  "\u53E4\u5178": { description: "\u4F20\u7EDF\u6587\u5316\uFF0C\u4E2D\u5F0F\u7F8E\u5B66", color: "#b7410e" },
+  "\u79D1\u6280": { description: "\u79D1\u6280\u611F\uFF0C\u5F00\u53D1\u8005\u98CE\u683C", color: "#27c3b4" },
+  "\u6587\u827A": { description: "\u67D4\u548C\u914D\u8272\uFF0C\u6587\u827A\u6E05\u65B0", color: "#a29bfe" },
+  "\u6559\u80B2": { description: "\u9002\u5408\u5B66\u4E60\u4E0E\u6559\u5B66\u5185\u5BB9", color: "#fdcb6e" },
+  "\u5176\u4ED6": { description: "\u5176\u4ED6\u98CE\u683C\u4E3B\u9898", color: "#95a5a6" }
 };
+var CATEGORY_RULES = [
+  // 深色 — 必须优先于极简，否则 dark.json 的名字"暗夜系列 - 极简"会被"极简"抢走
+  { category: "\u6DF1\u8272", idPrefixes: ["dark", "xiaohu-ink", "xiaohu-midnight"], nameContains: ["\u6697\u591C"] },
+  // 教育
+  { category: "\u6559\u80B2", idPrefixes: ["parent-child", "teacher", "kindergarten"], nameContains: ["\u6559\u80B2\u7CFB\u5217"] },
+  // 渐变 — focus/elegant/bytedance 系列（'elegant' 独立 ID 也要匹配）
+  { category: "\u6E10\u53D8", idPrefixes: ["focus-", "focus", "elegant", "xiaohu-focus", "xiaohu-elegant", "xiaohu-bytedance"], nameContains: ["\u805A\u7126\u7CFB\u5217", "\u7CBE\u81F4\u7CFB\u5217", "\u5B57\u8282\u8DF3\u52A8"] },
+  // 醒目 — bold 系列 + bauhaus + sports + modern-report
+  { category: "\u9192\u76EE", idPrefixes: ["bold-", "bold", "xiaohu-bold", "xiaohu-bauhaus", "xiaohu-sports", "modern-report"], nameContains: ["\u9192\u76EE\u7CFB\u5217", "\u5305\u8C6A\u65AF", "\u8FD0\u52A8\u98CE", "\u73B0\u4EE3\u62A5\u544A"] },
+  // 古典
+  { category: "\u53E4\u5178", idPrefixes: ["xiaohu-chinese", "xiaohu-terracotta", "xiaohu-newspaper"], nameContains: ["\u4E2D\u5F0F\u7F8E\u5B66", "\u7ECF\u5178\u62A5\u7EB8"] },
+  // 科技
+  { category: "\u79D1\u6280", idPrefixes: ["xiaohu-github", "xiaohu-sspai"], nameContains: ["GitHub", "\u5C11\u6570\u6D3E"] },
+  // 文艺
+  { category: "\u6587\u827A", idPrefixes: ["xiaohu-lavender", "xiaohu-mint", "xiaohu-sunset", "xiaohu-coffee", "xiaohu-magazine"], nameContains: ["\u6587\u827A\u7CFB\u5217", "\u85B0\u8863\u8349", "\u8584\u8377", "\u65E5\u843D", "\u5496\u5561", "\u65F6\u5C1A\u6742\u5FD7"] },
+  // 极简 — 放在最后一组精确匹配里，避免吞掉别人
+  { category: "\u6781\u7B80", idPrefixes: ["minimal", "xiaohu-minimal", "default", "scarlet", "academic", "zen-essence", "orange", "yeban", "brown", "xiaohu-wechat"], nameContains: ["\u6781\u7B80\u7CFB\u5217", "\u9ED8\u8BA4\u6A21\u677F", "\u5B66\u672F\u4E13\u4E1A", "\u7985\u610F\u6781\u7B80", "\u53F6\u4F34\u7CFB\u5217"] }
+];
 function getThemeCategory(template) {
   const id = (template.id || "").toLowerCase();
-  const name = (template.name || "").toLowerCase();
-  const source = (template.source || "").toLowerCase();
-  const desc = (template.description || "").toLowerCase();
-  for (const [category, config2] of Object.entries(STYLE_CATEGORIES)) {
-    if (category === "\u5176\u4ED6")
-      continue;
-    for (const keyword of config2.keywords) {
-      const lowKeyword = keyword.toLowerCase();
-      if (id.includes(lowKeyword) || name.includes(lowKeyword) || desc.includes(lowKeyword)) {
-        return category;
+  const name = template.name || "";
+  for (const rule of CATEGORY_RULES) {
+    if (rule.idPrefixes) {
+      for (const prefix of rule.idPrefixes) {
+        if (id === prefix.toLowerCase() || id.startsWith(prefix.toLowerCase())) {
+          return rule.category;
+        }
+      }
+    }
+    if (rule.nameContains) {
+      for (const keyword of rule.nameContains) {
+        if (name.includes(keyword)) {
+          return rule.category;
+        }
       }
     }
   }

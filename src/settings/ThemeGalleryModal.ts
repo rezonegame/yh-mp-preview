@@ -8,75 +8,67 @@ import type { SettingsManager } from './settings';
 import type { Template } from '../templateManager';
 
 /**
- * 风格分组定义
+ * 风格分组定义（仅用于显示信息）
  */
 export const STYLE_CATEGORIES = {
-    '极简': {
-        description: '简洁干净，注重内容',
-        keywords: ['minimal', 'standard', 'classic', 'default', '简约', 'zen', 'essence', 'academic', '极简', '禅意', '学术', '标准', '默认'],
-        color: '#636e72'
-    },
-    '渐变': {
-        description: '渐变色标题，现代感',
-        keywords: ['focus', 'elegant', 'bytedance', 'gradient', '聚焦', '精致', '渐变', '字节'],
-        color: '#0984e3'
-    },
-    '醒目': {
-        description: '大胆配色，视觉冲击',
-        keywords: ['bold', 'sports', 'bauhaus', 'modern-report', '醒目', '运动', '包豪斯', '报告', '黑白'],
-        color: '#d63031'
-    },
-    '深色': {
-        description: '深色/暗夜风格',
-        keywords: ['dark', 'ink', 'midnight', 'night', 'deep', '黑韵', '墨韵', '深色', '暗夜', '午夜'],
-        color: '#2d3436'
-    },
-    '古典': {
-        description: '传统文化，中式美学',
-        keywords: ['chinese', 'terracotta', 'newspaper', 'retro', '中国', '赤陶', '报纸', '古典'],
-        color: '#b7410e'
-    },
-    '科技': {
-        description: '科技感，开发者风格',
-        keywords: ['github', 'sspai', 'tech', 'developer', 'GitHub', '少数派', '科技'],
-        color: '#27c3b4'
-    },
-    '文艺': {
-        description: '柔和配色，文艺清新',
-        keywords: ['lavender', 'mint', 'sunset', 'coffee', 'magazine', 'floral', '薰衣草', '薄荷', '日落', '咖啡', '画刊', '杂志', '文艺'],
-        color: '#a29bfe'
-    },
-    '教育': {
-        description: '适合学习与教学内容',
-        keywords: ['teacher', 'kindergarten', 'child', 'education', '教师', '教育', '幼儿园', '亲子'],
-        color: '#fdcb6e'
-    },
-    '其他': {
-        description: '其他风格主题',
-        keywords: [],
-        color: '#95a5a6'
-    }
+    '极简': { description: '简洁干净，注重内容', color: '#636e72' },
+    '渐变': { description: '渐变色标题，现代感', color: '#0984e3' },
+    '醒目': { description: '大胆配色，视觉冲击', color: '#d63031' },
+    '深色': { description: '深色/暗夜风格', color: '#2d3436' },
+    '古典': { description: '传统文化，中式美学', color: '#b7410e' },
+    '科技': { description: '科技感，开发者风格', color: '#27c3b4' },
+    '文艺': { description: '柔和配色，文艺清新', color: '#a29bfe' },
+    '教育': { description: '适合学习与教学内容', color: '#fdcb6e' },
+    '其他': { description: '其他风格主题', color: '#95a5a6' }
 };
 
 export type StyleCategory = keyof typeof STYLE_CATEGORIES;
 
 /**
- * 根据主题 ID 判断其风格分类
+ * 显式的分类映射表（按 ID 前缀精确匹配，避免关键词互抢）
+ * 规则按优先级从高到低排列，使用 ID 前缀匹配
+ */
+const CATEGORY_RULES: Array<{ category: StyleCategory; idPrefixes?: string[]; idContains?: string[]; nameContains?: string[] }> = [
+    // 深色 — 必须优先于极简，否则 dark.json 的名字"暗夜系列 - 极简"会被"极简"抢走
+    { category: '深色', idPrefixes: ['dark', 'xiaohu-ink', 'xiaohu-midnight'], nameContains: ['暗夜'] },
+    // 教育
+    { category: '教育', idPrefixes: ['parent-child', 'teacher', 'kindergarten'], nameContains: ['教育系列'] },
+    // 渐变 — focus/elegant/bytedance 系列（'elegant' 独立 ID 也要匹配）
+    { category: '渐变', idPrefixes: ['focus-', 'focus', 'elegant', 'xiaohu-focus', 'xiaohu-elegant', 'xiaohu-bytedance'], nameContains: ['聚焦系列', '精致系列', '字节跳动'] },
+    // 醒目 — bold 系列 + bauhaus + sports + modern-report
+    { category: '醒目', idPrefixes: ['bold-', 'bold', 'xiaohu-bold', 'xiaohu-bauhaus', 'xiaohu-sports', 'modern-report'], nameContains: ['醒目系列', '包豪斯', '运动风', '现代报告'] },
+    // 古典
+    { category: '古典', idPrefixes: ['xiaohu-chinese', 'xiaohu-terracotta', 'xiaohu-newspaper'], nameContains: ['中式美学', '经典报纸'] },
+    // 科技
+    { category: '科技', idPrefixes: ['xiaohu-github', 'xiaohu-sspai'], nameContains: ['GitHub', '少数派'] },
+    // 文艺
+    { category: '文艺', idPrefixes: ['xiaohu-lavender', 'xiaohu-mint', 'xiaohu-sunset', 'xiaohu-coffee', 'xiaohu-magazine'], nameContains: ['文艺系列', '薰衣草', '薄荷', '日落', '咖啡', '时尚杂志'] },
+    // 极简 — 放在最后一组精确匹配里，避免吞掉别人
+    { category: '极简', idPrefixes: ['minimal', 'xiaohu-minimal', 'default', 'scarlet', 'academic', 'zen-essence', 'orange', 'yeban', 'brown', 'xiaohu-wechat'], nameContains: ['极简系列', '默认模板', '学术专业', '禅意极简', '叶伴系列'] },
+];
+
+/**
+ * 根据主题 ID 精确判断其风格分类
  */
 export function getThemeCategory(template: Template): StyleCategory {
     const id = (template.id || '').toLowerCase();
-    const name = (template.name || '').toLowerCase();
-    const source = (template.source || '').toLowerCase();
-    const desc = (template.description || '').toLowerCase();
+    const name = (template.name || '');
 
-    // 优先匹配各分类关键词
-    for (const [category, config] of Object.entries(STYLE_CATEGORIES)) {
-        if (category === '其他') continue;
-
-        for (const keyword of config.keywords) {
-            const lowKeyword = keyword.toLowerCase();
-            if (id.includes(lowKeyword) || name.includes(lowKeyword) || desc.includes(lowKeyword)) {
-                return category as StyleCategory;
+    for (const rule of CATEGORY_RULES) {
+        // 检查 ID 前缀
+        if (rule.idPrefixes) {
+            for (const prefix of rule.idPrefixes) {
+                if (id === prefix.toLowerCase() || id.startsWith(prefix.toLowerCase())) {
+                    return rule.category;
+                }
+            }
+        }
+        // 检查名称包含
+        if (rule.nameContains) {
+            for (const keyword of rule.nameContains) {
+                if (name.includes(keyword)) {
+                    return rule.category;
+                }
             }
         }
     }
