@@ -37,384 +37,6 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/ai/ContentAnalyzer.ts
-function detectDialogue(lines) {
-  const dialoguePattern = /^(.+?)\s*[：:]\s*(.+)$/;
-  const detectedLines = [];
-  const speakers = /* @__PURE__ */ new Set();
-  let consecutiveMatches = 0;
-  let maxConsecutive = 0;
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (!line) {
-      consecutiveMatches = 0;
-      continue;
-    }
-    const match = line.match(dialoguePattern);
-    if (match) {
-      const speaker = match[1].trim();
-      const content = match[2].trim();
-      if (isValidDialogueSpeaker(speaker, content)) {
-        detectedLines.push({ speaker, content, lineNumber: i + 1 });
-        speakers.add(speaker);
-        consecutiveMatches++;
-        maxConsecutive = Math.max(maxConsecutive, consecutiveMatches);
-      }
-    } else {
-      consecutiveMatches = 0;
-    }
-  }
-  if (detectedLines.length >= 3 && speakers.size >= 2 && maxConsecutive >= 2) {
-    return {
-      speakers: Array.from(speakers),
-      lines: detectedLines,
-      confidence: calculateDialogueConfidence(detectedLines.length, speakers.size, maxConsecutive)
-    };
-  }
-  return null;
-}
-function isValidDialogueSpeaker(speaker, content) {
-  if (speaker.length > 10)
-    return false;
-  const invalidPatterns = [
-    /^https?/i,
-    // URL
-    /^\d+$/,
-    // 纯数字
-    /^第[一二三四五六七八九十\d]+/,
-    // 章节
-    /^[（(]/
-    // 括号开头
-  ];
-  for (const pattern of invalidPatterns) {
-    if (pattern.test(speaker))
-      return false;
-  }
-  if (content.length < 2 || content.length > 500)
-    return false;
-  return true;
-}
-function calculateDialogueConfidence(lineCount, speakerCount, maxConsecutive) {
-  let confidence = 0.5;
-  if (lineCount >= 5)
-    confidence += 0.2;
-  else if (lineCount >= 3)
-    confidence += 0.1;
-  if (speakerCount === 2)
-    confidence += 0.15;
-  else if (speakerCount >= 3)
-    confidence += 0.1;
-  if (maxConsecutive >= 4)
-    confidence += 0.15;
-  else if (maxConsecutive >= 2)
-    confidence += 0.1;
-  return Math.min(confidence, 0.95);
-}
-function detectQuotes(lines) {
-  const quotes = [];
-  const quotePattern = /^>\s*(.+)$/;
-  const boldPattern = /\*\*([^*]+)\*\*/g;
-  const calloutPattern = /^>\s*\[!(important|tip|note|warning)\]\s*(.*)$/i;
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (!line)
-      continue;
-    const calloutMatch = line.match(calloutPattern);
-    if (calloutMatch) {
-      quotes.push({
-        content: calloutMatch[2] || line,
-        lineNumber: i + 1,
-        isKeyPoint: calloutMatch[1].toLowerCase() === "important"
-      });
-      continue;
-    }
-    const quoteMatch = line.match(quotePattern);
-    if (quoteMatch && !line.startsWith(">[!")) {
-      quotes.push({
-        content: quoteMatch[1],
-        lineNumber: i + 1,
-        isKeyPoint: false
-      });
-    }
-    const boldMatches = line.match(boldPattern);
-    if (boldMatches && boldMatches.length === 1 && line.length < 100) {
-      const boldContent = boldMatches[0].replace(/\*\*/g, "");
-      if (boldContent.length / line.replace(/\*\*/g, "").length > 0.7) {
-        quotes.push({
-          content: boldContent,
-          lineNumber: i + 1,
-          isKeyPoint: true
-        });
-      }
-    }
-  }
-  return quotes;
-}
-function analyzeContent(markdown) {
-  const results = [];
-  const lines = markdown.split("\n");
-  const dialogue = detectDialogue(lines);
-  if (dialogue && dialogue.confidence >= 0.6) {
-    const startLine = dialogue.lines[0].lineNumber;
-    const endLine = dialogue.lines[dialogue.lines.length - 1].lineNumber;
-    const dialogueContent = dialogue.lines.map((l) => `${l.speaker}\uFF1A${l.content}`).join("\n");
-    const convertedContent = `\`\`\`dialogue
-${dialogueContent}
-\`\`\``;
-    results.push({
-      type: "dialogue",
-      startLine,
-      endLine,
-      content: dialogue.lines.map((l) => `${l.speaker}\uFF1A${l.content}`).join("\n"),
-      confidence: dialogue.confidence,
-      suggestedAction: `\u68C0\u6D4B\u5230 ${dialogue.speakers.length} \u4EBA\u5BF9\u8BDD\uFF0C\u70B9\u51FB\u5E94\u7528\u53EF\u8F6C\u6362\u4E3A dialogue \u5BB9\u5668`,
-      convertedContent
-    });
-  }
-  const quotes = detectQuotes(lines);
-  const keyPoints = quotes.filter((q) => q.isKeyPoint);
-  if (keyPoints.length > 0) {
-    const convertedQuotes = keyPoints.map((q) => {
-      if (q.content.length < 50) {
-        return `> [!important] \u6838\u5FC3\u89C2\u70B9
-> ${q.content}`;
-      } else {
-        return `> ${q.content}`;
-      }
-    }).join("\n\n");
-    results.push({
-      type: "keypoint",
-      startLine: keyPoints[0].lineNumber,
-      endLine: keyPoints[keyPoints.length - 1].lineNumber,
-      content: keyPoints.map((q) => q.content).join("\n"),
-      confidence: 0.8,
-      suggestedAction: `\u68C0\u6D4B\u5230 ${keyPoints.length} \u5904\u6838\u5FC3\u89C2\u70B9\uFF0C\u70B9\u51FB\u5E94\u7528\u53EF\u8F6C\u6362\u4E3A\u5F15\u7528\u683C\u5F0F`,
-      convertedContent: convertedQuotes
-    });
-  }
-  return results;
-}
-function generateDialogueContainer(title, lines) {
-  const content = lines.map((l) => `${l.speaker}\uFF1A${l.content}`).join("\n");
-  return `\`\`\`dialogue {title="${title}"}
-${content}
-\`\`\``;
-}
-function convertToDialogueContainer(markdown) {
-  const lines = markdown.split("\n");
-  const dialogue = detectDialogue(lines);
-  if (!dialogue || dialogue.confidence < 0.6) {
-    return markdown;
-  }
-  const startIdx = dialogue.lines[0].lineNumber - 1;
-  const endIdx = dialogue.lines[dialogue.lines.length - 1].lineNumber - 1;
-  const dialogueContent = dialogue.lines.map((l) => `${l.speaker}\uFF1A${l.content}`).join("\n");
-  const container = `\`\`\`dialogue
-${dialogueContent}
-\`\`\``;
-  const newLines = [
-    ...lines.slice(0, startIdx),
-    container,
-    ...lines.slice(endIdx + 1)
-  ];
-  return newLines.join("\n");
-}
-var ContentHistory;
-var init_ContentAnalyzer = __esm({
-  "src/ai/ContentAnalyzer.ts"() {
-    ContentHistory = class {
-      constructor() {
-        this.history = /* @__PURE__ */ new Map();
-        this.maxHistory = 10;
-      }
-      static getInstance() {
-        if (!ContentHistory.instance) {
-          ContentHistory.instance = new ContentHistory();
-        }
-        return ContentHistory.instance;
-      }
-      /**
-       * 保存原始内容
-       */
-      saveOriginal(filePath, content) {
-        this.history.set(filePath, {
-          original: content,
-          timestamp: Date.now()
-        });
-        if (this.history.size > this.maxHistory) {
-          const oldest = [...this.history.entries()].sort((a, b) => a[1].timestamp - b[1].timestamp)[0];
-          if (oldest) {
-            this.history.delete(oldest[0]);
-          }
-        }
-      }
-      /**
-       * 获取原始内容
-       */
-      getOriginal(filePath) {
-        var _a;
-        return ((_a = this.history.get(filePath)) == null ? void 0 : _a.original) || null;
-      }
-      /**
-       * 检查是否有历史
-       */
-      hasHistory(filePath) {
-        return this.history.has(filePath);
-      }
-      /**
-       * 清除历史
-       */
-      clearHistory(filePath) {
-        this.history.delete(filePath);
-      }
-    };
-  }
-});
-
-// src/ai/AIProvider.ts
-function configureAI(newConfig) {
-  config = { ...config, ...newConfig };
-}
-function getAIConfig() {
-  return { ...config };
-}
-function buildPrompt(request) {
-  const taskPrompts = {
-    analyze: `\u5206\u6790\u4EE5\u4E0B Markdown \u5185\u5BB9\uFF0C\u8BC6\u522B\uFF1A
-1. \u5BF9\u8BDD\u6BB5\u843D\uFF08\u6807\u8BB0\u8BF4\u8BDD\u4EBA\u548C\u5185\u5BB9\uFF09
-2. \u6838\u5FC3\u89C2\u70B9/\u91D1\u53E5
-3. \u5EFA\u8BAE\u7684\u6392\u7248\u4F18\u5316
-
-\u8BF7\u4EE5 JSON \u683C\u5F0F\u8FD4\u56DE\u7ED3\u679C\u3002`,
-    extract_dialogue: `\u4ECE\u4EE5\u4E0B\u5185\u5BB9\u4E2D\u63D0\u53D6\u5BF9\u8BDD\uFF0C\u8BC6\u522B\u8BF4\u8BDD\u4EBA\u548C\u5BF9\u8BDD\u5185\u5BB9\u3002
-\u8FD4\u56DE JSON \u683C\u5F0F\uFF1A{ "dialogues": [{ "speakers": [], "lines": [] }] }`,
-    extract_quotes: `\u4ECE\u4EE5\u4E0B\u5185\u5BB9\u4E2D\u63D0\u53D6\u91D1\u53E5\u548C\u6838\u5FC3\u89C2\u70B9\u3002
-\u8FD4\u56DE JSON \u683C\u5F0F\uFF1A{ "quotes": [{ "content": "", "isKeyPoint": true }] }`
-  };
-  return `${taskPrompts[request.task]}
-
-\u5185\u5BB9\uFF1A
----
-${request.content}
----
-
-\u8BF7\u76F4\u63A5\u8FD4\u56DE JSON\uFF0C\u4E0D\u8981\u5305\u542B\u5176\u4ED6\u6587\u5B57\u3002`;
-}
-async function analyzeWithAI(request) {
-  var _a, _b, _c, _d, _e;
-  if (!config.enabled || !config.apiKey) {
-    return null;
-  }
-  try {
-    const prompt = buildPrompt(request);
-    let response;
-    if (config.provider === "openai") {
-      response = await fetch(config.baseUrl || "https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${config.apiKey}`
-        },
-        body: JSON.stringify({
-          model: config.model || "gpt-3.5-turbo",
-          messages: [
-            { role: "system", content: "\u4F60\u662F\u4E00\u4E2A\u4E13\u4E1A\u7684\u5185\u5BB9\u5206\u6790\u52A9\u624B\uFF0C\u64C5\u957F\u8BC6\u522B\u6587\u7AE0\u7ED3\u6784\u3002" },
-            { role: "user", content: prompt }
-          ],
-          temperature: 0.3
-        })
-      });
-    } else if (config.provider === "anthropic") {
-      response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": config.apiKey,
-          "anthropic-version": "2023-06-01"
-        },
-        body: JSON.stringify({
-          model: config.model || "claude-3-haiku-20240307",
-          max_tokens: 2048,
-          messages: [
-            { role: "user", content: prompt }
-          ]
-        })
-      });
-    } else {
-      response = await fetch(config.baseUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${config.apiKey}`
-        },
-        body: JSON.stringify({ prompt })
-      });
-    }
-    if (!response.ok) {
-      console.error("AI API \u8BF7\u6C42\u5931\u8D25:", response.status);
-      return null;
-    }
-    const data = await response.json();
-    let content;
-    if (config.provider === "openai") {
-      content = ((_c = (_b = (_a = data.choices) == null ? void 0 : _a[0]) == null ? void 0 : _b.message) == null ? void 0 : _c.content) || "";
-    } else if (config.provider === "anthropic") {
-      content = ((_e = (_d = data.content) == null ? void 0 : _d[0]) == null ? void 0 : _e.text) || "";
-    } else {
-      content = data.content || data.result || "";
-    }
-    try {
-      const jsonMatch = content.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        return JSON.parse(jsonMatch[0]);
-      }
-    } catch (e) {
-      console.error("\u89E3\u6790 AI \u54CD\u5E94\u5931\u8D25:", e);
-    }
-    return null;
-  } catch (error) {
-    console.error("AI \u5206\u6790\u5931\u8D25:", error);
-    return null;
-  }
-}
-var DEFAULT_CONFIG, config, AIProvider;
-var init_AIProvider = __esm({
-  "src/ai/AIProvider.ts"() {
-    DEFAULT_CONFIG = {
-      enabled: false,
-      provider: "openai",
-      model: "gpt-3.5-turbo"
-    };
-    config = { ...DEFAULT_CONFIG };
-    AIProvider = {
-      configure: configureAI,
-      getConfig: getAIConfig,
-      analyze: analyzeWithAI
-    };
-  }
-});
-
-// src/ai/index.ts
-var ai_exports = {};
-__export(ai_exports, {
-  AIProvider: () => AIProvider,
-  ContentHistory: () => ContentHistory,
-  analyzeContent: () => analyzeContent,
-  analyzeWithAI: () => analyzeWithAI,
-  configureAI: () => configureAI,
-  convertToDialogueContainer: () => convertToDialogueContainer,
-  detectDialogue: () => detectDialogue,
-  detectQuotes: () => detectQuotes,
-  generateDialogueContainer: () => generateDialogueContainer,
-  getAIConfig: () => getAIConfig
-});
-var init_ai = __esm({
-  "src/ai/index.ts"() {
-    init_ContentAnalyzer();
-    init_AIProvider();
-  }
-});
-
 // node_modules/html2canvas/dist/html2canvas.js
 var require_html2canvas = __commonJS({
   "node_modules/html2canvas/dist/html2canvas.js"(exports, module2) {
@@ -16755,7 +16377,7 @@ var MPConverter = class {
         "failure": { color: "#f44336", icon: "\u274C" },
         "bug": { color: "#f44336", icon: "\u{1F41B}" }
       };
-      const config2 = calloutConfig[calloutType] || { color: "#448aff", icon: "\u{1F4DD}" };
+      const config = calloutConfig[calloutType] || { color: "#448aff", icon: "\u{1F4DD}" };
       const titleEl = calloutEl.querySelector(".callout-title-inner");
       const titleText = (titleEl == null ? void 0 : titleEl.textContent) || calloutType.charAt(0).toUpperCase() + calloutType.slice(1);
       const contentEl = calloutEl.querySelector(".callout-content");
@@ -16763,11 +16385,11 @@ var MPConverter = class {
       const calloutDiv = document.createElement("div");
       calloutDiv.className = "mp-callout";
       calloutDiv.setAttribute("data-callout-type", calloutType);
-      calloutDiv.style.cssText = `border-left: 4px solid ${config2.color}; background: ${config2.color}11; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;`;
+      calloutDiv.style.cssText = `border-left: 4px solid ${config.color}; background: ${config.color}11; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;`;
       const titleDiv = document.createElement("div");
       titleDiv.className = "mp-callout-title";
-      titleDiv.style.cssText = `font-weight: bold; color: ${config2.color}; margin-bottom: 8px; font-size: 1em; display: flex; align-items: center; gap: 6px;`;
-      titleDiv.innerHTML = `<span>${config2.icon}</span><span>${titleText}</span>`;
+      titleDiv.style.cssText = `font-weight: bold; color: ${config.color}; margin-bottom: 8px; font-size: 1em; display: flex; align-items: center; gap: 6px;`;
+      titleDiv.innerHTML = `<span>${config.icon}</span><span>${titleText}</span>`;
       calloutDiv.appendChild(titleDiv);
       if (contentHtml) {
         const contentDiv = document.createElement("div");
@@ -17338,8 +16960,8 @@ var TaskScheduler = class {
   clear() {
     this.taskQueue.clear();
   }
-  updateConfig(config2) {
-    Object.assign(this.config, config2);
+  updateConfig(config) {
+    Object.assign(this.config, config);
   }
 };
 var VisibilityDetector = class {
@@ -17439,10 +17061,10 @@ var VisibilityDetector = class {
     }
     return false;
   }
-  updateConfig(config2) {
-    Object.assign(this.config, config2);
-    if (config2.commonHiddenPatterns) {
-      Object.assign(this.config.commonHiddenPatterns, config2.commonHiddenPatterns);
+  updateConfig(config) {
+    Object.assign(this.config, config);
+    if (config.commonHiddenPatterns) {
+      Object.assign(this.config.commonHiddenPatterns, config.commonHiddenPatterns);
     }
   }
 };
@@ -17911,9 +17533,6 @@ var BackgroundManager = class {
   }
 };
 
-// src/view.ts
-init_ai();
-
 // src/settings/ThemeGalleryModal.ts
 var import_obsidian2 = require("obsidian");
 var STYLE_CATEGORIES = {
@@ -18065,16 +17684,16 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     container.empty();
     this.categoryButtons.clear();
     const categoryCounts = this.getCategoryCounts();
-    for (const [category, config2] of Object.entries(STYLE_CATEGORIES)) {
+    for (const [category, config] of Object.entries(STYLE_CATEGORIES)) {
       const count = categoryCounts[category] || 0;
       if (count === 0 && category !== "\u5176\u4ED6")
         continue;
       const btn = container.createEl("button", {
         cls: `mp-gallery-category-btn ${this.selectedCategory === category ? "active" : ""}`,
-        attr: { title: config2.description }
+        attr: { title: config.description }
       });
       const colorDot = btn.createEl("span", { cls: "mp-category-color" });
-      colorDot.style.backgroundColor = config2.color;
+      colorDot.style.backgroundColor = config.color;
       btn.createEl("span", { text: category, cls: "mp-category-name" });
       if (count > 0) {
         btn.createEl("span", { text: `${count}`, cls: "mp-category-count" });
@@ -18354,12 +17973,6 @@ var MPView = class extends import_obsidian3.ItemView {
     });
     (0, import_obsidian3.setIcon)(seoButton, "search");
     seoButton.addEventListener("click", () => this.insertSeoText());
-    const aiButton = secondaryRow.createEl("button", {
-      cls: "mp-action-button mp-icon-btn",
-      attr: { "aria-label": "AI \u5185\u5BB9\u5206\u6790", "title": "\u5206\u6790\u5185\u5BB9\u7ED3\u6784\uFF0C\u8BC6\u522B\u5BF9\u8BDD\u548C\u91D1\u53E5" }
-    });
-    (0, import_obsidian3.setIcon)(aiButton, "sparkles");
-    aiButton.addEventListener("click", () => this.analyzeWithAI());
     const helpButton = secondaryRow.createEl("button", {
       cls: "mp-help-button mp-icon-btn",
       attr: { "aria-label": "\u4F7F\u7528\u6307\u5357" }
@@ -18971,151 +18584,6 @@ var MPView = class extends import_obsidian3.ItemView {
       }
     });
     return options;
-  }
-  /**
-   * AI 内容分析
-   * 分析当前文档，识别对话和金句
-   */
-  async analyzeWithAI() {
-    if (!this.currentFile) {
-      new import_obsidian3.Notice("\u8BF7\u5148\u6253\u5F00\u4E00\u4E2A Markdown \u6587\u4EF6");
-      return;
-    }
-    try {
-      const content = await this.app.vault.read(this.currentFile);
-      const notice = new import_obsidian3.Notice("\u{1F50D} \u6B63\u5728\u5206\u6790\u5185\u5BB9...", 0);
-      const results = analyzeContent(content);
-      notice.hide();
-      if (results.length === 0) {
-        new import_obsidian3.Notice("\u672A\u68C0\u6D4B\u5230\u53EF\u4F18\u5316\u7684\u5185\u5BB9\u7ED3\u6784");
-        return;
-      }
-      this.showAnalysisResults(results);
-    } catch (error) {
-      console.error("AI \u5206\u6790\u5931\u8D25:", error);
-      new import_obsidian3.Notice("\u5206\u6790\u5931\u8D25\uFF0C\u8BF7\u67E5\u770B\u63A7\u5236\u53F0");
-    }
-  }
-  /**
-   * 显示分析结果弹窗
-   */
-  showAnalysisResults(results) {
-    const modal = new class extends import_obsidian3.Modal {
-      constructor(view, results2) {
-        super(view.app);
-        this.appliedChanges = false;
-        this.view = view;
-        this.results = results2;
-      }
-      onOpen() {
-        const { contentEl } = this;
-        contentEl.createEl("h3", { text: "\u2728 AI \u5185\u5BB9\u5206\u6790\u7ED3\u679C" });
-        contentEl.createEl("p", {
-          text: "\u68C0\u6D4B\u5230\u4EE5\u4E0B\u53EF\u4F18\u5316\u7684\u5185\u5BB9\u7ED3\u6784\uFF1A",
-          attr: { style: "color: #888; font-size: 13px; margin-bottom: 16px;" }
-        });
-        const list = contentEl.createEl("div", {
-          attr: { style: "max-height: 300px; overflow-y: auto;" }
-        });
-        this.results.forEach((result, index) => {
-          const item = list.createEl("div", {
-            attr: { style: "padding: 12px; border: 1px solid var(--background-modifier-border); border-radius: 8px; margin-bottom: 8px;" }
-          });
-          const typeLabel = result.type === "dialogue" ? "\u{1F4AC} \u5BF9\u8BDD" : result.type === "keypoint" ? "\u{1F4A1} \u91D1\u53E5" : "\u{1F4DD} \u5F15\u7528";
-          item.createEl("div", {
-            text: `${typeLabel} (\u884C ${result.startLine}-${result.endLine})`,
-            attr: { style: "font-weight: bold; margin-bottom: 4px;" }
-          });
-          const confidence = Math.round(result.confidence * 100);
-          item.createEl("div", {
-            text: `\u7F6E\u4FE1\u5EA6: ${confidence}%`,
-            attr: { style: `font-size: 12px; color: ${confidence >= 70 ? "#4caf50" : "#ff9800"};` }
-          });
-          if (result.suggestedAction) {
-            item.createEl("div", {
-              text: result.suggestedAction,
-              attr: { style: "font-size: 12px; color: #666; margin-top: 4px;" }
-            });
-          }
-          if (result.convertedContent) {
-            const applyBtn = item.createEl("button", {
-              text: "\u5E94\u7528\u8F6C\u6362",
-              attr: { style: "margin-top: 8px; padding: 4px 12px; font-size: 12px; background: var(--interactive-accent); color: var(--text-on-accent); border: none; border-radius: 4px; cursor: pointer;" }
-            });
-            applyBtn.addEventListener("click", () => {
-              this.applyResult(result);
-              applyBtn.textContent = "\u5DF2\u5E94\u7528 \u2713";
-              applyBtn.disabled = true;
-            });
-          }
-        });
-        const btnContainer = contentEl.createEl("div", {
-          attr: { style: "display: flex; justify-content: space-between; margin-top: 16px;" }
-        });
-        const revertBtn = btnContainer.createEl("button", {
-          text: "\u56DE\u9000\u66F4\u6539",
-          attr: { style: "padding: 6px 16px; border: 1px solid var(--background-modifier-border); border-radius: 6px; background: transparent; cursor: pointer;" }
-        });
-        revertBtn.addEventListener("click", () => {
-          this.revertChanges();
-        });
-        const rightBtns = btnContainer.createEl("div", { attr: { style: "display: flex; gap: 8px;" } });
-        const closeBtn = rightBtns.createEl("button", { text: "\u5173\u95ED" });
-        closeBtn.addEventListener("click", () => this.close());
-      }
-      /**
-       * 应用单个分析结果
-       */
-      async applyResult(result) {
-        if (!result.convertedContent)
-          return;
-        const file = this.view.currentFile;
-        if (!file)
-          return;
-        try {
-          const { ContentHistory: ContentHistory2 } = await Promise.resolve().then(() => (init_ai(), ai_exports));
-          const originalContent = await this.view.app.vault.read(file);
-          ContentHistory2.getInstance().saveOriginal(file.path, originalContent);
-          const lines = originalContent.split("\n");
-          const newLines = [
-            ...lines.slice(0, result.startLine - 1),
-            result.convertedContent,
-            ...lines.slice(result.endLine)
-          ];
-          await this.view.app.vault.modify(file, newLines.join("\n"));
-          this.appliedChanges = true;
-          new import_obsidian3.Notice("\u5DF2\u5E94\u7528\u66F4\u6539\uFF0C\u53EF\u70B9\u51FB\u300C\u56DE\u9000\u66F4\u6539\u300D\u6062\u590D");
-        } catch (error) {
-          console.error("\u5E94\u7528\u66F4\u6539\u5931\u8D25:", error);
-          new import_obsidian3.Notice("\u5E94\u7528\u5931\u8D25");
-        }
-      }
-      /**
-       * 回退更改
-       */
-      async revertChanges() {
-        const file = this.view.currentFile;
-        if (!file)
-          return;
-        const { ContentHistory: ContentHistory2 } = await Promise.resolve().then(() => (init_ai(), ai_exports));
-        const history = ContentHistory2.getInstance();
-        if (!history.hasHistory(file.path)) {
-          new import_obsidian3.Notice("\u6CA1\u6709\u53EF\u56DE\u9000\u7684\u66F4\u6539");
-          return;
-        }
-        const original = history.getOriginal(file.path);
-        if (original) {
-          await this.view.app.vault.modify(file, original);
-          history.clearHistory(file.path);
-          new import_obsidian3.Notice("\u5DF2\u56DE\u9000\u5230\u539F\u59CB\u5185\u5BB9");
-        }
-      }
-      onClose() {
-        const { contentEl } = this;
-        contentEl.empty();
-      }
-    }(this, results);
-    modal.open();
   }
   /**
    * 打开主题画廊弹窗
