@@ -6,21 +6,11 @@ import type { TemplateManager } from './templateManager';
 import type { SettingsManager } from './settings/settings';
 import { BackgroundManager } from './backgroundManager';
 import { ThemeGalleryModal } from './settings/ThemeGalleryModal';
+import { createCustomSelect, type SelectOption, type CustomSelectControl } from './ui/CustomSelect';
+import { handleImageAltEdit } from './ui/ImageAltModal';
 // @ts-ignore - html2canvas has no type declarations
 import html2canvas from 'html2canvas';
 export const VIEW_TYPE_MP = 'mp-preview';
-
-interface SelectOption {
-    label: string;
-    value: string;
-    header?: boolean;
-}
-
-interface CustomSelectControl {
-    container: HTMLElement;
-    updateOptions: (newOptions: SelectOption[]) => void;
-    setValue: (value: string) => void;
-}
 
 export class MPView extends ItemView {
     private previewEl: HTMLElement;
@@ -169,7 +159,7 @@ export class MPView extends ItemView {
         }
 
 
-        this.customBackgroundSelect = this.createCustomSelect(
+        this.customBackgroundSelect = createCustomSelect(
             controlsGroup, // Append to main controls
             'mp-background-select',
             backgroundOptions,
@@ -223,7 +213,7 @@ export class MPView extends ItemView {
         galleryBtn.addEventListener('click', () => this.openThemeGallery());
 
         // 字体选择器
-        this.customFontSelect = this.createCustomSelect(
+        this.customFontSelect = createCustomSelect(
             controlsGroup,
             'mp-font-select',
             this.getFontOptions(),
@@ -329,145 +319,13 @@ export class MPView extends ItemView {
         // 预览区域
         this.previewEl = container.createEl('div', { cls: 'mp-preview-area' });
 
-        // Add Image Click Listener for Alt Text Editing
+        // 点击图片 → 编辑 Alt Text
         this.previewEl.addEventListener('click', async (e) => {
             const target = e.target as HTMLElement;
             if (target.tagName.toLowerCase() === 'img') {
                 e.stopPropagation();
-
-                // Only allow editing if file is valid
                 if (!this.currentFile) return;
-
-                const img = target as HTMLImageElement;
-                const currentSrc = img.getAttribute('src');
-                const currentAlt = img.getAttribute('alt') || '';
-
-                // Prompt user for new alt text
-                // Using a simple prompt for GUI (Obsidian has Modal, but prompt is standard browser API, 
-                // might be blocked or ugly. Better to use Obsidian Modal if possible, but for "Super Simple GUI"
-                // browser prompt is simplest. User said "Super Simple GUI").
-                // Let's use a browser prompt first. If user wants better, we can upgrade to Modal.
-                // Updated: User said "Super Simple GUI", maybe a small popup.
-                // Let's stick with browser prompt for v1.7.0 as it's simplest.
-
-                // However, browser prompt might block thread. 
-                // Let's use a custom modal for better UX as "Super Simple GUI".
-                // Actually, let's just use `window.prompt`. It IS a super simple GUI.
-
-                // Prompt user for new alt text
-                const newAlt = window.prompt('编辑图片注释 (Alt Text):', currentAlt);
-
-                if (newAlt !== null && newAlt !== currentAlt) {
-                    console.log(`[MP Preview] Updating Alt Text: "${currentAlt}" -> "${newAlt}" for src: "${currentSrc}"`);
-                    // Update File Content
-                    try {
-                        let fileContent = await this.app.vault.read(this.currentFile);
-
-
-                        // Need to find the image in markdown.
-                        // Common formats: ![alt](src) or ![[src|alt]] (Obsidian internal)
-                        // `markdown-renderer` usually resolves internal links to actual http/app urls.
-                        // Converting rendered src back to markdown logic is tricky.
-                        // Strategy: We just simple-search for the ALT text if it's unique context, or src.
-
-                        // We can try to regex replace.
-                        // Case 1: Standard Markdown ![alt](src)
-                        // This is tricky because `src` in DOM is fully resolved (e.g. app://...)
-                        // but logic in MD is relative or wikilink.
-
-                        // Simplified approach for v1.7.0:
-                        // Just search for the EXACT standard markdown image syntax that matches known patterns?
-                        // No, that's fragile. 
-
-                        // Better approach: 
-                        // Just search for the Alt Text usage? ![currentAlt]
-                        // What if multiple images have same alt?
-                        // What if no alt? ![]
-
-                        // Let's accept that for this feature to work robustly, we might need a parser.
-                        // BUT, for a "Simple" feature:
-                        // We will try to replace `![currentAlt](` with `![newAlt](`
-                        // AND `![[...|currentAlt]]` with `![[...|newAlt]]`
-
-                        // Issues:
-                        // 1. If currentAlt is empty string, we are replacing `![]` with `![newAlt]`.
-                        //    This matches ALL images without alt. GLOBAL REPLACE? No, first one?
-                        //    User said "Super Simple".
-
-                        // Regex for standard MD image: /!\[(.*?)\]\((.*?)\)/g
-                        // Regex for Wikilink: /!\[\[(.*?)(?:\|(.*?))?\]\]/g
-
-                        // Let's notify user this is experimental if we can't be precise.
-                        // But let's try to be smart.
-
-                        let newFileContent = fileContent;
-                        let replaced = false;
-
-                        // 1. Try to use linktext for WikiLinks (Robust)
-                        const linktext = img.dataset.linktext;
-
-                        if (linktext) {
-                            // It's a WikiLink: ![[linktext]] or ![[linktext|alt]]
-                            // Escape linktext for regex
-                            const escapedLinktext = linktext.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-                            console.log(`[MP Preview] Found WikiLink linktext: "${linktext}"`);
-
-                            // Regex to find ![[linktext]] or ![[linktext|oldAlt]]
-                            // We look for ![[ followed by linktext, then optional pipe and anything, then ]]
-                            // Note: We use 'g' to replace all? Or just first? 
-                            // If user edits one image, we probably want to edit that specific one.
-                            // But detecting "which one" is hard without index.
-                            // For "Super Simple GUI", let's replace the first one or all?
-                            // Let's replace the first occurrence that matches.
-
-                            const wikiRegex = new RegExp(`!\\[\\[\\s*${escapedLinktext}\\s*(?:\\|.*?)?\\]\\]`);
-
-                            if (wikiRegex.test(newFileContent)) {
-                                newFileContent = newFileContent.replace(wikiRegex, `![[${linktext}|${newAlt}]]`);
-                                replaced = true;
-                                console.log('[MP Preview] Replaced WikiLink via linktext match');
-                            }
-                        }
-
-                        // 2. If not replaced (Standard Markdown OR WikiLink fallback), try Alt Text matching
-                        if (!replaced) {
-                            // Escape regex special chars in currentAlt
-                            const escapedAlt = currentAlt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-                            // Standard Markdown: ![alt](src)
-                            // Regex: !\[ (escapedAlt) \] \(
-                            const stdRegex = new RegExp(`!\\[\\s*${escapedAlt}\\s*\\]\\(`, '');
-
-                            if (stdRegex.test(newFileContent)) {
-                                newFileContent = newFileContent.replace(stdRegex, `![${newAlt}](`);
-                                replaced = true;
-                                console.log('[MP Preview] Replaced Standard Markdown via Alt Text');
-                            } else if (currentAlt) {
-                                // Fallback for WikiLink if linktext failed or missing
-                                // Try finding simple `|alt]]` end of wikilink
-                                const wikiAltRegex = new RegExp(`\\|\\s*${escapedAlt}\\s*\\]\\]`, '');
-                                if (wikiAltRegex.test(newFileContent)) {
-                                    newFileContent = newFileContent.replace(wikiAltRegex, `|${newAlt}]]`);
-                                    replaced = true;
-                                    console.log('[MP Preview] Replaced WikiLink via Alt Text pipe');
-                                }
-                            }
-                        }
-
-                        if (replaced) {
-                            await this.app.vault.modify(this.currentFile, newFileContent);
-                            new Notice('图片注释已更新');
-                        } else {
-                            console.warn(`[MP Preview] Update failed. Linktext: ${linktext}, Alt: ${currentAlt}`);
-                            new Notice('无法在文档中精确定位此图片，请检查是否为标准格式。');
-                        }
-
-                    } catch (err) {
-                        console.error('Failed to update image alt text', err);
-                        new Notice('更新失败');
-                    }
-                }
+                await handleImageAltEdit(this.app, this.currentFile, target as HTMLImageElement);
             }
         });
 
@@ -837,120 +695,6 @@ export class MPView extends ItemView {
             footerDiv.innerHTML = footerContent;
             this.previewEl.append(footerDiv);
         }
-    }
-
-    // Refactored createCustomSelect to return a controller
-    private createCustomSelect(
-        parent: HTMLElement,
-        className: string,
-        initialOptions: SelectOption[],
-        onChange: (value: string) => void
-    ): CustomSelectControl {
-        const container = parent.createEl('div', { cls: 'custom-select-container' });
-        if (className) container.classList.add(className);
-
-        const select = container.createEl('div', { cls: 'custom-select' });
-        const selectedText = select.createEl('span', { cls: 'selected-text' });
-        const arrow = select.createEl('span', { cls: 'select-arrow', text: '▾' });
-
-        const dropdown = container.createEl('div', { cls: 'select-dropdown' });
-
-        let currentOptions = initialOptions;
-        let currentValue = '';
-
-        // Function to render options
-        const renderOptions = (opts: SelectOption[]) => {
-            dropdown.empty();
-            opts.forEach(option => {
-                if (option.header) {
-                    dropdown.createEl('div', {
-                        cls: 'select-group-header',
-                        text: option.label,
-                        attr: {
-                            style: 'padding: 8px 12px; font-weight: bold; color: var(--text-muted); font-size: 0.8em; background-color: var(--background-secondary); border-bottom: 1px solid var(--background-modifier-border); border-top: 1px solid var(--background-modifier-border); pointer-events: none;'
-                        }
-                    });
-                    return;
-                }
-
-                const item = dropdown.createEl('div', {
-                    cls: 'select-item',
-                    text: option.label
-                });
-
-                item.dataset.value = option.value;
-                if (option.value === currentValue) {
-                    item.classList.add('selected');
-                }
-
-                item.addEventListener('click', () => {
-                    setValue(option.value);
-                    dropdown.classList.remove('show');
-                    onChange(option.value);
-                });
-            });
-        };
-
-        // Function to set value programmatically
-        const setValue = (value: string) => {
-            const option = currentOptions.find(o => o.value === value && !o.header);
-            if (option) {
-                currentValue = value;
-                selectedText.textContent = option.label;
-                select.dataset.value = value;
-
-                // Update active class in dropdown
-                dropdown.querySelectorAll('.select-item').forEach(el => {
-                    if ((el as HTMLElement).dataset.value === value) {
-                        el.classList.add('selected');
-                    } else {
-                        el.classList.remove('selected');
-                    }
-                });
-            }
-        };
-
-        // Initial render
-        renderOptions(currentOptions);
-
-        // Set initial default (first filtered non-header option)
-        const firstOption = currentOptions.find(o => !o.header);
-        if (firstOption && firstOption.value) {
-            setValue(firstOption.value);
-        }
-
-        // Event listeners
-        select.addEventListener('click', (e) => {
-            e.stopPropagation();
-            // Close other dropdowns
-            document.querySelectorAll('.select-dropdown.show').forEach(el => {
-                if (el !== dropdown) el.classList.remove('show');
-            });
-            dropdown.classList.toggle('show');
-        });
-
-        document.addEventListener('click', () => {
-            dropdown.classList.remove('show');
-        });
-
-        return {
-            container,
-            updateOptions: (newOptions: SelectOption[]) => {
-                currentOptions = newOptions;
-                renderOptions(newOptions);
-                // Try to keep current value if it exists in new options, else select first
-                if (currentOptions.length > 0) {
-                    const exists = currentOptions.find(o => o.value === currentValue && !o.header);
-                    if (!exists) {
-                        const first = currentOptions.find(o => !o.header);
-                        if (first) setValue(first.value);
-                    } else {
-                        setValue(currentValue); // Re-render selection state
-                    }
-                }
-            },
-            setValue
-        };
     }
 
     private async getTemplateOptions(): Promise<SelectOption[]> {
