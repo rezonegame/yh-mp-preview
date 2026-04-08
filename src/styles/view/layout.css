@@ -9,44 +9,43 @@
     flex-direction: column;
 }
 
-/* ===== 工具栏 - 玻璃拟态优化 ===== */
+/* ===== 工具栏 ===== */
 .mp-toolbar,
 .mp-bottom-bar {
-    padding: 14px 12px;
-    max-width: 600px;
+    width: 100%;
+    padding: 12px;
     background: var(--background-secondary);
     border: 1px solid var(--background-modifier-border);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: none;
 }
 
 .mp-toolbar {
     top: 0;
-    border-radius: 12px 12px 0 0;
+    border-radius: 10px 10px 0 0;
     border-bottom: 1px solid var(--background-modifier-border);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .mp-bottom-bar {
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 10px 10px;
     border-top: 1px solid var(--background-modifier-border);
     position: relative;
     z-index: 10;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 14px;
-    padding-bottom: 16px;
+    padding-bottom: 12px;
 }
 
-/* 控件组布局 - 增加间距 */
 .mp-controls-group {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
     width: 100%;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: nowrap;
     min-width: 0;
 }
@@ -59,33 +58,30 @@
 /* 辅助图标按钮行 */
 .mp-secondary-row {
     gap: 6px;
-    justify-content: center;
-    padding-top: 4px;
+    justify-content: flex-start;
+    padding-top: 2px;
 }
 
-/* 固定尺寸的图标按钮 - 增大尺寸 */
 .mp-icon-btn {
-    width: 38px !important;
-    min-width: 38px !important;
-    max-width: 38px !important;
-    height: 38px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
     padding: 0 !important;
     flex: none !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
-    border-radius: 10px !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-radius: 6px !important;
+    transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease !important;
 }
 
 .mp-icon-btn:hover {
     background: var(--background-modifier-hover) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 4px 12px var(--background-modifier-box-shadow) !important;
+    box-shadow: none !important;
 }
 
 .mp-icon-btn:active {
-    transform: translateY(0) scale(0.95) !important;
     box-shadow: none !important;
 }
 
@@ -98,18 +94,18 @@
 
 /* ===== 按钮基础样式 ===== */
 .mp-controls-group button {
-    height: 36px;
-    border-radius: 8px;
+    height: 32px;
+    border-radius: 6px;
     border: 1px solid var(--background-modifier-border);
     background: var(--background-primary);
     color: var(--text-normal);
     font-size: 14px;
-    box-shadow: 0 1px 3px var(--background-modifier-box-shadow);
+    box-shadow: none;
     flex: 1;
     white-space: nowrap;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
 }
 
 /* 按钮文本样式 */
@@ -122,13 +118,11 @@
 
 .mp-controls-group button:hover {
     background: var(--background-modifier-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px var(--background-modifier-box-shadow);
+    box-shadow: none;
 }
 
 .mp-controls-group button:active {
-    transform: translateY(0) scale(0.98);
-    box-shadow: 0 1px 2px var(--background-modifier-box-shadow);
+    box-shadow: none;
 }
 
 .mp-controls-group button:disabled {
@@ -143,26 +137,22 @@
 
 /* 特殊按钮样式 */
 
-/* 复制按钮 - 主CTA */
 .mp-controls-group .mp-copy-button {
-    background: linear-gradient(135deg, var(--text-accent), color-mix(in srgb, var(--text-accent) 80%, #000));
-    color: var(--text-on-accent);
-    border: none;
+    background: var(--interactive-accent);
+    color: var(--text-on-accent, var(--text-normal));
+    border-color: var(--interactive-accent);
     font-weight: 600;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--text-accent) 40%, transparent);
+    letter-spacing: 0;
 }
 
 .mp-controls-group .mp-copy-button:hover {
-    color: var(--text-on-accent);
-    background: linear-gradient(135deg, color-mix(in srgb, var(--text-accent) 90%, #fff), var(--text-accent));
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px color-mix(in srgb, var(--text-accent) 50%, transparent);
+    color: var(--text-on-accent, var(--text-normal));
+    background: var(--interactive-accent-hover);
+    border-color: var(--interactive-accent-hover);
 }
 
 .mp-controls-group .mp-copy-button:active {
-    transform: translateY(0) scale(0.97);
-    box-shadow: 0 1px 4px color-mix(in srgb, var(--text-accent) 30%, transparent);
+    box-shadow: none;
 }
 
 /* 导出按钮 */
@@ -184,10 +174,10 @@
 }
 
 .custom-select {
-    height: 36px;
+    height: 32px;
     padding: 0 12px;
     border: 1px solid var(--background-modifier-border);
-    border-radius: 8px;
+    border-radius: 6px;
     background: var(--background-primary);
     display: flex;
     align-items: center;
@@ -196,7 +186,7 @@
     user-select: none;
     transition: all 0.2s ease;
     color: var(--text-normal);
-    box-shadow: 0 1px 3px var(--background-modifier-box-shadow);
+    box-shadow: none;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -211,7 +201,7 @@
 
 .custom-select:hover {
     background: var(--background-modifier-hover);
-    box-shadow: 0 2px 6px var(--background-modifier-box-shadow);
+    box-shadow: none;
 }
 
 .custom-select.disabled {
@@ -238,8 +228,8 @@
     width: 100%;
     background: var(--background-primary);
     border: 1px solid var(--background-modifier-border);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px var(--background-modifier-box-shadow);
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     display: none;
     z-index: 1000;
     overflow: hidden;
@@ -269,7 +259,7 @@
 .mp-font-size-group {
     min-width: 36px;
     max-width: 120px;
-    height: 36px;
+    height: 32px;
     flex: 1;
     display: flex;
     align-items: center;
@@ -277,10 +267,10 @@
 
     background: var(--background-primary);
     border: 1px solid var(--background-modifier-border);
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 0;
     overflow: hidden;
-    box-shadow: 0 1px 3px var(--background-modifier-box-shadow);
+    box-shadow: none;
 }
 
 .mp-font-size-input {
@@ -503,47 +493,29 @@
 
 /* ===== 主题画廊按钮 - 优化版 ===== */
 .mp-gallery-btn {
-    width: 40px !important;
-    min-width: 40px !important;
-    max-width: 40px !important;
-    height: 40px !important;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
     padding: 0 !important;
     flex: none !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
-    border-radius: 10px !important;
-    background: linear-gradient(135deg, var(--interactive-accent) 0%, #6366f1 50%, var(--interactive-accent-hover) 100%) !important;
-    color: var(--text-on-accent) !important;
-    border: none !important;
+    border-radius: 6px !important;
+    background: var(--background-primary) !important;
+    color: var(--text-normal) !important;
+    border: 1px solid var(--background-modifier-border) !important;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.35);
-    position: relative;
-    overflow: hidden;
-}
-
-.mp-gallery-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
+    transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease !important;
+    box-shadow: none;
 }
 
 .mp-gallery-btn:hover {
-    transform: translateY(-2px) scale(1.05) !important;
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45) !important;
-    filter: brightness(1.05);
-}
-
-.mp-gallery-btn:hover::before {
-    left: 100%;
+    background: var(--background-modifier-hover) !important;
+    border-color: var(--background-modifier-border-hover, var(--background-modifier-border)) !important;
 }
 
 .mp-gallery-btn:active {
-    transform: translateY(0) scale(0.98) !important;
+    box-shadow: none !important;
 }

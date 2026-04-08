@@ -2,13 +2,14 @@
 .mp-preview-area {
     padding: 10px 20px 20px 20px;
     margin: 10px;
-    height: calc(100% - 180px);
+    min-height: 0;
     overflow-y: auto;
     background: #fcfcfc;
     flex: 1;
+    align-self: stretch;
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
-    border: 1px solid rgba(82, 144, 220, 0.08);
+    box-shadow: none;
+    border: 1px solid var(--background-modifier-border);
 }
 
 /* 段落 */
