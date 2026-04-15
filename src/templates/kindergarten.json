@@ -5,22 +5,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
+                "base": "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
                 "content": "display: inline-block; font-weight: bold; color: #fff; background: linear-gradient(135deg, #E91E63 0%, #FF5722 50%, #FFC107 100%); padding: 10px 28px; border-radius: 30px; box-shadow: 0 4px 12px rgba(233,30,99,0.3);",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5;",
+                "base": "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #4CAF50; border-bottom: 3px dotted #81C784; padding-bottom: 6px;",
                 "after": ""
             },
             "h3": {
-                "base": "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+                "base": "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #FF9800; padding-left: 10px; border-left: 4px solid #FFB74D;",
                 "after": ""
             },
             "base": {
-                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #9C27B0;",
                 "after": ""
             }

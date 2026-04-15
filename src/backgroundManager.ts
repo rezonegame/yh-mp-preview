@@ -38,14 +38,21 @@ export class BackgroundManager {
         return false;
     }
 
+    private static readonly BASE_CONTENT_PADDING = 'padding: 16px 20px;';
+
     public applyBackground(element: HTMLElement) {
         const section = element.querySelector('.mp-content-section');
         if (section) {
             if (!this.currentBackground) {
-                section.setAttribute('style', '');  // 当没有背景时，清除样式
+                // 无背景时使用基础间距，CSS padding 会生效
+                section.setAttribute('style', '');
                 return;
             }
-            section.setAttribute('style', this.currentBackground.style);
+            // 移除背景样式中的 padding: 0，替换为舒适的阅读间距
+            const bgStyle = this.currentBackground.style
+                .replace(/padding:\s*0;?/g, '')
+                .replace(/;\s*$/, ';');
+            section.setAttribute('style', bgStyle + ' ' + BackgroundManager.BASE_CONTENT_PADDING);
         }
     }
 }

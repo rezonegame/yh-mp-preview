@@ -9,22 +9,22 @@
         "container": "background-color: #ffffff; padding: 20px; color: #1a1a1a",
         "title": {
             "h1": {
-                "base": "font-size: 24px; font-weight: 800; color: #000000; text-align: left; padding: 0 0 10px 0; border-bottom: 4px solid #000000; margin-top: 40px; margin-bottom: 24px; letter-spacing: -0.02em",
+                "base": "font-size: 24px; font-weight: 800; color: #000000; text-align: left; padding: 0 0 10px 0; border-bottom: 4px solid #000000; margin-top: 28px; margin-bottom: 24px; letter-spacing: -0.02em",
                 "content": "color: #000000",
                 "after": ""
             },
             "h2": {
-                "base": "font-size: 19px; font-weight: 700; color: #000000; background: #f0f0f0; padding: 8px 12px; margin-top: 36px; margin-bottom: 16px; border-left: 6px solid #000000",
+                "base": "font-size: 19px; font-weight: 700; color: #000000; background: #f0f0f0; padding: 8px 12px; margin-top: 26px; margin-bottom: 16px; border-left: 6px solid #000000",
                 "content": "color: #000000",
                 "after": ""
             },
             "h3": {
-                "base": "font-size: 17px; font-weight: 600; color: #333333; margin-top: 28px; margin-bottom: 12px; text-decoration: underline; text-underline-offset: 6px",
+                "base": "font-size: 17px; font-weight: 600; color: #333333; margin-top: 20px; margin-bottom: 12px; text-decoration: underline; text-underline-offset: 6px",
                 "content": "color: #333333",
                 "after": ""
             },
             "base": {
-                "base": "font-size: 16px; font-weight: bold; color: #000000; margin-top: 20px; margin-bottom: 8px",
+                "base": "font-size: 16px; font-weight: bold; color: #000000; margin-top: 14px; margin-bottom: 8px",
                 "content": "color: #000000",
                 "after": ""
             }

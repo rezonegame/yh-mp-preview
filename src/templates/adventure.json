@@ -5,22 +5,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center; background-image: linear-gradient(to right, transparent, #3E2723, transparent); height: 2px;",
+                "base": "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: center; background-image: linear-gradient(to right, transparent, #3E2723, transparent); height: 2px;",
                 "content": "display: inline-block; font-weight: bold; color: #3E2723; background: #FFF8E1; padding: 0 15px; position: relative; top: -14px;",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5; border-bottom: 2px solid #5D4037;",
+                "base": "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5; border-bottom: 2px solid #5D4037;",
                 "content": "display: inline-block; font-weight: bold; color: #FFF; background: #5D4037; padding: 2px 10px 2px 8px; clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);",
                 "after": ""
             },
             "h3": {
-                "base": "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+                "base": "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #795548; text-shadow: 1px 1px 1px #EFEBE9;",
                 "after": "display: inline-block; width: 6px; height: 6px; background: #8D6E63; border-radius: 50%; margin-left: 8px; vertical-align: middle;"
             },
             "base": {
-                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #8D6E63;",
                 "after": ""
             }
@@ -66,7 +66,7 @@
         "table": {
             "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 2px solid #8D6E63;",
             "header": "background: #D7CCC8; font-weight: bold; color: #3E2723; border-bottom: 2px solid #8D6E63; font-size: 1em;",
-            "cell": "border: 1px solid #BCAAA4; padding: 8px; color: #3E2723; font-size: 1em;"
+            "cell": "border: 1px solid #BCAAA4; padding: 12px; color: #3E2723; font-size: 1em;"
         },
         "hr": "border: none; height: 1px; background-image: linear-gradient(to right, transparent, #8D6E63, transparent); margin: 30px 0;",
         "footnote": {

@@ -12,6 +12,18 @@
     border: 1px solid var(--background-modifier-border);
 }
 
+/* 内容区域基础间距 */
+.mp-content-section {
+    padding: 16px 20px;
+}
+
+/* 首个子元素减少顶部间距（容器已有 padding） */
+.mp-content-section > h1:first-child,
+.mp-content-section > h2:first-child,
+.mp-content-section > h3:first-child {
+    margin-top: 0;
+}
+
 /* 段落 */
 .mp-content-section p {
     margin: 0;

@@ -5,22 +5,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(0,0,0,0.1);",
+                "base": "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(0,0,0,0.1);",
                 "content": "font-weight: bold; color: #000000;",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+                "base": "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #262626;",
                 "after": ""
             },
             "h3": {
-                "base": "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+                "base": "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #404040;",
                 "after": ""
             },
             "base": {
-                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #595959;",
                 "after": ""
             }
@@ -63,7 +63,7 @@
                 "selector": "color: #22863a;"
             }
         },
-        "quote": "border-left: 4px solid #262626; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        "quote": "border-left: 4px solid #262626; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         "image": "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         "link": "color: #262626; text-decoration: none; border-bottom: 1px solid #262626;",
         "emphasis": {
@@ -74,7 +74,7 @@
         "table": {
             "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
             "header": "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #f0f0f0; font-size: 1em;",
-            "cell": "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+            "cell": "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         "hr": "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         "footnote": {

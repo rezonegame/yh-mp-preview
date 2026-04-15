@@ -5,22 +5,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
+                "base": "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
                 "content": "display: inline-block; font-weight: bold; color: #E65100; background: linear-gradient(to right, #FFE0B2, #FFCC80); padding: 8px 24px; border-radius: 25px; box-shadow: 0 2px 8px rgba(255,152,0,0.3);",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5;",
+                "base": "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #F57C00; padding-left: 12px; border-left: 4px solid #FFB74D; background: linear-gradient(to right, #FFF8E1, transparent);",
                 "after": ""
             },
             "h3": {
-                "base": "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+                "base": "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #FF9800;",
                 "after": ""
             },
             "base": {
-                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #FFB74D;",
                 "after": ""
             }
@@ -63,7 +63,7 @@
                 "selector": "color: #66BB6A;"
             }
         },
-        "quote": "border-left: 4px solid #FFB74D; border-radius: 0 12px 12px 0; padding: 15px 15px 15px 20px; background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); margin: 0.8em 0; color: #E65100; font-style: normal;",
+        "quote": "border-left: 4px solid #FFB74D; border-radius: 0 12px 12px 0; padding: 14px 18px 15px 20px; background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); margin: 0.8em 0; color: #E65100; font-style: normal;",
         "image": "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 12px; box-shadow: 0 4px 12px rgba(255,152,0,0.2);",
         "link": "color: #FF9800; text-decoration: none; border-bottom: 1px dashed #FFB74D; font-weight: 500;",
         "emphasis": {
@@ -74,7 +74,7 @@
         "table": {
             "container": "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 1px solid #FFE0B2; border-radius: 12px; overflow: hidden;",
             "header": "background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%); font-weight: bold; color: #E65100; font-size: 1em;",
-            "cell": "border-bottom: 1px solid #FFE0B2; padding: 10px 12px; color: #5D4037; font-size: 1em;"
+            "cell": "border-bottom: 1px solid #FFE0B2; padding: 12px 12px; color: #5D4037; font-size: 1em;"
         },
         "hr": "border: none; border-top: 2px dashed #FFB74D; margin: 24px 0;",
         "footnote": {

@@ -9,22 +9,22 @@
         "container": "background-color: #ffffff; padding: 24px",
         "title": {
             "h1": {
-                "base": "font-size: 26px; font-weight: 700; color: #1a1a2e; text-align: center; border-bottom: 2.5px solid #1a1a2e; padding-bottom: 12px; margin-top: 40px; margin-bottom: 30px; letter-spacing: 0.05em",
+                "base": "font-size: 26px; font-weight: 700; color: #1a1a2e; text-align: center; border-bottom: 2.5px solid #1a1a2e; padding-bottom: 12px; margin-top: 28px; margin-bottom: 30px; letter-spacing: 0.05em",
                 "content": "color: #1a1a2e",
                 "after": ""
             },
             "h2": {
-                "base": "font-size: 20px; font-weight: 700; color: #1a1a2e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 36px; margin-bottom: 16px; display: block; width: 100%",
+                "base": "font-size: 20px; font-weight: 700; color: #1a1a2e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 26px; margin-bottom: 16px; display: block; width: 100%",
                 "content": "color: #1a1a2e",
                 "after": ""
             },
             "h3": {
-                "base": "font-size: 18px; font-weight: 600; color: #2c3e50; margin-top: 28px; margin-bottom: 12px; font-style: italic",
+                "base": "font-size: 18px; font-weight: 600; color: #2c3e50; margin-top: 20px; margin-bottom: 12px; font-style: italic",
                 "content": "color: #2c3e50",
                 "after": ""
             },
             "base": {
-                "base": "font-size: 16px; font-weight: bold; color: #1a1a2e; margin-top: 20px; margin-bottom: 8px",
+                "base": "font-size: 16px; font-weight: bold; color: #1a1a2e; margin-top: 14px; margin-bottom: 8px",
                 "content": "color: #1a1a2e",
                 "after": ""
             }
@@ -58,8 +58,8 @@
         },
         "table": {
             "container": "width: 100%; border-collapse: collapse; margin: 24px 0; border-top: 2px solid #1a1a2e; border-bottom: 2px solid #1a1a2e",
-            "header": "padding: 10px; border-bottom: 1px solid #1a1a2e; text-align: left; font-weight: 700; color: #1a1a2e; background: #f8f9fb",
-            "cell": "padding: 10px; border-bottom: 1px solid #eee; color: #2c3e50"
+            "header": "padding: 12px; border-bottom: 1px solid #1a1a2e; text-align: left; font-weight: 700; color: #1a1a2e; background: #f8f9fb",
+            "cell": "padding: 12px; border-bottom: 1px solid #eee; color: #2c3e50"
         },
         "hr": "margin: 40px auto; height: 1px; background: #e0e0e0; border: none; width: 60%",
         "footnote": {

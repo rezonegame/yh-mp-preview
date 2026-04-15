@@ -5,22 +5,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
+                "base": "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #d64b3b;",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-bottom: 2px solid #ef7060; line-height: 1.2;",
+                "base": "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-bottom: 2px solid #ef7060; line-height: 1.2;",
                 "content": "display: inline-block; font-weight: bold; background: #ef7060; color: #ffffff; padding: 1px 4px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;",
                 "after": "display: inline-block; content: ' '; vertical-align: bottom; border-bottom: 28px solid #fff5f4; border-right: 20px solid transparent;"
             },
             "h3": {
-                "base": "margin: 24px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
+                "base": "margin: 18px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #f18070;",
                 "after": ""
             },
             "base": {
-                "base": "margin: 20px 0 14px; font-size: 1em; line-height: 1.5;",
+                "base": "margin: 14px 0 14px; font-size: 1em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #f39080;",
                 "after": ""
             }
@@ -63,7 +63,7 @@
                 "selector": "color: #22863a;"
             }
         },
-        "quote": "border-left: 4px solid #ef7060; border-radius: 6px; padding: 10px 10px; background: #fff5f4; margin: 0.8em 0; color: #d64b3b; font-style: italic; word-wrap: break-word;",
+        "quote": "border-left: 4px solid #ef7060; border-radius: 6px; padding: 14px 18px; background: #fff5f4; margin: 0.8em 0; color: #d64b3b; font-style: italic; word-wrap: break-word;",
         "image": "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         "link": "color: #ef7060; text-decoration: none; border-bottom: 1px solid #ef7060; transition: all 0.2s ease;",
         "emphasis": {
@@ -74,7 +74,7 @@
         "table": {
             "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #ffe8e6;",
             "header": "background: #fff8f7; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #ffe8e6; font-size: 1em;",
-            "cell": "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+            "cell": "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         "hr": "border: none; border-top: 1px solid #ffe8e6; margin: 20px 0;",
         "footnote": {

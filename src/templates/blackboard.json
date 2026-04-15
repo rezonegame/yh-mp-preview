@@ -5,22 +5,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
+                "base": "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
                 "content": "display: inline-block; font-weight: bold; color: #1B5E20; border: 2px solid #1B5E20; padding: 5px 20px;",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5; background: #E8F5E9; padding: 8px 12px; border-left: 6px solid #2E7D32;",
+                "base": "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5; background: #E8F5E9; padding: 8px 12px; border-left: 6px solid #2E7D32;",
                 "content": "font-weight: bold; color: #1B5E20;",
                 "after": ""
             },
             "h3": {
-                "base": "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+                "base": "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #2E7D32; border-bottom: 2px solid #A5D6A7; display: inline-block;",
                 "after": ""
             },
             "base": {
-                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #388E3C;",
                 "after": ""
             }
@@ -66,7 +66,7 @@
         "table": {
             "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #CFD8DC;",
             "header": "background: #ECEFF1; font-weight: bold; color: #37474F; border-bottom: 2px solid #CFD8DC; font-size: 1em;",
-            "cell": "border: 1px solid #CFD8DC; padding: 8px; color: #37474F; font-size: 1em;"
+            "cell": "border: 1px solid #CFD8DC; padding: 12px; color: #37474F; font-size: 1em;"
         },
         "hr": "border: none; border-top: 1px solid #CFD8DC; margin: 20px 0;",
         "footnote": {

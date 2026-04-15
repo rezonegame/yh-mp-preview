@@ -6,22 +6,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #2c3e50; padding: 10px 15px; background: linear-gradient(to right, rgba(44,62,80,0.1), transparent); border-radius: 0 4px 4px 0;",
+                "base": "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #2c3e50; padding: 10px 15px; background: linear-gradient(to right, rgba(44,62,80,0.1), transparent); border-radius: 0 4px 4px 0;",
                 "content": "font-weight: bold; color: #1b2631;",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #2c3e50; padding: 8px 12px; background: linear-gradient(to right, rgba(44,62,80,0.1), transparent); border-radius: 0 4px 4px 0;",
+                "base": "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #2c3e50; padding: 8px 12px; background: linear-gradient(to right, rgba(44,62,80,0.1), transparent); border-radius: 0 4px 4px 0;",
                 "content": "font-weight: bold; color: #1b2631;",
                 "after": ""
             },
             "h3": {
-                "base": "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #2c3e50; padding: 5px 10px;",
+                "base": "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #2c3e50; padding: 5px 10px;",
                 "content": "font-weight: bold; color: #2c3e50;",
                 "after": ""
             },
             "base": {
-                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #2c3e50; padding: 4px 8px;",
+                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #2c3e50; padding: 4px 8px;",
                 "content": "font-weight: bold; color: #1b2631;",
                 "after": ""
             }
@@ -64,7 +64,7 @@
                 "selector": "color: #22863a;"
             }
         },
-        "quote": "border-left: 4px solid #2c3e50; border-radius: 6px; padding: 10px 10px; background: rgba(44,62,80,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        "quote": "border-left: 4px solid #2c3e50; border-radius: 6px; padding: 14px 18px; background: rgba(44,62,80,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         "image": "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);",
         "link": "color: #2c3e50; text-decoration: none; border-bottom: 1px solid #2c3e50;",
         "emphasis": {
@@ -75,7 +75,7 @@
         "table": {
             "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
             "header": "background: rgba(44,62,80,0.1); font-weight: bold; color: #1b2631; border-bottom: 2px solid #2c3e50; font-size: 1em; text-align: left;",
-            "cell": "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: left;"
+            "cell": "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: left;"
         },
         "hr": "border: none; border-top: 1px solid #2c3e50; margin: 20px 0; opacity: 0.3;",
         "footnote": {

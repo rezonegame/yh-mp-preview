@@ -9,17 +9,17 @@
         "container": "background-color: #ffffff; padding: 32px 24px; color: #555555",
         "title": {
             "h1": {
-                "base": "font-size: 20px; font-weight: 300; color: #333333; text-align: center; margin-top: 50px; margin-bottom: 40px; letter-spacing: 0.3em; text-transform: uppercase",
+                "base": "font-size: 20px; font-weight: 300; color: #333333; text-align: center; margin-top: 32px; margin-bottom: 40px; letter-spacing: 0.3em; text-transform: uppercase",
                 "content": "color: #333333",
                 "after": ""
             },
             "h2": {
-                "base": "font-size: 17px; font-weight: 300; color: #333333; text-align: center; margin-top: 40px; margin-bottom: 20px; border-bottom: 0.5px solid #e0e0e0; padding-bottom: 15px; width: 30%; margin-left: auto; margin-right: auto",
+                "base": "font-size: 17px; font-weight: 300; color: #333333; text-align: center; margin-top: 28px; margin-bottom: 20px; border-bottom: 0.5px solid #e0e0e0; padding-bottom: 15px; width: 30%; margin-left: auto; margin-right: auto",
                 "content": "color: #333333",
                 "after": ""
             },
             "h3": {
-                "base": "font-size: 16px; font-weight: 400; color: #666666; text-align: center; margin-top: 30px; margin-bottom: 15px; letter-spacing: 0.1em",
+                "base": "font-size: 16px; font-weight: 400; color: #666666; text-align: center; margin-top: 22px; margin-bottom: 15px; letter-spacing: 0.1em",
                 "content": "color: #666666",
                 "after": ""
             },

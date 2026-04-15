@@ -9,22 +9,22 @@
         "container": "background-color: #ffffff; padding: 16px",
         "title": {
             "h1": {
-                "base": "font-size: 29px; font-weight: 700; color: #111111; line-height: 1.3; letter-spacing: -0.015em; padding: 10px 0 9px; border-top: 2px solid #111111; border-bottom: 1px solid #111111; text-align: left; margin-top: 38px; margin-bottom: 16px",
+                "base": "font-size: 29px; font-weight: 700; color: #111111; line-height: 1.3; letter-spacing: -0.015em; padding: 10px 0 9px; border-top: 2px solid #111111; border-bottom: 1px solid #111111; text-align: left; margin-top: 26px; margin-bottom: 16px",
                 "content": "color: #111111",
                 "after": ""
             },
             "h2": {
-                "base": "font-size: 19px; font-weight: 700; color: #111111; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.12em; text-align: center; padding: 10px 0; border-top: 1px solid rgba(17,17,17,0.85); border-bottom: 1px solid rgba(17,17,17,0.85); margin-top: 38px; margin-bottom: 18px",
+                "base": "font-size: 19px; font-weight: 700; color: #111111; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.12em; text-align: center; padding: 10px 0; border-top: 1px solid rgba(17,17,17,0.85); border-bottom: 1px solid rgba(17,17,17,0.85); margin-top: 26px; margin-bottom: 18px",
                 "content": "color: #111111",
                 "after": ""
             },
             "h3": {
-                "base": "font-size: 17px; font-weight: 700; color: #111111; line-height: 1.45; letter-spacing: 0.04em; padding-bottom: 6px; margin-top: 28px; margin-bottom: 14px",
+                "base": "font-size: 17px; font-weight: 700; color: #111111; line-height: 1.45; letter-spacing: 0.04em; padding-bottom: 6px; margin-top: 20px; margin-bottom: 14px",
                 "content": "color: #111111",
                 "after": ""
             },
             "base": {
-                "base": "font-size: 15px; font-weight: bold; color: #555555; border-left: 2px solid #326891; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+                "base": "font-size: 15px; font-weight: bold; color: #555555; border-left: 2px solid #326891; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
                 "content": "color: #111111",
                 "after": ""
             }

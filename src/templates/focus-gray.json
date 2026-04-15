@@ -6,22 +6,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 40px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #7f8c8d; border-bottom: 2px solid #7f8c8d; padding: 15px 0; max-width: 80%;",
+                "base": "margin: 28px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #7f8c8d; border-bottom: 2px solid #7f8c8d; padding: 15px 0; max-width: 80%;",
                 "content": "font-weight: bold; color: #7f8c8d;",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
+                "base": "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
                 "content": "font-weight: bold; color: #7f8c8d; border-bottom: 1px solid #7f8c8d; padding-bottom: 5px; display: inline-block;",
                 "after": ""
             },
             "h3": {
-                "base": "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
+                "base": "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
                 "content": "font-weight: bold; color: #616a6b;",
                 "after": ""
             },
             "base": {
-                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
+                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
                 "content": "font-weight: bold; color: #515a5a;",
                 "after": ""
             }
@@ -64,7 +64,7 @@
                 "selector": "color: #22863a;"
             }
         },
-        "quote": "border-left: 4px solid #7f8c8d; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        "quote": "border-left: 4px solid #7f8c8d; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         "image": "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         "link": "color: #7f8c8d; text-decoration: none; border-bottom: 1px solid #7f8c8d;",
         "emphasis": {
@@ -75,7 +75,7 @@
         "table": {
             "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
             "header": "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #7f8c8d; font-size: 1em; text-align: center;",
-            "cell": "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: center;"
+            "cell": "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: center;"
         },
         "hr": "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         "footnote": {

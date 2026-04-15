@@ -5,22 +5,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5;",
+                "base": "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #4a4a4a;",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 28px 0 24px 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+                "base": "margin: 20px 0 24px 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #4a4a4a;",
                 "after": ""
             },
             "h3": {
-                "base": "margin: 24px 0 20px 0; font-size: 1.25em; letter-spacing: -0.01em; border-left: 4px solid #4a4a4a; padding-left: 12px; line-height: 1.5;",
+                "base": "margin: 18px 0 20px 0; font-size: 1.25em; letter-spacing: -0.01em; border-left: 4px solid #4a4a4a; padding-left: 12px; line-height: 1.5;",
                 "content": "font-weight: bold; color: #4a4a4a;",
                 "after": ""
             },
             "base": {
-                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #4a4a4a;",
                 "after": ""
             }
@@ -63,7 +63,7 @@
                 "selector": "color: #22863a;"
             }
         },
-        "quote": "border-left: 4px solid #c57512; border-radius: 6px; padding: 10px 10px; background: #fef7ed; margin: 0.8em 0; color: #8b6d4d; font-style: italic; word-wrap: break-word;",
+        "quote": "border-left: 4px solid #c57512; border-radius: 6px; padding: 14px 18px; background: #fef7ed; margin: 0.8em 0; color: #8b6d4d; font-style: italic; word-wrap: break-word;",
         "image": "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         "link": "color: #c57512; text-decoration: none; border-bottom: 1px solid #c57512;",
         "emphasis": {
@@ -74,7 +74,7 @@
         "table": {
             "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f5e2c7;",
             "header": "background: #fef7ed; font-weight: bold; color: #c57512; border-bottom: 2px solid #f5e2c7; font-size: 1em;",
-            "cell": "border: 1px solid #f5e2c7; padding: 8px; color: #4a4a4a; font-size: 1em;"
+            "cell": "border: 1px solid #f5e2c7; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         "hr": "border: none; border-top: 1px solid #f5e2c7; margin: 20px 0;",
         "footnote": {

@@ -7875,22 +7875,22 @@ var init_default = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5;",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5;",
             content: "font-weight: bold; color: #2c3e50;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #34495e;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #3d566e;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #47637f;",
             after: ""
           }
@@ -7933,7 +7933,7 @@ var init_default = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #e0e0e0; border-radius: 6px; padding: 10px 10px; background: #f6f8fa; margin: 0.8em 0; color: #6a737d; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #e0e0e0; border-radius: 6px; padding: 14px 18px; background: #f6f8fa; margin: 0.8em 0; color: #6a737d; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #e0e0e0; text-decoration: none; border-bottom: 1px solid #e0e0e0;",
         emphasis: {
@@ -7944,7 +7944,7 @@ var init_default = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e1e4e8;",
           header: "background: #f6f8fa; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #e1e4e8; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -7967,22 +7967,22 @@ var init_minimal = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(0,0,0,0.1);",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(0,0,0,0.1);",
             content: "font-weight: bold; color: #000000;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #262626;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #404040;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #595959;",
             after: ""
           }
@@ -8025,7 +8025,7 @@ var init_minimal = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #262626; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #262626; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #262626; text-decoration: none; border-bottom: 1px solid #262626;",
         emphasis: {
@@ -8036,7 +8036,7 @@ var init_minimal = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #f0f0f0; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -8059,22 +8059,22 @@ var init_scarlet = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5;",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5;",
             content: "font-weight: bold; color: #DC143C;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5; border-bottom: 1px solid rgba(220,20,60,0.1);",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5; border-bottom: 1px solid rgba(220,20,60,0.1);",
             content: "font-weight: bold; color: #E34234;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #E65D52;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #E87A70;",
             after: ""
           }
@@ -8117,7 +8117,7 @@ var init_scarlet = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #DC143C; border-radius: 6px; padding: 10px 10px; background: #fff8f8; margin: 0.8em 0; color: #E34234; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #DC143C; border-radius: 6px; padding: 14px 18px; background: #fff8f8; margin: 0.8em 0; color: #E34234; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #DC143C; text-decoration: none; border-bottom: 1px solid #DC143C; transition: all 0.2s ease;",
         emphasis: {
@@ -8128,7 +8128,7 @@ var init_scarlet = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #ffe8e8;",
           header: "background: #fff8f8; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #ffe8e8; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #ffe8e8; margin: 20px 0;",
         footnote: {
@@ -8151,22 +8151,22 @@ var init_orange = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
             content: "font-weight: bold; color: #d64b3b;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-bottom: 2px solid #ef7060; line-height: 1.2;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-bottom: 2px solid #ef7060; line-height: 1.2;",
             content: "display: inline-block; font-weight: bold; background: #ef7060; color: #ffffff; padding: 1px 4px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;",
             after: "display: inline-block; content: ' '; vertical-align: bottom; border-bottom: 28px solid #fff5f4; border-right: 20px solid transparent;"
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #f18070;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 14px; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 14px; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #f39080;",
             after: ""
           }
@@ -8209,7 +8209,7 @@ var init_orange = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #ef7060; border-radius: 6px; padding: 10px 10px; background: #fff5f4; margin: 0.8em 0; color: #d64b3b; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #ef7060; border-radius: 6px; padding: 14px 18px; background: #fff5f4; margin: 0.8em 0; color: #d64b3b; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #ef7060; text-decoration: none; border-bottom: 1px solid #ef7060; transition: all 0.2s ease;",
         emphasis: {
@@ -8220,7 +8220,7 @@ var init_orange = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #ffe8e6;",
           header: "background: #fff8f7; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #ffe8e6; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #ffe8e6; margin: 20px 0;",
         footnote: {
@@ -8243,22 +8243,22 @@ var init_elegant = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
             content: "font-weight: bold; color: #553C9A;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-bottom: 2px solid #9F7AEA; line-height: 1.2;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-bottom: 2px solid #9F7AEA; line-height: 1.2;",
             content: "display: inline-block; font-weight: bold; background: #9F7AEA; color: #ffffff; padding: 1px 4px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;",
             after: "display: inline-block; content: ' '; vertical-align: bottom; border-bottom: 28px solid #f5f3ff; border-right: 20px solid transparent;"
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #805AD5;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 14px; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 14px; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #805AD5;",
             after: ""
           }
@@ -8301,7 +8301,7 @@ var init_elegant = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #9F7AEA; border-radius: 6px; padding: 10px 10px; background: #f5f3ff; margin: 0.8em 0; color: #6B46C1; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #9F7AEA; border-radius: 6px; padding: 14px 18px; background: #f5f3ff; margin: 0.8em 0; color: #6B46C1; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #805AD5; text-decoration: none; border-bottom: 1px solid #9F7AEA; transition: all 0.2s ease;",
         emphasis: {
@@ -8312,7 +8312,7 @@ var init_elegant = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e1e4e8;",
           header: "background: #f6f8fa; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #e1e4e8; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -8335,22 +8335,22 @@ var init_dark = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
             content: "font-weight: bold; color: #1E90FF;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-left: 4px solid #1E90FF; padding-left: 12px; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-left: 4px solid #1E90FF; padding-left: 12px; line-height: 1.5;",
             content: "font-weight: bold; color: #3B9DFF;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #57A9FF;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #74B6FF;",
             after: ""
           }
@@ -8393,7 +8393,7 @@ var init_dark = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #1E90FF; border-radius: 6px; padding: 10px 10px; background: #F5F9FF; margin: 0.8em 0; color: #6a737d; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #1E90FF; border-radius: 6px; padding: 14px 18px; background: #F5F9FF; margin: 0.8em 0; color: #6a737d; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #1E90FF; text-decoration: none; border-bottom: 1px solid #1E90FF; transition: all 0.2s ease;",
         emphasis: {
@@ -8404,7 +8404,7 @@ var init_dark = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #E6F0FF;",
           header: "background: #F8FBFF; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #E6F0FF; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #E6F0FF; margin: 20px 0;",
         footnote: {
@@ -8427,22 +8427,22 @@ var init_academic = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
             content: "font-weight: bold; color: #5D4037;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-left: 4px solid #8D6E63; padding-left: 12px; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-left: 4px solid #8D6E63; padding-left: 12px; line-height: 1.5;",
             content: "font-weight: bold; color: #6D4C41;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #795548;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #8D6E63;",
             after: ""
           }
@@ -8491,12 +8491,12 @@ var init_academic = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #8D6E63; border-radius: 6px; padding: 10px 10px; background: #EFEBE9; margin: 0.8em 0; color: #5D4037; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #8D6E63; border-radius: 6px; padding: 14px 18px; background: #EFEBE9; margin: 0.8em 0; color: #5D4037; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e1e4e8;",
           header: "background: #f6f8fa; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #e1e4e8; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -8519,22 +8519,22 @@ var init_yeban = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5; text-align: center;",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #666b8f; display: inline-block; border-bottom: 1px solid #666b8f;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(122,125,160,0.2);",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(122,125,160,0.2);",
             content: "font-weight: bold; color: #ffffff; background: #7a7da0; padding: 1px 4px; border-radius: 3px;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #7a7da0; padding: 1px 1px;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em;",
+            base: "margin: 14px 0 0; font-size: 1em;",
             content: "font-weight: bold; color: #7a7da0;",
             after: ""
           }
@@ -8577,7 +8577,7 @@ var init_yeban = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #7a7da0; border-radius: 6px; padding: 10px 10px; background: #f8f9fc; margin: 0.8em 0; color: #666b8f; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #7a7da0; border-radius: 6px; padding: 14px 18px; background: #f8f9fc; margin: 0.8em 0; color: #666b8f; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #7a7da0; text-decoration: none; border-bottom: 1px solid #7a7da0; transition: all 0.2s ease;",
         emphasis: {
@@ -8588,7 +8588,7 @@ var init_yeban = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e1e4e8;",
           header: "background: #f8f9fc; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #e1e4e8; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #eef0f7; margin: 20px 0;",
         footnote: {
@@ -8611,22 +8611,22 @@ var init_yeban_orange = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5; text-align: center;",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #ef7060; display: inline-block; border-bottom: 1px solid #ef7060;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(239,112,96,0.2);",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(239,112,96,0.2);",
             content: "font-weight: bold; color: #ffffff; background: #ef7060; padding: 1px 4px; border-radius: 3px;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #f18070; padding: 1px 1px;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em;",
+            base: "margin: 14px 0 0; font-size: 1em;",
             content: "font-weight: bold; color: #f39080;",
             after: ""
           }
@@ -8669,7 +8669,7 @@ var init_yeban_orange = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #7a7da0; border-radius: 6px; padding: 10px 10px; background: #fff8f7; margin: 0.8em 0; color: #d64b3b; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #7a7da0; border-radius: 6px; padding: 14px 18px; background: #fff8f7; margin: 0.8em 0; color: #d64b3b; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #ef7060; text-decoration: none; border-bottom: 1px solid #ef7060; transition: all 0.2s ease;",
         emphasis: {
@@ -8680,7 +8680,7 @@ var init_yeban_orange = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #ffe8e6;",
           header: "background: #fff8f7; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #ffe8e6; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #ffe8e6; margin: 20px 0;",
         footnote: {
@@ -8703,22 +8703,22 @@ var init_darkgreen = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5; text-align: center;",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #2C5530; display: inline-block; border-bottom: 1px solid #2C5530;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(46,139,87,0.2);",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(46,139,87,0.2);",
             content: "font-weight: bold; color: #ffffff; background: #2E8B57; padding: 1px 4px; border-radius: 3px;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #3CB371; padding: 1px 1px;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em;",
+            base: "margin: 14px 0 0; font-size: 1em;",
             content: "font-weight: bold; color: #66CDAA;",
             after: ""
           }
@@ -8761,7 +8761,7 @@ var init_darkgreen = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #e6f3ed; border-radius: 6px; padding: 10px 10px; background: #f4faf7; margin: 0.8em 0; color: #159461; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #e6f3ed; border-radius: 6px; padding: 14px 18px; background: #f4faf7; margin: 0.8em 0; color: #159461; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #159461; text-decoration: none; border-bottom: 1px solid #1a9d6a; transition: all 0.2s ease;",
         emphasis: {
@@ -8772,7 +8772,7 @@ var init_darkgreen = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e6f3ed;",
           header: "background: #f4faf7; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #e6f3ed; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #e6f3ed; margin: 20px 0;",
         footnote: {
@@ -8795,22 +8795,22 @@ var init_brown = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5;",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5;",
             content: "font-weight: bold; color: #4a4a4a;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 24px 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 20px 0 24px 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #4a4a4a;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 20px 0; font-size: 1.25em; letter-spacing: -0.01em; border-left: 4px solid #4a4a4a; padding-left: 12px; line-height: 1.5;",
+            base: "margin: 18px 0 20px 0; font-size: 1.25em; letter-spacing: -0.01em; border-left: 4px solid #4a4a4a; padding-left: 12px; line-height: 1.5;",
             content: "font-weight: bold; color: #4a4a4a;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #4a4a4a;",
             after: ""
           }
@@ -8853,7 +8853,7 @@ var init_brown = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #c57512; border-radius: 6px; padding: 10px 10px; background: #fef7ed; margin: 0.8em 0; color: #8b6d4d; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #c57512; border-radius: 6px; padding: 14px 18px; background: #fef7ed; margin: 0.8em 0; color: #8b6d4d; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #c57512; text-decoration: none; border-bottom: 1px solid #c57512;",
         emphasis: {
@@ -8864,7 +8864,7 @@ var init_brown = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f5e2c7;",
           header: "background: #fef7ed; font-weight: bold; color: #c57512; border-bottom: 2px solid #f5e2c7; font-size: 1em;",
-          cell: "border: 1px solid #f5e2c7; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f5e2c7; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f5e2c7; margin: 20px 0;",
         footnote: {
@@ -8887,22 +8887,22 @@ var init_playful = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 16px; font-size: 2em; line-height: 1.5; text-align: center;",
+            base: "margin: 24px 0 16px; font-size: 2em; line-height: 1.5; text-align: center;",
             content: "display: inline-block; font-weight: bold; color: #fff; background: #FFB74D; padding: 5px 20px; border-radius: 20px; box-shadow: 2px 2px 0px #F57C00;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5;",
+            base: "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5;",
             content: "display: inline-block; font-weight: bold; color: #4FC3F7; border-bottom: 3px dashed #4FC3F7; padding-bottom: 4px;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #FF8A65; padding-left: 10px; border-left: 5px solid #FF8A65; border-radius: 4px;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #BA68C8;",
             after: ""
           }
@@ -8937,7 +8937,7 @@ var init_playful = __esm({
             constant: "color: #F57C00;"
           }
         },
-        quote: "border: 2px dashed #FFB74D; border-radius: 12px; padding: 15px; background: #FFFDE7; margin: 0.8em 0; color: #F57C00; font-style: normal; word-wrap: break-word;",
+        quote: "border: 2px dashed #FFB74D; border-radius: 12px; padding: 14px 18px; background: #FFFDE7; margin: 0.8em 0; color: #F57C00; font-style: normal; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 12px; border: 4px solid #B2EBF2;",
         link: "color: #29B6F6; text-decoration: none; border-bottom: 2px dotted #29B6F6; font-weight: bold;",
         emphasis: {
@@ -8948,7 +8948,7 @@ var init_playful = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #FFCC80; border-radius: 8px; overflow: hidden;",
           header: "background: #FFF3E0; font-weight: bold; color: #E65100; border-bottom: 2px solid #FFCC80; font-size: 1em;",
-          cell: "border-bottom: 1px solid #FFE0B2; padding: 10px; color: #5D4037; font-size: 1em;"
+          cell: "border-bottom: 1px solid #FFE0B2; padding: 12px; color: #5D4037; font-size: 1em;"
         },
         hr: "border: none; border-top: 2px dashed #FFCC80; margin: 20px 0;",
         footnote: {
@@ -8971,22 +8971,22 @@ var init_blackboard = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
+            base: "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
             content: "display: inline-block; font-weight: bold; color: #1B5E20; border: 2px solid #1B5E20; padding: 5px 20px;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5; background: #E8F5E9; padding: 8px 12px; border-left: 6px solid #2E7D32;",
+            base: "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5; background: #E8F5E9; padding: 8px 12px; border-left: 6px solid #2E7D32;",
             content: "font-weight: bold; color: #1B5E20;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #2E7D32; border-bottom: 2px solid #A5D6A7; display: inline-block;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #388E3C;",
             after: ""
           }
@@ -9032,7 +9032,7 @@ var init_blackboard = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #CFD8DC;",
           header: "background: #ECEFF1; font-weight: bold; color: #37474F; border-bottom: 2px solid #CFD8DC; font-size: 1em;",
-          cell: "border: 1px solid #CFD8DC; padding: 8px; color: #37474F; font-size: 1em;"
+          cell: "border: 1px solid #CFD8DC; padding: 12px; color: #37474F; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #CFD8DC; margin: 20px 0;",
         footnote: {
@@ -9055,22 +9055,22 @@ var init_adventure = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center; background-image: linear-gradient(to right, transparent, #3E2723, transparent); height: 2px;",
+            base: "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: center; background-image: linear-gradient(to right, transparent, #3E2723, transparent); height: 2px;",
             content: "display: inline-block; font-weight: bold; color: #3E2723; background: #FFF8E1; padding: 0 15px; position: relative; top: -14px;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5; border-bottom: 2px solid #5D4037;",
+            base: "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5; border-bottom: 2px solid #5D4037;",
             content: "display: inline-block; font-weight: bold; color: #FFF; background: #5D4037; padding: 2px 10px 2px 8px; clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #795548; text-shadow: 1px 1px 1px #EFEBE9;",
             after: "display: inline-block; width: 6px; height: 6px; background: #8D6E63; border-radius: 50%; margin-left: 8px; vertical-align: middle;"
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #8D6E63;",
             after: ""
           }
@@ -9116,7 +9116,7 @@ var init_adventure = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 2px solid #8D6E63;",
           header: "background: #D7CCC8; font-weight: bold; color: #3E2723; border-bottom: 2px solid #8D6E63; font-size: 1em;",
-          cell: "border: 1px solid #BCAAA4; padding: 8px; color: #3E2723; font-size: 1em;"
+          cell: "border: 1px solid #BCAAA4; padding: 12px; color: #3E2723; font-size: 1em;"
         },
         hr: "border: none; height: 1px; background-image: linear-gradient(to right, transparent, #8D6E63, transparent); margin: 30px 0;",
         footnote: {
@@ -9139,22 +9139,22 @@ var init_warmth = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
+            base: "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
             content: "display: inline-block; font-weight: normal; color: #8D6E63; letter-spacing: 2px; border-top: 1px solid #D7CCC8; border-bottom: 1px solid #D7CCC8; padding: 10px 0;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5;",
+            base: "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5;",
             content: "font-weight: normal; color: #A1887F; background: linear-gradient(120deg, #EFEBE9 0%, #EFEBE9 100%); background-repeat: no-repeat; background-size: 100% 40%; background-position: 0 90%;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #BCAAA4;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #D7CCC8;",
             after: ""
           }
@@ -9189,7 +9189,7 @@ var init_warmth = __esm({
             constant: "color: #FF8A65;"
           }
         },
-        quote: "border: none; background: #FFF3E0; border-radius: 12px; padding: 15px; margin: 0.8em 0; color: #8D6E63; font-style: italic;",
+        quote: "border: none; background: #FFF3E0; border-radius: 12px; padding: 14px 18px; margin: 0.8em 0; color: #8D6E63; font-style: italic;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 8px;",
         link: "color: #A1887F; text-decoration: none; border-bottom: 1px solid #BCAAA4; transition: all 0.2s ease;",
         emphasis: {
@@ -9200,7 +9200,7 @@ var init_warmth = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #EFEBE9;",
           header: "background: #FAF9F8; font-weight: bold; color: #8D6E63; border-bottom: 1px solid #EFEBE9; font-size: 1em;",
-          cell: "border: 1px solid #EFEBE9; padding: 8px; color: #5D4037; font-size: 1em;"
+          cell: "border: 1px solid #EFEBE9; padding: 12px; color: #5D4037; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #EFEBE9; margin: 20px 0;",
         footnote: {
@@ -9223,22 +9223,22 @@ var init_gameui = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: left; padding-left: 15px; border-left: 5px solid #6200EA;",
+            base: "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: left; padding-left: 15px; border-left: 5px solid #6200EA;",
             content: "display: inline-block; font-weight: bold; color: #311B92; text-transform: uppercase; letter-spacing: 1px;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5; background: #F3E5F5; padding: 5px 10px; border-radius: 4px;",
+            base: "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5; background: #F3E5F5; padding: 5px 10px; border-radius: 4px;",
             content: "display: inline-block; font-weight: bold; color: #4A148C;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #651FFF; padding-bottom: 2px; border-bottom: 2px solid #B388FF; display: inline-block;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #7C4DFF;",
             after: ""
           }
@@ -9284,7 +9284,7 @@ var init_gameui = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #B39DDB;",
           header: "background: #EDE7F6; font-weight: bold; color: #4A148C; border-bottom: 2px solid #B39DDB; font-size: 1em;",
-          cell: "border: 1px solid #D1C4E9; padding: 8px; color: #311B92; font-size: 1em;"
+          cell: "border: 1px solid #D1C4E9; padding: 12px; color: #311B92; font-size: 1em;"
         },
         hr: "border: none; border-top: 2px solid #D1C4E9; margin: 20px 0;",
         footnote: {
@@ -9307,22 +9307,22 @@ var init_parent_child = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
+            base: "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
             content: "display: inline-block; font-weight: bold; color: #E65100; background: linear-gradient(to right, #FFE0B2, #FFCC80); padding: 8px 24px; border-radius: 25px; box-shadow: 0 2px 8px rgba(255,152,0,0.3);",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5;",
+            base: "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5;",
             content: "font-weight: bold; color: #F57C00; padding-left: 12px; border-left: 4px solid #FFB74D; background: linear-gradient(to right, #FFF8E1, transparent);",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #FF9800;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #FFB74D;",
             after: ""
           }
@@ -9365,7 +9365,7 @@ var init_parent_child = __esm({
             selector: "color: #66BB6A;"
           }
         },
-        quote: "border-left: 4px solid #FFB74D; border-radius: 0 12px 12px 0; padding: 15px 15px 15px 20px; background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); margin: 0.8em 0; color: #E65100; font-style: normal;",
+        quote: "border-left: 4px solid #FFB74D; border-radius: 0 12px 12px 0; padding: 14px 18px 15px 20px; background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); margin: 0.8em 0; color: #E65100; font-style: normal;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 12px; box-shadow: 0 4px 12px rgba(255,152,0,0.2);",
         link: "color: #FF9800; text-decoration: none; border-bottom: 1px dashed #FFB74D; font-weight: 500;",
         emphasis: {
@@ -9376,7 +9376,7 @@ var init_parent_child = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 1px solid #FFE0B2; border-radius: 12px; overflow: hidden;",
           header: "background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%); font-weight: bold; color: #E65100; font-size: 1em;",
-          cell: "border-bottom: 1px solid #FFE0B2; padding: 10px 12px; color: #5D4037; font-size: 1em;"
+          cell: "border-bottom: 1px solid #FFE0B2; padding: 12px 12px; color: #5D4037; font-size: 1em;"
         },
         hr: "border: none; border-top: 2px dashed #FFB74D; margin: 24px 0;",
         footnote: {
@@ -9399,22 +9399,22 @@ var init_teacher = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
+            base: "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
             content: "display: inline-block; font-weight: bold; color: #1565C0; border-bottom: 3px solid #1976D2; padding-bottom: 8px;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5;",
+            base: "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5;",
             content: "font-weight: bold; color: #00897B; padding-left: 12px; border-left: 4px solid #26A69A;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #1976D2;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #42A5F5;",
             after: ""
           }
@@ -9468,7 +9468,7 @@ var init_teacher = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #CFD8DC;",
           header: "background: #E3F2FD; font-weight: bold; color: #1565C0; border-bottom: 2px solid #1976D2; font-size: 1em;",
-          cell: "border: 1px solid #ECEFF1; padding: 10px; color: #37474F; font-size: 1em;"
+          cell: "border: 1px solid #ECEFF1; padding: 12px; color: #37474F; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #CFD8DC; margin: 24px 0;",
         footnote: {
@@ -9491,22 +9491,22 @@ var init_kindergarten = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
+            base: "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
             content: "display: inline-block; font-weight: bold; color: #fff; background: linear-gradient(135deg, #E91E63 0%, #FF5722 50%, #FFC107 100%); padding: 10px 28px; border-radius: 30px; box-shadow: 0 4px 12px rgba(233,30,99,0.3);",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5;",
+            base: "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5;",
             content: "font-weight: bold; color: #4CAF50; border-bottom: 3px dotted #81C784; padding-bottom: 6px;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #FF9800; padding-left: 10px; border-left: 4px solid #FFB74D;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #9C27B0;",
             after: ""
           }
@@ -9587,22 +9587,22 @@ var init_academic_pro = __esm({
         container: "background-color: #ffffff; padding: 24px",
         title: {
           h1: {
-            base: "font-size: 26px; font-weight: 700; color: #1a1a2e; text-align: center; border-bottom: 2.5px solid #1a1a2e; padding-bottom: 12px; margin-top: 40px; margin-bottom: 30px; letter-spacing: 0.05em",
+            base: "font-size: 26px; font-weight: 700; color: #1a1a2e; text-align: center; border-bottom: 2.5px solid #1a1a2e; padding-bottom: 12px; margin-top: 28px; margin-bottom: 30px; letter-spacing: 0.05em",
             content: "color: #1a1a2e",
             after: ""
           },
           h2: {
-            base: "font-size: 20px; font-weight: 700; color: #1a1a2e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 36px; margin-bottom: 16px; display: block; width: 100%",
+            base: "font-size: 20px; font-weight: 700; color: #1a1a2e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 26px; margin-bottom: 16px; display: block; width: 100%",
             content: "color: #1a1a2e",
             after: ""
           },
           h3: {
-            base: "font-size: 18px; font-weight: 600; color: #2c3e50; margin-top: 28px; margin-bottom: 12px; font-style: italic",
+            base: "font-size: 18px; font-weight: 600; color: #2c3e50; margin-top: 20px; margin-bottom: 12px; font-style: italic",
             content: "color: #2c3e50",
             after: ""
           },
           base: {
-            base: "font-size: 16px; font-weight: bold; color: #1a1a2e; margin-top: 20px; margin-bottom: 8px",
+            base: "font-size: 16px; font-weight: bold; color: #1a1a2e; margin-top: 14px; margin-bottom: 8px",
             content: "color: #1a1a2e",
             after: ""
           }
@@ -9636,8 +9636,8 @@ var init_academic_pro = __esm({
         },
         table: {
           container: "width: 100%; border-collapse: collapse; margin: 24px 0; border-top: 2px solid #1a1a2e; border-bottom: 2px solid #1a1a2e",
-          header: "padding: 10px; border-bottom: 1px solid #1a1a2e; text-align: left; font-weight: 700; color: #1a1a2e; background: #f8f9fb",
-          cell: "padding: 10px; border-bottom: 1px solid #eee; color: #2c3e50"
+          header: "padding: 12px; border-bottom: 1px solid #1a1a2e; text-align: left; font-weight: 700; color: #1a1a2e; background: #f8f9fb",
+          cell: "padding: 12px; border-bottom: 1px solid #eee; color: #2c3e50"
         },
         hr: "margin: 40px auto; height: 1px; background: #e0e0e0; border: none; width: 60%",
         footnote: {
@@ -9665,12 +9665,12 @@ var init_academic_pro_slate = __esm({
         container: "background-color: #ffffff; padding: 24px",
         title: {
           h1: {
-            base: "font-size: 26px; font-weight: 700; color: #34495e; text-align: center; border-bottom: 2.5px solid #34495e; padding-bottom: 12px; margin-top: 40px; margin-bottom: 30px; letter-spacing: 0.05em",
+            base: "font-size: 26px; font-weight: 700; color: #34495e; text-align: center; border-bottom: 2.5px solid #34495e; padding-bottom: 12px; margin-top: 28px; margin-bottom: 30px; letter-spacing: 0.05em",
             content: "color: #34495e",
             after: ""
           },
           h2: {
-            base: "font-size: 20px; font-weight: 700; color: #34495e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 36px; margin-bottom: 16px; display: block; width: 100%",
+            base: "font-size: 20px; font-weight: 700; color: #34495e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 26px; margin-bottom: 16px; display: block; width: 100%",
             content: "color: #34495e",
             after: ""
           },
@@ -9696,12 +9696,12 @@ var init_academic_pro_forest = __esm({
         container: "background-color: #ffffff; padding: 24px",
         title: {
           h1: {
-            base: "font-size: 26px; font-weight: 700; color: #1b4d3e; text-align: center; border-bottom: 2.5px solid #1b4d3e; padding-bottom: 12px; margin-top: 40px; margin-bottom: 30px; letter-spacing: 0.05em",
+            base: "font-size: 26px; font-weight: 700; color: #1b4d3e; text-align: center; border-bottom: 2.5px solid #1b4d3e; padding-bottom: 12px; margin-top: 28px; margin-bottom: 30px; letter-spacing: 0.05em",
             content: "color: #1b4d3e",
             after: ""
           },
           h2: {
-            base: "font-size: 20px; font-weight: 700; color: #1b4d3e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 36px; margin-bottom: 16px; display: block; width: 100%",
+            base: "font-size: 20px; font-weight: 700; color: #1b4d3e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 26px; margin-bottom: 16px; display: block; width: 100%",
             content: "color: #1b4d3e",
             after: ""
           },
@@ -9727,17 +9727,17 @@ var init_zen_essence = __esm({
         container: "background-color: #ffffff; padding: 32px 24px; color: #555555",
         title: {
           h1: {
-            base: "font-size: 20px; font-weight: 300; color: #333333; text-align: center; margin-top: 50px; margin-bottom: 40px; letter-spacing: 0.3em; text-transform: uppercase",
+            base: "font-size: 20px; font-weight: 300; color: #333333; text-align: center; margin-top: 32px; margin-bottom: 40px; letter-spacing: 0.3em; text-transform: uppercase",
             content: "color: #333333",
             after: ""
           },
           h2: {
-            base: "font-size: 17px; font-weight: 300; color: #333333; text-align: center; margin-top: 40px; margin-bottom: 20px; border-bottom: 0.5px solid #e0e0e0; padding-bottom: 15px; width: 30%; margin-left: auto; margin-right: auto",
+            base: "font-size: 17px; font-weight: 300; color: #333333; text-align: center; margin-top: 28px; margin-bottom: 20px; border-bottom: 0.5px solid #e0e0e0; padding-bottom: 15px; width: 30%; margin-left: auto; margin-right: auto",
             content: "color: #333333",
             after: ""
           },
           h3: {
-            base: "font-size: 16px; font-weight: 400; color: #666666; text-align: center; margin-top: 30px; margin-bottom: 15px; letter-spacing: 0.1em",
+            base: "font-size: 16px; font-weight: 400; color: #666666; text-align: center; margin-top: 22px; margin-bottom: 15px; letter-spacing: 0.1em",
             content: "color: #666666",
             after: ""
           },
@@ -9859,22 +9859,22 @@ var init_modern_report = __esm({
         container: "background-color: #ffffff; padding: 20px; color: #1a1a1a",
         title: {
           h1: {
-            base: "font-size: 24px; font-weight: 800; color: #000000; text-align: left; padding: 0 0 10px 0; border-bottom: 4px solid #000000; margin-top: 40px; margin-bottom: 24px; letter-spacing: -0.02em",
+            base: "font-size: 24px; font-weight: 800; color: #000000; text-align: left; padding: 0 0 10px 0; border-bottom: 4px solid #000000; margin-top: 28px; margin-bottom: 24px; letter-spacing: -0.02em",
             content: "color: #000000",
             after: ""
           },
           h2: {
-            base: "font-size: 19px; font-weight: 700; color: #000000; background: #f0f0f0; padding: 8px 12px; margin-top: 36px; margin-bottom: 16px; border-left: 6px solid #000000",
+            base: "font-size: 19px; font-weight: 700; color: #000000; background: #f0f0f0; padding: 8px 12px; margin-top: 26px; margin-bottom: 16px; border-left: 6px solid #000000",
             content: "color: #000000",
             after: ""
           },
           h3: {
-            base: "font-size: 17px; font-weight: 600; color: #333333; margin-top: 28px; margin-bottom: 12px; text-decoration: underline; text-underline-offset: 6px",
+            base: "font-size: 17px; font-weight: 600; color: #333333; margin-top: 20px; margin-bottom: 12px; text-decoration: underline; text-underline-offset: 6px",
             content: "color: #333333",
             after: ""
           },
           base: {
-            base: "font-size: 16px; font-weight: bold; color: #000000; margin-top: 20px; margin-bottom: 8px",
+            base: "font-size: 16px; font-weight: bold; color: #000000; margin-top: 14px; margin-bottom: 8px",
             content: "color: #000000",
             after: ""
           }
@@ -9961,22 +9961,22 @@ var init_minimal_gold = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(212,175,55,0.3);",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(212,175,55,0.3);",
             content: "font-weight: bold; color: #d4af37;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #d4af37;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #b8941f;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #9c7c1a;",
             after: ""
           }
@@ -10019,7 +10019,7 @@ var init_minimal_gold = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #d4af37; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #d4af37; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #d4af37; text-decoration: none; border-bottom: 1px solid #d4af37;",
         emphasis: {
@@ -10030,7 +10030,7 @@ var init_minimal_gold = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #d4af37; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -10054,22 +10054,22 @@ var init_minimal_green = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(46,204,113,0.3);",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(46,204,113,0.3);",
             content: "font-weight: bold; color: #2ecc71;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #2ecc71;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #27ae60;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #229954;",
             after: ""
           }
@@ -10112,7 +10112,7 @@ var init_minimal_green = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #2ecc71; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #2ecc71; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #2ecc71; text-decoration: none; border-bottom: 1px solid #2ecc71;",
         emphasis: {
@@ -10123,7 +10123,7 @@ var init_minimal_green = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #2ecc71; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -10147,22 +10147,22 @@ var init_minimal_blue = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(52,152,219,0.3);",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(52,152,219,0.3);",
             content: "font-weight: bold; color: #3498db;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #3498db;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #2980b9;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #21618c;",
             after: ""
           }
@@ -10205,7 +10205,7 @@ var init_minimal_blue = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #3498db; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #3498db; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #3498db; text-decoration: none; border-bottom: 1px solid #3498db;",
         emphasis: {
@@ -10216,7 +10216,7 @@ var init_minimal_blue = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #3498db; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -10240,22 +10240,22 @@ var init_minimal_orange = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(255,107,53,0.3);",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(255,107,53,0.3);",
             content: "font-weight: bold; color: #ff6b35;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #ff6b35;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #e85a2a;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #c74d23;",
             after: ""
           }
@@ -10298,7 +10298,7 @@ var init_minimal_orange = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #ff6b35; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #ff6b35; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #ff6b35; text-decoration: none; border-bottom: 1px solid #ff6b35;",
         emphasis: {
@@ -10309,7 +10309,7 @@ var init_minimal_orange = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #ff6b35; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -10333,22 +10333,22 @@ var init_minimal_red = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(231,76,60,0.3);",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(231,76,60,0.3);",
             content: "font-weight: bold; color: #e74c3c;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #e74c3c;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #c0392b;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #a93226;",
             after: ""
           }
@@ -10391,7 +10391,7 @@ var init_minimal_red = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #e74c3c; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #e74c3c; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #e74c3c; text-decoration: none; border-bottom: 1px solid #e74c3c;",
         emphasis: {
@@ -10402,7 +10402,7 @@ var init_minimal_red = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #e74c3c; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -10426,22 +10426,22 @@ var init_minimal_navy = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(44,62,80,0.3);",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(44,62,80,0.3);",
             content: "font-weight: bold; color: #2c3e50;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #2c3e50;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #34495e;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #1b2631;",
             after: ""
           }
@@ -10484,7 +10484,7 @@ var init_minimal_navy = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #2c3e50; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #2c3e50; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #2c3e50; text-decoration: none; border-bottom: 1px solid #2c3e50;",
         emphasis: {
@@ -10495,7 +10495,7 @@ var init_minimal_navy = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #2c3e50; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -10519,22 +10519,22 @@ var init_minimal_gray = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(127,140,141,0.3);",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(127,140,141,0.3);",
             content: "font-weight: bold; color: #7f8c8d;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #7f8c8d;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #616a6b;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #515a5a;",
             after: ""
           }
@@ -10577,7 +10577,7 @@ var init_minimal_gray = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #7f8c8d; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #7f8c8d; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #7f8c8d; text-decoration: none; border-bottom: 1px solid #7f8c8d;",
         emphasis: {
@@ -10588,7 +10588,7 @@ var init_minimal_gray = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #7f8c8d; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -10612,22 +10612,22 @@ var init_minimal_sky = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(86,194,230,0.3);",
+            base: "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(86,194,230,0.3);",
             content: "font-weight: bold; color: #56c2e6;",
             after: ""
           },
           h2: {
-            base: "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+            base: "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
             content: "font-weight: bold; color: #56c2e6;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 0; font-size: 1.25em; line-height: 1.5;",
+            base: "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
             content: "font-weight: bold; color: #3fa8c9;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
             content: "font-weight: bold; color: #2e8fab;",
             after: ""
           }
@@ -10670,7 +10670,7 @@ var init_minimal_sky = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #56c2e6; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #56c2e6; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #56c2e6; text-decoration: none; border-bottom: 1px solid #56c2e6;",
         emphasis: {
@@ -10681,7 +10681,7 @@ var init_minimal_sky = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #56c2e6; font-size: 1em;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -10705,22 +10705,22 @@ var init_focus_gold = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #d4af37; border-bottom: 2px solid #d4af37; padding: 15px 0; max-width: 80%;",
+            base: "margin: 28px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #d4af37; border-bottom: 2px solid #d4af37; padding: 15px 0; max-width: 80%;",
             content: "font-weight: bold; color: #d4af37;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #d4af37; border-bottom: 1px solid #d4af37; padding-bottom: 5px; display: inline-block;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #b8941f;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #9c7c1a;",
             after: ""
           }
@@ -10763,7 +10763,7 @@ var init_focus_gold = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #d4af37; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #d4af37; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #d4af37; text-decoration: none; border-bottom: 1px solid #d4af37;",
         emphasis: {
@@ -10774,7 +10774,7 @@ var init_focus_gold = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #d4af37; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: center;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: center;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -10798,22 +10798,22 @@ var init_focus_green = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #2ecc71; border-bottom: 2px solid #2ecc71; padding: 15px 0; max-width: 80%;",
+            base: "margin: 28px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #2ecc71; border-bottom: 2px solid #2ecc71; padding: 15px 0; max-width: 80%;",
             content: "font-weight: bold; color: #2ecc71;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #2ecc71; border-bottom: 1px solid #2ecc71; padding-bottom: 5px; display: inline-block;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #27ae60;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #229954;",
             after: ""
           }
@@ -10856,7 +10856,7 @@ var init_focus_green = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #2ecc71; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #2ecc71; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #2ecc71; text-decoration: none; border-bottom: 1px solid #2ecc71;",
         emphasis: {
@@ -10867,7 +10867,7 @@ var init_focus_green = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #2ecc71; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: center;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: center;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -10891,22 +10891,22 @@ var init_focus_blue = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #3498db; border-bottom: 2px solid #3498db; padding: 15px 0; max-width: 80%;",
+            base: "margin: 28px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #3498db; border-bottom: 2px solid #3498db; padding: 15px 0; max-width: 80%;",
             content: "font-weight: bold; color: #3498db;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #3498db; border-bottom: 1px solid #3498db; padding-bottom: 5px; display: inline-block;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #2980b9;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #21618c;",
             after: ""
           }
@@ -10949,7 +10949,7 @@ var init_focus_blue = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #3498db; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #3498db; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #3498db; text-decoration: none; border-bottom: 1px solid #3498db;",
         emphasis: {
@@ -10960,7 +10960,7 @@ var init_focus_blue = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #3498db; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: center;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: center;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -10984,22 +10984,22 @@ var init_focus_orange = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #ff6b35; border-bottom: 2px solid #ff6b35; padding: 15px 0; max-width: 80%;",
+            base: "margin: 28px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #ff6b35; border-bottom: 2px solid #ff6b35; padding: 15px 0; max-width: 80%;",
             content: "font-weight: bold; color: #ff6b35;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #ff6b35; border-bottom: 1px solid #ff6b35; padding-bottom: 5px; display: inline-block;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #e85a2a;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #c74d23;",
             after: ""
           }
@@ -11042,7 +11042,7 @@ var init_focus_orange = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #ff6b35; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #ff6b35; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #ff6b35; text-decoration: none; border-bottom: 1px solid #ff6b35;",
         emphasis: {
@@ -11053,7 +11053,7 @@ var init_focus_orange = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #ff6b35; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: center;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: center;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -11077,22 +11077,22 @@ var init_focus_red = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #e74c3c; border-bottom: 2px solid #e74c3c; padding: 15px 0; max-width: 80%;",
+            base: "margin: 28px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #e74c3c; border-bottom: 2px solid #e74c3c; padding: 15px 0; max-width: 80%;",
             content: "font-weight: bold; color: #e74c3c;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #e74c3c; border-bottom: 1px solid #e74c3c; padding-bottom: 5px; display: inline-block;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #c0392b;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #a93226;",
             after: ""
           }
@@ -11135,7 +11135,7 @@ var init_focus_red = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #e74c3c; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #e74c3c; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #e74c3c; text-decoration: none; border-bottom: 1px solid #e74c3c;",
         emphasis: {
@@ -11146,7 +11146,7 @@ var init_focus_red = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #e74c3c; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: center;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: center;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -11170,22 +11170,22 @@ var init_focus_navy = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #2c3e50; border-bottom: 2px solid #2c3e50; padding: 15px 0; max-width: 80%;",
+            base: "margin: 28px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #2c3e50; border-bottom: 2px solid #2c3e50; padding: 15px 0; max-width: 80%;",
             content: "font-weight: bold; color: #2c3e50;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #2c3e50; border-bottom: 1px solid #2c3e50; padding-bottom: 5px; display: inline-block;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #34495e;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #1b2631;",
             after: ""
           }
@@ -11228,7 +11228,7 @@ var init_focus_navy = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #2c3e50; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #2c3e50; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #2c3e50; text-decoration: none; border-bottom: 1px solid #2c3e50;",
         emphasis: {
@@ -11239,7 +11239,7 @@ var init_focus_navy = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #2c3e50; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: center;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: center;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -11263,22 +11263,22 @@ var init_focus_gray = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #7f8c8d; border-bottom: 2px solid #7f8c8d; padding: 15px 0; max-width: 80%;",
+            base: "margin: 28px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #7f8c8d; border-bottom: 2px solid #7f8c8d; padding: 15px 0; max-width: 80%;",
             content: "font-weight: bold; color: #7f8c8d;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #7f8c8d; border-bottom: 1px solid #7f8c8d; padding-bottom: 5px; display: inline-block;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #616a6b;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #515a5a;",
             after: ""
           }
@@ -11321,7 +11321,7 @@ var init_focus_gray = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #7f8c8d; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #7f8c8d; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #7f8c8d; text-decoration: none; border-bottom: 1px solid #7f8c8d;",
         emphasis: {
@@ -11332,7 +11332,7 @@ var init_focus_gray = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #7f8c8d; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: center;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: center;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -11356,22 +11356,22 @@ var init_focus_sky = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #56c2e6; border-bottom: 2px solid #56c2e6; padding: 15px 0; max-width: 80%;",
+            base: "margin: 28px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #56c2e6; border-bottom: 2px solid #56c2e6; padding: 15px 0; max-width: 80%;",
             content: "font-weight: bold; color: #56c2e6;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #56c2e6; border-bottom: 1px solid #56c2e6; padding-bottom: 5px; display: inline-block;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #3fa8c9;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; text-align: center;",
             content: "font-weight: bold; color: #2e8fab;",
             after: ""
           }
@@ -11414,7 +11414,7 @@ var init_focus_sky = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #56c2e6; border-radius: 6px; padding: 10px 10px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #56c2e6; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         link: "color: #56c2e6; text-decoration: none; border-bottom: 1px solid #56c2e6;",
         emphasis: {
@@ -11425,7 +11425,7 @@ var init_focus_sky = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: #fafafa; font-weight: bold; color: #4a4a4a; border-bottom: 1px solid #56c2e6; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: center;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: center;"
         },
         hr: "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         footnote: {
@@ -11449,22 +11449,22 @@ var init_elegant_gold = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #d4af37; padding: 10px 15px; background: linear-gradient(to right, rgba(212,175,55,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #d4af37; padding: 10px 15px; background: linear-gradient(to right, rgba(212,175,55,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #9c7c1a;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #d4af37; padding: 8px 12px; background: linear-gradient(to right, rgba(212,175,55,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #d4af37; padding: 8px 12px; background: linear-gradient(to right, rgba(212,175,55,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #9c7c1a;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #d4af37; padding: 5px 10px;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #d4af37; padding: 5px 10px;",
             content: "font-weight: bold; color: #d4af37;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #d4af37; padding: 4px 8px;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #d4af37; padding: 4px 8px;",
             content: "font-weight: bold; color: #9c7c1a;",
             after: ""
           }
@@ -11507,7 +11507,7 @@ var init_elegant_gold = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #d4af37; border-radius: 6px; padding: 10px 10px; background: rgba(212,175,55,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #d4af37; border-radius: 6px; padding: 14px 18px; background: rgba(212,175,55,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);",
         link: "color: #d4af37; text-decoration: none; border-bottom: 1px solid #d4af37;",
         emphasis: {
@@ -11518,7 +11518,7 @@ var init_elegant_gold = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: rgba(212,175,55,0.1); font-weight: bold; color: #9c7c1a; border-bottom: 2px solid #d4af37; font-size: 1em; text-align: left;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: left;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: left;"
         },
         hr: "border: none; border-top: 1px solid #d4af37; margin: 20px 0; opacity: 0.3;",
         footnote: {
@@ -11542,22 +11542,22 @@ var init_elegant_green = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #2ecc71; padding: 10px 15px; background: linear-gradient(to right, rgba(46,204,113,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #2ecc71; padding: 10px 15px; background: linear-gradient(to right, rgba(46,204,113,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #229954;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #2ecc71; padding: 8px 12px; background: linear-gradient(to right, rgba(46,204,113,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #2ecc71; padding: 8px 12px; background: linear-gradient(to right, rgba(46,204,113,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #229954;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #2ecc71; padding: 5px 10px;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #2ecc71; padding: 5px 10px;",
             content: "font-weight: bold; color: #2ecc71;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #2ecc71; padding: 4px 8px;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #2ecc71; padding: 4px 8px;",
             content: "font-weight: bold; color: #229954;",
             after: ""
           }
@@ -11600,7 +11600,7 @@ var init_elegant_green = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #2ecc71; border-radius: 6px; padding: 10px 10px; background: rgba(46,204,113,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #2ecc71; border-radius: 6px; padding: 14px 18px; background: rgba(46,204,113,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);",
         link: "color: #2ecc71; text-decoration: none; border-bottom: 1px solid #2ecc71;",
         emphasis: {
@@ -11611,7 +11611,7 @@ var init_elegant_green = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: rgba(46,204,113,0.1); font-weight: bold; color: #229954; border-bottom: 2px solid #2ecc71; font-size: 1em; text-align: left;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: left;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: left;"
         },
         hr: "border: none; border-top: 1px solid #2ecc71; margin: 20px 0; opacity: 0.3;",
         footnote: {
@@ -11635,22 +11635,22 @@ var init_elegant_blue = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #3498db; padding: 10px 15px; background: linear-gradient(to right, rgba(52,152,219,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #3498db; padding: 10px 15px; background: linear-gradient(to right, rgba(52,152,219,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #21618c;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #3498db; padding: 8px 12px; background: linear-gradient(to right, rgba(52,152,219,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #3498db; padding: 8px 12px; background: linear-gradient(to right, rgba(52,152,219,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #21618c;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #3498db; padding: 5px 10px;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #3498db; padding: 5px 10px;",
             content: "font-weight: bold; color: #3498db;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #3498db; padding: 4px 8px;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #3498db; padding: 4px 8px;",
             content: "font-weight: bold; color: #21618c;",
             after: ""
           }
@@ -11693,7 +11693,7 @@ var init_elegant_blue = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #3498db; border-radius: 6px; padding: 10px 10px; background: rgba(52,152,219,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #3498db; border-radius: 6px; padding: 14px 18px; background: rgba(52,152,219,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);",
         link: "color: #3498db; text-decoration: none; border-bottom: 1px solid #3498db;",
         emphasis: {
@@ -11704,7 +11704,7 @@ var init_elegant_blue = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: rgba(52,152,219,0.1); font-weight: bold; color: #21618c; border-bottom: 2px solid #3498db; font-size: 1em; text-align: left;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: left;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: left;"
         },
         hr: "border: none; border-top: 1px solid #3498db; margin: 20px 0; opacity: 0.3;",
         footnote: {
@@ -11728,22 +11728,22 @@ var init_elegant_orange = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #ff6b35; padding: 10px 15px; background: linear-gradient(to right, rgba(255,107,53,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #ff6b35; padding: 10px 15px; background: linear-gradient(to right, rgba(255,107,53,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #c74d23;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #ff6b35; padding: 8px 12px; background: linear-gradient(to right, rgba(255,107,53,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #ff6b35; padding: 8px 12px; background: linear-gradient(to right, rgba(255,107,53,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #c74d23;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #ff6b35; padding: 5px 10px;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #ff6b35; padding: 5px 10px;",
             content: "font-weight: bold; color: #ff6b35;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #ff6b35; padding: 4px 8px;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #ff6b35; padding: 4px 8px;",
             content: "font-weight: bold; color: #c74d23;",
             after: ""
           }
@@ -11786,7 +11786,7 @@ var init_elegant_orange = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #ff6b35; border-radius: 6px; padding: 10px 10px; background: rgba(255,107,53,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #ff6b35; border-radius: 6px; padding: 14px 18px; background: rgba(255,107,53,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);",
         link: "color: #ff6b35; text-decoration: none; border-bottom: 1px solid #ff6b35;",
         emphasis: {
@@ -11797,7 +11797,7 @@ var init_elegant_orange = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: rgba(255,107,53,0.1); font-weight: bold; color: #c74d23; border-bottom: 2px solid #ff6b35; font-size: 1em; text-align: left;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: left;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: left;"
         },
         hr: "border: none; border-top: 1px solid #ff6b35; margin: 20px 0; opacity: 0.3;",
         footnote: {
@@ -11821,22 +11821,22 @@ var init_elegant_red = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #e74c3c; padding: 10px 15px; background: linear-gradient(to right, rgba(231,76,60,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #e74c3c; padding: 10px 15px; background: linear-gradient(to right, rgba(231,76,60,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #922b21;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #e74c3c; padding: 8px 12px; background: linear-gradient(to right, rgba(231,76,60,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #e74c3c; padding: 8px 12px; background: linear-gradient(to right, rgba(231,76,60,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #922b21;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #e74c3c; padding: 5px 10px;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #e74c3c; padding: 5px 10px;",
             content: "font-weight: bold; color: #e74c3c;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #e74c3c; padding: 4px 8px;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #e74c3c; padding: 4px 8px;",
             content: "font-weight: bold; color: #922b21;",
             after: ""
           }
@@ -11879,7 +11879,7 @@ var init_elegant_red = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #e74c3c; border-radius: 6px; padding: 10px 10px; background: rgba(231,76,60,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #e74c3c; border-radius: 6px; padding: 14px 18px; background: rgba(231,76,60,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);",
         link: "color: #e74c3c; text-decoration: none; border-bottom: 1px solid #e74c3c;",
         emphasis: {
@@ -11890,7 +11890,7 @@ var init_elegant_red = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: rgba(231,76,60,0.1); font-weight: bold; color: #922b21; border-bottom: 2px solid #e74c3c; font-size: 1em; text-align: left;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: left;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: left;"
         },
         hr: "border: none; border-top: 1px solid #e74c3c; margin: 20px 0; opacity: 0.3;",
         footnote: {
@@ -11914,22 +11914,22 @@ var init_elegant_navy = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #2c3e50; padding: 10px 15px; background: linear-gradient(to right, rgba(44,62,80,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #2c3e50; padding: 10px 15px; background: linear-gradient(to right, rgba(44,62,80,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #1b2631;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #2c3e50; padding: 8px 12px; background: linear-gradient(to right, rgba(44,62,80,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #2c3e50; padding: 8px 12px; background: linear-gradient(to right, rgba(44,62,80,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #1b2631;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #2c3e50; padding: 5px 10px;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #2c3e50; padding: 5px 10px;",
             content: "font-weight: bold; color: #2c3e50;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #2c3e50; padding: 4px 8px;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #2c3e50; padding: 4px 8px;",
             content: "font-weight: bold; color: #1b2631;",
             after: ""
           }
@@ -11972,7 +11972,7 @@ var init_elegant_navy = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #2c3e50; border-radius: 6px; padding: 10px 10px; background: rgba(44,62,80,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #2c3e50; border-radius: 6px; padding: 14px 18px; background: rgba(44,62,80,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);",
         link: "color: #2c3e50; text-decoration: none; border-bottom: 1px solid #2c3e50;",
         emphasis: {
@@ -11983,7 +11983,7 @@ var init_elegant_navy = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: rgba(44,62,80,0.1); font-weight: bold; color: #1b2631; border-bottom: 2px solid #2c3e50; font-size: 1em; text-align: left;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: left;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: left;"
         },
         hr: "border: none; border-top: 1px solid #2c3e50; margin: 20px 0; opacity: 0.3;",
         footnote: {
@@ -12007,22 +12007,22 @@ var init_elegant_gray = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #7f8c8d; padding: 10px 15px; background: linear-gradient(to right, rgba(127,140,141,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #7f8c8d; padding: 10px 15px; background: linear-gradient(to right, rgba(127,140,141,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #515a5a;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #7f8c8d; padding: 8px 12px; background: linear-gradient(to right, rgba(127,140,141,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #7f8c8d; padding: 8px 12px; background: linear-gradient(to right, rgba(127,140,141,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #515a5a;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #7f8c8d; padding: 5px 10px;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #7f8c8d; padding: 5px 10px;",
             content: "font-weight: bold; color: #7f8c8d;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #7f8c8d; padding: 4px 8px;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #7f8c8d; padding: 4px 8px;",
             content: "font-weight: bold; color: #515a5a;",
             after: ""
           }
@@ -12065,7 +12065,7 @@ var init_elegant_gray = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #7f8c8d; border-radius: 6px; padding: 10px 10px; background: rgba(127,140,141,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #7f8c8d; border-radius: 6px; padding: 14px 18px; background: rgba(127,140,141,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);",
         link: "color: #7f8c8d; text-decoration: none; border-bottom: 1px solid #7f8c8d;",
         emphasis: {
@@ -12076,7 +12076,7 @@ var init_elegant_gray = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: rgba(127,140,141,0.1); font-weight: bold; color: #515a5a; border-bottom: 2px solid #7f8c8d; font-size: 1em; text-align: left;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: left;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: left;"
         },
         hr: "border: none; border-top: 1px solid #7f8c8d; margin: 20px 0; opacity: 0.3;",
         footnote: {
@@ -12100,22 +12100,22 @@ var init_elegant_sky = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #56c2e6; padding: 10px 15px; background: linear-gradient(to right, rgba(86,194,230,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; border-left: 8px solid #56c2e6; padding: 10px 15px; background: linear-gradient(to right, rgba(86,194,230,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #2e8fab;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #56c2e6; padding: 8px 12px; background: linear-gradient(to right, rgba(86,194,230,0.1), transparent); border-radius: 0 4px 4px 0;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-left: 6px solid #56c2e6; padding: 8px 12px; background: linear-gradient(to right, rgba(86,194,230,0.1), transparent); border-radius: 0 4px 4px 0;",
             content: "font-weight: bold; color: #2e8fab;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #56c2e6; padding: 5px 10px;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; border-left: 4px solid #56c2e6; padding: 5px 10px;",
             content: "font-weight: bold; color: #56c2e6;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #56c2e6; padding: 4px 8px;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; border-left: 3px solid #56c2e6; padding: 4px 8px;",
             content: "font-weight: bold; color: #2e8fab;",
             after: ""
           }
@@ -12158,7 +12158,7 @@ var init_elegant_sky = __esm({
             selector: "color: #22863a;"
           }
         },
-        quote: "border-left: 4px solid #56c2e6; border-radius: 6px; padding: 10px 10px; background: rgba(86,194,230,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        quote: "border-left: 4px solid #56c2e6; border-radius: 6px; padding: 14px 18px; background: rgba(86,194,230,0.05); margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);",
         link: "color: #56c2e6; text-decoration: none; border-bottom: 1px solid #56c2e6;",
         emphasis: {
@@ -12169,7 +12169,7 @@ var init_elegant_sky = __esm({
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;",
           header: "background: rgba(86,194,230,0.1); font-weight: bold; color: #2e8fab; border-bottom: 2px solid #56c2e6; font-size: 1em; text-align: left;",
-          cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em; text-align: left;"
+          cell: "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em; text-align: left;"
         },
         hr: "border: none; border-top: 1px solid #56c2e6; margin: 20px 0; opacity: 0.3;",
         footnote: {
@@ -12193,22 +12193,22 @@ var init_bold_gold = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #d4af37; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #d4af37; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
             content: "font-weight: 900; color: #fff;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #d4af37; padding-bottom: 8px;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #d4af37; padding-bottom: 8px;",
             content: "font-weight: 800; color: #d4af37;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #d4af37;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #d4af37;",
             content: "font-weight: bold; color: #b8941f;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
             content: "color: #9c7c1a;",
             after: ""
           }
@@ -12251,7 +12251,7 @@ var init_bold_gold = __esm({
             selector: "color: #e74c3c;"
           }
         },
-        quote: "border-left: 6px solid #d4af37; border-radius: 4px; padding: 15px; background: #fffcf5; margin: 1em 0; color: #5d4037; font-style: italic; font-weight: 600;",
+        quote: "border-left: 6px solid #d4af37; border-radius: 4px; padding: 14px 18px; background: #fffcf5; margin: 1em 0; color: #5d4037; font-style: italic; font-weight: 600;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.15);",
         link: "color: #d4af37; text-decoration: none; border-bottom: 2px solid #d4af37; font-weight: bold;",
         emphasis: {
@@ -12261,8 +12261,8 @@ var init_bold_gold = __esm({
         },
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #d4af37; border-radius: 6px; overflow: hidden;",
-          header: "background: #d4af37; font-weight: 900; color: #fff; padding: 10px; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #eee; padding: 10px; color: #2c3e50; font-size: 1em; font-weight: 500;"
+          header: "background: #d4af37; font-weight: 900; color: #fff; padding: 12px; font-size: 1em; text-align: center;",
+          cell: "border: 1px solid #eee; padding: 12px; color: #2c3e50; font-size: 1em; font-weight: 500;"
         },
         hr: "border: none; border-top: 4px solid #d4af37; margin: 30px 0; border-radius: 2px;",
         footnote: {
@@ -12286,22 +12286,22 @@ var init_bold_green = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #2ecc71; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #2ecc71; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
             content: "font-weight: 900; color: #fff;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #2ecc71; padding-bottom: 8px;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #2ecc71; padding-bottom: 8px;",
             content: "font-weight: 800; color: #2ecc71;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #2ecc71;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #2ecc71;",
             content: "font-weight: bold; color: #27ae60;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
             content: "color: #229954;",
             after: ""
           }
@@ -12344,7 +12344,7 @@ var init_bold_green = __esm({
             selector: "color: #e74c3c;"
           }
         },
-        quote: "border-left: 6px solid #2ecc71; border-radius: 4px; padding: 15px; background: #eafaf1; margin: 1em 0; color: #1e8449; font-style: italic; font-weight: 600;",
+        quote: "border-left: 6px solid #2ecc71; border-radius: 4px; padding: 14px 18px; background: #eafaf1; margin: 1em 0; color: #1e8449; font-style: italic; font-weight: 600;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.15);",
         link: "color: #2ecc71; text-decoration: none; border-bottom: 2px solid #2ecc71; font-weight: bold;",
         emphasis: {
@@ -12354,8 +12354,8 @@ var init_bold_green = __esm({
         },
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #2ecc71; border-radius: 6px; overflow: hidden;",
-          header: "background: #2ecc71; font-weight: 900; color: #fff; padding: 10px; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #eee; padding: 10px; color: #2c3e50; font-size: 1em; font-weight: 500;"
+          header: "background: #2ecc71; font-weight: 900; color: #fff; padding: 12px; font-size: 1em; text-align: center;",
+          cell: "border: 1px solid #eee; padding: 12px; color: #2c3e50; font-size: 1em; font-weight: 500;"
         },
         hr: "border: none; border-top: 4px solid #2ecc71; margin: 30px 0; border-radius: 2px;",
         footnote: {
@@ -12379,22 +12379,22 @@ var init_bold_blue = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #3498db; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #3498db; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
             content: "font-weight: 900; color: #fff;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #3498db; padding-bottom: 8px;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #3498db; padding-bottom: 8px;",
             content: "font-weight: 800; color: #3498db;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #3498db;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #3498db;",
             content: "font-weight: bold; color: #2980b9;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
             content: "color: #21618c;",
             after: ""
           }
@@ -12437,7 +12437,7 @@ var init_bold_blue = __esm({
             selector: "color: #e74c3c;"
           }
         },
-        quote: "border-left: 6px solid #3498db; border-radius: 4px; padding: 15px; background: #ebf5fb; margin: 1em 0; color: #154360; font-style: italic; font-weight: 600;",
+        quote: "border-left: 6px solid #3498db; border-radius: 4px; padding: 14px 18px; background: #ebf5fb; margin: 1em 0; color: #154360; font-style: italic; font-weight: 600;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.15);",
         link: "color: #3498db; text-decoration: none; border-bottom: 2px solid #3498db; font-weight: bold;",
         emphasis: {
@@ -12447,8 +12447,8 @@ var init_bold_blue = __esm({
         },
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #3498db; border-radius: 6px; overflow: hidden;",
-          header: "background: #3498db; font-weight: 900; color: #fff; padding: 10px; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #eee; padding: 10px; color: #2c3e50; font-size: 1em; font-weight: 500;"
+          header: "background: #3498db; font-weight: 900; color: #fff; padding: 12px; font-size: 1em; text-align: center;",
+          cell: "border: 1px solid #eee; padding: 12px; color: #2c3e50; font-size: 1em; font-weight: 500;"
         },
         hr: "border: none; border-top: 4px solid #3498db; margin: 30px 0; border-radius: 2px;",
         footnote: {
@@ -12472,22 +12472,22 @@ var init_bold_orange = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #ff6b35; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #ff6b35; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
             content: "font-weight: 900; color: #fff;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #ff6b35; padding-bottom: 8px;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #ff6b35; padding-bottom: 8px;",
             content: "font-weight: 800; color: #ff6b35;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #ff6b35;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #ff6b35;",
             content: "font-weight: bold; color: #e85a2a;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
             content: "color: #c74d23;",
             after: ""
           }
@@ -12530,7 +12530,7 @@ var init_bold_orange = __esm({
             selector: "color: #e74c3c;"
           }
         },
-        quote: "border-left: 6px solid #ff6b35; border-radius: 4px; padding: 15px; background: #fdf2e9; margin: 1em 0; color: #873600; font-style: italic; font-weight: 600;",
+        quote: "border-left: 6px solid #ff6b35; border-radius: 4px; padding: 14px 18px; background: #fdf2e9; margin: 1em 0; color: #873600; font-style: italic; font-weight: 600;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.15);",
         link: "color: #ff6b35; text-decoration: none; border-bottom: 2px solid #ff6b35; font-weight: bold;",
         emphasis: {
@@ -12540,8 +12540,8 @@ var init_bold_orange = __esm({
         },
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #ff6b35; border-radius: 6px; overflow: hidden;",
-          header: "background: #ff6b35; font-weight: 900; color: #fff; padding: 10px; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #eee; padding: 10px; color: #2c3e50; font-size: 1em; font-weight: 500;"
+          header: "background: #ff6b35; font-weight: 900; color: #fff; padding: 12px; font-size: 1em; text-align: center;",
+          cell: "border: 1px solid #eee; padding: 12px; color: #2c3e50; font-size: 1em; font-weight: 500;"
         },
         hr: "border: none; border-top: 4px solid #ff6b35; margin: 30px 0; border-radius: 2px;",
         footnote: {
@@ -12565,22 +12565,22 @@ var init_bold_red = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #e74c3c; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #e74c3c; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
             content: "font-weight: 900; color: #fff;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #e74c3c; padding-bottom: 8px;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #e74c3c; padding-bottom: 8px;",
             content: "font-weight: 800; color: #e74c3c;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #e74c3c;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #e74c3c;",
             content: "font-weight: bold; color: #c0392b;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
             content: "color: #a93226;",
             after: ""
           }
@@ -12623,7 +12623,7 @@ var init_bold_red = __esm({
             selector: "color: #f39c12;"
           }
         },
-        quote: "border-left: 6px solid #e74c3c; border-radius: 4px; padding: 15px; background: #fdfefe; margin: 1em 0; color: #641e16; font-style: italic; font-weight: 600;",
+        quote: "border-left: 6px solid #e74c3c; border-radius: 4px; padding: 14px 18px; background: #fdfefe; margin: 1em 0; color: #641e16; font-style: italic; font-weight: 600;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.15);",
         link: "color: #e74c3c; text-decoration: none; border-bottom: 2px solid #e74c3c; font-weight: bold;",
         emphasis: {
@@ -12633,8 +12633,8 @@ var init_bold_red = __esm({
         },
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #e74c3c; border-radius: 6px; overflow: hidden;",
-          header: "background: #e74c3c; font-weight: 900; color: #fff; padding: 10px; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #eee; padding: 10px; color: #2c3e50; font-size: 1em; font-weight: 500;"
+          header: "background: #e74c3c; font-weight: 900; color: #fff; padding: 12px; font-size: 1em; text-align: center;",
+          cell: "border: 1px solid #eee; padding: 12px; color: #2c3e50; font-size: 1em; font-weight: 500;"
         },
         hr: "border: none; border-top: 4px solid #e74c3c; margin: 30px 0; border-radius: 2px;",
         footnote: {
@@ -12658,22 +12658,22 @@ var init_bold_navy = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #2c3e50; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #2c3e50; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
             content: "font-weight: 900; color: #fff;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #2c3e50; padding-bottom: 8px;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #2c3e50; padding-bottom: 8px;",
             content: "font-weight: 800; color: #2c3e50;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #2c3e50;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #2c3e50;",
             content: "font-weight: bold; color: #34495e;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
             content: "color: #1b2631;",
             after: ""
           }
@@ -12716,7 +12716,7 @@ var init_bold_navy = __esm({
             selector: "color: #e74c3c;"
           }
         },
-        quote: "border-left: 6px solid #2c3e50; border-radius: 4px; padding: 15px; background: #fdfefe; margin: 1em 0; color: #17202a; font-style: italic; font-weight: 600;",
+        quote: "border-left: 6px solid #2c3e50; border-radius: 4px; padding: 14px 18px; background: #fdfefe; margin: 1em 0; color: #17202a; font-style: italic; font-weight: 600;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.15);",
         link: "color: #2c3e50; text-decoration: none; border-bottom: 2px solid #2c3e50; font-weight: bold;",
         emphasis: {
@@ -12726,8 +12726,8 @@ var init_bold_navy = __esm({
         },
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #2c3e50; border-radius: 6px; overflow: hidden;",
-          header: "background: #2c3e50; font-weight: 900; color: #fff; padding: 10px; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #eee; padding: 10px; color: #2c3e50; font-size: 1em; font-weight: 500;"
+          header: "background: #2c3e50; font-weight: 900; color: #fff; padding: 12px; font-size: 1em; text-align: center;",
+          cell: "border: 1px solid #eee; padding: 12px; color: #2c3e50; font-size: 1em; font-weight: 500;"
         },
         hr: "border: none; border-top: 4px solid #2c3e50; margin: 30px 0; border-radius: 2px;",
         footnote: {
@@ -12751,22 +12751,22 @@ var init_bold_gray = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #7f8c8d; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #7f8c8d; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
             content: "font-weight: 900; color: #fff;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #7f8c8d; padding-bottom: 8px;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #7f8c8d; padding-bottom: 8px;",
             content: "font-weight: 800; color: #7f8c8d;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #7f8c8d;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #7f8c8d;",
             content: "font-weight: bold; color: #616a6b;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
             content: "color: #515a5a;",
             after: ""
           }
@@ -12809,7 +12809,7 @@ var init_bold_gray = __esm({
             selector: "color: #e74c3c;"
           }
         },
-        quote: "border-left: 6px solid #7f8c8d; border-radius: 4px; padding: 15px; background: #fdfefe; margin: 1em 0; color: #424949; font-style: italic; font-weight: 600;",
+        quote: "border-left: 6px solid #7f8c8d; border-radius: 4px; padding: 14px 18px; background: #fdfefe; margin: 1em 0; color: #424949; font-style: italic; font-weight: 600;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.15);",
         link: "color: #7f8c8d; text-decoration: none; border-bottom: 2px solid #7f8c8d; font-weight: bold;",
         emphasis: {
@@ -12819,8 +12819,8 @@ var init_bold_gray = __esm({
         },
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #7f8c8d; border-radius: 6px; overflow: hidden;",
-          header: "background: #7f8c8d; font-weight: 900; color: #fff; padding: 10px; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #eee; padding: 10px; color: #2c3e50; font-size: 1em; font-weight: 500;"
+          header: "background: #7f8c8d; font-weight: 900; color: #fff; padding: 12px; font-size: 1em; text-align: center;",
+          cell: "border: 1px solid #eee; padding: 12px; color: #2c3e50; font-size: 1em; font-weight: 500;"
         },
         hr: "border: none; border-top: 4px solid #7f8c8d; margin: 30px 0; border-radius: 2px;",
         footnote: {
@@ -12844,22 +12844,22 @@ var init_bold_sky = __esm({
         container: "",
         title: {
           h1: {
-            base: "margin: 40px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #56c2e6; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
+            base: "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #56c2e6; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
             content: "font-weight: 900; color: #fff;",
             after: ""
           },
           h2: {
-            base: "margin: 30px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #56c2e6; padding-bottom: 8px;",
+            base: "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #56c2e6; padding-bottom: 8px;",
             content: "font-weight: 800; color: #56c2e6;",
             after: ""
           },
           h3: {
-            base: "margin: 24px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #56c2e6;",
+            base: "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #56c2e6;",
             content: "font-weight: bold; color: #3fa8c9;",
             after: ""
           },
           base: {
-            base: "margin: 20px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
+            base: "margin: 14px 0 0; font-size: 1em; line-height: 1.5; font-weight: bold;",
             content: "color: #2e8fab;",
             after: ""
           }
@@ -12902,7 +12902,7 @@ var init_bold_sky = __esm({
             selector: "color: #e74c3c;"
           }
         },
-        quote: "border-left: 6px solid #56c2e6; border-radius: 4px; padding: 15px; background: #fdfefe; margin: 1em 0; color: #1b4f72; font-style: italic; font-weight: 600;",
+        quote: "border-left: 6px solid #56c2e6; border-radius: 4px; padding: 14px 18px; background: #fdfefe; margin: 1em 0; color: #1b4f72; font-style: italic; font-weight: 600;",
         image: "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 8px; box-shadow: 0 8px 16px rgba(0,0,0,0.15);",
         link: "color: #56c2e6; text-decoration: none; border-bottom: 2px solid #56c2e6; font-weight: bold;",
         emphasis: {
@@ -12912,8 +12912,8 @@ var init_bold_sky = __esm({
         },
         table: {
           container: "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #56c2e6; border-radius: 6px; overflow: hidden;",
-          header: "background: #56c2e6; font-weight: 900; color: #fff; padding: 10px; font-size: 1em; text-align: center;",
-          cell: "border: 1px solid #eee; padding: 10px; color: #2c3e50; font-size: 1em; font-weight: 500;"
+          header: "background: #56c2e6; font-weight: 900; color: #fff; padding: 12px; font-size: 1em; text-align: center;",
+          cell: "border: 1px solid #eee; padding: 12px; color: #2c3e50; font-size: 1em; font-weight: 500;"
         },
         hr: "border: none; border-top: 4px solid #56c2e6; margin: 30px 0; border-radius: 2px;",
         footnote: {
@@ -12940,22 +12940,22 @@ var init_bauhaus = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 31px; font-weight: 900; color: #ffffff; text-transform: uppercase; line-height: 1.16; letter-spacing: -0.02em; padding: 10px 14px 9px; background: linear-gradient(90deg, #E30613 0%, #E30613 64%, #004D9F 64%, #004D9F 86%, #F5A623 86%, #F5A623 100%); border: 3px solid #1a1a1a; box-shadow: 6px 6px 0 #1a1a1a; margin-top: 36px; margin-bottom: 18px",
+            base: "font-size: 31px; font-weight: 900; color: #ffffff; text-transform: uppercase; line-height: 1.16; letter-spacing: -0.02em; padding: 10px 14px 9px; background: linear-gradient(90deg, #E30613 0%, #E30613 64%, #004D9F 64%, #004D9F 86%, #F5A623 86%, #F5A623 100%); border: 3px solid #1a1a1a; box-shadow: 6px 6px 0 #1a1a1a; margin-top: 26px; margin-bottom: 18px",
             content: "color: #ffffff",
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 800; color: #1a1a1a; text-transform: uppercase; line-height: 1.35; letter-spacing: 0.08em; padding: 8px 16px; background: linear-gradient(90deg, #F5A623 0%, #F5A623 68%, #ffffff 68%, #ffffff 100%); border-left: 10px solid #004D9F; border-top: 3px solid #1a1a1a; border-bottom: 3px solid #1a1a1a; margin-top: 34px; margin-bottom: 18px",
+            base: "font-size: 22px; font-weight: 800; color: #1a1a1a; text-transform: uppercase; line-height: 1.35; letter-spacing: 0.08em; padding: 8px 16px; background: linear-gradient(90deg, #F5A623 0%, #F5A623 68%, #ffffff 68%, #ffffff 100%); border-left: 10px solid #004D9F; border-top: 3px solid #1a1a1a; border-bottom: 3px solid #1a1a1a; margin-top: 24px; margin-bottom: 18px",
             content: "color: #1a1a1a",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; line-height: 1.45; letter-spacing: 0.05em; padding: 6px 12px; background: #ffffff; border-left: 3px solid #E30613; margin-top: 28px; margin-bottom: 14px",
+            base: "font-size: 20px; font-weight: 700; color: #1a1a1a; text-transform: uppercase; line-height: 1.45; letter-spacing: 0.05em; padding: 6px 12px; background: #ffffff; border-left: 3px solid #E30613; margin-top: 20px; margin-bottom: 14px",
             content: "color: #1a1a1a",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #E30613; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #E30613; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #1a1a1a",
             after: ""
           }
@@ -13040,17 +13040,17 @@ var init_bold_blue2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 600; color: #4B6EF5; padding-left: 12px; border-left: 4px solid #4B6EF5; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            base: "font-size: 22px; font-weight: 600; color: #4B6EF5; padding-left: 12px; border-left: 4px solid #4B6EF5; margin-top: 26px; margin-bottom: 24px; line-height: 1.4",
             content: "color: #4B6EF5",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #4B6EF5; padding: 6px 12px; background-color: rgba(75,110,245,0.1); border-radius: 6px; border-left: 3px solid #4B6EF5; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            base: "font-size: 20px; font-weight: 600; color: #4B6EF5; padding: 6px 12px; background-color: rgba(75,110,245,0.1); border-radius: 6px; border-left: 3px solid #4B6EF5; margin-top: 20px; margin-bottom: 20px; line-height: 1.4",
             content: "color: #4B6EF5",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #4B6EF5",
             after: ""
           }
@@ -13135,17 +13135,17 @@ var init_bold_green2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 600; color: #2BAE85; padding-left: 12px; border-left: 4px solid #2BAE85; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            base: "font-size: 22px; font-weight: 600; color: #2BAE85; padding-left: 12px; border-left: 4px solid #2BAE85; margin-top: 26px; margin-bottom: 24px; line-height: 1.4",
             content: "color: #2BAE85",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #2BAE85; padding: 6px 12px; background-color: rgba(43,174,133,0.1); border-radius: 6px; border-left: 3px solid #2BAE85; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            base: "font-size: 20px; font-weight: 600; color: #2BAE85; padding: 6px 12px; background-color: rgba(43,174,133,0.1); border-radius: 6px; border-left: 3px solid #2BAE85; margin-top: 20px; margin-bottom: 20px; line-height: 1.4",
             content: "color: #2BAE85",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #2BAE85; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #2BAE85; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #2BAE85",
             after: ""
           }
@@ -13230,17 +13230,17 @@ var init_bold_navy2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 600; color: #1F4F8A; padding-left: 12px; border-left: 4px solid #1F4F8A; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            base: "font-size: 22px; font-weight: 600; color: #1F4F8A; padding-left: 12px; border-left: 4px solid #1F4F8A; margin-top: 26px; margin-bottom: 24px; line-height: 1.4",
             content: "color: #1F4F8A",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #1F4F8A; padding: 6px 12px; background-color: rgba(31,79,138,0.1); border-radius: 6px; border-left: 3px solid #1F4F8A; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            base: "font-size: 20px; font-weight: 600; color: #1F4F8A; padding: 6px 12px; background-color: rgba(31,79,138,0.1); border-radius: 6px; border-left: 3px solid #1F4F8A; margin-top: 20px; margin-bottom: 20px; line-height: 1.4",
             content: "color: #1F4F8A",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #1F4F8A; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #1F4F8A; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #1F4F8A",
             after: ""
           }
@@ -13320,22 +13320,22 @@ var init_bytedance = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 22px; font-weight: 600; color: #1d2129; text-align: center; letter-spacing: 0.1em; line-height: 1.2; padding: 10px 24px; background: linear-gradient(to right, rgba(22,119,255,0.02), rgba(5,212,205,0.05), rgba(22,119,255,0.02)); border-radius: 4px; border-top: 3px solid #1677FF; border-bottom: 1px solid rgba(5,212,205,0.5); margin-top: 24px; margin-bottom: 24px",
+            base: "font-size: 22px; font-weight: 600; color: #1d2129; text-align: center; letter-spacing: 0.1em; line-height: 1.2; padding: 10px 24px; background: linear-gradient(to right, rgba(22,119,255,0.02), rgba(5,212,205,0.05), rgba(22,119,255,0.02)); border-radius: 4px; border-top: 3px solid #1677FF; border-bottom: 1px solid rgba(5,212,205,0.5); margin-top: 18px; margin-bottom: 24px",
             content: "color: #1d2129",
             after: ""
           },
           h2: {
-            base: "font-size: 20px; font-weight: 600; color: #ffffff; text-align: center; letter-spacing: 0.1em; line-height: 1.4; padding: 6px 22px; background: linear-gradient(135deg, #1677FF, #05D4CD); border-radius: 8px 24px 8px 24px; box-shadow: 0 4px 12px rgba(5,212,205,0.15); margin-top: 48px; margin-bottom: 24px",
+            base: "font-size: 20px; font-weight: 600; color: #ffffff; text-align: center; letter-spacing: 0.1em; line-height: 1.4; padding: 6px 22px; background: linear-gradient(135deg, #1677FF, #05D4CD); border-radius: 8px 24px 8px 24px; box-shadow: 0 4px 12px rgba(5,212,205,0.15); margin-top: 30px; margin-bottom: 24px",
             content: "color: #ffffff",
             after: ""
           },
           h3: {
-            base: "font-size: 18px; font-weight: 600; color: #1677FF; line-height: 1.6; padding: 8px 16px 8px 12px; border-left: 3px solid #1677FF; border-radius: 6px; background: linear-gradient(to right, rgba(22,119,255,0.08), rgba(5,212,205,0.03)); border-right: 1px solid rgba(22,119,255,0.1); border-top: 1px solid rgba(22,119,255,0.1); margin-top: 32px; margin-bottom: 12px",
+            base: "font-size: 18px; font-weight: 600; color: #1677FF; line-height: 1.6; padding: 8px 16px 8px 12px; border-left: 3px solid #1677FF; border-radius: 6px; background: linear-gradient(to right, rgba(22,119,255,0.08), rgba(5,212,205,0.03)); border-right: 1px solid rgba(22,119,255,0.1); border-top: 1px solid rgba(22,119,255,0.1); margin-top: 24px; margin-bottom: 12px",
             content: "color: #1677FF",
             after: ""
           },
           base: {
-            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #1677FF; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #1677FF; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #1677FF",
             after: ""
           }
@@ -13370,7 +13370,7 @@ var init_bytedance = __esm({
         table: {
           container: "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05)",
           header: "background: linear-gradient(to right, rgba(22,119,255,0.05), rgba(5,212,205,0.05)); padding: 12px 16px; border-bottom: 1px solid rgba(5,212,205,0.1); text-align: left; font-weight: 600; color: #1677FF",
-          cell: "padding: 10px 16px; border-bottom: 1px solid rgba(0,0,0,0.05); color: #4e5969"
+          cell: "padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.05); color: #4e5969"
         },
         hr: "margin-top: 40px; margin-bottom: 40px; height: 2px; background: linear-gradient(to right, rgba(22,119,255,0), #1677FF, #05D4CD, rgba(5,212,205,0)); border: none",
         footnote: {
@@ -13415,22 +13415,22 @@ var init_chinese = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 22px; font-weight: bold; color: #8B1E22; text-align: center; letter-spacing: 0.1em; line-height: 1.2; padding: 12px 24px; background-image: repeating-linear-gradient(45deg, rgba(139,30,34,0.03), rgba(139,30,34,0.03) 2px, transparent 2px, transparent 8px); border-top: 2px solid #8B1E22; border-bottom: 2px solid #8B1E22; width: 80%; margin-top: 24px; margin-bottom: 24px; margin-left: auto; margin-right: auto",
+            base: "font-size: 22px; font-weight: bold; color: #8B1E22; text-align: center; letter-spacing: 0.1em; line-height: 1.2; padding: 12px 24px; background-image: repeating-linear-gradient(45deg, rgba(139,30,34,0.03), rgba(139,30,34,0.03) 2px, transparent 2px, transparent 8px); border-top: 2px solid #8B1E22; border-bottom: 2px solid #8B1E22; width: 80%; margin-top: 18px; margin-bottom: 24px; margin-left: auto; margin-right: auto",
             content: "color: #8B1E22",
             after: ""
           },
           h2: {
-            base: "font-size: 20px; font-weight: bold; color: #8B1E22; line-height: 1.2; letter-spacing: 0.1em; padding: 0 0 8px 12px; border-left: 4px solid #8B1E22; border-bottom: 1px dashed rgba(139,30,34,0.4); margin-top: 32px; margin-bottom: 12px",
+            base: "font-size: 20px; font-weight: bold; color: #8B1E22; line-height: 1.2; letter-spacing: 0.1em; padding: 0 0 8px 12px; border-left: 4px solid #8B1E22; border-bottom: 1px dashed rgba(139,30,34,0.4); margin-top: 24px; margin-bottom: 12px",
             content: "color: #8B1E22",
             after: ""
           },
           h3: {
-            base: "font-size: 18px; font-weight: 600; color: #8B1E22; line-height: 1.6; padding: 0 0 6px 12px; border-left: 3px solid #8B1E22; margin-top: 32px; margin-bottom: 12px",
+            base: "font-size: 18px; font-weight: 600; color: #8B1E22; line-height: 1.6; padding: 0 0 6px 12px; border-left: 3px solid #8B1E22; margin-top: 24px; margin-bottom: 12px",
             content: "color: #8B1E22",
             after: ""
           },
           base: {
-            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #8B1E22; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #8B1E22; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #8B1E22",
             after: ""
           }
@@ -13510,22 +13510,22 @@ var init_coffee_house = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 29px; font-weight: 700; color: #4a302a; line-height: 1.32; margin-top: 36px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #8d6e63; border-radius: 12px; background: linear-gradient(180deg, rgba(236,226,212,0.92) 0%, rgba(245,239,230,0.94) 100%); border: 1px solid rgba(161,136,127,0.3)",
+            base: "font-size: 29px; font-weight: 700; color: #4a302a; line-height: 1.32; margin-top: 26px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #8d6e63; border-radius: 12px; background: linear-gradient(180deg, rgba(236,226,212,0.92) 0%, rgba(245,239,230,0.94) 100%); border: 1px solid rgba(161,136,127,0.3)",
             content: "color: #4a302a",
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 700; color: #5d4037; line-height: 1.45; margin-top: 34px; margin-bottom: 18px; padding: 0 0 8px; border-left: none; border-radius: 0; border-bottom: 1px solid rgba(161,136,127,0.36); background: none",
+            base: "font-size: 22px; font-weight: 700; color: #5d4037; line-height: 1.45; margin-top: 24px; margin-bottom: 18px; padding: 0 0 8px; border-left: none; border-radius: 0; border-bottom: 1px solid rgba(161,136,127,0.36); background: none",
             content: "color: #5d4037",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #4e342e; line-height: 1.45; margin-top: 28px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(141,110,99,0.7)",
+            base: "font-size: 20px; font-weight: 600; color: #4e342e; line-height: 1.45; margin-top: 20px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(141,110,99,0.7)",
             content: "color: #4e342e",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #8d6e63; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #8d6e63; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #4e342e",
             after: ""
           }
@@ -13610,17 +13610,17 @@ var init_elegant_blue2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 600; color: #4B6EF5; padding-left: 10px; border-left: 4px double #4B6EF5; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            base: "font-size: 22px; font-weight: 600; color: #4B6EF5; padding-left: 10px; border-left: 4px double #4B6EF5; margin-top: 26px; margin-bottom: 24px; line-height: 1.4",
             content: "color: #4B6EF5",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #4B6EF5; padding-left: 10px; border-left: 3px solid #4B6EF5; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            base: "font-size: 20px; font-weight: 600; color: #4B6EF5; padding-left: 10px; border-left: 3px solid #4B6EF5; margin-top: 20px; margin-bottom: 20px; line-height: 1.4",
             content: "color: #4B6EF5",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #4B6EF5",
             after: ""
           }
@@ -13705,17 +13705,17 @@ var init_elegant_green2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 600; color: #2BAE85; padding-left: 10px; border-left: 4px double #2BAE85; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            base: "font-size: 22px; font-weight: 600; color: #2BAE85; padding-left: 10px; border-left: 4px double #2BAE85; margin-top: 26px; margin-bottom: 24px; line-height: 1.4",
             content: "color: #2BAE85",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #2BAE85; padding-left: 10px; border-left: 3px solid #2BAE85; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            base: "font-size: 20px; font-weight: 600; color: #2BAE85; padding-left: 10px; border-left: 3px solid #2BAE85; margin-top: 20px; margin-bottom: 20px; line-height: 1.4",
             content: "color: #2BAE85",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #2BAE85; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #2BAE85; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #2BAE85",
             after: ""
           }
@@ -13800,17 +13800,17 @@ var init_elegant_navy2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 600; color: #1F4F8A; padding-left: 10px; border-left: 4px double #1F4F8A; margin-top: 36px; margin-bottom: 24px; line-height: 1.4",
+            base: "font-size: 22px; font-weight: 600; color: #1F4F8A; padding-left: 10px; border-left: 4px double #1F4F8A; margin-top: 26px; margin-bottom: 24px; line-height: 1.4",
             content: "color: #1F4F8A",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #1F4F8A; padding-left: 10px; border-left: 3px solid #1F4F8A; margin-top: 28px; margin-bottom: 20px; line-height: 1.4",
+            base: "font-size: 20px; font-weight: 600; color: #1F4F8A; padding-left: 10px; border-left: 3px solid #1F4F8A; margin-top: 20px; margin-bottom: 20px; line-height: 1.4",
             content: "color: #1F4F8A",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #1F4F8A; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #1F4F8A; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #1F4F8A",
             after: ""
           }
@@ -13895,17 +13895,17 @@ var init_focus_blue2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 700; color: #4B6EF5; text-align: center; padding: 12px 0; line-height: 1.35; margin-top: 36px; margin-bottom: 24px; background-image: linear-gradient(rgba(75,110,245,0.3), rgba(75,110,245,0.3)), linear-gradient(rgba(75,110,245,0.3), rgba(75,110,245,0.3)); background-size: 80% 1px, 80% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            base: "font-size: 22px; font-weight: 700; color: #4B6EF5; text-align: center; padding: 12px 0; line-height: 1.35; margin-top: 26px; margin-bottom: 24px; background-image: linear-gradient(rgba(75,110,245,0.3), rgba(75,110,245,0.3)), linear-gradient(rgba(75,110,245,0.3), rgba(75,110,245,0.3)); background-size: 80% 1px, 80% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
             content: "color: #4B6EF5",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #4B6EF5; text-align: center; padding: 10px 0; line-height: 1.4; margin-top: 28px; margin-bottom: 20px; background-image: linear-gradient(rgba(75,110,245,0.25), rgba(75,110,245,0.25)), linear-gradient(rgba(75,110,245,0.25), rgba(75,110,245,0.25)); background-size: 70% 1px, 70% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            base: "font-size: 20px; font-weight: 600; color: #4B6EF5; text-align: center; padding: 10px 0; line-height: 1.4; margin-top: 20px; margin-bottom: 20px; background-image: linear-gradient(rgba(75,110,245,0.25), rgba(75,110,245,0.25)), linear-gradient(rgba(75,110,245,0.25), rgba(75,110,245,0.25)); background-size: 70% 1px, 70% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
             content: "color: #4B6EF5",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #4B6EF5",
             after: ""
           }
@@ -13990,17 +13990,17 @@ var init_focus_gold2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 700; color: #C8A062; text-align: center; padding: 12px 0; line-height: 1.35; margin-top: 36px; margin-bottom: 24px; background-image: linear-gradient(rgba(200,160,98,0.3), rgba(200,160,98,0.3)), linear-gradient(rgba(200,160,98,0.3), rgba(200,160,98,0.3)); background-size: 80% 1px, 80% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            base: "font-size: 22px; font-weight: 700; color: #C8A062; text-align: center; padding: 12px 0; line-height: 1.35; margin-top: 26px; margin-bottom: 24px; background-image: linear-gradient(rgba(200,160,98,0.3), rgba(200,160,98,0.3)), linear-gradient(rgba(200,160,98,0.3), rgba(200,160,98,0.3)); background-size: 80% 1px, 80% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
             content: "color: #C8A062",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #C8A062; text-align: center; padding: 10px 0; line-height: 1.4; margin-top: 28px; margin-bottom: 20px; background-image: linear-gradient(rgba(200,160,98,0.25), rgba(200,160,98,0.25)), linear-gradient(rgba(200,160,98,0.25), rgba(200,160,98,0.25)); background-size: 70% 1px, 70% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            base: "font-size: 20px; font-weight: 600; color: #C8A062; text-align: center; padding: 10px 0; line-height: 1.4; margin-top: 20px; margin-bottom: 20px; background-image: linear-gradient(rgba(200,160,98,0.25), rgba(200,160,98,0.25)), linear-gradient(rgba(200,160,98,0.25), rgba(200,160,98,0.25)); background-size: 70% 1px, 70% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
             content: "color: #C8A062",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #C8A062; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #C8A062; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #C8A062",
             after: ""
           }
@@ -14085,17 +14085,17 @@ var init_focus_red2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 700; color: #F25C54; text-align: center; padding: 12px 0; line-height: 1.35; margin-top: 36px; margin-bottom: 24px; background-image: linear-gradient(rgba(242,92,84,0.3), rgba(242,92,84,0.3)), linear-gradient(rgba(242,92,84,0.3), rgba(242,92,84,0.3)); background-size: 80% 1px, 80% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            base: "font-size: 22px; font-weight: 700; color: #F25C54; text-align: center; padding: 12px 0; line-height: 1.35; margin-top: 26px; margin-bottom: 24px; background-image: linear-gradient(rgba(242,92,84,0.3), rgba(242,92,84,0.3)), linear-gradient(rgba(242,92,84,0.3), rgba(242,92,84,0.3)); background-size: 80% 1px, 80% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
             content: "color: #F25C54",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #F25C54; text-align: center; padding: 10px 0; line-height: 1.4; margin-top: 28px; margin-bottom: 20px; background-image: linear-gradient(rgba(242,92,84,0.25), rgba(242,92,84,0.25)), linear-gradient(rgba(242,92,84,0.25), rgba(242,92,84,0.25)); background-size: 70% 1px, 70% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
+            base: "font-size: 20px; font-weight: 600; color: #F25C54; text-align: center; padding: 10px 0; line-height: 1.4; margin-top: 20px; margin-bottom: 20px; background-image: linear-gradient(rgba(242,92,84,0.25), rgba(242,92,84,0.25)), linear-gradient(rgba(242,92,84,0.25), rgba(242,92,84,0.25)); background-size: 70% 1px, 70% 1px; background-position: center top, center bottom; background-repeat: no-repeat",
             content: "color: #F25C54",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #F25C54; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #F25C54; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #F25C54",
             after: ""
           }
@@ -14175,22 +14175,22 @@ var init_github = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 29px; font-weight: 700; color: #1f2328; line-height: 1.26; padding: 12px 16px 11px; border: 1px solid #d8dee4; border-left: 5px solid #0969da; border-radius: 10px; background: linear-gradient(180deg, #f8fbff 0%, #f6f8fa 100%); box-shadow: 0 1px 0 rgba(31,35,40,0.04); margin-top: 36px; margin-bottom: 18px",
+            base: "font-size: 29px; font-weight: 700; color: #1f2328; line-height: 1.26; padding: 12px 16px 11px; border: 1px solid #d8dee4; border-left: 5px solid #0969da; border-radius: 10px; background: linear-gradient(180deg, #f8fbff 0%, #f6f8fa 100%); box-shadow: 0 1px 0 rgba(31,35,40,0.04); margin-top: 26px; margin-bottom: 18px",
             content: "color: #1f2328",
             after: ""
           },
           h2: {
-            base: "font-size: 23px; font-weight: 700; color: #1f2328; line-height: 1.35; padding: 0 0 10px 0; border-bottom: 2px solid #d8dee4; box-shadow: inset 0 -2px 0 #0969da; margin-top: 34px; margin-bottom: 18px",
+            base: "font-size: 23px; font-weight: 700; color: #1f2328; line-height: 1.35; padding: 0 0 10px 0; border-bottom: 2px solid #d8dee4; box-shadow: inset 0 -2px 0 #0969da; margin-top: 24px; margin-bottom: 18px",
             content: "color: #1f2328",
             after: ""
           },
           h3: {
-            base: "font-size: 21px; font-weight: 600; color: #1f2328; line-height: 1.4; padding-left: 12px; border-left: 3px solid #218bff; letter-spacing: 0.01em; margin-top: 28px; margin-bottom: 14px",
+            base: "font-size: 21px; font-weight: 600; color: #1f2328; line-height: 1.4; padding-left: 12px; border-left: 3px solid #218bff; letter-spacing: 0.01em; margin-top: 20px; margin-bottom: 14px",
             content: "color: #1f2328",
             after: ""
           },
           base: {
-            base: "font-size: 19px; font-weight: bold; color: #555555; border-left: 2px solid #0969da; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 19px; font-weight: bold; color: #555555; border-left: 2px solid #0969da; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #1f2328",
             after: ""
           }
@@ -14224,8 +14224,8 @@ var init_github = __esm({
         },
         table: {
           container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
-          header: "background: #f6f8fa; padding: 8px 16px; border: 1px solid #d1d9e0; text-align: left; font-weight: 600; color: #1f2328",
-          cell: "padding: 8px 16px; border: 1px solid #d1d9e0; color: #1f2328"
+          header: "background: #f6f8fa; padding: 12px 16px; border: 1px solid #d1d9e0; text-align: left; font-weight: 600; color: #1f2328",
+          cell: "padding: 12px 16px; border: 1px solid #d1d9e0; color: #1f2328"
         },
         hr: "margin-top: 34px; margin-bottom: 34px; height: 1px; background: linear-gradient(90deg, rgba(209,217,224,0) 0%, rgba(209,217,224,1) 16%, #0969da 50%, rgba(209,217,224,1) 84%, rgba(209,217,224,0) 100%); border: none",
         footnote: {
@@ -14270,22 +14270,22 @@ var init_ink = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 29px; font-weight: 700; color: #000000; line-height: 1.3; letter-spacing: -0.02em; padding: 0 0 10px; border-bottom: 2px solid #000000; margin-top: 36px; margin-bottom: 18px",
+            base: "font-size: 29px; font-weight: 700; color: #000000; line-height: 1.3; letter-spacing: -0.02em; padding: 0 0 10px; border-bottom: 2px solid #000000; margin-top: 26px; margin-bottom: 18px",
             content: "color: #000000",
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 700; color: #111111; line-height: 1.45; padding-left: 12px; border-left: 3px solid #000000; margin-top: 34px; margin-bottom: 18px",
+            base: "font-size: 22px; font-weight: 700; color: #111111; line-height: 1.45; padding-left: 12px; border-left: 3px solid #000000; margin-top: 24px; margin-bottom: 18px",
             content: "color: #111111",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #222222; line-height: 1.45; padding-bottom: 6px; margin-top: 28px; margin-bottom: 14px",
+            base: "font-size: 20px; font-weight: 600; color: #222222; line-height: 1.45; padding-bottom: 6px; margin-top: 20px; margin-bottom: 14px",
             content: "color: #222222",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #000000; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #000000; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #222222",
             after: ""
           }
@@ -14365,22 +14365,22 @@ var init_lavender_dream = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 29px; font-weight: 700; color: #5f4688; line-height: 1.32; margin-top: 36px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #9b7fd4; border-radius: 13px; background: linear-gradient(180deg, rgba(236,228,255,0.98) 0%, rgba(245,240,255,0.98) 100%); border: 1px solid rgba(155,127,212,0.22)",
+            base: "font-size: 29px; font-weight: 700; color: #5f4688; line-height: 1.32; margin-top: 26px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #9b7fd4; border-radius: 13px; background: linear-gradient(180deg, rgba(236,228,255,0.98) 0%, rgba(245,240,255,0.98) 100%); border: 1px solid rgba(155,127,212,0.22)",
             content: "color: #5f4688",
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 700; color: #6b4c9a; line-height: 1.4; margin-top: 34px; margin-bottom: 18px; padding: 9px 14px; border-left: 3px solid #9b7fd4; border-radius: 12px; background: linear-gradient(90deg, rgba(236,228,255,0.94) 0%, rgba(236,228,255,0.2) 74%, rgba(236,228,255,0) 100%)",
+            base: "font-size: 22px; font-weight: 700; color: #6b4c9a; line-height: 1.4; margin-top: 24px; margin-bottom: 18px; padding: 9px 14px; border-left: 3px solid #9b7fd4; border-radius: 12px; background: linear-gradient(90deg, rgba(236,228,255,0.94) 0%, rgba(236,228,255,0.2) 74%, rgba(236,228,255,0) 100%)",
             content: "color: #6b4c9a",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #4a3c67; line-height: 1.45; margin-top: 28px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(155,127,212,0.6)",
+            base: "font-size: 20px; font-weight: 600; color: #4a3c67; line-height: 1.45; margin-top: 20px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(155,127,212,0.6)",
             content: "color: #4a3c67",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #9b7fd4; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #9b7fd4; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #4a3c67",
             after: ""
           }
@@ -14460,22 +14460,22 @@ var init_magazine = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 22px; font-weight: 700; color: #ffffff; text-align: center; letter-spacing: 0.1em; line-height: 1.2; background: linear-gradient(135deg, #007AFF 0%, #5856D6 50%, #FF2D55 100%); border-radius: 12px; padding: 12px 24px; box-shadow: 0 4px 15px rgba(0,122,255,0.2); margin-top: 22px; margin-bottom: 16px",
+            base: "font-size: 22px; font-weight: 700; color: #ffffff; text-align: center; letter-spacing: 0.1em; line-height: 1.2; background: linear-gradient(135deg, #007AFF 0%, #5856D6 50%, #FF2D55 100%); border-radius: 12px; padding: 12px 24px; box-shadow: 0 4px 15px rgba(0,122,255,0.2); margin-top: 16px; margin-bottom: 16px",
             content: "color: #ffffff",
             after: ""
           },
           h2: {
-            base: "font-size: 20px; font-weight: 600; color: #1d1d1f; line-height: 1.4; padding: 6px 0 8px 12px; border-left: 3px solid #007AFF; border-image: linear-gradient(to bottom, #007AFF, #5856D6) 1; margin-top: 28px; margin-bottom: 16px",
+            base: "font-size: 20px; font-weight: 600; color: #1d1d1f; line-height: 1.4; padding: 6px 0 8px 12px; border-left: 3px solid #007AFF; border-image: linear-gradient(to bottom, #007AFF, #5856D6) 1; margin-top: 20px; margin-bottom: 16px",
             content: "color: #1d1d1f",
             after: ""
           },
           h3: {
-            base: "font-size: 18px; font-weight: 600; color: #1d1d1f; line-height: 1.4; padding: 5px 0 6px 10px; border-left: 3px solid #5856D6; border-image: linear-gradient(to bottom, #34c759, #5856D6) 1; margin-top: 24px; margin-bottom: 12px",
+            base: "font-size: 18px; font-weight: 600; color: #1d1d1f; line-height: 1.4; padding: 5px 0 6px 10px; border-left: 3px solid #5856D6; border-image: linear-gradient(to bottom, #34c759, #5856D6) 1; margin-top: 18px; margin-bottom: 12px",
             content: "color: #1d1d1f",
             after: ""
           },
           base: {
-            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #007AFF; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #007AFF; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #1d1d1f",
             after: ""
           }
@@ -14510,7 +14510,7 @@ var init_magazine = __esm({
         table: {
           container: "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08)",
           header: "background: #fbfbfd; padding: 12px 15px; border-bottom: 1.5px solid rgba(0,0,0,0.1); text-align: left; font-weight: 600; color: #1d1d1f",
-          cell: "padding: 10px 15px; border-bottom: 1px solid rgba(0,0,0,0.05); color: #333333"
+          cell: "padding: 12px 15px; border-bottom: 1px solid rgba(0,0,0,0.05); color: #333333"
         },
         hr: "margin-top: 40px; margin-bottom: 40px; height: 2px; background: linear-gradient(to right, rgba(0,122,255,0), #007AFF, #5856D6, #FF2D55, rgba(255,45,85,0)); border: none",
         footnote: {
@@ -14555,22 +14555,22 @@ var init_midnight = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 22px; font-weight: 700; color: #ffffff; text-align: center; letter-spacing: 0.1em; line-height: 1.2; background: linear-gradient(135deg, #F472B6 0%, #8B5CF6 50%, #60A5FA 100%); border-radius: 16px; padding: 12px 24px; box-shadow: 0 6px 20px rgba(244,114,182,0.25), 0 2px 8px rgba(139,92,246,0.15); margin-top: 22px; margin-bottom: 16px",
+            base: "font-size: 22px; font-weight: 700; color: #ffffff; text-align: center; letter-spacing: 0.1em; line-height: 1.2; background: linear-gradient(135deg, #F472B6 0%, #8B5CF6 50%, #60A5FA 100%); border-radius: 16px; padding: 12px 24px; box-shadow: 0 6px 20px rgba(244,114,182,0.25), 0 2px 8px rgba(139,92,246,0.15); margin-top: 16px; margin-bottom: 16px",
             content: "color: #ffffff",
             after: ""
           },
           h2: {
-            base: "font-size: 20px; font-weight: 600; color: #1d1d1f; line-height: 1.2; padding: 8px 8px 8px 15px; border-bottom: 1px dashed #8B5CF6; border-radius: 4px; background: radial-gradient(80.23% 80.23% at 50% 88.37%, rgba(174,78,245,0.22) 0%, rgba(174,78,245,0) 100%); box-shadow: 0 0 15px rgba(174,78,245,0.15), inset 3px 0 0 0 #F472B6, inset 2px 0 0 0 #8B5CF6, inset 1px 0 0 0 #60A5FA; margin-top: 32px; margin-bottom: 12px",
+            base: "font-size: 20px; font-weight: 600; color: #1d1d1f; line-height: 1.2; padding: 8px 8px 8px 15px; border-bottom: 1px dashed #8B5CF6; border-radius: 4px; background: radial-gradient(80.23% 80.23% at 50% 88.37%, rgba(174,78,245,0.22) 0%, rgba(174,78,245,0) 100%); box-shadow: 0 0 15px rgba(174,78,245,0.15), inset 3px 0 0 0 #F472B6, inset 2px 0 0 0 #8B5CF6, inset 1px 0 0 0 #60A5FA; margin-top: 24px; margin-bottom: 12px",
             content: "color: #1d1d1f",
             after: ""
           },
           h3: {
-            base: "font-size: 18px; font-weight: 600; color: #1d1d1f; line-height: 1.2; padding: 6px 6px 6px 13px; border-radius: 3px; background: radial-gradient(80.23% 80.23% at 50% 88.37%, rgba(139,92,246,0.18) 0%, rgba(139,92,246,0) 100%); box-shadow: 0 0 12px rgba(139,92,246,0.12), inset 2.5px 0 0 0 #8B5CF6, inset 1.5px 0 0 0 #60A5FA; margin-top: 28px; margin-bottom: 12px",
+            base: "font-size: 18px; font-weight: 600; color: #1d1d1f; line-height: 1.2; padding: 6px 6px 6px 13px; border-radius: 3px; background: radial-gradient(80.23% 80.23% at 50% 88.37%, rgba(139,92,246,0.18) 0%, rgba(139,92,246,0) 100%); box-shadow: 0 0 12px rgba(139,92,246,0.12), inset 2.5px 0 0 0 #8B5CF6, inset 1.5px 0 0 0 #60A5FA; margin-top: 20px; margin-bottom: 12px",
             content: "color: #1d1d1f",
             after: ""
           },
           base: {
-            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #8B5CF6; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #8B5CF6; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #1d1d1f",
             after: ""
           }
@@ -14605,7 +14605,7 @@ var init_midnight = __esm({
         table: {
           container: "width: 100%; border-collapse: separate; margin-top: 24px; margin-bottom: 24px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(168,85,247,0.08)",
           header: "background: linear-gradient(135deg, rgba(244,114,182,0.03), rgba(168,85,247,0.02)); padding: 12px 15px; border-bottom: 1.5px solid rgba(168,85,247,0.1); text-align: left; font-weight: 600; color: #1d1d1f",
-          cell: "padding: 10px 15px; border-bottom: 1px solid rgba(168,85,247,0.05); color: #333333"
+          cell: "padding: 12px 15px; border-bottom: 1px solid rgba(168,85,247,0.05); color: #333333"
         },
         hr: "margin-top: 40px; margin-bottom: 40px; height: 2px; background: linear-gradient(to right, rgba(244,114,182,0), #F472B6, #8B5CF6, #60A5FA, rgba(96,165,250,0)); border: none",
         footnote: {
@@ -14655,17 +14655,17 @@ var init_minimal_blue2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 24px; font-weight: 700; color: #4B6EF5; margin-top: 36px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
+            base: "font-size: 24px; font-weight: 700; color: #4B6EF5; margin-top: 26px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
             content: "color: #4B6EF5",
             after: ""
           },
           h3: {
-            base: "font-size: 22px; font-weight: 700; color: #4B6EF5; margin-top: 28px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
+            base: "font-size: 22px; font-weight: 700; color: #4B6EF5; margin-top: 20px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
             content: "color: #4B6EF5",
             after: ""
           },
           base: {
-            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #4B6EF5; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #4B6EF5",
             after: ""
           }
@@ -14750,17 +14750,17 @@ var init_minimal_gold2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 24px; font-weight: 700; color: #C8A062; margin-top: 36px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
+            base: "font-size: 24px; font-weight: 700; color: #C8A062; margin-top: 26px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
             content: "color: #C8A062",
             after: ""
           },
           h3: {
-            base: "font-size: 22px; font-weight: 700; color: #C8A062; margin-top: 28px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
+            base: "font-size: 22px; font-weight: 700; color: #C8A062; margin-top: 20px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
             content: "color: #C8A062",
             after: ""
           },
           base: {
-            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #C8A062; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #C8A062; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #C8A062",
             after: ""
           }
@@ -14845,17 +14845,17 @@ var init_minimal_gray2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 24px; font-weight: 700; color: #4E5969; margin-top: 36px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
+            base: "font-size: 24px; font-weight: 700; color: #4E5969; margin-top: 26px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
             content: "color: #4E5969",
             after: ""
           },
           h3: {
-            base: "font-size: 22px; font-weight: 700; color: #4E5969; margin-top: 28px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
+            base: "font-size: 22px; font-weight: 700; color: #4E5969; margin-top: 20px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
             content: "color: #4E5969",
             after: ""
           },
           base: {
-            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #4E5969; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #4E5969; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #4E5969",
             after: ""
           }
@@ -14940,17 +14940,17 @@ var init_minimal_navy2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 24px; font-weight: 700; color: #1F4F8A; margin-top: 36px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
+            base: "font-size: 24px; font-weight: 700; color: #1F4F8A; margin-top: 26px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
             content: "color: #1F4F8A",
             after: ""
           },
           h3: {
-            base: "font-size: 22px; font-weight: 700; color: #1F4F8A; margin-top: 28px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
+            base: "font-size: 22px; font-weight: 700; color: #1F4F8A; margin-top: 20px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
             content: "color: #1F4F8A",
             after: ""
           },
           base: {
-            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #1F4F8A; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #1F4F8A; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #1F4F8A",
             after: ""
           }
@@ -15035,17 +15035,17 @@ var init_minimal_red2 = __esm({
             after: ""
           },
           h2: {
-            base: "font-size: 24px; font-weight: 700; color: #F25C54; margin-top: 36px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
+            base: "font-size: 24px; font-weight: 700; color: #F25C54; margin-top: 26px; margin-bottom: 24px; line-height: 1.4; letter-spacing: -0.02em",
             content: "color: #F25C54",
             after: ""
           },
           h3: {
-            base: "font-size: 22px; font-weight: 700; color: #F25C54; margin-top: 28px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
+            base: "font-size: 22px; font-weight: 700; color: #F25C54; margin-top: 20px; margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.01em",
             content: "color: #F25C54",
             after: ""
           },
           base: {
-            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #F25C54; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 20px; font-weight: bold; color: #555555; border-left: 2px solid #F25C54; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #F25C54",
             after: ""
           }
@@ -15125,22 +15125,22 @@ var init_mint_fresh = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 29px; font-weight: 700; color: #1d5e49; line-height: 1.32; margin-top: 36px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #1a7a5a; border-radius: 13px; background: linear-gradient(180deg, rgba(224,245,236,0.95) 0%, rgba(240,250,245,0.95) 100%); border: 1px solid rgba(26,122,90,0.18)",
+            base: "font-size: 29px; font-weight: 700; color: #1d5e49; line-height: 1.32; margin-top: 26px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #1a7a5a; border-radius: 13px; background: linear-gradient(180deg, rgba(224,245,236,0.95) 0%, rgba(240,250,245,0.95) 100%); border: 1px solid rgba(26,122,90,0.18)",
             content: "color: #1d5e49",
             after: ""
           },
           h2: {
-            base: "font-size: 22px; font-weight: 700; color: #1a7a5a; line-height: 1.4; margin-top: 34px; margin-bottom: 18px; padding: 6px 14px; border-left: none; border-radius: 999px; background-color: rgba(224,245,236,0.95); border: 1px solid rgba(26,122,90,0.16); text-align: center; display: block; width: fit-content",
+            base: "font-size: 22px; font-weight: 700; color: #1a7a5a; line-height: 1.4; margin-top: 24px; margin-bottom: 18px; padding: 6px 14px; border-left: none; border-radius: 999px; background-color: rgba(224,245,236,0.95); border: 1px solid rgba(26,122,90,0.16); text-align: center; display: block; width: fit-content",
             content: "color: #1a7a5a",
             after: ""
           },
           h3: {
-            base: "font-size: 20px; font-weight: 600; color: #1d5e49; line-height: 1.45; margin-top: 28px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(26,122,90,0.75)",
+            base: "font-size: 20px; font-weight: 600; color: #1d5e49; line-height: 1.45; margin-top: 20px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(26,122,90,0.75)",
             content: "color: #1d5e49",
             after: ""
           },
           base: {
-            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #1a7a5a; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 18px; font-weight: bold; color: #555555; border-left: 2px solid #1a7a5a; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #1d5e49",
             after: ""
           }
@@ -15220,22 +15220,22 @@ var init_newspaper = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 29px; font-weight: 700; color: #111111; line-height: 1.3; letter-spacing: -0.015em; padding: 10px 0 9px; border-top: 2px solid #111111; border-bottom: 1px solid #111111; text-align: left; margin-top: 38px; margin-bottom: 16px",
+            base: "font-size: 29px; font-weight: 700; color: #111111; line-height: 1.3; letter-spacing: -0.015em; padding: 10px 0 9px; border-top: 2px solid #111111; border-bottom: 1px solid #111111; text-align: left; margin-top: 26px; margin-bottom: 16px",
             content: "color: #111111",
             after: ""
           },
           h2: {
-            base: "font-size: 19px; font-weight: 700; color: #111111; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.12em; text-align: center; padding: 10px 0; border-top: 1px solid rgba(17,17,17,0.85); border-bottom: 1px solid rgba(17,17,17,0.85); margin-top: 38px; margin-bottom: 18px",
+            base: "font-size: 19px; font-weight: 700; color: #111111; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.12em; text-align: center; padding: 10px 0; border-top: 1px solid rgba(17,17,17,0.85); border-bottom: 1px solid rgba(17,17,17,0.85); margin-top: 26px; margin-bottom: 18px",
             content: "color: #111111",
             after: ""
           },
           h3: {
-            base: "font-size: 17px; font-weight: 700; color: #111111; line-height: 1.45; letter-spacing: 0.04em; padding-bottom: 6px; margin-top: 28px; margin-bottom: 14px",
+            base: "font-size: 17px; font-weight: 700; color: #111111; line-height: 1.45; letter-spacing: 0.04em; padding-bottom: 6px; margin-top: 20px; margin-bottom: 14px",
             content: "color: #111111",
             after: ""
           },
           base: {
-            base: "font-size: 15px; font-weight: bold; color: #555555; border-left: 2px solid #326891; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 15px; font-weight: bold; color: #555555; border-left: 2px solid #326891; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #111111",
             after: ""
           }
@@ -15315,22 +15315,22 @@ var init_sports = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 22px; font-weight: 700; color: #ffffff; text-align: center; letter-spacing: 0.12em; line-height: 1.4; background: linear-gradient(120deg, #00A968, #008A56, #00A968); border-radius: 50px; padding: 12px 24px; box-shadow: 0 8px 20px rgba(0, 169, 104, 0.3); margin-top: 24px; margin-bottom: 12px",
+            base: "font-size: 22px; font-weight: 700; color: #ffffff; text-align: center; letter-spacing: 0.12em; line-height: 1.4; background: linear-gradient(120deg, #00A968, #008A56, #00A968); border-radius: 50px; padding: 12px 24px; box-shadow: 0 8px 20px rgba(0, 169, 104, 0.3); margin-top: 18px; margin-bottom: 12px",
             content: "color: #ffffff",
             after: ""
           },
           h2: {
-            base: "font-size: 20px; font-weight: 600; color: #00A968; text-align: left; letter-spacing: 0.06em; line-height: 1.4; background: linear-gradient(to right, rgba(0, 169, 104, 0.05), rgba(56, 198, 244, 0.05)); border-left: 4px solid; border-image: linear-gradient(to bottom, #FF6600, #00A968, #38C6F4) 1; border-radius: 0 12px 12px 0; padding: 8px 16px; box-shadow: 0 3px 8px rgba(0, 169, 104, 0.12); margin-top: 32px; margin-bottom: 12px",
+            base: "font-size: 20px; font-weight: 600; color: #00A968; text-align: left; letter-spacing: 0.06em; line-height: 1.4; background: linear-gradient(to right, rgba(0, 169, 104, 0.05), rgba(56, 198, 244, 0.05)); border-left: 4px solid; border-image: linear-gradient(to bottom, #FF6600, #00A968, #38C6F4) 1; border-radius: 0 12px 12px 0; padding: 8px 16px; box-shadow: 0 3px 8px rgba(0, 169, 104, 0.12); margin-top: 24px; margin-bottom: 12px",
             content: "color: #00A968",
             after: ""
           },
           h3: {
-            base: "font-size: 18px; font-weight: 600; color: #00A968; letter-spacing: 0.08em; border-left: 4px solid; border-image: linear-gradient(to bottom, #FF6600, #00A968, #38C6F4) 1; background: linear-gradient(to right, rgba(255, 102, 0, 0.05), rgba(0, 169, 104, 0.05)); border-radius: 0 25px 25px 0; padding: 8px 20px; margin-top: 28px; margin-bottom: 12px; line-height: 1.4",
+            base: "font-size: 18px; font-weight: 600; color: #00A968; letter-spacing: 0.08em; border-left: 4px solid; border-image: linear-gradient(to bottom, #FF6600, #00A968, #38C6F4) 1; background: linear-gradient(to right, rgba(255, 102, 0, 0.05), rgba(0, 169, 104, 0.05)); border-radius: 0 25px 25px 0; padding: 8px 20px; margin-top: 20px; margin-bottom: 12px; line-height: 1.4",
             content: "color: #00A968",
             after: ""
           },
           base: {
-            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #00A968; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #00A968; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #00A968",
             after: ""
           }
@@ -15365,7 +15365,7 @@ var init_sports = __esm({
         table: {
           container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
           header: "background: linear-gradient(135deg, rgba(255,102,0,0.1), rgba(0,169,104,0.1)); padding: 12px 16px; text-align: left; font-weight: bold; color: #00A968; border-bottom: 2px solid rgba(255,102,0,0.2)",
-          cell: "padding: 10px 16px; border-bottom: 1px solid rgba(0,0,0,0.08); color: #2c2c2c"
+          cell: "padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.08); color: #2c2c2c"
         },
         hr: "margin-top: 32px; margin-bottom: 32px; height: 3px; background: linear-gradient(to right, rgba(255,102,0,0), #FF6600, #00A968, #38C6F4, rgba(56,198,244,0)); border: none",
         footnote: {
@@ -15410,22 +15410,22 @@ var init_sspai = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 29px; font-weight: 700; color: #2d2d2d; line-height: 1.32; letter-spacing: -0.015em; padding: 11px 16px 10px; border-top: 3px solid #D71A1B; border-bottom: 1px solid #e8dede; background: linear-gradient(180deg, rgba(215,26,27,0.05) 0%, rgba(255,255,255,1) 100%); margin-top: 36px; margin-bottom: 18px",
+            base: "font-size: 29px; font-weight: 700; color: #2d2d2d; line-height: 1.32; letter-spacing: -0.015em; padding: 11px 16px 10px; border-top: 3px solid #D71A1B; border-bottom: 1px solid #e8dede; background: linear-gradient(180deg, rgba(215,26,27,0.05) 0%, rgba(255,255,255,1) 100%); margin-top: 26px; margin-bottom: 18px",
             content: "color: #2d2d2d",
             after: ""
           },
           h2: {
-            base: "font-size: 21px; font-weight: 700; color: #2d2d2d; line-height: 1.45; padding: 8px 0 8px 14px; border-left: 4px solid #D71A1B; letter-spacing: 0.01em; margin-top: 34px; margin-bottom: 18px",
+            base: "font-size: 21px; font-weight: 700; color: #2d2d2d; line-height: 1.45; padding: 8px 0 8px 14px; border-left: 4px solid #D71A1B; letter-spacing: 0.01em; margin-top: 24px; margin-bottom: 18px",
             content: "color: #2d2d2d",
             after: ""
           },
           h3: {
-            base: "font-size: 19px; font-weight: 700; color: #444444; line-height: 1.45; padding-bottom: 6px; margin-top: 28px; margin-bottom: 14px",
+            base: "font-size: 19px; font-weight: 700; color: #444444; line-height: 1.45; padding-bottom: 6px; margin-top: 20px; margin-bottom: 14px",
             content: "color: #444444",
             after: ""
           },
           base: {
-            base: "font-size: 17px; font-weight: bold; color: #555555; border-left: 2px solid #D71A1B; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 17px; font-weight: bold; color: #555555; border-left: 2px solid #D71A1B; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #444444",
             after: ""
           }
@@ -15505,22 +15505,22 @@ var init_sunset_amber = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 29px; font-weight: 700; color: #8d4d2e; line-height: 1.32; margin-top: 36px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #d37a45; border-radius: 13px; background: linear-gradient(180deg, rgba(255,243,227,0.94) 0%, rgba(248,228,201,0.8) 100%); border: 1px solid rgba(224,174,112,0.4); box-shadow: 0 6px 16px rgba(166,102,56,0.06)",
+            base: "font-size: 29px; font-weight: 700; color: #8d4d2e; line-height: 1.32; margin-top: 26px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #d37a45; border-radius: 13px; background: linear-gradient(180deg, rgba(255,243,227,0.94) 0%, rgba(248,228,201,0.8) 100%); border: 1px solid rgba(224,174,112,0.4); box-shadow: 0 6px 16px rgba(166,102,56,0.06)",
             content: "color: #8d4d2e",
             after: ""
           },
           h2: {
-            base: "font-size: 23px; font-weight: 700; color: #a45a33; line-height: 1.4; margin-top: 34px; margin-bottom: 18px; padding: 10px 14px; border-left: 3px solid #d78a54; border-radius: 12px; background: linear-gradient(90deg, rgba(236,191,132,0.24) 0%, rgba(236,191,132,0.08) 72%, rgba(236,191,132,0) 100%)",
+            base: "font-size: 23px; font-weight: 700; color: #a45a33; line-height: 1.4; margin-top: 24px; margin-bottom: 18px; padding: 10px 14px; border-left: 3px solid #d78a54; border-radius: 12px; background: linear-gradient(90deg, rgba(236,191,132,0.24) 0%, rgba(236,191,132,0.08) 72%, rgba(236,191,132,0) 100%)",
             content: "color: #a45a33",
             after: ""
           },
           h3: {
-            base: "font-size: 21px; font-weight: 600; color: #5c402b; line-height: 1.45; margin-top: 28px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(215,138,84,0.9); padding: 0 0 6px 12px",
+            base: "font-size: 21px; font-weight: 600; color: #5c402b; line-height: 1.45; margin-top: 20px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(215,138,84,0.9); padding: 0 0 6px 12px",
             content: "color: #5c402b",
             after: ""
           },
           base: {
-            base: "font-size: 19px; font-weight: bold; color: #555555; border-left: 2px solid #d37a45; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 19px; font-weight: bold; color: #555555; border-left: 2px solid #d37a45; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #5c402b",
             after: ""
           }
@@ -15600,22 +15600,22 @@ var init_terracotta = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 22px; font-weight: bold; color: #ffffff; text-align: center; background: #C86442; border-radius: 8px; padding: 12px 24px; margin-top: 24px; margin-bottom: 12px; line-height: 1.2; box-shadow: 0 2px 8px rgba(200,100,66,0.2)",
+            base: "font-size: 22px; font-weight: bold; color: #ffffff; text-align: center; background: #C86442; border-radius: 8px; padding: 12px 24px; margin-top: 18px; margin-bottom: 12px; line-height: 1.2; box-shadow: 0 2px 8px rgba(200,100,66,0.2)",
             content: "color: #ffffff",
             after: ""
           },
           h2: {
-            base: "font-size: 20px; font-weight: bold; color: #3F3F3F; border-left: 4px solid #C86442; border-bottom: 1px dashed #C86442; padding: 0 0 8px 12px; margin-top: 32px; margin-bottom: 12px; line-height: 1.2",
+            base: "font-size: 20px; font-weight: bold; color: #3F3F3F; border-left: 4px solid #C86442; border-bottom: 1px dashed #C86442; padding: 0 0 8px 12px; margin-top: 24px; margin-bottom: 12px; line-height: 1.2",
             content: "color: #3F3F3F",
             after: ""
           },
           h3: {
-            base: "font-size: 18px; font-weight: bold; color: #3F3F3F; border-left: 3px solid #C86442; padding: 0 0 6px 12px; margin-top: 32px; margin-bottom: 12px; line-height: 1.2",
+            base: "font-size: 18px; font-weight: bold; color: #3F3F3F; border-left: 3px solid #C86442; padding: 0 0 6px 12px; margin-top: 24px; margin-bottom: 12px; line-height: 1.2",
             content: "color: #3F3F3F",
             after: ""
           },
           base: {
-            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #C86442; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 16px; font-weight: bold; color: #555555; border-left: 2px solid #C86442; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #3F3F3F",
             after: ""
           }
@@ -15649,8 +15649,8 @@ var init_terracotta = __esm({
         },
         table: {
           container: "width: 100%; border-collapse: separate; margin-top: 16px; margin-bottom: 16px; font-size: 15px; border-spacing: 0; border-radius: 8px; overflow: hidden",
-          header: "background: #f6f6f4; padding: 8px 12px; border: 1px solid #e5e5e5; text-align: left; font-weight: bold; color: #3F3F3F",
-          cell: "padding: 8px 12px; border: 1px solid #e5e5e5; color: #3F3F3F"
+          header: "background: #f6f6f4; padding: 12px 12px; border: 1px solid #e5e5e5; text-align: left; font-weight: bold; color: #3F3F3F",
+          cell: "padding: 12px 12px; border: 1px solid #e5e5e5; color: #3F3F3F"
         },
         hr: "margin-top: 32px; margin-bottom: 32px; height: 1px; background: linear-gradient(to right, rgba(200,100,66,0), rgba(200,100,66,0.6), rgba(200,100,66,0)); border: none",
         footnote: {
@@ -15695,22 +15695,22 @@ var init_wechat_native = __esm({
         container: "background-color: #ffffff; padding: 16px",
         title: {
           h1: {
-            base: "font-size: 29px; font-weight: 700; color: #163325; line-height: 1.32; margin-top: 36px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #07c160; border-radius: 12px; background: linear-gradient(180deg, rgba(7,193,96,0.08) 0%, rgba(7,193,96,0.03) 100%); border-bottom: 1px dashed rgba(22,51,37,0.2); box-shadow: 0 6px 14px rgba(7,193,96,0.05)",
+            base: "font-size: 29px; font-weight: 700; color: #163325; line-height: 1.32; margin-top: 26px; margin-bottom: 18px; letter-spacing: -0.015em; padding: 12px 16px 11px; border-left: 5px solid #07c160; border-radius: 12px; background: linear-gradient(180deg, rgba(7,193,96,0.08) 0%, rgba(7,193,96,0.03) 100%); border-bottom: 1px dashed rgba(22,51,37,0.2); box-shadow: 0 6px 14px rgba(7,193,96,0.05)",
             content: "color: #163325",
             after: ""
           },
           h2: {
-            base: "font-size: 23px; font-weight: 700; color: #067647; line-height: 1.4; margin-top: 34px; margin-bottom: 18px; padding: 10px 14px; border-left: 4px solid #07c160; border-radius: 12px; background: linear-gradient(90deg, rgba(7,193,96,0.12) 0%, rgba(7,193,96,0.03) 70%, rgba(7,193,96,0) 100%)",
+            base: "font-size: 23px; font-weight: 700; color: #067647; line-height: 1.4; margin-top: 24px; margin-bottom: 18px; padding: 10px 14px; border-left: 4px solid #07c160; border-radius: 12px; background: linear-gradient(90deg, rgba(7,193,96,0.12) 0%, rgba(7,193,96,0.03) 70%, rgba(7,193,96,0) 100%)",
             content: "color: #067647",
             after: ""
           },
           h3: {
-            base: "font-size: 21px; font-weight: 600; color: #1f3d2d; line-height: 1.45; margin-top: 28px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(7,193,96,0.9); padding: 0 0 6px 12px",
+            base: "font-size: 21px; font-weight: 600; color: #1f3d2d; line-height: 1.45; margin-top: 20px; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid rgba(7,193,96,0.9); padding: 0 0 6px 12px",
             content: "color: #1f3d2d",
             after: ""
           },
           base: {
-            base: "font-size: 19px; font-weight: bold; color: #555555; border-left: 2px solid #07c160; padding: 0; margin-top: 20px; margin-bottom: 6px; line-height: 1.3",
+            base: "font-size: 19px; font-weight: bold; color: #555555; border-left: 2px solid #07c160; padding: 0; margin-top: 14px; margin-bottom: 6px; line-height: 1.3",
             content: "color: #1f3d2d",
             after: ""
           }
@@ -17499,7 +17499,7 @@ var CopyManager = class {
 };
 
 // src/backgroundManager.ts
-var BackgroundManager = class {
+var _BackgroundManager = class {
   constructor(settingsManager) {
     this.currentBackground = null;
     this.settingsManager = settingsManager;
@@ -17528,10 +17528,13 @@ var BackgroundManager = class {
         section.setAttribute("style", "");
         return;
       }
-      section.setAttribute("style", this.currentBackground.style);
+      const bgStyle = this.currentBackground.style.replace(/padding:\s*0;?/g, "").replace(/;\s*$/, ";");
+      section.setAttribute("style", bgStyle + " " + _BackgroundManager.BASE_CONTENT_PADDING);
     }
   }
 };
+var BackgroundManager = _BackgroundManager;
+BackgroundManager.BASE_CONTENT_PADDING = "padding: 16px 20px;";
 
 // src/settings/ThemeGalleryModal.ts
 var import_obsidian2 = require("obsidian");

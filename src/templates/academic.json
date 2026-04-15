@@ -5,22 +5,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 32px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
+                "base": "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #5D4037;",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 28px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-left: 4px solid #8D6E63; padding-left: 12px; line-height: 1.5;",
+                "base": "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-left: 4px solid #8D6E63; padding-left: 12px; line-height: 1.5;",
                 "content": "font-weight: bold; color: #6D4C41;",
                 "after": ""
             },
             "h3": {
-                "base": "margin: 24px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
+                "base": "margin: 18px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #795548;",
                 "after": ""
             },
             "base": {
-                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #8D6E63;",
                 "after": ""
             }
@@ -69,12 +69,12 @@
                 "selector": "color: #22863a;"
             }
         },
-        "quote": "border-left: 4px solid #8D6E63; border-radius: 6px; padding: 10px 10px; background: #EFEBE9; margin: 0.8em 0; color: #5D4037; font-style: italic; word-wrap: break-word;",
+        "quote": "border-left: 4px solid #8D6E63; border-radius: 6px; padding: 14px 18px; background: #EFEBE9; margin: 0.8em 0; color: #5D4037; font-style: italic; word-wrap: break-word;",
         "image": "max-width: 100%; height: auto; margin: 1em auto; display: block;",
         "table": {
             "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e1e4e8;",
             "header": "background: #f6f8fa; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #e1e4e8; font-size: 1em;",
-            "cell": "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
+            "cell": "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
         },
         "hr": "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
         "footnote": {

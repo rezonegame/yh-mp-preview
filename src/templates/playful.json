@@ -5,22 +5,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 32px 0 16px; font-size: 2em; line-height: 1.5; text-align: center;",
+                "base": "margin: 24px 0 16px; font-size: 2em; line-height: 1.5; text-align: center;",
                 "content": "display: inline-block; font-weight: bold; color: #fff; background: #FFB74D; padding: 5px 20px; border-radius: 20px; box-shadow: 2px 2px 0px #F57C00;",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5;",
+                "base": "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5;",
                 "content": "display: inline-block; font-weight: bold; color: #4FC3F7; border-bottom: 3px dashed #4FC3F7; padding-bottom: 4px;",
                 "after": ""
             },
             "h3": {
-                "base": "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+                "base": "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #FF8A65; padding-left: 10px; border-left: 5px solid #FF8A65; border-radius: 4px;",
                 "after": ""
             },
             "base": {
-                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #BA68C8;",
                 "after": ""
             }
@@ -55,7 +55,7 @@
                 "constant": "color: #F57C00;"
             }
         },
-        "quote": "border: 2px dashed #FFB74D; border-radius: 12px; padding: 15px; background: #FFFDE7; margin: 0.8em 0; color: #F57C00; font-style: normal; word-wrap: break-word;",
+        "quote": "border: 2px dashed #FFB74D; border-radius: 12px; padding: 14px 18px; background: #FFFDE7; margin: 0.8em 0; color: #F57C00; font-style: normal; word-wrap: break-word;",
         "image": "max-width: 100%; height: auto; margin: 1em auto; display: block; border-radius: 12px; border: 4px solid #B2EBF2;",
         "link": "color: #29B6F6; text-decoration: none; border-bottom: 2px dotted #29B6F6; font-weight: bold;",
         "emphasis": {
@@ -66,7 +66,7 @@
         "table": {
             "container": "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #FFCC80; border-radius: 8px; overflow: hidden;",
             "header": "background: #FFF3E0; font-weight: bold; color: #E65100; border-bottom: 2px solid #FFCC80; font-size: 1em;",
-            "cell": "border-bottom: 1px solid #FFE0B2; padding: 10px; color: #5D4037; font-size: 1em;"
+            "cell": "border-bottom: 1px solid #FFE0B2; padding: 12px; color: #5D4037; font-size: 1em;"
         },
         "hr": "border: none; border-top: 2px dashed #FFCC80; margin: 20px 0;",
         "footnote": {

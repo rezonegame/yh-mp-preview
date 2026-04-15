@@ -7,6 +7,18 @@
     text-align: center;
 }
 
+/* 内容区域基础间距 */
+.tp-mp-content-section {
+    padding: 16px 20px;
+}
+
+/* 首个子元素减少顶部间距 */
+.tp-mp-content-section > h1:first-child,
+.tp-mp-content-section > h2:first-child,
+.tp-mp-content-section > h3:first-child {
+    margin-top: 0;
+}
+
 /* ===== 预览区域 ===== */
 .tp-mp-preview-area {
     padding: 10px 20px 20px 20px;

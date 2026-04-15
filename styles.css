@@ -459,6 +459,14 @@
   box-shadow: none;
   border: 1px solid var(--background-modifier-border);
 }
+.mp-content-section {
+  padding: 16px 20px;
+}
+.mp-content-section > h1:first-child,
+.mp-content-section > h2:first-child,
+.mp-content-section > h3:first-child {
+  margin-top: 0;
+}
 .mp-content-section p {
   margin: 0;
   padding: 0;
@@ -1182,6 +1190,14 @@ ol {
 }
 .template-preview-modal .mp-template-title {
   text-align: center;
+}
+.tp-mp-content-section {
+  padding: 16px 20px;
+}
+.tp-mp-content-section > h1:first-child,
+.tp-mp-content-section > h2:first-child,
+.tp-mp-content-section > h3:first-child {
+  margin-top: 0;
 }
 .tp-mp-preview-area {
   padding: 10px 20px 20px 20px;

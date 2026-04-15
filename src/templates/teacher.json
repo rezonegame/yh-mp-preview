@@ -5,22 +5,22 @@
         "container": "",
         "title": {
             "h1": {
-                "base": "margin: 32px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
+                "base": "margin: 24px 0 20px; font-size: 2em; line-height: 1.5; text-align: center;",
                 "content": "display: inline-block; font-weight: bold; color: #1565C0; border-bottom: 3px solid #1976D2; padding-bottom: 8px;",
                 "after": ""
             },
             "h2": {
-                "base": "margin: 28px 0 16px; font-size: 1.5em; line-height: 1.5;",
+                "base": "margin: 20px 0 16px; font-size: 1.5em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #00897B; padding-left: 12px; border-left: 4px solid #26A69A;",
                 "after": ""
             },
             "h3": {
-                "base": "margin: 24px 0 12px; font-size: 1.25em; line-height: 1.5;",
+                "base": "margin: 18px 0 12px; font-size: 1.25em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #1976D2;",
                 "after": ""
             },
             "base": {
-                "base": "margin: 20px 0 0; font-size: 1em; line-height: 1.5;",
+                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
                 "content": "font-weight: bold; color: #42A5F5;",
                 "after": ""
             }
@@ -74,7 +74,7 @@
         "table": {
             "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #CFD8DC;",
             "header": "background: #E3F2FD; font-weight: bold; color: #1565C0; border-bottom: 2px solid #1976D2; font-size: 1em;",
-            "cell": "border: 1px solid #ECEFF1; padding: 10px; color: #37474F; font-size: 1em;"
+            "cell": "border: 1px solid #ECEFF1; padding: 12px; color: #37474F; font-size: 1em;"
         },
         "hr": "border: none; border-top: 1px solid #CFD8DC; margin: 24px 0;",
         "footnote": {

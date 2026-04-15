@@ -9,12 +9,12 @@
         "container": "background-color: #ffffff; padding: 24px",
         "title": {
             "h1": {
-                "base": "font-size: 26px; font-weight: 700; color: #1b4d3e; text-align: center; border-bottom: 2.5px solid #1b4d3e; padding-bottom: 12px; margin-top: 40px; margin-bottom: 30px; letter-spacing: 0.05em",
+                "base": "font-size: 26px; font-weight: 700; color: #1b4d3e; text-align: center; border-bottom: 2.5px solid #1b4d3e; padding-bottom: 12px; margin-top: 28px; margin-bottom: 30px; letter-spacing: 0.05em",
                 "content": "color: #1b4d3e",
                 "after": ""
             },
             "h2": {
-                "base": "font-size: 20px; font-weight: 700; color: #1b4d3e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 36px; margin-bottom: 16px; display: block; width: 100%",
+                "base": "font-size: 20px; font-weight: 700; color: #1b4d3e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 26px; margin-bottom: 16px; display: block; width: 100%",
                 "content": "color: #1b4d3e",
                 "after": ""
             },
