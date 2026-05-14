@@ -1,0 +1,31 @@
+{
+    "id": "autumn-warm",
+    "name": "场景情绪 - 秋日暖光",
+    "description": "温暖治愈，橙色调，适合生活随笔、情感故事与文艺长文",
+    "source": "mp-preview",
+    "styles": {
+        "container": "",
+        "accentColor": "#d97758",
+        "title": {
+            "h1": { "base": "margin: 26px 0 0; font-size: 1.9em; line-height: 1.5; text-align: center;", "content": "font-weight: 800; color: #4a413d;", "after": "display: block; width: 52px; height: 3px; background: #d97758; margin: 12px auto 0; border-radius: 999px;" },
+            "h2": { "base": "margin: 28px 0 10px; font-size: 1.35em; line-height: 1.5; border-bottom: 1px dashed rgba(74,65,61,0.28); padding-bottom: 8px;", "content": "font-weight: 700; color: #d97758;", "after": "" },
+            "h3": { "base": "margin: 22px 0 8px; font-size: 1.16em; line-height: 1.5;", "content": "font-weight: 700; color: #c06b4d; border-bottom: 2px solid #d97758; padding-bottom: 3px;", "after": "" },
+            "base": { "base": "margin: 16px 0 0; font-size: 1em; line-height: 1.5;", "content": "font-weight: 700; color: #c06b4d;", "after": "" }
+        },
+        "paragraph": "line-height: 1.85; margin-top: 1em; color: #4a413d;",
+        "list": { "container": "padding-left: 28px; color: #4a413d;", "item": "color: #4a413d; line-height: 1.85;", "taskList": "list-style: none; color: #4a413d; line-height: 1.85;" },
+        "quote": "border-left: 5px solid #d97758; border-radius: 10px; padding: 14px 18px; background: #fef4e7; margin: 1em 0; color: #6b5148; box-shadow: inset 0 0 15px rgba(217,119,88,0.1);",
+        "code": {
+            "header": { "container": "margin-bottom: 1em; display: flex; gap: 6px;", "dot": "width: 12px; height: 12px; border-radius: 50%;", "colors": ["#ff8a65", "#ffd166", "#8fb996"] },
+            "block": "color: #4a413d; background: #fffaf5; border-radius: 12px; border: 1px solid rgba(217,119,88,0.18); box-shadow: 0 8px 20px rgba(217,119,88,0.08); margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.7; white-space: pre-wrap;",
+            "inline": "background: #fef4e7; padding: 2px 6px; border-radius: 4px; color: #c06b4d; font-size: 14px;",
+            "syntax": { "comment": "color: #9a8279;", "keyword": "color: #c06b4d;", "string": "color: #8a5a35;", "function": "color: #b45f3b;", "number": "color: #d97758;", "operator": "color: #c06b4d;", "class-name": "color: #b45f3b;", "variable": "color: #a45a3a;", "constant": "color: #d97758;", "property": "color: #c06b4d;", "punctuation": "color: #4a413d;", "boolean": "color: #d97758;", "tag": "color: #8a5a35;", "attr-name": "color: #b45f3b;", "attr-value": "color: #8a5a35;", "regex": "color: #8a5a35;", "selector": "color: #8a5a35;" }
+        },
+        "image": "max-width: 100%; height: auto; margin: 1.2em auto; display: block; border-radius: 14px; box-shadow: 0 10px 28px rgba(74,65,61,0.08);",
+        "link": "color: #c06b4d; text-decoration: none; border-bottom: 1px solid rgba(192,107,77,0.35);",
+        "emphasis": { "strong": "font-weight: bold; color: #c06b4d;", "em": "font-style: italic; color: #6b5148;", "del": "text-decoration: line-through; color: #9a8279;" },
+        "table": { "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid rgba(217,119,88,0.18);", "header": "background: #fef4e7; font-weight: bold; color: #c06b4d; border-bottom: 2px solid rgba(217,119,88,0.22);", "cell": "border: 1px solid rgba(217,119,88,0.12); padding: 12px; color: #4a413d;" },
+        "hr": "border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(217,119,88,0.35), transparent); margin: 24px 0;",
+        "footnote": { "ref": "color: #c06b4d; text-decoration: none; font-size: 0.9em;", "backref": "color: #c06b4d; text-decoration: none; font-size: 0.9em;" }
+    }
+}

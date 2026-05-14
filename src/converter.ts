@@ -1,6 +1,7 @@
 import { App } from 'obsidian';
 import type { SettingsManager } from './settings/settings';
 import { parseContainers, renderDialogue, renderGallery, resolveImagePath, type ParsedContainer } from './containers';
+import { applyLayoutEnhancements } from './layoutEnhancer';
 
 export class MPConverter {
     private static app: App;
@@ -32,8 +33,12 @@ export class MPConverter {
             this.processContainerBlocks(section, markdownContent);
         }
 
+        if (settingsManager) {
+            applyLayoutEnhancements(section, settingsManager.getSettings());
+        }
+
         // 处理元素
-        this.processElements(section);
+        this.processElements(section, settingsManager?.getSettings().layoutEnhancements.enableImageCaptions !== false);
     }
 
     private static insertFrontMatterCard(container: HTMLElement, markdown: string): void {
@@ -140,7 +145,7 @@ export class MPConverter {
         });
     }
 
-    private static processElements(container: HTMLElement | null): void {
+    private static processElements(container: HTMLElement | null, enableImageCaptions: boolean = true): void {
         if (!container) return;
 
         // 1. 处理列表项内部元素，用section包裹
@@ -270,16 +275,18 @@ export class MPConverter {
                         newImg.alt = alt;
                         figure.appendChild(newImg);
 
-                        // 添加 figcaption
-                        const figcaption = document.createElement('figcaption');
-                        figcaption.textContent = alt;
-                        figcaption.className = 'mp-image-caption';
-                        figcaption.style.textAlign = 'center';
-                        figcaption.style.color = '#888';
-                        figcaption.style.fontSize = '0.9em';
-                        figcaption.style.marginTop = '6px';
-                        figcaption.style.display = 'block';
-                        figure.appendChild(figcaption);
+                        if (enableImageCaptions) {
+                            // 添加 figcaption
+                            const figcaption = document.createElement('figcaption');
+                            figcaption.textContent = alt;
+                            figcaption.className = 'mp-image-caption';
+                            figcaption.style.textAlign = 'center';
+                            figcaption.style.color = '#888';
+                            figcaption.style.fontSize = '0.9em';
+                            figcaption.style.marginTop = '6px';
+                            figcaption.style.display = 'block';
+                            figure.appendChild(figcaption);
+                        }
                     } else {
                         figure.appendChild(newImg);
                     }

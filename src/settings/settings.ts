@@ -1,7 +1,7 @@
 import { Template } from '../templateManager';
 import { Background } from '../backgroundManager';
 
-interface MPSettings {
+export interface MPSettings {
     backgroundId: string;
     templateId: string;
     fontFamily: string;
@@ -14,6 +14,32 @@ interface MPSettings {
     customHeader: string;
     customFooter: string;
     enableFrontMatterCard: boolean;
+    layoutEnhancements: {
+        enableAutoToc: boolean;
+        tocMinHeadings: number;
+        enableTaskListEnhancement: boolean;
+        enableImageCaptions: boolean;
+        enableTableEnhancement: boolean;
+        enableAuthorCard: boolean;
+        enableSubscribeCard: boolean;
+    };
+    authorCard: {
+        name: string;
+        role: string;
+        bio: string;
+        tags: string;
+        link: string;
+        avatar: string;
+    };
+    subscribeCard: {
+        label: string;
+        title: string;
+        subtitle: string;
+        primary: string;
+        secondary: string;
+        note: string;
+        qrcode: string;
+    };
 }
 
 const DEFAULT_SETTINGS: MPSettings = {
@@ -28,6 +54,32 @@ const DEFAULT_SETTINGS: MPSettings = {
     customHeader: '',
     customFooter: '',
     enableFrontMatterCard: false,
+    layoutEnhancements: {
+        enableAutoToc: false,
+        tocMinHeadings: 3,
+        enableTaskListEnhancement: true,
+        enableImageCaptions: true,
+        enableTableEnhancement: true,
+        enableAuthorCard: false,
+        enableSubscribeCard: false,
+    },
+    authorCard: {
+        name: '',
+        role: '',
+        bio: '',
+        tags: '',
+        link: '',
+        avatar: '',
+    },
+    subscribeCard: {
+        label: '持续更新',
+        title: '',
+        subtitle: '',
+        primary: '关注公众号',
+        secondary: '收藏这篇',
+        note: '',
+        qrcode: '',
+    },
     customFonts: [
         {
             value: 'Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, "PingFang SC", Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
@@ -133,6 +185,18 @@ export class SettingsManager {
             savedData.customFonts = DEFAULT_SETTINGS.customFonts;
         }
         this.settings = Object.assign({}, DEFAULT_SETTINGS, savedData);
+        this.settings.layoutEnhancements = {
+            ...DEFAULT_SETTINGS.layoutEnhancements,
+            ...(savedData.layoutEnhancements || {})
+        };
+        this.settings.authorCard = {
+            ...DEFAULT_SETTINGS.authorCard,
+            ...(savedData.authorCard || {})
+        };
+        this.settings.subscribeCard = {
+            ...DEFAULT_SETTINGS.subscribeCard,
+            ...(savedData.subscribeCard || {})
+        };
     }
 
     getAllTemplates(): Template[] {

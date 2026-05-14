@@ -5,6 +5,7 @@ import { CreateFontModal } from './CreateFontModal';
 import { CreateBackgroundModal } from './CreateBackgroundModal'; // 添加导入
 import { ConfirmModal } from './ConfirmModal';
 import { TemplatePreviewModal } from './templatePreviewModal'; // 添加导入
+import type { MPSettings } from './settings';
 export class MPSettingTab extends PluginSettingTab {
     plugin: MPPlugin; // 修改插件类型以匹配类名
     private expandedSections: Set<string> = new Set();
@@ -58,6 +59,7 @@ export class MPSettingTab extends PluginSettingTab {
         this.createSection(containerEl, '基本选项', el => this.renderBasicSettings(el));
         this.createSection(containerEl, '模板选项', el => this.renderTemplateSettings(el));
         this.createSection(containerEl, '背景选项', el => this.renderBackgroundSettings(el));
+        this.createSection(containerEl, '排版增强', el => this.renderLayoutEnhancementSettings(el));
         this.createSection(containerEl, '高级选项', el => this.renderAdvancedSettings(el));
     }
 
@@ -511,6 +513,192 @@ export class MPSettingTab extends PluginSettingTab {
 
     // Add createSection helper if it was removed or not accessible, but it seems to be private in class
     // We need to render a new section for Advanced Settings
+
+    private renderLayoutEnhancementSettings(containerEl: HTMLElement): void {
+        const settings = this.plugin.settingsManager.getSettings();
+        const layout = settings.layoutEnhancements;
+
+        new Setting(containerEl)
+            .setName('自动阅读导航')
+            .setDesc('当文章 h2/h3 数量达到阈值时，自动在开头插入目录卡片')
+            .addToggle(toggle => toggle
+                .setValue(layout.enableAutoToc)
+                .onChange(async value => {
+                    await this.plugin.settingsManager.updateSettings({
+                        layoutEnhancements: {
+                            ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+                            enableAutoToc: value
+                        }
+                    });
+                }));
+
+        new Setting(containerEl)
+            .setName('目录触发阈值')
+            .setDesc('h2/h3 数量达到该值才自动生成阅读导航')
+            .addText(text => text
+                .setPlaceholder('3')
+                .setValue(String(layout.tocMinHeadings || 3))
+                .onChange(async value => {
+                    const parsed = Math.max(1, parseInt(value, 10) || 3);
+                    await this.plugin.settingsManager.updateSettings({
+                        layoutEnhancements: {
+                            ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+                            tocMinHeadings: parsed
+                        }
+                    });
+                }));
+
+        new Setting(containerEl)
+            .setName('任务列表增强')
+            .setDesc('将 Markdown 任务列表转换为公众号检查清单卡片')
+            .addToggle(toggle => toggle
+                .setValue(layout.enableTaskListEnhancement)
+                .onChange(async value => {
+                    await this.plugin.settingsManager.updateSettings({
+                        layoutEnhancements: {
+                            ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+                            enableTaskListEnhancement: value
+                        }
+                    });
+                }));
+
+        new Setting(containerEl)
+            .setName('图片 Alt 图注')
+            .setDesc('把图片 alt 文本显示为图注')
+            .addToggle(toggle => toggle
+                .setValue(layout.enableImageCaptions)
+                .onChange(async value => {
+                    await this.plugin.settingsManager.updateSettings({
+                        layoutEnhancements: {
+                            ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+                            enableImageCaptions: value
+                        }
+                    });
+                }));
+
+        new Setting(containerEl)
+            .setName('表格横向优化')
+            .setDesc('为表格增加移动端横向滚动容器，避免窄屏溢出')
+            .addToggle(toggle => toggle
+                .setValue(layout.enableTableEnhancement)
+                .onChange(async value => {
+                    await this.plugin.settingsManager.updateSettings({
+                        layoutEnhancements: {
+                            ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+                            enableTableEnhancement: value
+                        }
+                    });
+                }));
+
+        containerEl.createEl('h4', { text: '作者卡' });
+
+        new Setting(containerEl)
+            .setName('自动插入作者卡')
+            .setDesc('在文章末尾自动插入作者信息卡')
+            .addToggle(toggle => toggle
+                .setValue(layout.enableAuthorCard)
+                .onChange(async value => {
+                    await this.plugin.settingsManager.updateSettings({
+                        layoutEnhancements: {
+                            ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+                            enableAuthorCard: value
+                        }
+                    });
+                }));
+
+        this.addAuthorTextSetting(containerEl, '名称', 'name');
+        this.addAuthorTextSetting(containerEl, '身份', 'role');
+        this.addAuthorTextSetting(containerEl, '简介', 'bio', true);
+        this.addAuthorTextSetting(containerEl, '标签', 'tags');
+        this.addAuthorTextSetting(containerEl, '链接', 'link');
+        this.addAuthorTextSetting(containerEl, '头像 URL', 'avatar');
+
+        containerEl.createEl('h4', { text: '关注引导' });
+
+        new Setting(containerEl)
+            .setName('自动插入关注引导')
+            .setDesc('在文章末尾自动插入关注/收藏引导卡')
+            .addToggle(toggle => toggle
+                .setValue(layout.enableSubscribeCard)
+                .onChange(async value => {
+                    await this.plugin.settingsManager.updateSettings({
+                        layoutEnhancements: {
+                            ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+                            enableSubscribeCard: value
+                        }
+                    });
+                }));
+
+        this.addSubscribeTextSetting(containerEl, '标签', 'label');
+        this.addSubscribeTextSetting(containerEl, '标题', 'title');
+        this.addSubscribeTextSetting(containerEl, '副标题', 'subtitle', true);
+        this.addSubscribeTextSetting(containerEl, '主行动', 'primary');
+        this.addSubscribeTextSetting(containerEl, '次行动', 'secondary');
+        this.addSubscribeTextSetting(containerEl, '说明', 'note');
+        this.addSubscribeTextSetting(containerEl, '二维码 URL', 'qrcode');
+    }
+
+    private addAuthorTextSetting(containerEl: HTMLElement, name: string, key: keyof MPSettings['authorCard'], multiline = false): void {
+        const authorCard = this.plugin.settingsManager.getSettings().authorCard;
+        const setting = new Setting(containerEl)
+            .setName(name);
+
+        if (multiline) {
+            setting.addTextArea(text => text
+                .setValue(authorCard[key] || '')
+                .onChange(async value => {
+                    await this.plugin.settingsManager.updateSettings({
+                        authorCard: {
+                            ...this.plugin.settingsManager.getSettings().authorCard,
+                            [key]: value
+                        }
+                    });
+                }));
+            return;
+        }
+
+        setting.addText(text => text
+            .setValue(authorCard[key] || '')
+            .onChange(async value => {
+                await this.plugin.settingsManager.updateSettings({
+                    authorCard: {
+                        ...this.plugin.settingsManager.getSettings().authorCard,
+                        [key]: value
+                    }
+                });
+            }));
+    }
+
+    private addSubscribeTextSetting(containerEl: HTMLElement, name: string, key: keyof MPSettings['subscribeCard'], multiline = false): void {
+        const subscribeCard = this.plugin.settingsManager.getSettings().subscribeCard;
+        const setting = new Setting(containerEl)
+            .setName(name);
+
+        if (multiline) {
+            setting.addTextArea(text => text
+                .setValue(subscribeCard[key] || '')
+                .onChange(async value => {
+                    await this.plugin.settingsManager.updateSettings({
+                        subscribeCard: {
+                            ...this.plugin.settingsManager.getSettings().subscribeCard,
+                            [key]: value
+                        }
+                    });
+                }));
+            return;
+        }
+
+        setting.addText(text => text
+            .setValue(subscribeCard[key] || '')
+            .onChange(async value => {
+                await this.plugin.settingsManager.updateSettings({
+                    subscribeCard: {
+                        ...this.plugin.settingsManager.getSettings().subscribeCard,
+                        [key]: value
+                    }
+                });
+            }));
+    }
 
     private renderAdvancedSettings(containerEl: HTMLElement): void {
         new Setting(containerEl)

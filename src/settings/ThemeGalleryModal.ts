@@ -31,11 +31,11 @@ type CategoryRule = {
 const CATEGORY_RULES: CategoryRule[] = [
     { category: '深色', idPrefixes: ['dark', 'xiaohu-ink', 'xiaohu-midnight'], nameContains: ['暗夜'] },
     { category: '教育', idPrefixes: ['parent-child', 'teacher', 'kindergarten', 'blackboard'], nameContains: ['教育系列', '黑板'] },
-    { category: '渐变', idPrefixes: ['focus-', 'focus', 'elegant', 'xiaohu-focus', 'xiaohu-elegant', 'xiaohu-bytedance'], nameContains: ['聚焦系列', '精致系列', '字节跳动'] },
-    { category: '醒目', idPrefixes: ['bold-', 'bold', 'xiaohu-bold', 'xiaohu-bauhaus', 'xiaohu-sports', 'modern-report', 'playful', 'adventure'], nameContains: ['醒目系列', '包豪斯', '运动风', '现代报告', '活泼', '探险'] },
+    { category: '渐变', idPrefixes: ['focus-', 'focus', 'elegant', 'xiaohu-focus', 'xiaohu-elegant', 'xiaohu-bytedance', 'apple-product', 'ocean-calm'], nameContains: ['聚焦系列', '精致系列', '字节跳动', '苹果产品', '深海静谧'] },
+    { category: '醒目', idPrefixes: ['bold-', 'bold', 'xiaohu-bold', 'xiaohu-bauhaus', 'xiaohu-sports', 'modern-report', 'playful', 'adventure', 'cyber-neon'], nameContains: ['醒目系列', '包豪斯', '运动风', '现代报告', '活泼', '探险', '赛博霓虹'] },
     { category: '古典', idPrefixes: ['xiaohu-chinese', 'xiaohu-terracotta', 'xiaohu-newspaper'], nameContains: ['中式美学', '经典报纸'] },
     { category: '科技', idPrefixes: ['xiaohu-github', 'xiaohu-sspai', 'gameui'], nameContains: ['GitHub', '少数派', '游戏UI'] },
-    { category: '文艺', idPrefixes: ['xiaohu-lavender', 'xiaohu-mint', 'xiaohu-sunset', 'xiaohu-coffee', 'xiaohu-magazine', 'warmth'], nameContains: ['文艺系列', '薰衣草', '薄荷', '日落', '咖啡', '时尚杂志', '温暖'] },
+    { category: '文艺', idPrefixes: ['xiaohu-lavender', 'xiaohu-mint', 'xiaohu-sunset', 'xiaohu-coffee', 'xiaohu-magazine', 'warmth', 'autumn-warm', 'spring-fresh'], nameContains: ['文艺系列', '薰衣草', '薄荷', '日落', '咖啡', '时尚杂志', '温暖', '秋日暖光', '春日清新'] },
     { category: '极简', idPrefixes: ['minimal', 'xiaohu-minimal', 'default', 'scarlet', 'academic', 'zen-essence', 'orange', 'yeban', 'brown', 'xiaohu-wechat'], nameContains: ['极简系列', '默认模板', '学术专业', '禅意极简', '叶伴系列'] },
 ];
 

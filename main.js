@@ -9949,6 +9949,196 @@ var init_modern_report_navy = __esm({
   }
 });
 
+// src/templates/autumn-warm.json
+var autumn_warm_default;
+var init_autumn_warm = __esm({
+  "src/templates/autumn-warm.json"() {
+    autumn_warm_default = {
+      id: "autumn-warm",
+      name: "\u573A\u666F\u60C5\u7EEA - \u79CB\u65E5\u6696\u5149",
+      description: "\u6E29\u6696\u6CBB\u6108\uFF0C\u6A59\u8272\u8C03\uFF0C\u9002\u5408\u751F\u6D3B\u968F\u7B14\u3001\u60C5\u611F\u6545\u4E8B\u4E0E\u6587\u827A\u957F\u6587",
+      source: "mp-preview",
+      styles: {
+        container: "",
+        accentColor: "#d97758",
+        title: {
+          h1: { base: "margin: 26px 0 0; font-size: 1.9em; line-height: 1.5; text-align: center;", content: "font-weight: 800; color: #4a413d;", after: "display: block; width: 52px; height: 3px; background: #d97758; margin: 12px auto 0; border-radius: 999px;" },
+          h2: { base: "margin: 28px 0 10px; font-size: 1.35em; line-height: 1.5; border-bottom: 1px dashed rgba(74,65,61,0.28); padding-bottom: 8px;", content: "font-weight: 700; color: #d97758;", after: "" },
+          h3: { base: "margin: 22px 0 8px; font-size: 1.16em; line-height: 1.5;", content: "font-weight: 700; color: #c06b4d; border-bottom: 2px solid #d97758; padding-bottom: 3px;", after: "" },
+          base: { base: "margin: 16px 0 0; font-size: 1em; line-height: 1.5;", content: "font-weight: 700; color: #c06b4d;", after: "" }
+        },
+        paragraph: "line-height: 1.85; margin-top: 1em; color: #4a413d;",
+        list: { container: "padding-left: 28px; color: #4a413d;", item: "color: #4a413d; line-height: 1.85;", taskList: "list-style: none; color: #4a413d; line-height: 1.85;" },
+        quote: "border-left: 5px solid #d97758; border-radius: 10px; padding: 14px 18px; background: #fef4e7; margin: 1em 0; color: #6b5148; box-shadow: inset 0 0 15px rgba(217,119,88,0.1);",
+        code: {
+          header: { container: "margin-bottom: 1em; display: flex; gap: 6px;", dot: "width: 12px; height: 12px; border-radius: 50%;", colors: ["#ff8a65", "#ffd166", "#8fb996"] },
+          block: "color: #4a413d; background: #fffaf5; border-radius: 12px; border: 1px solid rgba(217,119,88,0.18); box-shadow: 0 8px 20px rgba(217,119,88,0.08); margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.7; white-space: pre-wrap;",
+          inline: "background: #fef4e7; padding: 2px 6px; border-radius: 4px; color: #c06b4d; font-size: 14px;",
+          syntax: { comment: "color: #9a8279;", keyword: "color: #c06b4d;", string: "color: #8a5a35;", function: "color: #b45f3b;", number: "color: #d97758;", operator: "color: #c06b4d;", "class-name": "color: #b45f3b;", variable: "color: #a45a3a;", constant: "color: #d97758;", property: "color: #c06b4d;", punctuation: "color: #4a413d;", boolean: "color: #d97758;", tag: "color: #8a5a35;", "attr-name": "color: #b45f3b;", "attr-value": "color: #8a5a35;", regex: "color: #8a5a35;", selector: "color: #8a5a35;" }
+        },
+        image: "max-width: 100%; height: auto; margin: 1.2em auto; display: block; border-radius: 14px; box-shadow: 0 10px 28px rgba(74,65,61,0.08);",
+        link: "color: #c06b4d; text-decoration: none; border-bottom: 1px solid rgba(192,107,77,0.35);",
+        emphasis: { strong: "font-weight: bold; color: #c06b4d;", em: "font-style: italic; color: #6b5148;", del: "text-decoration: line-through; color: #9a8279;" },
+        table: { container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid rgba(217,119,88,0.18);", header: "background: #fef4e7; font-weight: bold; color: #c06b4d; border-bottom: 2px solid rgba(217,119,88,0.22);", cell: "border: 1px solid rgba(217,119,88,0.12); padding: 12px; color: #4a413d;" },
+        hr: "border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(217,119,88,0.35), transparent); margin: 24px 0;",
+        footnote: { ref: "color: #c06b4d; text-decoration: none; font-size: 0.9em;", backref: "color: #c06b4d; text-decoration: none; font-size: 0.9em;" }
+      }
+    };
+  }
+});
+
+// src/templates/spring-fresh.json
+var spring_fresh_default;
+var init_spring_fresh = __esm({
+  "src/templates/spring-fresh.json"() {
+    spring_fresh_default = {
+      id: "spring-fresh",
+      name: "\u573A\u666F\u60C5\u7EEA - \u6625\u65E5\u6E05\u65B0",
+      description: "\u6E05\u65B0\u81EA\u7136\uFF0C\u7EFF\u8272\u8C03\uFF0C\u9002\u5408\u65C5\u884C\u65E5\u8BB0\u3001\u81EA\u7136\u4E3B\u9898\u4E0E\u8F7B\u77E5\u8BC6\u5185\u5BB9",
+      source: "mp-preview",
+      styles: {
+        container: "",
+        accentColor: "#6b9b7a",
+        title: {
+          h1: { base: "margin: 26px 0 0; font-size: 1.9em; line-height: 1.5; text-align: center;", content: "font-weight: 800; color: #3d4a3d;", after: "display: block; width: 52px; height: 3px; background: #6b9b7a; margin: 12px auto 0; border-radius: 999px;" },
+          h2: { base: "margin: 28px 0 10px; font-size: 1.35em; line-height: 1.5; border-bottom: 1px dashed rgba(74,128,88,0.25); padding-bottom: 8px;", content: "font-weight: 700; color: #4a8058;", after: "" },
+          h3: { base: "margin: 22px 0 8px; font-size: 1.16em; line-height: 1.5;", content: "font-weight: 700; color: #4a8058; border-bottom: 2px solid #6b9b7a; padding-bottom: 3px;", after: "" },
+          base: { base: "margin: 16px 0 0; font-size: 1em; line-height: 1.5;", content: "font-weight: 700; color: #4a8058;", after: "" }
+        },
+        paragraph: "line-height: 1.85; margin-top: 1em; color: #3d4a3d;",
+        list: { container: "padding-left: 28px; color: #3d4a3d;", item: "color: #3d4a3d; line-height: 1.85;", taskList: "list-style: none; color: #3d4a3d; line-height: 1.85;" },
+        quote: "border-left: 5px solid #6b9b7a; border-radius: 10px; padding: 14px 18px; background: #e8f0e8; margin: 1em 0; color: #526c58; box-shadow: inset 0 0 12px rgba(107,155,122,0.1);",
+        code: {
+          header: { container: "margin-bottom: 1em; display: flex; gap: 6px;", dot: "width: 12px; height: 12px; border-radius: 50%;", colors: ["#7bc99a", "#f4d35e", "#84a98c"] },
+          block: "color: #3d4a3d; background: #f8fbf8; border-radius: 12px; border: 1px solid rgba(107,155,122,0.16); box-shadow: 0 8px 20px rgba(74,128,88,0.06); margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.7; white-space: pre-wrap;",
+          inline: "background: #e8f0e8; padding: 2px 6px; border-radius: 4px; color: #4a8058; font-size: 14px;",
+          syntax: { comment: "color: #78917d;", keyword: "color: #4a8058;", string: "color: #3b7a57;", function: "color: #5d946a;", number: "color: #4a8058;", operator: "color: #4a8058;", "class-name": "color: #5d946a;", variable: "color: #3b7a57;", constant: "color: #4a8058;", property: "color: #4a8058;", punctuation: "color: #3d4a3d;", boolean: "color: #4a8058;", tag: "color: #3b7a57;", "attr-name": "color: #5d946a;", "attr-value": "color: #3b7a57;", regex: "color: #3b7a57;", selector: "color: #3b7a57;" }
+        },
+        image: "max-width: 100%; height: auto; margin: 1.2em auto; display: block; border-radius: 14px; box-shadow: 0 8px 24px rgba(74,128,88,0.08);",
+        link: "color: #4a8058; text-decoration: none; border-bottom: 1px solid rgba(74,128,88,0.35);",
+        emphasis: { strong: "font-weight: bold; color: #4a8058;", em: "font-style: italic; color: #526c58;", del: "text-decoration: line-through; color: #78917d;" },
+        table: { container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid rgba(107,155,122,0.18);", header: "background: #e8f0e8; font-weight: bold; color: #4a8058; border-bottom: 2px solid rgba(107,155,122,0.22);", cell: "border: 1px solid rgba(107,155,122,0.12); padding: 12px; color: #3d4a3d;" },
+        hr: "border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(107,155,122,0.3), transparent); margin: 24px 0;",
+        footnote: { ref: "color: #4a8058; text-decoration: none; font-size: 0.9em;", backref: "color: #4a8058; text-decoration: none; font-size: 0.9em;" }
+      }
+    };
+  }
+});
+
+// src/templates/ocean-calm.json
+var ocean_calm_default;
+var init_ocean_calm = __esm({
+  "src/templates/ocean-calm.json"() {
+    ocean_calm_default = {
+      id: "ocean-calm",
+      name: "\u573A\u666F\u60C5\u7EEA - \u6DF1\u6D77\u9759\u8C27",
+      description: "\u6DF1\u9083\u51B7\u9759\uFF0C\u84DD\u7070\u8272\u8C03\uFF0C\u9002\u5408\u6280\u672F\u6587\u7AE0\u3001\u5546\u4E1A\u5206\u6790\u4E0E\u4E13\u4E1A\u957F\u6587",
+      source: "mp-preview",
+      styles: {
+        container: "",
+        accentColor: "#4a7c9b",
+        title: {
+          h1: { base: "margin: 26px 0 0; font-size: 1.9em; line-height: 1.5; text-align: center;", content: "font-weight: 800; color: #3a4150;", after: "display: block; width: 52px; height: 3px; background: #4a7c9b; margin: 12px auto 0; border-radius: 999px;" },
+          h2: { base: "margin: 28px 0 10px; font-size: 1.35em; line-height: 1.5; border-bottom: 1px dashed rgba(74,124,155,0.3); padding-bottom: 8px;", content: "font-weight: 700; color: #3d6a8a;", after: "" },
+          h3: { base: "margin: 22px 0 8px; font-size: 1.16em; line-height: 1.5;", content: "font-weight: 700; color: #3d6a8a; border-bottom: 2px solid #4a7c9b; padding-bottom: 3px;", after: "" },
+          base: { base: "margin: 16px 0 0; font-size: 1em; line-height: 1.5;", content: "font-weight: 700; color: #3d6a8a;", after: "" }
+        },
+        paragraph: "line-height: 1.85; margin-top: 1em; color: #3a4150;",
+        list: { container: "padding-left: 28px; color: #3a4150;", item: "color: #3a4150; line-height: 1.85;", taskList: "list-style: none; color: #3a4150; line-height: 1.85;" },
+        quote: "border-left: 5px solid #4a7c9b; border-radius: 10px; padding: 14px 18px; background: #e8f0f8; margin: 1em 0; color: #526273; box-shadow: inset 0 0 12px rgba(74,124,155,0.08);",
+        code: {
+          header: { container: "margin-bottom: 1em; display: flex; gap: 6px;", dot: "width: 12px; height: 12px; border-radius: 50%;", colors: ["#72a6c7", "#9fb7c9", "#4a7c9b"] },
+          block: "color: #3a4150; background: #f6f9fc; border-radius: 12px; border: 1px solid rgba(74,124,155,0.16); box-shadow: 0 8px 24px rgba(58,65,80,0.06); margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.7; white-space: pre-wrap;",
+          inline: "background: #e8f0f8; padding: 2px 6px; border-radius: 4px; color: #3d6a8a; font-size: 14px;",
+          syntax: { comment: "color: #738496;", keyword: "color: #3d6a8a;", string: "color: #315f7b;", function: "color: #4a7c9b;", number: "color: #3d6a8a;", operator: "color: #3d6a8a;", "class-name": "color: #4a7c9b;", variable: "color: #315f7b;", constant: "color: #3d6a8a;", property: "color: #3d6a8a;", punctuation: "color: #3a4150;", boolean: "color: #3d6a8a;", tag: "color: #315f7b;", "attr-name": "color: #4a7c9b;", "attr-value": "color: #315f7b;", regex: "color: #315f7b;", selector: "color: #315f7b;" }
+        },
+        image: "max-width: 100%; height: auto; margin: 1.2em auto; display: block; border-radius: 12px; box-shadow: 0 8px 28px rgba(58,65,80,0.08);",
+        link: "color: #3d6a8a; text-decoration: none; border-bottom: 1px solid rgba(61,106,138,0.35);",
+        emphasis: { strong: "font-weight: bold; color: #3d6a8a;", em: "font-style: italic; color: #526273;", del: "text-decoration: line-through; color: #738496;" },
+        table: { container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid rgba(74,124,155,0.18);", header: "background: #e8f0f8; font-weight: bold; color: #3d6a8a; border-bottom: 2px solid rgba(74,124,155,0.22);", cell: "border: 1px solid rgba(74,124,155,0.12); padding: 12px; color: #3a4150;" },
+        hr: "border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(74,124,155,0.28), transparent); margin: 24px 0;",
+        footnote: { ref: "color: #3d6a8a; text-decoration: none; font-size: 0.9em;", backref: "color: #3d6a8a; text-decoration: none; font-size: 0.9em;" }
+      }
+    };
+  }
+});
+
+// src/templates/cyber-neon.json
+var cyber_neon_default;
+var init_cyber_neon = __esm({
+  "src/templates/cyber-neon.json"() {
+    cyber_neon_default = {
+      id: "cyber-neon",
+      name: "\u573A\u666F\u60C5\u7EEA - \u8D5B\u535A\u9713\u8679",
+      description: "\u9713\u8679\u79D1\u6280\u611F\uFF0C\u9002\u5408 AI\u3001\u6E38\u620F\u3001\u5F00\u53D1\u8005\u4E0E\u672A\u6765\u611F\u5185\u5BB9",
+      source: "mp-preview",
+      styles: {
+        container: "",
+        accentColor: "#00e5ff",
+        title: {
+          h1: { base: "margin: 26px 0 0; font-size: 1.9em; line-height: 1.5; text-align: center;", content: "font-weight: 800; color: #083344; text-shadow: 0 0 10px rgba(0,229,255,0.25);", after: "display: block; width: 56px; height: 3px; background: linear-gradient(90deg,#00e5ff,#ff2bd6); margin: 12px auto 0; border-radius: 999px;" },
+          h2: { base: "margin: 28px 0 10px; font-size: 1.35em; line-height: 1.5; border-bottom: 1px solid rgba(0,229,255,0.25); padding-bottom: 8px;", content: "font-weight: 700; color: #0284c7;", after: "" },
+          h3: { base: "margin: 22px 0 8px; font-size: 1.16em; line-height: 1.5;", content: "font-weight: 700; color: #be185d; border-bottom: 2px solid #00e5ff; padding-bottom: 3px;", after: "" },
+          base: { base: "margin: 16px 0 0; font-size: 1em; line-height: 1.5;", content: "font-weight: 700; color: #0284c7;", after: "" }
+        },
+        paragraph: "line-height: 1.82; margin-top: 1em; color: #14313d;",
+        list: { container: "padding-left: 28px; color: #14313d;", item: "color: #14313d; line-height: 1.82;", taskList: "list-style: none; color: #14313d; line-height: 1.82;" },
+        quote: "border-left: 5px solid #00e5ff; border-radius: 10px; padding: 14px 18px; background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(255,43,214,0.06)); margin: 1em 0; color: #164155; box-shadow: inset 0 0 16px rgba(0,229,255,0.12);",
+        code: {
+          header: { container: "margin-bottom: 1em; display: flex; gap: 6px;", dot: "width: 12px; height: 12px; border-radius: 50%;", colors: ["#ff2bd6", "#00e5ff", "#7c3aed"] },
+          block: "color: #dffbff; background: #071923; border-radius: 12px; border: 1px solid rgba(0,229,255,0.28); box-shadow: 0 0 24px rgba(0,229,255,0.16); margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.7; white-space: pre-wrap;",
+          inline: "background: rgba(0,229,255,0.12); padding: 2px 6px; border-radius: 4px; color: #0284c7; font-size: 14px;",
+          syntax: { comment: "color: #7aa6b2;", keyword: "color: #00e5ff;", string: "color: #a7f3d0;", function: "color: #ff7ade;", number: "color: #facc15;", operator: "color: #00e5ff;", "class-name": "color: #ff7ade;", variable: "color: #a7f3d0;", constant: "color: #facc15;", property: "color: #00e5ff;", punctuation: "color: #dffbff;", boolean: "color: #facc15;", tag: "color: #a7f3d0;", "attr-name": "color: #ff7ade;", "attr-value": "color: #a7f3d0;", regex: "color: #a7f3d0;", selector: "color: #a7f3d0;" }
+        },
+        image: "max-width: 100%; height: auto; margin: 1.2em auto; display: block; border-radius: 12px; box-shadow: 0 0 24px rgba(0,229,255,0.14);",
+        link: "color: #0284c7; text-decoration: none; border-bottom: 1px solid rgba(2,132,199,0.35);",
+        emphasis: { strong: "font-weight: bold; color: #be185d;", em: "font-style: italic; color: #164155;", del: "text-decoration: line-through; color: #77919c;" },
+        table: { container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid rgba(0,229,255,0.22);", header: "background: rgba(0,229,255,0.1); font-weight: bold; color: #0284c7; border-bottom: 2px solid rgba(0,229,255,0.3);", cell: "border: 1px solid rgba(0,229,255,0.14); padding: 12px; color: #14313d;" },
+        hr: "border: none; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,229,255,0.45), rgba(255,43,214,0.35), transparent); margin: 24px 0;",
+        footnote: { ref: "color: #0284c7; text-decoration: none; font-size: 0.9em;", backref: "color: #0284c7; text-decoration: none; font-size: 0.9em;" }
+      }
+    };
+  }
+});
+
+// src/templates/apple-product.json
+var apple_product_default;
+var init_apple_product = __esm({
+  "src/templates/apple-product.json"() {
+    apple_product_default = {
+      id: "apple-product",
+      name: "\u573A\u666F\u60C5\u7EEA - \u82F9\u679C\u4EA7\u54C1",
+      description: "\u514B\u5236\u3001\u6E05\u900F\u3001\u4EA7\u54C1\u53D1\u5E03\u611F\uFF0C\u9002\u5408\u4EA7\u54C1\u4ECB\u7ECD\u3001\u5DE5\u5177\u8BC4\u6D4B\u4E0E\u54C1\u724C\u5185\u5BB9",
+      source: "mp-preview",
+      styles: {
+        container: "",
+        accentColor: "#0a84ff",
+        title: {
+          h1: { base: "margin: 28px 0 0; font-size: 2em; line-height: 1.42; text-align: center;", content: "font-weight: 800; color: #111827;", after: "display: block; width: 44px; height: 3px; background: #0a84ff; margin: 12px auto 0; border-radius: 999px;" },
+          h2: { base: "margin: 28px 0 10px; font-size: 1.36em; line-height: 1.5; padding-bottom: 8px;", content: "font-weight: 760; color: #111827;", after: "display: block; width: 32px; height: 2px; background: #0a84ff; margin-top: 8px; border-radius: 999px;" },
+          h3: { base: "margin: 22px 0 8px; font-size: 1.14em; line-height: 1.5;", content: "font-weight: 700; color: #1f2937;", after: "" },
+          base: { base: "margin: 16px 0 0; font-size: 1em; line-height: 1.5;", content: "font-weight: 700; color: #1f2937;", after: "" }
+        },
+        paragraph: "line-height: 1.82; margin-top: 1em; color: #374151;",
+        list: { container: "padding-left: 28px; color: #374151;", item: "color: #374151; line-height: 1.82;", taskList: "list-style: none; color: #374151; line-height: 1.82;" },
+        quote: "border-left: 4px solid #0a84ff; border-radius: 12px; padding: 14px 18px; background: #f5f7fb; margin: 1em 0; color: #4b5563;",
+        code: {
+          header: { container: "margin-bottom: 1em; display: flex; gap: 6px;", dot: "width: 12px; height: 12px; border-radius: 50%;", colors: ["#ff5f57", "#ffbd2e", "#28c840"] },
+          block: "color: #1f2937; background: #f8fafc; border-radius: 14px; border: 1px solid #e5e7eb; box-shadow: 0 10px 28px rgba(17,24,39,0.05); margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.7; white-space: pre-wrap;",
+          inline: "background: #f1f5f9; padding: 2px 6px; border-radius: 5px; color: #0a84ff; font-size: 14px;",
+          syntax: { comment: "color: #6b7280;", keyword: "color: #0a84ff;", string: "color: #047857;", function: "color: #7c3aed;", number: "color: #2563eb;", operator: "color: #0a84ff;", "class-name": "color: #7c3aed;", variable: "color: #b45309;", constant: "color: #2563eb;", property: "color: #2563eb;", punctuation: "color: #1f2937;", boolean: "color: #2563eb;", tag: "color: #047857;", "attr-name": "color: #7c3aed;", "attr-value": "color: #047857;", regex: "color: #047857;", selector: "color: #047857;" }
+        },
+        image: "max-width: 100%; height: auto; margin: 1.2em auto; display: block; border-radius: 16px; box-shadow: 0 14px 34px rgba(17,24,39,0.08);",
+        link: "color: #0a84ff; text-decoration: none; border-bottom: 1px solid rgba(10,132,255,0.35);",
+        emphasis: { strong: "font-weight: bold; color: #111827;", em: "font-style: italic; color: #4b5563;", del: "text-decoration: line-through; color: #9ca3af;" },
+        table: { container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e5e7eb;", header: "background: #f8fafc; font-weight: bold; color: #111827; border-bottom: 2px solid #e5e7eb;", cell: "border: 1px solid #eef2f7; padding: 12px; color: #374151;" },
+        hr: "border: none; height: 1px; background: #e5e7eb; margin: 24px 0;",
+        footnote: { ref: "color: #0a84ff; text-decoration: none; font-size: 0.9em;", backref: "color: #0a84ff; text-decoration: none; font-size: 0.9em;" }
+      }
+    };
+  }
+});
+
 // src/templates/minimal-gold.json
 var minimal_gold_default;
 var init_minimal_gold = __esm({
@@ -15879,6 +16069,11 @@ var init_templates = __esm({
     init_zen_essence_teal();
     init_modern_report();
     init_modern_report_navy();
+    init_autumn_warm();
+    init_spring_fresh();
+    init_ocean_calm();
+    init_cyber_neon();
+    init_apple_product();
     init_minimal_gold();
     init_minimal_green();
     init_minimal_blue();
@@ -15942,6 +16137,11 @@ var init_templates = __esm({
       "zen-essence-teal": zen_essence_teal_default,
       "modern-report": modern_report_default,
       "modern-report-navy": modern_report_navy_default,
+      "autumn-warm": autumn_warm_default,
+      "spring-fresh": spring_fresh_default,
+      "ocean-calm": ocean_calm_default,
+      "cyber-neon": cyber_neon_default,
+      "apple-product": apple_product_default,
       // Minimal Series
       "minimal-gold": minimal_gold_default,
       "minimal-green": minimal_green_default,
@@ -16235,6 +16435,355 @@ function resolveImagePath(linktext, app) {
   return null;
 }
 
+// src/layoutEnhancer.ts
+var DEFAULT_ACCENT = "#4285f4";
+function escapeHtml(value) {
+  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+function parseKeyValues(content) {
+  const values = {};
+  content.split(/\r?\n/).forEach((line) => {
+    const match = line.match(/^([^:：]+)\s*[:：]\s*(.*)$/);
+    if (!match)
+      return;
+    values[match[1].trim()] = match[2].trim();
+  });
+  return values;
+}
+function parseRows(content) {
+  return content.split(/\r?\n/).map((line) => line.trim()).filter((line) => line && !line.match(/^[^:：]+[:：]/)).map((line) => line.split("|").map((cell) => cell.trim()).filter(Boolean)).filter((row) => row.length > 0);
+}
+function htmlToElement(html) {
+  const template = document.createElement("template");
+  template.innerHTML = html.trim();
+  return template.content.firstElementChild;
+}
+function cardStyle(accent = DEFAULT_ACCENT) {
+  return [
+    "margin: 1.2em 0",
+    "padding: 18px 20px",
+    "border-radius: 10px",
+    `border: 1px solid ${accent}22`,
+    `background: linear-gradient(135deg, ${accent}0f 0%, #ffffff 100%)`,
+    "box-shadow: 0 6px 18px rgba(0,0,0,0.04)",
+    "box-sizing: border-box"
+  ].join("; ");
+}
+function titleStyle(accent = DEFAULT_ACCENT) {
+  return `margin: 0 0 12px; font-size: 1.05em; font-weight: 700; color: ${accent}; line-height: 1.5;`;
+}
+function bodyStyle() {
+  return "margin: 0; color: #3f4652; line-height: 1.8; font-size: 1em;";
+}
+function renderToc(content, headings) {
+  const rows = headings ? headings.map((heading, index) => {
+    var _a;
+    return [
+      String(index + 1).padStart(2, "0"),
+      ((_a = heading.textContent) == null ? void 0 : _a.trim()) || "",
+      ""
+    ];
+  }) : parseRows(content);
+  const title = parseKeyValues(content).title || "\u9605\u8BFB\u5BFC\u822A";
+  const items = rows.map((row, index) => {
+    const number = row[0] || String(index + 1).padStart(2, "0");
+    const heading = row[1] || row[0] || "";
+    const desc = row[2] || "";
+    return `<div style="display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px dashed #e8edf5;">
+            <span style="min-width: 32px; color: ${DEFAULT_ACCENT}; font-weight: 700;">${escapeHtml(number)}</span>
+            <span style="flex: 1;"><span style="display: block; color: #2f3a4a; font-weight: 600;">${escapeHtml(heading)}</span>${desc ? `<span style="display: block; margin-top: 2px; color: #7a8494; font-size: 0.92em;">${escapeHtml(desc)}</span>` : ""}</span>
+        </div>`;
+  }).join("");
+  return htmlToElement(`<section class="mp-layout-card mp-layout-toc" data-mp-layout="toc" style="${cardStyle()}">
+        <div style="${titleStyle()}">${escapeHtml(title)}</div>
+        <div>${items}</div>
+    </section>`);
+}
+function renderSteps(content) {
+  const values = parseKeyValues(content);
+  const rows = parseRows(content);
+  const items = rows.map((row, index) => {
+    const number = row[0] || String(index + 1).padStart(2, "0");
+    const title = row[1] || row[0] || "";
+    const desc = row[2] || "";
+    return `<div style="display: flex; gap: 12px; margin: 12px 0;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: ${DEFAULT_ACCENT}; color: #fff; font-weight: 700; flex: 0 0 34px;">${escapeHtml(number)}</span>
+            <span style="flex: 1;"><span style="display: block; color: #2f3a4a; font-weight: 700; line-height: 1.5;">${escapeHtml(title)}</span>${desc ? `<span style="display: block; margin-top: 4px; color: #677182; line-height: 1.7;">${escapeHtml(desc)}</span>` : ""}</span>
+        </div>`;
+  }).join("");
+  return htmlToElement(`<section class="mp-layout-card mp-layout-steps" data-mp-layout="steps" style="${cardStyle()}">
+        <div style="${titleStyle()}">${escapeHtml(values.title || "\u6B65\u9AA4")}</div>
+        ${items}
+    </section>`);
+}
+function renderChecklist(content) {
+  const values = parseKeyValues(content);
+  const rows = parseRows(content);
+  return renderChecklistRows(rows, values.title || "\u68C0\u67E5\u6E05\u5355");
+}
+function renderChecklistRows(rows, title = "\u68C0\u67E5\u6E05\u5355") {
+  const items = rows.map((row) => {
+    const status = (row[0] || "pending").toLowerCase();
+    const item = row.length > 1 ? row[1] : row[0];
+    const note = row.length > 2 ? row[2] : "";
+    const color = status === "done" ? "#2f9e44" : status === "warn" ? "#d97706" : "#64748b";
+    const mark = status === "done" ? "\u2713" : status === "warn" ? "!" : "\u2022";
+    return `<div style="display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid #edf1f7;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: ${color}18; color: ${color}; font-weight: 700; flex: 0 0 22px;">${mark}</span>
+            <span style="flex: 1;"><span style="display: block; color: #2f3a4a; line-height: 1.6;">${escapeHtml(item || "")}</span>${note ? `<span style="display: block; color: #7a8494; font-size: 0.9em;">${escapeHtml(note)}</span>` : ""}</span>
+        </div>`;
+  }).join("");
+  return htmlToElement(`<section class="mp-layout-card mp-layout-checklist" data-mp-layout="checklist" style="${cardStyle("#2f9e44")}">
+        <div style="${titleStyle("#2f9e44")}">${escapeHtml(title)}</div>
+        ${items}
+    </section>`);
+}
+function renderQuoteCard(content) {
+  let values = parseKeyValues(content);
+  const trimmed = content.trim();
+  if (trimmed.startsWith("{")) {
+    try {
+      values = JSON.parse(trimmed);
+    } catch (e) {
+      values = {};
+    }
+  }
+  const text = values.text || values.quote || trimmed;
+  const source = values.source || values.author || "";
+  return htmlToElement(`<section class="mp-layout-card mp-layout-quote-card" data-mp-layout="quote-card" style="${cardStyle("#8b5cf6")}; text-align: center;">
+        <div style="font-size: 1.28em; line-height: 1.7; color: #33255f; font-weight: 700;">${escapeHtml(text)}</div>
+        ${source ? `<div style="margin-top: 10px; color: #7c6aa8; font-size: 0.92em;">${escapeHtml(source)}</div>` : ""}
+    </section>`);
+}
+function renderSummary(content) {
+  const values = parseKeyValues(content);
+  const highlight = values.highlight || values.title || content.trim();
+  const body = values.body || values.content || "";
+  const eyebrow = values.eyebrow || "\u4E00\u53E5\u8BDD\u603B\u7ED3";
+  return htmlToElement(`<section class="mp-layout-card mp-layout-summary" data-mp-layout="summary" style="${cardStyle("#f59f00")}">
+        <div style="margin-bottom: 8px; color: #b76e00; font-size: 0.85em; font-weight: 700; letter-spacing: 0.08em;">${escapeHtml(eyebrow)}</div>
+        <div style="color: #3b2f18; font-size: 1.12em; font-weight: 700; line-height: 1.7;">${escapeHtml(highlight)}</div>
+        ${body ? `<p style="${bodyStyle()}; margin-top: 8px;">${escapeHtml(body)}</p>` : ""}
+    </section>`);
+}
+function renderAuthorCard(values) {
+  const tags = (values.tags || "").split("|").map((tag) => tag.trim()).filter(Boolean).slice(0, 4);
+  return htmlToElement(`<section class="mp-layout-card mp-layout-author-card" data-mp-layout="author-card" style="${cardStyle("#0f766e")}">
+        <div style="display: flex; gap: 14px; align-items: center;">
+            ${values.avatar ? `<img src="${escapeHtml(values.avatar)}" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; flex: 0 0 54px;" />` : `<span style="width: 54px; height: 54px; border-radius: 50%; background: #0f766e18; color: #0f766e; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; flex: 0 0 54px;">${escapeHtml((values.name || "\u4F5C").slice(0, 1))}</span>`}
+            <span style="flex: 1;">
+                <span style="display: block; color: #183b38; font-size: 1.08em; font-weight: 700;">${escapeHtml(values.name || "\u4F5C\u8005")}</span>
+                ${values.role ? `<span style="display: block; margin-top: 2px; color: #55706d; font-size: 0.92em;">${escapeHtml(values.role)}</span>` : ""}
+            </span>
+        </div>
+        ${values.bio ? `<p style="${bodyStyle()}; margin-top: 12px;">${escapeHtml(values.bio)}</p>` : ""}
+        ${tags.length ? `<div style="margin-top: 12px;">${tags.map((tag) => `<span style="display: inline-block; margin: 0 6px 6px 0; padding: 3px 8px; border-radius: 999px; background: #0f766e12; color: #0f766e; font-size: 0.86em;">${escapeHtml(tag)}</span>`).join("")}</div>` : ""}
+        ${values.link ? `<div style="margin-top: 8px; color: #55706d; font-size: 0.9em;">${escapeHtml(values.link)}</div>` : ""}
+    </section>`);
+}
+function renderSubscribe(values) {
+  return htmlToElement(`<section class="mp-layout-card mp-layout-subscribe" data-mp-layout="subscribe" style="${cardStyle("#ef4444")}; text-align: center;">
+        ${values.label ? `<div style="margin-bottom: 8px; color: #ef4444; font-size: 0.85em; font-weight: 700;">${escapeHtml(values.label)}</div>` : ""}
+        <div style="color: #3f1f1f; font-size: 1.14em; line-height: 1.6; font-weight: 700;">${escapeHtml(values.title || values.cta || "\u5982\u679C\u8FD9\u7BC7\u5BF9\u4F60\u6709\u5E2E\u52A9\uFF0C\u53EF\u4EE5\u6536\u85CF\u8D77\u6765")}</div>
+        ${values.subtitle ? `<p style="${bodyStyle()}; margin-top: 8px;">${escapeHtml(values.subtitle)}</p>` : ""}
+        <div style="margin-top: 14px;">
+            <span style="display: inline-block; margin: 4px; padding: 6px 12px; border-radius: 999px; background: #ef4444; color: #fff; font-size: 0.92em;">${escapeHtml(values.primary || "\u7EE7\u7EED\u5173\u6CE8")}</span>
+            <span style="display: inline-block; margin: 4px; padding: 6px 12px; border-radius: 999px; background: #ef444414; color: #ef4444; font-size: 0.92em;">${escapeHtml(values.secondary || "\u6536\u85CF\u8FD9\u7BC7")}</span>
+        </div>
+        ${values.qrcode ? `<img src="${escapeHtml(values.qrcode)}" style="display: block; width: 120px; height: 120px; object-fit: cover; margin: 14px auto 0;" />` : ""}
+        ${values.note ? `<div style="margin-top: 10px; color: #8a5a5a; font-size: 0.9em;">${escapeHtml(values.note)}</div>` : ""}
+    </section>`);
+}
+function renderFaq(content) {
+  const values = parseKeyValues(content);
+  const rows = parseRows(content);
+  const items = rows.map((row) => `<div style="padding: 12px 0; border-bottom: 1px solid #edf1f7;">
+        <div style="color: #2f3a4a; font-weight: 700; line-height: 1.6;">Q: ${escapeHtml(row[0] || "")}</div>
+        <div style="margin-top: 4px; color: #667085; line-height: 1.7;">A: ${escapeHtml(row[1] || "")}</div>
+    </div>`).join("");
+  return htmlToElement(`<section class="mp-layout-card mp-layout-faq" data-mp-layout="faq" style="${cardStyle("#6366f1")}">
+        <div style="${titleStyle("#6366f1")}">${escapeHtml(values.title || "\u5E38\u89C1\u95EE\u9898")}</div>
+        ${items}
+    </section>`);
+}
+function renderTimeline(content) {
+  const values = parseKeyValues(content);
+  const rows = parseRows(content);
+  const items = rows.map((row) => `<div style="display: flex; gap: 12px; margin: 14px 0;">
+        <span style="min-width: 70px; color: #b45309; font-weight: 700;">${escapeHtml(row[0] || "")}</span>
+        <span style="flex: 1; border-left: 2px solid #f6d6a7; padding-left: 12px;">
+            <span style="display: block; color: #3c2b17; font-weight: 700;">${escapeHtml(row[1] || "")}</span>
+            ${row[2] ? `<span style="display: block; margin-top: 4px; color: #76634c; line-height: 1.7;">${escapeHtml(row[2])}</span>` : ""}
+        </span>
+    </div>`).join("");
+  return htmlToElement(`<section class="mp-layout-card mp-layout-timeline" data-mp-layout="timeline" style="${cardStyle("#d97706")}">
+        <div style="${titleStyle("#d97706")}">${escapeHtml(values.title || "\u65F6\u95F4\u7EBF")}</div>
+        ${items}
+    </section>`);
+}
+function renderComparisonTable(content) {
+  var _a, _b;
+  let data = null;
+  try {
+    data = JSON.parse(content.trim());
+  } catch (e) {
+    data = null;
+  }
+  if (!data || !data.left || !data.right) {
+    const rows = parseRows(content);
+    data = {
+      left: { title: ((_a = rows[0]) == null ? void 0 : _a[0]) || "\u65B9\u6848 A", items: rows.slice(1).map((row) => row[0]).filter(Boolean) },
+      right: { title: ((_b = rows[0]) == null ? void 0 : _b[1]) || "\u65B9\u6848 B", items: rows.slice(1).map((row) => row[1]).filter(Boolean) }
+    };
+  }
+  const renderSide = (side, accent) => `<div style="flex: 1; min-width: 0; padding: 14px; border-radius: 10px; background: ${accent}10;">
+        <div style="color: ${accent}; font-weight: 700; margin-bottom: 8px;">${escapeHtml(side.title || "")}</div>
+        ${(side.items || []).map((item) => `<div style="padding: 6px 0; color: #394150; line-height: 1.6;">${escapeHtml(item)}</div>`).join("")}
+    </div>`;
+  return htmlToElement(`<section class="mp-layout-card mp-layout-comparison-table" data-mp-layout="comparison-table" style="${cardStyle("#0ea5e9")}">
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            ${renderSide(data.left, "#16a34a")}
+            ${renderSide(data.right, "#dc2626")}
+        </div>
+    </section>`);
+}
+function renderExplicitComponent(type, content, settings) {
+  switch (type) {
+    case "toc":
+      return renderToc(content);
+    case "steps":
+      return renderSteps(content);
+    case "checklist":
+      return renderChecklist(content);
+    case "quote-card":
+      return renderQuoteCard(content);
+    case "summary":
+      return renderSummary(content);
+    case "author-card":
+      return renderAuthorCard({ ...settings.authorCard, ...parseKeyValues(content) });
+    case "subscribe":
+      return renderSubscribe({ ...settings.subscribeCard, ...parseKeyValues(content) });
+    case "faq":
+      return renderFaq(content);
+    case "timeline":
+      return renderTimeline(content);
+    case "comparison-table":
+      return renderComparisonTable(content);
+    default:
+      return null;
+  }
+}
+function codeBlockLanguage(codeEl) {
+  const classes = Array.from(codeEl.classList);
+  const languageClass = classes.find((cls) => cls.startsWith("language-"));
+  return languageClass ? languageClass.replace("language-", "") : "";
+}
+function processExplicitComponents(container, settings) {
+  const rendered = /* @__PURE__ */ new Set();
+  const supported = /* @__PURE__ */ new Set(["toc", "steps", "checklist", "quote-card", "summary", "author-card", "subscribe", "faq", "timeline", "comparison-table"]);
+  container.querySelectorAll("pre > code").forEach((codeEl) => {
+    var _a;
+    const type = codeBlockLanguage(codeEl);
+    if (!supported.has(type))
+      return;
+    const pre = codeEl.parentElement;
+    if (!pre)
+      return;
+    const component = renderExplicitComponent(type, codeEl.textContent || "", settings);
+    if (!component)
+      return;
+    rendered.add(type);
+    (_a = pre.parentNode) == null ? void 0 : _a.replaceChild(component, pre);
+  });
+  return rendered;
+}
+function processAutoToc(container, settings, rendered) {
+  if (!settings.enableAutoToc || rendered.has("toc"))
+    return;
+  const headings = Array.from(container.querySelectorAll("h2, h3"));
+  if (headings.length < Math.max(1, settings.tocMinHeadings || 3))
+    return;
+  const toc = renderToc("", headings);
+  const firstHeading = container.querySelector("h1, h2, h3");
+  if (firstHeading && firstHeading.parentElement === container) {
+    firstHeading.insertAdjacentElement("afterend", toc);
+    return;
+  }
+  container.prepend(toc);
+}
+function processTaskLists(container, settings) {
+  if (!settings.enableTaskListEnhancement)
+    return;
+  container.querySelectorAll("ul").forEach((list) => {
+    var _a;
+    const items = Array.from(list.querySelectorAll(":scope > li"));
+    const taskItems = items.filter((item) => item.classList.contains("task-list-item") || item.querySelector('input[type="checkbox"]'));
+    if (taskItems.length === 0 || taskItems.length !== items.length)
+      return;
+    const rows = taskItems.map((item) => {
+      var _a2, _b;
+      const input = item.querySelector('input[type="checkbox"]');
+      const status = (input == null ? void 0 : input.checked) ? "done" : "pending";
+      const clone = item.cloneNode(true);
+      (_a2 = clone.querySelector('input[type="checkbox"]')) == null ? void 0 : _a2.remove();
+      return [status, ((_b = clone.textContent) == null ? void 0 : _b.trim()) || ""];
+    });
+    (_a = list.parentNode) == null ? void 0 : _a.replaceChild(renderChecklistRows(rows), list);
+  });
+}
+function processImageCaptions(container, settings) {
+  if (!settings.enableImageCaptions)
+    return;
+  container.querySelectorAll("img[alt]").forEach((img) => {
+    var _a;
+    const image = img;
+    const alt = image.alt.trim();
+    if (!alt || image.closest("figure"))
+      return;
+    const figure = document.createElement("figure");
+    figure.className = "mp-image-container";
+    figure.style.cssText = "margin: 1em auto; text-align: center; display: block;";
+    const clone = image.cloneNode(true);
+    figure.appendChild(clone);
+    const caption = document.createElement("figcaption");
+    caption.className = "mp-image-caption";
+    caption.textContent = alt;
+    caption.style.cssText = "text-align: center; color: #888; font-size: 0.9em; margin-top: 6px; display: block;";
+    figure.appendChild(caption);
+    (_a = image.parentNode) == null ? void 0 : _a.replaceChild(figure, image);
+  });
+}
+function processTables(container, settings) {
+  if (!settings.enableTableEnhancement)
+    return;
+  container.querySelectorAll("table").forEach((table) => {
+    var _a;
+    if (table.closest(".mp-table-wrapper"))
+      return;
+    const wrapper = document.createElement("div");
+    wrapper.className = "mp-table-wrapper";
+    wrapper.style.cssText = "width: 100%; overflow-x: auto; margin: 1em 0; -webkit-overflow-scrolling: touch;";
+    (_a = table.parentNode) == null ? void 0 : _a.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+  });
+}
+function processClosingCards(container, settings, rendered) {
+  if (settings.layoutEnhancements.enableAuthorCard && !rendered.has("author-card") && settings.authorCard.name) {
+    container.appendChild(renderAuthorCard(settings.authorCard));
+  }
+  if (settings.layoutEnhancements.enableSubscribeCard && !rendered.has("subscribe") && settings.subscribeCard.title) {
+    container.appendChild(renderSubscribe(settings.subscribeCard));
+  }
+}
+function applyLayoutEnhancements(container, settings) {
+  const rendered = processExplicitComponents(container, settings);
+  processAutoToc(container, settings.layoutEnhancements, rendered);
+  processTaskLists(container, settings.layoutEnhancements);
+  processImageCaptions(container, settings.layoutEnhancements);
+  processTables(container, settings.layoutEnhancements);
+  processClosingCards(container, settings, rendered);
+}
+
 // src/converter.ts
 var MPConverter = class {
   static initialize(app) {
@@ -16256,7 +16805,10 @@ var MPConverter = class {
     if (markdownContent) {
       this.processContainerBlocks(section, markdownContent);
     }
-    this.processElements(section);
+    if (settingsManager) {
+      applyLayoutEnhancements(section, settingsManager.getSettings());
+    }
+    this.processElements(section, (settingsManager == null ? void 0 : settingsManager.getSettings().layoutEnhancements.enableImageCaptions) !== false);
   }
   static insertFrontMatterCard(container, markdown) {
     const fmMatch = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---/);
@@ -16343,7 +16895,7 @@ var MPConverter = class {
       }
     });
   }
-  static processElements(container) {
+  static processElements(container, enableImageCaptions = true) {
     if (!container)
       return;
     container.querySelectorAll("li").forEach((li) => {
@@ -16446,15 +16998,17 @@ var MPConverter = class {
           if (alt) {
             newImg.alt = alt;
             figure.appendChild(newImg);
-            const figcaption = document.createElement("figcaption");
-            figcaption.textContent = alt;
-            figcaption.className = "mp-image-caption";
-            figcaption.style.textAlign = "center";
-            figcaption.style.color = "#888";
-            figcaption.style.fontSize = "0.9em";
-            figcaption.style.marginTop = "6px";
-            figcaption.style.display = "block";
-            figure.appendChild(figcaption);
+            if (enableImageCaptions) {
+              const figcaption = document.createElement("figcaption");
+              figcaption.textContent = alt;
+              figcaption.className = "mp-image-caption";
+              figcaption.style.textAlign = "center";
+              figcaption.style.color = "#888";
+              figcaption.style.fontSize = "0.9em";
+              figcaption.style.marginTop = "6px";
+              figcaption.style.display = "block";
+              figure.appendChild(figcaption);
+            }
           } else {
             figure.appendChild(newImg);
           }
@@ -17552,11 +18106,11 @@ var STYLE_CATEGORIES = {
 var CATEGORY_RULES = [
   { category: "\u6DF1\u8272", idPrefixes: ["dark", "xiaohu-ink", "xiaohu-midnight"], nameContains: ["\u6697\u591C"] },
   { category: "\u6559\u80B2", idPrefixes: ["parent-child", "teacher", "kindergarten", "blackboard"], nameContains: ["\u6559\u80B2\u7CFB\u5217", "\u9ED1\u677F"] },
-  { category: "\u6E10\u53D8", idPrefixes: ["focus-", "focus", "elegant", "xiaohu-focus", "xiaohu-elegant", "xiaohu-bytedance"], nameContains: ["\u805A\u7126\u7CFB\u5217", "\u7CBE\u81F4\u7CFB\u5217", "\u5B57\u8282\u8DF3\u52A8"] },
-  { category: "\u9192\u76EE", idPrefixes: ["bold-", "bold", "xiaohu-bold", "xiaohu-bauhaus", "xiaohu-sports", "modern-report", "playful", "adventure"], nameContains: ["\u9192\u76EE\u7CFB\u5217", "\u5305\u8C6A\u65AF", "\u8FD0\u52A8\u98CE", "\u73B0\u4EE3\u62A5\u544A", "\u6D3B\u6CFC", "\u63A2\u9669"] },
+  { category: "\u6E10\u53D8", idPrefixes: ["focus-", "focus", "elegant", "xiaohu-focus", "xiaohu-elegant", "xiaohu-bytedance", "apple-product", "ocean-calm"], nameContains: ["\u805A\u7126\u7CFB\u5217", "\u7CBE\u81F4\u7CFB\u5217", "\u5B57\u8282\u8DF3\u52A8", "\u82F9\u679C\u4EA7\u54C1", "\u6DF1\u6D77\u9759\u8C27"] },
+  { category: "\u9192\u76EE", idPrefixes: ["bold-", "bold", "xiaohu-bold", "xiaohu-bauhaus", "xiaohu-sports", "modern-report", "playful", "adventure", "cyber-neon"], nameContains: ["\u9192\u76EE\u7CFB\u5217", "\u5305\u8C6A\u65AF", "\u8FD0\u52A8\u98CE", "\u73B0\u4EE3\u62A5\u544A", "\u6D3B\u6CFC", "\u63A2\u9669", "\u8D5B\u535A\u9713\u8679"] },
   { category: "\u53E4\u5178", idPrefixes: ["xiaohu-chinese", "xiaohu-terracotta", "xiaohu-newspaper"], nameContains: ["\u4E2D\u5F0F\u7F8E\u5B66", "\u7ECF\u5178\u62A5\u7EB8"] },
   { category: "\u79D1\u6280", idPrefixes: ["xiaohu-github", "xiaohu-sspai", "gameui"], nameContains: ["GitHub", "\u5C11\u6570\u6D3E", "\u6E38\u620FUI"] },
-  { category: "\u6587\u827A", idPrefixes: ["xiaohu-lavender", "xiaohu-mint", "xiaohu-sunset", "xiaohu-coffee", "xiaohu-magazine", "warmth"], nameContains: ["\u6587\u827A\u7CFB\u5217", "\u85B0\u8863\u8349", "\u8584\u8377", "\u65E5\u843D", "\u5496\u5561", "\u65F6\u5C1A\u6742\u5FD7", "\u6E29\u6696"] },
+  { category: "\u6587\u827A", idPrefixes: ["xiaohu-lavender", "xiaohu-mint", "xiaohu-sunset", "xiaohu-coffee", "xiaohu-magazine", "warmth", "autumn-warm", "spring-fresh"], nameContains: ["\u6587\u827A\u7CFB\u5217", "\u85B0\u8863\u8349", "\u8584\u8377", "\u65E5\u843D", "\u5496\u5561", "\u65F6\u5C1A\u6742\u5FD7", "\u6E29\u6696", "\u79CB\u65E5\u6696\u5149", "\u6625\u65E5\u6E05\u65B0"] },
   { category: "\u6781\u7B80", idPrefixes: ["minimal", "xiaohu-minimal", "default", "scarlet", "academic", "zen-essence", "orange", "yeban", "brown", "xiaohu-wechat"], nameContains: ["\u6781\u7B80\u7CFB\u5217", "\u9ED8\u8BA4\u6A21\u677F", "\u5B66\u672F\u4E13\u4E1A", "\u7985\u610F\u6781\u7B80", "\u53F6\u4F34\u7CFB\u5217"] }
 ];
 function getThemeCategory(template) {
@@ -18659,10 +19213,10 @@ var TemplateManager = class {
           el.appendChild(after);
         }
         const styleKey = tag === "h4" || tag === "h5" || tag === "h6" ? "base" : tag;
-        const titleStyle = styles.title[styleKey];
-        el.setAttribute("style", `${titleStyle.base}; font-family: ${this.currentFont};`);
-        (_a = el.querySelector(".content")) == null ? void 0 : _a.setAttribute("style", titleStyle.content);
-        (_b = el.querySelector(".after")) == null ? void 0 : _b.setAttribute("style", titleStyle.after);
+        const titleStyle2 = styles.title[styleKey];
+        el.setAttribute("style", `${titleStyle2.base}; font-family: ${this.currentFont};`);
+        (_a = el.querySelector(".content")) == null ? void 0 : _a.setAttribute("style", titleStyle2.content);
+        (_b = el.querySelector(".after")) == null ? void 0 : _b.setAttribute("style", titleStyle2.after);
       });
     });
     element.querySelectorAll("p").forEach((el) => {
@@ -18819,6 +19373,32 @@ var DEFAULT_SETTINGS = {
   customHeader: "",
   customFooter: "",
   enableFrontMatterCard: false,
+  layoutEnhancements: {
+    enableAutoToc: false,
+    tocMinHeadings: 3,
+    enableTaskListEnhancement: true,
+    enableImageCaptions: true,
+    enableTableEnhancement: true,
+    enableAuthorCard: false,
+    enableSubscribeCard: false
+  },
+  authorCard: {
+    name: "",
+    role: "",
+    bio: "",
+    tags: "",
+    link: "",
+    avatar: ""
+  },
+  subscribeCard: {
+    label: "\u6301\u7EED\u66F4\u65B0",
+    title: "",
+    subtitle: "",
+    primary: "\u5173\u6CE8\u516C\u4F17\u53F7",
+    secondary: "\u6536\u85CF\u8FD9\u7BC7",
+    note: "",
+    qrcode: ""
+  },
   customFonts: [
     {
       value: 'Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, "PingFang SC", Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
@@ -18906,6 +19486,18 @@ var SettingsManager = class {
       savedData.customFonts = DEFAULT_SETTINGS.customFonts;
     }
     this.settings = Object.assign({}, DEFAULT_SETTINGS, savedData);
+    this.settings.layoutEnhancements = {
+      ...DEFAULT_SETTINGS.layoutEnhancements,
+      ...savedData.layoutEnhancements || {}
+    };
+    this.settings.authorCard = {
+      ...DEFAULT_SETTINGS.authorCard,
+      ...savedData.authorCard || {}
+    };
+    this.settings.subscribeCard = {
+      ...DEFAULT_SETTINGS.subscribeCard,
+      ...savedData.subscribeCard || {}
+    };
   }
   getAllTemplates() {
     return [...this.settings.templates, ...this.settings.customTemplates];
@@ -20580,6 +21172,7 @@ var MPSettingTab = class extends import_obsidian10.PluginSettingTab {
     this.createSection(containerEl, "\u57FA\u672C\u9009\u9879", (el) => this.renderBasicSettings(el));
     this.createSection(containerEl, "\u6A21\u677F\u9009\u9879", (el) => this.renderTemplateSettings(el));
     this.createSection(containerEl, "\u80CC\u666F\u9009\u9879", (el) => this.renderBackgroundSettings(el));
+    this.createSection(containerEl, "\u6392\u7248\u589E\u5F3A", (el) => this.renderLayoutEnhancementSettings(el));
     this.createSection(containerEl, "\u9AD8\u7EA7\u9009\u9879", (el) => this.renderAdvancedSettings(el));
   }
   renderBasicSettings(containerEl) {
@@ -20874,6 +21467,128 @@ var MPSettingTab = class extends import_obsidian10.PluginSettingTab {
   }
   // Add createSection helper if it was removed or not accessible, but it seems to be private in class
   // We need to render a new section for Advanced Settings
+  renderLayoutEnhancementSettings(containerEl) {
+    const settings = this.plugin.settingsManager.getSettings();
+    const layout = settings.layoutEnhancements;
+    new import_obsidian10.Setting(containerEl).setName("\u81EA\u52A8\u9605\u8BFB\u5BFC\u822A").setDesc("\u5F53\u6587\u7AE0 h2/h3 \u6570\u91CF\u8FBE\u5230\u9608\u503C\u65F6\uFF0C\u81EA\u52A8\u5728\u5F00\u5934\u63D2\u5165\u76EE\u5F55\u5361\u7247").addToggle((toggle) => toggle.setValue(layout.enableAutoToc).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableAutoToc: value
+        }
+      });
+    }));
+    new import_obsidian10.Setting(containerEl).setName("\u76EE\u5F55\u89E6\u53D1\u9608\u503C").setDesc("h2/h3 \u6570\u91CF\u8FBE\u5230\u8BE5\u503C\u624D\u81EA\u52A8\u751F\u6210\u9605\u8BFB\u5BFC\u822A").addText((text) => text.setPlaceholder("3").setValue(String(layout.tocMinHeadings || 3)).onChange(async (value) => {
+      const parsed = Math.max(1, parseInt(value, 10) || 3);
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          tocMinHeadings: parsed
+        }
+      });
+    }));
+    new import_obsidian10.Setting(containerEl).setName("\u4EFB\u52A1\u5217\u8868\u589E\u5F3A").setDesc("\u5C06 Markdown \u4EFB\u52A1\u5217\u8868\u8F6C\u6362\u4E3A\u516C\u4F17\u53F7\u68C0\u67E5\u6E05\u5355\u5361\u7247").addToggle((toggle) => toggle.setValue(layout.enableTaskListEnhancement).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableTaskListEnhancement: value
+        }
+      });
+    }));
+    new import_obsidian10.Setting(containerEl).setName("\u56FE\u7247 Alt \u56FE\u6CE8").setDesc("\u628A\u56FE\u7247 alt \u6587\u672C\u663E\u793A\u4E3A\u56FE\u6CE8").addToggle((toggle) => toggle.setValue(layout.enableImageCaptions).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableImageCaptions: value
+        }
+      });
+    }));
+    new import_obsidian10.Setting(containerEl).setName("\u8868\u683C\u6A2A\u5411\u4F18\u5316").setDesc("\u4E3A\u8868\u683C\u589E\u52A0\u79FB\u52A8\u7AEF\u6A2A\u5411\u6EDA\u52A8\u5BB9\u5668\uFF0C\u907F\u514D\u7A84\u5C4F\u6EA2\u51FA").addToggle((toggle) => toggle.setValue(layout.enableTableEnhancement).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableTableEnhancement: value
+        }
+      });
+    }));
+    containerEl.createEl("h4", { text: "\u4F5C\u8005\u5361" });
+    new import_obsidian10.Setting(containerEl).setName("\u81EA\u52A8\u63D2\u5165\u4F5C\u8005\u5361").setDesc("\u5728\u6587\u7AE0\u672B\u5C3E\u81EA\u52A8\u63D2\u5165\u4F5C\u8005\u4FE1\u606F\u5361").addToggle((toggle) => toggle.setValue(layout.enableAuthorCard).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableAuthorCard: value
+        }
+      });
+    }));
+    this.addAuthorTextSetting(containerEl, "\u540D\u79F0", "name");
+    this.addAuthorTextSetting(containerEl, "\u8EAB\u4EFD", "role");
+    this.addAuthorTextSetting(containerEl, "\u7B80\u4ECB", "bio", true);
+    this.addAuthorTextSetting(containerEl, "\u6807\u7B7E", "tags");
+    this.addAuthorTextSetting(containerEl, "\u94FE\u63A5", "link");
+    this.addAuthorTextSetting(containerEl, "\u5934\u50CF URL", "avatar");
+    containerEl.createEl("h4", { text: "\u5173\u6CE8\u5F15\u5BFC" });
+    new import_obsidian10.Setting(containerEl).setName("\u81EA\u52A8\u63D2\u5165\u5173\u6CE8\u5F15\u5BFC").setDesc("\u5728\u6587\u7AE0\u672B\u5C3E\u81EA\u52A8\u63D2\u5165\u5173\u6CE8/\u6536\u85CF\u5F15\u5BFC\u5361").addToggle((toggle) => toggle.setValue(layout.enableSubscribeCard).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableSubscribeCard: value
+        }
+      });
+    }));
+    this.addSubscribeTextSetting(containerEl, "\u6807\u7B7E", "label");
+    this.addSubscribeTextSetting(containerEl, "\u6807\u9898", "title");
+    this.addSubscribeTextSetting(containerEl, "\u526F\u6807\u9898", "subtitle", true);
+    this.addSubscribeTextSetting(containerEl, "\u4E3B\u884C\u52A8", "primary");
+    this.addSubscribeTextSetting(containerEl, "\u6B21\u884C\u52A8", "secondary");
+    this.addSubscribeTextSetting(containerEl, "\u8BF4\u660E", "note");
+    this.addSubscribeTextSetting(containerEl, "\u4E8C\u7EF4\u7801 URL", "qrcode");
+  }
+  addAuthorTextSetting(containerEl, name, key, multiline = false) {
+    const authorCard = this.plugin.settingsManager.getSettings().authorCard;
+    const setting = new import_obsidian10.Setting(containerEl).setName(name);
+    if (multiline) {
+      setting.addTextArea((text) => text.setValue(authorCard[key] || "").onChange(async (value) => {
+        await this.plugin.settingsManager.updateSettings({
+          authorCard: {
+            ...this.plugin.settingsManager.getSettings().authorCard,
+            [key]: value
+          }
+        });
+      }));
+      return;
+    }
+    setting.addText((text) => text.setValue(authorCard[key] || "").onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        authorCard: {
+          ...this.plugin.settingsManager.getSettings().authorCard,
+          [key]: value
+        }
+      });
+    }));
+  }
+  addSubscribeTextSetting(containerEl, name, key, multiline = false) {
+    const subscribeCard = this.plugin.settingsManager.getSettings().subscribeCard;
+    const setting = new import_obsidian10.Setting(containerEl).setName(name);
+    if (multiline) {
+      setting.addTextArea((text) => text.setValue(subscribeCard[key] || "").onChange(async (value) => {
+        await this.plugin.settingsManager.updateSettings({
+          subscribeCard: {
+            ...this.plugin.settingsManager.getSettings().subscribeCard,
+            [key]: value
+          }
+        });
+      }));
+      return;
+    }
+    setting.addText((text) => text.setValue(subscribeCard[key] || "").onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        subscribeCard: {
+          ...this.plugin.settingsManager.getSettings().subscribeCard,
+          [key]: value
+        }
+      });
+    }));
+  }
   renderAdvancedSettings(containerEl) {
     new import_obsidian10.Setting(containerEl).setName("\u81EA\u5B9A\u4E49\u5934\u90E8 (HTML)").setDesc("\u5728\u6587\u7AE0\u9876\u90E8\u63D2\u5165\u7684 HTML \u4EE3\u7801\uFF08\u5982\u5173\u6CE8\u5F15\u5BFC\uFF09").addTextArea((text) => text.setPlaceholder("<div>...</div>").setValue(this.plugin.settingsManager.getSettings().customHeader || "").onChange(async (value) => {
       await this.plugin.settingsManager.updateSettings({ customHeader: value });

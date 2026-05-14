@@ -1,0 +1,31 @@
+{
+    "id": "apple-product",
+    "name": "场景情绪 - 苹果产品",
+    "description": "克制、清透、产品发布感，适合产品介绍、工具评测与品牌内容",
+    "source": "mp-preview",
+    "styles": {
+        "container": "",
+        "accentColor": "#0a84ff",
+        "title": {
+            "h1": { "base": "margin: 28px 0 0; font-size: 2em; line-height: 1.42; text-align: center;", "content": "font-weight: 800; color: #111827;", "after": "display: block; width: 44px; height: 3px; background: #0a84ff; margin: 12px auto 0; border-radius: 999px;" },
+            "h2": { "base": "margin: 28px 0 10px; font-size: 1.36em; line-height: 1.5; padding-bottom: 8px;", "content": "font-weight: 760; color: #111827;", "after": "display: block; width: 32px; height: 2px; background: #0a84ff; margin-top: 8px; border-radius: 999px;" },
+            "h3": { "base": "margin: 22px 0 8px; font-size: 1.14em; line-height: 1.5;", "content": "font-weight: 700; color: #1f2937;", "after": "" },
+            "base": { "base": "margin: 16px 0 0; font-size: 1em; line-height: 1.5;", "content": "font-weight: 700; color: #1f2937;", "after": "" }
+        },
+        "paragraph": "line-height: 1.82; margin-top: 1em; color: #374151;",
+        "list": { "container": "padding-left: 28px; color: #374151;", "item": "color: #374151; line-height: 1.82;", "taskList": "list-style: none; color: #374151; line-height: 1.82;" },
+        "quote": "border-left: 4px solid #0a84ff; border-radius: 12px; padding: 14px 18px; background: #f5f7fb; margin: 1em 0; color: #4b5563;",
+        "code": {
+            "header": { "container": "margin-bottom: 1em; display: flex; gap: 6px;", "dot": "width: 12px; height: 12px; border-radius: 50%;", "colors": ["#ff5f57", "#ffbd2e", "#28c840"] },
+            "block": "color: #1f2937; background: #f8fafc; border-radius: 14px; border: 1px solid #e5e7eb; box-shadow: 0 10px 28px rgba(17,24,39,0.05); margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.7; white-space: pre-wrap;",
+            "inline": "background: #f1f5f9; padding: 2px 6px; border-radius: 5px; color: #0a84ff; font-size: 14px;",
+            "syntax": { "comment": "color: #6b7280;", "keyword": "color: #0a84ff;", "string": "color: #047857;", "function": "color: #7c3aed;", "number": "color: #2563eb;", "operator": "color: #0a84ff;", "class-name": "color: #7c3aed;", "variable": "color: #b45309;", "constant": "color: #2563eb;", "property": "color: #2563eb;", "punctuation": "color: #1f2937;", "boolean": "color: #2563eb;", "tag": "color: #047857;", "attr-name": "color: #7c3aed;", "attr-value": "color: #047857;", "regex": "color: #047857;", "selector": "color: #047857;" }
+        },
+        "image": "max-width: 100%; height: auto; margin: 1.2em auto; display: block; border-radius: 16px; box-shadow: 0 14px 34px rgba(17,24,39,0.08);",
+        "link": "color: #0a84ff; text-decoration: none; border-bottom: 1px solid rgba(10,132,255,0.35);",
+        "emphasis": { "strong": "font-weight: bold; color: #111827;", "em": "font-style: italic; color: #4b5563;", "del": "text-decoration: line-through; color: #9ca3af;" },
+        "table": { "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e5e7eb;", "header": "background: #f8fafc; font-weight: bold; color: #111827; border-bottom: 2px solid #e5e7eb;", "cell": "border: 1px solid #eef2f7; padding: 12px; color: #374151;" },
+        "hr": "border: none; height: 1px; background: #e5e7eb; margin: 24px 0;",
+        "footnote": { "ref": "color: #0a84ff; text-decoration: none; font-size: 0.9em;", "backref": "color: #0a84ff; text-decoration: none; font-size: 0.9em;" }
+    }
+}

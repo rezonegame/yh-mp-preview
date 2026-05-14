@@ -29,6 +29,11 @@ import zenEssenceSakuraTemplate from './zen-essence-sakura.json';
 import zenEssenceTealTemplate from './zen-essence-teal.json';
 import modernReportTemplate from './modern-report.json';
 import modernReportNavyTemplate from './modern-report-navy.json';
+import autumnWarmTemplate from './autumn-warm.json';
+import springFreshTemplate from './spring-fresh.json';
+import oceanCalmTemplate from './ocean-calm.json';
+import cyberNeonTemplate from './cyber-neon.json';
+import appleProductTemplate from './apple-product.json';
 
 // Minimal Series (8 themes)
 import minimalGoldTemplate from './minimal-gold.json';
@@ -103,6 +108,11 @@ export const templates = {
     'zen-essence-teal': zenEssenceTealTemplate,
     'modern-report': modernReportTemplate,
     'modern-report-navy': modernReportNavyTemplate,
+    'autumn-warm': autumnWarmTemplate,
+    'spring-fresh': springFreshTemplate,
+    'ocean-calm': oceanCalmTemplate,
+    'cyber-neon': cyberNeonTemplate,
+    'apple-product': appleProductTemplate,
 
     // Minimal Series
     'minimal-gold': minimalGoldTemplate,
