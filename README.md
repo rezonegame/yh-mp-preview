@@ -2,7 +2,7 @@
 
 一个面向微信公众号排版的 Obsidian 插件，可以把当前 Markdown 笔记转换为适合公众号后台粘贴的富文本样式，并在 Obsidian 内完成预览、微调、复制和长图导出。
 
-![version](https://img.shields.io/github/v/tag/yhwang/yh-mp-preview?color=blue&label=version&style=flat) ![license](https://img.shields.io/badge/license-MIT-green)
+![version](https://img.shields.io/github/v/tag/rezonegame/yh-mp-preview?color=blue&label=version&style=flat) ![license](https://img.shields.io/badge/license-MIT-green)
 
 ## 最新版本
 
@@ -40,13 +40,13 @@
 
 ## BRAT 安装
 
-本仓库适合通过 Obsidian BRAT 安装。在线仓库改名完成后，在 BRAT 中添加：
+本仓库适合通过 Obsidian BRAT 安装。在线仓库已改名完成，在 BRAT 中添加：
 
 ```text
-yhwang/yh-mp-preview
+rezonegame/yh-mp-preview
 ```
 
-如果你的 GitHub 仓库实际 owner 不是 `yhwang`，请在 BRAT 中使用真实仓库地址：
+如果你之后把仓库转移到其他 GitHub 账号或组织，请在 BRAT 中使用真实仓库地址：
 
 ```text
 <owner>/yh-mp-preview
