@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const XIAOHU_DIR = 'C:/Users/wudao/AppData/Local/Temp/xiaohu-wechat-format/themes';
-const OUTPUT_DIR = 'C:/github/mp-preview/src/templates/xiaohu';
+const OUTPUT_DIR = 'C:/github/yh-mp-preview/src/templates/xiaohu';
 
 function styleToCss(style) {
     if (!style) return '';

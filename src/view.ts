@@ -10,7 +10,7 @@ import { createCustomSelect, type SelectOption, type CustomSelectControl } from 
 import { handleImageAltEdit } from './ui/ImageAltModal';
 // @ts-ignore - html2canvas has no type declarations
 import html2canvas from 'html2canvas';
-export const VIEW_TYPE_MP = 'mp-preview';
+export const VIEW_TYPE_MP = 'yh-mp-preview';
 
 export class MPView extends ItemView {
     private previewEl: HTMLElement;
@@ -47,7 +47,7 @@ export class MPView extends ItemView {
     }
 
     getDisplayText() {
-        return '公众号预览';
+        return 'yh-mp-preview';
     }
 
     getIcon() {
@@ -365,7 +365,7 @@ export class MPView extends ItemView {
                     });
 
                     const link = document.createElement('a');
-                    link.download = `mp-preview-${Date.now()}.png`;
+                    link.download = `yh-mp-preview-${Date.now()}.png`;
                     link.href = canvas.toDataURL('image/png');
                     link.click();
 

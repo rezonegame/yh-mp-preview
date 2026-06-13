@@ -4,7 +4,7 @@
     "description": "简约现代的报告风格，高对比度黑白灰，配合精致的边框装饰，适合深度调研、周报总结、商业规划",
     "isPreset": true,
     "isVisible": true,
-    "source": "mp-preview",
+    "source": "yh-mp-preview",
     "styles": {
         "container": "background-color: #ffffff; padding: 20px; color: #1a1a1a",
         "title": {

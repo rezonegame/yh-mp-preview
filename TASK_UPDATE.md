@@ -1,4 +1,4 @@
-# Task Update: MP Preview Plugin
+# Task Update: yh-mp-preview Plugin
 
 ## Completed Features
 ### v1.3.4: Optimized Theme Selection UX

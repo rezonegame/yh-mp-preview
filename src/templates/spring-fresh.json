@@ -2,7 +2,7 @@
     "id": "spring-fresh",
     "name": "场景情绪 - 春日清新",
     "description": "清新自然，绿色调，适合旅行日记、自然主题与轻知识内容",
-    "source": "mp-preview",
+    "source": "yh-mp-preview",
     "styles": {
         "container": "",
         "accentColor": "#6b9b7a",

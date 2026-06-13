@@ -2,7 +2,7 @@
     "id": "apple-product",
     "name": "场景情绪 - 苹果产品",
     "description": "克制、清透、产品发布感，适合产品介绍、工具评测与品牌内容",
-    "source": "mp-preview",
+    "source": "yh-mp-preview",
     "styles": {
         "container": "",
         "accentColor": "#0a84ff",

@@ -1,6 +1,6 @@
 /**
  * xiaohu 主题转换器
- * 将 xiaohu-wechat-format 的主题格式转换为 mp-preview 格式
+ * 将 xiaohu-wechat-format 的主题格式转换为 yh-mp-preview 格式
  *
  * 使用方法: npx ts-node scripts/convert-xiaohu-themes.ts
  */
@@ -33,7 +33,7 @@ interface XiaohuTheme {
     };
 }
 
-// mp-preview 主题格式
+// yh-mp-preview 主题格式
 interface MpPreviewTemplate {
     id: string;
     name: string;

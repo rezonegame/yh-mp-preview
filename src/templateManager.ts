@@ -8,7 +8,7 @@ export interface Template {
     description: string;
     isPreset?: boolean;
     isVisible?: boolean;
-    source?: string;  // 来源标记：'mp-preview' | 'xiaohu'
+    source?: string;  // 来源标记：'yh-mp-preview' | 'xiaohu'
     styles: {
         container: string;
         title: {

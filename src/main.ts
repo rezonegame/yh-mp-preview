@@ -48,8 +48,8 @@ export default class MPPlugin extends Plugin {
 
     // 添加命令到命令面板
     this.addCommand({
-            id: 'open-mp-preview',
-            name: '打开公众号预览插件',
+            id: 'open-yh-mp-preview',
+            name: '打开 yh-mp-preview',
       callback: async () => {
         await this.activateView();
             }

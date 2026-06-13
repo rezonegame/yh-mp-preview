@@ -4,7 +4,7 @@
     "description": "专业学术论文风格，衬线体标题，蓝黑配色，严谨排版，适合论文摘要、前沿技术研究",
     "isPreset": true,
     "isVisible": true,
-    "source": "mp-preview",
+    "source": "yh-mp-preview",
     "styles": {
         "container": "background-color: #ffffff; padding: 24px",
         "title": {

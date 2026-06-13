@@ -45,7 +45,7 @@ export class DonateManager {
         
         // 使用 createEl 替代 innerHTML
         introEl.createSpan({ text: '你好，我是' });
-        introEl.createSpan({ text: '【夜半】', cls: 'mp-about-name' });
+        introEl.createSpan({ text: 'yhwang', cls: 'mp-about-name' });
         introEl.createSpan({ text: '，一名' });
         introEl.createSpan({ text: '全职写作与独立开发者', cls: 'mp-about-identity' });
         introEl.createSpan({ text: '。' });

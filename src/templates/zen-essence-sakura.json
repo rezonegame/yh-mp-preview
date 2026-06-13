@@ -4,7 +4,7 @@
     "description": "禅意极简风格的樱红变体",
     "isPreset": true,
     "isVisible": true,
-    "source": "mp-preview",
+    "source": "yh-mp-preview",
     "styles": {
         "container": "background-color: #fffafb; padding: 32px 24px",
         "title": {

@@ -4,7 +4,7 @@
     "description": "禅意极简风格的暗青变体",
     "isPreset": true,
     "isVisible": true,
-    "source": "mp-preview",
+    "source": "yh-mp-preview",
     "styles": {
         "container": "background-color: #f7fcfc",
         "title": {

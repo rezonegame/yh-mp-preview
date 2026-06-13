@@ -2,7 +2,7 @@
     "id": "cyber-neon",
     "name": "场景情绪 - 赛博霓虹",
     "description": "霓虹科技感，适合 AI、游戏、开发者与未来感内容",
-    "source": "mp-preview",
+    "source": "yh-mp-preview",
     "styles": {
         "container": "",
         "accentColor": "#00e5ff",

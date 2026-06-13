@@ -122,7 +122,7 @@ function convertTheme(xiaohu: XiaohuTheme, filename: string): MpTemplate {
 }
 
 const XIAOHU_DIR = 'C:/Users/wudao/AppData/Local/Temp/xiaohu-wechat-format/themes';
-const OUTPUT_DIR = 'C:/github/mp-preview/src/templates/xiaohu';
+const OUTPUT_DIR = 'C:/github/yh-mp-preview/src/templates/xiaohu';
 
 async function main() {
     const files = fs.readdirSync(XIAOHU_DIR).filter(f => f.endsWith('.json'));

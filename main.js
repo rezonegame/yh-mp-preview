@@ -9582,7 +9582,7 @@ var init_academic_pro = __esm({
       description: "\u4E13\u4E1A\u5B66\u672F\u8BBA\u6587\u98CE\u683C\uFF0C\u886C\u7EBF\u4F53\u6807\u9898\uFF0C\u84DD\u9ED1\u914D\u8272\uFF0C\u4E25\u8C28\u6392\u7248\uFF0C\u9002\u5408\u8BBA\u6587\u6458\u8981\u3001\u524D\u6CBF\u6280\u672F\u7814\u7A76",
       isPreset: true,
       isVisible: true,
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "background-color: #ffffff; padding: 24px",
         title: {
@@ -9660,7 +9660,7 @@ var init_academic_pro_slate = __esm({
       description: "\u4E13\u4E1A\u5B66\u672F\u98CE\u683C\u7684\u77F3\u677F\u7070\u989C\u8272\u53D8\u4F53",
       isPreset: true,
       isVisible: true,
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "background-color: #ffffff; padding: 24px",
         title: {
@@ -9691,7 +9691,7 @@ var init_academic_pro_forest = __esm({
       description: "\u4E13\u4E1A\u5B66\u672F\u98CE\u683C\u7684\u68EE\u7EFF\u989C\u8272\u53D8\u4F53",
       isPreset: true,
       isVisible: true,
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "background-color: #ffffff; padding: 24px",
         title: {
@@ -9722,7 +9722,7 @@ var init_zen_essence = __esm({
       description: "\u751A\u81F3\u6BD4\u6781\u7B80\u66F4\u7B80\uFF0C\u767D\u8336\u914D\u6DE1\u58A8\uFF0C\u7559\u767D\u827A\u672F\u611F\uFF0C\u9002\u5408\u751F\u6D3B\u65B9\u5F0F\u3001\u601D\u8003\u609F\u9053\u3001\u51A5\u60F3\u7597\u6108\u5185\u5BB9",
       isPreset: true,
       isVisible: true,
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "background-color: #ffffff; padding: 32px 24px; color: #555555",
         title: {
@@ -9800,7 +9800,7 @@ var init_zen_essence_sakura = __esm({
       description: "\u7985\u610F\u6781\u7B80\u98CE\u683C\u7684\u6A31\u7EA2\u53D8\u4F53",
       isPreset: true,
       isVisible: true,
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "background-color: #fffafb; padding: 32px 24px",
         title: {
@@ -9827,7 +9827,7 @@ var init_zen_essence_teal = __esm({
       description: "\u7985\u610F\u6781\u7B80\u98CE\u683C\u7684\u6697\u9752\u53D8\u4F53",
       isPreset: true,
       isVisible: true,
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "background-color: #f7fcfc",
         title: {
@@ -9854,7 +9854,7 @@ var init_modern_report = __esm({
       description: "\u7B80\u7EA6\u73B0\u4EE3\u7684\u62A5\u544A\u98CE\u683C\uFF0C\u9AD8\u5BF9\u6BD4\u5EA6\u9ED1\u767D\u7070\uFF0C\u914D\u5408\u7CBE\u81F4\u7684\u8FB9\u6846\u88C5\u9970\uFF0C\u9002\u5408\u6DF1\u5EA6\u8C03\u7814\u3001\u5468\u62A5\u603B\u7ED3\u3001\u5546\u4E1A\u89C4\u5212",
       isPreset: true,
       isVisible: true,
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "background-color: #ffffff; padding: 20px; color: #1a1a1a",
         title: {
@@ -9932,7 +9932,7 @@ var init_modern_report_navy = __esm({
       description: "\u73B0\u4EE3\u62A5\u544A\u98CE\u683C\u7684\u6DF1\u7A7A\u84DD\u53D8\u4F53",
       isPreset: true,
       isVisible: true,
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "background-color: #ffffff; padding: 20px",
         title: {
@@ -9957,7 +9957,7 @@ var init_autumn_warm = __esm({
       id: "autumn-warm",
       name: "\u573A\u666F\u60C5\u7EEA - \u79CB\u65E5\u6696\u5149",
       description: "\u6E29\u6696\u6CBB\u6108\uFF0C\u6A59\u8272\u8C03\uFF0C\u9002\u5408\u751F\u6D3B\u968F\u7B14\u3001\u60C5\u611F\u6545\u4E8B\u4E0E\u6587\u827A\u957F\u6587",
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "",
         accentColor: "#d97758",
@@ -9995,7 +9995,7 @@ var init_spring_fresh = __esm({
       id: "spring-fresh",
       name: "\u573A\u666F\u60C5\u7EEA - \u6625\u65E5\u6E05\u65B0",
       description: "\u6E05\u65B0\u81EA\u7136\uFF0C\u7EFF\u8272\u8C03\uFF0C\u9002\u5408\u65C5\u884C\u65E5\u8BB0\u3001\u81EA\u7136\u4E3B\u9898\u4E0E\u8F7B\u77E5\u8BC6\u5185\u5BB9",
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "",
         accentColor: "#6b9b7a",
@@ -10033,7 +10033,7 @@ var init_ocean_calm = __esm({
       id: "ocean-calm",
       name: "\u573A\u666F\u60C5\u7EEA - \u6DF1\u6D77\u9759\u8C27",
       description: "\u6DF1\u9083\u51B7\u9759\uFF0C\u84DD\u7070\u8272\u8C03\uFF0C\u9002\u5408\u6280\u672F\u6587\u7AE0\u3001\u5546\u4E1A\u5206\u6790\u4E0E\u4E13\u4E1A\u957F\u6587",
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "",
         accentColor: "#4a7c9b",
@@ -10071,7 +10071,7 @@ var init_cyber_neon = __esm({
       id: "cyber-neon",
       name: "\u573A\u666F\u60C5\u7EEA - \u8D5B\u535A\u9713\u8679",
       description: "\u9713\u8679\u79D1\u6280\u611F\uFF0C\u9002\u5408 AI\u3001\u6E38\u620F\u3001\u5F00\u53D1\u8005\u4E0E\u672A\u6765\u611F\u5185\u5BB9",
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "",
         accentColor: "#00e5ff",
@@ -10109,7 +10109,7 @@ var init_apple_product = __esm({
       id: "apple-product",
       name: "\u573A\u666F\u60C5\u7EEA - \u82F9\u679C\u4EA7\u54C1",
       description: "\u514B\u5236\u3001\u6E05\u900F\u3001\u4EA7\u54C1\u53D1\u5E03\u611F\uFF0C\u9002\u5408\u4EA7\u54C1\u4ECB\u7ECD\u3001\u5DE5\u5177\u8BC4\u6D4B\u4E0E\u54C1\u724C\u5185\u5BB9",
-      source: "mp-preview",
+      source: "yh-mp-preview",
       styles: {
         container: "",
         accentColor: "#0a84ff",
@@ -18597,7 +18597,7 @@ async function handleImageAltEdit(app, currentFile, img) {
 
 // src/view.ts
 var import_html2canvas = __toESM(require_html2canvas());
-var VIEW_TYPE_MP = "mp-preview";
+var VIEW_TYPE_MP = "yh-mp-preview";
 var MPView = class extends import_obsidian4.ItemView {
   constructor(leaf, templateManager, settingsManager) {
     super(leaf);
@@ -18613,7 +18613,7 @@ var MPView = class extends import_obsidian4.ItemView {
     return VIEW_TYPE_MP;
   }
   getDisplayText() {
-    return "\u516C\u4F17\u53F7\u9884\u89C8";
+    return "yh-mp-preview";
   }
   getIcon() {
     return "eye";
@@ -18845,7 +18845,7 @@ var MPView = class extends import_obsidian4.ItemView {
             // 提高清晰度
           });
           const link = document.createElement("a");
-          link.download = `mp-preview-${Date.now()}.png`;
+          link.download = `yh-mp-preview-${Date.now()}.png`;
           link.href = canvas.toDataURL("image/png");
           link.click();
           exportImageButton.setText("\u5BFC\u51FA\u6210\u529F");
@@ -19663,7 +19663,7 @@ var DonateManager = class {
       cls: "mp-about-intro"
     });
     introEl.createSpan({ text: "\u4F60\u597D\uFF0C\u6211\u662F" });
-    introEl.createSpan({ text: "\u3010\u591C\u534A\u3011", cls: "mp-about-name" });
+    introEl.createSpan({ text: "yhwang", cls: "mp-about-name" });
     introEl.createSpan({ text: "\uFF0C\u4E00\u540D" });
     introEl.createSpan({ text: "\u5168\u804C\u5199\u4F5C\u4E0E\u72EC\u7ACB\u5F00\u53D1\u8005", cls: "mp-about-identity" });
     introEl.createSpan({ text: "\u3002" });
@@ -21167,7 +21167,7 @@ var MPSettingTab = class extends import_obsidian10.PluginSettingTab {
     containerEl.empty();
     containerEl.addClass("mp-settings");
     const header = containerEl.createDiv({ cls: "mp-settings-header" });
-    header.createEl("h2", { text: "MP Preview", attr: { style: "display: inline-block; margin-bottom: 0;" } });
+    header.createEl("h2", { text: "yh-mp-preview", attr: { style: "display: inline-block; margin-bottom: 0;" } });
     header.createEl("span", { text: ` v${this.plugin.manifest.version}`, attr: { style: "font-size: 0.8em; color: var(--text-muted); margin-left: 10px;" } });
     this.createSection(containerEl, "\u57FA\u672C\u9009\u9879", (el) => this.renderBasicSettings(el));
     this.createSection(containerEl, "\u6A21\u677F\u9009\u9879", (el) => this.renderTemplateSettings(el));
@@ -21615,8 +21615,8 @@ var MPPlugin = class extends import_obsidian11.Plugin {
       this.activateView();
     });
     this.addCommand({
-      id: "open-mp-preview",
-      name: "\u6253\u5F00\u516C\u4F17\u53F7\u9884\u89C8\u63D2\u4EF6",
+      id: "open-yh-mp-preview",
+      name: "\u6253\u5F00 yh-mp-preview",
       callback: async () => {
         await this.activateView();
       }

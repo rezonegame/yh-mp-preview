@@ -4,7 +4,7 @@
     "description": "现代报告风格的深空蓝变体",
     "isPreset": true,
     "isVisible": true,
-    "source": "mp-preview",
+    "source": "yh-mp-preview",
     "styles": {
         "container": "background-color: #ffffff; padding: 20px",
         "title": {

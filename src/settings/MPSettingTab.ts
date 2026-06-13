@@ -53,7 +53,7 @@ export class MPSettingTab extends PluginSettingTab {
         containerEl.addClass('mp-settings');
 
         const header = containerEl.createDiv({ cls: 'mp-settings-header' });
-        header.createEl('h2', { text: 'MP Preview', attr: { style: 'display: inline-block; margin-bottom: 0;' } });
+        header.createEl('h2', { text: 'yh-mp-preview', attr: { style: 'display: inline-block; margin-bottom: 0;' } });
         header.createEl('span', { text: ` v${this.plugin.manifest.version}`, attr: { style: 'font-size: 0.8em; color: var(--text-muted); margin-left: 10px;' } });
 
         this.createSection(containerEl, '基本选项', el => this.renderBasicSettings(el));

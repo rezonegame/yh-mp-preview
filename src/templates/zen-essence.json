@@ -4,7 +4,7 @@
     "description": "甚至比极简更简，白茶配淡墨，留白艺术感，适合生活方式、思考悟道、冥想疗愈内容",
     "isPreset": true,
     "isVisible": true,
-    "source": "mp-preview",
+    "source": "yh-mp-preview",
     "styles": {
         "container": "background-color: #ffffff; padding: 32px 24px; color: #555555",
         "title": {
