@@ -15,3 +15,10 @@
 
 The v3 source and distribution are licensed under AGPL-3.0-or-later. These
 dependency notices do not replace the licenses included with their packages.
+
+## Quarantined legacy themes
+
+The 30 historical `xiaohu` import themes and their conversion scripts were
+removed from the v3.0.1 distribution because their upstream provenance has not
+been verified. They remain available only in the repository history until a
+separate provenance review authorizes a compliant reintroduction.

@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.1
+
+- Removed 30 historical `xiaohu` import themes and conversion scripts from the
+  distribution pending upstream provenance review.
+
 ## 3.0.0
 
 - Migrated the project license to AGPL-3.0-or-later while preserving the original MIT notice.

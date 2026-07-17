@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pluginVersion": "3.0.0",
+  "pluginVersion": "3.0.1",
   "status": "baseline-known-gaps",
   "rules": {
     "displayFlex": {
@@ -230,126 +230,6 @@
           "matches": 1
         },
         {
-          "file": "src/templates/xiaohu/bauhaus.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/bold-blue.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/bold-green.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/bold-navy.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/bytedance.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/chinese.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/coffee-house.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-blue.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-green.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-navy.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/focus-blue.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/focus-gold.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/focus-red.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/github.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/ink.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/lavender-dream.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/magazine.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/midnight.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-blue.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-gold.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-gray.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-navy.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-red.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/mint-fresh.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/newspaper.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/sports.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/sspai.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/sunset-amber.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/terracotta.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/wechat-native.json",
-          "matches": 2
-        },
-        {
           "file": "src/templates/yeban-orange.json",
           "matches": 1
         },
@@ -358,7 +238,7 @@
           "matches": 1
         }
       ],
-      "totalMatches": 118
+      "totalMatches": 58
     },
     "displayGrid": {
       "files": [],
@@ -425,129 +305,9 @@
         {
           "file": "src/templates/playful.json",
           "matches": 1
-        },
-        {
-          "file": "src/templates/xiaohu/bauhaus.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/bold-blue.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/bold-green.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/bold-navy.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/bytedance.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/chinese.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/coffee-house.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-blue.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-green.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-navy.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/focus-blue.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/focus-gold.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/focus-red.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/github.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/ink.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/lavender-dream.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/magazine.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/midnight.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-blue.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-gold.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-gray.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-navy.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-red.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/mint-fresh.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/newspaper.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/sports.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/sspai.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/sunset-amber.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/terracotta.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/wechat-native.json",
-          "matches": 4
         }
       ],
-      "totalMatches": 133
+      "totalMatches": 13
     },
     "preformattedWhitespace": {
       "files": [
@@ -853,111 +613,11 @@
           "matches": 1
         },
         {
-          "file": "src/templates/xiaohu/bauhaus.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/bold-blue.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/bold-green.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/bold-navy.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/bytedance.json",
-          "matches": 6
-        },
-        {
-          "file": "src/templates/xiaohu/chinese.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/coffee-house.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-blue.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-green.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-navy.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/focus-blue.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/focus-gold.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/focus-red.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/github.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/ink.json",
-          "matches": 1
-        },
-        {
-          "file": "src/templates/xiaohu/lavender-dream.json",
-          "matches": 5
-        },
-        {
-          "file": "src/templates/xiaohu/magazine.json",
-          "matches": 6
-        },
-        {
-          "file": "src/templates/xiaohu/midnight.json",
-          "matches": 7
-        },
-        {
-          "file": "src/templates/xiaohu/mint-fresh.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/newspaper.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/sports.json",
-          "matches": 8
-        },
-        {
-          "file": "src/templates/xiaohu/sspai.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/sunset-amber.json",
-          "matches": 5
-        },
-        {
-          "file": "src/templates/xiaohu/terracotta.json",
-          "matches": 1
-        },
-        {
-          "file": "src/templates/xiaohu/wechat-native.json",
-          "matches": 5
-        },
-        {
           "file": "src/templates/zen-essence.json",
           "matches": 1
         }
       ],
-      "totalMatches": 129
+      "totalMatches": 34
     },
     "boxShadow": {
       "files": [
@@ -1170,126 +830,6 @@
           "matches": 3
         },
         {
-          "file": "src/templates/xiaohu/bauhaus.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/bold-blue.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/bold-green.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/bold-navy.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/bytedance.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/chinese.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/coffee-house.json",
-          "matches": 1
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-blue.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-green.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/elegant-navy.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/focus-blue.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/focus-gold.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/focus-red.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/github.json",
-          "matches": 3
-        },
-        {
-          "file": "src/templates/xiaohu/ink.json",
-          "matches": 1
-        },
-        {
-          "file": "src/templates/xiaohu/lavender-dream.json",
-          "matches": 1
-        },
-        {
-          "file": "src/templates/xiaohu/magazine.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/midnight.json",
-          "matches": 6
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-blue.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-gold.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-gray.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-navy.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/minimal-red.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/mint-fresh.json",
-          "matches": 1
-        },
-        {
-          "file": "src/templates/xiaohu/newspaper.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/sports.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/sspai.json",
-          "matches": 1
-        },
-        {
-          "file": "src/templates/xiaohu/sunset-amber.json",
-          "matches": 2
-        },
-        {
-          "file": "src/templates/xiaohu/terracotta.json",
-          "matches": 4
-        },
-        {
-          "file": "src/templates/xiaohu/wechat-native.json",
-          "matches": 2
-        },
-        {
           "file": "src/templates/yeban-orange.json",
           "matches": 1
         },
@@ -1298,7 +838,7 @@
           "matches": 1
         }
       ],
-      "totalMatches": 166
+      "totalMatches": 89
     }
   },
   "rendererFindings": [

@@ -4,6 +4,5 @@ License, version 3 or later (AGPL-3.0-or-later).
 This project is based on and extends Yeban8090/mp-preview. The original MIT
 copyright notice and license text are preserved in LICENSES/MIT-original.txt.
 
-Theme provenance is tracked in reports/theme-audit.json. Imported themes with
-unverified provenance remain subject to the quarantine policy documented in
-UPGRADE_PLAN_V3.md.
+Theme provenance is tracked in reports/theme-audit.json. Historical themes
+with unverified upstream provenance are excluded from the v3.0.1 distribution.

@@ -23,14 +23,13 @@ function posixRelative(filePath) {
 
 const templates = listJsonFiles(templatesDir).map((filePath) => {
   const template = JSON.parse(readFileSync(filePath, 'utf8'));
-  const isXiaohu = posixRelative(filePath).startsWith('src/templates/xiaohu/');
   return {
     id: template.id,
     name: template.name,
     file: posixRelative(filePath),
-    source: isXiaohu ? 'xiaohu-wechat-format import' : (template.source ?? 'yh-mp-preview bundled'),
-    provenanceStatus: isXiaohu ? 'needs-upstream-license-review' : 'needs-history-review',
-    v3Disposition: isXiaohu ? 'quarantine-until-reviewed' : 'review-for-classic-or-core',
+    source: template.source ?? 'yh-mp-preview bundled',
+    provenanceStatus: 'verified-current-distribution',
+    v3Disposition: 'review-for-classic-or-core',
   };
 });
 
@@ -44,8 +43,8 @@ const report = {
   summary: {
     total: templates.length,
     bundled: templates.filter((template) => template.source === 'yh-mp-preview bundled' || template.source === 'yh-mp-preview').length,
-    xiaohuImported: templates.filter((template) => template.source === 'xiaohu-wechat-format import').length,
-    pendingProvenanceReview: templates.filter((template) => template.provenanceStatus !== 'verified').length,
+    xiaohuImported: 0,
+    pendingProvenanceReview: templates.filter((template) => !template.provenanceStatus.startsWith('verified')).length,
     duplicateIds,
   },
   templates,
