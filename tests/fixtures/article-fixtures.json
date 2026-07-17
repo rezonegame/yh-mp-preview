@@ -1,0 +1,22 @@
+[
+  {
+    "id": "article-basics",
+    "file": "article-basics.md",
+    "requiredMarkers": ["# ", "## ", "- ", "> "]
+  },
+  {
+    "id": "article-technical",
+    "file": "article-technical.md",
+    "requiredMarkers": ["```ts", "|", "[", "[^1]"]
+  },
+  {
+    "id": "article-media",
+    "file": "article-media.md",
+    "requiredMarkers": ["![", "- [ ]", "```toc", "```steps"]
+  },
+  {
+    "id": "article-callout",
+    "file": "article-callout.md",
+    "requiredMarkers": ["> [!note]", "~~", "`", "---"]
+  }
+]

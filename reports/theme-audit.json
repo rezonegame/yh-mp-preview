@@ -1,0 +1,765 @@
+{
+  "schemaVersion": 1,
+  "pluginVersion": "2.0.11",
+  "summary": {
+    "total": 94,
+    "bundled": 64,
+    "xiaohuImported": 30,
+    "pendingProvenanceReview": 94,
+    "duplicateIds": []
+  },
+  "templates": [
+    {
+      "id": "academic-pro-forest",
+      "name": "学术专业 - 森绿",
+      "file": "src/templates/academic-pro-forest.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "academic-pro-slate",
+      "name": "学术专业 - 石板灰",
+      "file": "src/templates/academic-pro-slate.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "academic-pro",
+      "name": "学术专业 - 墨韵",
+      "file": "src/templates/academic-pro.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "academic",
+      "name": "学术专业 - 经典",
+      "file": "src/templates/academic.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "adventure",
+      "name": "创意系列 - 探险",
+      "file": "src/templates/adventure.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "apple-product",
+      "name": "场景情绪 - 苹果产品",
+      "file": "src/templates/apple-product.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "autumn-warm",
+      "name": "场景情绪 - 秋日暖光",
+      "file": "src/templates/autumn-warm.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "blackboard",
+      "name": "创意系列 - 黑板",
+      "file": "src/templates/blackboard.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "bold-blue",
+      "name": "醒目系列 - 蓝色",
+      "file": "src/templates/bold-blue.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "bold-gold",
+      "name": "醒目系列 - 金色",
+      "file": "src/templates/bold-gold.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "bold-gray",
+      "name": "醒目系列 - 灰色",
+      "file": "src/templates/bold-gray.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "bold-green",
+      "name": "醒目系列 - 绿色",
+      "file": "src/templates/bold-green.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "bold-navy",
+      "name": "醒目系列 - 藏青",
+      "file": "src/templates/bold-navy.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "bold-orange",
+      "name": "醒目系列 - 橙色",
+      "file": "src/templates/bold-orange.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "bold-red",
+      "name": "醒目系列 - 红色",
+      "file": "src/templates/bold-red.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "bold-sky",
+      "name": "醒目系列 - 天蓝",
+      "file": "src/templates/bold-sky.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "brown",
+      "name": "叶伴系列 - 雅棕",
+      "file": "src/templates/brown.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "cyber-neon",
+      "name": "场景情绪 - 赛博霓虹",
+      "file": "src/templates/cyber-neon.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "dark",
+      "name": "暗夜系列 - 极简",
+      "file": "src/templates/dark.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "darkgreen",
+      "name": "暗夜系列 - 墨绿",
+      "file": "src/templates/darkgreen.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "default",
+      "name": "默认模板 - 标准",
+      "file": "src/templates/default.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "elegant-blue",
+      "name": "精致系列 - 蓝色",
+      "file": "src/templates/elegant-blue.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "elegant-gold",
+      "name": "精致系列 - 金色",
+      "file": "src/templates/elegant-gold.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "elegant-gray",
+      "name": "精致系列 - 灰色",
+      "file": "src/templates/elegant-gray.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "elegant-green",
+      "name": "精致系列 - 绿色",
+      "file": "src/templates/elegant-green.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "elegant-navy",
+      "name": "精致系列 - 藏青",
+      "file": "src/templates/elegant-navy.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "elegant-orange",
+      "name": "精致系列 - 橙色",
+      "file": "src/templates/elegant-orange.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "elegant-red",
+      "name": "精致系列 - 红色",
+      "file": "src/templates/elegant-red.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "elegant-sky",
+      "name": "精致系列 - 天蓝",
+      "file": "src/templates/elegant-sky.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "elegant",
+      "name": "精致系列 - 经典",
+      "file": "src/templates/elegant.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "focus-blue",
+      "name": "聚焦系列 - 蓝色",
+      "file": "src/templates/focus-blue.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "focus-gold",
+      "name": "聚焦系列 - 金色",
+      "file": "src/templates/focus-gold.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "focus-gray",
+      "name": "聚焦系列 - 灰色",
+      "file": "src/templates/focus-gray.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "focus-green",
+      "name": "聚焦系列 - 绿色",
+      "file": "src/templates/focus-green.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "focus-navy",
+      "name": "聚焦系列 - 藏青",
+      "file": "src/templates/focus-navy.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "focus-orange",
+      "name": "聚焦系列 - 橙色",
+      "file": "src/templates/focus-orange.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "focus-red",
+      "name": "聚焦系列 - 红色",
+      "file": "src/templates/focus-red.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "focus-sky",
+      "name": "聚焦系列 - 天蓝",
+      "file": "src/templates/focus-sky.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "gameui",
+      "name": "创意系列 - 游戏UI",
+      "file": "src/templates/gameui.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "kindergarten",
+      "name": "教育系列 - 幼儿园",
+      "file": "src/templates/kindergarten.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "minimal-blue",
+      "name": "极简系列 - 蓝色",
+      "file": "src/templates/minimal-blue.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "minimal-gold",
+      "name": "极简系列 - 金色",
+      "file": "src/templates/minimal-gold.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "minimal-gray",
+      "name": "极简系列 - 灰色",
+      "file": "src/templates/minimal-gray.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "minimal-green",
+      "name": "极简系列 - 绿色",
+      "file": "src/templates/minimal-green.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "minimal-navy",
+      "name": "极简系列 - 藏青",
+      "file": "src/templates/minimal-navy.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "minimal-orange",
+      "name": "极简系列 - 橙色",
+      "file": "src/templates/minimal-orange.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "minimal-red",
+      "name": "极简系列 - 红色",
+      "file": "src/templates/minimal-red.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "minimal-sky",
+      "name": "极简系列 - 天蓝",
+      "file": "src/templates/minimal-sky.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "minimal",
+      "name": "极简系列 - 标准",
+      "file": "src/templates/minimal.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "modern-report-navy",
+      "name": "现代报告 - 深空蓝",
+      "file": "src/templates/modern-report-navy.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "modern-report",
+      "name": "现代报告 - 黑白",
+      "file": "src/templates/modern-report.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "ocean-calm",
+      "name": "场景情绪 - 深海静谧",
+      "file": "src/templates/ocean-calm.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "orange",
+      "name": "极简系列 - 橙色",
+      "file": "src/templates/orange.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "parent-child",
+      "name": "教育系列 - 亲子",
+      "file": "src/templates/parent-child.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "playful",
+      "name": "创意系列 - 活泼",
+      "file": "src/templates/playful.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "scarlet",
+      "name": "极简系列 - 绯红",
+      "file": "src/templates/scarlet.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "spring-fresh",
+      "name": "场景情绪 - 春日清新",
+      "file": "src/templates/spring-fresh.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "teacher",
+      "name": "教育系列 - 教师",
+      "file": "src/templates/teacher.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "warmth",
+      "name": "创意系列 - 温暖",
+      "file": "src/templates/warmth.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "xiaohu-bauhaus",
+      "name": "包豪斯 - 复古",
+      "file": "src/templates/xiaohu/bauhaus.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-bold-blue",
+      "name": "醒目系列 - 科技蓝",
+      "file": "src/templates/xiaohu/bold-blue.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-bold-green",
+      "name": "醒目系列 - 活力绿",
+      "file": "src/templates/xiaohu/bold-green.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-bold-navy",
+      "name": "醒目系列 - 深邃蓝",
+      "file": "src/templates/xiaohu/bold-navy.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-bytedance",
+      "name": "字节跳动 - 标准",
+      "file": "src/templates/xiaohu/bytedance.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-chinese",
+      "name": "中式美学 - 瓷青",
+      "file": "src/templates/xiaohu/chinese.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-coffee-house",
+      "name": "文艺系列 - 咖啡",
+      "file": "src/templates/xiaohu/coffee-house.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-elegant-blue",
+      "name": "精致系列 - 蓝色",
+      "file": "src/templates/xiaohu/elegant-blue.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-elegant-green",
+      "name": "精致系列 - 绿色",
+      "file": "src/templates/xiaohu/elegant-green.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-elegant-navy",
+      "name": "精致系列 - 藏青",
+      "file": "src/templates/xiaohu/elegant-navy.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-focus-blue",
+      "name": "聚焦系列 - 蓝色",
+      "file": "src/templates/xiaohu/focus-blue.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-focus-gold",
+      "name": "聚焦系列 - 金色",
+      "file": "src/templates/xiaohu/focus-gold.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-focus-red",
+      "name": "聚焦系列 - 红色",
+      "file": "src/templates/xiaohu/focus-red.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-github",
+      "name": "GitHub - 简洁",
+      "file": "src/templates/xiaohu/github.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-ink",
+      "name": "暗夜系列 - 墨韵",
+      "file": "src/templates/xiaohu/ink.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-lavender-dream",
+      "name": "文艺系列 - 薰衣草",
+      "file": "src/templates/xiaohu/lavender-dream.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-magazine",
+      "name": "时尚杂志 - 封面",
+      "file": "src/templates/xiaohu/magazine.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-midnight",
+      "name": "暗夜系列 - 午夜",
+      "file": "src/templates/xiaohu/midnight.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-minimal-blue",
+      "name": "极简系列 - 经典蓝",
+      "file": "src/templates/xiaohu/minimal-blue.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-minimal-gold",
+      "name": "极简系列 - 雅金",
+      "file": "src/templates/xiaohu/minimal-gold.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-minimal-gray",
+      "name": "极简系列 - 铅灰",
+      "file": "src/templates/xiaohu/minimal-gray.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-minimal-navy",
+      "name": "极简系列 - 藏青",
+      "file": "src/templates/xiaohu/minimal-navy.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-minimal-red",
+      "name": "极简系列 - 胭脂",
+      "file": "src/templates/xiaohu/minimal-red.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-mint-fresh",
+      "name": "文艺系列 - 薄荷",
+      "file": "src/templates/xiaohu/mint-fresh.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-newspaper",
+      "name": "经典报纸 - 纽约时报",
+      "file": "src/templates/xiaohu/newspaper.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-sports",
+      "name": "运动风 - 动感",
+      "file": "src/templates/xiaohu/sports.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-sspai",
+      "name": "少数派 - 经典",
+      "file": "src/templates/xiaohu/sspai.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-sunset-amber",
+      "name": "文艺系列 - 日落",
+      "file": "src/templates/xiaohu/sunset-amber.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-terracotta",
+      "name": "中式美学 - 赤陶",
+      "file": "src/templates/xiaohu/terracotta.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "xiaohu-wechat-native",
+      "name": "微信原生 (xiaohu)",
+      "file": "src/templates/xiaohu/wechat-native.json",
+      "source": "xiaohu-wechat-format import",
+      "provenanceStatus": "needs-upstream-license-review",
+      "v3Disposition": "quarantine-until-reviewed"
+    },
+    {
+      "id": "yeban-orange",
+      "name": "叶伴系列 - 活力",
+      "file": "src/templates/yeban-orange.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "yeban",
+      "name": "叶伴系列 - 经典",
+      "file": "src/templates/yeban.json",
+      "source": "yh-mp-preview bundled",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "zen-essence-sakura",
+      "name": "禅意极简 - 樱红",
+      "file": "src/templates/zen-essence-sakura.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "zen-essence-teal",
+      "name": "禅意极简 - 暗青",
+      "file": "src/templates/zen-essence-teal.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    },
+    {
+      "id": "zen-essence",
+      "name": "禅意极简 - 留白",
+      "file": "src/templates/zen-essence.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "needs-history-review",
+      "v3Disposition": "review-for-classic-or-core"
+    }
+  ]
+}

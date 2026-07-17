@@ -1,0 +1,1324 @@
+{
+  "schemaVersion": 1,
+  "pluginVersion": "2.0.11",
+  "status": "baseline-known-gaps",
+  "rules": {
+    "displayFlex": {
+      "files": [
+        {
+          "file": "src/templates/academic-pro.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/academic.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/adventure.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/apple-product.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/autumn-warm.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/blackboard.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-blue.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-gold.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-gray.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-green.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-navy.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-red.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-sky.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/brown.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/cyber-neon.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/dark.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/darkgreen.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/default.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-blue.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-gold.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-gray.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-green.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-navy.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-red.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-sky.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-blue.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-gold.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-gray.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-green.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-navy.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-red.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-sky.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/gameui.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/kindergarten.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-blue.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-gold.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-gray.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-green.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-navy.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-red.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-sky.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/modern-report.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/ocean-calm.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/parent-child.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/playful.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/scarlet.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/spring-fresh.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/teacher.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/warmth.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/xiaohu/bauhaus.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/bold-blue.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/bold-green.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/bold-navy.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/bytedance.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/chinese.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/coffee-house.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-blue.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-green.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-navy.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/focus-blue.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/focus-gold.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/focus-red.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/github.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/ink.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/lavender-dream.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/magazine.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/midnight.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-blue.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-gold.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-gray.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-navy.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-red.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/mint-fresh.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/newspaper.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/sports.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/sspai.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/sunset-amber.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/terracotta.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/wechat-native.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/yeban-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/yeban.json",
+          "matches": 1
+        }
+      ],
+      "totalMatches": 118
+    },
+    "displayGrid": {
+      "files": [],
+      "totalMatches": 0
+    },
+    "fixedOrStickyPosition": {
+      "files": [],
+      "totalMatches": 0
+    },
+    "absolutePosition": {
+      "files": [],
+      "totalMatches": 0
+    },
+    "overflow": {
+      "files": [
+        {
+          "file": "src/templates/academic-pro.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-blue.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-gold.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-gray.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-green.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-navy.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-red.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-sky.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/kindergarten.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/modern-report.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/parent-child.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/playful.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/xiaohu/bauhaus.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/bold-blue.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/bold-green.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/bold-navy.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/bytedance.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/chinese.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/coffee-house.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-blue.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-green.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-navy.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/focus-blue.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/focus-gold.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/focus-red.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/github.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/ink.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/lavender-dream.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/magazine.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/midnight.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-blue.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-gold.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-gray.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-navy.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-red.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/mint-fresh.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/newspaper.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/sports.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/sspai.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/sunset-amber.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/terracotta.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/wechat-native.json",
+          "matches": 4
+        }
+      ],
+      "totalMatches": 133
+    },
+    "preformattedWhitespace": {
+      "files": [
+        {
+          "file": "src/templates/academic.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/adventure.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/apple-product.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/autumn-warm.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/blackboard.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-blue.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-gold.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-gray.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-green.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-navy.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-red.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/bold-sky.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/brown.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/cyber-neon.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/dark.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/darkgreen.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/default.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-blue.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-gold.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-gray.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-green.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-navy.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-red.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-sky.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-blue.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-gold.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-gray.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-green.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-navy.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-red.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-sky.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/gameui.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/kindergarten.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-blue.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-gold.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-gray.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-green.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-navy.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-red.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-sky.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/ocean-calm.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/parent-child.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/playful.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/scarlet.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/spring-fresh.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/teacher.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/warmth.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/yeban-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/yeban.json",
+          "matches": 1
+        }
+      ],
+      "totalMatches": 56
+    },
+    "cssVariables": {
+      "files": [],
+      "totalMatches": 0
+    },
+    "gradients": {
+      "files": [
+        {
+          "file": "src/templates/adventure.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/autumn-warm.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/blackboard.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/cyber-neon.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/elegant-blue.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-gold.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-gray.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-green.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-navy.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-orange.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-red.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-sky.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/kindergarten.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/ocean-calm.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/parent-child.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/spring-fresh.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/warmth.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/xiaohu/bauhaus.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/bold-blue.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/bold-green.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/bold-navy.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/bytedance.json",
+          "matches": 6
+        },
+        {
+          "file": "src/templates/xiaohu/chinese.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/coffee-house.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-blue.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-green.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-navy.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/focus-blue.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/focus-gold.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/focus-red.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/github.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/ink.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/xiaohu/lavender-dream.json",
+          "matches": 5
+        },
+        {
+          "file": "src/templates/xiaohu/magazine.json",
+          "matches": 6
+        },
+        {
+          "file": "src/templates/xiaohu/midnight.json",
+          "matches": 7
+        },
+        {
+          "file": "src/templates/xiaohu/mint-fresh.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/newspaper.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/sports.json",
+          "matches": 8
+        },
+        {
+          "file": "src/templates/xiaohu/sspai.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/sunset-amber.json",
+          "matches": 5
+        },
+        {
+          "file": "src/templates/xiaohu/terracotta.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/xiaohu/wechat-native.json",
+          "matches": 5
+        },
+        {
+          "file": "src/templates/zen-essence.json",
+          "matches": 1
+        }
+      ],
+      "totalMatches": 129
+    },
+    "boxShadow": {
+      "files": [
+        {
+          "file": "src/templates/academic-pro.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/academic.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/adventure.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/apple-product.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/autumn-warm.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/bold-blue.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/bold-gold.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/bold-gray.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/bold-green.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/bold-navy.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/bold-orange.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/bold-red.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/bold-sky.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/brown.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/cyber-neon.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/dark.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/darkgreen.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/default.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/elegant-blue.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-gold.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-gray.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-green.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-navy.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-orange.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-red.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant-sky.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/elegant.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-blue.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-gold.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-gray.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-green.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-navy.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-red.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/focus-sky.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/gameui.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/kindergarten.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/minimal-blue.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-gold.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-gray.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-green.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-navy.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-red.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal-sky.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/minimal.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/ocean-calm.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/parent-child.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/playful.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/scarlet.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/spring-fresh.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/bauhaus.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/bold-blue.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/bold-green.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/bold-navy.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/bytedance.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/chinese.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/coffee-house.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-blue.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-green.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/elegant-navy.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/focus-blue.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/focus-gold.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/focus-red.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/github.json",
+          "matches": 3
+        },
+        {
+          "file": "src/templates/xiaohu/ink.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/xiaohu/lavender-dream.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/xiaohu/magazine.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/midnight.json",
+          "matches": 6
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-blue.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-gold.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-gray.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-navy.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/minimal-red.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/mint-fresh.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/xiaohu/newspaper.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/sports.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/sspai.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/xiaohu/sunset-amber.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/xiaohu/terracotta.json",
+          "matches": 4
+        },
+        {
+          "file": "src/templates/xiaohu/wechat-native.json",
+          "matches": 2
+        },
+        {
+          "file": "src/templates/yeban-orange.json",
+          "matches": 1
+        },
+        {
+          "file": "src/templates/yeban.json",
+          "matches": 1
+        }
+      ],
+      "totalMatches": 166
+    }
+  },
+  "rendererFindings": [
+    {
+      "file": "src/layoutEnhancer.ts",
+      "divTemplates": 28,
+      "flexDeclarations": 9,
+      "overflowDeclarations": 1
+    },
+    {
+      "file": "src/converter.ts",
+      "divTemplates": 0,
+      "flexDeclarations": 1,
+      "overflowDeclarations": 0
+    },
+    {
+      "file": "src/containers/GalleryRenderer.ts",
+      "divTemplates": 0,
+      "flexDeclarations": 1,
+      "overflowDeclarations": 2
+    }
+  ]
+}
