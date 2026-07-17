@@ -1,7 +1,10 @@
 import { Template } from '../templateManager';
 import { Background } from '../backgroundManager';
+import { migrateSettingsForV3, type V3SettingsMetadata, V3_SETTINGS_SCHEMA_VERSION } from '../core/migration/settingsMigration';
 
 export interface MPSettings {
+    schemaVersion: number;
+    v3: V3SettingsMetadata;
     backgroundId: string;
     templateId: string;
     fontFamily: string;
@@ -43,6 +46,12 @@ export interface MPSettings {
 }
 
 const DEFAULT_SETTINGS: MPSettings = {
+    schemaVersion: V3_SETTINGS_SCHEMA_VERSION,
+    v3: {
+        enabled: false,
+        selectedRecipeId: 'legacy-compatible',
+        migrationSource: 'v2',
+    },
     backgroundId: 'default',
     templateId: 'default',
     fontFamily: '-apple-system',
@@ -107,6 +116,7 @@ export class SettingsManager {
         if (!savedData) {
             savedData = {};
         }
+        savedData = migrateSettingsForV3(savedData);
 
         // 总是从代码中加载最新的预设模板
         const { templates } = await import('../templates');

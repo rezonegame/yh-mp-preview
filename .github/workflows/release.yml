@@ -39,5 +39,7 @@ jobs:
             styles.css
             LICENSE
             NOTICE
+            THIRD_PARTY_NOTICES.md
+            LICENSES/MIT-original.txt
           draft: false
           prerelease: false

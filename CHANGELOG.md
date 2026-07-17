@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.0.0
+
+- Migrated the project license to AGPL-3.0-or-later while preserving the original MIT notice.
+- Added ArticleModel, local LayoutPlan, ThemeManifest, legacy theme adapter and theme registry.
+- Added non-destructive v2 settings migration metadata and a v3 copy preparation pipeline.
+- Added a WeChat HTML compatibility validator that reports unsafe legacy structures during copy.
+- Added third-party license notices and theme provenance references for the v3 distribution.
+
 ## 2.0.11
 
 - Added reproducible version synchronization and release metadata checks.

@@ -17972,26 +17972,159 @@ var BrowserPangu = class extends Pangu {
 };
 var pangu2 = new BrowserPangu();
 
+// src/core/article/articleModel.ts
+var emptyStats = () => ({
+  headings: 0,
+  paragraphs: 0,
+  listItems: 0,
+  quotes: 0,
+  codeBlocks: 0,
+  tables: 0,
+  images: 0,
+  links: 0,
+  components: 0
+});
+function normalizedText(element) {
+  return (element.textContent || "").replace(/\s+/g, " ").trim();
+}
+function addNode(nodes, stats, kind, element, extra = {}) {
+  stats[`${kind === "listItem" ? "listItems" : `${kind}s`}`]++;
+  nodes.push({
+    id: `node-${nodes.length + 1}`,
+    kind,
+    text: normalizedText(element),
+    ...extra
+  });
+}
+function createArticleModel(root) {
+  const nodes = [];
+  const stats = emptyStats();
+  root.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((element) => {
+    const level = Number(element.tagName.slice(1));
+    addNode(nodes, stats, "heading", element, { level });
+  });
+  root.querySelectorAll("p").forEach((element) => addNode(nodes, stats, "paragraph", element));
+  root.querySelectorAll("li").forEach((element) => addNode(nodes, stats, "listItem", element));
+  root.querySelectorAll("blockquote").forEach((element) => addNode(nodes, stats, "quote", element));
+  root.querySelectorAll("pre").forEach((element) => addNode(nodes, stats, "codeBlock", element));
+  root.querySelectorAll("table").forEach((element) => addNode(nodes, stats, "table", element));
+  root.querySelectorAll("img").forEach((element) => addNode(nodes, stats, "image", element, { src: element.src }));
+  root.querySelectorAll("a[href]").forEach((element) => addNode(nodes, stats, "link", element, { href: element.href }));
+  root.querySelectorAll("[data-mp-layout], [data-container]").forEach((element) => addNode(nodes, stats, "component", element));
+  return { schemaVersion: 1, nodes, stats };
+}
+
+// src/core/layout/localLayoutPlanner.ts
+function sectionFromHeading(heading, index) {
+  return {
+    id: `section-${index + 1}`,
+    headingNodeId: heading.id,
+    title: heading.text || `Section ${index + 1}`,
+    componentIds: []
+  };
+}
+function createLocalLayoutPlan(article, options) {
+  const headings = article.nodes.filter((node) => node.kind === "heading");
+  const sections = headings.map(sectionFromHeading);
+  if (sections.length === 0) {
+    sections.push({ id: "section-1", title: "\u6B63\u6587", componentIds: [] });
+  }
+  return {
+    schemaVersion: 1,
+    articleType: options.articleType || "general-article",
+    themeId: options.themeId,
+    recipeId: options.recipeId || "legacy-compatible",
+    sections,
+    options: {
+      includeToc: options.includeToc === true,
+      includeEnding: options.includeEnding === true
+    }
+  };
+}
+
+// src/core/validation/wechatHtmlValidator.ts
+var forbiddenTags = /* @__PURE__ */ new Set(["SCRIPT", "STYLE", "IFRAME", "FORM", "INPUT", "BUTTON", "TEXTAREA", "SELECT"]);
+var discouragedStyles = [
+  ["display-flex", /display\s*:\s*(?:inline-)?flex\b/i],
+  ["display-grid", /display\s*:\s*grid\b/i],
+  ["fixed-position", /position\s*:\s*(?:fixed|sticky)\b/i],
+  ["absolute-position", /position\s*:\s*absolute\b/i],
+  ["overflow", /overflow(?:-[xy])?\s*:/i],
+  ["css-variable", /var\s*\(/i]
+];
+function pathFor(element) {
+  const parts = [];
+  let current = element;
+  while (current && parts.length < 4) {
+    parts.unshift(current.tagName.toLowerCase());
+    current = current.parentElement;
+  }
+  return parts.join(" > ");
+}
+function validateWechatHtml(root) {
+  const issues = [];
+  const add = (severity, code, message, element) => {
+    issues.push({ severity, code, message, path: pathFor(element) });
+  };
+  root.querySelectorAll("*").forEach((element) => {
+    if (forbiddenTags.has(element.tagName)) {
+      add("error", "forbidden-tag", `\u4E0D\u5141\u8BB8\u7684\u6807\u7B7E\uFF1A${element.tagName.toLowerCase()}`, element);
+    }
+    Array.from(element.attributes).forEach((attribute) => {
+      if (attribute.name.startsWith("on")) {
+        add("error", "event-attribute", `\u4E0D\u5141\u8BB8\u7684\u4E8B\u4EF6\u5C5E\u6027\uFF1A${attribute.name}`, element);
+      }
+      if (attribute.name === "class" || attribute.name === "id" || attribute.name.startsWith("data-")) {
+        add("warning", "transient-attribute", `\u590D\u5236\u65F6\u5C06\u79FB\u9664\u5C5E\u6027\uFF1A${attribute.name}`, element);
+      }
+    });
+    const style = element.getAttribute("style") || "";
+    discouragedStyles.forEach(([code, pattern]) => {
+      if (pattern.test(style)) {
+        add("warning", code, `\u5FAE\u4FE1\u516C\u4F17\u53F7\u517C\u5BB9\u6027\u98CE\u9669\uFF1A${code}`, element);
+      }
+    });
+  });
+  return {
+    issues,
+    errors: issues.filter((issue) => issue.severity === "error").length,
+    warnings: issues.filter((issue) => issue.severity === "warning").length
+  };
+}
+
+// src/core/render/legacyWechatPipeline.ts
+var removableTags = /* @__PURE__ */ new Set(["SCRIPT", "STYLE", "IFRAME", "FORM", "INPUT", "BUTTON", "TEXTAREA", "SELECT"]);
+function removeTransientAttributes(root) {
+  root.querySelectorAll("*").forEach((element) => {
+    Array.from(element.attributes).forEach((attribute) => {
+      if (attribute.name === "class" || attribute.name === "id" || attribute.name.startsWith("data-") || attribute.name.startsWith("on")) {
+        element.removeAttribute(attribute.name);
+      }
+    });
+    if (removableTags.has(element.tagName)) {
+      element.remove();
+    }
+  });
+}
+function prepareLegacyWechatFragment(element, options = {}) {
+  const clone = element.cloneNode(true);
+  const article = createArticleModel(clone);
+  const plan = createLocalLayoutPlan(article, {
+    themeId: options.themeId || "legacy-active",
+    recipeId: options.recipeId || "legacy-compatible"
+  });
+  removeTransientAttributes(clone);
+  const validation = validateWechatHtml(clone);
+  return {
+    article,
+    plan,
+    html: new XMLSerializer().serializeToString(clone),
+    validation
+  };
+}
+
 // src/copyManager.ts
 var CopyManager = class {
-  static cleanupHtml(element) {
-    const clone = element.cloneNode(true);
-    clone.querySelectorAll("*").forEach((el) => {
-      Array.from(el.attributes).forEach((attr) => {
-        if (attr.name.startsWith("data-")) {
-          el.removeAttribute(attr.name);
-        }
-      });
-    });
-    clone.querySelectorAll("*").forEach((el) => {
-      el.removeAttribute("class");
-    });
-    clone.querySelectorAll("*").forEach((el) => {
-      el.removeAttribute("id");
-    });
-    const serializer = new XMLSerializer();
-    return serializer.serializeToString(clone);
-  }
   static async processImagesForExport(container) {
     return this.processImages(container);
   }
@@ -18016,7 +18149,7 @@ var CopyManager = class {
       }
     }
   }
-  static async copyToClipboard(element) {
+  static async copyToClipboard(element, options = {}) {
     try {
       const clone = element.cloneNode(true);
       await this.processImages(clone);
@@ -18024,7 +18157,11 @@ var CopyManager = class {
       if (!contentSection) {
         throw new Error("\u627E\u4E0D\u5230\u5185\u5BB9\u533A\u57DF");
       }
-      let cleanHtml = this.cleanupHtml(contentSection);
+      const preparation = prepareLegacyWechatFragment(contentSection, options);
+      let cleanHtml = preparation.html;
+      if (preparation.validation.errors > 0 || preparation.validation.warnings > 0) {
+        console.warn("WeChat compatibility report", preparation.validation);
+      }
       try {
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = cleanHtml;
@@ -18046,8 +18183,10 @@ var CopyManager = class {
       });
       await navigator.clipboard.write([clipData]);
       new import_obsidian.Notice("\u5DF2\u590D\u5236\u5230\u526A\u8D34\u677F");
+      return preparation.validation;
     } catch (error) {
       new import_obsidian.Notice("\u590D\u5236\u5931\u8D25");
+      throw error;
     }
   }
 };
@@ -18762,6 +18901,27 @@ var MPView = class extends import_obsidian4.ItemView {
       text: "+"
     });
     const settings = this.settingsManager.getSettings();
+    const recipeSelect = createCustomSelect(
+      controlsGroup,
+      "mp-recipe-select",
+      [
+        { label: "\u901A\u7528\u957F\u6587", value: "legacy-compatible" },
+        { label: "\u6559\u7A0B\u4E0E\u6B65\u9AA4", value: "tutorial" },
+        { label: "\u6E05\u5355\u4E0E\u65B9\u6CD5\u8BBA", value: "checklist" },
+        { label: "\u4EA7\u54C1\u6216\u5DE5\u5177\u4ECB\u7ECD", value: "product-intro" },
+        { label: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", value: "commentary" },
+        { label: "\u5468\u62A5\u4E0E\u590D\u76D8", value: "review" }
+      ],
+      async (value) => {
+        await this.settingsManager.updateSettings({
+          v3: {
+            ...this.settingsManager.getSettings().v3,
+            selectedRecipeId: value
+          }
+        });
+      }
+    );
+    recipeSelect.setValue(settings.v3.selectedRecipeId);
     if (settings.backgroundId) {
       this.customBackgroundSelect.setValue(settings.backgroundId);
       this.backgroundManager.setBackground(settings.backgroundId);
@@ -18865,8 +19025,12 @@ var MPView = class extends import_obsidian4.ItemView {
         this.copyButton.disabled = true;
         this.copyButton.setText("\u590D\u5236\u4E2D...");
         try {
-          await CopyManager.copyToClipboard(this.previewEl);
-          this.copyButton.setText("\u590D\u5236\u6210\u529F");
+          const copySettings = this.settingsManager.getSettings();
+          const validation = await CopyManager.copyToClipboard(this.previewEl, {
+            themeId: copySettings.templateId,
+            recipeId: copySettings.v3.selectedRecipeId
+          });
+          this.copyButton.setText(validation.warnings > 0 ? `\u590D\u5236\u6210\u529F\uFF08${validation.warnings} \u9879\u517C\u5BB9\u6027\u63D0\u793A\uFF09` : "\u590D\u5236\u6210\u529F");
           setTimeout(() => {
             this.copyButton.disabled = false;
             this.copyButton.setText("Pub \u590D\u5236");
@@ -19360,8 +19524,29 @@ var TemplateManager = class {
   }
 };
 
+// src/core/migration/settingsMigration.ts
+var V3_SETTINGS_SCHEMA_VERSION = 3;
+function migrateSettingsForV3(savedData) {
+  const existingV3 = savedData.v3 || {};
+  return {
+    ...savedData,
+    schemaVersion: Math.max(Number(savedData.schemaVersion) || 0, V3_SETTINGS_SCHEMA_VERSION),
+    v3: {
+      enabled: existingV3.enabled === true,
+      selectedRecipeId: existingV3.selectedRecipeId || "legacy-compatible",
+      migrationSource: "v2"
+    }
+  };
+}
+
 // src/settings/settings.ts
 var DEFAULT_SETTINGS = {
+  schemaVersion: V3_SETTINGS_SCHEMA_VERSION,
+  v3: {
+    enabled: false,
+    selectedRecipeId: "legacy-compatible",
+    migrationSource: "v2"
+  },
   backgroundId: "default",
   templateId: "default",
   fontFamily: "-apple-system",
@@ -19421,6 +19606,7 @@ var SettingsManager = class {
     if (!savedData) {
       savedData = {};
     }
+    savedData = migrateSettingsForV3(savedData);
     const { templates: templates2 } = await Promise.resolve().then(() => (init_templates(), templates_exports));
     const codeTemplates = Object.values(templates2).map((template) => ({
       ...template,
@@ -21599,12 +21785,75 @@ var MPSettingTab = class extends import_obsidian10.PluginSettingTab {
   }
 };
 
+// src/core/theme/themeRegistry.ts
+var ThemeRegistry = class {
+  constructor() {
+    this.themes = /* @__PURE__ */ new Map();
+  }
+  replaceAll(themes) {
+    this.themes.clear();
+    themes.forEach((theme) => this.register(theme));
+  }
+  register(theme) {
+    this.themes.set(theme.id, theme);
+  }
+  get(id) {
+    return this.themes.get(id);
+  }
+  list() {
+    return Array.from(this.themes.values());
+  }
+};
+
+// src/core/theme/legacyThemeAdapter.ts
+function cssValue(style, property, fallback) {
+  if (!style)
+    return fallback;
+  const match = style.match(new RegExp(`${property}\\s*:\\s*([^;]+)`, "i"));
+  return match ? match[1].trim() : fallback;
+}
+function adaptLegacyTemplate(template) {
+  const styles = template.styles;
+  const accent = styles.accentColor || cssValue(styles.title.h2.content, "color", "#4285f4");
+  return {
+    schemaVersion: 3,
+    id: template.id,
+    name: template.name,
+    version: "legacy-v2",
+    license: "legacy-pending-provenance-review",
+    source: template.source || "yh-mp-preview bundled",
+    tokens: {
+      accent,
+      text: cssValue(styles.paragraph, "color", "#333333"),
+      mutedText: "#667085",
+      background: cssValue(styles.container, "background(?:-color)?", "transparent"),
+      fontSize: cssValue(styles.paragraph, "font-size", "16px"),
+      lineHeight: cssValue(styles.paragraph, "line-height", "1.8")
+    },
+    components: [
+      { id: "heading-1", legacyStyle: styles.title.h1.base },
+      { id: "heading-2", legacyStyle: styles.title.h2.base },
+      { id: "paragraph", legacyStyle: styles.paragraph },
+      { id: "quote", legacyStyle: styles.quote },
+      { id: "code-block", legacyStyle: styles.code.block },
+      { id: "table", legacyStyle: styles.table.container }
+    ],
+    recipes: [{ id: "legacy-compatible", name: "\u517C\u5BB9\u65E7\u7248\u6587\u7AE0", componentIds: [] }],
+    compatibility: {
+      mode: "legacy",
+      notes: ["\u7531 v2 \u6A21\u677F\u9002\u914D\u800C\u6765\uFF1Bv3 \u9A8C\u8BC1\u5668\u76EE\u524D\u53EA\u62A5\u544A\u517C\u5BB9\u6027\u98CE\u9669\uFF0C\u4E0D\u963B\u65AD\u590D\u5236\u3002"]
+    }
+  };
+}
+
 // src/main.ts
 var MPPlugin = class extends import_obsidian11.Plugin {
   async onload() {
     this.settingsManager = new SettingsManager(this);
     await this.settingsManager.loadSettings();
     this.templateManager = new TemplateManager(this.app, this.settingsManager);
+    this.themeRegistry = new ThemeRegistry();
+    this.themeRegistry.replaceAll(this.settingsManager.getAllTemplates().map(adaptLegacyTemplate));
     MPConverter.initialize(this.app);
     DonateManager.initialize(this.app, this);
     this.registerView(

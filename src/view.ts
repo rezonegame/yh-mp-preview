@@ -251,6 +251,28 @@ export class MPView extends ItemView {
         // 恢复设置状态
         const settings = this.settingsManager.getSettings();
 
+        const recipeSelect = createCustomSelect(
+            controlsGroup,
+            'mp-recipe-select',
+            [
+                { label: '通用长文', value: 'legacy-compatible' },
+                { label: '教程与步骤', value: 'tutorial' },
+                { label: '清单与方法论', value: 'checklist' },
+                { label: '产品或工具介绍', value: 'product-intro' },
+                { label: '观点与评论', value: 'commentary' },
+                { label: '周报与复盘', value: 'review' },
+            ],
+            async (value) => {
+                await this.settingsManager.updateSettings({
+                    v3: {
+                        ...this.settingsManager.getSettings().v3,
+                        selectedRecipeId: value,
+                    },
+                });
+            },
+        );
+        recipeSelect.setValue(settings.v3.selectedRecipeId);
+
         // 恢复背景
         if (settings.backgroundId) {
             this.customBackgroundSelect.setValue(settings.backgroundId);
@@ -389,8 +411,14 @@ export class MPView extends ItemView {
                 this.copyButton.setText('复制中...');
 
                 try {
-                    await CopyManager.copyToClipboard(this.previewEl);
-                    this.copyButton.setText('复制成功');
+                    const copySettings = this.settingsManager.getSettings();
+                    const validation = await CopyManager.copyToClipboard(this.previewEl, {
+                        themeId: copySettings.templateId,
+                        recipeId: copySettings.v3.selectedRecipeId,
+                    });
+                    this.copyButton.setText(validation.warnings > 0
+                        ? `复制成功（${validation.warnings} 项兼容性提示）`
+                        : '复制成功');
 
                     setTimeout(() => {
                         this.copyButton.disabled = false;

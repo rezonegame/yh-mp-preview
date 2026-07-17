@@ -1,7 +1,9 @@
-yh-mp-preview v2.x is distributed under the MIT License.
+yh-mp-preview v3.0.0 is distributed under the GNU Affero General Public
+License, version 3 or later (AGPL-3.0-or-later).
 
 This project is based on and extends Yeban8090/mp-preview. The original MIT
-copyright notice is retained in LICENSE.
+copyright notice and license text are preserved in LICENSES/MIT-original.txt.
 
-The v3 upgrade will preserve this notice and add a complete third-party and
-theme provenance inventory before changing the project license to AGPL-3.0-or-later.
+Theme provenance is tracked in reports/theme-audit.json. Imported themes with
+unverified provenance remain subject to the quarantine policy documented in
+UPGRADE_PLAN_V3.md.

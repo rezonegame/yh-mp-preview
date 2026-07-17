@@ -5,9 +5,12 @@ import { SettingsManager } from './settings/settings';
 import { MPConverter } from './converter';
 import { DonateManager } from './donateManager';
 import { MPSettingTab } from './settings/MPSettingTab';
+import { ThemeRegistry } from './core/theme/themeRegistry';
+import { adaptLegacyTemplate } from './core/theme/legacyThemeAdapter';
 export default class MPPlugin extends Plugin {
   settingsManager: SettingsManager;
   templateManager: TemplateManager;
+  themeRegistry: ThemeRegistry;
   async onload() {
     // 初始化设置管理器
     this.settingsManager = new SettingsManager(this);
@@ -15,6 +18,8 @@ export default class MPPlugin extends Plugin {
 
     // 初始化模板管理器
     this.templateManager = new TemplateManager(this.app, this.settingsManager);
+    this.themeRegistry = new ThemeRegistry();
+    this.themeRegistry.replaceAll(this.settingsManager.getAllTemplates().map(adaptLegacyTemplate));
 
     // 初始化转换器
     MPConverter.initialize(this.app);

@@ -1,36 +1,10 @@
 import { Notice } from 'obsidian';
 // @ts-ignore
 import pangu from 'pangu/browser';
+import { prepareLegacyWechatFragment } from './core/render/legacyWechatPipeline';
+import type { ValidationReport } from './core/validation/wechatHtmlValidator';
 
 export class CopyManager {
-    private static cleanupHtml(element: HTMLElement): string {
-        // 创建克隆以避免修改原始元素
-        const clone = element.cloneNode(true) as HTMLElement;
-
-        // 移除所有的 data-* 属性
-        clone.querySelectorAll('*').forEach(el => {
-            Array.from(el.attributes).forEach(attr => {
-                if (attr.name.startsWith('data-')) {
-                    el.removeAttribute(attr.name);
-                }
-            });
-        });
-
-        // 移除所有的 class 属性
-        clone.querySelectorAll('*').forEach(el => {
-            el.removeAttribute('class');
-        });
-
-        // 移除所有的 id 属性
-        clone.querySelectorAll('*').forEach(el => {
-            el.removeAttribute('id');
-        });
-
-        // 使用 XMLSerializer 安全地转换为字符串
-        const serializer = new XMLSerializer();
-        return serializer.serializeToString(clone);
-    }
-
     public static async processImagesForExport(container: HTMLElement): Promise<void> {
         return this.processImages(container);
     }
@@ -58,7 +32,10 @@ export class CopyManager {
         }
     }
 
-    public static async copyToClipboard(element: HTMLElement): Promise<void> {
+    public static async copyToClipboard(
+        element: HTMLElement,
+        options: { themeId?: string; recipeId?: string } = {},
+    ): Promise<ValidationReport> {
         try {
             const clone = element.cloneNode(true) as HTMLElement;
             await this.processImages(clone);
@@ -67,8 +44,12 @@ export class CopyManager {
             if (!contentSection) {
                 throw new Error('找不到内容区域');
             }
-            // 使用新的 cleanupHtml 方法
-            let cleanHtml = this.cleanupHtml(contentSection as HTMLElement);
+            const preparation = prepareLegacyWechatFragment(contentSection as HTMLElement, options);
+            let cleanHtml = preparation.html;
+
+            if (preparation.validation.errors > 0 || preparation.validation.warnings > 0) {
+                console.warn('WeChat compatibility report', preparation.validation);
+            }
 
             // 文本清洗：pangu 自动加空格 + 智能引号转换
             try {
@@ -104,8 +85,10 @@ export class CopyManager {
 
             await navigator.clipboard.write([clipData]);
             new Notice('已复制到剪贴板');
+            return preparation.validation;
         } catch (error) {
             new Notice('复制失败');
+            throw error;
         }
     }
 }
