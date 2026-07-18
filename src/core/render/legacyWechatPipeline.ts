@@ -1,6 +1,7 @@
 import { createArticleModel, type ArticleModel } from '../article/articleModel';
 import { createLocalLayoutPlan, type LayoutPlan } from '../layout/localLayoutPlanner';
 import { validateWechatHtml, type ValidationReport } from '../validation/wechatHtmlValidator';
+import { applyArticleRecipe } from '../recipe/articleRecipeFormatter';
 
 export interface LegacyWechatPreparation {
     article: ArticleModel;
@@ -40,6 +41,7 @@ export function prepareLegacyWechatFragment(element: HTMLElement, options: Legac
         themeId: options.themeId || 'legacy-active',
         recipeId: options.recipeId || 'legacy-compatible',
     });
+    applyArticleRecipe(clone, plan.recipeId);
     removeTransientAttributes(clone);
     const validation = validateWechatHtml(clone);
     return {

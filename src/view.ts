@@ -8,6 +8,7 @@ import { BackgroundManager } from './backgroundManager';
 import { ThemeGalleryModal } from './settings/ThemeGalleryModal';
 import { createCustomSelect, type SelectOption, type CustomSelectControl } from './ui/CustomSelect';
 import { handleImageAltEdit } from './ui/ImageAltModal';
+import { applyArticleRecipe } from './core/recipe/articleRecipeFormatter';
 // @ts-ignore - html2canvas has no type declarations
 import html2canvas from 'html2canvas';
 export const VIEW_TYPE_MP = 'yh-mp-preview';
@@ -269,6 +270,7 @@ export class MPView extends ItemView {
                         selectedRecipeId: value,
                     },
                 });
+                await this.updatePreview();
             },
         );
         recipeSelect.setValue(settings.v3.selectedRecipeId);
@@ -668,6 +670,10 @@ export class MPView extends ItemView {
 
         this.templateManager.applyTemplate(this.previewEl);
         this.backgroundManager.applyBackground(this.previewEl);
+        const contentSection = this.previewEl.querySelector('.mp-content-section') as HTMLElement | null;
+        if (contentSection) {
+            applyArticleRecipe(contentSection, this.settingsManager.getSettings().v3.selectedRecipeId);
+        }
 
         // 恢复滚动位置
         requestAnimationFrame(() => {
