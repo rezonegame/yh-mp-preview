@@ -6,6 +6,8 @@ import { CreateBackgroundModal } from './CreateBackgroundModal'; // 添加导入
 import { ConfirmModal } from './ConfirmModal';
 import { TemplatePreviewModal } from './templatePreviewModal'; // 添加导入
 import type { MPSettings } from './settings';
+import { exportTemplateManifest, createTemplateFromThemeManifest } from '../core/theme/themeManifestBridge';
+import { ThemeManifestImportModal } from './ThemeManifestImportModal';
 export class MPSettingTab extends PluginSettingTab {
     plugin: MPPlugin; // 修改插件类型以匹配类名
     private expandedSections: Set<string> = new Set();
@@ -278,6 +280,17 @@ export class MPSettingTab extends PluginSettingTab {
                                 new TemplatePreviewModal(this.app, template, this.plugin.templateManager).open(); // 修改为使用预览模态框
                             }))
                     .addExtraButton(btn =>
+                        btn.setIcon('clipboard-copy')
+                            .setTooltip('复制 ThemeManifest')
+                            .onClick(async () => {
+                                try {
+                                    await navigator.clipboard.writeText(exportTemplateManifest(template));
+                                    new Notice('ThemeManifest 已复制到剪贴板。');
+                                } catch (_) {
+                                    new Notice('无法写入剪贴板，请检查 Obsidian 的系统权限。');
+                                }
+                            }))
+                    .addExtraButton(btn =>
                         btn.setIcon('pencil')
                             .setTooltip('编辑')
                             .onClick(() => {
@@ -309,6 +322,30 @@ export class MPSettingTab extends PluginSettingTab {
                                 ).open();
                             }));
             });
+
+        new Setting(containerEl)
+            .setName('主题工作室（V3）')
+            .setDesc('ThemeManifest 只会导入为自定义主题；版本、许可证和组件结构会先校验。自定义主题右侧的复制按钮可导出。')
+            .addButton(btn => btn
+                .setButtonText('从 JSON 导入')
+                .onClick(() => {
+                    new ThemeManifestImportModal(this.app, async manifest => {
+                        if (this.plugin.settingsManager.getTemplate(manifest.id)) {
+                            new Notice(`主题 ID “${manifest.id}” 已存在，请在 JSON 中改用新的 id。`);
+                            return;
+                        }
+                        const baseTemplate = this.plugin.settingsManager.getTemplate('default');
+                        if (!baseTemplate) {
+                            new Notice('找不到默认主题，无法完成导入。');
+                            return;
+                        }
+                        await this.plugin.settingsManager.addCustomTemplate(
+                            createTemplateFromThemeManifest(manifest, baseTemplate)
+                        );
+                        this.display();
+                        new Notice(`已导入主题：${manifest.name}`);
+                    }).open();
+                }));
 
         // 添加新模板按钮
         new Setting(containerEl)

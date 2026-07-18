@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.5.0
+
+- Added ThemeManifest V3 validation, safe JSON import, and portable export for custom themes.
+- Imported manifests now bridge into the existing custom-template renderer, validation gate, and layout history instead of creating a parallel rendering path.
+- Added V2-to-V3 migration and ThemeManifest authoring documentation.
+
 ## 3.0.1
 
 - Removed 30 historical `xiaohu` import themes and conversion scripts from the

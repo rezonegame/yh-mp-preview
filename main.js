@@ -13323,7 +13323,7 @@ __export(main_exports, {
   default: () => MPPlugin
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian11 = require("obsidian");
+var import_obsidian12 = require("obsidian");
 
 // src/view.ts
 var import_obsidian4 = require("obsidian");
@@ -17369,7 +17369,7 @@ var DonateManager = class {
 };
 
 // src/settings/MPSettingTab.ts
-var import_obsidian10 = require("obsidian");
+var import_obsidian11 = require("obsidian");
 
 // src/settings/CreateTemplateModal.ts
 var import_obsidian6 = require("obsidian");
@@ -18748,496 +18748,6 @@ var ConfirmModal = class extends import_obsidian9.Modal {
   }
 };
 
-// src/settings/MPSettingTab.ts
-var MPSettingTab = class extends import_obsidian10.PluginSettingTab {
-  constructor(app, plugin) {
-    super(app, plugin);
-    // 修改插件类型以匹配类名
-    this.expandedSections = /* @__PURE__ */ new Set();
-    this.plugin = plugin;
-  }
-  createSection(containerEl, title, renderContent) {
-    const section = containerEl.createDiv("settings-section");
-    const header = section.createDiv("settings-section-header");
-    const toggle = header.createSpan("settings-section-toggle");
-    (0, import_obsidian10.setIcon)(toggle, "chevron-right");
-    header.createEl("h4", { text: title });
-    const content = section.createDiv("settings-section-content");
-    renderContent(content);
-    header.addEventListener("click", () => {
-      const isExpanded = !section.hasClass("is-expanded");
-      section.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian10.setIcon)(toggle, isExpanded ? "chevron-down" : "chevron-right");
-      if (isExpanded) {
-        this.expandedSections.add(title);
-      } else {
-        this.expandedSections.delete(title);
-      }
-    });
-    if (this.expandedSections.has(title) || !containerEl.querySelector(".settings-section")) {
-      section.addClass("is-expanded");
-      (0, import_obsidian10.setIcon)(toggle, "chevron-down");
-      this.expandedSections.add(title);
-    }
-    return section;
-  }
-  display() {
-    const { containerEl } = this;
-    containerEl.empty();
-    containerEl.addClass("mp-settings");
-    const header = containerEl.createDiv({ cls: "mp-settings-header" });
-    header.createEl("h2", { text: "yh-mp-preview", attr: { style: "display: inline-block; margin-bottom: 0;" } });
-    header.createEl("span", { text: ` v${this.plugin.manifest.version}`, attr: { style: "font-size: 0.8em; color: var(--text-muted); margin-left: 10px;" } });
-    this.createSection(containerEl, "\u57FA\u672C\u9009\u9879", (el) => this.renderBasicSettings(el));
-    this.createSection(containerEl, "\u6A21\u677F\u9009\u9879", (el) => this.renderTemplateSettings(el));
-    this.createSection(containerEl, "\u80CC\u666F\u9009\u9879", (el) => this.renderBackgroundSettings(el));
-    this.createSection(containerEl, "\u6392\u7248\u589E\u5F3A", (el) => this.renderLayoutEnhancementSettings(el));
-    this.createSection(containerEl, "\u9AD8\u7EA7\u9009\u9879", (el) => this.renderAdvancedSettings(el));
-  }
-  renderBasicSettings(containerEl) {
-    const fontSection = containerEl.createDiv("mp-settings-subsection");
-    const fontHeader = fontSection.createDiv("mp-settings-subsection-header");
-    const fontToggle = fontHeader.createSpan("mp-settings-subsection-toggle");
-    (0, import_obsidian10.setIcon)(fontToggle, "chevron-right");
-    fontHeader.createEl("h3", { text: "\u5B57\u4F53\u7BA1\u7406" });
-    const fontContent = fontSection.createDiv("mp-settings-subsection-content");
-    fontHeader.addEventListener("click", () => {
-      const isExpanded = !fontSection.hasClass("is-expanded");
-      fontSection.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian10.setIcon)(fontToggle, isExpanded ? "chevron-down" : "chevron-right");
-    });
-    const fontList = fontContent.createDiv("font-management");
-    this.plugin.settingsManager.getFontOptions().forEach((font) => {
-      const fontItem = fontList.createDiv("font-item");
-      const setting = new import_obsidian10.Setting(fontItem).setName(font.label).setDesc(font.value);
-      if (!font.isPreset) {
-        setting.addExtraButton((btn) => btn.setIcon("pencil").setTooltip("\u7F16\u8F91").onClick(() => {
-          new CreateFontModal(
-            this.app,
-            async (updatedFont) => {
-              await this.plugin.settingsManager.updateFont(font.value, updatedFont);
-              this.display();
-              new import_obsidian10.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
-            },
-            font
-          ).open();
-        })).addExtraButton((btn) => btn.setIcon("trash").setTooltip("\u5220\u9664").onClick(() => {
-          new ConfirmModal(
-            this.app,
-            "\u786E\u8BA4\u5220\u9664\u5B57\u4F53",
-            `\u786E\u5B9A\u8981\u5220\u9664\u300C${font.label}\u300D\u5B57\u4F53\u914D\u7F6E\u5417\uFF1F`,
-            async () => {
-              await this.plugin.settingsManager.removeFont(font.value);
-              this.display();
-              new import_obsidian10.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
-            }
-          ).open();
-        }));
-      }
-    });
-    new import_obsidian10.Setting(fontContent).addButton((btn) => btn.setButtonText("+ \u6DFB\u52A0\u5B57\u4F53").setCta().onClick(() => {
-      new CreateFontModal(
-        this.app,
-        async (newFont) => {
-          await this.plugin.settingsManager.addCustomFont(newFont);
-          this.display();
-          new import_obsidian10.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
-        }
-      ).open();
-    }));
-  }
-  renderTemplateSettings(containerEl) {
-    const templateVisibilitySection = containerEl.createDiv("mp-settings-subsection");
-    const templateVisibilityHeader = templateVisibilitySection.createDiv("mp-settings-subsection-header");
-    const templateVisibilityToggle = templateVisibilityHeader.createSpan("mp-settings-subsection-toggle");
-    (0, import_obsidian10.setIcon)(templateVisibilityToggle, "chevron-right");
-    templateVisibilityHeader.createEl("h3", { text: "\u6A21\u677F\u663E\u793A\u9009\u9879" });
-    const templateVisibilityContent = templateVisibilitySection.createDiv("mp-settings-subsection-content");
-    templateVisibilityHeader.addEventListener("click", () => {
-      const isExpanded = !templateVisibilitySection.hasClass("is-expanded");
-      templateVisibilitySection.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian10.setIcon)(templateVisibilityToggle, isExpanded ? "chevron-down" : "chevron-right");
-    });
-    const templateSelectionContainer = templateVisibilityContent.createDiv("template-selection-container");
-    const allTemplatesContainer = templateSelectionContainer.createDiv("all-templates-container");
-    allTemplatesContainer.createEl("h4", { text: "\u9690\u85CF\u6A21\u677F" });
-    const allTemplatesList = allTemplatesContainer.createDiv("templates-list");
-    const controlButtonsContainer = templateSelectionContainer.createDiv("control-buttons-container");
-    const addButton = controlButtonsContainer.createEl("button", { text: ">" });
-    const removeButton = controlButtonsContainer.createEl("button", { text: "<" });
-    const visibleTemplatesContainer = templateSelectionContainer.createDiv("visible-templates-container");
-    visibleTemplatesContainer.createEl("h4", { text: "\u663E\u793A\u6A21\u677F" });
-    const visibleTemplatesList = visibleTemplatesContainer.createDiv("templates-list");
-    const allTemplates = this.plugin.settingsManager.getAllTemplates();
-    const renderTemplateLists = () => {
-      allTemplatesList.empty();
-      visibleTemplatesList.empty();
-      allTemplates.filter((template) => template.isVisible === false).forEach((template) => {
-        const templateItem = allTemplatesList.createDiv("template-list-item");
-        templateItem.textContent = template.name;
-        templateItem.dataset.templateId = template.id;
-        templateItem.addEventListener("click", () => {
-          templateItem.toggleClass("selected", !templateItem.hasClass("selected"));
-        });
-      });
-      allTemplates.filter((template) => template.isVisible !== false).forEach((template) => {
-        const templateItem = visibleTemplatesList.createDiv("template-list-item");
-        templateItem.textContent = template.name;
-        templateItem.dataset.templateId = template.id;
-        templateItem.addEventListener("click", () => {
-          templateItem.toggleClass("selected", !templateItem.hasClass("selected"));
-        });
-      });
-    };
-    renderTemplateLists();
-    addButton.addEventListener("click", async () => {
-      const selectedItems = Array.from(allTemplatesList.querySelectorAll(".template-list-item.selected"));
-      if (selectedItems.length === 0)
-        return;
-      for (const item of selectedItems) {
-        const templateId = item.dataset.templateId;
-        if (!templateId)
-          continue;
-        const template = allTemplates.find((t) => t.id === templateId);
-        if (template) {
-          template.isVisible = true;
-          await this.plugin.settingsManager.updateTemplate(templateId, template);
-        }
-      }
-      renderTemplateLists();
-      new import_obsidian10.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
-    });
-    removeButton.addEventListener("click", async () => {
-      const selectedItems = Array.from(visibleTemplatesList.querySelectorAll(".template-list-item.selected"));
-      if (selectedItems.length === 0)
-        return;
-      for (const item of selectedItems) {
-        const templateId = item.dataset.templateId;
-        if (!templateId)
-          continue;
-        const template = allTemplates.find((t) => t.id === templateId);
-        if (template) {
-          template.isVisible = false;
-          await this.plugin.settingsManager.updateTemplate(templateId, template);
-        }
-      }
-      renderTemplateLists();
-      new import_obsidian10.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
-    });
-    const templateList = containerEl.createDiv("template-management");
-    templateList.createEl("h4", { text: "\u81EA\u5B9A\u4E49\u6A21\u677F", cls: "template-custom-header" });
-    this.plugin.settingsManager.getAllTemplates().filter((template) => !template.isPreset).forEach((template) => {
-      const templateItem = templateList.createDiv("template-item");
-      new import_obsidian10.Setting(templateItem).setName(template.name).setDesc(template.description).addExtraButton((btn) => btn.setIcon("eye").setTooltip("\u9884\u89C8").onClick(() => {
-        new TemplatePreviewModal(this.app, template, this.plugin.templateManager).open();
-      })).addExtraButton((btn) => btn.setIcon("pencil").setTooltip("\u7F16\u8F91").onClick(() => {
-        new CreateTemplateModal(
-          this.app,
-          this.plugin,
-          (updatedTemplate) => {
-            this.plugin.settingsManager.updateTemplate(template.id, updatedTemplate);
-            this.display();
-            new import_obsidian10.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
-          },
-          template
-        ).open();
-      })).addExtraButton((btn) => btn.setIcon("trash").setTooltip("\u5220\u9664").onClick(() => {
-        new ConfirmModal(
-          this.app,
-          "\u786E\u8BA4\u5220\u9664\u6A21\u677F",
-          `\u786E\u5B9A\u8981\u5220\u9664\u300C${template.name}\u300D\u6A21\u677F\u5417\uFF1F\u6B64\u64CD\u4F5C\u4E0D\u53EF\u6062\u590D\u3002`,
-          async () => {
-            await this.plugin.settingsManager.removeTemplate(template.id);
-            this.display();
-            new import_obsidian10.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
-          }
-        ).open();
-      }));
-    });
-    new import_obsidian10.Setting(containerEl).addButton((btn) => btn.setButtonText("+ \u65B0\u5EFA\u6A21\u677F").setCta().onClick(() => {
-      new CreateTemplateModal(
-        this.app,
-        this.plugin,
-        async (newTemplate) => {
-          await this.plugin.settingsManager.addCustomTemplate(newTemplate);
-          this.display();
-          new import_obsidian10.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
-        }
-      ).open();
-    }));
-  }
-  renderBackgroundSettings(containerEl) {
-    const backgroundVisibilitySection = containerEl.createDiv("mp-settings-subsection");
-    const backgroundVisibilityHeader = backgroundVisibilitySection.createDiv("mp-settings-subsection-header");
-    const backgroundVisibilityToggle = backgroundVisibilityHeader.createSpan("mp-settings-subsection-toggle");
-    (0, import_obsidian10.setIcon)(backgroundVisibilityToggle, "chevron-right");
-    backgroundVisibilityHeader.createEl("h3", { text: "\u80CC\u666F\u663E\u793A" });
-    const backgroundVisibilityContent = backgroundVisibilitySection.createDiv("mp-settings-subsection-content");
-    backgroundVisibilityHeader.addEventListener("click", () => {
-      const isExpanded = !backgroundVisibilitySection.hasClass("is-expanded");
-      backgroundVisibilitySection.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian10.setIcon)(backgroundVisibilityToggle, isExpanded ? "chevron-down" : "chevron-right");
-    });
-    const backgroundSelectionContainer = backgroundVisibilityContent.createDiv("background-selection-container");
-    const allBackgroundsContainer = backgroundSelectionContainer.createDiv("all-backgrounds-container");
-    allBackgroundsContainer.createEl("h4", { text: "\u9690\u85CF\u80CC\u666F" });
-    const allBackgroundsList = allBackgroundsContainer.createDiv("backgrounds-list");
-    const controlButtonsContainer = backgroundSelectionContainer.createDiv("control-buttons-container");
-    const addButton = controlButtonsContainer.createEl("button", { text: ">" });
-    const removeButton = controlButtonsContainer.createEl("button", { text: "<" });
-    const visibleBackgroundsContainer = backgroundSelectionContainer.createDiv("visible-backgrounds-container");
-    visibleBackgroundsContainer.createEl("h4", { text: "\u663E\u793A\u80CC\u666F" });
-    const visibleBackgroundsList = visibleBackgroundsContainer.createDiv("backgrounds-list");
-    const allBackgrounds = this.plugin.settingsManager.getAllBackgrounds();
-    const renderBackgroundLists = () => {
-      allBackgroundsList.empty();
-      visibleBackgroundsList.empty();
-      allBackgrounds.filter((background) => background.isVisible === false).forEach((background) => {
-        const backgroundItem = allBackgroundsList.createDiv("background-list-item");
-        backgroundItem.textContent = background.name;
-        backgroundItem.dataset.backgroundId = background.id;
-        backgroundItem.addEventListener("click", () => {
-          backgroundItem.toggleClass("selected", !backgroundItem.hasClass("selected"));
-        });
-      });
-      allBackgrounds.filter((background) => background.isVisible !== false).forEach((background) => {
-        const backgroundItem = visibleBackgroundsList.createDiv("background-list-item");
-        backgroundItem.textContent = background.name;
-        backgroundItem.dataset.backgroundId = background.id;
-        backgroundItem.addEventListener("click", () => {
-          backgroundItem.toggleClass("selected", !backgroundItem.hasClass("selected"));
-        });
-      });
-    };
-    renderBackgroundLists();
-    addButton.addEventListener("click", async () => {
-      const selectedItems = Array.from(allBackgroundsList.querySelectorAll(".background-list-item.selected"));
-      if (selectedItems.length === 0)
-        return;
-      for (const item of selectedItems) {
-        const backgroundId = item.dataset.backgroundId;
-        if (!backgroundId)
-          continue;
-        const background = allBackgrounds.find((b) => b.id === backgroundId);
-        if (background) {
-          background.isVisible = true;
-          await this.plugin.settingsManager.updateBackground(backgroundId, background);
-        }
-      }
-      renderBackgroundLists();
-      new import_obsidian10.Notice("\u80CC\u666F\u663E\u793A\u8BBE\u7F6E\u5DF2\u66F4\u65B0");
-    });
-    removeButton.addEventListener("click", async () => {
-      const selectedItems = Array.from(visibleBackgroundsList.querySelectorAll(".background-list-item.selected"));
-      if (selectedItems.length === 0)
-        return;
-      for (const item of selectedItems) {
-        const backgroundId = item.dataset.backgroundId;
-        if (!backgroundId)
-          continue;
-        const background = allBackgrounds.find((b) => b.id === backgroundId);
-        if (background) {
-          background.isVisible = false;
-          await this.plugin.settingsManager.updateBackground(backgroundId, background);
-        }
-      }
-      renderBackgroundLists();
-      new import_obsidian10.Notice("\u80CC\u666F\u663E\u793A\u5DF2\u66F4\u65B0");
-    });
-    const backgroundList = containerEl.createDiv("background-management");
-    backgroundList.createEl("h4", { text: "\u81EA\u5B9A\u4E49\u80CC\u666F", cls: "background-custom-header" });
-    this.plugin.settingsManager.getAllBackgrounds().filter((background) => !background.isPreset).forEach((background) => {
-      const backgroundItem = backgroundList.createDiv("background-item");
-      new import_obsidian10.Setting(backgroundItem).setName(background.name).addExtraButton((btn) => btn.setIcon("pencil").setTooltip("\u7F16\u8F91").onClick(() => {
-        new CreateBackgroundModal(
-          this.app,
-          async (updatedBackground) => {
-            await this.plugin.settingsManager.updateBackground(background.id, updatedBackground);
-            this.display();
-            new import_obsidian10.Notice("\u80CC\u666F\u5DF2\u66F4\u65B0");
-          },
-          background
-        ).open();
-      })).addExtraButton((btn) => btn.setIcon("trash").setTooltip("\u5220\u9664").onClick(() => {
-        new ConfirmModal(
-          this.app,
-          "\u786E\u8BA4\u5220\u9664\u80CC\u666F",
-          `\u786E\u5B9A\u8981\u5220\u9664\u300C${background.name}\u300D\u80CC\u666F\u5417\uFF1F\u6B64\u64CD\u4F5C\u4E0D\u53EF\u6062\u590D\u3002`,
-          async () => {
-            await this.plugin.settingsManager.removeBackground(background.id);
-            this.display();
-            new import_obsidian10.Notice("\u80CC\u666F\u5DF2\u5220\u9664");
-          }
-        ).open();
-      }));
-      const previewEl = backgroundItem.createDiv("background-preview");
-      previewEl.setAttribute("style", background.style);
-    });
-    new import_obsidian10.Setting(containerEl).addButton((btn) => btn.setButtonText("+ \u65B0\u5EFA\u80CC\u666F").setCta().onClick(() => {
-      new CreateBackgroundModal(
-        this.app,
-        async (newBackground) => {
-          await this.plugin.settingsManager.addCustomBackground(newBackground);
-          this.display();
-          new import_obsidian10.Notice("\u80CC\u666F\u5DF2\u521B\u5EFA");
-        }
-      ).open();
-    }));
-  }
-  // Add createSection helper if it was removed or not accessible, but it seems to be private in class
-  // We need to render a new section for Advanced Settings
-  renderLayoutEnhancementSettings(containerEl) {
-    const settings = this.plugin.settingsManager.getSettings();
-    const layout = settings.layoutEnhancements;
-    new import_obsidian10.Setting(containerEl).setName("\u81EA\u52A8\u9605\u8BFB\u5BFC\u822A").setDesc("\u5F53\u6587\u7AE0 h2/h3 \u6570\u91CF\u8FBE\u5230\u9608\u503C\u65F6\uFF0C\u81EA\u52A8\u5728\u5F00\u5934\u63D2\u5165\u76EE\u5F55\u5361\u7247").addToggle((toggle) => toggle.setValue(layout.enableAutoToc).onChange(async (value) => {
-      await this.plugin.settingsManager.updateSettings({
-        layoutEnhancements: {
-          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
-          enableAutoToc: value
-        }
-      });
-    }));
-    new import_obsidian10.Setting(containerEl).setName("\u76EE\u5F55\u89E6\u53D1\u9608\u503C").setDesc("h2/h3 \u6570\u91CF\u8FBE\u5230\u8BE5\u503C\u624D\u81EA\u52A8\u751F\u6210\u9605\u8BFB\u5BFC\u822A").addText((text) => text.setPlaceholder("3").setValue(String(layout.tocMinHeadings || 3)).onChange(async (value) => {
-      const parsed = Math.max(1, parseInt(value, 10) || 3);
-      await this.plugin.settingsManager.updateSettings({
-        layoutEnhancements: {
-          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
-          tocMinHeadings: parsed
-        }
-      });
-    }));
-    new import_obsidian10.Setting(containerEl).setName("\u4EFB\u52A1\u5217\u8868\u589E\u5F3A").setDesc("\u5C06 Markdown \u4EFB\u52A1\u5217\u8868\u8F6C\u6362\u4E3A\u516C\u4F17\u53F7\u68C0\u67E5\u6E05\u5355\u5361\u7247").addToggle((toggle) => toggle.setValue(layout.enableTaskListEnhancement).onChange(async (value) => {
-      await this.plugin.settingsManager.updateSettings({
-        layoutEnhancements: {
-          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
-          enableTaskListEnhancement: value
-        }
-      });
-    }));
-    new import_obsidian10.Setting(containerEl).setName("\u56FE\u7247 Alt \u56FE\u6CE8").setDesc("\u628A\u56FE\u7247 alt \u6587\u672C\u663E\u793A\u4E3A\u56FE\u6CE8").addToggle((toggle) => toggle.setValue(layout.enableImageCaptions).onChange(async (value) => {
-      await this.plugin.settingsManager.updateSettings({
-        layoutEnhancements: {
-          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
-          enableImageCaptions: value
-        }
-      });
-    }));
-    new import_obsidian10.Setting(containerEl).setName("\u8868\u683C\u6A2A\u5411\u4F18\u5316").setDesc("\u4E3A\u8868\u683C\u589E\u52A0\u79FB\u52A8\u7AEF\u6A2A\u5411\u6EDA\u52A8\u5BB9\u5668\uFF0C\u907F\u514D\u7A84\u5C4F\u6EA2\u51FA").addToggle((toggle) => toggle.setValue(layout.enableTableEnhancement).onChange(async (value) => {
-      await this.plugin.settingsManager.updateSettings({
-        layoutEnhancements: {
-          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
-          enableTableEnhancement: value
-        }
-      });
-    }));
-    containerEl.createEl("h4", { text: "\u4F5C\u8005\u5361" });
-    new import_obsidian10.Setting(containerEl).setName("\u81EA\u52A8\u63D2\u5165\u4F5C\u8005\u5361").setDesc("\u5728\u6587\u7AE0\u672B\u5C3E\u81EA\u52A8\u63D2\u5165\u4F5C\u8005\u4FE1\u606F\u5361").addToggle((toggle) => toggle.setValue(layout.enableAuthorCard).onChange(async (value) => {
-      await this.plugin.settingsManager.updateSettings({
-        layoutEnhancements: {
-          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
-          enableAuthorCard: value
-        }
-      });
-    }));
-    this.addAuthorTextSetting(containerEl, "\u540D\u79F0", "name");
-    this.addAuthorTextSetting(containerEl, "\u8EAB\u4EFD", "role");
-    this.addAuthorTextSetting(containerEl, "\u7B80\u4ECB", "bio", true);
-    this.addAuthorTextSetting(containerEl, "\u6807\u7B7E", "tags");
-    this.addAuthorTextSetting(containerEl, "\u94FE\u63A5", "link");
-    this.addAuthorTextSetting(containerEl, "\u5934\u50CF URL", "avatar");
-    containerEl.createEl("h4", { text: "\u5173\u6CE8\u5F15\u5BFC" });
-    new import_obsidian10.Setting(containerEl).setName("\u81EA\u52A8\u63D2\u5165\u5173\u6CE8\u5F15\u5BFC").setDesc("\u5728\u6587\u7AE0\u672B\u5C3E\u81EA\u52A8\u63D2\u5165\u5173\u6CE8/\u6536\u85CF\u5F15\u5BFC\u5361").addToggle((toggle) => toggle.setValue(layout.enableSubscribeCard).onChange(async (value) => {
-      await this.plugin.settingsManager.updateSettings({
-        layoutEnhancements: {
-          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
-          enableSubscribeCard: value
-        }
-      });
-    }));
-    this.addSubscribeTextSetting(containerEl, "\u6807\u7B7E", "label");
-    this.addSubscribeTextSetting(containerEl, "\u6807\u9898", "title");
-    this.addSubscribeTextSetting(containerEl, "\u526F\u6807\u9898", "subtitle", true);
-    this.addSubscribeTextSetting(containerEl, "\u4E3B\u884C\u52A8", "primary");
-    this.addSubscribeTextSetting(containerEl, "\u6B21\u884C\u52A8", "secondary");
-    this.addSubscribeTextSetting(containerEl, "\u8BF4\u660E", "note");
-    this.addSubscribeTextSetting(containerEl, "\u4E8C\u7EF4\u7801 URL", "qrcode");
-  }
-  addAuthorTextSetting(containerEl, name, key, multiline = false) {
-    const authorCard = this.plugin.settingsManager.getSettings().authorCard;
-    const setting = new import_obsidian10.Setting(containerEl).setName(name);
-    if (multiline) {
-      setting.addTextArea((text) => text.setValue(authorCard[key] || "").onChange(async (value) => {
-        await this.plugin.settingsManager.updateSettings({
-          authorCard: {
-            ...this.plugin.settingsManager.getSettings().authorCard,
-            [key]: value
-          }
-        });
-      }));
-      return;
-    }
-    setting.addText((text) => text.setValue(authorCard[key] || "").onChange(async (value) => {
-      await this.plugin.settingsManager.updateSettings({
-        authorCard: {
-          ...this.plugin.settingsManager.getSettings().authorCard,
-          [key]: value
-        }
-      });
-    }));
-  }
-  addSubscribeTextSetting(containerEl, name, key, multiline = false) {
-    const subscribeCard = this.plugin.settingsManager.getSettings().subscribeCard;
-    const setting = new import_obsidian10.Setting(containerEl).setName(name);
-    if (multiline) {
-      setting.addTextArea((text) => text.setValue(subscribeCard[key] || "").onChange(async (value) => {
-        await this.plugin.settingsManager.updateSettings({
-          subscribeCard: {
-            ...this.plugin.settingsManager.getSettings().subscribeCard,
-            [key]: value
-          }
-        });
-      }));
-      return;
-    }
-    setting.addText((text) => text.setValue(subscribeCard[key] || "").onChange(async (value) => {
-      await this.plugin.settingsManager.updateSettings({
-        subscribeCard: {
-          ...this.plugin.settingsManager.getSettings().subscribeCard,
-          [key]: value
-        }
-      });
-    }));
-  }
-  renderAdvancedSettings(containerEl) {
-    new import_obsidian10.Setting(containerEl).setName("\u81EA\u5B9A\u4E49\u5934\u90E8 (HTML)").setDesc("\u5728\u6587\u7AE0\u9876\u90E8\u63D2\u5165\u7684 HTML \u4EE3\u7801\uFF08\u5982\u5173\u6CE8\u5F15\u5BFC\uFF09").addTextArea((text) => text.setPlaceholder("<div>...</div>").setValue(this.plugin.settingsManager.getSettings().customHeader || "").onChange(async (value) => {
-      await this.plugin.settingsManager.updateSettings({ customHeader: value });
-    }));
-    new import_obsidian10.Setting(containerEl).setName("\u81EA\u5B9A\u4E49\u5C3E\u90E8 (HTML)").setDesc("\u5728\u6587\u7AE0\u5E95\u90E8\u63D2\u5165\u7684 HTML \u4EE3\u7801\uFF08\u5982\u4E8C\u7EF4\u7801\uFF09").addTextArea((text) => text.setPlaceholder("<div>...</div>").setValue(this.plugin.settingsManager.getSettings().customFooter || "").onChange(async (value) => {
-      await this.plugin.settingsManager.updateSettings({ customFooter: value });
-    }));
-  }
-};
-
-// src/core/theme/themeRegistry.ts
-var ThemeRegistry = class {
-  constructor() {
-    this.themes = /* @__PURE__ */ new Map();
-  }
-  replaceAll(themes) {
-    this.themes.clear();
-    themes.forEach((theme) => this.register(theme));
-  }
-  register(theme) {
-    this.themes.set(theme.id, theme);
-  }
-  get(id) {
-    return this.themes.get(id);
-  }
-  list() {
-    return Array.from(this.themes.values());
-  }
-};
-
 // src/core/theme/legacyThemeAdapter.ts
 function cssValue(style, property, fallback) {
   if (!style)
@@ -19287,8 +18797,685 @@ function adaptLegacyTemplate(template) {
   };
 }
 
+// src/core/theme/themeManifestBridge.ts
+var componentStyleKeys = {
+  "heading-1": "title.h1.base",
+  "heading-2": "title.h2.base",
+  paragraph: "paragraph",
+  quote: "quote",
+  "code-block": "code.block",
+  table: "table.container"
+};
+function appendStyle(current, extra) {
+  return [current.replace(/;?\s*$/, ";"), extra].filter(Boolean).join(" ");
+}
+function setStyle(template, key, style) {
+  switch (key) {
+    case "title.h1.base":
+      template.styles.title.h1.base = style;
+      break;
+    case "title.h2.base":
+      template.styles.title.h2.base = style;
+      break;
+    case "paragraph":
+      template.styles.paragraph = style;
+      break;
+    case "quote":
+      template.styles.quote = style;
+      break;
+    case "code.block":
+      template.styles.code.block = style;
+      break;
+    case "table.container":
+      template.styles.table.container = style;
+      break;
+  }
+}
+function exportTemplateManifest(template) {
+  return JSON.stringify(adaptLegacyTemplate(template), null, 2);
+}
+function createTemplateFromThemeManifest(manifest, baseTemplate) {
+  const template = JSON.parse(JSON.stringify(baseTemplate));
+  const componentStyles = new Map(manifest.components.map((component) => [component.id, component.legacyStyle]));
+  Object.entries(componentStyleKeys).forEach(([componentId, styleKey]) => {
+    const style = componentStyles.get(componentId);
+    if (typeof style === "string" && style.trim())
+      setStyle(template, styleKey, style);
+  });
+  template.id = manifest.id;
+  template.name = manifest.name;
+  template.description = `ThemeManifest v${manifest.version} \xB7 ${manifest.license}`;
+  template.source = manifest.source || "ThemeManifest import";
+  template.isPreset = false;
+  template.isVisible = true;
+  template.styles.accentColor = manifest.tokens.accent;
+  template.styles.container = appendStyle(template.styles.container, `background: ${manifest.tokens.background}; color: ${manifest.tokens.text};`);
+  template.styles.paragraph = appendStyle(template.styles.paragraph, `color: ${manifest.tokens.text}; font-size: ${manifest.tokens.fontSize}; line-height: ${manifest.tokens.lineHeight};`);
+  template.styles.title.h1.content = appendStyle(template.styles.title.h1.content, `color: ${manifest.tokens.accent};`);
+  template.styles.title.h2.content = appendStyle(template.styles.title.h2.content, `color: ${manifest.tokens.accent};`);
+  return template;
+}
+
+// src/settings/ThemeManifestImportModal.ts
+var import_obsidian10 = require("obsidian");
+
+// src/core/theme/themeManifestValidator.ts
+function isRecord(value) {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+function isNonEmptyString(value) {
+  return typeof value === "string" && value.trim().length > 0;
+}
+function addRequiredStringIssues(value, fields, prefix, issues) {
+  fields.forEach((field) => {
+    if (!isNonEmptyString(value[field])) {
+      issues.push({ path: `${prefix}${field}`, message: "\u5FC5\u987B\u662F\u975E\u7A7A\u5B57\u7B26\u4E32\u3002" });
+    }
+  });
+}
+function validateThemeManifest(value) {
+  const issues = [];
+  if (!isRecord(value)) {
+    return { valid: false, issues: [{ path: "$", message: "\u4E3B\u9898\u6E05\u5355\u5FC5\u987B\u662F JSON \u5BF9\u8C61\u3002" }] };
+  }
+  if (value.schemaVersion !== 3) {
+    issues.push({ path: "schemaVersion", message: "\u4EC5\u652F\u6301 schemaVersion: 3\u3002" });
+  }
+  addRequiredStringIssues(value, ["id", "name", "version", "license"], "", issues);
+  if (isNonEmptyString(value.id) && !/^[a-z0-9][a-z0-9-]*$/.test(value.id)) {
+    issues.push({ path: "id", message: "\u53EA\u80FD\u4F7F\u7528\u5C0F\u5199\u5B57\u6BCD\u3001\u6570\u5B57\u548C\u8FDE\u5B57\u7B26\uFF0C\u4E14\u5FC5\u987B\u4EE5\u5B57\u6BCD\u6216\u6570\u5B57\u5F00\u5934\u3002" });
+  }
+  if (value.source !== void 0 && !isNonEmptyString(value.source)) {
+    issues.push({ path: "source", message: "\u5982\u63D0\u4F9B\u6765\u6E90\uFF0C\u5FC5\u987B\u662F\u975E\u7A7A\u5B57\u7B26\u4E32\u3002" });
+  }
+  if (!isRecord(value.tokens)) {
+    issues.push({ path: "tokens", message: "\u5FC5\u987B\u662F\u8BBE\u8BA1\u4EE4\u724C\u5BF9\u8C61\u3002" });
+  } else {
+    addRequiredStringIssues(value.tokens, ["accent", "text", "mutedText", "background", "fontSize", "lineHeight"], "tokens.", issues);
+  }
+  if (!Array.isArray(value.components)) {
+    issues.push({ path: "components", message: "\u5FC5\u987B\u662F\u7EC4\u4EF6\u6570\u7EC4\u3002" });
+  } else {
+    value.components.forEach((component, index) => {
+      if (!isRecord(component) || !isNonEmptyString(component.id)) {
+        issues.push({ path: `components[${index}].id`, message: "\u7EC4\u4EF6\u5FC5\u987B\u6709\u975E\u7A7A id\u3002" });
+      }
+      if (isRecord(component) && component.legacyStyle !== void 0 && typeof component.legacyStyle !== "string") {
+        issues.push({ path: `components[${index}].legacyStyle`, message: "\u5FC5\u987B\u662F\u5B57\u7B26\u4E32\u3002" });
+      }
+    });
+  }
+  if (!Array.isArray(value.recipes)) {
+    issues.push({ path: "recipes", message: "\u5FC5\u987B\u662F\u6587\u7AE0\u914D\u65B9\u6570\u7EC4\u3002" });
+  } else {
+    value.recipes.forEach((recipe, index) => {
+      if (!isRecord(recipe) || !isNonEmptyString(recipe.id) || !isNonEmptyString(recipe.name) || !Array.isArray(recipe.componentIds) || recipe.componentIds.some((id) => !isNonEmptyString(id))) {
+        issues.push({ path: `recipes[${index}]`, message: "\u914D\u65B9\u9700\u8981\u975E\u7A7A id\u3001\u540D\u79F0\u548C\u5B57\u7B26\u4E32\u7EC4\u4EF6 id \u6570\u7EC4\u3002" });
+      }
+    });
+  }
+  if (!isRecord(value.compatibility) || value.compatibility.mode !== "native" && value.compatibility.mode !== "legacy" || !Array.isArray(value.compatibility.notes) || value.compatibility.notes.some((note) => !isNonEmptyString(note))) {
+    issues.push({ path: "compatibility", message: "\u9700\u8981 mode\uFF08native \u6216 legacy\uFF09\u548C\u5B57\u7B26\u4E32\u8BF4\u660E\u6570\u7EC4\u3002" });
+  }
+  return issues.length > 0 ? { valid: false, issues } : { valid: true, issues: [], manifest: value };
+}
+function formatThemeManifestIssues(issues) {
+  return issues.slice(0, 3).map((issue) => `${issue.path}\uFF1A${issue.message}`).join("\n");
+}
+
+// src/settings/ThemeManifestImportModal.ts
+var ThemeManifestImportModal = class extends import_obsidian10.Modal {
+  constructor(app, onImport) {
+    super(app);
+    this.input = "";
+    this.onImport = onImport;
+  }
+  onOpen() {
+    this.contentEl.createEl("h2", { text: "\u5BFC\u5165 ThemeManifest" });
+    this.contentEl.createEl("p", { text: "\u7C98\u8D34\u7531 yh-mp-preview V3 \u5BFC\u51FA\u7684\u4E3B\u9898 JSON\u3002\u5BFC\u5165\u524D\u4F1A\u6821\u9A8C\u7248\u672C\u3001\u4EE4\u724C\u548C\u7EC4\u4EF6\u7ED3\u6784\u3002" });
+    new import_obsidian10.Setting(this.contentEl).setName("\u4E3B\u9898 JSON").addTextArea((text) => text.setPlaceholder('{ "schemaVersion": 3, ... }').onChange((value) => {
+      this.input = value;
+    }));
+    new import_obsidian10.Setting(this.contentEl).addButton((button) => button.setButtonText("\u5BFC\u5165\u4E3A\u81EA\u5B9A\u4E49\u4E3B\u9898").setCta().onClick(async () => {
+      let value;
+      try {
+        value = JSON.parse(this.input);
+      } catch (_) {
+        new import_obsidian10.Notice("\u4E3B\u9898 JSON \u65E0\u6CD5\u89E3\u6790\u3002");
+        return;
+      }
+      const result = validateThemeManifest(value);
+      if (!result.valid || !result.manifest) {
+        new import_obsidian10.Notice(`\u4E3B\u9898\u6E05\u5355\u6821\u9A8C\u5931\u8D25\uFF1A
+${formatThemeManifestIssues(result.issues)}`);
+        return;
+      }
+      await this.onImport(result.manifest);
+      this.close();
+    }));
+  }
+  onClose() {
+    this.contentEl.empty();
+  }
+};
+
+// src/settings/MPSettingTab.ts
+var MPSettingTab = class extends import_obsidian11.PluginSettingTab {
+  constructor(app, plugin) {
+    super(app, plugin);
+    // 修改插件类型以匹配类名
+    this.expandedSections = /* @__PURE__ */ new Set();
+    this.plugin = plugin;
+  }
+  createSection(containerEl, title, renderContent) {
+    const section = containerEl.createDiv("settings-section");
+    const header = section.createDiv("settings-section-header");
+    const toggle = header.createSpan("settings-section-toggle");
+    (0, import_obsidian11.setIcon)(toggle, "chevron-right");
+    header.createEl("h4", { text: title });
+    const content = section.createDiv("settings-section-content");
+    renderContent(content);
+    header.addEventListener("click", () => {
+      const isExpanded = !section.hasClass("is-expanded");
+      section.toggleClass("is-expanded", isExpanded);
+      (0, import_obsidian11.setIcon)(toggle, isExpanded ? "chevron-down" : "chevron-right");
+      if (isExpanded) {
+        this.expandedSections.add(title);
+      } else {
+        this.expandedSections.delete(title);
+      }
+    });
+    if (this.expandedSections.has(title) || !containerEl.querySelector(".settings-section")) {
+      section.addClass("is-expanded");
+      (0, import_obsidian11.setIcon)(toggle, "chevron-down");
+      this.expandedSections.add(title);
+    }
+    return section;
+  }
+  display() {
+    const { containerEl } = this;
+    containerEl.empty();
+    containerEl.addClass("mp-settings");
+    const header = containerEl.createDiv({ cls: "mp-settings-header" });
+    header.createEl("h2", { text: "yh-mp-preview", attr: { style: "display: inline-block; margin-bottom: 0;" } });
+    header.createEl("span", { text: ` v${this.plugin.manifest.version}`, attr: { style: "font-size: 0.8em; color: var(--text-muted); margin-left: 10px;" } });
+    this.createSection(containerEl, "\u57FA\u672C\u9009\u9879", (el) => this.renderBasicSettings(el));
+    this.createSection(containerEl, "\u6A21\u677F\u9009\u9879", (el) => this.renderTemplateSettings(el));
+    this.createSection(containerEl, "\u80CC\u666F\u9009\u9879", (el) => this.renderBackgroundSettings(el));
+    this.createSection(containerEl, "\u6392\u7248\u589E\u5F3A", (el) => this.renderLayoutEnhancementSettings(el));
+    this.createSection(containerEl, "\u9AD8\u7EA7\u9009\u9879", (el) => this.renderAdvancedSettings(el));
+  }
+  renderBasicSettings(containerEl) {
+    const fontSection = containerEl.createDiv("mp-settings-subsection");
+    const fontHeader = fontSection.createDiv("mp-settings-subsection-header");
+    const fontToggle = fontHeader.createSpan("mp-settings-subsection-toggle");
+    (0, import_obsidian11.setIcon)(fontToggle, "chevron-right");
+    fontHeader.createEl("h3", { text: "\u5B57\u4F53\u7BA1\u7406" });
+    const fontContent = fontSection.createDiv("mp-settings-subsection-content");
+    fontHeader.addEventListener("click", () => {
+      const isExpanded = !fontSection.hasClass("is-expanded");
+      fontSection.toggleClass("is-expanded", isExpanded);
+      (0, import_obsidian11.setIcon)(fontToggle, isExpanded ? "chevron-down" : "chevron-right");
+    });
+    const fontList = fontContent.createDiv("font-management");
+    this.plugin.settingsManager.getFontOptions().forEach((font) => {
+      const fontItem = fontList.createDiv("font-item");
+      const setting = new import_obsidian11.Setting(fontItem).setName(font.label).setDesc(font.value);
+      if (!font.isPreset) {
+        setting.addExtraButton((btn) => btn.setIcon("pencil").setTooltip("\u7F16\u8F91").onClick(() => {
+          new CreateFontModal(
+            this.app,
+            async (updatedFont) => {
+              await this.plugin.settingsManager.updateFont(font.value, updatedFont);
+              this.display();
+              new import_obsidian11.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+            },
+            font
+          ).open();
+        })).addExtraButton((btn) => btn.setIcon("trash").setTooltip("\u5220\u9664").onClick(() => {
+          new ConfirmModal(
+            this.app,
+            "\u786E\u8BA4\u5220\u9664\u5B57\u4F53",
+            `\u786E\u5B9A\u8981\u5220\u9664\u300C${font.label}\u300D\u5B57\u4F53\u914D\u7F6E\u5417\uFF1F`,
+            async () => {
+              await this.plugin.settingsManager.removeFont(font.value);
+              this.display();
+              new import_obsidian11.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+            }
+          ).open();
+        }));
+      }
+    });
+    new import_obsidian11.Setting(fontContent).addButton((btn) => btn.setButtonText("+ \u6DFB\u52A0\u5B57\u4F53").setCta().onClick(() => {
+      new CreateFontModal(
+        this.app,
+        async (newFont) => {
+          await this.plugin.settingsManager.addCustomFont(newFont);
+          this.display();
+          new import_obsidian11.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+        }
+      ).open();
+    }));
+  }
+  renderTemplateSettings(containerEl) {
+    const templateVisibilitySection = containerEl.createDiv("mp-settings-subsection");
+    const templateVisibilityHeader = templateVisibilitySection.createDiv("mp-settings-subsection-header");
+    const templateVisibilityToggle = templateVisibilityHeader.createSpan("mp-settings-subsection-toggle");
+    (0, import_obsidian11.setIcon)(templateVisibilityToggle, "chevron-right");
+    templateVisibilityHeader.createEl("h3", { text: "\u6A21\u677F\u663E\u793A\u9009\u9879" });
+    const templateVisibilityContent = templateVisibilitySection.createDiv("mp-settings-subsection-content");
+    templateVisibilityHeader.addEventListener("click", () => {
+      const isExpanded = !templateVisibilitySection.hasClass("is-expanded");
+      templateVisibilitySection.toggleClass("is-expanded", isExpanded);
+      (0, import_obsidian11.setIcon)(templateVisibilityToggle, isExpanded ? "chevron-down" : "chevron-right");
+    });
+    const templateSelectionContainer = templateVisibilityContent.createDiv("template-selection-container");
+    const allTemplatesContainer = templateSelectionContainer.createDiv("all-templates-container");
+    allTemplatesContainer.createEl("h4", { text: "\u9690\u85CF\u6A21\u677F" });
+    const allTemplatesList = allTemplatesContainer.createDiv("templates-list");
+    const controlButtonsContainer = templateSelectionContainer.createDiv("control-buttons-container");
+    const addButton = controlButtonsContainer.createEl("button", { text: ">" });
+    const removeButton = controlButtonsContainer.createEl("button", { text: "<" });
+    const visibleTemplatesContainer = templateSelectionContainer.createDiv("visible-templates-container");
+    visibleTemplatesContainer.createEl("h4", { text: "\u663E\u793A\u6A21\u677F" });
+    const visibleTemplatesList = visibleTemplatesContainer.createDiv("templates-list");
+    const allTemplates = this.plugin.settingsManager.getAllTemplates();
+    const renderTemplateLists = () => {
+      allTemplatesList.empty();
+      visibleTemplatesList.empty();
+      allTemplates.filter((template) => template.isVisible === false).forEach((template) => {
+        const templateItem = allTemplatesList.createDiv("template-list-item");
+        templateItem.textContent = template.name;
+        templateItem.dataset.templateId = template.id;
+        templateItem.addEventListener("click", () => {
+          templateItem.toggleClass("selected", !templateItem.hasClass("selected"));
+        });
+      });
+      allTemplates.filter((template) => template.isVisible !== false).forEach((template) => {
+        const templateItem = visibleTemplatesList.createDiv("template-list-item");
+        templateItem.textContent = template.name;
+        templateItem.dataset.templateId = template.id;
+        templateItem.addEventListener("click", () => {
+          templateItem.toggleClass("selected", !templateItem.hasClass("selected"));
+        });
+      });
+    };
+    renderTemplateLists();
+    addButton.addEventListener("click", async () => {
+      const selectedItems = Array.from(allTemplatesList.querySelectorAll(".template-list-item.selected"));
+      if (selectedItems.length === 0)
+        return;
+      for (const item of selectedItems) {
+        const templateId = item.dataset.templateId;
+        if (!templateId)
+          continue;
+        const template = allTemplates.find((t) => t.id === templateId);
+        if (template) {
+          template.isVisible = true;
+          await this.plugin.settingsManager.updateTemplate(templateId, template);
+        }
+      }
+      renderTemplateLists();
+      new import_obsidian11.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+    });
+    removeButton.addEventListener("click", async () => {
+      const selectedItems = Array.from(visibleTemplatesList.querySelectorAll(".template-list-item.selected"));
+      if (selectedItems.length === 0)
+        return;
+      for (const item of selectedItems) {
+        const templateId = item.dataset.templateId;
+        if (!templateId)
+          continue;
+        const template = allTemplates.find((t) => t.id === templateId);
+        if (template) {
+          template.isVisible = false;
+          await this.plugin.settingsManager.updateTemplate(templateId, template);
+        }
+      }
+      renderTemplateLists();
+      new import_obsidian11.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+    });
+    const templateList = containerEl.createDiv("template-management");
+    templateList.createEl("h4", { text: "\u81EA\u5B9A\u4E49\u6A21\u677F", cls: "template-custom-header" });
+    this.plugin.settingsManager.getAllTemplates().filter((template) => !template.isPreset).forEach((template) => {
+      const templateItem = templateList.createDiv("template-item");
+      new import_obsidian11.Setting(templateItem).setName(template.name).setDesc(template.description).addExtraButton((btn) => btn.setIcon("eye").setTooltip("\u9884\u89C8").onClick(() => {
+        new TemplatePreviewModal(this.app, template, this.plugin.templateManager).open();
+      })).addExtraButton((btn) => btn.setIcon("clipboard-copy").setTooltip("\u590D\u5236 ThemeManifest").onClick(async () => {
+        try {
+          await navigator.clipboard.writeText(exportTemplateManifest(template));
+          new import_obsidian11.Notice("ThemeManifest \u5DF2\u590D\u5236\u5230\u526A\u8D34\u677F\u3002");
+        } catch (_) {
+          new import_obsidian11.Notice("\u65E0\u6CD5\u5199\u5165\u526A\u8D34\u677F\uFF0C\u8BF7\u68C0\u67E5 Obsidian \u7684\u7CFB\u7EDF\u6743\u9650\u3002");
+        }
+      })).addExtraButton((btn) => btn.setIcon("pencil").setTooltip("\u7F16\u8F91").onClick(() => {
+        new CreateTemplateModal(
+          this.app,
+          this.plugin,
+          (updatedTemplate) => {
+            this.plugin.settingsManager.updateTemplate(template.id, updatedTemplate);
+            this.display();
+            new import_obsidian11.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+          },
+          template
+        ).open();
+      })).addExtraButton((btn) => btn.setIcon("trash").setTooltip("\u5220\u9664").onClick(() => {
+        new ConfirmModal(
+          this.app,
+          "\u786E\u8BA4\u5220\u9664\u6A21\u677F",
+          `\u786E\u5B9A\u8981\u5220\u9664\u300C${template.name}\u300D\u6A21\u677F\u5417\uFF1F\u6B64\u64CD\u4F5C\u4E0D\u53EF\u6062\u590D\u3002`,
+          async () => {
+            await this.plugin.settingsManager.removeTemplate(template.id);
+            this.display();
+            new import_obsidian11.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+          }
+        ).open();
+      }));
+    });
+    new import_obsidian11.Setting(containerEl).setName("\u4E3B\u9898\u5DE5\u4F5C\u5BA4\uFF08V3\uFF09").setDesc("ThemeManifest \u53EA\u4F1A\u5BFC\u5165\u4E3A\u81EA\u5B9A\u4E49\u4E3B\u9898\uFF1B\u7248\u672C\u3001\u8BB8\u53EF\u8BC1\u548C\u7EC4\u4EF6\u7ED3\u6784\u4F1A\u5148\u6821\u9A8C\u3002\u81EA\u5B9A\u4E49\u4E3B\u9898\u53F3\u4FA7\u7684\u590D\u5236\u6309\u94AE\u53EF\u5BFC\u51FA\u3002").addButton((btn) => btn.setButtonText("\u4ECE JSON \u5BFC\u5165").onClick(() => {
+      new ThemeManifestImportModal(this.app, async (manifest) => {
+        if (this.plugin.settingsManager.getTemplate(manifest.id)) {
+          new import_obsidian11.Notice(`\u4E3B\u9898 ID \u201C${manifest.id}\u201D \u5DF2\u5B58\u5728\uFF0C\u8BF7\u5728 JSON \u4E2D\u6539\u7528\u65B0\u7684 id\u3002`);
+          return;
+        }
+        const baseTemplate = this.plugin.settingsManager.getTemplate("default");
+        if (!baseTemplate) {
+          new import_obsidian11.Notice("\u627E\u4E0D\u5230\u9ED8\u8BA4\u4E3B\u9898\uFF0C\u65E0\u6CD5\u5B8C\u6210\u5BFC\u5165\u3002");
+          return;
+        }
+        await this.plugin.settingsManager.addCustomTemplate(
+          createTemplateFromThemeManifest(manifest, baseTemplate)
+        );
+        this.display();
+        new import_obsidian11.Notice(`\u5DF2\u5BFC\u5165\u4E3B\u9898\uFF1A${manifest.name}`);
+      }).open();
+    }));
+    new import_obsidian11.Setting(containerEl).addButton((btn) => btn.setButtonText("+ \u65B0\u5EFA\u6A21\u677F").setCta().onClick(() => {
+      new CreateTemplateModal(
+        this.app,
+        this.plugin,
+        async (newTemplate) => {
+          await this.plugin.settingsManager.addCustomTemplate(newTemplate);
+          this.display();
+          new import_obsidian11.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+        }
+      ).open();
+    }));
+  }
+  renderBackgroundSettings(containerEl) {
+    const backgroundVisibilitySection = containerEl.createDiv("mp-settings-subsection");
+    const backgroundVisibilityHeader = backgroundVisibilitySection.createDiv("mp-settings-subsection-header");
+    const backgroundVisibilityToggle = backgroundVisibilityHeader.createSpan("mp-settings-subsection-toggle");
+    (0, import_obsidian11.setIcon)(backgroundVisibilityToggle, "chevron-right");
+    backgroundVisibilityHeader.createEl("h3", { text: "\u80CC\u666F\u663E\u793A" });
+    const backgroundVisibilityContent = backgroundVisibilitySection.createDiv("mp-settings-subsection-content");
+    backgroundVisibilityHeader.addEventListener("click", () => {
+      const isExpanded = !backgroundVisibilitySection.hasClass("is-expanded");
+      backgroundVisibilitySection.toggleClass("is-expanded", isExpanded);
+      (0, import_obsidian11.setIcon)(backgroundVisibilityToggle, isExpanded ? "chevron-down" : "chevron-right");
+    });
+    const backgroundSelectionContainer = backgroundVisibilityContent.createDiv("background-selection-container");
+    const allBackgroundsContainer = backgroundSelectionContainer.createDiv("all-backgrounds-container");
+    allBackgroundsContainer.createEl("h4", { text: "\u9690\u85CF\u80CC\u666F" });
+    const allBackgroundsList = allBackgroundsContainer.createDiv("backgrounds-list");
+    const controlButtonsContainer = backgroundSelectionContainer.createDiv("control-buttons-container");
+    const addButton = controlButtonsContainer.createEl("button", { text: ">" });
+    const removeButton = controlButtonsContainer.createEl("button", { text: "<" });
+    const visibleBackgroundsContainer = backgroundSelectionContainer.createDiv("visible-backgrounds-container");
+    visibleBackgroundsContainer.createEl("h4", { text: "\u663E\u793A\u80CC\u666F" });
+    const visibleBackgroundsList = visibleBackgroundsContainer.createDiv("backgrounds-list");
+    const allBackgrounds = this.plugin.settingsManager.getAllBackgrounds();
+    const renderBackgroundLists = () => {
+      allBackgroundsList.empty();
+      visibleBackgroundsList.empty();
+      allBackgrounds.filter((background) => background.isVisible === false).forEach((background) => {
+        const backgroundItem = allBackgroundsList.createDiv("background-list-item");
+        backgroundItem.textContent = background.name;
+        backgroundItem.dataset.backgroundId = background.id;
+        backgroundItem.addEventListener("click", () => {
+          backgroundItem.toggleClass("selected", !backgroundItem.hasClass("selected"));
+        });
+      });
+      allBackgrounds.filter((background) => background.isVisible !== false).forEach((background) => {
+        const backgroundItem = visibleBackgroundsList.createDiv("background-list-item");
+        backgroundItem.textContent = background.name;
+        backgroundItem.dataset.backgroundId = background.id;
+        backgroundItem.addEventListener("click", () => {
+          backgroundItem.toggleClass("selected", !backgroundItem.hasClass("selected"));
+        });
+      });
+    };
+    renderBackgroundLists();
+    addButton.addEventListener("click", async () => {
+      const selectedItems = Array.from(allBackgroundsList.querySelectorAll(".background-list-item.selected"));
+      if (selectedItems.length === 0)
+        return;
+      for (const item of selectedItems) {
+        const backgroundId = item.dataset.backgroundId;
+        if (!backgroundId)
+          continue;
+        const background = allBackgrounds.find((b) => b.id === backgroundId);
+        if (background) {
+          background.isVisible = true;
+          await this.plugin.settingsManager.updateBackground(backgroundId, background);
+        }
+      }
+      renderBackgroundLists();
+      new import_obsidian11.Notice("\u80CC\u666F\u663E\u793A\u8BBE\u7F6E\u5DF2\u66F4\u65B0");
+    });
+    removeButton.addEventListener("click", async () => {
+      const selectedItems = Array.from(visibleBackgroundsList.querySelectorAll(".background-list-item.selected"));
+      if (selectedItems.length === 0)
+        return;
+      for (const item of selectedItems) {
+        const backgroundId = item.dataset.backgroundId;
+        if (!backgroundId)
+          continue;
+        const background = allBackgrounds.find((b) => b.id === backgroundId);
+        if (background) {
+          background.isVisible = false;
+          await this.plugin.settingsManager.updateBackground(backgroundId, background);
+        }
+      }
+      renderBackgroundLists();
+      new import_obsidian11.Notice("\u80CC\u666F\u663E\u793A\u5DF2\u66F4\u65B0");
+    });
+    const backgroundList = containerEl.createDiv("background-management");
+    backgroundList.createEl("h4", { text: "\u81EA\u5B9A\u4E49\u80CC\u666F", cls: "background-custom-header" });
+    this.plugin.settingsManager.getAllBackgrounds().filter((background) => !background.isPreset).forEach((background) => {
+      const backgroundItem = backgroundList.createDiv("background-item");
+      new import_obsidian11.Setting(backgroundItem).setName(background.name).addExtraButton((btn) => btn.setIcon("pencil").setTooltip("\u7F16\u8F91").onClick(() => {
+        new CreateBackgroundModal(
+          this.app,
+          async (updatedBackground) => {
+            await this.plugin.settingsManager.updateBackground(background.id, updatedBackground);
+            this.display();
+            new import_obsidian11.Notice("\u80CC\u666F\u5DF2\u66F4\u65B0");
+          },
+          background
+        ).open();
+      })).addExtraButton((btn) => btn.setIcon("trash").setTooltip("\u5220\u9664").onClick(() => {
+        new ConfirmModal(
+          this.app,
+          "\u786E\u8BA4\u5220\u9664\u80CC\u666F",
+          `\u786E\u5B9A\u8981\u5220\u9664\u300C${background.name}\u300D\u80CC\u666F\u5417\uFF1F\u6B64\u64CD\u4F5C\u4E0D\u53EF\u6062\u590D\u3002`,
+          async () => {
+            await this.plugin.settingsManager.removeBackground(background.id);
+            this.display();
+            new import_obsidian11.Notice("\u80CC\u666F\u5DF2\u5220\u9664");
+          }
+        ).open();
+      }));
+      const previewEl = backgroundItem.createDiv("background-preview");
+      previewEl.setAttribute("style", background.style);
+    });
+    new import_obsidian11.Setting(containerEl).addButton((btn) => btn.setButtonText("+ \u65B0\u5EFA\u80CC\u666F").setCta().onClick(() => {
+      new CreateBackgroundModal(
+        this.app,
+        async (newBackground) => {
+          await this.plugin.settingsManager.addCustomBackground(newBackground);
+          this.display();
+          new import_obsidian11.Notice("\u80CC\u666F\u5DF2\u521B\u5EFA");
+        }
+      ).open();
+    }));
+  }
+  // Add createSection helper if it was removed or not accessible, but it seems to be private in class
+  // We need to render a new section for Advanced Settings
+  renderLayoutEnhancementSettings(containerEl) {
+    const settings = this.plugin.settingsManager.getSettings();
+    const layout = settings.layoutEnhancements;
+    new import_obsidian11.Setting(containerEl).setName("\u81EA\u52A8\u9605\u8BFB\u5BFC\u822A").setDesc("\u5F53\u6587\u7AE0 h2/h3 \u6570\u91CF\u8FBE\u5230\u9608\u503C\u65F6\uFF0C\u81EA\u52A8\u5728\u5F00\u5934\u63D2\u5165\u76EE\u5F55\u5361\u7247").addToggle((toggle) => toggle.setValue(layout.enableAutoToc).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableAutoToc: value
+        }
+      });
+    }));
+    new import_obsidian11.Setting(containerEl).setName("\u76EE\u5F55\u89E6\u53D1\u9608\u503C").setDesc("h2/h3 \u6570\u91CF\u8FBE\u5230\u8BE5\u503C\u624D\u81EA\u52A8\u751F\u6210\u9605\u8BFB\u5BFC\u822A").addText((text) => text.setPlaceholder("3").setValue(String(layout.tocMinHeadings || 3)).onChange(async (value) => {
+      const parsed = Math.max(1, parseInt(value, 10) || 3);
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          tocMinHeadings: parsed
+        }
+      });
+    }));
+    new import_obsidian11.Setting(containerEl).setName("\u4EFB\u52A1\u5217\u8868\u589E\u5F3A").setDesc("\u5C06 Markdown \u4EFB\u52A1\u5217\u8868\u8F6C\u6362\u4E3A\u516C\u4F17\u53F7\u68C0\u67E5\u6E05\u5355\u5361\u7247").addToggle((toggle) => toggle.setValue(layout.enableTaskListEnhancement).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableTaskListEnhancement: value
+        }
+      });
+    }));
+    new import_obsidian11.Setting(containerEl).setName("\u56FE\u7247 Alt \u56FE\u6CE8").setDesc("\u628A\u56FE\u7247 alt \u6587\u672C\u663E\u793A\u4E3A\u56FE\u6CE8").addToggle((toggle) => toggle.setValue(layout.enableImageCaptions).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableImageCaptions: value
+        }
+      });
+    }));
+    new import_obsidian11.Setting(containerEl).setName("\u8868\u683C\u6A2A\u5411\u4F18\u5316").setDesc("\u4E3A\u8868\u683C\u589E\u52A0\u79FB\u52A8\u7AEF\u6A2A\u5411\u6EDA\u52A8\u5BB9\u5668\uFF0C\u907F\u514D\u7A84\u5C4F\u6EA2\u51FA").addToggle((toggle) => toggle.setValue(layout.enableTableEnhancement).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableTableEnhancement: value
+        }
+      });
+    }));
+    containerEl.createEl("h4", { text: "\u4F5C\u8005\u5361" });
+    new import_obsidian11.Setting(containerEl).setName("\u81EA\u52A8\u63D2\u5165\u4F5C\u8005\u5361").setDesc("\u5728\u6587\u7AE0\u672B\u5C3E\u81EA\u52A8\u63D2\u5165\u4F5C\u8005\u4FE1\u606F\u5361").addToggle((toggle) => toggle.setValue(layout.enableAuthorCard).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableAuthorCard: value
+        }
+      });
+    }));
+    this.addAuthorTextSetting(containerEl, "\u540D\u79F0", "name");
+    this.addAuthorTextSetting(containerEl, "\u8EAB\u4EFD", "role");
+    this.addAuthorTextSetting(containerEl, "\u7B80\u4ECB", "bio", true);
+    this.addAuthorTextSetting(containerEl, "\u6807\u7B7E", "tags");
+    this.addAuthorTextSetting(containerEl, "\u94FE\u63A5", "link");
+    this.addAuthorTextSetting(containerEl, "\u5934\u50CF URL", "avatar");
+    containerEl.createEl("h4", { text: "\u5173\u6CE8\u5F15\u5BFC" });
+    new import_obsidian11.Setting(containerEl).setName("\u81EA\u52A8\u63D2\u5165\u5173\u6CE8\u5F15\u5BFC").setDesc("\u5728\u6587\u7AE0\u672B\u5C3E\u81EA\u52A8\u63D2\u5165\u5173\u6CE8/\u6536\u85CF\u5F15\u5BFC\u5361").addToggle((toggle) => toggle.setValue(layout.enableSubscribeCard).onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        layoutEnhancements: {
+          ...this.plugin.settingsManager.getSettings().layoutEnhancements,
+          enableSubscribeCard: value
+        }
+      });
+    }));
+    this.addSubscribeTextSetting(containerEl, "\u6807\u7B7E", "label");
+    this.addSubscribeTextSetting(containerEl, "\u6807\u9898", "title");
+    this.addSubscribeTextSetting(containerEl, "\u526F\u6807\u9898", "subtitle", true);
+    this.addSubscribeTextSetting(containerEl, "\u4E3B\u884C\u52A8", "primary");
+    this.addSubscribeTextSetting(containerEl, "\u6B21\u884C\u52A8", "secondary");
+    this.addSubscribeTextSetting(containerEl, "\u8BF4\u660E", "note");
+    this.addSubscribeTextSetting(containerEl, "\u4E8C\u7EF4\u7801 URL", "qrcode");
+  }
+  addAuthorTextSetting(containerEl, name, key, multiline = false) {
+    const authorCard = this.plugin.settingsManager.getSettings().authorCard;
+    const setting = new import_obsidian11.Setting(containerEl).setName(name);
+    if (multiline) {
+      setting.addTextArea((text) => text.setValue(authorCard[key] || "").onChange(async (value) => {
+        await this.plugin.settingsManager.updateSettings({
+          authorCard: {
+            ...this.plugin.settingsManager.getSettings().authorCard,
+            [key]: value
+          }
+        });
+      }));
+      return;
+    }
+    setting.addText((text) => text.setValue(authorCard[key] || "").onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        authorCard: {
+          ...this.plugin.settingsManager.getSettings().authorCard,
+          [key]: value
+        }
+      });
+    }));
+  }
+  addSubscribeTextSetting(containerEl, name, key, multiline = false) {
+    const subscribeCard = this.plugin.settingsManager.getSettings().subscribeCard;
+    const setting = new import_obsidian11.Setting(containerEl).setName(name);
+    if (multiline) {
+      setting.addTextArea((text) => text.setValue(subscribeCard[key] || "").onChange(async (value) => {
+        await this.plugin.settingsManager.updateSettings({
+          subscribeCard: {
+            ...this.plugin.settingsManager.getSettings().subscribeCard,
+            [key]: value
+          }
+        });
+      }));
+      return;
+    }
+    setting.addText((text) => text.setValue(subscribeCard[key] || "").onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({
+        subscribeCard: {
+          ...this.plugin.settingsManager.getSettings().subscribeCard,
+          [key]: value
+        }
+      });
+    }));
+  }
+  renderAdvancedSettings(containerEl) {
+    new import_obsidian11.Setting(containerEl).setName("\u81EA\u5B9A\u4E49\u5934\u90E8 (HTML)").setDesc("\u5728\u6587\u7AE0\u9876\u90E8\u63D2\u5165\u7684 HTML \u4EE3\u7801\uFF08\u5982\u5173\u6CE8\u5F15\u5BFC\uFF09").addTextArea((text) => text.setPlaceholder("<div>...</div>").setValue(this.plugin.settingsManager.getSettings().customHeader || "").onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({ customHeader: value });
+    }));
+    new import_obsidian11.Setting(containerEl).setName("\u81EA\u5B9A\u4E49\u5C3E\u90E8 (HTML)").setDesc("\u5728\u6587\u7AE0\u5E95\u90E8\u63D2\u5165\u7684 HTML \u4EE3\u7801\uFF08\u5982\u4E8C\u7EF4\u7801\uFF09").addTextArea((text) => text.setPlaceholder("<div>...</div>").setValue(this.plugin.settingsManager.getSettings().customFooter || "").onChange(async (value) => {
+      await this.plugin.settingsManager.updateSettings({ customFooter: value });
+    }));
+  }
+};
+
+// src/core/theme/themeRegistry.ts
+var ThemeRegistry = class {
+  constructor() {
+    this.themes = /* @__PURE__ */ new Map();
+  }
+  replaceAll(themes) {
+    this.themes.clear();
+    themes.forEach((theme) => this.register(theme));
+  }
+  register(theme) {
+    this.themes.set(theme.id, theme);
+  }
+  get(id) {
+    return this.themes.get(id);
+  }
+  list() {
+    return Array.from(this.themes.values());
+  }
+};
+
 // src/main.ts
-var MPPlugin = class extends import_obsidian11.Plugin {
+var MPPlugin = class extends import_obsidian12.Plugin {
   async onload() {
     this.settingsManager = new SettingsManager(this);
     await this.settingsManager.loadSettings();
@@ -19326,7 +19513,7 @@ var MPPlugin = class extends import_obsidian11.Plugin {
         active: true
       });
     } else {
-      new import_obsidian11.Notice("\u65E0\u6CD5\u521B\u5EFA\u89C6\u56FE\u9762\u677F");
+      new import_obsidian12.Notice("\u65E0\u6CD5\u521B\u5EFA\u89C6\u56FE\u9762\u677F");
     }
   }
 };
