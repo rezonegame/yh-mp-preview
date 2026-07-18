@@ -189,6 +189,20 @@
 .mp-validation-issues .is-warning { color: var(--text-muted); }
 .mp-validation-more { padding: 0 12px 10px; color: var(--text-muted); font-size: 12px; }
 
+@media (max-width: 720px) {
+  .mp-view-content { padding: 8px 8px 0; }
+  .mp-toolbar, .mp-bottom-bar { padding: 8px; }
+  .mp-controls-group { flex-wrap: wrap; }
+  .mp-controls-group .custom-select-container {
+    min-width: calc(50% - 4px);
+    max-width: none;
+    flex: 1 1 calc(50% - 4px);
+  }
+  .mp-secondary-row { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; }
+  .mp-primary-row button { flex: 1 1 calc(50% - 6px); }
+  .mp-preview-area { min-width: 0; }
+}
+
 /* ===== 下拉选择器 ===== */
 .custom-select-container {
     position: relative;

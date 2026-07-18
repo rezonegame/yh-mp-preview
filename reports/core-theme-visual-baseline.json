@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pluginVersion": "3.4.0",
+  "pluginVersion": "3.4.1",
   "description": "Deterministic Core theme visual-style baseline. Screenshot comparison is a later RC task.",
   "themes": [
     {
