@@ -52,6 +52,8 @@ export class ThemeGalleryModal extends Modal {
         this.currentTemplateId = currentTemplateId;
         this.onSelect = onSelect;
         this.previewCallback = previewCallback;
+        const currentTemplate = this.templates.find(template => template.id === currentTemplateId);
+        if (currentTemplate) this.selectedScene = getThemeScene(currentTemplate);
     }
 
     onOpen(): void {
@@ -139,7 +141,10 @@ export class ThemeGalleryModal extends Modal {
         scenes.forEach(scene => {
             const sceneTemplates = grouped ? templates.filter(template => getThemeScene(template) === scene) : templates;
             if (sceneTemplates.length === 0) return;
-            if (grouped) this.gridContainer!.createEl('h3', { cls: 'mp-gallery-section-title', text: scene });
+            this.gridContainer!.createEl('h3', {
+                cls: 'mp-gallery-section-title',
+                text: grouped ? scene : `${scene} · ${sceneTemplates.length} 个主题`,
+            });
             const cardGrid = this.gridContainer!.createDiv('mp-gallery-card-grid');
             sceneTemplates.forEach(template => this.renderThemeCard(cardGrid, template));
         });
@@ -158,8 +163,9 @@ export class ThemeGalleryModal extends Modal {
         const accent = template.styles.accentColor || this.extractAccentColor(template);
         const preview = card.createDiv('mp-theme-preview');
         preview.style.background = this.createColorGradient(accent);
-        preview.createEl('span', { text: '文章标题', cls: 'mp-theme-preview-title' });
-        preview.createEl('span', { text: '让内容清晰、有重点地被阅读', cls: 'mp-theme-preview-copy' });
+        preview.createEl('span', { text: '主题试用', cls: 'mp-theme-preview-kicker' });
+        preview.createEl('span', { text: template.name, cls: 'mp-theme-preview-title' });
+        preview.createEl('span', { text: '标题、正文与强调色预览', cls: 'mp-theme-preview-copy' });
 
         const info = card.createDiv('mp-theme-info');
         const nameRow = info.createDiv('mp-theme-name-row');

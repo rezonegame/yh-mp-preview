@@ -1522,8 +1522,8 @@ ol {
 }
 .mp-gallery-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
 }
 .mp-theme-card {
   position: relative;
@@ -1535,6 +1535,7 @@ ol {
   color: var(--text-normal);
   text-align: left;
   cursor: pointer;
+  min-width: 0;
   transition:
     border-color .16s ease,
     box-shadow .16s ease,
@@ -1557,19 +1558,32 @@ ol {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: 96px;
-  padding: 14px;
+  min-height: 116px;
+  padding: 16px;
   color: #fff;
 }
+.mp-theme-preview-kicker {
+  margin-bottom: 7px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  opacity: .86;
+}
 .mp-theme-preview-title {
-  font-size: 17px;
+  overflow: hidden;
+  font-size: 18px;
   font-weight: 800;
   line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .mp-theme-preview-copy {
+  overflow: hidden;
   margin-top: 8px;
   font-size: 11px;
   opacity: .9;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .mp-theme-info {
   display: flex;
@@ -1584,8 +1598,11 @@ ol {
   gap: 8px;
 }
 .mp-theme-name {
+  overflow: hidden;
   font-size: 14px;
   line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .mp-theme-checkmark {
   display: flex;
@@ -1683,6 +1700,13 @@ ol {
   .mp-gallery-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
+  }
+  .mp-theme-preview {
+    min-height: 104px;
+    padding: 12px;
+  }
+  .mp-theme-preview-title {
+    font-size: 15px;
   }
   .mp-gallery-footer {
     align-items: stretch;

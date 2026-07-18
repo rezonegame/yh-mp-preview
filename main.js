@@ -15475,6 +15475,9 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     this.currentTemplateId = currentTemplateId;
     this.onSelect = onSelect;
     this.previewCallback = previewCallback;
+    const currentTemplate = this.templates.find((template) => template.id === currentTemplateId);
+    if (currentTemplate)
+      this.selectedScene = getThemeScene(currentTemplate);
   }
   onOpen() {
     const { contentEl, modalEl } = this;
@@ -15554,8 +15557,10 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       const sceneTemplates = grouped ? templates2.filter((template) => getThemeScene(template) === scene) : templates2;
       if (sceneTemplates.length === 0)
         return;
-      if (grouped)
-        this.gridContainer.createEl("h3", { cls: "mp-gallery-section-title", text: scene });
+      this.gridContainer.createEl("h3", {
+        cls: "mp-gallery-section-title",
+        text: grouped ? scene : `${scene} \xB7 ${sceneTemplates.length} \u4E2A\u4E3B\u9898`
+      });
       const cardGrid = this.gridContainer.createDiv("mp-gallery-card-grid");
       sceneTemplates.forEach((template) => this.renderThemeCard(cardGrid, template));
     });
@@ -15573,8 +15578,9 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     const accent = template.styles.accentColor || this.extractAccentColor(template);
     const preview = card.createDiv("mp-theme-preview");
     preview.style.background = this.createColorGradient(accent);
-    preview.createEl("span", { text: "\u6587\u7AE0\u6807\u9898", cls: "mp-theme-preview-title" });
-    preview.createEl("span", { text: "\u8BA9\u5185\u5BB9\u6E05\u6670\u3001\u6709\u91CD\u70B9\u5730\u88AB\u9605\u8BFB", cls: "mp-theme-preview-copy" });
+    preview.createEl("span", { text: "\u4E3B\u9898\u8BD5\u7528", cls: "mp-theme-preview-kicker" });
+    preview.createEl("span", { text: template.name, cls: "mp-theme-preview-title" });
+    preview.createEl("span", { text: "\u6807\u9898\u3001\u6B63\u6587\u4E0E\u5F3A\u8C03\u8272\u9884\u89C8", cls: "mp-theme-preview-copy" });
     const info = card.createDiv("mp-theme-info");
     const nameRow = info.createDiv("mp-theme-name-row");
     nameRow.createEl("strong", { text: template.name, cls: "mp-theme-name" });

@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.6.1
+
+- Default the theme gallery to the current theme's article scene, while keeping
+  all themes available as an explicit exploration filter.
+- Increase card width and clarify the in-card preview hierarchy so theme names
+  remain legible in compact Obsidian workspaces.
+
 ## 3.6.0
 
 - Reworked the Theme Gallery into a scene-first card picker inspired by article-use recommendations.
