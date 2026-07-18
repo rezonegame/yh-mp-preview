@@ -155,6 +155,19 @@ export class SettingsManager {
         if (!savedData.customTemplates) {
             savedData.customTemplates = [];
         }
+        const availableTemplateIds = new Set([
+            ...savedData.templates,
+            ...savedData.customTemplates,
+        ].map((template: Template) => template.id));
+        if (!availableTemplateIds.has(savedData.templateId)) {
+            // Removed legacy themes (such as quarantined xiaohu themes) must
+            // not leave the view without an active template after upgrade.
+            savedData.v3 = {
+                ...savedData.v3,
+                legacyTemplateId: savedData.templateId,
+            };
+            savedData.templateId = DEFAULT_SETTINGS.templateId;
+        }
         if (!savedData.customFonts) {
             savedData.customFonts = DEFAULT_SETTINGS.customFonts;
         }

@@ -16606,13 +16606,15 @@ var TemplateManager = class {
 var V3_SETTINGS_SCHEMA_VERSION = 3;
 function migrateSettingsForV3(savedData) {
   const existingV3 = savedData.v3 || {};
+  const legacyTemplateId = typeof existingV3.legacyTemplateId === "string" ? existingV3.legacyTemplateId : void 0;
   return {
     ...savedData,
     schemaVersion: Math.max(Number(savedData.schemaVersion) || 0, V3_SETTINGS_SCHEMA_VERSION),
     v3: {
       enabled: existingV3.enabled === true,
       selectedRecipeId: existingV3.selectedRecipeId || "legacy-compatible",
-      migrationSource: "v2"
+      migrationSource: "v2",
+      ...legacyTemplateId ? { legacyTemplateId } : {}
     }
   };
 }
@@ -16713,6 +16715,17 @@ var SettingsManager = class {
     }
     if (!savedData.customTemplates) {
       savedData.customTemplates = [];
+    }
+    const availableTemplateIds = new Set([
+      ...savedData.templates,
+      ...savedData.customTemplates
+    ].map((template) => template.id));
+    if (!availableTemplateIds.has(savedData.templateId)) {
+      savedData.v3 = {
+        ...savedData.v3,
+        legacyTemplateId: savedData.templateId
+      };
+      savedData.templateId = DEFAULT_SETTINGS.templateId;
     }
     if (!savedData.customFonts) {
       savedData.customFonts = DEFAULT_SETTINGS.customFonts;
@@ -18890,31 +18903,39 @@ function cssValue(style, property, fallback) {
   const match = style.match(new RegExp(`${property}\\s*:\\s*([^;]+)`, "i"));
   return match ? match[1].trim() : fallback;
 }
+function stringValue(value, fallback = "") {
+  return typeof value === "string" ? value : fallback;
+}
 function adaptLegacyTemplate(template) {
-  const styles = template.styles;
-  const accent = styles.accentColor || cssValue(styles.title.h2.content, "color", "#4285f4");
+  const styles = (template == null ? void 0 : template.styles) || {};
+  const title = styles.title || {};
+  const h1 = title.h1 || {};
+  const h2 = title.h2 || {};
+  const code = styles.code || {};
+  const table = styles.table || {};
+  const accent = stringValue(styles.accentColor) || cssValue(stringValue(h2.content), "color", "#4285f4");
   return {
     schemaVersion: 3,
-    id: template.id,
-    name: template.name,
+    id: stringValue(template == null ? void 0 : template.id, "legacy-unnamed-theme"),
+    name: stringValue(template == null ? void 0 : template.name, "\u672A\u547D\u540D\u65E7\u7248\u4E3B\u9898"),
     version: "legacy-v2",
     license: "legacy-pending-provenance-review",
     source: template.source || "yh-mp-preview bundled",
     tokens: {
       accent,
-      text: cssValue(styles.paragraph, "color", "#333333"),
+      text: cssValue(stringValue(styles.paragraph), "color", "#333333"),
       mutedText: "#667085",
-      background: cssValue(styles.container, "background(?:-color)?", "transparent"),
-      fontSize: cssValue(styles.paragraph, "font-size", "16px"),
-      lineHeight: cssValue(styles.paragraph, "line-height", "1.8")
+      background: cssValue(stringValue(styles.container), "background(?:-color)?", "transparent"),
+      fontSize: cssValue(stringValue(styles.paragraph), "font-size", "16px"),
+      lineHeight: cssValue(stringValue(styles.paragraph), "line-height", "1.8")
     },
     components: [
-      { id: "heading-1", legacyStyle: styles.title.h1.base },
-      { id: "heading-2", legacyStyle: styles.title.h2.base },
-      { id: "paragraph", legacyStyle: styles.paragraph },
-      { id: "quote", legacyStyle: styles.quote },
-      { id: "code-block", legacyStyle: styles.code.block },
-      { id: "table", legacyStyle: styles.table.container }
+      { id: "heading-1", legacyStyle: stringValue(h1.base) },
+      { id: "heading-2", legacyStyle: stringValue(h2.base) },
+      { id: "paragraph", legacyStyle: stringValue(styles.paragraph) },
+      { id: "quote", legacyStyle: stringValue(styles.quote) },
+      { id: "code-block", legacyStyle: stringValue(code.block) },
+      { id: "table", legacyStyle: stringValue(table.container) }
     ],
     recipes: [{ id: "legacy-compatible", name: "\u517C\u5BB9\u65E7\u7248\u6587\u7AE0", componentIds: [] }],
     compatibility: {
