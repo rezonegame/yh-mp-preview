@@ -70,6 +70,10 @@
 }
 
 .mp-theme-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
     position: relative;
     padding: 0;
     overflow: hidden;
@@ -87,12 +91,12 @@
 .mp-theme-card.is-selected { border: 2px solid var(--interactive-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--interactive-accent) 16%, transparent); }
 .mp-theme-card:focus-visible { outline: 2px solid var(--interactive-accent); outline-offset: 3px; }
 
-.mp-theme-preview { display: flex; flex-direction: column; justify-content: flex-end; min-height: 116px; padding: 16px; color: #fff; }
+.mp-theme-preview { display: flex; flex: 0 0 auto; flex-direction: column; justify-content: flex-end; min-width: 0; min-height: 116px; padding: 16px; color: #fff; }
 .mp-theme-preview-kicker { margin-bottom: 7px; font-size: 10px; font-weight: 700; letter-spacing: .1em; opacity: .86; }
 .mp-theme-preview-title { overflow: hidden; font-size: 18px; font-weight: 800; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
 .mp-theme-preview-copy { overflow: hidden; margin-top: 8px; font-size: 11px; opacity: .9; text-overflow: ellipsis; white-space: nowrap; }
 
-.mp-theme-info { display: flex; flex-direction: column; gap: 7px; padding: 13px 14px 14px; }
+.mp-theme-info { display: flex; flex: 1 0 auto; flex-direction: column; gap: 7px; min-width: 0; padding: 13px 14px 14px; }
 .mp-theme-name-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .mp-theme-name { overflow: hidden; font-size: 14px; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
 .mp-theme-checkmark { display: flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--interactive-accent); color: var(--text-on-accent); }

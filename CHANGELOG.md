@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.6.2
+
+- Explicitly stack the preview and information regions of every theme card,
+  preventing Obsidian theme button styles from forcing a horizontal layout.
+
 ## 3.6.1
 
 - Default the theme gallery to the current theme's article scene, while keeping

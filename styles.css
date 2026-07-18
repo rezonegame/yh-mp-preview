@@ -1526,6 +1526,10 @@ ol {
   gap: 16px;
 }
 .mp-theme-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
   position: relative;
   padding: 0;
   overflow: hidden;
@@ -1556,8 +1560,10 @@ ol {
 }
 .mp-theme-preview {
   display: flex;
+  flex: 0 0 auto;
   flex-direction: column;
   justify-content: flex-end;
+  min-width: 0;
   min-height: 116px;
   padding: 16px;
   color: #fff;
@@ -1587,8 +1593,10 @@ ol {
 }
 .mp-theme-info {
   display: flex;
+  flex: 1 0 auto;
   flex-direction: column;
   gap: 7px;
+  min-width: 0;
   padding: 13px 14px 14px;
 }
 .mp-theme-name-row {
