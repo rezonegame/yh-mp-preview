@@ -9,6 +9,8 @@ import { ThemeGalleryModal } from './settings/ThemeGalleryModal';
 import { createCustomSelect, type SelectOption, type CustomSelectControl } from './ui/CustomSelect';
 import { handleImageAltEdit } from './ui/ImageAltModal';
 import { applyArticleRecipe } from './core/recipe/articleRecipeFormatter';
+import { prepareLegacyWechatFragment } from './core/render/legacyWechatPipeline';
+import type { ValidationReport } from './core/validation/wechatHtmlValidator';
 // @ts-ignore - html2canvas has no type declarations
 import html2canvas from 'html2canvas';
 export const VIEW_TYPE_MP = 'yh-mp-preview';
@@ -22,6 +24,8 @@ export class MPView extends ItemView {
     private lockButton: HTMLButtonElement;
     private editButton: HTMLButtonElement;
     private copyButton: HTMLButtonElement;
+    private validationPanel: HTMLElement;
+    private validationReport: ValidationReport | null = null;
     private templateManager: TemplateManager;
     private settingsManager: SettingsManager;
 
@@ -342,6 +346,7 @@ export class MPView extends ItemView {
         this.fontSizeSelect.addEventListener('change', updateFontSize);
         // 预览区域
         this.previewEl = container.createEl('div', { cls: 'mp-preview-area' });
+        this.validationPanel = container.createEl('section', { cls: 'mp-validation-panel' });
 
         // 点击图片 → 编辑 Alt Text
         this.previewEl.addEventListener('click', async (e) => {
@@ -409,6 +414,11 @@ export class MPView extends ItemView {
         // 添加复制按钮点击事件
         this.copyButton.addEventListener('click', async () => {
             if (this.previewEl) {
+                const validation = this.refreshValidationReport();
+                if (validation?.errors) {
+                    new Notice(`发现 ${validation.errors} 项阻断问题，请先在“检查”区域处理`);
+                    return;
+                }
                 this.copyButton.disabled = true;
                 this.copyButton.setText('复制中...');
 
@@ -466,12 +476,65 @@ export class MPView extends ItemView {
         });
 
         this.fontSizeSelect.disabled = !enabled;
-        this.copyButton.disabled = !enabled;
+        this.copyButton.disabled = !enabled || (this.validationReport?.errors || 0) > 0;
 
         const fontSizeButtons = this.containerEl.querySelectorAll('.mp-font-size-btn');
         fontSizeButtons.forEach(button => {
             (button as HTMLButtonElement).disabled = !enabled;
         });
+    }
+
+    private refreshValidationReport(): ValidationReport | null {
+        const contentSection = this.previewEl?.querySelector('.mp-content-section') as HTMLElement | null;
+        if (!contentSection) {
+            this.validationReport = null;
+            this.renderValidationReport();
+            return null;
+        }
+
+        const settings = this.settingsManager.getSettings();
+        this.validationReport = prepareLegacyWechatFragment(contentSection, {
+            themeId: settings.templateId,
+            recipeId: settings.v3.selectedRecipeId,
+        }).validation;
+        this.renderValidationReport();
+        this.copyButton.disabled = this.validationReport.errors > 0;
+        return this.validationReport;
+    }
+
+    private renderValidationReport(): void {
+        this.validationPanel.empty();
+        const report = this.validationReport;
+        if (!report) {
+            this.validationPanel.style.display = 'none';
+            return;
+        }
+
+        this.validationPanel.style.display = 'block';
+        const status = this.validationPanel.createDiv({
+            cls: `mp-validation-summary ${report.errors > 0 ? 'is-error' : report.warnings > 0 ? 'is-warning' : 'is-ok'}`,
+        });
+        status.setText(report.errors > 0
+            ? `检查：${report.errors} 项阻断问题，已禁止复制`
+            : report.warnings > 0
+                ? `检查：可复制，${report.warnings} 项兼容性提示`
+                : '检查：可复制，未发现兼容性问题');
+
+        if (report.issues.length > 0) {
+            const list = this.validationPanel.createEl('ul', { cls: 'mp-validation-issues' });
+            report.issues.slice(0, 4).forEach((issue) => {
+                list.createEl('li', {
+                    text: `${issue.severity === 'error' ? '阻断' : '提示'} · ${issue.message}（${issue.path}）`,
+                    cls: issue.severity === 'error' ? 'is-error' : 'is-warning',
+                });
+            });
+            if (report.issues.length > 4) {
+                this.validationPanel.createDiv({
+                    text: `另有 ${report.issues.length - 4} 项提示未展开`,
+                    cls: 'mp-validation-more',
+                });
+            }
+        }
     }
 
     async onFileOpen(file: TFile | null) {
@@ -482,6 +545,8 @@ export class MPView extends ItemView {
                 text: '只能预览 markdown 文本文档',
                 cls: 'mp-empty-message'
             });
+            this.validationReport = null;
+            this.renderValidationReport();
             this.updateControlsState(false);
             return;
         }
@@ -674,6 +739,7 @@ export class MPView extends ItemView {
         if (contentSection) {
             applyArticleRecipe(contentSection, this.settingsManager.getSettings().v3.selectedRecipeId);
         }
+        this.refreshValidationReport();
 
         // 恢复滚动位置
         requestAnimationFrame(() => {

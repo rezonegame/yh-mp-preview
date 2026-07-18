@@ -15162,6 +15162,9 @@ function validateWechatHtml(root) {
         add("warning", code, `\u5FAE\u4FE1\u516C\u4F17\u53F7\u517C\u5BB9\u6027\u98CE\u9669\uFF1A${code}`, element);
       }
     });
+    if (element.tagName === "IMG" && !element.getAttribute("src")) {
+      add("error", "missing-image-source", "\u56FE\u7247\u7F3A\u5C11\u53EF\u7528\u7684 src \u5730\u5740", element);
+    }
   });
   return {
     issues,
@@ -15288,13 +15291,20 @@ function removeTransientAttributes(root) {
 function prepareLegacyWechatFragment(element, options = {}) {
   const clone = element.cloneNode(true);
   const article = createArticleModel(clone);
+  const sourceValidation = validateWechatHtml(clone);
   const plan = createLocalLayoutPlan(article, {
     themeId: options.themeId || "legacy-active",
     recipeId: options.recipeId || "legacy-compatible"
   });
   applyArticleRecipe(clone, plan.recipeId);
   removeTransientAttributes(clone);
-  const validation = validateWechatHtml(clone);
+  const outputValidation = validateWechatHtml(clone);
+  const blockingIssues = sourceValidation.issues.filter((issue) => issue.severity === "error");
+  const validation = {
+    issues: [...blockingIssues, ...outputValidation.issues],
+    errors: blockingIssues.length + outputValidation.errors,
+    warnings: outputValidation.warnings
+  };
   return {
     article,
     plan,
@@ -15338,6 +15348,9 @@ var CopyManager = class {
         throw new Error("\u627E\u4E0D\u5230\u5185\u5BB9\u533A\u57DF");
       }
       const preparation = prepareLegacyWechatFragment(contentSection, options);
+      if (preparation.validation.errors > 0) {
+        throw new Error(`\u53D1\u73B0 ${preparation.validation.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u5DF2\u53D6\u6D88\u590D\u5236`);
+      }
       let cleanHtml = preparation.html;
       if (preparation.validation.errors > 0 || preparation.validation.warnings > 0) {
         console.warn("WeChat compatibility report", preparation.validation);
@@ -15924,6 +15937,7 @@ var MPView = class extends import_obsidian4.ItemView {
     this.updateTimer = null;
     this.isPreviewLocked = false;
     this.isEditMode = false;
+    this.validationReport = null;
     this.templateManager = templateManager;
     this.settingsManager = settingsManager;
     this.backgroundManager = new BackgroundManager(this.settingsManager);
@@ -16152,6 +16166,7 @@ var MPView = class extends import_obsidian4.ItemView {
     });
     this.fontSizeSelect.addEventListener("change", updateFontSize);
     this.previewEl = container.createEl("div", { cls: "mp-preview-area" });
+    this.validationPanel = container.createEl("section", { cls: "mp-validation-panel" });
     this.previewEl.addEventListener("click", async (e) => {
       const target = e.target;
       if (target.tagName.toLowerCase() === "img") {
@@ -16203,15 +16218,20 @@ var MPView = class extends import_obsidian4.ItemView {
     });
     this.copyButton.addEventListener("click", async () => {
       if (this.previewEl) {
+        const validation = this.refreshValidationReport();
+        if (validation == null ? void 0 : validation.errors) {
+          new import_obsidian4.Notice(`\u53D1\u73B0 ${validation.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u8BF7\u5148\u5728\u201C\u68C0\u67E5\u201D\u533A\u57DF\u5904\u7406`);
+          return;
+        }
         this.copyButton.disabled = true;
         this.copyButton.setText("\u590D\u5236\u4E2D...");
         try {
           const copySettings = this.settingsManager.getSettings();
-          const validation = await CopyManager.copyToClipboard(this.previewEl, {
+          const validation2 = await CopyManager.copyToClipboard(this.previewEl, {
             themeId: copySettings.templateId,
             recipeId: copySettings.v3.selectedRecipeId
           });
-          this.copyButton.setText(validation.warnings > 0 ? `\u590D\u5236\u6210\u529F\uFF08${validation.warnings} \u9879\u517C\u5BB9\u6027\u63D0\u793A\uFF09` : "\u590D\u5236\u6210\u529F");
+          this.copyButton.setText(validation2.warnings > 0 ? `\u590D\u5236\u6210\u529F\uFF08${validation2.warnings} \u9879\u517C\u5BB9\u6027\u63D0\u793A\uFF09` : "\u590D\u5236\u6210\u529F");
           setTimeout(() => {
             this.copyButton.disabled = false;
             this.copyButton.setText("Pub \u590D\u5236");
@@ -16235,6 +16255,7 @@ var MPView = class extends import_obsidian4.ItemView {
     await this.onFileOpen(currentFile);
   }
   updateControlsState(enabled) {
+    var _a;
     this.lockButton.disabled = !enabled;
     [this.customFontSelect, this.customBackgroundSelect].forEach((ctrl) => {
       if (ctrl && ctrl.container) {
@@ -16246,11 +16267,56 @@ var MPView = class extends import_obsidian4.ItemView {
       }
     });
     this.fontSizeSelect.disabled = !enabled;
-    this.copyButton.disabled = !enabled;
+    this.copyButton.disabled = !enabled || (((_a = this.validationReport) == null ? void 0 : _a.errors) || 0) > 0;
     const fontSizeButtons = this.containerEl.querySelectorAll(".mp-font-size-btn");
     fontSizeButtons.forEach((button) => {
       button.disabled = !enabled;
     });
+  }
+  refreshValidationReport() {
+    var _a;
+    const contentSection = (_a = this.previewEl) == null ? void 0 : _a.querySelector(".mp-content-section");
+    if (!contentSection) {
+      this.validationReport = null;
+      this.renderValidationReport();
+      return null;
+    }
+    const settings = this.settingsManager.getSettings();
+    this.validationReport = prepareLegacyWechatFragment(contentSection, {
+      themeId: settings.templateId,
+      recipeId: settings.v3.selectedRecipeId
+    }).validation;
+    this.renderValidationReport();
+    this.copyButton.disabled = this.validationReport.errors > 0;
+    return this.validationReport;
+  }
+  renderValidationReport() {
+    this.validationPanel.empty();
+    const report = this.validationReport;
+    if (!report) {
+      this.validationPanel.style.display = "none";
+      return;
+    }
+    this.validationPanel.style.display = "block";
+    const status = this.validationPanel.createDiv({
+      cls: `mp-validation-summary ${report.errors > 0 ? "is-error" : report.warnings > 0 ? "is-warning" : "is-ok"}`
+    });
+    status.setText(report.errors > 0 ? `\u68C0\u67E5\uFF1A${report.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u5DF2\u7981\u6B62\u590D\u5236` : report.warnings > 0 ? `\u68C0\u67E5\uFF1A\u53EF\u590D\u5236\uFF0C${report.warnings} \u9879\u517C\u5BB9\u6027\u63D0\u793A` : "\u68C0\u67E5\uFF1A\u53EF\u590D\u5236\uFF0C\u672A\u53D1\u73B0\u517C\u5BB9\u6027\u95EE\u9898");
+    if (report.issues.length > 0) {
+      const list = this.validationPanel.createEl("ul", { cls: "mp-validation-issues" });
+      report.issues.slice(0, 4).forEach((issue) => {
+        list.createEl("li", {
+          text: `${issue.severity === "error" ? "\u963B\u65AD" : "\u63D0\u793A"} \xB7 ${issue.message}\uFF08${issue.path}\uFF09`,
+          cls: issue.severity === "error" ? "is-error" : "is-warning"
+        });
+      });
+      if (report.issues.length > 4) {
+        this.validationPanel.createDiv({
+          text: `\u53E6\u6709 ${report.issues.length - 4} \u9879\u63D0\u793A\u672A\u5C55\u5F00`,
+          cls: "mp-validation-more"
+        });
+      }
+    }
   }
   async onFileOpen(file) {
     this.currentFile = file;
@@ -16260,6 +16326,8 @@ var MPView = class extends import_obsidian4.ItemView {
         text: "\u53EA\u80FD\u9884\u89C8 markdown \u6587\u672C\u6587\u6863",
         cls: "mp-empty-message"
       });
+      this.validationReport = null;
+      this.renderValidationReport();
       this.updateControlsState(false);
       return;
     }
@@ -16405,6 +16473,7 @@ var MPView = class extends import_obsidian4.ItemView {
     if (contentSection) {
       applyArticleRecipe(contentSection, this.settingsManager.getSettings().v3.selectedRecipeId);
     }
+    this.refreshValidationReport();
     requestAnimationFrame(() => {
       if (isAtBottom) {
         this.previewEl.scrollTop = this.previewEl.scrollHeight;

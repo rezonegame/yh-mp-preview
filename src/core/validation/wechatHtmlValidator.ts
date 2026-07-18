@@ -58,6 +58,9 @@ export function validateWechatHtml(root: HTMLElement): ValidationReport {
                 add('warning', code, `微信公众号兼容性风险：${code}`, element);
             }
         });
+        if (element.tagName === 'IMG' && !element.getAttribute('src')) {
+            add('error', 'missing-image-source', '图片缺少可用的 src 地址', element);
+        }
     });
 
     return {

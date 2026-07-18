@@ -45,6 +45,9 @@ export class CopyManager {
                 throw new Error('找不到内容区域');
             }
             const preparation = prepareLegacyWechatFragment(contentSection as HTMLElement, options);
+            if (preparation.validation.errors > 0) {
+                throw new Error(`发现 ${preparation.validation.errors} 项阻断问题，已取消复制`);
+            }
             let cleanHtml = preparation.html;
 
             if (preparation.validation.errors > 0 || preparation.validation.warnings > 0) {

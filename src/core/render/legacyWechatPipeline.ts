@@ -37,13 +37,20 @@ function removeTransientAttributes(root: HTMLElement): void {
 export function prepareLegacyWechatFragment(element: HTMLElement, options: LegacyWechatOptions = {}): LegacyWechatPreparation {
     const clone = element.cloneNode(true) as HTMLElement;
     const article = createArticleModel(clone);
+    const sourceValidation = validateWechatHtml(clone);
     const plan = createLocalLayoutPlan(article, {
         themeId: options.themeId || 'legacy-active',
         recipeId: options.recipeId || 'legacy-compatible',
     });
     applyArticleRecipe(clone, plan.recipeId);
     removeTransientAttributes(clone);
-    const validation = validateWechatHtml(clone);
+    const outputValidation = validateWechatHtml(clone);
+    const blockingIssues = sourceValidation.issues.filter((issue) => issue.severity === 'error');
+    const validation: ValidationReport = {
+        issues: [...blockingIssues, ...outputValidation.issues],
+        errors: blockingIssues.length + outputValidation.errors,
+        warnings: outputValidation.warnings,
+    };
     return {
         article,
         plan,
