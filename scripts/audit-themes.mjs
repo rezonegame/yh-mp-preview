@@ -5,7 +5,10 @@ import { dirname, join, relative, resolve, sep } from 'node:path';
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const templatesDir = resolve(rootDir, 'src/templates');
 const reportPath = resolve(rootDir, 'reports/theme-audit.json');
+const coreThemesPath = resolve(rootDir, 'config/core-themes.json');
 const args = new Set(process.argv.slice(2));
+
+const coreThemeIds = new Set(JSON.parse(readFileSync(coreThemesPath, 'utf8')).themeIds);
 
 function listJsonFiles(directory) {
   return readdirSync(directory, { withFileTypes: true })
@@ -29,13 +32,14 @@ const templates = listJsonFiles(templatesDir).map((filePath) => {
     file: posixRelative(filePath),
     source: template.source ?? 'yh-mp-preview bundled',
     provenanceStatus: 'verified-current-distribution',
-    v3Disposition: 'review-for-classic-or-core',
+    v3Disposition: coreThemeIds.has(template.id) ? 'core' : 'classic',
   };
 });
 
 const duplicateIds = templates
   .map((template) => template.id)
   .filter((id, index, all) => all.indexOf(id) !== index);
+const missingCoreThemeIds = [...coreThemeIds].filter((id) => !templates.some((template) => template.id === id));
 
 const report = {
   schemaVersion: 1,
@@ -46,6 +50,8 @@ const report = {
     xiaohuImported: 0,
     pendingProvenanceReview: templates.filter((template) => !template.provenanceStatus.startsWith('verified')).length,
     duplicateIds,
+    coreThemes: templates.filter((template) => template.v3Disposition === 'core').length,
+    missingCoreThemeIds,
   },
   templates,
 };
@@ -63,6 +69,9 @@ if (args.has('--write')) {
   }
   if (duplicateIds.length > 0) {
     throw new Error(`Duplicate template ids: ${duplicateIds.join(', ')}`);
+  }
+  if (missingCoreThemeIds.length > 0) {
+    throw new Error(`Core theme ids not found: ${missingCoreThemeIds.join(', ')}`);
   }
   console.log(`Theme audit is current for ${templates.length} themes.`);
 } else {

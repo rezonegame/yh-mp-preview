@@ -1,4 +1,5 @@
 import type { MPSettings } from './settings/settings';
+import { STANDARD_COMPONENT_IDS } from './core/components/standardComponents';
 
 type LayoutSettings = MPSettings['layoutEnhancements'];
 
@@ -282,7 +283,7 @@ function codeBlockLanguage(codeEl: Element): string {
 
 function processExplicitComponents(container: HTMLElement, settings: MPSettings): Set<string> {
     const rendered = new Set<string>();
-    const supported = new Set(['toc', 'steps', 'checklist', 'quote-card', 'summary', 'author-card', 'subscribe', 'faq', 'timeline', 'comparison-table']);
+    const supported = STANDARD_COMPONENT_IDS;
 
     container.querySelectorAll('pre > code').forEach(codeEl => {
         const type = codeBlockLanguage(codeEl);

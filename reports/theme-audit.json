@@ -1,12 +1,14 @@
 {
   "schemaVersion": 1,
-  "pluginVersion": "3.2.0",
+  "pluginVersion": "3.3.0",
   "summary": {
     "total": 64,
     "bundled": 64,
     "xiaohuImported": 0,
     "pendingProvenanceReview": 0,
-    "duplicateIds": []
+    "duplicateIds": [],
+    "coreThemes": 10,
+    "missingCoreThemeIds": []
   },
   "templates": [
     {
@@ -15,7 +17,7 @@
       "file": "src/templates/academic-pro-forest.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "core"
     },
     {
       "id": "academic-pro-slate",
@@ -23,7 +25,7 @@
       "file": "src/templates/academic-pro-slate.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "academic-pro",
@@ -31,7 +33,7 @@
       "file": "src/templates/academic-pro.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "core"
     },
     {
       "id": "academic",
@@ -39,7 +41,7 @@
       "file": "src/templates/academic.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "adventure",
@@ -47,7 +49,7 @@
       "file": "src/templates/adventure.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "apple-product",
@@ -55,7 +57,7 @@
       "file": "src/templates/apple-product.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "core"
     },
     {
       "id": "autumn-warm",
@@ -63,7 +65,7 @@
       "file": "src/templates/autumn-warm.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "blackboard",
@@ -71,7 +73,7 @@
       "file": "src/templates/blackboard.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "bold-blue",
@@ -79,7 +81,7 @@
       "file": "src/templates/bold-blue.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "bold-gold",
@@ -87,7 +89,7 @@
       "file": "src/templates/bold-gold.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "bold-gray",
@@ -95,7 +97,7 @@
       "file": "src/templates/bold-gray.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "bold-green",
@@ -103,7 +105,7 @@
       "file": "src/templates/bold-green.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "core"
     },
     {
       "id": "bold-navy",
@@ -111,7 +113,7 @@
       "file": "src/templates/bold-navy.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "bold-orange",
@@ -119,7 +121,7 @@
       "file": "src/templates/bold-orange.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "bold-red",
@@ -127,7 +129,7 @@
       "file": "src/templates/bold-red.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "bold-sky",
@@ -135,7 +137,7 @@
       "file": "src/templates/bold-sky.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "brown",
@@ -143,7 +145,7 @@
       "file": "src/templates/brown.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "cyber-neon",
@@ -151,7 +153,7 @@
       "file": "src/templates/cyber-neon.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "dark",
@@ -159,7 +161,7 @@
       "file": "src/templates/dark.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "darkgreen",
@@ -167,7 +169,7 @@
       "file": "src/templates/darkgreen.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "default",
@@ -175,7 +177,7 @@
       "file": "src/templates/default.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "core"
     },
     {
       "id": "elegant-blue",
@@ -183,7 +185,7 @@
       "file": "src/templates/elegant-blue.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "elegant-gold",
@@ -191,7 +193,7 @@
       "file": "src/templates/elegant-gold.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "elegant-gray",
@@ -199,7 +201,7 @@
       "file": "src/templates/elegant-gray.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "elegant-green",
@@ -207,7 +209,7 @@
       "file": "src/templates/elegant-green.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "elegant-navy",
@@ -215,7 +217,7 @@
       "file": "src/templates/elegant-navy.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "elegant-orange",
@@ -223,7 +225,7 @@
       "file": "src/templates/elegant-orange.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "elegant-red",
@@ -231,7 +233,7 @@
       "file": "src/templates/elegant-red.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "elegant-sky",
@@ -239,7 +241,7 @@
       "file": "src/templates/elegant-sky.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "elegant",
@@ -247,7 +249,7 @@
       "file": "src/templates/elegant.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "core"
     },
     {
       "id": "focus-blue",
@@ -255,7 +257,7 @@
       "file": "src/templates/focus-blue.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "core"
     },
     {
       "id": "focus-gold",
@@ -263,7 +265,7 @@
       "file": "src/templates/focus-gold.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "focus-gray",
@@ -271,7 +273,7 @@
       "file": "src/templates/focus-gray.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "focus-green",
@@ -279,7 +281,7 @@
       "file": "src/templates/focus-green.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "focus-navy",
@@ -287,7 +289,7 @@
       "file": "src/templates/focus-navy.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "focus-orange",
@@ -295,7 +297,7 @@
       "file": "src/templates/focus-orange.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "focus-red",
@@ -303,7 +305,7 @@
       "file": "src/templates/focus-red.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "focus-sky",
@@ -311,7 +313,7 @@
       "file": "src/templates/focus-sky.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "gameui",
@@ -319,7 +321,7 @@
       "file": "src/templates/gameui.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "kindergarten",
@@ -327,7 +329,7 @@
       "file": "src/templates/kindergarten.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "minimal-blue",
@@ -335,7 +337,7 @@
       "file": "src/templates/minimal-blue.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "minimal-gold",
@@ -343,7 +345,7 @@
       "file": "src/templates/minimal-gold.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "minimal-gray",
@@ -351,7 +353,7 @@
       "file": "src/templates/minimal-gray.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "minimal-green",
@@ -359,7 +361,7 @@
       "file": "src/templates/minimal-green.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "minimal-navy",
@@ -367,7 +369,7 @@
       "file": "src/templates/minimal-navy.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "minimal-orange",
@@ -375,7 +377,7 @@
       "file": "src/templates/minimal-orange.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "minimal-red",
@@ -383,7 +385,7 @@
       "file": "src/templates/minimal-red.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "minimal-sky",
@@ -391,7 +393,7 @@
       "file": "src/templates/minimal-sky.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "minimal",
@@ -399,7 +401,7 @@
       "file": "src/templates/minimal.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "core"
     },
     {
       "id": "modern-report-navy",
@@ -407,7 +409,7 @@
       "file": "src/templates/modern-report-navy.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "modern-report",
@@ -415,7 +417,7 @@
       "file": "src/templates/modern-report.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "core"
     },
     {
       "id": "ocean-calm",
@@ -423,7 +425,7 @@
       "file": "src/templates/ocean-calm.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "orange",
@@ -431,7 +433,7 @@
       "file": "src/templates/orange.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "parent-child",
@@ -439,7 +441,7 @@
       "file": "src/templates/parent-child.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "playful",
@@ -447,7 +449,7 @@
       "file": "src/templates/playful.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "scarlet",
@@ -455,7 +457,7 @@
       "file": "src/templates/scarlet.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "spring-fresh",
@@ -463,7 +465,7 @@
       "file": "src/templates/spring-fresh.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "teacher",
@@ -471,7 +473,7 @@
       "file": "src/templates/teacher.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "warmth",
@@ -479,7 +481,7 @@
       "file": "src/templates/warmth.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "yeban-orange",
@@ -487,7 +489,7 @@
       "file": "src/templates/yeban-orange.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "yeban",
@@ -495,7 +497,7 @@
       "file": "src/templates/yeban.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "zen-essence-sakura",
@@ -503,7 +505,7 @@
       "file": "src/templates/zen-essence-sakura.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "zen-essence-teal",
@@ -511,7 +513,7 @@
       "file": "src/templates/zen-essence-teal.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "classic"
     },
     {
       "id": "zen-essence",
@@ -519,7 +521,7 @@
       "file": "src/templates/zen-essence.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "review-for-classic-or-core"
+      "v3Disposition": "core"
     }
   ]
 }

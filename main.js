@@ -13513,6 +13513,21 @@ function resolveImagePath(linktext, app) {
   return null;
 }
 
+// src/core/components/standardComponents.ts
+var STANDARD_COMPONENTS = [
+  { id: "toc", name: "\u76EE\u5F55", description: "\u6587\u7AE0\u7AE0\u8282\u5BFC\u822A" },
+  { id: "steps", name: "\u6B65\u9AA4", description: "\u987A\u5E8F\u64CD\u4F5C\u8BF4\u660E" },
+  { id: "checklist", name: "\u68C0\u67E5\u6E05\u5355", description: "\u5F85\u529E\u548C\u6838\u5BF9\u4E8B\u9879" },
+  { id: "quote-card", name: "\u5F15\u7528\u5361\u7247", description: "\u91CD\u70B9\u5F15\u8BED" },
+  { id: "summary", name: "\u6458\u8981\u5361\u7247", description: "\u5173\u952E\u7ED3\u8BBA" },
+  { id: "author-card", name: "\u4F5C\u8005\u5361\u7247", description: "\u4F5C\u8005\u4FE1\u606F" },
+  { id: "subscribe", name: "\u5173\u6CE8\u5F15\u5BFC", description: "\u6587\u7AE0\u7ED3\u5C3E\u884C\u52A8\u5F15\u5BFC" },
+  { id: "faq", name: "\u5E38\u89C1\u95EE\u9898", description: "\u95EE\u7B54\u5185\u5BB9" },
+  { id: "timeline", name: "\u65F6\u95F4\u7EBF", description: "\u6309\u65F6\u95F4\u7EC4\u7EC7\u7684\u4FE1\u606F" },
+  { id: "comparison-table", name: "\u5BF9\u6BD4\u8868", description: "\u4E24\u7EC4\u65B9\u6848\u6BD4\u8F83" }
+];
+var STANDARD_COMPONENT_IDS = new Set(STANDARD_COMPONENTS.map((component) => component.id));
+
 // src/layoutEnhancer.ts
 var DEFAULT_ACCENT = "#4285f4";
 function escapeHtml(value) {
@@ -13758,7 +13773,7 @@ function codeBlockLanguage(codeEl) {
 }
 function processExplicitComponents(container, settings) {
   const rendered = /* @__PURE__ */ new Set();
-  const supported = /* @__PURE__ */ new Set(["toc", "steps", "checklist", "quote-card", "summary", "author-card", "subscribe", "faq", "timeline", "comparison-table"]);
+  const supported = STANDARD_COMPONENT_IDS;
   container.querySelectorAll("pre > code").forEach((codeEl) => {
     var _a;
     const type = codeBlockLanguage(codeEl);

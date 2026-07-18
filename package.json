@@ -1,6 +1,6 @@
 {
 	"name": "yh-mp-preview",
-	"version": "3.2.0",
+	"version": "3.3.0",
 	"description": "一键将 Markdown 文档转换为微信公众号格式",
 	"main": "main.js",
 	"scripts": {
@@ -9,12 +9,14 @@
 		"test": "node --test tests/*.test.mjs",
 		"audit:themes": "node scripts/audit-themes.mjs --check",
 		"audit:themes:write": "node scripts/audit-themes.mjs --write",
+		"audit:core-themes": "node scripts/audit-core-theme-baseline.mjs --check",
+		"audit:core-themes:write": "node scripts/audit-core-theme-baseline.mjs --write",
 		"audit:wechat": "node scripts/audit-wechat-compatibility.mjs --check",
 		"audit:wechat:write": "node scripts/audit-wechat-compatibility.mjs --write",
 		"check:text": "node scripts/check-text-encoding.mjs",
 		"sync-version": "node scripts/version-bump.mjs",
 		"check:release": "node scripts/check-release.mjs",
-		"verify": "npm run test && npm run check:text && npm run audit:themes && npm run audit:wechat && npm run check:release",
+		"verify": "npm run test && npm run check:text && npm run audit:themes && npm run audit:core-themes && npm run audit:wechat && npm run check:release",
 		"version": "npm run sync-version"
 	},
 	"keywords": [

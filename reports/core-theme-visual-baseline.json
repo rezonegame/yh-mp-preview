@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "pluginVersion": "3.3.0",
+  "description": "Deterministic Core theme visual-style baseline. Screenshot comparison is a later RC task.",
+  "themes": [
+    {
+      "id": "default",
+      "name": "默认模板 - 标准",
+      "fingerprint": "04b0774a7876bc3226e9e808503449395faaad3fba315a5e4c8589bf342331f5",
+      "visualTokens": {
+        "container": "",
+        "h1": "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5;",
+        "h2": "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+        "h3": "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
+        "paragraph": "line-height: 1.8; margin-top: 1em; font-size: 1em; color: #4a4a4a;",
+        "quote": "border-left: 4px solid #e0e0e0; border-radius: 6px; padding: 14px 18px; background: #f6f8fa; margin: 0.8em 0; color: #6a737d; font-style: italic; word-wrap: break-word;",
+        "codeBlock": "color: #333; background: #f8f8f8; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
+        "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e1e4e8;"
+      }
+    },
+    {
+      "id": "minimal",
+      "name": "极简系列 - 标准",
+      "fingerprint": "a90cd7f5a91d3ef2648e49a8c85fd1f67bdcdf7159a16f4cd1aea625d28a4922",
+      "visualTokens": {
+        "container": "",
+        "h1": "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(0,0,0,0.1);",
+        "h2": "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
+        "h3": "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
+        "paragraph": "line-height: 1.8; margin-top: 1em; font-size: 1em; color: #4a4a4a;",
+        "quote": "border-left: 4px solid #262626; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        "codeBlock": "color: #333; background: #fafafa; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
+        "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;"
+      }
+    },
+    {
+      "id": "elegant",
+      "name": "精致系列 - 经典",
+      "fingerprint": "e6071d364bc3c04215c281e773e4f74fec1ecb58af9c140c1e2c732769fb3118",
+      "visualTokens": {
+        "container": "",
+        "h1": "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
+        "h2": "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-bottom: 2px solid #9F7AEA; line-height: 1.2;",
+        "h3": "margin: 18px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
+        "paragraph": "line-height: 1.8; margin-top: 1em; font-size: 1em; color: #4a4a4a;",
+        "quote": "border-left: 4px solid #9F7AEA; border-radius: 6px; padding: 14px 18px; background: #f5f3ff; margin: 0.8em 0; color: #6B46C1; font-style: italic; word-wrap: break-word;",
+        "codeBlock": "color: #333; background: #f8f8f8; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
+        "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e1e4e8;"
+      }
+    },
+    {
+      "id": "academic-pro",
+      "name": "学术专业 - 墨韵",
+      "fingerprint": "5221954dd48280a8c06db50615e44b7114ab4f64a82b4ab6b4f18f04650860a7",
+      "visualTokens": {
+        "container": "background-color: #ffffff; padding: 24px",
+        "h1": "font-size: 26px; font-weight: 700; color: #1a1a2e; text-align: center; border-bottom: 2.5px solid #1a1a2e; padding-bottom: 12px; margin-top: 28px; margin-bottom: 30px; letter-spacing: 0.05em",
+        "h2": "font-size: 20px; font-weight: 700; color: #1a1a2e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 26px; margin-bottom: 16px; display: block; width: 100%",
+        "h3": "font-size: 18px; font-weight: 600; color: #2c3e50; margin-top: 20px; margin-bottom: 12px; font-style: italic",
+        "paragraph": "font-size: 16px; color: #2c3e50; line-height: 1.8; margin-top: 0; margin-bottom: 18px; text-align: justify; text-indent: 0",
+        "quote": "border-left: 4px solid #1a1a2e; background: #f8f9fb; padding: 16px 20px; margin: 24px 0; color: #5a6a7a; font-size: 15px; line-height: 1.8; font-style: normal",
+        "codeBlock": "background: #f4f6f8; border-radius: 4px; margin: 24px 0; overflow: hidden; border: 1px solid #e1e4e8",
+        "table": "width: 100%; border-collapse: collapse; margin: 24px 0; border-top: 2px solid #1a1a2e; border-bottom: 2px solid #1a1a2e"
+      }
+    },
+    {
+      "id": "academic-pro-forest",
+      "name": "学术专业 - 森绿",
+      "fingerprint": "b46f9eeac2a9bee4ac988e1467c91b8d64e7d19342262f05017adf145c9d0eea",
+      "visualTokens": {
+        "container": "background-color: #ffffff; padding: 24px",
+        "h1": "font-size: 26px; font-weight: 700; color: #1b4d3e; text-align: center; border-bottom: 2.5px solid #1b4d3e; padding-bottom: 12px; margin-top: 28px; margin-bottom: 30px; letter-spacing: 0.05em",
+        "h2": "font-size: 20px; font-weight: 700; color: #1b4d3e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 26px; margin-bottom: 16px; display: block; width: 100%",
+        "h3": "",
+        "paragraph": "",
+        "quote": "",
+        "codeBlock": "",
+        "table": ""
+      }
+    },
+    {
+      "id": "modern-report",
+      "name": "现代报告 - 黑白",
+      "fingerprint": "076833a6a4058b6a75ad4c9953199c67ce37d709fa009b25d512d089b19f2c1f",
+      "visualTokens": {
+        "container": "background-color: #ffffff; padding: 20px; color: #1a1a1a",
+        "h1": "font-size: 24px; font-weight: 800; color: #000000; text-align: left; padding: 0 0 10px 0; border-bottom: 4px solid #000000; margin-top: 28px; margin-bottom: 24px; letter-spacing: -0.02em",
+        "h2": "font-size: 19px; font-weight: 700; color: #000000; background: #f0f0f0; padding: 8px 12px; margin-top: 26px; margin-bottom: 16px; border-left: 6px solid #000000",
+        "h3": "font-size: 17px; font-weight: 600; color: #333333; margin-top: 20px; margin-bottom: 12px; text-decoration: underline; text-underline-offset: 6px",
+        "paragraph": "font-size: 16px; color: #333333; line-height: 1.75; margin-top: 0; margin-bottom: 20px; text-align: left",
+        "quote": "background: #f9f9f9; border-radius: 8px; padding: 20px; margin: 24px 0; color: #444444; font-size: 15px; line-height: 1.75; border: 1px solid #eeeeee",
+        "codeBlock": "background: #1e1e1e; border-radius: 6px; margin: 24px 0; overflow: hidden; color: #d4d4d4",
+        "table": "width: 100%; border-collapse: collapse; margin: 24px 0"
+      }
+    },
+    {
+      "id": "zen-essence",
+      "name": "禅意极简 - 留白",
+      "fingerprint": "bc5b43d67a037be56a54e9d942dcc3ff2714e84ff8eaa0d5e8938e4465a92785",
+      "visualTokens": {
+        "container": "background-color: #ffffff; padding: 32px 24px; color: #555555",
+        "h1": "font-size: 20px; font-weight: 300; color: #333333; text-align: center; margin-top: 32px; margin-bottom: 40px; letter-spacing: 0.3em; text-transform: uppercase",
+        "h2": "font-size: 17px; font-weight: 300; color: #333333; text-align: center; margin-top: 28px; margin-bottom: 20px; border-bottom: 0.5px solid #e0e0e0; padding-bottom: 15px; width: 30%; margin-left: auto; margin-right: auto",
+        "h3": "font-size: 16px; font-weight: 400; color: #666666; text-align: center; margin-top: 22px; margin-bottom: 15px; letter-spacing: 0.1em",
+        "paragraph": "font-size: 15px; color: #666666; line-height: 2.2; margin-top: 0; margin-bottom: 24px; text-align: center; font-weight: 300; letter-spacing: 0.8px",
+        "quote": "border: none; background: transparent; padding: 20px 40px; margin: 40px 0; font-size: 14px; color: #888888; line-height: 2.4; font-style: italic; position: relative; text-align: center",
+        "codeBlock": "background: #fdfdfd; border: 0.5px solid #eee; border-radius: 2px; margin: 30px 0; padding: 20px; text-align: left",
+        "table": "width: 80%; border-collapse: collapse; margin: 40px auto; font-size: 14px; border-bottom: 0.5px solid #eee; border-top: 0.5px solid #eee"
+      }
+    },
+    {
+      "id": "apple-product",
+      "name": "场景情绪 - 苹果产品",
+      "fingerprint": "db989d508c51cea3868ba44b77ff63f0fccc499f41a49daecaf4345fcf48d75d",
+      "visualTokens": {
+        "container": "",
+        "h1": "margin: 28px 0 0; font-size: 2em; line-height: 1.42; text-align: center;",
+        "h2": "margin: 28px 0 10px; font-size: 1.36em; line-height: 1.5; padding-bottom: 8px;",
+        "h3": "margin: 22px 0 8px; font-size: 1.14em; line-height: 1.5;",
+        "paragraph": "line-height: 1.82; margin-top: 1em; color: #374151;",
+        "quote": "border-left: 4px solid #0a84ff; border-radius: 12px; padding: 14px 18px; background: #f5f7fb; margin: 1em 0; color: #4b5563;",
+        "codeBlock": "color: #1f2937; background: #f8fafc; border-radius: 14px; border: 1px solid #e5e7eb; box-shadow: 0 10px 28px rgba(17,24,39,0.05); margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.7; white-space: pre-wrap;",
+        "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e5e7eb;"
+      }
+    },
+    {
+      "id": "focus-blue",
+      "name": "聚焦系列 - 蓝色",
+      "fingerprint": "8f2e6e528ad461a9086ac221afdacb596a2175044299809274cdc6dbb79031fe",
+      "visualTokens": {
+        "container": "",
+        "h1": "margin: 28px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #3498db; border-bottom: 2px solid #3498db; padding: 15px 0; max-width: 80%;",
+        "h2": "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
+        "h3": "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
+        "paragraph": "line-height: 1.8; margin: 1em 0; font-size: 1em; color: #4a4a4a; text-align: justify;",
+        "quote": "border-left: 4px solid #3498db; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
+        "codeBlock": "color: #333; background: #fafafa; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
+        "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;"
+      }
+    },
+    {
+      "id": "bold-green",
+      "name": "醒目系列 - 绿色",
+      "fingerprint": "1ae5b0cfa1482c12164f62e35dd06d53849743c52d9ef6c963aa6ea248f43043",
+      "visualTokens": {
+        "container": "",
+        "h1": "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #2ecc71; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
+        "h2": "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #2ecc71; padding-bottom: 8px;",
+        "h3": "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #2ecc71;",
+        "paragraph": "line-height: 1.8; margin: 1em 0; font-size: 1em; color: #2c3e50; font-weight: 500; text-align: justify;",
+        "quote": "border-left: 6px solid #2ecc71; border-radius: 4px; padding: 14px 18px; background: #eafaf1; margin: 1em 0; color: #1e8449; font-style: italic; font-weight: 600;",
+        "codeBlock": "color: #e0e0e0; background: #2c3e50; border-radius: 8px; border: 1px solid #1a252f; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
+        "table": "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #2ecc71; border-radius: 6px; overflow: hidden;"
+      }
+    }
+  ]
+}
