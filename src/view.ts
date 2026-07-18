@@ -3,7 +3,7 @@ import { MPConverter } from './converter';
 import { CopyManager } from './copyManager';
 import type { TemplateManager } from './templateManager';
 
-import type { SettingsManager } from './settings/settings';
+import type { SettingsManager, LayoutSnapshot } from './settings/settings';
 import { BackgroundManager } from './backgroundManager';
 import { ThemeGalleryModal } from './settings/ThemeGalleryModal';
 import { createCustomSelect, type SelectOption, type CustomSelectControl } from './ui/CustomSelect';
@@ -32,6 +32,7 @@ export class MPView extends ItemView {
     // Updated to use the controller interface
     private customFontSelect: CustomSelectControl;
     private customBackgroundSelect: CustomSelectControl;
+    private recipeSelect: CustomSelectControl;
 
     private fontSizeSelect: HTMLInputElement;
     private backgroundManager: BackgroundManager;
@@ -114,6 +115,20 @@ export class MPView extends ItemView {
         });
         setIcon(this.editButton, 'pencil');
         this.editButton.addEventListener('click', () => this.toggleEditMode());
+
+        const snapshotButton = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
+            attr: { 'aria-label': '保存排版快照', title: '保存排版快照' },
+        });
+        setIcon(snapshotButton, 'save');
+        snapshotButton.addEventListener('click', async () => this.saveCurrentSnapshot());
+
+        const restoreButton = secondaryRow.createEl('button', {
+            cls: 'mp-action-button mp-icon-btn',
+            attr: { 'aria-label': '恢复最近快照', title: '恢复最近快照' },
+        });
+        setIcon(restoreButton, 'history');
+        restoreButton.addEventListener('click', async () => this.restoreLatestSnapshot());
 
         // SEO Hidden Text Button
         const seoButton = secondaryRow.createEl('button', {
@@ -256,7 +271,7 @@ export class MPView extends ItemView {
         // 恢复设置状态
         const settings = this.settingsManager.getSettings();
 
-        const recipeSelect = createCustomSelect(
+        this.recipeSelect = createCustomSelect(
             controlsGroup,
             'mp-recipe-select',
             [
@@ -277,7 +292,7 @@ export class MPView extends ItemView {
                 await this.updatePreview();
             },
         );
-        recipeSelect.setValue(settings.v3.selectedRecipeId);
+        this.recipeSelect.setValue(settings.v3.selectedRecipeId);
 
         // 恢复背景
         if (settings.backgroundId) {
@@ -412,6 +427,18 @@ export class MPView extends ItemView {
         });
 
         // 添加复制按钮点击事件
+        const exportHtmlButton = primaryRow.createEl('button', {
+            text: '导出 HTML',
+            cls: 'mp-export-button',
+        });
+        exportHtmlButton.addEventListener('click', async () => this.exportHtmlFragment(exportHtmlButton));
+
+        const exportSegmentsButton = primaryRow.createEl('button', {
+            text: '导出分段图',
+            cls: 'mp-export-button',
+        });
+        exportSegmentsButton.addEventListener('click', async () => this.exportSegmentedImages(exportSegmentsButton));
+
         this.copyButton.addEventListener('click', async () => {
             if (this.previewEl) {
                 const validation = this.refreshValidationReport();
@@ -482,6 +509,7 @@ export class MPView extends ItemView {
         fontSizeButtons.forEach(button => {
             (button as HTMLButtonElement).disabled = !enabled;
         });
+
     }
 
     private refreshValidationReport(): ValidationReport | null {
@@ -534,6 +562,116 @@ export class MPView extends ItemView {
                     cls: 'mp-validation-more',
                 });
             }
+        }
+    }
+
+    private async saveCurrentSnapshot(): Promise<void> {
+        if (!this.currentFile) {
+            new Notice('请先打开一篇 Markdown 笔记');
+            return;
+        }
+        const content = await this.app.vault.cachedRead(this.currentFile);
+        const settings = this.settingsManager.getSettings();
+        const validation = this.refreshValidationReport() || { errors: 0, warnings: 0 };
+        const snapshot: LayoutSnapshot = {
+            id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+            createdAt: new Date().toISOString(),
+            filePath: this.currentFile.path,
+            contentHash: this.hashText(content),
+            templateId: settings.templateId,
+            backgroundId: settings.backgroundId,
+            fontFamily: settings.fontFamily,
+            fontSize: settings.fontSize,
+            recipeId: settings.v3.selectedRecipeId,
+            validation: { errors: validation.errors, warnings: validation.warnings },
+        };
+        await this.settingsManager.saveLayoutSnapshot(snapshot);
+        new Notice('已保存排版快照');
+    }
+
+    private async restoreLatestSnapshot(): Promise<void> {
+        const snapshot = this.settingsManager.getSettings().layoutSnapshots[0];
+        if (!snapshot) {
+            new Notice('尚无可恢复的排版快照');
+            return;
+        }
+        await this.settingsManager.restoreLayoutSnapshot(snapshot);
+        this.customFontSelect.setValue(snapshot.fontFamily);
+        this.customBackgroundSelect.setValue(snapshot.backgroundId);
+        this.fontSizeSelect.value = String(snapshot.fontSize);
+        this.recipeSelect.setValue(snapshot.recipeId);
+        await this.updatePreview();
+        new Notice(`已恢复 ${new Date(snapshot.createdAt).toLocaleString()} 的排版快照`);
+    }
+
+    private hashText(value: string): string {
+        let hash = 5381;
+        for (let index = 0; index < value.length; index += 1) {
+            hash = ((hash << 5) + hash) ^ value.charCodeAt(index);
+        }
+        return (hash >>> 0).toString(16);
+    }
+
+    private async exportHtmlFragment(button: HTMLButtonElement): Promise<void> {
+        const contentSection = this.previewEl.querySelector('.mp-content-section') as HTMLElement | null;
+        if (!contentSection) return;
+        const originalText = button.textContent || '导出 HTML';
+        button.disabled = true;
+        try {
+            const settings = this.settingsManager.getSettings();
+            const prepared = prepareLegacyWechatFragment(contentSection, {
+                themeId: settings.templateId,
+                recipeId: settings.v3.selectedRecipeId,
+            });
+            if (prepared.validation.errors > 0) {
+                new Notice(`存在 ${prepared.validation.errors} 项阻断问题，无法导出 HTML`);
+                return;
+            }
+            const blob = new Blob([prepared.html], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `yh-mp-preview-${Date.now()}.html`;
+            link.click();
+            URL.revokeObjectURL(url);
+            new Notice('已导出 HTML 片段');
+        } finally {
+            button.disabled = false;
+            button.setText(originalText);
+        }
+    }
+
+    private async exportSegmentedImages(button: HTMLButtonElement): Promise<void> {
+        const originalText = button.textContent || '导出分段图';
+        button.disabled = true;
+        try {
+            const canvas = await html2canvas(this.previewEl, {
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                scale: 2,
+            });
+            const segmentHeight = Math.max(1, Math.round(canvas.width * 4 / 3));
+            const total = Math.ceil(canvas.height / segmentHeight);
+            for (let index = 0; index < total; index += 1) {
+                const sourceY = index * segmentHeight;
+                const height = Math.min(segmentHeight, canvas.height - sourceY);
+                const segment = document.createElement('canvas');
+                segment.width = canvas.width;
+                segment.height = height;
+                segment.getContext('2d')?.drawImage(canvas, 0, sourceY, canvas.width, height, 0, 0, canvas.width, height);
+                const link = document.createElement('a');
+                link.download = `yh-mp-preview-${Date.now()}-${index + 1}.png`;
+                link.href = segment.toDataURL('image/png');
+                link.click();
+            }
+            new Notice(`已导出 ${total} 张 1:1.33 分段图`);
+        } catch (error) {
+            console.error('分段图导出失败', error);
+            new Notice('分段图导出失败');
+        } finally {
+            button.disabled = false;
+            button.setText(originalText);
         }
     }
 

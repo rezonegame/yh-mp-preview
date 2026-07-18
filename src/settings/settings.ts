@@ -43,6 +43,20 @@ export interface MPSettings {
         note: string;
         qrcode: string;
     };
+    layoutSnapshots: LayoutSnapshot[];
+}
+
+export interface LayoutSnapshot {
+    id: string;
+    createdAt: string;
+    filePath: string;
+    contentHash: string;
+    templateId: string;
+    backgroundId: string;
+    fontFamily: string;
+    fontSize: number;
+    recipeId: string;
+    validation: { errors: number; warnings: number };
 }
 
 const DEFAULT_SETTINGS: MPSettings = {
@@ -89,6 +103,7 @@ const DEFAULT_SETTINGS: MPSettings = {
         note: '',
         qrcode: '',
     },
+    layoutSnapshots: [],
     customFonts: [
         {
             value: 'Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, "PingFang SC", Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
@@ -170,6 +185,9 @@ export class SettingsManager {
         }
         if (!savedData.customFonts) {
             savedData.customFonts = DEFAULT_SETTINGS.customFonts;
+        }
+        if (!Array.isArray(savedData.layoutSnapshots)) {
+            savedData.layoutSnapshots = [];
         }
 
         // 加载背景设置 -同样的逻辑
@@ -289,6 +307,27 @@ export class SettingsManager {
 
     async updateSettings(settings: Partial<MPSettings>) {
         this.settings = { ...this.settings, ...settings };
+        await this.saveSettings();
+    }
+
+    async saveLayoutSnapshot(snapshot: LayoutSnapshot): Promise<void> {
+        this.settings.layoutSnapshots = [snapshot, ...this.settings.layoutSnapshots]
+            .slice(0, 20);
+        await this.saveSettings();
+    }
+
+    async restoreLayoutSnapshot(snapshot: LayoutSnapshot): Promise<void> {
+        this.settings = {
+            ...this.settings,
+            templateId: this.getTemplate(snapshot.templateId) ? snapshot.templateId : 'default',
+            backgroundId: snapshot.backgroundId,
+            fontFamily: snapshot.fontFamily,
+            fontSize: snapshot.fontSize,
+            v3: {
+                ...this.settings.v3,
+                selectedRecipeId: snapshot.recipeId,
+            },
+        };
         await this.saveSettings();
     }
 

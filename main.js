@@ -16008,6 +16008,18 @@ var MPView = class extends import_obsidian4.ItemView {
     });
     (0, import_obsidian4.setIcon)(this.editButton, "pencil");
     this.editButton.addEventListener("click", () => this.toggleEditMode());
+    const snapshotButton = secondaryRow.createEl("button", {
+      cls: "mp-action-button mp-icon-btn",
+      attr: { "aria-label": "\u4FDD\u5B58\u6392\u7248\u5FEB\u7167", title: "\u4FDD\u5B58\u6392\u7248\u5FEB\u7167" }
+    });
+    (0, import_obsidian4.setIcon)(snapshotButton, "save");
+    snapshotButton.addEventListener("click", async () => this.saveCurrentSnapshot());
+    const restoreButton = secondaryRow.createEl("button", {
+      cls: "mp-action-button mp-icon-btn",
+      attr: { "aria-label": "\u6062\u590D\u6700\u8FD1\u5FEB\u7167", title: "\u6062\u590D\u6700\u8FD1\u5FEB\u7167" }
+    });
+    (0, import_obsidian4.setIcon)(restoreButton, "history");
+    restoreButton.addEventListener("click", async () => this.restoreLatestSnapshot());
     const seoButton = secondaryRow.createEl("button", {
       cls: "mp-action-button mp-icon-btn",
       attr: { "aria-label": "SEO \u9690\u85CF\u6587\u5B57", "title": "\u63D2\u5165 SEO \u9690\u85CF\u5173\u952E\u8BCD" }
@@ -16110,7 +16122,7 @@ var MPView = class extends import_obsidian4.ItemView {
       text: "+"
     });
     const settings = this.settingsManager.getSettings();
-    const recipeSelect = createCustomSelect(
+    this.recipeSelect = createCustomSelect(
       controlsGroup,
       "mp-recipe-select",
       [
@@ -16131,7 +16143,7 @@ var MPView = class extends import_obsidian4.ItemView {
         await this.updatePreview();
       }
     );
-    recipeSelect.setValue(settings.v3.selectedRecipeId);
+    this.recipeSelect.setValue(settings.v3.selectedRecipeId);
     if (settings.backgroundId) {
       this.customBackgroundSelect.setValue(settings.backgroundId);
       this.backgroundManager.setBackground(settings.backgroundId);
@@ -16231,6 +16243,16 @@ var MPView = class extends import_obsidian4.ItemView {
         }
       }
     });
+    const exportHtmlButton = primaryRow.createEl("button", {
+      text: "\u5BFC\u51FA HTML",
+      cls: "mp-export-button"
+    });
+    exportHtmlButton.addEventListener("click", async () => this.exportHtmlFragment(exportHtmlButton));
+    const exportSegmentsButton = primaryRow.createEl("button", {
+      text: "\u5BFC\u51FA\u5206\u6BB5\u56FE",
+      cls: "mp-export-button"
+    });
+    exportSegmentsButton.addEventListener("click", async () => this.exportSegmentedImages(exportSegmentsButton));
     this.copyButton.addEventListener("click", async () => {
       if (this.previewEl) {
         const validation = this.refreshValidationReport();
@@ -16331,6 +16353,113 @@ var MPView = class extends import_obsidian4.ItemView {
           cls: "mp-validation-more"
         });
       }
+    }
+  }
+  async saveCurrentSnapshot() {
+    if (!this.currentFile) {
+      new import_obsidian4.Notice("\u8BF7\u5148\u6253\u5F00\u4E00\u7BC7 Markdown \u7B14\u8BB0");
+      return;
+    }
+    const content = await this.app.vault.cachedRead(this.currentFile);
+    const settings = this.settingsManager.getSettings();
+    const validation = this.refreshValidationReport() || { errors: 0, warnings: 0 };
+    const snapshot = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      createdAt: new Date().toISOString(),
+      filePath: this.currentFile.path,
+      contentHash: this.hashText(content),
+      templateId: settings.templateId,
+      backgroundId: settings.backgroundId,
+      fontFamily: settings.fontFamily,
+      fontSize: settings.fontSize,
+      recipeId: settings.v3.selectedRecipeId,
+      validation: { errors: validation.errors, warnings: validation.warnings }
+    };
+    await this.settingsManager.saveLayoutSnapshot(snapshot);
+    new import_obsidian4.Notice("\u5DF2\u4FDD\u5B58\u6392\u7248\u5FEB\u7167");
+  }
+  async restoreLatestSnapshot() {
+    const snapshot = this.settingsManager.getSettings().layoutSnapshots[0];
+    if (!snapshot) {
+      new import_obsidian4.Notice("\u5C1A\u65E0\u53EF\u6062\u590D\u7684\u6392\u7248\u5FEB\u7167");
+      return;
+    }
+    await this.settingsManager.restoreLayoutSnapshot(snapshot);
+    this.customFontSelect.setValue(snapshot.fontFamily);
+    this.customBackgroundSelect.setValue(snapshot.backgroundId);
+    this.fontSizeSelect.value = String(snapshot.fontSize);
+    this.recipeSelect.setValue(snapshot.recipeId);
+    await this.updatePreview();
+    new import_obsidian4.Notice(`\u5DF2\u6062\u590D ${new Date(snapshot.createdAt).toLocaleString()} \u7684\u6392\u7248\u5FEB\u7167`);
+  }
+  hashText(value) {
+    let hash = 5381;
+    for (let index = 0; index < value.length; index += 1) {
+      hash = (hash << 5) + hash ^ value.charCodeAt(index);
+    }
+    return (hash >>> 0).toString(16);
+  }
+  async exportHtmlFragment(button) {
+    const contentSection = this.previewEl.querySelector(".mp-content-section");
+    if (!contentSection)
+      return;
+    const originalText = button.textContent || "\u5BFC\u51FA HTML";
+    button.disabled = true;
+    try {
+      const settings = this.settingsManager.getSettings();
+      const prepared = prepareLegacyWechatFragment(contentSection, {
+        themeId: settings.templateId,
+        recipeId: settings.v3.selectedRecipeId
+      });
+      if (prepared.validation.errors > 0) {
+        new import_obsidian4.Notice(`\u5B58\u5728 ${prepared.validation.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u65E0\u6CD5\u5BFC\u51FA HTML`);
+        return;
+      }
+      const blob = new Blob([prepared.html], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `yh-mp-preview-${Date.now()}.html`;
+      link.click();
+      URL.revokeObjectURL(url);
+      new import_obsidian4.Notice("\u5DF2\u5BFC\u51FA HTML \u7247\u6BB5");
+    } finally {
+      button.disabled = false;
+      button.setText(originalText);
+    }
+  }
+  async exportSegmentedImages(button) {
+    var _a;
+    const originalText = button.textContent || "\u5BFC\u51FA\u5206\u6BB5\u56FE";
+    button.disabled = true;
+    try {
+      const canvas = await (0, import_html2canvas.default)(this.previewEl, {
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: "#ffffff",
+        scale: 2
+      });
+      const segmentHeight = Math.max(1, Math.round(canvas.width * 4 / 3));
+      const total = Math.ceil(canvas.height / segmentHeight);
+      for (let index = 0; index < total; index += 1) {
+        const sourceY = index * segmentHeight;
+        const height = Math.min(segmentHeight, canvas.height - sourceY);
+        const segment = document.createElement("canvas");
+        segment.width = canvas.width;
+        segment.height = height;
+        (_a = segment.getContext("2d")) == null ? void 0 : _a.drawImage(canvas, 0, sourceY, canvas.width, height, 0, 0, canvas.width, height);
+        const link = document.createElement("a");
+        link.download = `yh-mp-preview-${Date.now()}-${index + 1}.png`;
+        link.href = segment.toDataURL("image/png");
+        link.click();
+      }
+      new import_obsidian4.Notice(`\u5DF2\u5BFC\u51FA ${total} \u5F20 1:1.33 \u5206\u6BB5\u56FE`);
+    } catch (error) {
+      console.error("\u5206\u6BB5\u56FE\u5BFC\u51FA\u5931\u8D25", error);
+      new import_obsidian4.Notice("\u5206\u6BB5\u56FE\u5BFC\u51FA\u5931\u8D25");
+    } finally {
+      button.disabled = false;
+      button.setText(originalText);
     }
   }
   async onFileOpen(file) {
@@ -16855,6 +16984,7 @@ var DEFAULT_SETTINGS = {
     note: "",
     qrcode: ""
   },
+  layoutSnapshots: [],
   customFonts: [
     {
       value: 'Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, "PingFang SC", Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
@@ -16920,6 +17050,9 @@ var SettingsManager = class {
     }
     if (!savedData.customFonts) {
       savedData.customFonts = DEFAULT_SETTINGS.customFonts;
+    }
+    if (!Array.isArray(savedData.layoutSnapshots)) {
+      savedData.layoutSnapshots = [];
     }
     const { backgrounds: backgrounds2 } = await Promise.resolve().then(() => (init_backgrounds(), backgrounds_exports));
     const codeBackgrounds = backgrounds2.backgrounds.map((background) => ({
@@ -17023,6 +17156,24 @@ var SettingsManager = class {
   }
   async updateSettings(settings) {
     this.settings = { ...this.settings, ...settings };
+    await this.saveSettings();
+  }
+  async saveLayoutSnapshot(snapshot) {
+    this.settings.layoutSnapshots = [snapshot, ...this.settings.layoutSnapshots].slice(0, 20);
+    await this.saveSettings();
+  }
+  async restoreLayoutSnapshot(snapshot) {
+    this.settings = {
+      ...this.settings,
+      templateId: this.getTemplate(snapshot.templateId) ? snapshot.templateId : "default",
+      backgroundId: snapshot.backgroundId,
+      fontFamily: snapshot.fontFamily,
+      fontSize: snapshot.fontSize,
+      v3: {
+        ...this.settings.v3,
+        selectedRecipeId: snapshot.recipeId
+      }
+    };
     await this.saveSettings();
   }
   getFontOptions() {
