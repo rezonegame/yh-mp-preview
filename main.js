@@ -15439,370 +15439,188 @@ BackgroundManager.BASE_CONTENT_PADDING = "padding: 16px 20px;";
 
 // src/settings/ThemeGalleryModal.ts
 var import_obsidian2 = require("obsidian");
-var STYLE_CATEGORIES = {
-  "\u6781\u7B80": { description: "\u7B80\u6D01\u5E72\u51C0\uFF0C\u6CE8\u91CD\u5185\u5BB9", color: "#636e72" },
-  "\u6E10\u53D8": { description: "\u6E10\u53D8\u8272\u6807\u9898\uFF0C\u73B0\u4EE3\u611F", color: "#0984e3" },
-  "\u9192\u76EE": { description: "\u5927\u80C6\u914D\u8272\uFF0C\u89C6\u89C9\u51B2\u51FB", color: "#d63031" },
-  "\u6DF1\u8272": { description: "\u6DF1\u8272/\u6697\u591C\u98CE\u683C", color: "#2d3436" },
-  "\u53E4\u5178": { description: "\u4F20\u7EDF\u6587\u5316\uFF0C\u4E2D\u5F0F\u7F8E\u5B66", color: "#b7410e" },
-  "\u79D1\u6280": { description: "\u79D1\u6280\u611F\uFF0C\u5F00\u53D1\u8005\u98CE\u683C", color: "#27c3b4" },
-  "\u6587\u827A": { description: "\u67D4\u548C\u914D\u8272\uFF0C\u6587\u827A\u6E05\u65B0", color: "#a29bfe" },
-  "\u6559\u80B2": { description: "\u9002\u5408\u5B66\u4E60\u4E0E\u6559\u5B66\u5185\u5BB9", color: "#fdcb6e" },
-  "\u5176\u4ED6": { description: "\u5176\u4ED6\u98CE\u683C\u4E3B\u9898", color: "#95a5a6" }
-};
-var CATEGORY_RULES = [
-  { category: "\u6DF1\u8272", idPrefixes: ["dark", "xiaohu-ink", "xiaohu-midnight"], nameContains: ["\u6697\u591C"] },
-  { category: "\u6559\u80B2", idPrefixes: ["parent-child", "teacher", "kindergarten", "blackboard"], nameContains: ["\u6559\u80B2\u7CFB\u5217", "\u9ED1\u677F"] },
-  { category: "\u6E10\u53D8", idPrefixes: ["focus-", "focus", "elegant", "xiaohu-focus", "xiaohu-elegant", "xiaohu-bytedance", "apple-product", "ocean-calm"], nameContains: ["\u805A\u7126\u7CFB\u5217", "\u7CBE\u81F4\u7CFB\u5217", "\u5B57\u8282\u8DF3\u52A8", "\u82F9\u679C\u4EA7\u54C1", "\u6DF1\u6D77\u9759\u8C27"] },
-  { category: "\u9192\u76EE", idPrefixes: ["bold-", "bold", "xiaohu-bold", "xiaohu-bauhaus", "xiaohu-sports", "modern-report", "playful", "adventure", "cyber-neon"], nameContains: ["\u9192\u76EE\u7CFB\u5217", "\u5305\u8C6A\u65AF", "\u8FD0\u52A8\u98CE", "\u73B0\u4EE3\u62A5\u544A", "\u6D3B\u6CFC", "\u63A2\u9669", "\u8D5B\u535A\u9713\u8679"] },
-  { category: "\u53E4\u5178", idPrefixes: ["xiaohu-chinese", "xiaohu-terracotta", "xiaohu-newspaper"], nameContains: ["\u4E2D\u5F0F\u7F8E\u5B66", "\u7ECF\u5178\u62A5\u7EB8"] },
-  { category: "\u79D1\u6280", idPrefixes: ["xiaohu-github", "xiaohu-sspai", "gameui"], nameContains: ["GitHub", "\u5C11\u6570\u6D3E", "\u6E38\u620FUI"] },
-  { category: "\u6587\u827A", idPrefixes: ["xiaohu-lavender", "xiaohu-mint", "xiaohu-sunset", "xiaohu-coffee", "xiaohu-magazine", "warmth", "autumn-warm", "spring-fresh"], nameContains: ["\u6587\u827A\u7CFB\u5217", "\u85B0\u8863\u8349", "\u8584\u8377", "\u65E5\u843D", "\u5496\u5561", "\u65F6\u5C1A\u6742\u5FD7", "\u6E29\u6696", "\u79CB\u65E5\u6696\u5149", "\u6625\u65E5\u6E05\u65B0"] },
-  { category: "\u6781\u7B80", idPrefixes: ["minimal", "xiaohu-minimal", "default", "scarlet", "academic", "zen-essence", "orange", "yeban", "brown", "xiaohu-wechat"], nameContains: ["\u6781\u7B80\u7CFB\u5217", "\u9ED8\u8BA4\u6A21\u677F", "\u5B66\u672F\u4E13\u4E1A", "\u7985\u610F\u6781\u7B80", "\u53F6\u4F34\u7CFB\u5217"] }
+var SCENE_ORDER = [
+  "\u5168\u90E8",
+  "\u6559\u7A0B\u4E0E\u77E5\u8BC6",
+  "\u4EA7\u54C1\u4E0E\u62A5\u544A",
+  "\u89C2\u70B9\u4E0E\u4E13\u4E1A",
+  "\u968F\u7B14\u4E0E\u751F\u6D3B",
+  "\u521B\u610F\u4E0E\u6D3B\u52A8",
+  "\u81EA\u5B9A\u4E49\u4E3B\u9898"
 ];
-function getThemeCategory(template) {
-  const id = (template.id || "").toLowerCase();
-  const name = template.name || "";
-  for (const rule of CATEGORY_RULES) {
-    if (rule.idPrefixes) {
-      for (const prefix of rule.idPrefixes) {
-        const normalizedPrefix = prefix.toLowerCase();
-        if (id === normalizedPrefix || id.startsWith(normalizedPrefix)) {
-          return rule.category;
-        }
-      }
-    }
-    if (rule.idContains) {
-      for (const keyword of rule.idContains) {
-        if (id.includes(keyword.toLowerCase())) {
-          return rule.category;
-        }
-      }
-    }
-    if (rule.nameContains) {
-      for (const keyword of rule.nameContains) {
-        if (name.includes(keyword)) {
-          return rule.category;
-        }
-      }
-    }
-  }
-  return "\u5176\u4ED6";
+var sceneRules = [
+  { scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", keywords: ["academic", "teacher", "blackboard", "kindergarten", "parent-child"] },
+  { scene: "\u4EA7\u54C1\u4E0E\u62A5\u544A", keywords: ["apple-product", "modern-report", "focus-", "focus"] },
+  { scene: "\u89C2\u70B9\u4E0E\u4E13\u4E1A", keywords: ["minimal", "elegant", "default", "scarlet", "orange", "yeban"] },
+  { scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", keywords: ["zen", "warmth", "autumn", "spring", "brown", "ocean"] },
+  { scene: "\u521B\u610F\u4E0E\u6D3B\u52A8", keywords: ["bold", "playful", "adventure", "cyber", "gameui", "dark"] }
+];
+function getThemeScene(template) {
+  var _a;
+  if (!template.isPreset)
+    return "\u81EA\u5B9A\u4E49\u4E3B\u9898";
+  const id = template.id.toLowerCase();
+  return ((_a = sceneRules.find((rule) => rule.keywords.some((keyword) => id.includes(keyword)))) == null ? void 0 : _a.scene) || "\u89C2\u70B9\u4E0E\u4E13\u4E1A";
 }
 var ThemeGalleryModal = class extends import_obsidian2.Modal {
   constructor(app, settingsManager, currentTemplateId, onSelect, previewCallback) {
     super(app);
-    this.selectedCategory = "\u6781\u7B80";
-    this.selectedLayoutFamily = "";
+    this.selectedScene = "\u5168\u90E8";
     this.searchQuery = "";
-    this.layoutContainer = null;
+    this.hasApplied = false;
     this.gridContainer = null;
-    this.searchInput = null;
-    this.categoryButtons = /* @__PURE__ */ new Map();
-    this.layoutButtons = /* @__PURE__ */ new Map();
-    this.settingsManager = settingsManager;
+    this.applyButton = null;
     this.templates = settingsManager.getVisibleTemplates();
+    this.originalTemplateId = currentTemplateId;
     this.currentTemplateId = currentTemplateId;
     this.onSelect = onSelect;
     this.previewCallback = previewCallback;
-    this.initializeDefaults();
-  }
-  initializeDefaults() {
-    const currentTemplate = this.templates.find((template) => template.id === this.currentTemplateId);
-    if (currentTemplate) {
-      this.selectedCategory = getThemeCategory(currentTemplate);
-      this.selectedLayoutFamily = this.parseTemplateFamily(currentTemplate).family;
-      return;
-    }
-    this.selectedCategory = this.getFirstAvailableCategory();
-    const categoryTemplates = this.getTemplatesForCategory(this.selectedCategory);
-    this.selectedLayoutFamily = categoryTemplates.length > 0 ? this.parseTemplateFamily(categoryTemplates[0]).family : "";
-  }
-  getFirstAvailableCategory() {
-    const categories = Object.keys(STYLE_CATEGORIES);
-    return categories.find((category) => this.getTemplatesForCategory(category).length > 0) || "\u5176\u4ED6";
-  }
-  getTemplatesForCategory(category) {
-    return this.templates.filter((template) => getThemeCategory(template) === category);
-  }
-  matchesSearch(template) {
-    if (!this.searchQuery)
-      return true;
-    const searchable = [
-      template.id,
-      template.name,
-      template.description || "",
-      this.parseTemplateFamily(template).family
-    ].join(" ").toLowerCase();
-    return searchable.includes(this.searchQuery);
-  }
-  getTemplateDescription(template) {
-    var _a;
-    const description = (_a = template.description) == null ? void 0 : _a.trim();
-    if (description) {
-      return description.split("\uFF08")[0].trim();
-    }
-    const { family, variant } = this.parseTemplateFamily(template);
-    if (variant !== "\u9ED8\u8BA4") {
-      return `${variant}\u914D\u8272`;
-    }
-    return `${family}\u4E3B\u9898`;
   }
   onOpen() {
     const { contentEl, modalEl } = this;
     modalEl.addClass("mp-theme-gallery-modal");
     contentEl.empty();
-    const header = contentEl.createEl("div", { cls: "mp-gallery-header" });
-    header.createEl("h2", { text: "\u{1F3A8} \u4E3B\u9898\u753B\u5ECA" });
-    this.searchInput = header.createEl("input", {
+    const header = contentEl.createDiv("mp-gallery-header");
+    const heading = header.createDiv("mp-gallery-heading");
+    heading.createEl("h2", { text: "\u4E3B\u9898\u753B\u5ECA" });
+    heading.createEl("p", { text: "\u6309\u6587\u7AE0\u573A\u666F\u6311\u9009\u89C6\u89C9\u98CE\u683C\uFF1B\u70B9\u51FB\u5361\u7247\u5148\u8BD5\u7528\uFF0C\u786E\u8BA4\u540E\u518D\u5E94\u7528\u3002" });
+    const search = header.createEl("input", {
       cls: "mp-gallery-search",
-      attr: { type: "text", placeholder: "\u641C\u7D22\u4E3B\u9898..." }
+      attr: { type: "search", placeholder: "\u641C\u7D22\u4E3B\u9898\u6216\u6587\u7AE0\u573A\u666F" }
     });
-    this.searchInput.addEventListener("input", () => {
-      this.searchQuery = this.searchInput.value.toLowerCase();
-      this.renderLayoutList();
-      this.renderGrid();
+    search.addEventListener("input", () => {
+      this.searchQuery = search.value.trim().toLowerCase();
+      this.renderGallery();
     });
-    const mainContent = contentEl.createEl("div", { cls: "mp-gallery-main" });
-    const sidebar = mainContent.createEl("div", { cls: "mp-gallery-sidebar" });
-    this.renderSidebar(sidebar);
-    this.layoutContainer = mainContent.createEl("div", { cls: "mp-gallery-layouts" });
-    this.renderLayoutList();
-    this.gridContainer = mainContent.createEl("div", { cls: "mp-gallery-grid" });
-    this.renderGrid();
-    const footer = contentEl.createEl("div", { cls: "mp-gallery-footer" });
-    const cancelBtn = footer.createEl("button", { text: "\u53D6\u6D88", cls: "mp-gallery-btn-cancel" });
-    cancelBtn.addEventListener("click", () => this.close());
-    const applyBtn = footer.createEl("button", { text: "\u5E94\u7528\u4E3B\u9898", cls: "mp-gallery-btn-apply" });
-    applyBtn.addEventListener("click", () => {
-      if (this.currentTemplateId) {
-        this.onSelect(this.currentTemplateId);
-        this.close();
-      }
+    const sceneBar = contentEl.createDiv("mp-gallery-scenes");
+    SCENE_ORDER.forEach((scene) => {
+      const count = this.getTemplatesForScene(scene).length;
+      if (count === 0 && scene !== "\u5168\u90E8")
+        return;
+      const button = sceneBar.createEl("button", {
+        text: scene === "\u5168\u90E8" ? `\u5168\u90E8\u4E3B\u9898 \xB7 ${this.templates.length}` : `${scene} \xB7 ${count}`,
+        cls: `mp-gallery-scene ${scene === this.selectedScene ? "is-active" : ""}`
+      });
+      button.addEventListener("click", () => {
+        this.selectedScene = scene;
+        sceneBar.querySelectorAll(".mp-gallery-scene").forEach((el) => el.removeClass("is-active"));
+        button.addClass("is-active");
+        this.renderGallery();
+      });
+    });
+    this.gridContainer = contentEl.createDiv("mp-gallery-grid");
+    this.renderGallery();
+    const footer = contentEl.createDiv("mp-gallery-footer");
+    footer.createEl("span", { cls: "mp-gallery-try-hint", text: "\u8BD5\u7528\u4E0D\u4F1A\u4FDD\u5B58\u5230\u7B14\u8BB0\u8BBE\u7F6E\u3002" });
+    const actions = footer.createDiv("mp-gallery-actions");
+    const cancel = actions.createEl("button", { text: "\u53D6\u6D88\u8BD5\u7528", cls: "mp-gallery-btn-cancel" });
+    cancel.addEventListener("click", () => this.close());
+    this.applyButton = actions.createEl("button", { cls: "mp-gallery-btn-apply" });
+    this.updateApplyButton();
+    this.applyButton.addEventListener("click", () => {
+      this.hasApplied = true;
+      void Promise.resolve(this.onSelect(this.currentTemplateId)).then(() => this.close());
     });
   }
   onClose() {
+    if (!this.hasApplied && this.currentTemplateId !== this.originalTemplateId) {
+      this.previewCallback(this.originalTemplateId);
+    }
     this.contentEl.empty();
   }
-  renderSidebar(container) {
-    container.empty();
-    this.categoryButtons.clear();
-    const categoryCounts = this.getCategoryCounts();
-    for (const [category, config] of Object.entries(STYLE_CATEGORIES)) {
-      const count = categoryCounts[category] || 0;
-      if (count === 0 && category !== "\u5176\u4ED6")
-        continue;
-      const btn = container.createEl("button", {
-        cls: `mp-gallery-category-btn ${this.selectedCategory === category ? "active" : ""}`,
-        attr: { title: config.description }
-      });
-      const colorDot = btn.createEl("span", { cls: "mp-category-color" });
-      colorDot.style.backgroundColor = config.color;
-      btn.createEl("span", { text: category, cls: "mp-category-name" });
-      if (count > 0) {
-        btn.createEl("span", { text: `${count}`, cls: "mp-category-count" });
-      }
-      btn.addEventListener("click", () => {
-        this.selectedCategory = category;
-        this.updateCategoryButtons();
-        const families = this.getLayoutFamilies();
-        this.selectedLayoutFamily = families.length > 0 ? families[0].name : "";
-        this.renderLayoutList();
-        this.renderGrid();
-      });
-      this.categoryButtons.set(category, btn);
-    }
+  getTemplatesForScene(scene) {
+    return this.templates.filter((template) => scene === "\u5168\u90E8" || getThemeScene(template) === scene);
   }
-  updateCategoryButtons() {
-    for (const [category, btn] of this.categoryButtons) {
-      if (category === this.selectedCategory)
-        btn.addClass("active");
-      else
-        btn.removeClass("active");
-    }
+  matchesSearch(template) {
+    if (!this.searchQuery)
+      return true;
+    return [template.id, template.name, template.description || "", getThemeScene(template)].join(" ").toLowerCase().includes(this.searchQuery);
   }
-  renderLayoutList() {
-    if (!this.layoutContainer)
-      return;
-    this.layoutContainer.empty();
-    this.layoutButtons.clear();
-    this.layoutContainer.createEl("div", { text: "\u6392\u7248\u7ED3\u6784", cls: "mp-gallery-layout-header" });
-    const families = this.getLayoutFamilies();
-    if (families.length === 0) {
-      this.layoutContainer.createEl("div", { text: "\u6682\u65E0\u7ED3\u6784", cls: "mp-gallery-empty-small" });
-      return;
-    }
-    if (!families.some((family) => family.name === this.selectedLayoutFamily)) {
-      this.selectedLayoutFamily = families[0].name;
-    }
-    for (const family of families) {
-      const btn = this.layoutContainer.createEl("button", {
-        cls: `mp-gallery-layout-btn ${this.selectedLayoutFamily === family.name ? "active" : ""}`
-      });
-      btn.createEl("div", { text: family.name, cls: "mp-layout-name" });
-      btn.createEl("div", { text: family.description, cls: "mp-layout-desc" });
-      btn.addEventListener("click", () => {
-        this.selectedLayoutFamily = family.name;
-        this.updateLayoutButtons();
-        this.renderGrid();
-      });
-      this.layoutButtons.set(family.name, btn);
-    }
+  getVisibleTemplates() {
+    return this.getTemplatesForScene(this.selectedScene).filter((template) => this.matchesSearch(template));
   }
-  updateLayoutButtons() {
-    for (const [name, btn] of this.layoutButtons) {
-      if (name === this.selectedLayoutFamily)
-        btn.addClass("active");
-      else
-        btn.removeClass("active");
-    }
-  }
-  getLayoutFamilies() {
-    const categoryTemplates = this.getTemplatesForCategory(this.selectedCategory).filter((template) => this.matchesSearch(template));
-    const familyMap = /* @__PURE__ */ new Map();
-    for (const template of categoryTemplates) {
-      const { family } = this.parseTemplateFamily(template);
-      if (!familyMap.has(family)) {
-        familyMap.set(family, {
-          description: this.getTemplateDescription(template),
-          templates: []
-        });
-      }
-      familyMap.get(family).templates.push(template);
-    }
-    return Array.from(familyMap.entries()).map(([name, data]) => ({
-      name,
-      description: data.description,
-      templates: data.templates
-    }));
-  }
-  renderGrid() {
+  renderGallery() {
     if (!this.gridContainer)
       return;
     this.gridContainer.empty();
-    const familyTemplates = this.getTemplatesForCategory(this.selectedCategory).filter((template) => {
-      if (!this.matchesSearch(template))
-        return false;
-      const { family } = this.parseTemplateFamily(template);
-      return family === this.selectedLayoutFamily;
-    });
-    if (familyTemplates.length === 0) {
-      this.gridContainer.createEl("div", { cls: "mp-gallery-empty", text: "\u8BE5\u7ED3\u6784\u4E0B\u65E0\u989C\u8272\u53D8\u4F53" });
+    const templates2 = this.getVisibleTemplates();
+    if (templates2.length === 0) {
+      this.gridContainer.createEl("div", { cls: "mp-gallery-empty", text: "\u6CA1\u6709\u5339\u914D\u7684\u4E3B\u9898\uFF0C\u6362\u4E2A\u573A\u666F\u6216\u5173\u952E\u8BCD\u8BD5\u8BD5\u3002" });
       return;
     }
-    for (const template of familyTemplates) {
-      this.renderThemeCard(template);
-    }
+    const grouped = this.selectedScene === "\u5168\u90E8";
+    const scenes = grouped ? SCENE_ORDER.filter((scene) => scene !== "\u5168\u90E8") : [this.selectedScene];
+    scenes.forEach((scene) => {
+      const sceneTemplates = grouped ? templates2.filter((template) => getThemeScene(template) === scene) : templates2;
+      if (sceneTemplates.length === 0)
+        return;
+      if (grouped)
+        this.gridContainer.createEl("h3", { cls: "mp-gallery-section-title", text: scene });
+      const cardGrid = this.gridContainer.createDiv("mp-gallery-card-grid");
+      sceneTemplates.forEach((template) => this.renderThemeCard(cardGrid, template));
+    });
   }
-  renderThemeCard(template) {
-    if (!this.gridContainer)
-      return;
-    const isSelected = template.id === this.currentTemplateId;
-    const card = this.gridContainer.createEl("div", {
-      cls: `mp-theme-card ${isSelected ? "selected" : ""}`
+  renderThemeCard(container, template) {
+    const selected = template.id === this.currentTemplateId;
+    const card = container.createEl("button", {
+      cls: `mp-theme-card ${selected ? "is-selected" : ""}`,
+      attr: {
+        type: "button",
+        "aria-pressed": selected ? "true" : "false",
+        title: `\u8BD5\u7528\u4E3B\u9898\uFF1A${template.name}`
+      }
     });
-    const accentColor = template.styles.accentColor || this.extractAccentColor(template);
-    const { variant } = this.parseTemplateFamily(template);
-    const colorBarWrapper = card.createEl("div", { cls: "mp-theme-color-bar-wrapper" });
-    const colorBar = colorBarWrapper.createEl("div", { cls: "mp-theme-color-bar" });
-    colorBar.style.background = this.createColorGradient(accentColor);
-    const previewText = colorBarWrapper.createEl("div", {
-      cls: "mp-theme-color-text",
-      text: variant === "\u9ED8\u8BA4" ? this.getPreviewText(template) : variant
-    });
-    previewText.style.color = this.getContrastColor(accentColor);
-    const info = card.createEl("div", { cls: "mp-theme-info" });
-    info.createEl("div", { text: variant === "\u9ED8\u8BA4" ? template.name : variant, cls: "mp-theme-name" });
-    if (template.source === "xiaohu") {
-      info.createEl("span", { text: "xiaohu", cls: "mp-theme-source" });
+    const accent = template.styles.accentColor || this.extractAccentColor(template);
+    const preview = card.createDiv("mp-theme-preview");
+    preview.style.background = this.createColorGradient(accent);
+    preview.createEl("span", { text: "\u6587\u7AE0\u6807\u9898", cls: "mp-theme-preview-title" });
+    preview.createEl("span", { text: "\u8BA9\u5185\u5BB9\u6E05\u6670\u3001\u6709\u91CD\u70B9\u5730\u88AB\u9605\u8BFB", cls: "mp-theme-preview-copy" });
+    const info = card.createDiv("mp-theme-info");
+    const nameRow = info.createDiv("mp-theme-name-row");
+    nameRow.createEl("strong", { text: template.name, cls: "mp-theme-name" });
+    if (selected) {
+      const check = nameRow.createDiv("mp-theme-checkmark");
+      (0, import_obsidian2.setIcon)(check, "check");
     }
-    if (isSelected) {
-      const checkmark = card.createEl("div", { cls: "mp-theme-checkmark" });
-      (0, import_obsidian2.setIcon)(checkmark, "check");
-    }
+    info.createEl("span", { text: getThemeScene(template), cls: "mp-theme-scene-label" });
+    info.createEl("span", { text: this.getTemplateDescription(template), cls: "mp-theme-description" });
+    info.createEl("span", { text: template.isPreset ? "Core" : "\u672C\u5730\u5BFC\u5165", cls: "mp-theme-source" });
     card.addEventListener("click", () => {
       this.currentTemplateId = template.id;
       this.previewCallback(template.id);
-      this.renderGrid();
-    });
-    card.addEventListener("dblclick", () => {
-      this.onSelect(template.id);
-      this.close();
+      this.updateApplyButton();
+      this.renderGallery();
     });
   }
-  parseTemplateFamily(template) {
-    const name = template.name.replace(/\s*\(xiaohu\)\s*/i, "");
-    const parts = name.split(" - ");
-    if (parts.length > 1) {
-      return { family: parts[0], variant: parts[1] };
-    }
-    return { family: name, variant: "\u9ED8\u8BA4" };
+  updateApplyButton() {
+    if (!this.applyButton)
+      return;
+    const template = this.templates.find((item) => item.id === this.currentTemplateId);
+    this.applyButton.setText(`\u5E94\u7528\u300C${(template == null ? void 0 : template.name) || "\u4E3B\u9898"}\u300D`);
+  }
+  getTemplateDescription(template) {
+    var _a;
+    const description = (_a = template.description) == null ? void 0 : _a.trim();
+    return description ? description.split("\uFF08")[0].trim() : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
   }
   extractAccentColor(template) {
     var _a, _b;
     const h2Style = ((_b = (_a = template.styles.title) == null ? void 0 : _a.h2) == null ? void 0 : _b.base) || "";
     const match = h2Style.match(/(?:color|background):\s*([#\w]+)/);
-    if (match)
-      return match[1];
-    return "#4285f4";
+    return match ? match[1] : "#4285f4";
   }
-  createColorGradient(accentColor) {
-    return `linear-gradient(135deg, ${accentColor} 0%, ${this.lightenColor(accentColor, 20)} 100%)`;
-  }
-  getPreviewText(template) {
-    const name = template.name.replace(/\s*\(xiaohu\)\s*/i, "");
-    const keywords = ["\u805A\u7126", "\u7CBE\u81F4", "\u5B57\u8282", "\u5175\u9A6C\u4FD1", "\u4E2D\u56FD", "\u62A5\u7EB8", "\u58A8\u97F5", "\u6697\u591C", "\u8FD0\u52A8", "\u5305\u8C6A\u65AF", "\u8584\u8377", "\u65E5\u843D", "\u85B0\u8863\u8349", "\u5496\u5561", "\u6742\u5FD7", "\u4F18\u96C5", "\u9192\u76EE", "\u6781\u7B80"];
-    for (const keyword of keywords) {
-      if (name.includes(keyword))
-        return keyword;
-    }
-    if (name.length <= 3)
-      return name;
-    const cnMatch = name.match(/[\u4e00-\u9fa5]/g);
-    if (cnMatch) {
-      const chars = cnMatch.filter((char) => char !== "\u7CFB" && char !== "\u5217").slice(0, 2);
-      if (chars.length >= 2)
-        return chars.join("");
-    }
-    return name.slice(0, 3);
-  }
-  getContrastColor(hexColor) {
-    if (!hexColor || !hexColor.startsWith("#"))
-      return "#ffffff";
-    const hex = hexColor.replace("#", "");
-    if (hex.length < 6)
-      return "#ffffff";
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-    const brightness = (r * 299 + g * 587 + b * 114) / 1e3;
-    return brightness > 128 ? "#1a1a2e" : "#ffffff";
+  createColorGradient(accent) {
+    return `linear-gradient(135deg, ${accent} 0%, ${this.lightenColor(accent, 18)} 100%)`;
   }
   lightenColor(hex, percent) {
-    if (!hex || !hex.startsWith("#"))
-      return hex;
-    const num = parseInt(hex.replace("#", ""), 16);
-    const amt = Math.round(2.55 * percent);
-    const r = Math.min(255, (num >> 16) + amt);
-    const g = Math.min(255, (num >> 8 & 255) + amt);
-    const b = Math.min(255, (num & 255) + amt);
-    return `#${(16777216 + r * 65536 + g * 256 + b).toString(16).slice(1)}`;
-  }
-  getCategoryCounts() {
-    const counts = {};
-    const categoryFamilies = /* @__PURE__ */ new Map();
-    for (const template of this.templates) {
-      const category = getThemeCategory(template);
-      const { family } = this.parseTemplateFamily(template);
-      if (!categoryFamilies.has(category)) {
-        categoryFamilies.set(category, /* @__PURE__ */ new Set());
-      }
-      categoryFamilies.get(category).add(family);
-    }
-    for (const [category, families] of categoryFamilies.entries()) {
-      counts[category] = families.size;
-    }
-    return counts;
+    if (!/^#[0-9a-f]{6}$/i.test(hex))
+      return "#4285f4";
+    const value = parseInt(hex.slice(1), 16);
+    const amount = Math.round(2.55 * percent);
+    const red = Math.min(255, (value >> 16) + amount);
+    const green = Math.min(255, (value >> 8 & 255) + amount);
+    const blue = Math.min(255, (value & 255) + amount);
+    return `#${(16777216 + red * 65536 + green * 256 + blue).toString(16).slice(1)}`;
   }
 };
 

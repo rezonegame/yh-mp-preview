@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.0
+
+- Reworked the Theme Gallery into a scene-first card picker inspired by article-use recommendations.
+- A card click now previews a theme only; cancel restores the previous theme and Apply persists the selected theme.
+- Kept article recipes outside the gallery so visual themes and article structure remain separate choices.
+
 ## 3.5.0
 
 - Added ThemeManifest V3 validation, safe JSON import, and portable export for custom themes.
