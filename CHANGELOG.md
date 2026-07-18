@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.6.3
+
+- Simplified every theme card to its name and recommended article use, removing
+  visual previews and duplicated metadata from the selection list.
+
 ## 3.6.2
 
 - Explicitly stack the preview and information regions of every theme card,

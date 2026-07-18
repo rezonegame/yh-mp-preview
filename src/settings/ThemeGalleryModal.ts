@@ -160,23 +160,13 @@ export class ThemeGalleryModal extends Modal {
                 title: `试用主题：${template.name}`,
             },
         });
-        const accent = template.styles.accentColor || this.extractAccentColor(template);
-        const preview = card.createDiv('mp-theme-preview');
-        preview.style.background = this.createColorGradient(accent);
-        preview.createEl('span', { text: '主题试用', cls: 'mp-theme-preview-kicker' });
-        preview.createEl('span', { text: template.name, cls: 'mp-theme-preview-title' });
-        preview.createEl('span', { text: '标题、正文与强调色预览', cls: 'mp-theme-preview-copy' });
-
         const info = card.createDiv('mp-theme-info');
-        const nameRow = info.createDiv('mp-theme-name-row');
-        nameRow.createEl('strong', { text: template.name, cls: 'mp-theme-name' });
+        info.createEl('strong', { text: template.name, cls: 'mp-theme-name' });
+        info.createEl('span', { text: this.getTemplateDescription(template), cls: 'mp-theme-description' });
         if (selected) {
-            const check = nameRow.createDiv('mp-theme-checkmark');
+            const check = info.createDiv('mp-theme-checkmark');
             setIcon(check, 'check');
         }
-        info.createEl('span', { text: getThemeScene(template), cls: 'mp-theme-scene-label' });
-        info.createEl('span', { text: this.getTemplateDescription(template), cls: 'mp-theme-description' });
-        info.createEl('span', { text: template.isPreset ? 'Core' : '本地导入', cls: 'mp-theme-source' });
 
         card.addEventListener('click', () => {
             this.currentTemplateId = template.id;
@@ -197,23 +187,4 @@ export class ThemeGalleryModal extends Modal {
         return description ? description.split('（')[0].trim() : '适合当前文章的视觉排版';
     }
 
-    private extractAccentColor(template: Template): string {
-        const h2Style = template.styles.title?.h2?.base || '';
-        const match = h2Style.match(/(?:color|background):\s*([#\w]+)/);
-        return match ? match[1] : '#4285f4';
-    }
-
-    private createColorGradient(accent: string): string {
-        return `linear-gradient(135deg, ${accent} 0%, ${this.lightenColor(accent, 18)} 100%)`;
-    }
-
-    private lightenColor(hex: string, percent: number): string {
-        if (!/^#[0-9a-f]{6}$/i.test(hex)) return '#4285f4';
-        const value = parseInt(hex.slice(1), 16);
-        const amount = Math.round(2.55 * percent);
-        const red = Math.min(255, (value >> 16) + amount);
-        const green = Math.min(255, ((value >> 8) & 0xff) + amount);
-        const blue = Math.min(255, (value & 0xff) + amount);
-        return `#${(0x1000000 + red * 0x10000 + green * 0x100 + blue).toString(16).slice(1)}`;
-    }
 }

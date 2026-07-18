@@ -15575,22 +15575,13 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
         title: `\u8BD5\u7528\u4E3B\u9898\uFF1A${template.name}`
       }
     });
-    const accent = template.styles.accentColor || this.extractAccentColor(template);
-    const preview = card.createDiv("mp-theme-preview");
-    preview.style.background = this.createColorGradient(accent);
-    preview.createEl("span", { text: "\u4E3B\u9898\u8BD5\u7528", cls: "mp-theme-preview-kicker" });
-    preview.createEl("span", { text: template.name, cls: "mp-theme-preview-title" });
-    preview.createEl("span", { text: "\u6807\u9898\u3001\u6B63\u6587\u4E0E\u5F3A\u8C03\u8272\u9884\u89C8", cls: "mp-theme-preview-copy" });
     const info = card.createDiv("mp-theme-info");
-    const nameRow = info.createDiv("mp-theme-name-row");
-    nameRow.createEl("strong", { text: template.name, cls: "mp-theme-name" });
+    info.createEl("strong", { text: template.name, cls: "mp-theme-name" });
+    info.createEl("span", { text: this.getTemplateDescription(template), cls: "mp-theme-description" });
     if (selected) {
-      const check = nameRow.createDiv("mp-theme-checkmark");
+      const check = info.createDiv("mp-theme-checkmark");
       (0, import_obsidian2.setIcon)(check, "check");
     }
-    info.createEl("span", { text: getThemeScene(template), cls: "mp-theme-scene-label" });
-    info.createEl("span", { text: this.getTemplateDescription(template), cls: "mp-theme-description" });
-    info.createEl("span", { text: template.isPreset ? "Core" : "\u672C\u5730\u5BFC\u5165", cls: "mp-theme-source" });
     card.addEventListener("click", () => {
       this.currentTemplateId = template.id;
       this.previewCallback(template.id);
@@ -15608,25 +15599,6 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     var _a;
     const description = (_a = template.description) == null ? void 0 : _a.trim();
     return description ? description.split("\uFF08")[0].trim() : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
-  }
-  extractAccentColor(template) {
-    var _a, _b;
-    const h2Style = ((_b = (_a = template.styles.title) == null ? void 0 : _a.h2) == null ? void 0 : _b.base) || "";
-    const match = h2Style.match(/(?:color|background):\s*([#\w]+)/);
-    return match ? match[1] : "#4285f4";
-  }
-  createColorGradient(accent) {
-    return `linear-gradient(135deg, ${accent} 0%, ${this.lightenColor(accent, 18)} 100%)`;
-  }
-  lightenColor(hex, percent) {
-    if (!/^#[0-9a-f]{6}$/i.test(hex))
-      return "#4285f4";
-    const value = parseInt(hex.slice(1), 16);
-    const amount = Math.round(2.55 * percent);
-    const red = Math.min(255, (value >> 16) + amount);
-    const green = Math.min(255, (value >> 8 & 255) + amount);
-    const blue = Math.min(255, (value & 255) + amount);
-    return `#${(16777216 + red * 65536 + green * 256 + blue).toString(16).slice(1)}`;
   }
 };
 
