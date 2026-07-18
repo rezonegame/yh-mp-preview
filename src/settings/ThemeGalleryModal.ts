@@ -38,6 +38,7 @@ export class ThemeGalleryModal extends Modal {
     private hasApplied = false;
     private gridContainer: HTMLElement | null = null;
     private applyButton: HTMLButtonElement | null = null;
+    private tryHintEl: HTMLElement | null = null;
 
     constructor(
         app: any,
@@ -94,7 +95,10 @@ export class ThemeGalleryModal extends Modal {
         this.renderGallery();
 
         const footer = contentEl.createDiv('mp-gallery-footer');
-        footer.createEl('span', { cls: 'mp-gallery-try-hint', text: '试用不会保存到笔记设置。' });
+        const trialInfo = footer.createDiv('mp-gallery-trial-info');
+        this.tryHintEl = trialInfo.createDiv('mp-gallery-try-hint');
+        trialInfo.createEl('div', { cls: 'mp-gallery-trial-note', text: '试用不会保存到笔记设置。' });
+        this.updateTryHint();
         const actions = footer.createDiv('mp-gallery-actions');
         const cancel = actions.createEl('button', { text: '取消试用', cls: 'mp-gallery-btn-cancel' });
         cancel.addEventListener('click', () => this.close());
@@ -162,7 +166,6 @@ export class ThemeGalleryModal extends Modal {
         });
         const info = card.createDiv('mp-theme-info');
         info.createEl('strong', { text: template.name, cls: 'mp-theme-name' });
-        info.createEl('span', { text: this.getTemplateDescription(template), cls: 'mp-theme-description' });
         if (selected) {
             const check = info.createDiv('mp-theme-checkmark');
             setIcon(check, 'check');
@@ -172,6 +175,7 @@ export class ThemeGalleryModal extends Modal {
             this.currentTemplateId = template.id;
             this.previewCallback(template.id);
             this.updateApplyButton();
+            this.updateTryHint();
             this.renderGallery();
         });
     }
@@ -180,6 +184,13 @@ export class ThemeGalleryModal extends Modal {
         if (!this.applyButton) return;
         const template = this.templates.find(item => item.id === this.currentTemplateId);
         this.applyButton.setText(`应用「${template?.name || '主题'}」`);
+    }
+
+    private updateTryHint(): void {
+        if (!this.tryHintEl) return;
+        const template = this.templates.find(item => item.id === this.currentTemplateId);
+        const description = template ? this.getTemplateDescription(template) : '适合当前文章的视觉排版';
+        this.tryHintEl.setText(`推荐作用：${description}`);
     }
 
     private getTemplateDescription(template: Template): string {

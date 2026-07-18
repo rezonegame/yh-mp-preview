@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.6.4
+
+- Reduced theme cards to theme names only; after a selection, its recommended
+  article use is shown in the footer beside the safe trial guidance.
+
 ## 3.6.3
 
 - Simplified every theme card to its name and recommended article use, removing

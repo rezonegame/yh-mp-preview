@@ -1522,11 +1522,13 @@ ol {
 }
 .mp-gallery-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 .mp-theme-card {
-  display: block;
+  display: flex;
+  align-items: stretch;
+  min-height: 52px;
   width: 100%;
   position: relative;
   padding: 0;
@@ -1557,33 +1559,21 @@ ol {
   outline-offset: 3px;
 }
 .mp-theme-info {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) auto;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
-  gap: 12px;
   min-width: 0;
-  padding: 14px 16px;
+  gap: 12px;
+  padding: 12px 14px;
 }
 .mp-theme-name {
   overflow: hidden;
   font-size: 14px;
+  font-weight: 700;
   line-height: 1.35;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-.mp-theme-description {
-  overflow: hidden;
-  color: var(--text-muted);
-  font-size: 12px;
-  line-height: 1.45;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.mp-theme-description::before {
-  content: "\2014";
-  margin-right: 8px;
-  color: var(--text-faint);
 }
 .mp-theme-checkmark {
   display: flex;
@@ -1607,14 +1597,30 @@ ol {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 16px 24px;
+  gap: 20px;
+  min-height: 76px;
+  padding: 14px 24px;
   border-top: 1px solid var(--background-modifier-border);
   background: var(--background-secondary);
 }
+.mp-gallery-trial-info {
+  flex: 1;
+  min-width: 0;
+}
 .mp-gallery-try-hint {
+  overflow: hidden;
+  color: var(--text-normal);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mp-gallery-trial-note {
+  margin-top: 4px;
   color: var(--text-muted);
-  font-size: 12px;
+  font-size: 11px;
+  line-height: 1.4;
 }
 .mp-gallery-actions {
   display: flex;
@@ -1637,6 +1643,11 @@ ol {
   border: 0;
   background: var(--interactive-accent);
   color: var(--text-on-accent);
+}
+@media (max-width: 800px) {
+  .mp-gallery-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 @media (max-width: 640px) {
   .mp-theme-gallery-modal {
@@ -1661,7 +1672,6 @@ ol {
     gap: 8px;
   }
   .mp-theme-info {
-    grid-template-columns: minmax(96px, .8fr) minmax(0, 1.2fr) auto;
     gap: 9px;
     padding: 12px;
   }
@@ -1669,6 +1679,9 @@ ol {
     align-items: stretch;
     flex-direction: column;
     padding: 14px 16px;
+  }
+  .mp-gallery-try-hint {
+    white-space: normal;
   }
   .mp-gallery-actions {
     width: 100%;

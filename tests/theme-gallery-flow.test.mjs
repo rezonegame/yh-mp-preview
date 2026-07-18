@@ -13,7 +13,11 @@ test('theme gallery is scene-first and preserves a safe try-before-apply flow', 
   assert.match(modal, /!this\.hasApplied && this\.currentTemplateId !== this\.originalTemplateId/);
   assert.match(modal, /this\.previewCallback\(this\.originalTemplateId\)/);
   assert.match(modal, /应用「\$\{template\?\.name/);
+  assert.match(modal, /推荐作用：\$\{description\}/);
+  assert.doesNotMatch(modal, /info\.createEl\('span', \{ text: this\.getTemplateDescription/);
+  assert.match(modal, /mp-gallery-trial-note/);
   assert.match(styles, /\.mp-gallery-scenes/);
   assert.match(styles, /\.mp-gallery-card-grid/);
+  assert.match(styles, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
   assert.doesNotMatch(styles, /\.mp-gallery-layouts/);
 });

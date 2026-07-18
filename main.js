@@ -15470,6 +15470,7 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     this.hasApplied = false;
     this.gridContainer = null;
     this.applyButton = null;
+    this.tryHintEl = null;
     this.templates = settingsManager.getVisibleTemplates();
     this.originalTemplateId = currentTemplateId;
     this.currentTemplateId = currentTemplateId;
@@ -15514,7 +15515,10 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     this.gridContainer = contentEl.createDiv("mp-gallery-grid");
     this.renderGallery();
     const footer = contentEl.createDiv("mp-gallery-footer");
-    footer.createEl("span", { cls: "mp-gallery-try-hint", text: "\u8BD5\u7528\u4E0D\u4F1A\u4FDD\u5B58\u5230\u7B14\u8BB0\u8BBE\u7F6E\u3002" });
+    const trialInfo = footer.createDiv("mp-gallery-trial-info");
+    this.tryHintEl = trialInfo.createDiv("mp-gallery-try-hint");
+    trialInfo.createEl("div", { cls: "mp-gallery-trial-note", text: "\u8BD5\u7528\u4E0D\u4F1A\u4FDD\u5B58\u5230\u7B14\u8BB0\u8BBE\u7F6E\u3002" });
+    this.updateTryHint();
     const actions = footer.createDiv("mp-gallery-actions");
     const cancel = actions.createEl("button", { text: "\u53D6\u6D88\u8BD5\u7528", cls: "mp-gallery-btn-cancel" });
     cancel.addEventListener("click", () => this.close());
@@ -15577,7 +15581,6 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     });
     const info = card.createDiv("mp-theme-info");
     info.createEl("strong", { text: template.name, cls: "mp-theme-name" });
-    info.createEl("span", { text: this.getTemplateDescription(template), cls: "mp-theme-description" });
     if (selected) {
       const check = info.createDiv("mp-theme-checkmark");
       (0, import_obsidian2.setIcon)(check, "check");
@@ -15586,6 +15589,7 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       this.currentTemplateId = template.id;
       this.previewCallback(template.id);
       this.updateApplyButton();
+      this.updateTryHint();
       this.renderGallery();
     });
   }
@@ -15594,6 +15598,13 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       return;
     const template = this.templates.find((item) => item.id === this.currentTemplateId);
     this.applyButton.setText(`\u5E94\u7528\u300C${(template == null ? void 0 : template.name) || "\u4E3B\u9898"}\u300D`);
+  }
+  updateTryHint() {
+    if (!this.tryHintEl)
+      return;
+    const template = this.templates.find((item) => item.id === this.currentTemplateId);
+    const description = template ? this.getTemplateDescription(template) : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
+    this.tryHintEl.setText(`\u63A8\u8350\u4F5C\u7528\uFF1A${description}`);
   }
   getTemplateDescription(template) {
     var _a;
