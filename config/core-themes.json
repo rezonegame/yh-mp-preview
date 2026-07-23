@@ -2,11 +2,18 @@
   "schemaVersion": 1,
   "themeIds": [
     "default",
+    "deep-reading",
     "minimal",
+    "red-white-editorial",
     "academic-pro",
+    "clear-guide",
     "academic-pro-forest",
+    "olive-journal",
     "modern-report",
+    "data-blueprint",
     "zen-essence",
-    "apple-product"
+    "eastern-notes",
+    "apple-product",
+    "product-review"
   ]
 }

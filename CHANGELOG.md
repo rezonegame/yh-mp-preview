@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.8.0
+
+- Added one deliberately distinct, WeChat-safe alternative to each of the
+  seven article-use frameworks. The gallery now contains 14 themes, organised
+  as two options per scene rather than a flat collection of colour variants.
+- Added deep-reading, clear-guide, product-review, red-white-editorial,
+  data-blueprint, eastern-notes, and olive-journal frameworks.
+
 ## 3.7.0
 
 - Consolidated the shipped theme catalogue from 64 presets to seven distinct

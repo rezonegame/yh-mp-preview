@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "pluginVersion": "3.7.0",
+  "pluginVersion": "3.8.0",
   "summary": {
-    "total": 7,
-    "bundled": 7,
+    "total": 14,
+    "bundled": 14,
     "xiaohuImported": 0,
     "pendingProvenanceReview": 0,
     "duplicateIds": [],
-    "coreThemes": 7,
+    "coreThemes": 14,
     "missingCoreThemeIds": []
   },
   "templates": [
@@ -36,9 +36,41 @@
       "v3Disposition": "core"
     },
     {
+      "id": "clear-guide",
+      "name": "清晰指南",
+      "file": "src/templates/clear-guide.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
+      "id": "data-blueprint",
+      "name": "数据蓝图",
+      "file": "src/templates/data-blueprint.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
+      "id": "deep-reading",
+      "name": "深度阅读",
+      "file": "src/templates/deep-reading.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
       "id": "default",
       "name": "通用长文",
       "file": "src/templates/default.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
+      "id": "eastern-notes",
+      "name": "东方笺谱",
+      "file": "src/templates/eastern-notes.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
       "v3Disposition": "core"
@@ -55,6 +87,30 @@
       "id": "modern-report",
       "name": "报告与复盘",
       "file": "src/templates/modern-report.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
+      "id": "olive-journal",
+      "name": "橄榄手记",
+      "file": "src/templates/olive-journal.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
+      "id": "product-review",
+      "name": "测评清单",
+      "file": "src/templates/product-review.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
+      "id": "red-white-editorial",
+      "name": "红白编辑",
+      "file": "src/templates/red-white-editorial.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
       "v3Disposition": "core"

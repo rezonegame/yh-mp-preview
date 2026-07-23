@@ -17,12 +17,19 @@ test('Core theme visual-style baseline is reproducible', () => {
   execFileSync(process.execPath, ['scripts/audit-core-theme-baseline.mjs', '--check'], { stdio: 'pipe' });
   assert.deepEqual(config.themeIds, [
     'default',
+    'deep-reading',
     'minimal',
+    'red-white-editorial',
     'academic-pro',
+    'clear-guide',
     'academic-pro-forest',
+    'olive-journal',
     'modern-report',
+    'data-blueprint',
     'zen-essence',
+    'eastern-notes',
     'apple-product',
+    'product-review',
   ]);
   assert.equal(baseline.themes.length, config.themeIds.length);
   assert.ok(baseline.themes.every((theme) => /^[a-f0-9]{64}$/.test(theme.fingerprint)));

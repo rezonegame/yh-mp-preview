@@ -7963,6 +7963,30 @@ var init_apple_product = __esm({
   }
 });
 
+// src/templates/clear-guide.json
+var clear_guide_default;
+var init_clear_guide = __esm({
+  "src/templates/clear-guide.json"() {
+    clear_guide_default = { id: "clear-guide", name: "\u6E05\u6670\u6307\u5357", description: "\u7F16\u53F7\u611F\u66F4\u5F3A\u7684\u64CD\u4F5C\u8BF4\u660E\u98CE\uFF0C\u9002\u5408\u6559\u7A0B\u3001\u6D41\u7A0B\u548C\u5DE5\u5177\u4E0A\u624B\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#263b3a;", accentColor: "#087f75", title: { h1: { base: "margin:28px 0 24px;padding-bottom:14px;border-bottom:6px solid #f0c94d;font-size:1.82em;", content: "font-weight:700;color:#172b29;", after: "" }, h2: { base: "margin:30px 0 14px;padding-bottom:8px;border-bottom:3px solid #172b29;font-size:1.38em;", content: "font-weight:700;color:#172b29;", after: "" }, h3: { base: "margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid #b9d0cd;font-size:1.15em;", content: "font-weight:700;color:#087f75;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#176c65;", after: "" } }, paragraph: "color:#263b3a;", list: { container: "padding-left:1.45em;color:#087f75;", item: "color:#263b3a;", taskList: "list-style:none;padding-left:0;color:#263b3a;" }, quote: "margin:1.2em 0;padding:14px 16px;border:2px solid #172b29;background:#fff7cf;color:#31514f;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#dff1ee;", dot: "display:none;", colors: ["#087f75", "#087f75", "#087f75"] }, block: "margin:1.2em 0;padding:14px;background:#173330;border:1px solid #183f3c;color:#e8f4f2;", inline: "padding:1px 4px;background:#eaf3f2;color:#075f58;" }, image: "border:2px solid #172b29;border-radius:0;", link: "color:#06736a;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#064c47;", em: "color:#476a66;", del: "color:#9bbdb9;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #172b29;", header: "padding:10px;background:#fff7cf;color:#172b29;border-bottom:1px solid #b9d0cd;", cell: "padding:10px;border-bottom:1px solid #d9e9e6;color:#263b3a;" }, hr: "margin:30px 0;border:0;border-top:1px solid #9bbdb9;", footnote: { ref: "color:#06736a;", backref: "color:#06736a;" } } };
+  }
+});
+
+// src/templates/data-blueprint.json
+var data_blueprint_default;
+var init_data_blueprint = __esm({
+  "src/templates/data-blueprint.json"() {
+    data_blueprint_default = { id: "data-blueprint", name: "\u6570\u636E\u84DD\u56FE", description: "\u6DF1\u84DD\u6570\u636E\u5C42\u7EA7\u4E0E\u6696\u8272\u6807\u8BB0\uFF0C\u9002\u5408\u6570\u636E\u5206\u6790\u3001\u7ECF\u8425\u590D\u76D8\u4E0E\u62A5\u544A\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#203047;", accentColor: "#173f7a", title: { h1: { base: "margin:24px 0 24px;padding:20px 18px;background:#102b4e;font-size:1.82em;", content: "font-weight:700;color:#ffffff;", after: "" }, h2: { base: "margin:30px 0 14px;padding-bottom:8px;border-bottom:2px solid #173f7a;font-size:1.38em;", content: "font-weight:700;color:#173f7a;", after: "" }, h3: { base: "margin:22px 0 10px;padding:4px 8px;border:1px solid #7790ac;background:#edf3f8;font-size:1.04em;", content: "font-weight:700;color:#173f7a;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#365777;", after: "" } }, paragraph: "color:#203047;", list: { container: "padding-left:1.45em;color:#a84317;", item: "color:#203047;", taskList: "list-style:none;padding-left:0;color:#203047;" }, quote: "margin:1.2em 0;padding:14px 16px;border-top:1px solid #7790ac;border-bottom:1px solid #7790ac;color:#314765;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#13233a;", dot: "display:none;", colors: ["#a84317", "#a84317", "#a84317"] }, block: "margin:1.2em 0;padding:14px;background:#13233a;border-top:5px solid #a84317;color:#eaf1f8;", inline: "padding:1px 4px;background:#eef3f8;color:#174f8f;" }, image: "padding:4px;border:1px solid #aebdce;border-radius:0;", link: "color:#175da8;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#142e55;", em: "color:#536a84;", del: "color:#94a3b8;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #173f7a;", header: "padding:10px;background:#173f7a;color:#ffffff;border-bottom:1px solid #173f7a;", cell: "padding:10px;border-bottom:1px solid #d8e1eb;color:#203047;" }, hr: "margin:30px 0;border:0;border-top:1px solid #aebdce;", footnote: { ref: "color:#175da8;", backref: "color:#175da8;" } } };
+  }
+});
+
+// src/templates/deep-reading.json
+var deep_reading_default;
+var init_deep_reading = __esm({
+  "src/templates/deep-reading.json"() {
+    deep_reading_default = { id: "deep-reading", name: "\u6DF1\u5EA6\u9605\u8BFB", description: "\u66F4\u5C11\u88C5\u9970\u3001\u66F4\u5F3A\u6587\u5B57\u5C42\u7EA7\uFF0C\u9002\u5408\u53D9\u4E8B\u3001\u8BBF\u8C08\u4E0E\u6DF1\u5EA6\u957F\u6587\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#202124;", accentColor: "#202124", title: { h1: { base: "margin:34px 0 24px;font-size:1.9em;", content: "font-weight:700;color:#111111;", after: "" }, h2: { base: "margin:32px 0 14px;font-size:1.42em;", content: "font-weight:700;color:#111111;", after: "" }, h3: { base: "margin:24px 0 10px;font-size:1.16em;", content: "font-weight:700;color:#303134;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#4b5563;", after: "" } }, paragraph: "color:#202124;", list: { container: "padding-left:1.45em;color:#202124;", item: "color:#202124;", taskList: "list-style:none;padding-left:0;color:#202124;" }, quote: "margin:1.3em 0;padding:14px 18px;border-left:3px solid #202124;background:#fafafa;color:#4b5563;", code: { header: { container: "display:none;", dot: "display:none;", colors: ["#202124", "#202124", "#202124"] }, block: "margin:1.3em 0;padding:14px;background:#f6f8fa;border:1px solid #e5e7eb;color:#202124;", inline: "padding:1px 4px;background:#f3f4f6;color:#202124;" }, image: "border:0;border-radius:0;", link: "color:#202124;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#111111;", em: "color:#4b5563;", del: "color:#9ca3af;" }, table: { container: "margin:1.3em 0;border-collapse:collapse;border-top:1px solid #202124;", header: "padding:10px;color:#111111;border-bottom:1px solid #d1d5db;", cell: "padding:10px;border-bottom:1px solid #e5e7eb;color:#202124;" }, hr: "margin:34px 0;border:0;border-top:1px solid #d1d5db;", footnote: { ref: "color:#4b5563;", backref: "color:#4b5563;" } } };
+  }
+});
+
 // src/templates/default.json
 var default_default;
 var init_default = __esm({
@@ -7993,6 +8017,14 @@ var init_default = __esm({
         footnote: { ref: "color: #475569;", backref: "color: #475569;" }
       }
     };
+  }
+});
+
+// src/templates/eastern-notes.json
+var eastern_notes_default;
+var init_eastern_notes = __esm({
+  "src/templates/eastern-notes.json"() {
+    eastern_notes_default = { id: "eastern-notes", name: "\u4E1C\u65B9\u7B3A\u8C31", description: "\u7EB8\u7B3A\u822C\u7684\u6E29\u6DA6\u4F4E\u9971\u548C\u8272\u8C03\uFF0C\u9002\u5408\u6587\u5316\u968F\u7B14\u3001\u8BFB\u4E66\u4E0E\u751F\u6D3B\u8BB0\u5F55\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#4b4239;", accentColor: "#8a6248", title: { h1: { base: "margin:34px 0 22px;padding-bottom:14px;border-bottom:1px solid #c9b8a5;font-size:1.78em;", content: "font-weight:700;color:#40362e;", after: "" }, h2: { base: "margin:30px 0 14px;padding-left:10px;border-left:3px solid #8a6248;font-size:1.34em;", content: "font-weight:700;color:#5b4435;", after: "" }, h3: { base: "margin:24px 0 10px;font-size:1.13em;", content: "font-weight:700;color:#8a6248;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#725645;", after: "" } }, paragraph: "color:#4b4239;", list: { container: "padding-left:1.45em;color:#8a6248;", item: "color:#4b4239;", taskList: "list-style:none;padding-left:0;color:#4b4239;" }, quote: "margin:1.3em 0;padding:16px 18px;border-left:3px solid #c9b8a5;background:#fcfaf7;color:#66574b;", code: { header: { container: "display:none;", dot: "display:none;", colors: ["#8a6248", "#8a6248", "#8a6248"] }, block: "margin:1.3em 0;padding:14px;background:#fcfaf7;border:1px solid #e6ddd3;color:#4b4239;", inline: "padding:1px 4px;background:#f6f0e9;color:#725645;" }, image: "border:1px solid #e6ddd3;border-radius:2px;", link: "color:#725645;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#40362e;", em: "color:#725645;", del: "color:#b8a99a;" }, table: { container: "margin:1.3em 0;border-collapse:collapse;border-top:1px solid #8a6248;", header: "padding:10px;background:#f8f2eb;color:#5b4435;border-bottom:1px solid #dfd1c2;", cell: "padding:10px;border-bottom:1px solid #eee5dc;color:#4b4239;" }, hr: "margin:32px 0;border:0;border-top:1px solid #dfd1c2;", footnote: { ref: "color:#8a6248;", backref: "color:#8a6248;" } } };
   }
 });
 
@@ -8062,6 +8094,30 @@ var init_modern_report = __esm({
   }
 });
 
+// src/templates/olive-journal.json
+var olive_journal_default;
+var init_olive_journal = __esm({
+  "src/templates/olive-journal.json"() {
+    olive_journal_default = { id: "olive-journal", name: "\u6A44\u6984\u624B\u8BB0", description: "\u9ED1\u7070\u6B63\u6587\u914D\u6A59\u8272\u7F16\u8F91\u6807\u8BB0\uFF0C\u9002\u5408\u6848\u4F8B\u590D\u76D8\u3001\u5185\u520A\u4E0E\u7CFB\u7EDF\u6027\u8BF4\u660E\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#303236;", accentColor: "#ed7b2f", title: { h1: { base: "margin:28px 0 22px;padding-bottom:12px;border-bottom:3px solid #1e1f23;font-size:1.84em;", content: "font-weight:700;color:#1e1f23;", after: "" }, h2: { base: "margin:30px 0 14px;padding-left:12px;border-left:5px solid #ed7b2f;font-size:1.4em;", content: "font-weight:700;color:#1e1f23;", after: "" }, h3: { base: "margin:22px 0 10px;font-size:1.15em;", content: "font-weight:700;color:#c75f1c;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#45474d;", after: "" } }, paragraph: "color:#303236;", list: { container: "padding-left:1.45em;color:#ed7b2f;", item: "color:#303236;", taskList: "list-style:none;padding-left:0;color:#303236;" }, quote: "margin:1.2em 0;padding:15px 17px;border-left:4px solid #ed7b2f;background:#fff8f2;color:#505158;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#1e1f23;", dot: "display:none;", colors: ["#ed7b2f", "#ed7b2f", "#ed7b2f"] }, block: "margin:1.2em 0;padding:14px;background:#25262b;border-top:4px solid #ed7b2f;color:#f2f3f5;", inline: "padding:1px 4px;background:#f8eee6;color:#b95114;" }, image: "border:1px solid #dedfe2;border-radius:2px;", link: "color:#b95114;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#1e1f23;", em: "color:#505158;", del: "color:#9ca3af;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #1e1f23;", header: "padding:10px;background:#1e1f23;color:#ffffff;border-bottom:1px solid #1e1f23;", cell: "padding:10px;border-bottom:1px solid #dedfe2;color:#303236;" }, hr: "margin:30px 0;border:0;border-top:1px solid #dedfe2;", footnote: { ref: "color:#b95114;", backref: "color:#b95114;" } } };
+  }
+});
+
+// src/templates/product-review.json
+var product_review_default;
+var init_product_review = __esm({
+  "src/templates/product-review.json"() {
+    product_review_default = { id: "product-review", name: "\u6D4B\u8BC4\u6E05\u5355", description: "\u4EE5\u8BC4\u5206\u3001\u8981\u70B9\u548C\u5BF9\u6BD4\u9605\u8BFB\u4E3A\u4E2D\u5FC3\uFF0C\u9002\u5408\u4EA7\u54C1\u6D4B\u8BC4\u4E0E\u5DE5\u5177\u76D8\u70B9\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#334155;", accentColor: "#059669", title: { h1: { base: "margin:28px 0 20px;padding:12px 14px;border-left:5px solid #059669;background:#ecfdf5;font-size:1.8em;", content: "font-weight:700;color:#14532d;", after: "" }, h2: { base: "margin:28px 0 12px;padding:8px 12px;border-left:4px solid #059669;background:#f0fdf4;font-size:1.36em;", content: "font-weight:700;color:#14532d;", after: "" }, h3: { base: "margin:22px 0 10px;font-size:1.14em;", content: "font-weight:700;color:#047857;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#166534;", after: "" } }, paragraph: "color:#334155;", list: { container: "padding-left:1.45em;color:#059669;", item: "color:#334155;", taskList: "list-style:none;padding-left:0;color:#334155;" }, quote: "margin:1.1em 0;padding:14px 16px;border-left:4px solid #059669;background:#f0fdf4;color:#365248;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#dff8ed;", dot: "display:none;", colors: ["#059669", "#059669", "#059669"] }, block: "margin:1.2em 0;padding:14px;background:#f7fffa;border:1px solid #ccebd8;color:#14532d;", inline: "padding:1px 4px;background:#ecfdf5;color:#047857;" }, image: "border:1px solid #ccebd8;border-radius:6px;", link: "color:#047857;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#047857;", em: "color:#46705c;", del: "color:#94a3b8;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #059669;", header: "padding:10px;background:#059669;color:#ffffff;border-bottom:1px solid #059669;", cell: "padding:10px;border-bottom:1px solid #d9eee1;color:#334155;" }, hr: "margin:28px 0;border:0;border-top:1px solid #ccebd8;", footnote: { ref: "color:#059669;", backref: "color:#059669;" } } };
+  }
+});
+
+// src/templates/red-white-editorial.json
+var red_white_editorial_default;
+var init_red_white_editorial = __esm({
+  "src/templates/red-white-editorial.json"() {
+    red_white_editorial_default = { id: "red-white-editorial", name: "\u7EA2\u767D\u7F16\u8F91", description: "\u514B\u5236\u7684\u7EA2\u8272\u7AE0\u8282\u951A\u70B9\uFF0C\u9002\u5408\u8BC4\u8BBA\u3001\u5206\u6790\u4E0E\u6709\u529B\u91CF\u611F\u7684\u8BAE\u9898\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#292524;", accentColor: "#c2413b", title: { h1: { base: "margin:30px 0 22px;padding-bottom:12px;border-bottom:3px solid #c2413b;font-size:1.86em;", content: "font-weight:700;color:#1c1917;", after: "" }, h2: { base: "margin:30px 0 14px;padding-left:12px;border-left:5px solid #c2413b;font-size:1.4em;", content: "font-weight:700;color:#1c1917;", after: "" }, h3: { base: "margin:22px 0 10px;font-size:1.15em;", content: "font-weight:700;color:#c2413b;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#44403c;", after: "" } }, paragraph: "color:#292524;", list: { container: "padding-left:1.45em;color:#c2413b;", item: "color:#292524;", taskList: "list-style:none;padding-left:0;color:#292524;" }, quote: "margin:1.2em 0;padding:16px 18px;border-left:4px solid #c2413b;background:#fff7f6;color:#57534e;", code: { header: { container: "display:none;", dot: "display:none;", colors: ["#c2413b", "#c2413b", "#c2413b"] }, block: "margin:1.2em 0;padding:14px;background:#fafafa;border:1px solid #e7e5e4;color:#292524;", inline: "padding:1px 4px;background:#fff1f0;color:#b42318;" }, image: "border:0;border-radius:0;", link: "color:#c2413b;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#b42318;", em: "color:#57534e;", del: "color:#a8a29e;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #c2413b;", header: "padding:10px;background:#fff1f0;color:#7f1d1d;border-bottom:1px solid #fecaca;", cell: "padding:10px;border-bottom:1px solid #e7e5e4;color:#292524;" }, hr: "margin:30px 0;border:0;border-top:1px solid #fecaca;", footnote: { ref: "color:#c2413b;", backref: "color:#c2413b;" } } };
+  }
+});
+
 // src/templates/zen-essence.json
 var zen_essence_default;
 var init_zen_essence = __esm({
@@ -8106,18 +8162,32 @@ var init_templates = __esm({
     init_academic_pro_forest();
     init_academic_pro();
     init_apple_product();
+    init_clear_guide();
+    init_data_blueprint();
+    init_deep_reading();
     init_default();
+    init_eastern_notes();
     init_minimal();
     init_modern_report();
+    init_olive_journal();
+    init_product_review();
+    init_red_white_editorial();
     init_zen_essence();
     templates = {
       default: default_default,
+      "deep-reading": deep_reading_default,
       "academic-pro": academic_pro_default,
+      "clear-guide": clear_guide_default,
       "apple-product": apple_product_default,
+      "product-review": product_review_default,
       minimal: minimal_default,
+      "red-white-editorial": red_white_editorial_default,
       "modern-report": modern_report_default,
+      "data-blueprint": data_blueprint_default,
       "zen-essence": zen_essence_default,
-      "academic-pro-forest": academic_pro_forest_default
+      "eastern-notes": eastern_notes_default,
+      "academic-pro-forest": academic_pro_forest_default,
+      "olive-journal": olive_journal_default
     };
   }
 });
@@ -10296,13 +10366,20 @@ var import_obsidian2 = require("obsidian");
 // src/core/theme/themeCatalog.ts
 var CURATED_THEME_CATALOG_VERSION = 2;
 var curatedThemeEntries = [
-  { id: "default", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u9002\u5408\u901A\u77E5\u3001\u6587\u7AE0\u521D\u7A3F\u4E0E\u9700\u8981\u7A33\u5B9A\u9605\u8BFB\u8282\u594F\u7684\u957F\u6587\u3002" },
-  { id: "academic-pro", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u9002\u5408\u6559\u7A0B\u3001\u65B9\u6CD5\u8BBA\u3001\u77E5\u8BC6\u6574\u7406\u4E0E\u6280\u672F\u8BF4\u660E\u3002" },
-  { id: "apple-product", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u9002\u5408\u4EA7\u54C1\u4ECB\u7ECD\u3001\u5DE5\u5177\u8BC4\u6D4B\u4E0E\u54C1\u724C\u5185\u5BB9\u3002" },
-  { id: "minimal", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u9002\u5408\u89C2\u70B9\u3001\u8BC4\u8BBA\u4E0E\u9700\u8981\u514B\u5236\u8868\u8FBE\u7684\u4E13\u4E1A\u6587\u7AE0\u3002" },
-  { id: "modern-report", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u9002\u5408\u5468\u62A5\u3001\u590D\u76D8\u3001\u6570\u636E\u8BF4\u660E\u4E0E\u9636\u6BB5\u603B\u7ED3\u3002" },
-  { id: "zen-essence", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u9002\u5408\u968F\u7B14\u3001\u751F\u6D3B\u65B9\u5F0F\u4E0E\u4F4E\u5E72\u6270\u9605\u8BFB\u5185\u5BB9\u3002" },
-  { id: "academic-pro-forest", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u9002\u5408\u6848\u4F8B\u62C6\u89E3\u3001\u7EC4\u7EC7\u5185\u520A\u4E0E\u6DF1\u5EA6\u7ECF\u9A8C\u603B\u7ED3\u3002" }
+  { id: "default", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u4E2D\u6027\u3001\u7A33\u5B9A\uFF0C\u9002\u5408\u901A\u77E5\u3001\u6587\u7AE0\u521D\u7A3F\u4E0E\u5E38\u89C4\u957F\u6587\u3002" },
+  { id: "deep-reading", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u4F4E\u88C5\u9970\u6587\u5B57\u5C42\u7EA7\uFF0C\u9002\u5408\u53D9\u4E8B\u3001\u8BBF\u8C08\u4E0E\u6DF1\u5EA6\u957F\u6587\u3002" },
+  { id: "academic-pro", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u7AE0\u8282\u8FB9\u754C\u6E05\u6670\uFF0C\u9002\u5408\u6559\u7A0B\u3001\u65B9\u6CD5\u8BBA\u4E0E\u6280\u672F\u8BF4\u660E\u3002" },
+  { id: "clear-guide", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u66F4\u5F3A\u7684\u64CD\u4F5C\u6B65\u9AA4\u611F\uFF0C\u9002\u5408\u6D41\u7A0B\u3001\u4E0A\u624B\u4E0E\u5DE5\u5177\u6307\u5357\u3002" },
+  { id: "apple-product", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u6E05\u900F\u7684\u4EA7\u54C1\u8BF4\u660E\u5C42\u7EA7\uFF0C\u9002\u5408\u4EA7\u54C1\u4ECB\u7ECD\u4E0E\u54C1\u724C\u5185\u5BB9\u3002" },
+  { id: "product-review", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u5F3A\u8C03\u8981\u70B9\u4E0E\u5BF9\u6BD4\u9605\u8BFB\uFF0C\u9002\u5408\u6D4B\u8BC4\u548C\u5DE5\u5177\u76D8\u70B9\u3002" },
+  { id: "minimal", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u77F3\u58A8\u7070\u5C42\u7EA7\uFF0C\u9002\u5408\u4E13\u4E1A\u89C2\u70B9\u4E0E\u514B\u5236\u8868\u8FBE\u3002" },
+  { id: "red-white-editorial", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u514B\u5236\u7EA2\u8272\u7AE0\u8282\u951A\u70B9\uFF0C\u9002\u5408\u8BC4\u8BBA\u4E0E\u5206\u6790\u8BAE\u9898\u3002" },
+  { id: "modern-report", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u9AD8\u5BF9\u6BD4\u4F46\u4E0D\u8FC7\u5EA6\u88C5\u9970\uFF0C\u9002\u5408\u5468\u62A5\u4E0E\u9636\u6BB5\u603B\u7ED3\u3002" },
+  { id: "data-blueprint", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u6570\u636E\u5C42\u7EA7\u4E0E\u6696\u8272\u6807\u8BB0\uFF0C\u9002\u5408\u7ECF\u8425\u5206\u6790\u548C\u6570\u636E\u590D\u76D8\u3002" },
+  { id: "zen-essence", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u4F4E\u9971\u548C\u7559\u767D\uFF0C\u9002\u5408\u968F\u7B14\u3001\u751F\u6D3B\u65B9\u5F0F\u4E0E\u6C89\u9759\u9605\u8BFB\u3002" },
+  { id: "eastern-notes", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u6E29\u6DA6\u7EB8\u7B3A\u611F\uFF0C\u9002\u5408\u6587\u5316\u968F\u7B14\u3001\u8BFB\u4E66\u4E0E\u751F\u6D3B\u8BB0\u5F55\u3002" },
+  { id: "academic-pro-forest", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u4E13\u4E1A\u6848\u4F8B\u7ED3\u6784\uFF0C\u9002\u5408\u6848\u4F8B\u62C6\u89E3\u4E0E\u7ECF\u9A8C\u603B\u7ED3\u3002" },
+  { id: "olive-journal", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u7F16\u8F91\u90E8\u5185\u520A\u8D28\u611F\uFF0C\u9002\u5408\u7CFB\u7EDF\u590D\u76D8\u4E0E\u7EC4\u7EC7\u6C89\u6DC0\u3002" }
 ];
 var curatedThemesById = new Map(curatedThemeEntries.map((entry) => [entry.id, entry]));
 function getCuratedThemeEntry(themeId) {
