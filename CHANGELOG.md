@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.7.0
+
+- Consolidated the shipped theme catalogue from 64 presets to seven distinct
+  WeChat reading frameworks. All remaining themes now appear directly under
+  their article-use scenes; there is no classic-theme or re-enable setting.
+- Rebuilt every retained framework with a complete, conservative inline style
+  set for long-form WeChat reading, including the previously incomplete forest
+  case-study theme.
+- Removed colour-only, decorative, and low-readability bundled presets. Custom
+  user themes remain untouched; removed preset selections safely fall back to
+  the default framework after upgrade.
+
 ## 3.6.5
 
 - Kept the scene-first theme picker, but curated its default catalogue around

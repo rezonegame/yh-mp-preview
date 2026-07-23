@@ -8,15 +8,15 @@ import type { SettingsManager } from './settings';
 import type { Template } from '../templateManager';
 import { curatedThemeEntries, getCuratedThemeEntry, type CuratedThemeScene } from '../core/theme/themeCatalog';
 
-type ThemeScene = '全部' | CuratedThemeScene | '经典主题' | '自定义主题';
+type ThemeScene = '全部' | CuratedThemeScene | '自定义主题';
 
 const SCENE_ORDER: ThemeScene[] = [
-    '全部', ...curatedThemeEntries.map(entry => entry.scene), '经典主题', '自定义主题'
+    '全部', ...curatedThemeEntries.map(entry => entry.scene), '自定义主题'
 ];
 
 export function getThemeScene(template: Template): ThemeScene {
     if (!template.isPreset) return '自定义主题';
-    return getCuratedThemeEntry(template.id)?.scene || '经典主题';
+    return getCuratedThemeEntry(template.id)?.scene || '通用长文';
 }
 
 export class ThemeGalleryModal extends Modal {

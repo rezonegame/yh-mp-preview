@@ -1,85 +1,26 @@
 {
-    "id": "default",
-    "name": "默认模板 - 标准",
-    "styles": {
-        "container": "",
-        "title": {
-            "h1": {
-                "base": "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5;",
-                "content": "font-weight: bold; color: #2c3e50;",
-                "after": ""
-            },
-            "h2": {
-                "base": "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
-                "content": "font-weight: bold; color: #34495e;",
-                "after": ""
-            },
-            "h3": {
-                "base": "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
-                "content": "font-weight: bold; color: #3d566e;",
-                "after": ""
-            },
-            "base": {
-                "base": "margin: 14px 0 0; font-size: 1em; line-height: 1.5;",
-                "content": "font-weight: bold; color: #47637f;",
-                "after": ""
-            }
-        },
-        "paragraph": "line-height: 1.8; margin-top: 1em; font-size: 1em; color: #4a4a4a;",
-        "list": {
-            "container": "padding-left: 32px; color: #4a4a4a;",
-            "item": " font-size: 1em; color: #4a4a4a; line-height: 1.8;",
-            "taskList": "list-style: none; font-size: 1em; color: #4a4a4a; line-height: 1.8;"
-        },
-        "code": {
-            "header": {
-                "container": "margin-bottom: 1em; display: flex; gap: 6px;",
-                "dot": "width: 12px; height: 12px; border-radius: 50%;",
-                "colors": [
-                    "#ff5f56",
-                    "#ffbd2e",
-                    "#27c93f"
-                ]
-            },
-            "block": "color: #333; background: #f8f8f8; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
-            "inline": "background: #f8f8f8; padding: 2px 6px; border-radius: 4px; color: #333; font-size: 14px; border: 1px solid #eee;",
-            "syntax": {
-                "comment": "color: #6a737d;",
-                "keyword": "color: #d73a49;",
-                "string": "color: #032f62;",
-                "function": "color: #6f42c1;",
-                "number": "color: #005cc5;",
-                "operator": "color: #d73a49;",
-                "class-name": "color: #6f42c1;",
-                "variable": "color: #e36209;",
-                "constant": "color: #005cc5;",
-                "property": "color: #005cc5;",
-                "punctuation": "color: #24292e;",
-                "boolean": "color: #005cc5;",
-                "tag": "color: #22863a;",
-                "attr-name": "color: #6f42c1;",
-                "attr-value": "color: #032f62;",
-                "regex": "color: #032f62;",
-                "selector": "color: #22863a;"
-            }
-        },
-        "quote": "border-left: 4px solid #e0e0e0; border-radius: 6px; padding: 14px 18px; background: #f6f8fa; margin: 0.8em 0; color: #6a737d; font-style: italic; word-wrap: break-word;",
-        "image": "max-width: 100%; height: auto; margin: 1em auto; display: block;",
-        "link": "color: #e0e0e0; text-decoration: none; border-bottom: 1px solid #e0e0e0;",
-        "emphasis": {
-            "strong": "font-weight: bold; color: #4a4a4a;",
-            "em": "font-style: italic; color: #4a4a4a;",
-            "del": "text-decoration: line-through; color: #4a4a4a;"
-        },
-        "table": {
-            "container": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e1e4e8;",
-            "header": "background: #f6f8fa; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #e1e4e8; font-size: 1em;",
-            "cell": "border: 1px solid #f0f0f0; padding: 12px; color: #4a4a4a; font-size: 1em;"
-        },
-        "hr": "border: none; border-top: 1px solid #f0f0f0; margin: 20px 0;",
-        "footnote": {
-            "ref": "color: #e0e0e0; text-decoration: none; font-size: 0.9em;",
-            "backref": "color: #e0e0e0; text-decoration: none; font-size: 0.9em;"
-        }
-    }
+  "id": "default",
+  "name": "通用长文",
+  "description": "中性、稳定的正文框架，适合通知、文章初稿与常规长文。",
+  "source": "yh-mp-preview",
+  "styles": {
+    "container": "background: #ffffff; padding: 0; color: #334155;",
+    "accentColor": "#475569",
+    "title": {
+      "h1": { "base": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 2px solid #475569;", "content": "font-weight: 700; color: #1f2937;", "after": "" },
+      "h2": { "base": "margin: 26px 0 12px; padding-left: 12px; border-left: 4px solid #475569; font-size: 1.38em;", "content": "font-weight: 700; color: #1f2937;", "after": "" },
+      "h3": { "base": "margin: 22px 0 10px; font-size: 1.15em;", "content": "font-weight: 700; color: #475569;", "after": "" },
+      "base": { "base": "margin: 18px 0 8px; font-size: 1em;", "content": "font-weight: 700; color: #475569;", "after": "" }
+    },
+    "paragraph": "color: #334155;",
+    "list": { "container": "padding-left: 1.45em; color: #334155;", "item": "color: #334155;", "taskList": "list-style: none; padding-left: 0; color: #334155;" },
+    "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #94a3b8; background: #f8fafc; color: #475569;",
+    "code": { "header": { "container": "margin-bottom: 6px; padding: 6px 10px; background: #eef2f7;", "dot": "display: none;", "colors": ["#475569", "#475569", "#475569"] }, "block": "margin: 1.2em 0; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; color: #334155;", "inline": "padding: 1px 4px; background: #f1f5f9; color: #334155;" },
+    "image": "border: 1px solid #e2e8f0; border-radius: 4px;",
+    "link": "color: #334155; text-decoration: underline;",
+    "emphasis": { "strong": "font-weight: 700; color: #1f2937;", "em": "color: #475569;", "del": "color: #94a3b8;" },
+    "table": { "container": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #475569;", "header": "padding: 10px; background: #f8fafc; color: #1f2937; border-bottom: 1px solid #dbe3ec;", "cell": "padding: 10px; border-bottom: 1px solid #e2e8f0; color: #334155;" },
+    "hr": "margin: 28px 0; border: 0; border-top: 1px solid #e2e8f0;",
+    "footnote": { "ref": "color: #475569;", "backref": "color: #475569;" }
+  }
 }

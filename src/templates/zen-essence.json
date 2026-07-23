@@ -1,71 +1,26 @@
 {
-    "id": "zen-essence",
-    "name": "禅意极简 - 留白",
-    "description": "甚至比极简更简，白茶配淡墨，留白艺术感，适合生活方式、思考悟道、冥想疗愈内容",
-    "isPreset": true,
-    "isVisible": true,
-    "source": "yh-mp-preview",
-    "styles": {
-        "container": "background-color: #ffffff; padding: 32px 24px; color: #555555",
-        "title": {
-            "h1": {
-                "base": "font-size: 20px; font-weight: 300; color: #333333; text-align: center; margin-top: 32px; margin-bottom: 40px; letter-spacing: 0.3em; text-transform: uppercase",
-                "content": "color: #333333",
-                "after": ""
-            },
-            "h2": {
-                "base": "font-size: 17px; font-weight: 300; color: #333333; text-align: center; margin-top: 28px; margin-bottom: 20px; border-bottom: 0.5px solid #e0e0e0; padding-bottom: 15px; width: 30%; margin-left: auto; margin-right: auto",
-                "content": "color: #333333",
-                "after": ""
-            },
-            "h3": {
-                "base": "font-size: 16px; font-weight: 400; color: #666666; text-align: center; margin-top: 22px; margin-bottom: 15px; letter-spacing: 0.1em",
-                "content": "color: #666666",
-                "after": ""
-            },
-            "base": {
-                "base": "font-size: 15px; font-weight: 400; color: #888888; text-align: center",
-                "content": "color: #888888",
-                "after": ""
-            }
-        },
-        "paragraph": "font-size: 15px; color: #666666; line-height: 2.2; margin-top: 0; margin-bottom: 24px; text-align: center; font-weight: 300; letter-spacing: 0.8px",
-        "list": {
-            "container": "margin: 20px auto; padding-left: 0; list-style: none; text-align: center",
-            "item": "font-size: 14px; color: #777777; line-height: 2.2; margin-bottom: 10px",
-            "taskList": "list-style: none; padding-left: 0;"
-        },
-        "quote": "border: none; background: transparent; padding: 20px 40px; margin: 40px 0; font-size: 14px; color: #888888; line-height: 2.4; font-style: italic; position: relative; text-align: center",
-        "code": {
-            "header": {
-                "container": "display: none",
-                "dot": "display: none",
-                "colors": [
-                    "#ccc",
-                    "#ccc",
-                    "#ccc"
-                ]
-            },
-            "block": "background: #fdfdfd; border: 0.5px solid #eee; border-radius: 2px; margin: 30px 0; padding: 20px; text-align: left",
-            "inline": "background: #fdfdfd; border-bottom: 0.5px solid #ccc; padding: 1px 3px; font-size: 90%; color: #333"
-        },
-        "image": "max-width: 90%; margin: 10px auto 40px auto; display: block; border-radius: 0; filter: grayscale(10%) contrast(90%); opacity: 0.95",
-        "link": "color: #aaa; text-decoration: none; border-bottom: 1px solid #eee",
-        "emphasis": {
-            "strong": "font-weight: 400; color: #333; background: linear-gradient(0deg, #f0f0f0 30%, transparent 30%)",
-            "em": "font-style: italic; color: #999",
-            "del": "text-decoration: line-through; color: #ccc"
-        },
-        "table": {
-            "container": "width: 80%; border-collapse: collapse; margin: 40px auto; font-size: 14px; border-bottom: 0.5px solid #eee; border-top: 0.5px solid #eee",
-            "header": "padding: 15px 10px; text-align: center; border-bottom: 0.5px solid #f0f0f0; color: #333; font-weight: 300",
-            "cell": "padding: 15px 10px; color: #888; text-align: center; font-weight: 300"
-        },
-        "hr": "margin: 60px auto; width: 40px; height: 1px; background: #ddd; border: none",
-        "footnote": {
-            "ref": "font-size: 10px; color: #aaa; vertical-align: super",
-            "backref": "color: #ccc; text-decoration: none"
-        },
-        "accentColor": "#888888"
-    }
+  "id": "zen-essence",
+  "name": "随笔与生活",
+  "description": "温和留白与低饱和墨色，适合随笔、生活方式与沉静阅读。",
+  "source": "yh-mp-preview",
+  "styles": {
+    "container": "background: #ffffff; padding: 0; color: #5d625d;",
+    "accentColor": "#79836f",
+    "title": {
+      "h1": { "base": "margin: 32px 0 22px; font-size: 1.7em; padding-bottom: 14px; border-bottom: 1px solid #cfd5ca;", "content": "font-weight: 700; color: #3f463d;", "after": "" },
+      "h2": { "base": "margin: 30px 0 14px; font-size: 1.32em;", "content": "font-weight: 700; color: #4e584a;", "after": "display: block; width: 24px; height: 1px; margin-top: 9px; background: #79836f;" },
+      "h3": { "base": "margin: 24px 0 10px; font-size: 1.12em;", "content": "font-weight: 700; color: #65705f;", "after": "" },
+      "base": { "base": "margin: 18px 0 8px; font-size: 1em;", "content": "font-weight: 700; color: #65705f;", "after": "" }
+    },
+    "paragraph": "color: #5d625d;",
+    "list": { "container": "padding-left: 1.45em; color: #5d625d;", "item": "color: #5d625d;", "taskList": "list-style: none; padding-left: 0; color: #5d625d;" },
+    "quote": "margin: 1.2em 0; padding: 16px 18px; border-left: 3px solid #aeb7a7; background: #fafbf9; color: #687065;",
+    "code": { "header": { "container": "display: none;", "dot": "display: none;", "colors": ["#79836f", "#79836f", "#79836f"] }, "block": "margin: 1.3em 0; padding: 14px; background: #fafbf9; border: 1px solid #e2e6de; color: #4e584a;", "inline": "padding: 1px 4px; background: #f2f4ef; color: #65705f;" },
+    "image": "border: 0; border-radius: 0;",
+    "link": "color: #65705f; text-decoration: underline;",
+    "emphasis": { "strong": "font-weight: 700; color: #3f463d;", "em": "color: #687065;", "del": "color: #aeb7a7;" },
+    "table": { "container": "margin: 1.3em 0; border-collapse: collapse; border-top: 1px solid #aeb7a7;", "header": "padding: 10px; color: #4e584a; border-bottom: 1px solid #dce1d7;", "cell": "padding: 10px; border-bottom: 1px solid #e7ebe3; color: #5d625d;" },
+    "hr": "margin: 32px 0; border: 0; border-top: 1px solid #dce1d7;",
+    "footnote": { "ref": "color: #79836f;", "backref": "color: #79836f;" }
+  }
 }

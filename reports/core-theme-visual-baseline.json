@@ -1,111 +1,111 @@
 {
   "schemaVersion": 1,
-  "pluginVersion": "3.6.5",
+  "pluginVersion": "3.7.0",
   "description": "Deterministic Core theme visual-style baseline. Screenshot comparison is a later RC task.",
   "themes": [
     {
       "id": "default",
-      "name": "默认模板 - 标准",
-      "fingerprint": "04b0774a7876bc3226e9e808503449395faaad3fba315a5e4c8589bf342331f5",
+      "name": "通用长文",
+      "fingerprint": "94af13efeb080605850f850abe98cd987a3b44c31291d90fb7f1c9a373090837",
       "visualTokens": {
-        "container": "",
-        "h1": "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5;",
-        "h2": "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
-        "h3": "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
-        "paragraph": "line-height: 1.8; margin-top: 1em; font-size: 1em; color: #4a4a4a;",
-        "quote": "border-left: 4px solid #e0e0e0; border-radius: 6px; padding: 14px 18px; background: #f6f8fa; margin: 0.8em 0; color: #6a737d; font-style: italic; word-wrap: break-word;",
-        "codeBlock": "color: #333; background: #f8f8f8; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
-        "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e1e4e8;"
+        "container": "background: #ffffff; padding: 0; color: #334155;",
+        "h1": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 2px solid #475569;",
+        "h2": "margin: 26px 0 12px; padding-left: 12px; border-left: 4px solid #475569; font-size: 1.38em;",
+        "h3": "margin: 22px 0 10px; font-size: 1.15em;",
+        "paragraph": "color: #334155;",
+        "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #94a3b8; background: #f8fafc; color: #475569;",
+        "codeBlock": "margin: 1.2em 0; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; color: #334155;",
+        "table": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #475569;"
       }
     },
     {
       "id": "minimal",
-      "name": "极简系列 - 标准",
-      "fingerprint": "a90cd7f5a91d3ef2648e49a8c85fd1f67bdcdf7159a16f4cd1aea625d28a4922",
+      "name": "观点与评论",
+      "fingerprint": "8d47c18542b67deacc03e7dd3ab845cf6eb884a0f0f529a7361b43552cf3998a",
       "visualTokens": {
-        "container": "",
-        "h1": "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(0,0,0,0.1);",
-        "h2": "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.01em; line-height: 1.5;",
-        "h3": "margin: 18px 0 0; font-size: 1.25em; line-height: 1.5;",
-        "paragraph": "line-height: 1.8; margin-top: 1em; font-size: 1em; color: #4a4a4a;",
-        "quote": "border-left: 4px solid #262626; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
-        "codeBlock": "color: #333; background: #fafafa; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
-        "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;"
+        "container": "background: #ffffff; padding: 0; color: #3f3f46;",
+        "h1": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 1px solid #a1a1aa;",
+        "h2": "margin: 26px 0 12px; font-size: 1.38em;",
+        "h3": "margin: 22px 0 10px; font-size: 1.15em;",
+        "paragraph": "color: #3f3f46;",
+        "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 3px solid #71717a; background: #fafafa; color: #52525b;",
+        "codeBlock": "margin: 1.2em 0; padding: 14px; background: #fafafa; border: 1px solid #e4e4e7; color: #27272a;",
+        "table": "margin: 1.2em 0; border-collapse: collapse; border-top: 1px solid #71717a;"
       }
     },
     {
       "id": "academic-pro",
-      "name": "学术专业 - 墨韵",
-      "fingerprint": "5221954dd48280a8c06db50615e44b7114ab4f64a82b4ab6b4f18f04650860a7",
+      "name": "教程与知识",
+      "fingerprint": "f20d92fb8709dae693a89037315859c9dc5ea0c9f319cf997edc6d7645671cfd",
       "visualTokens": {
-        "container": "background-color: #ffffff; padding: 24px",
-        "h1": "font-size: 26px; font-weight: 700; color: #1a1a2e; text-align: center; border-bottom: 2.5px solid #1a1a2e; padding-bottom: 12px; margin-top: 28px; margin-bottom: 30px; letter-spacing: 0.05em",
-        "h2": "font-size: 20px; font-weight: 700; color: #1a1a2e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 26px; margin-bottom: 16px; display: block; width: 100%",
-        "h3": "font-size: 18px; font-weight: 600; color: #2c3e50; margin-top: 20px; margin-bottom: 12px; font-style: italic",
-        "paragraph": "font-size: 16px; color: #2c3e50; line-height: 1.8; margin-top: 0; margin-bottom: 18px; text-align: justify; text-indent: 0",
-        "quote": "border-left: 4px solid #1a1a2e; background: #f8f9fb; padding: 16px 20px; margin: 24px 0; color: #5a6a7a; font-size: 15px; line-height: 1.8; font-style: normal",
-        "codeBlock": "background: #f4f6f8; border-radius: 4px; margin: 24px 0; overflow: hidden; border: 1px solid #e1e4e8",
-        "table": "width: 100%; border-collapse: collapse; margin: 24px 0; border-top: 2px solid #1a1a2e; border-bottom: 2px solid #1a1a2e"
+        "container": "background: #ffffff; padding: 0; color: #26384a;",
+        "h1": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 2px solid #285b92;",
+        "h2": "margin: 26px 0 12px; padding-left: 12px; border-left: 4px solid #285b92; font-size: 1.38em;",
+        "h3": "margin: 22px 0 10px; font-size: 1.15em;",
+        "paragraph": "color: #334155;",
+        "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #285b92; background: #f3f7fb; color: #3f5871;",
+        "codeBlock": "margin: 1.2em 0; padding: 14px; background: #f7f9fc; border: 1px solid #d9e3ef; color: #26384a;",
+        "table": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #285b92;"
       }
     },
     {
       "id": "academic-pro-forest",
-      "name": "学术专业 - 森绿",
-      "fingerprint": "b46f9eeac2a9bee4ac988e1467c91b8d64e7d19342262f05017adf145c9d0eea",
+      "name": "案例与内刊",
+      "fingerprint": "91a90368c1b3965b89776678aaae841f7e2348577d8d617bdcfc889532fc0b49",
       "visualTokens": {
-        "container": "background-color: #ffffff; padding: 24px",
-        "h1": "font-size: 26px; font-weight: 700; color: #1b4d3e; text-align: center; border-bottom: 2.5px solid #1b4d3e; padding-bottom: 12px; margin-top: 28px; margin-bottom: 30px; letter-spacing: 0.05em",
-        "h2": "font-size: 20px; font-weight: 700; color: #1b4d3e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 26px; margin-bottom: 16px; display: block; width: 100%",
-        "h3": "",
-        "paragraph": "",
-        "quote": "",
-        "codeBlock": "",
-        "table": ""
+        "container": "background: #ffffff; padding: 0; color: #25332d;",
+        "h1": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 2px solid #216a52;",
+        "h2": "margin: 26px 0 12px; padding-left: 12px; border-left: 4px solid #216a52; font-size: 1.38em;",
+        "h3": "margin: 22px 0 10px; font-size: 1.15em;",
+        "paragraph": "color: #334155;",
+        "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #216a52; background: #f3f8f5; color: #365248;",
+        "codeBlock": "margin: 1.2em 0; padding: 14px; background: #f7faf8; border: 1px solid #d9e6dd; color: #243b32;",
+        "table": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #216a52;"
       }
     },
     {
       "id": "modern-report",
-      "name": "现代报告 - 黑白",
-      "fingerprint": "076833a6a4058b6a75ad4c9953199c67ce37d709fa009b25d512d089b19f2c1f",
+      "name": "报告与复盘",
+      "fingerprint": "dbfbc68fdc70d5ff825697100dc0dea60982d134c1daec8df1c258dfe4bb974f",
       "visualTokens": {
-        "container": "background-color: #ffffff; padding: 20px; color: #1a1a1a",
-        "h1": "font-size: 24px; font-weight: 800; color: #000000; text-align: left; padding: 0 0 10px 0; border-bottom: 4px solid #000000; margin-top: 28px; margin-bottom: 24px; letter-spacing: -0.02em",
-        "h2": "font-size: 19px; font-weight: 700; color: #000000; background: #f0f0f0; padding: 8px 12px; margin-top: 26px; margin-bottom: 16px; border-left: 6px solid #000000",
-        "h3": "font-size: 17px; font-weight: 600; color: #333333; margin-top: 20px; margin-bottom: 12px; text-decoration: underline; text-underline-offset: 6px",
-        "paragraph": "font-size: 16px; color: #333333; line-height: 1.75; margin-top: 0; margin-bottom: 20px; text-align: left",
-        "quote": "background: #f9f9f9; border-radius: 8px; padding: 20px; margin: 24px 0; color: #444444; font-size: 15px; line-height: 1.75; border: 1px solid #eeeeee",
-        "codeBlock": "background: #1e1e1e; border-radius: 6px; margin: 24px 0; overflow: hidden; color: #d4d4d4",
-        "table": "width: 100%; border-collapse: collapse; margin: 24px 0"
+        "container": "background: #ffffff; padding: 0; color: #30343b;",
+        "h1": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 3px solid #252b36;",
+        "h2": "margin: 26px 0 12px; padding: 8px 12px; border-left: 4px solid #252b36; background: #f4f5f7; font-size: 1.35em;",
+        "h3": "margin: 22px 0 10px; font-size: 1.15em;",
+        "paragraph": "color: #30343b;",
+        "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #252b36; background: #f7f7f8; color: #4b5563;",
+        "codeBlock": "margin: 1.2em 0; padding: 14px; background: #f4f5f7; border: 1px solid #d9dde4; color: #252b36;",
+        "table": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #252b36;"
       }
     },
     {
       "id": "zen-essence",
-      "name": "禅意极简 - 留白",
-      "fingerprint": "bc5b43d67a037be56a54e9d942dcc3ff2714e84ff8eaa0d5e8938e4465a92785",
+      "name": "随笔与生活",
+      "fingerprint": "d4fc8299c057bc483fb46f057f632176850e649a259dadd038561fa9dea0166c",
       "visualTokens": {
-        "container": "background-color: #ffffff; padding: 32px 24px; color: #555555",
-        "h1": "font-size: 20px; font-weight: 300; color: #333333; text-align: center; margin-top: 32px; margin-bottom: 40px; letter-spacing: 0.3em; text-transform: uppercase",
-        "h2": "font-size: 17px; font-weight: 300; color: #333333; text-align: center; margin-top: 28px; margin-bottom: 20px; border-bottom: 0.5px solid #e0e0e0; padding-bottom: 15px; width: 30%; margin-left: auto; margin-right: auto",
-        "h3": "font-size: 16px; font-weight: 400; color: #666666; text-align: center; margin-top: 22px; margin-bottom: 15px; letter-spacing: 0.1em",
-        "paragraph": "font-size: 15px; color: #666666; line-height: 2.2; margin-top: 0; margin-bottom: 24px; text-align: center; font-weight: 300; letter-spacing: 0.8px",
-        "quote": "border: none; background: transparent; padding: 20px 40px; margin: 40px 0; font-size: 14px; color: #888888; line-height: 2.4; font-style: italic; position: relative; text-align: center",
-        "codeBlock": "background: #fdfdfd; border: 0.5px solid #eee; border-radius: 2px; margin: 30px 0; padding: 20px; text-align: left",
-        "table": "width: 80%; border-collapse: collapse; margin: 40px auto; font-size: 14px; border-bottom: 0.5px solid #eee; border-top: 0.5px solid #eee"
+        "container": "background: #ffffff; padding: 0; color: #5d625d;",
+        "h1": "margin: 32px 0 22px; font-size: 1.7em; padding-bottom: 14px; border-bottom: 1px solid #cfd5ca;",
+        "h2": "margin: 30px 0 14px; font-size: 1.32em;",
+        "h3": "margin: 24px 0 10px; font-size: 1.12em;",
+        "paragraph": "color: #5d625d;",
+        "quote": "margin: 1.2em 0; padding: 16px 18px; border-left: 3px solid #aeb7a7; background: #fafbf9; color: #687065;",
+        "codeBlock": "margin: 1.3em 0; padding: 14px; background: #fafbf9; border: 1px solid #e2e6de; color: #4e584a;",
+        "table": "margin: 1.3em 0; border-collapse: collapse; border-top: 1px solid #aeb7a7;"
       }
     },
     {
       "id": "apple-product",
-      "name": "场景情绪 - 苹果产品",
-      "fingerprint": "db989d508c51cea3868ba44b77ff63f0fccc499f41a49daecaf4345fcf48d75d",
+      "name": "产品与工具",
+      "fingerprint": "b9a1bcfbb54e03fb8112c8afb1f27148428c01dcd76c677c953d92fc8a32220a",
       "visualTokens": {
-        "container": "",
-        "h1": "margin: 28px 0 0; font-size: 2em; line-height: 1.42; text-align: center;",
-        "h2": "margin: 28px 0 10px; font-size: 1.36em; line-height: 1.5; padding-bottom: 8px;",
-        "h3": "margin: 22px 0 8px; font-size: 1.14em; line-height: 1.5;",
-        "paragraph": "line-height: 1.82; margin-top: 1em; color: #374151;",
-        "quote": "border-left: 4px solid #0a84ff; border-radius: 12px; padding: 14px 18px; background: #f5f7fb; margin: 1em 0; color: #4b5563;",
-        "codeBlock": "color: #1f2937; background: #f8fafc; border-radius: 14px; border: 1px solid #e5e7eb; box-shadow: 0 10px 28px rgba(17,24,39,0.05); margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.7; white-space: pre-wrap;",
-        "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e5e7eb;"
+        "container": "background: #ffffff; padding: 0; color: #374151;",
+        "h1": "margin: 28px 0 20px; font-size: 1.85em; padding-bottom: 12px; border-bottom: 2px solid #0a84ff;",
+        "h2": "margin: 26px 0 12px; font-size: 1.38em;",
+        "h3": "margin: 22px 0 10px; font-size: 1.15em;",
+        "paragraph": "color: #374151;",
+        "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #0a84ff; background: #f4f8ff; color: #4b5563;",
+        "codeBlock": "margin: 1.2em 0; padding: 14px; background: #f8fafc; border: 1px solid #dbeafe; color: #1f2937;",
+        "table": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #0a84ff;"
       }
     }
   ]

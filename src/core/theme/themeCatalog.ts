@@ -1,9 +1,8 @@
 /**
  * The curated default catalogue intentionally contains different reading
- * structures, not colour-only copies of the same structure.  Other bundled
- * themes remain available from settings as classic themes.
+ * structures, not colour-only copies of the same structure.
  */
-export const CURATED_THEME_CATALOG_VERSION = 1;
+export const CURATED_THEME_CATALOG_VERSION = 2;
 
 export type CuratedThemeScene =
     | '通用长文'
@@ -39,4 +38,3 @@ export function getCuratedThemeEntry(themeId: string): CuratedThemeEntry | undef
 export function isCuratedTheme(themeId: string): boolean {
     return curatedThemesById.has(themeId);
 }
-

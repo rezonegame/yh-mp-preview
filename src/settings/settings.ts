@@ -1,7 +1,7 @@
 import { Template } from '../templateManager';
 import { Background } from '../backgroundManager';
 import { migrateSettingsForV3, type V3SettingsMetadata, V3_SETTINGS_SCHEMA_VERSION } from '../core/migration/settingsMigration';
-import { CURATED_THEME_CATALOG_VERSION, isCuratedTheme } from '../core/theme/themeCatalog';
+import { CURATED_THEME_CATALOG_VERSION } from '../core/theme/themeCatalog';
 
 export interface MPSettings {
     schemaVersion: number;
@@ -141,7 +141,7 @@ export class SettingsManager {
         const codeTemplates = Object.values(templates).map(template => ({
             ...template,
             isPreset: true,
-            isVisible: isCuratedTheme(template.id)
+            isVisible: true
         }));
         const shouldCuratePresetVisibility = (savedData.themeCatalogVersion || 0) < CURATED_THEME_CATALOG_VERSION;
 
@@ -160,9 +160,7 @@ export class SettingsManager {
                 if (savedTemplate) {
                     // 保留用户对预设模板的修改（目前只有 isVisible）
                     // 确保 isVisible 存在，如果不存在默认为 true
-                    const isVisible = savedTemplate.isVisible !== undefined
-                        ? savedTemplate.isVisible
-                        : isCuratedTheme(codeTemplate.id);
+                    const isVisible = savedTemplate.isVisible !== undefined ? savedTemplate.isVisible : true;
                     return {
                         ...codeTemplate,
                         isVisible: isVisible
@@ -173,13 +171,12 @@ export class SettingsManager {
             });
         }
 
-        // Apply the curated catalogue once. The currently selected classic
-        // theme remains visible so an upgrade never hides a user's active
-        // visual choice; all other legacy palettes stay available in settings.
+        // Version 2 removes legacy palettes from the distribution. All
+        // retained frameworks are immediately available in the gallery.
         if (shouldCuratePresetVisibility) {
             savedData.templates = savedData.templates.map((template: Template) => ({
                 ...template,
-                isVisible: isCuratedTheme(template.id) || template.id === savedData.templateId,
+                isVisible: true,
             }));
             savedData.themeCatalogVersion = CURATED_THEME_CATALOG_VERSION;
         }

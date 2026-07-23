@@ -7,7 +7,8 @@ const report = JSON.parse(readFileSync(new URL('../reports/theme-audit.json', im
 
 test('theme provenance audit covers every bundled theme', () => {
   execFileSync(process.execPath, ['scripts/audit-themes.mjs', '--check'], { stdio: 'pipe' });
-  assert.equal(report.summary.total, 64);
+  assert.equal(report.summary.total, 7);
+  assert.equal(report.summary.coreThemes, 7);
   assert.equal(report.summary.xiaohuImported, 0);
   assert.equal(report.summary.pendingProvenanceReview, 0);
   assert.equal(report.summary.duplicateIds.length, 0);

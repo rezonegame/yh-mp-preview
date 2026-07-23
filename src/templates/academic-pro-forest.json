@@ -1,24 +1,26 @@
 {
-    "id": "academic-pro-forest",
-    "name": "学术专业 - 森绿",
-    "description": "专业学术风格的森绿颜色变体",
-    "isPreset": true,
-    "isVisible": true,
-    "source": "yh-mp-preview",
-    "styles": {
-        "container": "background-color: #ffffff; padding: 24px",
-        "title": {
-            "h1": {
-                "base": "font-size: 26px; font-weight: 700; color: #1b4d3e; text-align: center; border-bottom: 2.5px solid #1b4d3e; padding-bottom: 12px; margin-top: 28px; margin-bottom: 30px; letter-spacing: 0.05em",
-                "content": "color: #1b4d3e",
-                "after": ""
-            },
-            "h2": {
-                "base": "font-size: 20px; font-weight: 700; color: #1b4d3e; border-bottom: 1px solid #e0e0e0; padding: 0 0 8px 0; margin-top: 26px; margin-bottom: 16px; display: block; width: 100%",
-                "content": "color: #1b4d3e",
-                "after": ""
-            },
-            "accentColor": "#1b4d3e"
-        }
-    }
+  "id": "academic-pro-forest",
+  "name": "案例与内刊",
+  "description": "森林绿强调色，适合案例拆解、组织内刊与深度经验总结。",
+  "source": "yh-mp-preview",
+  "styles": {
+    "container": "background: #ffffff; padding: 0; color: #25332d;",
+    "accentColor": "#216a52",
+    "title": {
+      "h1": { "base": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 2px solid #216a52;", "content": "font-weight: 700; color: #183f31;", "after": "" },
+      "h2": { "base": "margin: 26px 0 12px; padding-left: 12px; border-left: 4px solid #216a52; font-size: 1.38em;", "content": "font-weight: 700; color: #183f31;", "after": "" },
+      "h3": { "base": "margin: 22px 0 10px; font-size: 1.15em;", "content": "font-weight: 700; color: #216a52;", "after": "" },
+      "base": { "base": "margin: 18px 0 8px; font-size: 1em;", "content": "font-weight: 700; color: #2c5948;", "after": "" }
+    },
+    "paragraph": "color: #334155;",
+    "list": { "container": "padding-left: 1.45em; color: #334155;", "item": "color: #334155;", "taskList": "list-style: none; padding-left: 0; color: #334155;" },
+    "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #216a52; background: #f3f8f5; color: #365248;",
+    "code": { "header": { "container": "margin-bottom: 6px; padding: 6px 10px; background: #e8f1eb;", "dot": "display: none;", "colors": ["#216a52", "#216a52", "#216a52"] }, "block": "margin: 1.2em 0; padding: 14px; background: #f7faf8; border: 1px solid #d9e6dd; color: #243b32;", "inline": "padding: 1px 4px; background: #edf5ef; color: #216a52;" },
+    "image": "border: 1px solid #d9e6dd; border-radius: 4px;",
+    "link": "color: #216a52; text-decoration: underline;",
+    "emphasis": { "strong": "font-weight: 700; color: #183f31;", "em": "color: #476457;", "del": "color: #94a3b8;" },
+    "table": { "container": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #216a52;", "header": "padding: 10px; background: #f3f8f5; color: #183f31; border-bottom: 1px solid #cfe0d4;", "cell": "padding: 10px; border-bottom: 1px solid #e1ebe4; color: #334155;" },
+    "hr": "margin: 28px 0; border: 0; border-top: 1px solid #d9e6dd;",
+    "footnote": { "ref": "color: #216a52;", "backref": "color: #216a52;" }
+  }
 }
