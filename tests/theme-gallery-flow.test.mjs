@@ -7,6 +7,7 @@ const styles = readFileSync(new URL('../src/styles/settings/theme-gallery.css', 
 
 test('theme gallery is scene-first and preserves a safe try-before-apply flow', () => {
   assert.match(modal, /type ThemeScene/);
+  assert.match(modal, /new Set\(curatedThemeEntries\.map\(entry => entry\.scene\)\)/);
   assert.match(modal, /点击卡片先试用，确认后再应用/);
   assert.match(modal, /getThemeScene/);
   assert.doesNotMatch(modal, /selectedLayoutFamily/);

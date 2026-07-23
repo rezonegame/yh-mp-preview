@@ -10,8 +10,9 @@ import { curatedThemeEntries, getCuratedThemeEntry, type CuratedThemeScene } fro
 
 type ThemeScene = '全部' | CuratedThemeScene | '自定义主题';
 
+const CURATED_SCENE_ORDER = [...new Set(curatedThemeEntries.map(entry => entry.scene))];
 const SCENE_ORDER: ThemeScene[] = [
-    '全部', ...curatedThemeEntries.map(entry => entry.scene), '自定义主题'
+    '全部', ...CURATED_SCENE_ORDER, '自定义主题'
 ];
 
 export function getThemeScene(template: Template): ThemeScene {

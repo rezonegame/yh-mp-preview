@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.8.1
+
+- Fixed repeated scene filters in the theme gallery when a scene contains two
+  alternative themes. Each scene is now rendered once with both cards inside.
+
 ## 3.8.0
 
 - Added one deliberately distinct, WeChat-safe alternative to each of the

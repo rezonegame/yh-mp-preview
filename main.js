@@ -10387,9 +10387,10 @@ function getCuratedThemeEntry(themeId) {
 }
 
 // src/settings/ThemeGalleryModal.ts
+var CURATED_SCENE_ORDER = [...new Set(curatedThemeEntries.map((entry) => entry.scene))];
 var SCENE_ORDER = [
   "\u5168\u90E8",
-  ...curatedThemeEntries.map((entry) => entry.scene),
+  ...CURATED_SCENE_ORDER,
   "\u81EA\u5B9A\u4E49\u4E3B\u9898"
 ];
 function getThemeScene(template) {
