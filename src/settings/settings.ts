@@ -1,6 +1,7 @@
 import { Template } from '../templateManager';
 import { Background } from '../backgroundManager';
 import { migrateSettingsForV3, type V3SettingsMetadata, V3_SETTINGS_SCHEMA_VERSION } from '../core/migration/settingsMigration';
+import { CURATED_THEME_CATALOG_VERSION, isCuratedTheme } from '../core/theme/themeCatalog';
 
 export interface MPSettings {
     schemaVersion: number;
@@ -9,6 +10,7 @@ export interface MPSettings {
     templateId: string;
     fontFamily: string;
     fontSize: number;
+    themeCatalogVersion?: number;
     templates: Template[];
     customTemplates: Template[];
     backgrounds: Background[];
@@ -70,6 +72,7 @@ const DEFAULT_SETTINGS: MPSettings = {
     templateId: 'default',
     fontFamily: '-apple-system',
     fontSize: 16,
+    themeCatalogVersion: CURATED_THEME_CATALOG_VERSION,
     templates: [],
     customTemplates: [],
     backgrounds: [],
@@ -138,8 +141,9 @@ export class SettingsManager {
         const codeTemplates = Object.values(templates).map(template => ({
             ...template,
             isPreset: true,
-            isVisible: true
+            isVisible: isCuratedTheme(template.id)
         }));
+        const shouldCuratePresetVisibility = (savedData.themeCatalogVersion || 0) < CURATED_THEME_CATALOG_VERSION;
 
         // 如果没有保存的模板数据，直接使用代码中的模板
         if (!savedData.templates || !Array.isArray(savedData.templates) || savedData.templates.length === 0) {
@@ -156,7 +160,9 @@ export class SettingsManager {
                 if (savedTemplate) {
                     // 保留用户对预设模板的修改（目前只有 isVisible）
                     // 确保 isVisible 存在，如果不存在默认为 true
-                    const isVisible = savedTemplate.isVisible !== undefined ? savedTemplate.isVisible : true;
+                    const isVisible = savedTemplate.isVisible !== undefined
+                        ? savedTemplate.isVisible
+                        : isCuratedTheme(codeTemplate.id);
                     return {
                         ...codeTemplate,
                         isVisible: isVisible
@@ -165,6 +171,17 @@ export class SettingsManager {
                 // 新增的模板
                 return codeTemplate;
             });
+        }
+
+        // Apply the curated catalogue once. The currently selected classic
+        // theme remains visible so an upgrade never hides a user's active
+        // visual choice; all other legacy palettes stay available in settings.
+        if (shouldCuratePresetVisibility) {
+            savedData.templates = savedData.templates.map((template: Template) => ({
+                ...template,
+                isVisible: isCuratedTheme(template.id) || template.id === savedData.templateId,
+            }));
+            savedData.themeCatalogVersion = CURATED_THEME_CATALOG_VERSION;
         }
 
         if (!savedData.customTemplates) {

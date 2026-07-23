@@ -1,6 +1,7 @@
 import { App } from 'obsidian';
 import { SettingsManager } from './settings/settings';
 import type { DialogueStyle, GalleryStyle } from './containers';
+import { appendWechatReadingBaseline, wechatReadingBaseline } from './core/theme/wechatReadingBaseline';
 
 export interface Template {
     id: string;
@@ -136,7 +137,13 @@ export class TemplateManager {
                 const titleStyle = styles.title[styleKey];
 
                 // 应用样式
-                el.setAttribute('style', `${titleStyle.base}; font-family: ${this.currentFont};`);
+                const titleBaseline = tag === 'h1'
+                    ? wechatReadingBaseline.title
+                    : wechatReadingBaseline.sectionTitle;
+                el.setAttribute('style', appendWechatReadingBaseline(
+                    `${titleStyle.base}; font-family: ${this.currentFont};`,
+                    titleBaseline,
+                ));
                 el.querySelector('.content')?.setAttribute('style', titleStyle.content);
                 el.querySelector('.after')?.setAttribute('style', titleStyle.after);
             });
@@ -145,30 +152,42 @@ export class TemplateManager {
         // 应用段落样式
         element.querySelectorAll('p').forEach(el => {
             if (!el.parentElement?.closest('p') && !el.parentElement?.closest('blockquote')) {
-                el.setAttribute('style', `${styles.paragraph}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+                el.setAttribute('style', appendWechatReadingBaseline(
+                    `${styles.paragraph}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+                    wechatReadingBaseline.paragraph,
+                ));
             }
         });
 
         // 应用列表样式
         element.querySelectorAll('ul, ol').forEach(el => {
-            el.setAttribute('style', styles.list.container);
+            el.setAttribute('style', appendWechatReadingBaseline(styles.list.container, wechatReadingBaseline.list));
         });
         element.querySelectorAll('li').forEach(el => {
-            el.setAttribute('style', `${styles.list.item}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+            el.setAttribute('style', appendWechatReadingBaseline(
+                `${styles.list.item}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+                wechatReadingBaseline.listItem,
+            ));
         });
         element.querySelectorAll('.task-list-item').forEach(el => {
-            el.setAttribute('style', `${styles.list.taskList}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+            el.setAttribute('style', appendWechatReadingBaseline(
+                `${styles.list.taskList}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+                wechatReadingBaseline.listItem,
+            ));
         });
 
         // 应用引用样式
         element.querySelectorAll('blockquote').forEach(el => {
-            el.setAttribute('style', `${styles.quote}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+            el.setAttribute('style', appendWechatReadingBaseline(
+                `${styles.quote}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+                wechatReadingBaseline.quote,
+            ));
         });
 
         // 应用代码样式
         element.querySelectorAll('pre').forEach(el => {
             // 应用基础代码块样式
-            el.setAttribute('style', styles.code.block);
+            el.setAttribute('style', appendWechatReadingBaseline(styles.code.block, wechatReadingBaseline.codeBlock));
 
             // 设置代码块头部样式
             const header = el.querySelector('.mp-code-header');
@@ -207,17 +226,17 @@ export class TemplateManager {
 
         // 应用内联代码样式
         element.querySelectorAll('code:not(pre code)').forEach(el => {
-            el.setAttribute('style', styles.code.inline);
+            el.setAttribute('style', appendWechatReadingBaseline(styles.code.inline, wechatReadingBaseline.inlineCode));
         });
 
         // 应用链接样式
         element.querySelectorAll('a').forEach(el => {
-            el.setAttribute('style', styles.link);
+            el.setAttribute('style', appendWechatReadingBaseline(styles.link, wechatReadingBaseline.link));
         });
 
         // 应用强调样式
         element.querySelectorAll('strong').forEach(el => {
-            el.setAttribute('style', styles.emphasis.strong);
+            el.setAttribute('style', appendWechatReadingBaseline(styles.emphasis.strong, wechatReadingBaseline.emphasis));
         });
         element.querySelectorAll('em').forEach(el => {
             el.setAttribute('style', styles.emphasis.em);
@@ -228,13 +247,19 @@ export class TemplateManager {
 
         // 应用表格样式（内容表格，非包裹表格）
         element.querySelectorAll('table').forEach(el => {
-            el.setAttribute('style', styles.table.container);
+            el.setAttribute('style', appendWechatReadingBaseline(styles.table.container, wechatReadingBaseline.table));
         });
         element.querySelectorAll('th').forEach(el => {
-            el.setAttribute('style', `${styles.table.header}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+            el.setAttribute('style', appendWechatReadingBaseline(
+                `${styles.table.header}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+                wechatReadingBaseline.tableCell,
+            ));
         });
         element.querySelectorAll('td').forEach(el => {
-            el.setAttribute('style', `${styles.table.cell}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+            el.setAttribute('style', appendWechatReadingBaseline(
+                `${styles.table.cell}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+                wechatReadingBaseline.tableCell,
+            ));
         });
 
         // 应用分割线样式
@@ -253,7 +278,7 @@ export class TemplateManager {
         // 应用图片样式
         element.querySelectorAll('img').forEach(el => {
             const img = el as HTMLImageElement;
-            el.setAttribute('style', styles.image);
+            el.setAttribute('style', appendWechatReadingBaseline(styles.image, wechatReadingBaseline.image));
         });
 
         // 应用容器样式（对话气泡、图片画廊）

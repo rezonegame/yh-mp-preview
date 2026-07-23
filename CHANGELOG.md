@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.6.5
+
+- Kept the scene-first theme picker, but curated its default catalogue around
+  seven distinct long-form reading frameworks instead of colour-only variations.
+- Moved non-core bundled palettes to the optional classic-theme collection;
+  existing active themes remain visible after upgrade and can be re-enabled in
+  plugin settings.
+- Added a shared WeChat reading baseline for every theme: stable text rhythm,
+  left-aligned section hierarchy, readable tables, wrapping code, and
+  responsive images.
+- Simplified article recipes to avoid gradients, absolute positioning, and
+  multi-colour structural signals that are unreliable in WeChat articles.
+
 ## 3.6.4
 
 - Reduced theme cards to theme names only; after a selection, its recommended

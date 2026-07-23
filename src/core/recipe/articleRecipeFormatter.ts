@@ -41,12 +41,12 @@ function applyChecklist(section: HTMLElement): void {
     });
     section.querySelectorAll('ul > li, ol > li').forEach((item) => {
         const element = item as HTMLElement;
-        element.style.cssText += 'display: block; margin: 8px 0; padding: 10px 14px 10px 38px; position: relative; border: 1px solid #b7dfbf; border-radius: 8px; background: #f4fbf5; line-height: 1.75;';
+        element.style.cssText += 'display: block; margin: 8px 0; padding: 10px 14px; border: 1px solid #b7dfbf; border-radius: 8px; background: #f4fbf5; line-height: 1.75;';
         if (!element.querySelector(':scope > .mp-recipe-check')) {
             const marker = document.createElement('span');
             marker.className = 'mp-recipe-check';
             marker.textContent = '✓';
-            marker.style.cssText = 'position: absolute; left: 14px; color: #16803c; font-weight: 700;';
+            marker.style.cssText = 'display: inline; color: #16803c; font-weight: 700;';
             element.prepend(marker);
         }
     });
@@ -55,7 +55,7 @@ function applyChecklist(section: HTMLElement): void {
 function applyProductIntro(section: HTMLElement): void {
     const firstParagraph = section.querySelector('p');
     if (firstParagraph) {
-        (firstParagraph as HTMLElement).style.cssText += 'margin: 0 0 20px; padding: 16px 18px; border: 1px solid #c9d8ff; border-radius: 10px; background: linear-gradient(135deg, #f5f8ff, #ffffff); color: #234; font-size: 1.05em; line-height: 1.85;';
+        (firstParagraph as HTMLElement).style.cssText += 'margin: 0 0 20px; padding: 16px 18px; border: 1px solid #c9d8ff; border-radius: 10px; background: #f5f8ff; color: #234; font-size: 1.05em; line-height: 1.85;';
     }
     section.querySelectorAll('h2').forEach((heading) => {
         (heading as HTMLElement).style.cssText += 'margin-top: 28px; padding: 8px 12px; border-left: 5px solid #4f46e5; border-radius: 0 6px 6px 0; background: #f5f3ff;';
@@ -76,12 +76,8 @@ function applyCommentary(section: HTMLElement): void {
 function applyReview(section: HTMLElement): void {
     section.querySelectorAll('h2, h3').forEach((heading) => {
         const element = heading as HTMLElement;
-        const text = element.textContent || '';
-        let color = '#2563eb';
-        if (/问题|风险|阻塞/.test(text)) color = '#dc2626';
-        if (/下一步|计划|行动/.test(text)) color = '#16a34a';
-        if (/复盘|收获|总结/.test(text)) color = '#7c3aed';
-        element.style.cssText += `margin-top: 26px; padding: 8px 12px; border-left: 5px solid ${color}; border-radius: 0 6px 6px 0; background: ${color}12;`;
+        const accent = '#2563eb';
+        element.style.cssText += `margin-top: 26px; padding: 8px 12px; border-left: 5px solid ${accent}; border-radius: 0 6px 6px 0; background: #f5f8ff;`;
     });
 }
 

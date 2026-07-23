@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "pluginVersion": "3.6.4",
+  "pluginVersion": "3.6.5",
   "summary": {
     "total": 64,
     "bundled": 64,
     "xiaohuImported": 0,
     "pendingProvenanceReview": 0,
     "duplicateIds": [],
-    "coreThemes": 10,
+    "coreThemes": 7,
     "missingCoreThemeIds": []
   },
   "templates": [
@@ -105,7 +105,7 @@
       "file": "src/templates/bold-green.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "core"
+      "v3Disposition": "classic"
     },
     {
       "id": "bold-navy",
@@ -249,7 +249,7 @@
       "file": "src/templates/elegant.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "core"
+      "v3Disposition": "classic"
     },
     {
       "id": "focus-blue",
@@ -257,7 +257,7 @@
       "file": "src/templates/focus-blue.json",
       "source": "yh-mp-preview bundled",
       "provenanceStatus": "verified-current-distribution",
-      "v3Disposition": "core"
+      "v3Disposition": "classic"
     },
     {
       "id": "focus-gold",

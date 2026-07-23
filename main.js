@@ -15221,12 +15221,12 @@ function applyChecklist(section) {
   });
   section.querySelectorAll("ul > li, ol > li").forEach((item) => {
     const element = item;
-    element.style.cssText += "display: block; margin: 8px 0; padding: 10px 14px 10px 38px; position: relative; border: 1px solid #b7dfbf; border-radius: 8px; background: #f4fbf5; line-height: 1.75;";
+    element.style.cssText += "display: block; margin: 8px 0; padding: 10px 14px; border: 1px solid #b7dfbf; border-radius: 8px; background: #f4fbf5; line-height: 1.75;";
     if (!element.querySelector(":scope > .mp-recipe-check")) {
       const marker = document.createElement("span");
       marker.className = "mp-recipe-check";
       marker.textContent = "\u2713";
-      marker.style.cssText = "position: absolute; left: 14px; color: #16803c; font-weight: 700;";
+      marker.style.cssText = "display: inline; color: #16803c; font-weight: 700;";
       element.prepend(marker);
     }
   });
@@ -15234,7 +15234,7 @@ function applyChecklist(section) {
 function applyProductIntro(section) {
   const firstParagraph = section.querySelector("p");
   if (firstParagraph) {
-    firstParagraph.style.cssText += "margin: 0 0 20px; padding: 16px 18px; border: 1px solid #c9d8ff; border-radius: 10px; background: linear-gradient(135deg, #f5f8ff, #ffffff); color: #234; font-size: 1.05em; line-height: 1.85;";
+    firstParagraph.style.cssText += "margin: 0 0 20px; padding: 16px 18px; border: 1px solid #c9d8ff; border-radius: 10px; background: #f5f8ff; color: #234; font-size: 1.05em; line-height: 1.85;";
   }
   section.querySelectorAll("h2").forEach((heading) => {
     heading.style.cssText += "margin-top: 28px; padding: 8px 12px; border-left: 5px solid #4f46e5; border-radius: 0 6px 6px 0; background: #f5f3ff;";
@@ -15253,15 +15253,8 @@ function applyCommentary(section) {
 function applyReview(section) {
   section.querySelectorAll("h2, h3").forEach((heading) => {
     const element = heading;
-    const text = element.textContent || "";
-    let color = "#2563eb";
-    if (/问题|风险|阻塞/.test(text))
-      color = "#dc2626";
-    if (/下一步|计划|行动/.test(text))
-      color = "#16a34a";
-    if (/复盘|收获|总结/.test(text))
-      color = "#7c3aed";
-    element.style.cssText += `margin-top: 26px; padding: 8px 12px; border-left: 5px solid ${color}; border-radius: 0 6px 6px 0; background: ${color}12;`;
+    const accent = "#2563eb";
+    element.style.cssText += `margin-top: 26px; padding: 8px 12px; border-left: 5px solid ${accent}; border-radius: 0 6px 6px 0; background: #f5f8ff;`;
   });
 }
 function applyArticleRecipe(section, recipeId) {
@@ -15439,28 +15432,38 @@ BackgroundManager.BASE_CONTENT_PADDING = "padding: 16px 20px;";
 
 // src/settings/ThemeGalleryModal.ts
 var import_obsidian2 = require("obsidian");
+
+// src/core/theme/themeCatalog.ts
+var CURATED_THEME_CATALOG_VERSION = 1;
+var curatedThemeEntries = [
+  { id: "default", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u9002\u5408\u901A\u77E5\u3001\u6587\u7AE0\u521D\u7A3F\u4E0E\u9700\u8981\u7A33\u5B9A\u9605\u8BFB\u8282\u594F\u7684\u957F\u6587\u3002" },
+  { id: "academic-pro", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u9002\u5408\u6559\u7A0B\u3001\u65B9\u6CD5\u8BBA\u3001\u77E5\u8BC6\u6574\u7406\u4E0E\u6280\u672F\u8BF4\u660E\u3002" },
+  { id: "apple-product", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u9002\u5408\u4EA7\u54C1\u4ECB\u7ECD\u3001\u5DE5\u5177\u8BC4\u6D4B\u4E0E\u54C1\u724C\u5185\u5BB9\u3002" },
+  { id: "minimal", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u9002\u5408\u89C2\u70B9\u3001\u8BC4\u8BBA\u4E0E\u9700\u8981\u514B\u5236\u8868\u8FBE\u7684\u4E13\u4E1A\u6587\u7AE0\u3002" },
+  { id: "modern-report", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u9002\u5408\u5468\u62A5\u3001\u590D\u76D8\u3001\u6570\u636E\u8BF4\u660E\u4E0E\u9636\u6BB5\u603B\u7ED3\u3002" },
+  { id: "zen-essence", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u9002\u5408\u968F\u7B14\u3001\u751F\u6D3B\u65B9\u5F0F\u4E0E\u4F4E\u5E72\u6270\u9605\u8BFB\u5185\u5BB9\u3002" },
+  { id: "academic-pro-forest", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u9002\u5408\u6848\u4F8B\u62C6\u89E3\u3001\u7EC4\u7EC7\u5185\u520A\u4E0E\u6DF1\u5EA6\u7ECF\u9A8C\u603B\u7ED3\u3002" }
+];
+var curatedThemesById = new Map(curatedThemeEntries.map((entry) => [entry.id, entry]));
+function getCuratedThemeEntry(themeId) {
+  return curatedThemesById.get(themeId);
+}
+function isCuratedTheme(themeId) {
+  return curatedThemesById.has(themeId);
+}
+
+// src/settings/ThemeGalleryModal.ts
 var SCENE_ORDER = [
   "\u5168\u90E8",
-  "\u6559\u7A0B\u4E0E\u77E5\u8BC6",
-  "\u4EA7\u54C1\u4E0E\u62A5\u544A",
-  "\u89C2\u70B9\u4E0E\u4E13\u4E1A",
-  "\u968F\u7B14\u4E0E\u751F\u6D3B",
-  "\u521B\u610F\u4E0E\u6D3B\u52A8",
+  ...curatedThemeEntries.map((entry) => entry.scene),
+  "\u7ECF\u5178\u4E3B\u9898",
   "\u81EA\u5B9A\u4E49\u4E3B\u9898"
-];
-var sceneRules = [
-  { scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", keywords: ["academic", "teacher", "blackboard", "kindergarten", "parent-child"] },
-  { scene: "\u4EA7\u54C1\u4E0E\u62A5\u544A", keywords: ["apple-product", "modern-report", "focus-", "focus"] },
-  { scene: "\u89C2\u70B9\u4E0E\u4E13\u4E1A", keywords: ["minimal", "elegant", "default", "scarlet", "orange", "yeban"] },
-  { scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", keywords: ["zen", "warmth", "autumn", "spring", "brown", "ocean"] },
-  { scene: "\u521B\u610F\u4E0E\u6D3B\u52A8", keywords: ["bold", "playful", "adventure", "cyber", "gameui", "dark"] }
 ];
 function getThemeScene(template) {
   var _a;
   if (!template.isPreset)
     return "\u81EA\u5B9A\u4E49\u4E3B\u9898";
-  const id = template.id.toLowerCase();
-  return ((_a = sceneRules.find((rule) => rule.keywords.some((keyword) => id.includes(keyword)))) == null ? void 0 : _a.scene) || "\u89C2\u70B9\u4E0E\u4E13\u4E1A";
+  return ((_a = getCuratedThemeEntry(template.id)) == null ? void 0 : _a.scene) || "\u7ECF\u5178\u4E3B\u9898";
 }
 var ThemeGalleryModal = class extends import_obsidian2.Modal {
   constructor(app, settingsManager, currentTemplateId, onSelect, previewCallback) {
@@ -15607,8 +15610,11 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     this.tryHintEl.setText(`\u63A8\u8350\u4F5C\u7528\uFF1A${description}`);
   }
   getTemplateDescription(template) {
-    var _a;
-    const description = (_a = template.description) == null ? void 0 : _a.trim();
+    var _a, _b;
+    const curatedRecommendation = (_a = getCuratedThemeEntry(template.id)) == null ? void 0 : _a.recommendation;
+    if (curatedRecommendation)
+      return curatedRecommendation;
+    const description = (_b = template.description) == null ? void 0 : _b.trim();
     return description ? description.split("\uFF08")[0].trim() : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
   }
 };
@@ -16540,6 +16546,26 @@ var MPView = class extends import_obsidian4.ItemView {
   }
 };
 
+// src/core/theme/wechatReadingBaseline.ts
+var wechatReadingBaseline = {
+  title: "line-height: 1.45; letter-spacing: 0; word-break: break-word;",
+  sectionTitle: "text-align: left; font-weight: 700; line-height: 1.45; letter-spacing: 0; word-break: break-word;",
+  paragraph: "font-weight: 400; line-height: 1.85; letter-spacing: 0; text-align: left; margin-top: 0; margin-bottom: 1.1em; word-break: break-word;",
+  list: "margin-top: 0.9em; margin-bottom: 1.1em; padding-left: 1.45em; text-align: left;",
+  listItem: "font-weight: 400; line-height: 1.8; letter-spacing: 0; text-align: left; margin-bottom: 0.5em; word-break: break-word;",
+  quote: "font-weight: 400; line-height: 1.8; letter-spacing: 0; text-align: left; font-style: normal; word-break: break-word;",
+  codeBlock: "font-size: 14px; line-height: 1.65; white-space: pre-wrap; word-break: break-word;",
+  inlineCode: "font-size: 0.9em; line-height: 1.5; word-break: break-word;",
+  emphasis: "font-weight: 600;",
+  table: "width: 100%; max-width: 100%; table-layout: auto;",
+  tableCell: "line-height: 1.65; vertical-align: top; word-break: break-word;",
+  image: "max-width: 100%; height: auto; display: block; margin: 1.2em auto;",
+  link: "word-break: break-word;"
+};
+function appendWechatReadingBaseline(themeStyle, baseline) {
+  return `${themeStyle || ""}; ${baseline}`.replace(/;;+/g, ";");
+}
+
 // src/templateManager.ts
 var TemplateManager = class {
   constructor(app, settingsManager) {
@@ -16583,7 +16609,11 @@ var TemplateManager = class {
         }
         const styleKey = tag === "h4" || tag === "h5" || tag === "h6" ? "base" : tag;
         const titleStyle2 = styles.title[styleKey];
-        el.setAttribute("style", `${titleStyle2.base}; font-family: ${this.currentFont};`);
+        const titleBaseline = tag === "h1" ? wechatReadingBaseline.title : wechatReadingBaseline.sectionTitle;
+        el.setAttribute("style", appendWechatReadingBaseline(
+          `${titleStyle2.base}; font-family: ${this.currentFont};`,
+          titleBaseline
+        ));
         (_a = el.querySelector(".content")) == null ? void 0 : _a.setAttribute("style", titleStyle2.content);
         (_b = el.querySelector(".after")) == null ? void 0 : _b.setAttribute("style", titleStyle2.after);
       });
@@ -16591,23 +16621,35 @@ var TemplateManager = class {
     element.querySelectorAll("p").forEach((el) => {
       var _a, _b;
       if (!((_a = el.parentElement) == null ? void 0 : _a.closest("p")) && !((_b = el.parentElement) == null ? void 0 : _b.closest("blockquote"))) {
-        el.setAttribute("style", `${styles.paragraph}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+        el.setAttribute("style", appendWechatReadingBaseline(
+          `${styles.paragraph}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+          wechatReadingBaseline.paragraph
+        ));
       }
     });
     element.querySelectorAll("ul, ol").forEach((el) => {
-      el.setAttribute("style", styles.list.container);
+      el.setAttribute("style", appendWechatReadingBaseline(styles.list.container, wechatReadingBaseline.list));
     });
     element.querySelectorAll("li").forEach((el) => {
-      el.setAttribute("style", `${styles.list.item}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+      el.setAttribute("style", appendWechatReadingBaseline(
+        `${styles.list.item}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+        wechatReadingBaseline.listItem
+      ));
     });
     element.querySelectorAll(".task-list-item").forEach((el) => {
-      el.setAttribute("style", `${styles.list.taskList}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+      el.setAttribute("style", appendWechatReadingBaseline(
+        `${styles.list.taskList}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+        wechatReadingBaseline.listItem
+      ));
     });
     element.querySelectorAll("blockquote").forEach((el) => {
-      el.setAttribute("style", `${styles.quote}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+      el.setAttribute("style", appendWechatReadingBaseline(
+        `${styles.quote}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+        wechatReadingBaseline.quote
+      ));
     });
     element.querySelectorAll("pre").forEach((el) => {
-      el.setAttribute("style", styles.code.block);
+      el.setAttribute("style", appendWechatReadingBaseline(styles.code.block, wechatReadingBaseline.codeBlock));
       const header = el.querySelector(".mp-code-header");
       if (header) {
         header.setAttribute("style", styles.code.header.container);
@@ -16635,13 +16677,13 @@ var TemplateManager = class {
       }
     });
     element.querySelectorAll("code:not(pre code)").forEach((el) => {
-      el.setAttribute("style", styles.code.inline);
+      el.setAttribute("style", appendWechatReadingBaseline(styles.code.inline, wechatReadingBaseline.inlineCode));
     });
     element.querySelectorAll("a").forEach((el) => {
-      el.setAttribute("style", styles.link);
+      el.setAttribute("style", appendWechatReadingBaseline(styles.link, wechatReadingBaseline.link));
     });
     element.querySelectorAll("strong").forEach((el) => {
-      el.setAttribute("style", styles.emphasis.strong);
+      el.setAttribute("style", appendWechatReadingBaseline(styles.emphasis.strong, wechatReadingBaseline.emphasis));
     });
     element.querySelectorAll("em").forEach((el) => {
       el.setAttribute("style", styles.emphasis.em);
@@ -16650,13 +16692,19 @@ var TemplateManager = class {
       el.setAttribute("style", styles.emphasis.del);
     });
     element.querySelectorAll("table").forEach((el) => {
-      el.setAttribute("style", styles.table.container);
+      el.setAttribute("style", appendWechatReadingBaseline(styles.table.container, wechatReadingBaseline.table));
     });
     element.querySelectorAll("th").forEach((el) => {
-      el.setAttribute("style", `${styles.table.header}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+      el.setAttribute("style", appendWechatReadingBaseline(
+        `${styles.table.header}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+        wechatReadingBaseline.tableCell
+      ));
     });
     element.querySelectorAll("td").forEach((el) => {
-      el.setAttribute("style", `${styles.table.cell}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`);
+      el.setAttribute("style", appendWechatReadingBaseline(
+        `${styles.table.cell}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
+        wechatReadingBaseline.tableCell
+      ));
     });
     element.querySelectorAll("hr").forEach((el) => {
       el.setAttribute("style", styles.hr);
@@ -16669,7 +16717,7 @@ var TemplateManager = class {
     });
     element.querySelectorAll("img").forEach((el) => {
       const img = el;
-      el.setAttribute("style", styles.image);
+      el.setAttribute("style", appendWechatReadingBaseline(styles.image, wechatReadingBaseline.image));
     });
     if (styles.containers) {
       if (styles.containers.dialogue) {
@@ -16758,6 +16806,7 @@ var DEFAULT_SETTINGS = {
   templateId: "default",
   fontFamily: "-apple-system",
   fontSize: 16,
+  themeCatalogVersion: CURATED_THEME_CATALOG_VERSION,
   templates: [],
   customTemplates: [],
   backgrounds: [],
@@ -16819,8 +16868,9 @@ var SettingsManager = class {
     const codeTemplates = Object.values(templates2).map((template) => ({
       ...template,
       isPreset: true,
-      isVisible: true
+      isVisible: isCuratedTheme(template.id)
     }));
+    const shouldCuratePresetVisibility = (savedData.themeCatalogVersion || 0) < CURATED_THEME_CATALOG_VERSION;
     if (!savedData.templates || !Array.isArray(savedData.templates) || savedData.templates.length === 0) {
       savedData.templates = codeTemplates;
     } else {
@@ -16832,7 +16882,7 @@ var SettingsManager = class {
       savedData.templates = codeTemplates.map((codeTemplate) => {
         const savedTemplate = savedTemplatesMap.get(codeTemplate.id);
         if (savedTemplate) {
-          const isVisible = savedTemplate.isVisible !== void 0 ? savedTemplate.isVisible : true;
+          const isVisible = savedTemplate.isVisible !== void 0 ? savedTemplate.isVisible : isCuratedTheme(codeTemplate.id);
           return {
             ...codeTemplate,
             isVisible
@@ -16840,6 +16890,13 @@ var SettingsManager = class {
         }
         return codeTemplate;
       });
+    }
+    if (shouldCuratePresetVisibility) {
+      savedData.templates = savedData.templates.map((template) => ({
+        ...template,
+        isVisible: isCuratedTheme(template.id) || template.id === savedData.templateId
+      }));
+      savedData.themeCatalogVersion = CURATED_THEME_CATALOG_VERSION;
     }
     if (!savedData.customTemplates) {
       savedData.customTemplates = [];

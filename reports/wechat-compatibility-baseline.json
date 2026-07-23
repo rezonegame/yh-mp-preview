@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pluginVersion": "3.6.4",
+  "pluginVersion": "3.6.5",
   "status": "baseline-known-gaps",
   "rules": {
     "displayFlex": {

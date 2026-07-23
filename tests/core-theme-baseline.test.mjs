@@ -15,7 +15,15 @@ test('standard component registry exposes the supported deterministic components
 
 test('Core theme visual-style baseline is reproducible', () => {
   execFileSync(process.execPath, ['scripts/audit-core-theme-baseline.mjs', '--check'], { stdio: 'pipe' });
-  assert.equal(config.themeIds.length, 10);
+  assert.deepEqual(config.themeIds, [
+    'default',
+    'minimal',
+    'academic-pro',
+    'academic-pro-forest',
+    'modern-report',
+    'zen-essence',
+    'apple-product',
+  ]);
   assert.equal(baseline.themes.length, config.themeIds.length);
   assert.ok(baseline.themes.every((theme) => /^[a-f0-9]{64}$/.test(theme.fingerprint)));
 });

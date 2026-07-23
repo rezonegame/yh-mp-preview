@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pluginVersion": "3.6.4",
+  "pluginVersion": "3.6.5",
   "description": "Deterministic Core theme visual-style baseline. Screenshot comparison is a later RC task.",
   "themes": [
     {
@@ -31,21 +31,6 @@
         "quote": "border-left: 4px solid #262626; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
         "codeBlock": "color: #333; background: #fafafa; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
         "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;"
-      }
-    },
-    {
-      "id": "elegant",
-      "name": "精致系列 - 经典",
-      "fingerprint": "e6071d364bc3c04215c281e773e4f74fec1ecb58af9c140c1e2c732769fb3118",
-      "visualTokens": {
-        "container": "",
-        "h1": "margin: 24px 0 0; font-size: 2em; letter-spacing: -0.03em; line-height: 1.5;",
-        "h2": "margin: 20px 0 0; font-size: 1.5em; letter-spacing: -0.02em; border-bottom: 2px solid #9F7AEA; line-height: 1.2;",
-        "h3": "margin: 18px 0 0; font-size: 1.25em; letter-spacing: -0.01em; line-height: 1.5;",
-        "paragraph": "line-height: 1.8; margin-top: 1em; font-size: 1em; color: #4a4a4a;",
-        "quote": "border-left: 4px solid #9F7AEA; border-radius: 6px; padding: 14px 18px; background: #f5f3ff; margin: 0.8em 0; color: #6B46C1; font-style: italic; word-wrap: break-word;",
-        "codeBlock": "color: #333; background: #f8f8f8; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
-        "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e1e4e8;"
       }
     },
     {
@@ -121,36 +106,6 @@
         "quote": "border-left: 4px solid #0a84ff; border-radius: 12px; padding: 14px 18px; background: #f5f7fb; margin: 1em 0; color: #4b5563;",
         "codeBlock": "color: #1f2937; background: #f8fafc; border-radius: 14px; border: 1px solid #e5e7eb; box-shadow: 0 10px 28px rgba(17,24,39,0.05); margin: 1.2em 0; padding: 1em; font-size: 14px; line-height: 1.7; white-space: pre-wrap;",
         "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e5e7eb;"
-      }
-    },
-    {
-      "id": "focus-blue",
-      "name": "聚焦系列 - 蓝色",
-      "fingerprint": "8f2e6e528ad461a9086ac221afdacb596a2175044299809274cdc6dbb79031fe",
-      "visualTokens": {
-        "container": "",
-        "h1": "margin: 28px auto 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; text-align: center; border-top: 2px solid #3498db; border-bottom: 2px solid #3498db; padding: 15px 0; max-width: 80%;",
-        "h2": "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; text-align: center;",
-        "h3": "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; text-align: center;",
-        "paragraph": "line-height: 1.8; margin: 1em 0; font-size: 1em; color: #4a4a4a; text-align: justify;",
-        "quote": "border-left: 4px solid #3498db; border-radius: 6px; padding: 14px 18px; background: #fafafa; margin: 0.8em 0; color: #404040; font-style: italic; word-wrap: break-word;",
-        "codeBlock": "color: #333; background: #fafafa; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
-        "table": "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #f0f0f0;"
-      }
-    },
-    {
-      "id": "bold-green",
-      "name": "醒目系列 - 绿色",
-      "fingerprint": "1ae5b0cfa1482c12164f62e35dd06d53849743c52d9ef6c963aa6ea248f43043",
-      "visualTokens": {
-        "container": "",
-        "h1": "margin: 28px 0 20px; font-size: 2em; letter-spacing: 0.05em; line-height: 1.5; background: #2ecc71; color: #fff; padding: 15px 20px; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);",
-        "h2": "margin: 22px 0 15px; font-size: 1.6em; letter-spacing: 0.02em; line-height: 1.5; border-bottom: 4px solid #2ecc71; padding-bottom: 8px;",
-        "h3": "margin: 18px 0 10px; font-size: 1.3em; line-height: 1.5; padding-left: 10px; border-left: 6px solid #2ecc71;",
-        "paragraph": "line-height: 1.8; margin: 1em 0; font-size: 1em; color: #2c3e50; font-weight: 500; text-align: justify;",
-        "quote": "border-left: 6px solid #2ecc71; border-radius: 4px; padding: 14px 18px; background: #eafaf1; margin: 1em 0; color: #1e8449; font-style: italic; font-weight: 600;",
-        "codeBlock": "color: #e0e0e0; background: #2c3e50; border-radius: 8px; border: 1px solid #1a252f; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
-        "table": "width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; border: 2px solid #2ecc71; border-radius: 6px; overflow: hidden;"
       }
     }
   ]

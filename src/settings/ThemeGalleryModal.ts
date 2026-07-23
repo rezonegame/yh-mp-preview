@@ -6,25 +6,17 @@
 import { Modal, setIcon } from 'obsidian';
 import type { SettingsManager } from './settings';
 import type { Template } from '../templateManager';
+import { curatedThemeEntries, getCuratedThemeEntry, type CuratedThemeScene } from '../core/theme/themeCatalog';
 
-type ThemeScene = '全部' | '教程与知识' | '产品与报告' | '观点与专业' | '随笔与生活' | '创意与活动' | '自定义主题';
+type ThemeScene = '全部' | CuratedThemeScene | '经典主题' | '自定义主题';
 
 const SCENE_ORDER: ThemeScene[] = [
-    '全部', '教程与知识', '产品与报告', '观点与专业', '随笔与生活', '创意与活动', '自定义主题'
-];
-
-const sceneRules: Array<{ scene: Exclude<ThemeScene, '全部' | '自定义主题'>; keywords: string[] }> = [
-    { scene: '教程与知识', keywords: ['academic', 'teacher', 'blackboard', 'kindergarten', 'parent-child'] },
-    { scene: '产品与报告', keywords: ['apple-product', 'modern-report', 'focus-', 'focus'] },
-    { scene: '观点与专业', keywords: ['minimal', 'elegant', 'default', 'scarlet', 'orange', 'yeban'] },
-    { scene: '随笔与生活', keywords: ['zen', 'warmth', 'autumn', 'spring', 'brown', 'ocean'] },
-    { scene: '创意与活动', keywords: ['bold', 'playful', 'adventure', 'cyber', 'gameui', 'dark'] },
+    '全部', ...curatedThemeEntries.map(entry => entry.scene), '经典主题', '自定义主题'
 ];
 
 export function getThemeScene(template: Template): ThemeScene {
     if (!template.isPreset) return '自定义主题';
-    const id = template.id.toLowerCase();
-    return sceneRules.find(rule => rule.keywords.some(keyword => id.includes(keyword)))?.scene || '观点与专业';
+    return getCuratedThemeEntry(template.id)?.scene || '经典主题';
 }
 
 export class ThemeGalleryModal extends Modal {
@@ -194,6 +186,8 @@ export class ThemeGalleryModal extends Modal {
     }
 
     private getTemplateDescription(template: Template): string {
+        const curatedRecommendation = getCuratedThemeEntry(template.id)?.recommendation;
+        if (curatedRecommendation) return curatedRecommendation;
         const description = template.description?.trim();
         return description ? description.split('（')[0].trim() : '适合当前文章的视觉排版';
     }
