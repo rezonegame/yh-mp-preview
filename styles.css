@@ -707,6 +707,10 @@ ol {
   --yh-mp-note-accent: #9fb7e9;
 }
 .cm-editor.yh-mp-note-layout {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
   color: var(--yh-mp-note-text);
 }
 .cm-editor.yh-mp-note-layout .cm-scroller {
@@ -714,7 +718,8 @@ ol {
 }
 .cm-editor.yh-mp-note-layout .cm-content {
   box-sizing: border-box;
-  max-width: var(--yh-mp-note-max-width);
+  width: 100%;
+  max-width: none;
   min-height: 100%;
   padding-left: 20px;
   padding-right: 20px;

@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.10.0-beta.2
+
+- Fixed Live Preview becoming a narrow column when note-layout enhancement is enabled.
+- Kept editor width native while retaining note font, line-height, and theme enhancements.
+
 ## 3.10.0-beta.1
 
 - Added the first working Obsidian note-layout enhancement for reading view

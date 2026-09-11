@@ -42,6 +42,8 @@ test('note layout phase 3.10.0 applies only through reading and editor boundarie
   assert.match(settingsTab, /笔记最大宽度/);
   assert.match(noteLayoutCss, /\.yh-mp-note-layout/);
   assert.match(noteLayoutCss, /\.cm-editor\.yh-mp-note-layout/);
+  assert.match(noteLayoutCss, /\.cm-editor\.yh-mp-note-layout\s*\{[\s\S]*max-width:\s*none/);
+  assert.match(noteLayoutCss, /\.cm-editor\.yh-mp-note-layout \.cm-content\s*\{[\s\S]*max-width:\s*none/);
   assert.doesNotMatch(noteLayoutCss, /\.mp-preview-area/);
   assert.doesNotMatch(noteLayoutCss, /body\s*\{/);
 });
