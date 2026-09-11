@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.9.0-beta.1
+
+- Added an isolated, disabled-by-default note-layout settings file with
+  versioned validation, verified writes, backups, and restore commands.
+- Added the note-layout lifecycle boundary without changing document styling;
+  visual enhancement remains scheduled for the next feature version.
+
 ## 3.8.3-beta.1
 
 - Added prerelease-safe version checks for `package-lock.json` and GitHub

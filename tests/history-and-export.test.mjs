@@ -4,12 +4,32 @@ import test from 'node:test';
 
 const settings = readFileSync(new URL('../src/settings/settings.ts', import.meta.url), 'utf8');
 const view = readFileSync(new URL('../src/view.ts', import.meta.url), 'utf8');
+const noteLayoutStore = readFileSync(new URL('../src/core/note-layout/noteLayoutStore.ts', import.meta.url), 'utf8');
+const noteLayoutEnhancement = readFileSync(new URL('../src/core/note-layout/noteLayoutEnhancement.ts', import.meta.url), 'utf8');
+const main = readFileSync(new URL('../src/main.ts', import.meta.url), 'utf8');
+const settingsTab = readFileSync(new URL('../src/settings/MPSettingTab.ts', import.meta.url), 'utf8');
 
 test('layout snapshots preserve the user-selected local typesetting settings', () => {
   assert.match(settings, /layoutSnapshots: LayoutSnapshot\[\]/);
   assert.match(settings, /saveLayoutSnapshot/);
   assert.match(settings, /restoreLayoutSnapshot/);
   assert.match(view, /contentHash: this\.hashText\(content\)/);
+});
+
+test('note layout phase 3.9.0 has an isolated, disabled-by-default storage boundary', () => {
+  assert.match(noteLayoutStore, /NOTE_LAYOUT_SCHEMA_VERSION = 1/);
+  assert.match(noteLayoutStore, /enabled: false/);
+  assert.match(noteLayoutStore, /note-layout\.json/);
+  assert.match(noteLayoutStore, /createBackupFromRaw/);
+  assert.match(noteLayoutStore, /writeAtomically/);
+  assert.match(noteLayoutStore, /临时文件读回校验失败/);
+  assert.match(noteLayoutStore, /pruneBackups/);
+  assert.match(noteLayoutEnhancement, /3\.9\.0 intentionally stores the state/);
+  assert.match(main, /NoteLayoutStore/);
+  assert.match(main, /toggle-note-layout-enhancement/);
+  assert.match(main, /restore-note-layout-backup/);
+  assert.match(settingsTab, /备份当前笔记排版设置/);
+  assert.match(settingsTab, /3\.9\.0 只保存开关/);
 });
 
 test('local export renders full article content and fixed-ratio image segments', () => {

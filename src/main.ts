@@ -7,14 +7,30 @@ import { DonateManager } from './donateManager';
 import { MPSettingTab } from './settings/MPSettingTab';
 import { ThemeRegistry } from './core/theme/themeRegistry';
 import { adaptLegacyTemplate } from './core/theme/legacyThemeAdapter';
+import { NoteLayoutStore } from './core/note-layout/noteLayoutStore';
+import { NoteLayoutEnhancement } from './core/note-layout/noteLayoutEnhancement';
 export default class MPPlugin extends Plugin {
   settingsManager: SettingsManager;
   templateManager: TemplateManager;
   themeRegistry: ThemeRegistry;
+  noteLayoutStore: NoteLayoutStore;
+  noteLayoutEnhancement: NoteLayoutEnhancement;
   async onload() {
     // 初始化设置管理器
     this.settingsManager = new SettingsManager(this);
     await this.settingsManager.loadSettings();
+
+    this.noteLayoutStore = new NoteLayoutStore(
+      this.app.vault.adapter,
+      this.manifest.dir || `.obsidian/plugins/${this.manifest.id}`,
+    );
+    try {
+      await this.noteLayoutStore.load();
+    } catch (error) {
+      new Notice(error instanceof Error ? error.message : '笔记排版设置读取失败，已禁用笔记排版增强');
+    }
+    this.noteLayoutEnhancement = new NoteLayoutEnhancement(this.app, this.noteLayoutStore);
+    this.noteLayoutEnhancement.load();
 
     // 初始化模板管理器
     this.templateManager = new TemplateManager(this.app, this.settingsManager);
@@ -60,8 +76,39 @@ export default class MPPlugin extends Plugin {
             }
     });
 
+    this.addCommand({
+      id: 'toggle-note-layout-enhancement',
+      name: '切换笔记排版增强（准备中）',
+      callback: async () => {
+        try {
+          const enabled = !this.noteLayoutEnhancement.isEnabled();
+          await this.noteLayoutEnhancement.setEnabled(enabled);
+          new Notice(enabled ? '笔记排版增强已开启；当前版本仅保存设置' : '笔记排版增强已关闭');
+        } catch (error) {
+          new Notice(error instanceof Error ? error.message : '笔记排版设置保存失败');
+        }
+      },
+    });
+
+    this.addCommand({
+      id: 'restore-note-layout-backup',
+      name: '恢复最近的笔记排版设置备份',
+      callback: async () => {
+        try {
+          const backup = await this.noteLayoutStore.restoreLatestBackup();
+          new Notice(backup ? `已恢复笔记排版备份：${backup.createdAt}` : '没有可恢复的笔记排版备份');
+        } catch (error) {
+          new Notice(error instanceof Error ? error.message : '笔记排版备份恢复失败');
+        }
+      },
+    });
+
     // 在插件的 onload 方法中添加：
     this.addSettingTab(new MPSettingTab(this.app, this));
+  }
+
+  onunload() {
+    this.noteLayoutEnhancement?.unload();
   }
 
   async activateView() {

@@ -62,6 +62,7 @@ export class MPSettingTab extends PluginSettingTab {
         this.createSection(containerEl, '模板选项', el => this.renderTemplateSettings(el));
         this.createSection(containerEl, '背景选项', el => this.renderBackgroundSettings(el));
         this.createSection(containerEl, '排版增强', el => this.renderLayoutEnhancementSettings(el));
+        this.createSection(containerEl, '笔记排版（准备中）', el => this.renderNoteLayoutSettings(el));
         this.createSection(containerEl, '高级选项', el => this.renderAdvancedSettings(el));
     }
 
@@ -756,6 +757,64 @@ export class MPSettingTab extends PluginSettingTab {
                 .setValue(this.plugin.settingsManager.getSettings().customFooter || '')
                 .onChange(async (value) => {
                     await this.plugin.settingsManager.updateSettings({ customFooter: value });
+                }));
+    }
+
+    private renderNoteLayoutSettings(containerEl: HTMLElement): void {
+        const store = this.plugin.noteLayoutStore;
+        const enhancement = this.plugin.noteLayoutEnhancement;
+        const settings = store.getSettings();
+        const unavailable = !store.isAvailable();
+
+        new Setting(containerEl)
+            .setName('启用笔记排版增强')
+            .setDesc(unavailable ? '设置文件不可用，已暂停笔记排版增强' : '开启后将在后续版本自动改善 Obsidian 阅读视图；3.9.0 只保存开关，不改变正文显示')
+            .addToggle(toggle => toggle
+                .setValue(settings.enabled)
+                .setDisabled(unavailable)
+                .onChange(async value => {
+                    try {
+                        await enhancement.setEnabled(value);
+                        new Notice(value ? '笔记排版增强已开启（视觉效果将在后续版本启用）' : '笔记排版增强已关闭');
+                    } catch (error) {
+                        toggle.setValue(false);
+                        new Notice(error instanceof Error ? error.message : '笔记排版设置保存失败');
+                    }
+                }));
+
+        new Setting(containerEl)
+            .setName('源码模式显示增强')
+            .setDesc('将在实时预览稳定后提供；当前版本暂不可用')
+            .addToggle(toggle => toggle
+                .setValue(settings.sourceModeEnabled)
+                .setDisabled(true));
+
+        new Setting(containerEl)
+            .setName('备份当前笔记排版设置')
+            .setDesc('写入独立的 note-layout.json 之前保留可恢复副本')
+            .addButton(button => button
+                .setButtonText('创建备份')
+                .onClick(async () => {
+                    try {
+                        const backup = await store.createBackup('manual');
+                        new Notice(backup ? '笔记排版设置备份已创建' : '当前还没有可备份的笔记排版设置');
+                    } catch (error) {
+                        new Notice(error instanceof Error ? error.message : '笔记排版设置备份失败');
+                    }
+                }));
+
+        new Setting(containerEl)
+            .setName('恢复最近备份')
+            .setDesc('恢复前会自动保留当前设置')
+            .addButton(button => button
+                .setButtonText('恢复')
+                .onClick(async () => {
+                    try {
+                        const backup = await store.restoreLatestBackup();
+                        new Notice(backup ? '笔记排版设置已恢复' : '没有可恢复的笔记排版备份');
+                    } catch (error) {
+                        new Notice(error instanceof Error ? error.message : '笔记排版设置恢复失败');
+                    }
                 }));
     }
 }

@@ -8253,7 +8253,7 @@ __export(main_exports, {
   default: () => MPPlugin
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian12 = require("obsidian");
+var import_obsidian13 = require("obsidian");
 
 // src/view.ts
 var import_obsidian4 = require("obsidian");
@@ -13919,6 +13919,7 @@ var MPSettingTab = class extends import_obsidian11.PluginSettingTab {
     this.createSection(containerEl, "\u6A21\u677F\u9009\u9879", (el) => this.renderTemplateSettings(el));
     this.createSection(containerEl, "\u80CC\u666F\u9009\u9879", (el) => this.renderBackgroundSettings(el));
     this.createSection(containerEl, "\u6392\u7248\u589E\u5F3A", (el) => this.renderLayoutEnhancementSettings(el));
+    this.createSection(containerEl, "\u7B14\u8BB0\u6392\u7248\uFF08\u51C6\u5907\u4E2D\uFF09", (el) => this.renderNoteLayoutSettings(el));
     this.createSection(containerEl, "\u9AD8\u7EA7\u9009\u9879", (el) => this.renderAdvancedSettings(el));
   }
   renderBasicSettings(containerEl) {
@@ -14368,6 +14369,38 @@ var MPSettingTab = class extends import_obsidian11.PluginSettingTab {
       await this.plugin.settingsManager.updateSettings({ customFooter: value });
     }));
   }
+  renderNoteLayoutSettings(containerEl) {
+    const store = this.plugin.noteLayoutStore;
+    const enhancement = this.plugin.noteLayoutEnhancement;
+    const settings = store.getSettings();
+    const unavailable = !store.isAvailable();
+    new import_obsidian11.Setting(containerEl).setName("\u542F\u7528\u7B14\u8BB0\u6392\u7248\u589E\u5F3A").setDesc(unavailable ? "\u8BBE\u7F6E\u6587\u4EF6\u4E0D\u53EF\u7528\uFF0C\u5DF2\u6682\u505C\u7B14\u8BB0\u6392\u7248\u589E\u5F3A" : "\u5F00\u542F\u540E\u5C06\u5728\u540E\u7EED\u7248\u672C\u81EA\u52A8\u6539\u5584 Obsidian \u9605\u8BFB\u89C6\u56FE\uFF1B3.9.0 \u53EA\u4FDD\u5B58\u5F00\u5173\uFF0C\u4E0D\u6539\u53D8\u6B63\u6587\u663E\u793A").addToggle((toggle) => toggle.setValue(settings.enabled).setDisabled(unavailable).onChange(async (value) => {
+      try {
+        await enhancement.setEnabled(value);
+        new import_obsidian11.Notice(value ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F\uFF08\u89C6\u89C9\u6548\u679C\u5C06\u5728\u540E\u7EED\u7248\u672C\u542F\u7528\uFF09" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
+      } catch (error) {
+        toggle.setValue(false);
+        new import_obsidian11.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
+      }
+    }));
+    new import_obsidian11.Setting(containerEl).setName("\u6E90\u7801\u6A21\u5F0F\u663E\u793A\u589E\u5F3A").setDesc("\u5C06\u5728\u5B9E\u65F6\u9884\u89C8\u7A33\u5B9A\u540E\u63D0\u4F9B\uFF1B\u5F53\u524D\u7248\u672C\u6682\u4E0D\u53EF\u7528").addToggle((toggle) => toggle.setValue(settings.sourceModeEnabled).setDisabled(true));
+    new import_obsidian11.Setting(containerEl).setName("\u5907\u4EFD\u5F53\u524D\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E").setDesc("\u5199\u5165\u72EC\u7ACB\u7684 note-layout.json \u4E4B\u524D\u4FDD\u7559\u53EF\u6062\u590D\u526F\u672C").addButton((button) => button.setButtonText("\u521B\u5EFA\u5907\u4EFD").onClick(async () => {
+      try {
+        const backup = await store.createBackup("manual");
+        new import_obsidian11.Notice(backup ? "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u5907\u4EFD\u5DF2\u521B\u5EFA" : "\u5F53\u524D\u8FD8\u6CA1\u6709\u53EF\u5907\u4EFD\u7684\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E");
+      } catch (error) {
+        new import_obsidian11.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u5907\u4EFD\u5931\u8D25");
+      }
+    }));
+    new import_obsidian11.Setting(containerEl).setName("\u6062\u590D\u6700\u8FD1\u5907\u4EFD").setDesc("\u6062\u590D\u524D\u4F1A\u81EA\u52A8\u4FDD\u7559\u5F53\u524D\u8BBE\u7F6E").addButton((button) => button.setButtonText("\u6062\u590D").onClick(async () => {
+      try {
+        const backup = await store.restoreLatestBackup();
+        new import_obsidian11.Notice(backup ? "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u5DF2\u6062\u590D" : "\u6CA1\u6709\u53EF\u6062\u590D\u7684\u7B14\u8BB0\u6392\u7248\u5907\u4EFD");
+      } catch (error) {
+        new import_obsidian11.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u6062\u590D\u5931\u8D25");
+      }
+    }));
+  }
 };
 
 // src/core/theme/themeRegistry.ts
@@ -14390,11 +14423,254 @@ var ThemeRegistry = class {
   }
 };
 
+// src/core/note-layout/noteLayoutStore.ts
+var import_obsidian12 = require("obsidian");
+var NOTE_LAYOUT_SCHEMA_VERSION = 1;
+var NOTE_LAYOUT_FILE_NAME = "note-layout.json";
+var NOTE_LAYOUT_BACKUP_DIR = "backups";
+function createDefaultNoteLayoutSettings() {
+  return {
+    schemaVersion: NOTE_LAYOUT_SCHEMA_VERSION,
+    enabled: false,
+    sourceModeEnabled: false,
+    defaults: {
+      themeId: "default",
+      fontSize: 16,
+      lineHeight: 1.75,
+      maxWidth: 760
+    },
+    files: {}
+  };
+}
+function isRecord2(value) {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+function numberInRange(value, min, max, fallback) {
+  const number = typeof value === "number" && Number.isFinite(value) ? value : fallback;
+  return Math.min(max, Math.max(min, number));
+}
+function normalizeProfile(value, fallback) {
+  const source = isRecord2(value) ? value : {};
+  return {
+    themeId: typeof source.themeId === "string" && source.themeId.trim() ? source.themeId : fallback.themeId,
+    fontSize: Math.round(numberInRange(source.fontSize, 14, 24, fallback.fontSize)),
+    lineHeight: Number(numberInRange(source.lineHeight, 1.4, 2.2, fallback.lineHeight).toFixed(2)),
+    maxWidth: Math.round(numberInRange(source.maxWidth, 560, 960, fallback.maxWidth) / 20) * 20
+  };
+}
+function normalizeNoteLayoutSettings(value) {
+  if (!isRecord2(value))
+    throw new Error("\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4E0D\u662F\u6709\u6548\u5BF9\u8C61");
+  const schemaVersion = Number(value.schemaVersion);
+  if (schemaVersion > NOTE_LAYOUT_SCHEMA_VERSION) {
+    throw new Error(`\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u7248\u672C ${schemaVersion} \u9AD8\u4E8E\u5F53\u524D\u652F\u6301\u7248\u672C`);
+  }
+  const defaults = createDefaultNoteLayoutSettings();
+  const sourceDefaults = isRecord2(value.defaults) ? value.defaults : {};
+  const files = {};
+  if (isRecord2(value.files)) {
+    Object.entries(value.files).forEach(([path, override]) => {
+      if (!path || !isRecord2(override))
+        return;
+      if (override.mode === "native") {
+        files[path] = { mode: "native" };
+      } else if (override.mode === "custom") {
+        files[path] = {
+          mode: "custom",
+          profile: normalizeProfile(override.profile, defaults.defaults)
+        };
+      }
+    });
+  }
+  return {
+    schemaVersion: NOTE_LAYOUT_SCHEMA_VERSION,
+    enabled: value.enabled === true,
+    sourceModeEnabled: value.sourceModeEnabled === true,
+    defaults: normalizeProfile(sourceDefaults, defaults.defaults),
+    files
+  };
+}
+function safeName(value) {
+  return value.replace(/[^a-zA-Z0-9._-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48) || "manual";
+}
+async function sha256(value) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+var NoteLayoutStore = class {
+  constructor(adapter, pluginDir) {
+    this.adapter = adapter;
+    this.settings = createDefaultNoteLayoutSettings();
+    this.loaded = false;
+    this.available = true;
+    const directory = (0, import_obsidian12.normalizePath)(pluginDir || ".obsidian/plugins/yh-mp-preview");
+    this.filePath = (0, import_obsidian12.normalizePath)(`${directory}/${NOTE_LAYOUT_FILE_NAME}`);
+    this.backupDir = (0, import_obsidian12.normalizePath)(`${directory}/${NOTE_LAYOUT_BACKUP_DIR}`);
+  }
+  async load() {
+    this.loaded = true;
+    this.available = true;
+    if (!await this.adapter.exists(this.filePath))
+      return;
+    try {
+      const raw = await this.adapter.read(this.filePath);
+      this.settings = normalizeNoteLayoutSettings(JSON.parse(raw));
+    } catch (error) {
+      this.available = false;
+      throw new Error(`\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u8BFB\u53D6\u5931\u8D25\uFF1A${error instanceof Error ? error.message : "\u6587\u4EF6\u635F\u574F"}`);
+    }
+  }
+  isAvailable() {
+    return this.loaded && this.available;
+  }
+  getSettings() {
+    return JSON.parse(JSON.stringify(this.settings));
+  }
+  async updateSettings(patch) {
+    await this.save({ ...this.getSettings(), ...patch });
+  }
+  async save(value) {
+    if (!this.isAvailable())
+      throw new Error("\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u5F53\u524D\u4E0D\u53EF\u7528");
+    const next = normalizeNoteLayoutSettings(value);
+    const serialized = `${JSON.stringify(next, null, 2)}
+`;
+    const previous = await this.adapter.exists(this.filePath) ? await this.adapter.read(this.filePath) : null;
+    if (previous !== null)
+      await this.createBackupFromRaw(previous, "before-save");
+    await this.writeAtomically(serialized, previous);
+    this.settings = next;
+  }
+  async createBackup(reason = "manual") {
+    if (!await this.adapter.exists(this.filePath))
+      return null;
+    return this.createBackupFromRaw(await this.adapter.read(this.filePath), reason);
+  }
+  async listBackups() {
+    if (!await this.adapter.exists(this.backupDir))
+      return [];
+    const listed = await this.adapter.list(this.backupDir);
+    const backups = [];
+    for (const path of listed.files.filter((item) => item.endsWith(".json"))) {
+      try {
+        const raw = await this.adapter.read(path);
+        const parsed = JSON.parse(raw);
+        if (parsed.settings)
+          normalizeNoteLayoutSettings(parsed.settings);
+        backups.push({ path, createdAt: parsed.createdAt, reason: parsed.reason, checksum: parsed.checksum });
+      } catch (_) {
+      }
+    }
+    return backups.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  }
+  async restoreLatestBackup() {
+    const latest = (await this.listBackups())[0];
+    if (!latest)
+      return null;
+    const raw = await this.adapter.read(latest.path);
+    const parsed = JSON.parse(raw);
+    const restored = normalizeNoteLayoutSettings(parsed.settings);
+    await this.save(restored);
+    return latest;
+  }
+  async createBackupFromRaw(raw, reason) {
+    const settings = normalizeNoteLayoutSettings(JSON.parse(raw));
+    const checksum = await sha256(raw);
+    await this.ensureBackupDirectory();
+    const createdAt = new Date().toISOString();
+    const isFirst = (await this.listBackups()).length === 0;
+    const name = `${isFirst ? "baseline" : safeName(reason)}-${createdAt.replace(/[:.]/g, "-")}-${checksum.slice(0, 8)}.json`;
+    const path = (0, import_obsidian12.normalizePath)(`${this.backupDir}/${name}`);
+    const payload = `${JSON.stringify({ createdAt, reason, checksum, settings }, null, 2)}
+`;
+    await this.adapter.write(path, payload);
+    if (await this.adapter.read(path) !== payload)
+      throw new Error("\u7B14\u8BB0\u6392\u7248\u5907\u4EFD\u6821\u9A8C\u5931\u8D25");
+    await this.pruneBackups();
+    return { path, createdAt, reason, checksum };
+  }
+  async writeAtomically(serialized, previous) {
+    const temporaryPath = `${this.filePath}.tmp-${Date.now()}`;
+    try {
+      await this.adapter.write(temporaryPath, serialized);
+      if (await this.adapter.read(temporaryPath) !== serialized)
+        throw new Error("\u4E34\u65F6\u6587\u4EF6\u8BFB\u56DE\u6821\u9A8C\u5931\u8D25");
+      if (await this.adapter.exists(this.filePath))
+        await this.adapter.remove(this.filePath);
+      await this.adapter.rename(temporaryPath, this.filePath);
+      if (await this.adapter.read(this.filePath) !== serialized)
+        throw new Error("\u8BBE\u7F6E\u6587\u4EF6\u8BFB\u56DE\u6821\u9A8C\u5931\u8D25");
+    } catch (error) {
+      if (await this.adapter.exists(temporaryPath))
+        await this.adapter.remove(temporaryPath);
+      if (previous !== null && !await this.adapter.exists(this.filePath))
+        await this.adapter.write(this.filePath, previous);
+      throw error;
+    }
+  }
+  async ensureBackupDirectory() {
+    if (!await this.adapter.exists(this.backupDir))
+      await this.adapter.mkdir(this.backupDir);
+  }
+  async pruneBackups() {
+    const backups = await this.listBackups();
+    const baseline = backups.filter((item) => item.path.includes("/baseline-"));
+    const recent = backups.filter((item) => !item.path.includes("/baseline-")).slice(0, 10);
+    const keep = new Set([...baseline, ...recent].map((item) => item.path));
+    for (const backup of backups) {
+      if (!keep.has(backup.path))
+        await this.adapter.remove(backup.path);
+    }
+  }
+};
+
+// src/core/note-layout/noteLayoutEnhancement.ts
+var NoteLayoutEnhancement = class {
+  constructor(app, store) {
+    this.app = app;
+    this.store = store;
+    this.loaded = false;
+    this.enabled = false;
+  }
+  load() {
+    this.loaded = true;
+    this.enabled = this.store.getSettings().enabled;
+  }
+  isLoaded() {
+    return this.loaded;
+  }
+  isEnabled() {
+    return this.enabled;
+  }
+  async setEnabled(enabled) {
+    if (!this.loaded || !this.store.isAvailable())
+      throw new Error("\u7B14\u8BB0\u6392\u7248\u6A21\u5757\u5F53\u524D\u4E0D\u53EF\u7528");
+    await this.store.updateSettings({ enabled });
+    this.enabled = enabled;
+  }
+  unload() {
+    this.enabled = false;
+    this.loaded = false;
+  }
+};
+
 // src/main.ts
-var MPPlugin = class extends import_obsidian12.Plugin {
+var MPPlugin = class extends import_obsidian13.Plugin {
   async onload() {
     this.settingsManager = new SettingsManager(this);
     await this.settingsManager.loadSettings();
+    this.noteLayoutStore = new NoteLayoutStore(
+      this.app.vault.adapter,
+      this.manifest.dir || `.obsidian/plugins/${this.manifest.id}`
+    );
+    try {
+      await this.noteLayoutStore.load();
+    } catch (error) {
+      new import_obsidian13.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u8BFB\u53D6\u5931\u8D25\uFF0C\u5DF2\u7981\u7528\u7B14\u8BB0\u6392\u7248\u589E\u5F3A");
+    }
+    this.noteLayoutEnhancement = new NoteLayoutEnhancement(this.app, this.noteLayoutStore);
+    this.noteLayoutEnhancement.load();
     this.templateManager = new TemplateManager(this.app, this.settingsManager);
     this.themeRegistry = new ThemeRegistry();
     this.themeRegistry.replaceAll(this.settingsManager.getAllTemplates().map(adaptLegacyTemplate));
@@ -14414,7 +14690,36 @@ var MPPlugin = class extends import_obsidian12.Plugin {
         await this.activateView();
       }
     });
+    this.addCommand({
+      id: "toggle-note-layout-enhancement",
+      name: "\u5207\u6362\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\uFF08\u51C6\u5907\u4E2D\uFF09",
+      callback: async () => {
+        try {
+          const enabled = !this.noteLayoutEnhancement.isEnabled();
+          await this.noteLayoutEnhancement.setEnabled(enabled);
+          new import_obsidian13.Notice(enabled ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F\uFF1B\u5F53\u524D\u7248\u672C\u4EC5\u4FDD\u5B58\u8BBE\u7F6E" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
+        } catch (error) {
+          new import_obsidian13.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
+        }
+      }
+    });
+    this.addCommand({
+      id: "restore-note-layout-backup",
+      name: "\u6062\u590D\u6700\u8FD1\u7684\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u5907\u4EFD",
+      callback: async () => {
+        try {
+          const backup = await this.noteLayoutStore.restoreLatestBackup();
+          new import_obsidian13.Notice(backup ? `\u5DF2\u6062\u590D\u7B14\u8BB0\u6392\u7248\u5907\u4EFD\uFF1A${backup.createdAt}` : "\u6CA1\u6709\u53EF\u6062\u590D\u7684\u7B14\u8BB0\u6392\u7248\u5907\u4EFD");
+        } catch (error) {
+          new import_obsidian13.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u5907\u4EFD\u6062\u590D\u5931\u8D25");
+        }
+      }
+    });
     this.addSettingTab(new MPSettingTab(this.app, this));
+  }
+  onunload() {
+    var _a;
+    (_a = this.noteLayoutEnhancement) == null ? void 0 : _a.unload();
   }
   async activateView() {
     const leaves = this.app.workspace.getLeavesOfType(VIEW_TYPE_MP);
@@ -14429,7 +14734,7 @@ var MPPlugin = class extends import_obsidian12.Plugin {
         active: true
       });
     } else {
-      new import_obsidian12.Notice("\u65E0\u6CD5\u521B\u5EFA\u89C6\u56FE\u9762\u677F");
+      new import_obsidian13.Notice("\u65E0\u6CD5\u521B\u5EFA\u89C6\u56FE\u9762\u677F");
     }
   }
 };
