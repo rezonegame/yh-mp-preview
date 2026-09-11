@@ -22,12 +22,16 @@ function assert(condition, message) {
 const packageJson = readJson('package.json');
 const manifest = readJson('manifest.json');
 const versions = readJson('versions.json');
+const packageLock = readJson('package-lock.json');
 const workflow = readFileSync(resolve(rootDir, '.github/workflows/release.yml'), 'utf8');
 const license = readFileSync(resolve(rootDir, 'LICENSE'), 'utf8');
 
 assert(semverPattern.test(packageJson.version), `Invalid package version: ${packageJson.version}`);
 assert(manifest.version === packageJson.version, 'manifest.json version must match package.json');
 assert(versions[packageJson.version] === manifest.minAppVersion, 'versions.json must contain the current manifest minAppVersion');
+assert(packageLock.version === packageJson.version, 'package-lock.json root version must match package.json');
+assert(packageLock.packages?.['']?.version === packageJson.version, 'package-lock.json package version must match package.json');
+assert(packageLock.packages?.['']?.license === packageJson.license, 'package-lock.json license must match package.json');
 assert(packageJson.scripts['sync-version'], 'package.json must expose sync-version');
 assert(packageJson.scripts.verify, 'package.json must expose verify');
 assert(packageJson.license === 'AGPL-3.0-or-later', 'v3 must declare AGPL-3.0-or-later in package.json');

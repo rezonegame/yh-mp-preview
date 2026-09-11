@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.8.3-beta.1
+
+- Added prerelease-safe version checks for `package-lock.json` and GitHub
+  Releases.
+- Hardened long-image and segmented-image export around image loading, cleanup,
+  progress reporting, and oversized full-canvas failures.
+
 ## 3.8.2
 
 - Fixed long-image and segmented-image export to render a complete article

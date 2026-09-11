@@ -14,6 +14,7 @@ import type { ValidationReport } from './core/validation/wechatHtmlValidator';
 // @ts-ignore - html2canvas has no type declarations
 import html2canvas from 'html2canvas';
 export const VIEW_TYPE_MP = 'yh-mp-preview';
+const EXPORT_IMAGE_TIMEOUT_MS = 10_000;
 
 export class MPView extends ItemView {
     private previewEl: HTMLElement;
@@ -613,39 +614,63 @@ export class MPView extends ItemView {
             'pointer-events: none',
         ].join(';');
 
-        const snapshot = content.cloneNode(true) as HTMLElement;
-        const computed = window.getComputedStyle(content);
-        snapshot.style.cssText += `;${[
-            `width: ${width}px`,
-            'max-width: none',
-            'height: auto',
-            'max-height: none',
-            'min-height: 0',
-            'overflow: visible',
-            'box-sizing: border-box',
-            `font-family: ${computed.fontFamily}`,
-            `font-size: ${computed.fontSize}`,
-            `line-height: ${computed.lineHeight}`,
-            `color: ${computed.color}`,
-            'background: #ffffff',
-        ].join(';')};`;
-        snapshotHost.appendChild(snapshot);
-        document.body.appendChild(snapshotHost);
+        const cleanup = () => snapshotHost.remove();
+        try {
+            const snapshot = content.cloneNode(true) as HTMLElement;
+            const computed = window.getComputedStyle(content);
+            snapshot.style.cssText += `;${[
+                `width: ${width}px`,
+                'max-width: none',
+                'height: auto',
+                'max-height: none',
+                'min-height: 0',
+                'overflow: visible',
+                'box-sizing: border-box',
+                `font-family: ${computed.fontFamily}`,
+                `font-size: ${computed.fontSize}`,
+                `line-height: ${computed.lineHeight}`,
+                `color: ${computed.color}`,
+                'background: #ffffff',
+            ].join(';')};`;
+            snapshotHost.appendChild(snapshot);
+            document.body.appendChild(snapshotHost);
 
-        await Promise.all(Array.from(snapshot.querySelectorAll('img')).map((image) => {
-            if (image.complete) return Promise.resolve();
-            return new Promise<void>((resolve) => {
-                image.addEventListener('load', () => resolve(), { once: true });
-                image.addEventListener('error', () => resolve(), { once: true });
-            });
-        }));
+            const imageResults = await Promise.all(Array.from(snapshot.querySelectorAll('img')).map((image) => this.waitForExportImage(image)));
+            const failedImages = imageResults.filter((loaded) => !loaded).length;
+            if (failedImages > 0) {
+                throw new Error(`${failedImages} 张图片未能在 ${EXPORT_IMAGE_TIMEOUT_MS / 1000} 秒内加载`);
+            }
 
-        return {
-            element: snapshot,
-            width,
-            height: Math.max(1, Math.ceil(snapshot.scrollHeight)),
-            cleanup: () => snapshotHost.remove(),
-        };
+            return {
+                element: snapshot,
+                width,
+                height: Math.max(1, Math.ceil(snapshot.scrollHeight)),
+                cleanup,
+            };
+        } catch (error) {
+            cleanup();
+            throw error;
+        }
+    }
+
+    private waitForExportImage(image: HTMLImageElement): Promise<boolean> {
+        if (image.complete) return Promise.resolve(image.naturalWidth > 0);
+        return new Promise((resolve) => {
+            let settled = false;
+            const finish = (loaded: boolean) => {
+                if (settled) return;
+                settled = true;
+                window.clearTimeout(timeoutId);
+                image.removeEventListener('load', onLoad);
+                image.removeEventListener('error', onError);
+                resolve(loaded);
+            };
+            const onLoad = () => finish(image.naturalWidth > 0);
+            const onError = () => finish(false);
+            const timeoutId = window.setTimeout(() => finish(false), EXPORT_IMAGE_TIMEOUT_MS);
+            image.addEventListener('load', onLoad, { once: true });
+            image.addEventListener('error', onError, { once: true });
+        });
     }
 
     private async renderExportCanvas(
@@ -690,7 +715,10 @@ export class MPView extends ItemView {
                 maxDimension / snapshot.height,
                 Math.sqrt(maxPixels / (snapshot.width * snapshot.height)),
             );
-            const canvas = await this.renderExportCanvas(snapshot.element, snapshot.width, snapshot.height, Math.max(scale, 0.01));
+            if (!Number.isFinite(scale) || scale < 0.01) {
+                throw new Error('文章过长，无法生成单张长图，请改用“导出分段图”');
+            }
+            const canvas = await this.renderExportCanvas(snapshot.element, snapshot.width, snapshot.height, scale);
             const link = document.createElement('a');
             link.download = `yh-mp-preview-${Date.now()}.png`;
             link.href = canvas.toDataURL('image/png');
@@ -698,7 +726,9 @@ export class MPView extends ItemView {
             if (scale < 2) new Notice('文章较长，已自动降低长图分辨率以完整导出；可使用“导出分段图”获得高清切片。');
             button.setText('导出成功');
         } catch (error) {
+            const message = error instanceof Error ? error.message : '未知错误';
             console.error('导出长图失败:', error);
+            new Notice(`长图导出失败：${message}`);
             button.setText('导出失败');
         } finally {
             cleanup?.();
@@ -743,6 +773,7 @@ export class MPView extends ItemView {
         button.disabled = true;
         button.setText('生成中...');
         let cleanup: (() => void) | undefined;
+        let completed = 0;
         try {
             const snapshot = await this.createExportSnapshot();
             cleanup = snapshot.cleanup;
@@ -754,6 +785,7 @@ export class MPView extends ItemView {
             for (let index = 0; index < total; index += 1) {
                 const sourceY = index * segmentHeight;
                 const height = Math.min(segmentHeight, snapshot.height - sourceY);
+                button.setText(`生成中 ${index + 1}/${total}...`);
                 const segment = await this.renderExportCanvas(
                     snapshot.element,
                     snapshot.width,
@@ -765,11 +797,13 @@ export class MPView extends ItemView {
                 link.download = `yh-mp-preview-${exportedAt}-${index + 1}.png`;
                 link.href = segment.toDataURL('image/png');
                 link.click();
+                completed += 1;
             }
             new Notice(`已导出 ${total} 张 1:1.33 分段图`);
         } catch (error) {
+            const message = error instanceof Error ? error.message : '未知错误';
             console.error('分段图导出失败', error);
-            new Notice('分段图导出失败');
+            new Notice(`分段图导出失败：${message}${completed > 0 ? `（已完成 ${completed} 张）` : ''}`);
         } finally {
             cleanup?.();
             button.disabled = false;

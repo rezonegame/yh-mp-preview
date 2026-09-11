@@ -10692,6 +10692,7 @@ async function handleImageAltEdit(app, currentFile, img) {
 // src/view.ts
 var import_html2canvas = __toESM(require_html2canvas());
 var VIEW_TYPE_MP = "yh-mp-preview";
+var EXPORT_IMAGE_TIMEOUT_MS = 1e4;
 var MPView = class extends import_obsidian4.ItemView {
   constructor(leaf, templateManager, settingsManager) {
     super(leaf);
@@ -11144,38 +11145,62 @@ var MPView = class extends import_obsidian4.ItemView {
       "box-shadow: none",
       "pointer-events: none"
     ].join(";");
-    const snapshot = content.cloneNode(true);
-    const computed = window.getComputedStyle(content);
-    snapshot.style.cssText += `;${[
-      `width: ${width}px`,
-      "max-width: none",
-      "height: auto",
-      "max-height: none",
-      "min-height: 0",
-      "overflow: visible",
-      "box-sizing: border-box",
-      `font-family: ${computed.fontFamily}`,
-      `font-size: ${computed.fontSize}`,
-      `line-height: ${computed.lineHeight}`,
-      `color: ${computed.color}`,
-      "background: #ffffff"
-    ].join(";")};`;
-    snapshotHost.appendChild(snapshot);
-    document.body.appendChild(snapshotHost);
-    await Promise.all(Array.from(snapshot.querySelectorAll("img")).map((image) => {
-      if (image.complete)
-        return Promise.resolve();
-      return new Promise((resolve) => {
-        image.addEventListener("load", () => resolve(), { once: true });
-        image.addEventListener("error", () => resolve(), { once: true });
-      });
-    }));
-    return {
-      element: snapshot,
-      width,
-      height: Math.max(1, Math.ceil(snapshot.scrollHeight)),
-      cleanup: () => snapshotHost.remove()
-    };
+    const cleanup = () => snapshotHost.remove();
+    try {
+      const snapshot = content.cloneNode(true);
+      const computed = window.getComputedStyle(content);
+      snapshot.style.cssText += `;${[
+        `width: ${width}px`,
+        "max-width: none",
+        "height: auto",
+        "max-height: none",
+        "min-height: 0",
+        "overflow: visible",
+        "box-sizing: border-box",
+        `font-family: ${computed.fontFamily}`,
+        `font-size: ${computed.fontSize}`,
+        `line-height: ${computed.lineHeight}`,
+        `color: ${computed.color}`,
+        "background: #ffffff"
+      ].join(";")};`;
+      snapshotHost.appendChild(snapshot);
+      document.body.appendChild(snapshotHost);
+      const imageResults = await Promise.all(Array.from(snapshot.querySelectorAll("img")).map((image) => this.waitForExportImage(image)));
+      const failedImages = imageResults.filter((loaded) => !loaded).length;
+      if (failedImages > 0) {
+        throw new Error(`${failedImages} \u5F20\u56FE\u7247\u672A\u80FD\u5728 ${EXPORT_IMAGE_TIMEOUT_MS / 1e3} \u79D2\u5185\u52A0\u8F7D`);
+      }
+      return {
+        element: snapshot,
+        width,
+        height: Math.max(1, Math.ceil(snapshot.scrollHeight)),
+        cleanup
+      };
+    } catch (error) {
+      cleanup();
+      throw error;
+    }
+  }
+  waitForExportImage(image) {
+    if (image.complete)
+      return Promise.resolve(image.naturalWidth > 0);
+    return new Promise((resolve) => {
+      let settled = false;
+      const finish = (loaded) => {
+        if (settled)
+          return;
+        settled = true;
+        window.clearTimeout(timeoutId);
+        image.removeEventListener("load", onLoad);
+        image.removeEventListener("error", onError);
+        resolve(loaded);
+      };
+      const onLoad = () => finish(image.naturalWidth > 0);
+      const onError = () => finish(false);
+      const timeoutId = window.setTimeout(() => finish(false), EXPORT_IMAGE_TIMEOUT_MS);
+      image.addEventListener("load", onLoad, { once: true });
+      image.addEventListener("error", onError, { once: true });
+    });
   }
   async renderExportCanvas(element, width, height, scale, y = 0) {
     return (0, import_html2canvas.default)(element, {
@@ -11209,7 +11234,10 @@ var MPView = class extends import_obsidian4.ItemView {
         maxDimension / snapshot.height,
         Math.sqrt(maxPixels / (snapshot.width * snapshot.height))
       );
-      const canvas = await this.renderExportCanvas(snapshot.element, snapshot.width, snapshot.height, Math.max(scale, 0.01));
+      if (!Number.isFinite(scale) || scale < 0.01) {
+        throw new Error("\u6587\u7AE0\u8FC7\u957F\uFF0C\u65E0\u6CD5\u751F\u6210\u5355\u5F20\u957F\u56FE\uFF0C\u8BF7\u6539\u7528\u201C\u5BFC\u51FA\u5206\u6BB5\u56FE\u201D");
+      }
+      const canvas = await this.renderExportCanvas(snapshot.element, snapshot.width, snapshot.height, scale);
       const link = document.createElement("a");
       link.download = `yh-mp-preview-${Date.now()}.png`;
       link.href = canvas.toDataURL("image/png");
@@ -11218,7 +11246,9 @@ var MPView = class extends import_obsidian4.ItemView {
         new import_obsidian4.Notice("\u6587\u7AE0\u8F83\u957F\uFF0C\u5DF2\u81EA\u52A8\u964D\u4F4E\u957F\u56FE\u5206\u8FA8\u7387\u4EE5\u5B8C\u6574\u5BFC\u51FA\uFF1B\u53EF\u4F7F\u7528\u201C\u5BFC\u51FA\u5206\u6BB5\u56FE\u201D\u83B7\u5F97\u9AD8\u6E05\u5207\u7247\u3002");
       button.setText("\u5BFC\u51FA\u6210\u529F");
     } catch (error) {
+      const message = error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF";
       console.error("\u5BFC\u51FA\u957F\u56FE\u5931\u8D25:", error);
+      new import_obsidian4.Notice(`\u957F\u56FE\u5BFC\u51FA\u5931\u8D25\uFF1A${message}`);
       button.setText("\u5BFC\u51FA\u5931\u8D25");
     } finally {
       cleanup == null ? void 0 : cleanup();
@@ -11262,6 +11292,7 @@ var MPView = class extends import_obsidian4.ItemView {
     button.disabled = true;
     button.setText("\u751F\u6210\u4E2D...");
     let cleanup;
+    let completed = 0;
     try {
       const snapshot = await this.createExportSnapshot();
       cleanup = snapshot.cleanup;
@@ -11271,6 +11302,7 @@ var MPView = class extends import_obsidian4.ItemView {
       for (let index = 0; index < total; index += 1) {
         const sourceY = index * segmentHeight;
         const height = Math.min(segmentHeight, snapshot.height - sourceY);
+        button.setText(`\u751F\u6210\u4E2D ${index + 1}/${total}...`);
         const segment = await this.renderExportCanvas(
           snapshot.element,
           snapshot.width,
@@ -11282,11 +11314,13 @@ var MPView = class extends import_obsidian4.ItemView {
         link.download = `yh-mp-preview-${exportedAt}-${index + 1}.png`;
         link.href = segment.toDataURL("image/png");
         link.click();
+        completed += 1;
       }
       new import_obsidian4.Notice(`\u5DF2\u5BFC\u51FA ${total} \u5F20 1:1.33 \u5206\u6BB5\u56FE`);
     } catch (error) {
+      const message = error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF";
       console.error("\u5206\u6BB5\u56FE\u5BFC\u51FA\u5931\u8D25", error);
-      new import_obsidian4.Notice("\u5206\u6BB5\u56FE\u5BFC\u51FA\u5931\u8D25");
+      new import_obsidian4.Notice(`\u5206\u6BB5\u56FE\u5BFC\u51FA\u5931\u8D25\uFF1A${message}${completed > 0 ? `\uFF08\u5DF2\u5B8C\u6210 ${completed} \u5F20\uFF09` : ""}`);
     } finally {
       cleanup == null ? void 0 : cleanup();
       button.disabled = false;

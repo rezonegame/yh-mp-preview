@@ -18,6 +18,7 @@ function writeJson(relativePath, value) {
 const packageJson = readJson('package.json');
 const manifest = readJson('manifest.json');
 const versions = readJson('versions.json');
+const packageLock = readJson('package-lock.json');
 
 if (!semverPattern.test(packageJson.version)) {
   throw new Error(`package.json version is not valid semver: ${packageJson.version}`);
@@ -25,8 +26,23 @@ if (!semverPattern.test(packageJson.version)) {
 
 const expectedManifest = { ...manifest, version: packageJson.version };
 const expectedVersions = { ...versions, [packageJson.version]: manifest.minAppVersion };
+const expectedLock = {
+  ...packageLock,
+  version: packageJson.version,
+  packages: {
+    ...packageLock.packages,
+    '': {
+      ...packageLock.packages[''],
+      version: packageJson.version,
+      license: packageJson.license,
+    },
+  },
+};
 const isSynced = manifest.version === packageJson.version
-  && versions[packageJson.version] === manifest.minAppVersion;
+  && versions[packageJson.version] === manifest.minAppVersion
+  && packageLock.version === packageJson.version
+  && packageLock.packages?.['']?.version === packageJson.version
+  && packageLock.packages?.['']?.license === packageJson.license;
 
 if (checkOnly) {
   if (!isSynced) {
@@ -40,4 +56,5 @@ if (checkOnly) {
 
 writeJson('manifest.json', expectedManifest);
 writeJson('versions.json', expectedVersions);
-console.log(`Synchronized manifest.json and versions.json to ${packageJson.version}.`);
+writeJson('package-lock.json', expectedLock);
+console.log(`Synchronized manifest.json, versions.json, and package-lock.json to ${packageJson.version}.`);
