@@ -21,6 +21,8 @@ const config = {
         "obsidian",
         "electron",
         "@codemirror/autocomplete",
+        "@codemirror/state",
+        "@codemirror/view",
         ...builtins
     ],
     format: "cjs",

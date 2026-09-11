@@ -8253,7 +8253,7 @@ __export(main_exports, {
   default: () => MPPlugin
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian13 = require("obsidian");
+var import_obsidian14 = require("obsidian");
 
 // src/view.ts
 var import_obsidian4 = require("obsidian");
@@ -13919,7 +13919,7 @@ var MPSettingTab = class extends import_obsidian11.PluginSettingTab {
     this.createSection(containerEl, "\u6A21\u677F\u9009\u9879", (el) => this.renderTemplateSettings(el));
     this.createSection(containerEl, "\u80CC\u666F\u9009\u9879", (el) => this.renderBackgroundSettings(el));
     this.createSection(containerEl, "\u6392\u7248\u589E\u5F3A", (el) => this.renderLayoutEnhancementSettings(el));
-    this.createSection(containerEl, "\u7B14\u8BB0\u6392\u7248\uFF08\u51C6\u5907\u4E2D\uFF09", (el) => this.renderNoteLayoutSettings(el));
+    this.createSection(containerEl, "\u7B14\u8BB0\u6392\u7248", (el) => this.renderNoteLayoutSettings(el));
     this.createSection(containerEl, "\u9AD8\u7EA7\u9009\u9879", (el) => this.renderAdvancedSettings(el));
   }
   renderBasicSettings(containerEl) {
@@ -14374,16 +14374,25 @@ var MPSettingTab = class extends import_obsidian11.PluginSettingTab {
     const enhancement = this.plugin.noteLayoutEnhancement;
     const settings = store.getSettings();
     const unavailable = !store.isAvailable();
-    new import_obsidian11.Setting(containerEl).setName("\u542F\u7528\u7B14\u8BB0\u6392\u7248\u589E\u5F3A").setDesc(unavailable ? "\u8BBE\u7F6E\u6587\u4EF6\u4E0D\u53EF\u7528\uFF0C\u5DF2\u6682\u505C\u7B14\u8BB0\u6392\u7248\u589E\u5F3A" : "\u5F00\u542F\u540E\u5C06\u5728\u540E\u7EED\u7248\u672C\u81EA\u52A8\u6539\u5584 Obsidian \u9605\u8BFB\u89C6\u56FE\uFF1B3.9.0 \u53EA\u4FDD\u5B58\u5F00\u5173\uFF0C\u4E0D\u6539\u53D8\u6B63\u6587\u663E\u793A").addToggle((toggle) => toggle.setValue(settings.enabled).setDisabled(unavailable).onChange(async (value) => {
+    new import_obsidian11.Setting(containerEl).setName("\u542F\u7528\u7B14\u8BB0\u6392\u7248\u589E\u5F3A").setDesc(unavailable ? "\u8BBE\u7F6E\u6587\u4EF6\u4E0D\u53EF\u7528\uFF0C\u5DF2\u6682\u505C\u7B14\u8BB0\u6392\u7248\u589E\u5F3A" : "\u81EA\u52A8\u6539\u5584 Obsidian \u9605\u8BFB\u89C6\u56FE\u548C\u5B9E\u65F6\u9884\u89C8\uFF0C\u4E0D\u4FEE\u6539 Markdown \u5185\u5BB9").addToggle((toggle) => toggle.setValue(settings.enabled).setDisabled(unavailable).onChange(async (value) => {
       try {
         await enhancement.setEnabled(value);
-        new import_obsidian11.Notice(value ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F\uFF08\u89C6\u89C9\u6548\u679C\u5C06\u5728\u540E\u7EED\u7248\u672C\u542F\u7528\uFF09" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
+        new import_obsidian11.Notice(value ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
       } catch (error) {
         toggle.setValue(false);
         new import_obsidian11.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
       }
     }));
     new import_obsidian11.Setting(containerEl).setName("\u6E90\u7801\u6A21\u5F0F\u663E\u793A\u589E\u5F3A").setDesc("\u5C06\u5728\u5B9E\u65F6\u9884\u89C8\u7A33\u5B9A\u540E\u63D0\u4F9B\uFF1B\u5F53\u524D\u7248\u672C\u6682\u4E0D\u53EF\u7528").addToggle((toggle) => toggle.setValue(settings.sourceModeEnabled).setDisabled(true));
+    const updateDefaults = async (patch) => {
+      const latest = store.getSettings();
+      await store.updateSettings({ defaults: { ...latest.defaults, ...patch } });
+      enhancement.refresh();
+    };
+    new import_obsidian11.Setting(containerEl).setName("\u7B14\u8BB0\u9605\u8BFB\u4E3B\u9898").setDesc("\u9996\u6279\u652F\u6301\u9ED8\u8BA4\u3001\u6DF1\u5EA6\u9605\u8BFB\u548C\u6781\u7B80\u4E09\u5957 Obsidian \u9605\u8BFB\u4E3B\u9898").addDropdown((dropdown) => dropdown.addOption("default", "\u9ED8\u8BA4").addOption("deep-reading", "\u6DF1\u5EA6\u9605\u8BFB").addOption("minimal", "\u6781\u7B80").setValue(settings.defaults.themeId).setDisabled(unavailable).onChange((value) => updateDefaults({ themeId: value })));
+    new import_obsidian11.Setting(containerEl).setName("\u7B14\u8BB0\u5B57\u53F7").setDesc("\u8303\u56F4 14\u201324px").addText((text) => text.setValue(String(settings.defaults.fontSize)).setDisabled(unavailable).onChange((value) => updateDefaults({ fontSize: Number(value) })));
+    new import_obsidian11.Setting(containerEl).setName("\u7B14\u8BB0\u884C\u9AD8").setDesc("\u8303\u56F4 1.4\u20132.2").addText((text) => text.setValue(String(settings.defaults.lineHeight)).setDisabled(unavailable).onChange((value) => updateDefaults({ lineHeight: Number(value) })));
+    new import_obsidian11.Setting(containerEl).setName("\u7B14\u8BB0\u6700\u5927\u5BBD\u5EA6").setDesc("\u8303\u56F4 560\u2013960px").addText((text) => text.setValue(String(settings.defaults.maxWidth)).setDisabled(unavailable).onChange((value) => updateDefaults({ maxWidth: Number(value) })));
     new import_obsidian11.Setting(containerEl).setName("\u5907\u4EFD\u5F53\u524D\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E").setDesc("\u5199\u5165\u72EC\u7ACB\u7684 note-layout.json \u4E4B\u524D\u4FDD\u7559\u53EF\u6062\u590D\u526F\u672C").addButton((button) => button.setButtonText("\u521B\u5EFA\u5907\u4EFD").onClick(async () => {
       try {
         const backup = await store.createBackup("manual");
@@ -14428,6 +14437,7 @@ var import_obsidian12 = require("obsidian");
 var NOTE_LAYOUT_SCHEMA_VERSION = 1;
 var NOTE_LAYOUT_FILE_NAME = "note-layout.json";
 var NOTE_LAYOUT_BACKUP_DIR = "backups";
+var SUPPORTED_NOTE_THEMES = /* @__PURE__ */ new Set(["default", "deep-reading", "minimal"]);
 function createDefaultNoteLayoutSettings() {
   return {
     schemaVersion: NOTE_LAYOUT_SCHEMA_VERSION,
@@ -14526,6 +14536,18 @@ var NoteLayoutStore = class {
   }
   getSettings() {
     return JSON.parse(JSON.stringify(this.settings));
+  }
+  getProfileForPath(path) {
+    if (!this.settings.enabled)
+      return null;
+    const override = this.settings.files[path];
+    if ((override == null ? void 0 : override.mode) === "native")
+      return null;
+    const profile = (override == null ? void 0 : override.mode) === "custom" ? override.profile : this.settings.defaults;
+    return {
+      ...profile,
+      themeId: SUPPORTED_NOTE_THEMES.has(profile.themeId) ? profile.themeId : "default"
+    };
   }
   async updateSettings(patch) {
     await this.save({ ...this.getSettings(), ...patch });
@@ -14626,16 +14648,43 @@ var NoteLayoutStore = class {
 };
 
 // src/core/note-layout/noteLayoutEnhancement.ts
+var import_obsidian13 = require("obsidian");
+var import_view = require("@codemirror/view");
+var NOTE_LAYOUT_CLASS = "yh-mp-note-layout";
+var NOTE_THEME_CLASSES = ["yh-mp-note-theme-default", "yh-mp-note-theme-deep-reading", "yh-mp-note-theme-minimal"];
+function clearLayoutClasses(element) {
+  element.classList.remove(NOTE_LAYOUT_CLASS, ...NOTE_THEME_CLASSES);
+  element.style.removeProperty("--yh-mp-note-font-size");
+  element.style.removeProperty("--yh-mp-note-line-height");
+  element.style.removeProperty("--yh-mp-note-max-width");
+}
+function applyLayoutProfile(element, profile) {
+  clearLayoutClasses(element);
+  if (!profile)
+    return;
+  const theme = profile.themeId === "deep-reading" || profile.themeId === "minimal" ? profile.themeId : "default";
+  element.classList.add(NOTE_LAYOUT_CLASS, `yh-mp-note-theme-${theme}`);
+  element.style.setProperty("--yh-mp-note-font-size", `${profile.fontSize}px`);
+  element.style.setProperty("--yh-mp-note-line-height", String(profile.lineHeight));
+  element.style.setProperty("--yh-mp-note-max-width", `${profile.maxWidth}px`);
+}
 var NoteLayoutEnhancement = class {
-  constructor(app, store) {
+  constructor(plugin, app, store) {
+    this.plugin = plugin;
     this.app = app;
     this.store = store;
     this.loaded = false;
     this.enabled = false;
+    this.editorExtensions = [];
   }
   load() {
+    if (this.loaded)
+      return;
     this.loaded = true;
     this.enabled = this.store.getSettings().enabled;
+    this.plugin.registerMarkdownPostProcessor((element, context) => this.processReadingElement(element, context), 1e3);
+    this.plugin.registerEditorExtension(this.editorExtensions);
+    this.syncEditorExtension();
   }
   isLoaded() {
     return this.loaded;
@@ -14648,15 +14697,64 @@ var NoteLayoutEnhancement = class {
       throw new Error("\u7B14\u8BB0\u6392\u7248\u6A21\u5757\u5F53\u524D\u4E0D\u53EF\u7528");
     await this.store.updateSettings({ enabled });
     this.enabled = enabled;
+    this.syncEditorExtension();
+    this.refreshMarkdownPreviews();
+  }
+  refresh() {
+    if (!this.loaded)
+      return;
+    this.syncEditorExtension();
+    this.refreshMarkdownPreviews();
   }
   unload() {
     this.enabled = false;
+    this.editorExtensions.splice(0);
     this.loaded = false;
+  }
+  processReadingElement(element, context) {
+    const profile = this.enabled ? this.store.getProfileForPath(context.sourcePath) : null;
+    applyLayoutProfile(element, profile);
+  }
+  createEditorExtension() {
+    const store = this.store;
+    return import_view.ViewPlugin.fromClass(class {
+      constructor(view) {
+        this.view = view;
+        this.apply();
+      }
+      update(update) {
+        if (update.docChanged || update.viewportChanged || update.selectionSet)
+          this.apply();
+      }
+      destroy() {
+        clearLayoutClasses(this.view.dom);
+      }
+      apply() {
+        const info = this.view.state.field(import_obsidian13.editorInfoField, false);
+        const profile = (info == null ? void 0 : info.file) ? store.getProfileForPath(info.file.path) : null;
+        applyLayoutProfile(this.view.dom, profile);
+      }
+    });
+  }
+  syncEditorExtension() {
+    if (this.enabled && this.editorExtensions.length === 0) {
+      this.editorExtensions.push(this.createEditorExtension());
+    } else if (!this.enabled) {
+      this.editorExtensions.splice(0);
+    }
+    this.app.workspace.updateOptions();
+  }
+  refreshMarkdownPreviews() {
+    this.app.workspace.getLeavesOfType("markdown").forEach((leaf) => {
+      var _a;
+      const view = leaf.view;
+      (_a = view.previewMode) == null ? void 0 : _a.rerender(true);
+    });
   }
 };
 
 // src/main.ts
-var MPPlugin = class extends import_obsidian13.Plugin {
+var MPPlugin = class extends import_obsidian14.Plugin {
   async onload() {
     this.settingsManager = new SettingsManager(this);
     await this.settingsManager.loadSettings();
@@ -14667,9 +14765,9 @@ var MPPlugin = class extends import_obsidian13.Plugin {
     try {
       await this.noteLayoutStore.load();
     } catch (error) {
-      new import_obsidian13.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u8BFB\u53D6\u5931\u8D25\uFF0C\u5DF2\u7981\u7528\u7B14\u8BB0\u6392\u7248\u589E\u5F3A");
+      new import_obsidian14.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u8BFB\u53D6\u5931\u8D25\uFF0C\u5DF2\u7981\u7528\u7B14\u8BB0\u6392\u7248\u589E\u5F3A");
     }
-    this.noteLayoutEnhancement = new NoteLayoutEnhancement(this.app, this.noteLayoutStore);
+    this.noteLayoutEnhancement = new NoteLayoutEnhancement(this, this.app, this.noteLayoutStore);
     this.noteLayoutEnhancement.load();
     this.templateManager = new TemplateManager(this.app, this.settingsManager);
     this.themeRegistry = new ThemeRegistry();
@@ -14697,9 +14795,9 @@ var MPPlugin = class extends import_obsidian13.Plugin {
         try {
           const enabled = !this.noteLayoutEnhancement.isEnabled();
           await this.noteLayoutEnhancement.setEnabled(enabled);
-          new import_obsidian13.Notice(enabled ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F\uFF1B\u5F53\u524D\u7248\u672C\u4EC5\u4FDD\u5B58\u8BBE\u7F6E" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
+          new import_obsidian14.Notice(enabled ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F\uFF1B\u5F53\u524D\u7248\u672C\u4EC5\u4FDD\u5B58\u8BBE\u7F6E" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
         } catch (error) {
-          new import_obsidian13.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
+          new import_obsidian14.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
         }
       }
     });
@@ -14709,9 +14807,9 @@ var MPPlugin = class extends import_obsidian13.Plugin {
       callback: async () => {
         try {
           const backup = await this.noteLayoutStore.restoreLatestBackup();
-          new import_obsidian13.Notice(backup ? `\u5DF2\u6062\u590D\u7B14\u8BB0\u6392\u7248\u5907\u4EFD\uFF1A${backup.createdAt}` : "\u6CA1\u6709\u53EF\u6062\u590D\u7684\u7B14\u8BB0\u6392\u7248\u5907\u4EFD");
+          new import_obsidian14.Notice(backup ? `\u5DF2\u6062\u590D\u7B14\u8BB0\u6392\u7248\u5907\u4EFD\uFF1A${backup.createdAt}` : "\u6CA1\u6709\u53EF\u6062\u590D\u7684\u7B14\u8BB0\u6392\u7248\u5907\u4EFD");
         } catch (error) {
-          new import_obsidian13.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u5907\u4EFD\u6062\u590D\u5931\u8D25");
+          new import_obsidian14.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u5907\u4EFD\u6062\u590D\u5931\u8D25");
         }
       }
     });
@@ -14734,7 +14832,7 @@ var MPPlugin = class extends import_obsidian13.Plugin {
         active: true
       });
     } else {
-      new import_obsidian13.Notice("\u65E0\u6CD5\u521B\u5EFA\u89C6\u56FE\u9762\u677F");
+      new import_obsidian14.Notice("\u65E0\u6CD5\u521B\u5EFA\u89C6\u56FE\u9762\u677F");
     }
   }
 };

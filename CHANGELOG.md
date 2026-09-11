@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.10.0-beta.1
+
+- Added the first working Obsidian note-layout enhancement for reading view
+  and Live Preview, initially supporting default, deep-reading, and minimal.
+- Kept the enhancement scoped to Obsidian note surfaces and separate from
+  WeChat preview styles and export snapshots.
+
 ## 3.9.0-beta.1
 
 - Added an isolated, disabled-by-default note-layout settings file with

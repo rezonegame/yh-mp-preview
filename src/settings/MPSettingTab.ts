@@ -62,7 +62,7 @@ export class MPSettingTab extends PluginSettingTab {
         this.createSection(containerEl, '模板选项', el => this.renderTemplateSettings(el));
         this.createSection(containerEl, '背景选项', el => this.renderBackgroundSettings(el));
         this.createSection(containerEl, '排版增强', el => this.renderLayoutEnhancementSettings(el));
-        this.createSection(containerEl, '笔记排版（准备中）', el => this.renderNoteLayoutSettings(el));
+        this.createSection(containerEl, '笔记排版', el => this.renderNoteLayoutSettings(el));
         this.createSection(containerEl, '高级选项', el => this.renderAdvancedSettings(el));
     }
 
@@ -768,14 +768,14 @@ export class MPSettingTab extends PluginSettingTab {
 
         new Setting(containerEl)
             .setName('启用笔记排版增强')
-            .setDesc(unavailable ? '设置文件不可用，已暂停笔记排版增强' : '开启后将在后续版本自动改善 Obsidian 阅读视图；3.9.0 只保存开关，不改变正文显示')
+            .setDesc(unavailable ? '设置文件不可用，已暂停笔记排版增强' : '自动改善 Obsidian 阅读视图和实时预览，不修改 Markdown 内容')
             .addToggle(toggle => toggle
                 .setValue(settings.enabled)
                 .setDisabled(unavailable)
                 .onChange(async value => {
                     try {
                         await enhancement.setEnabled(value);
-                        new Notice(value ? '笔记排版增强已开启（视觉效果将在后续版本启用）' : '笔记排版增强已关闭');
+                        new Notice(value ? '笔记排版增强已开启' : '笔记排版增强已关闭');
                     } catch (error) {
                         toggle.setValue(false);
                         new Notice(error instanceof Error ? error.message : '笔记排版设置保存失败');
@@ -788,6 +788,47 @@ export class MPSettingTab extends PluginSettingTab {
             .addToggle(toggle => toggle
                 .setValue(settings.sourceModeEnabled)
                 .setDisabled(true));
+
+        const updateDefaults = async (patch: Partial<typeof settings.defaults>) => {
+            const latest = store.getSettings();
+            await store.updateSettings({ defaults: { ...latest.defaults, ...patch } });
+            enhancement.refresh();
+        };
+
+        new Setting(containerEl)
+            .setName('笔记阅读主题')
+            .setDesc('首批支持默认、深度阅读和极简三套 Obsidian 阅读主题')
+            .addDropdown(dropdown => dropdown
+                .addOption('default', '默认')
+                .addOption('deep-reading', '深度阅读')
+                .addOption('minimal', '极简')
+                .setValue(settings.defaults.themeId)
+                .setDisabled(unavailable)
+                .onChange(value => updateDefaults({ themeId: value })));
+
+        new Setting(containerEl)
+            .setName('笔记字号')
+            .setDesc('范围 14–24px')
+            .addText(text => text
+                .setValue(String(settings.defaults.fontSize))
+                .setDisabled(unavailable)
+                .onChange(value => updateDefaults({ fontSize: Number(value) })));
+
+        new Setting(containerEl)
+            .setName('笔记行高')
+            .setDesc('范围 1.4–2.2')
+            .addText(text => text
+                .setValue(String(settings.defaults.lineHeight))
+                .setDisabled(unavailable)
+                .onChange(value => updateDefaults({ lineHeight: Number(value) })));
+
+        new Setting(containerEl)
+            .setName('笔记最大宽度')
+            .setDesc('范围 560–960px')
+            .addText(text => text
+                .setValue(String(settings.defaults.maxWidth))
+                .setDisabled(unavailable)
+                .onChange(value => updateDefaults({ maxWidth: Number(value) })));
 
         new Setting(containerEl)
             .setName('备份当前笔记排版设置')

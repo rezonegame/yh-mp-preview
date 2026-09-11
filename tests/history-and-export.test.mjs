@@ -8,6 +8,7 @@ const noteLayoutStore = readFileSync(new URL('../src/core/note-layout/noteLayout
 const noteLayoutEnhancement = readFileSync(new URL('../src/core/note-layout/noteLayoutEnhancement.ts', import.meta.url), 'utf8');
 const main = readFileSync(new URL('../src/main.ts', import.meta.url), 'utf8');
 const settingsTab = readFileSync(new URL('../src/settings/MPSettingTab.ts', import.meta.url), 'utf8');
+const noteLayoutCss = readFileSync(new URL('../src/styles/view/note-layout.css', import.meta.url), 'utf8');
 
 test('layout snapshots preserve the user-selected local typesetting settings', () => {
   assert.match(settings, /layoutSnapshots: LayoutSnapshot\[\]/);
@@ -24,12 +25,25 @@ test('note layout phase 3.9.0 has an isolated, disabled-by-default storage bound
   assert.match(noteLayoutStore, /writeAtomically/);
   assert.match(noteLayoutStore, /临时文件读回校验失败/);
   assert.match(noteLayoutStore, /pruneBackups/);
-  assert.match(noteLayoutEnhancement, /3\.9\.0 intentionally stores the state/);
+  assert.match(noteLayoutEnhancement, /class NoteLayoutEnhancement/);
   assert.match(main, /NoteLayoutStore/);
   assert.match(main, /toggle-note-layout-enhancement/);
   assert.match(main, /restore-note-layout-backup/);
   assert.match(settingsTab, /备份当前笔记排版设置/);
-  assert.match(settingsTab, /3\.9\.0 只保存开关/);
+});
+
+test('note layout phase 3.10.0 applies only through reading and editor boundaries', () => {
+  assert.match(noteLayoutEnhancement, /registerMarkdownPostProcessor/);
+  assert.match(noteLayoutEnhancement, /registerEditorExtension/);
+  assert.match(noteLayoutEnhancement, /editorInfoField/);
+  assert.match(noteLayoutEnhancement, /refreshMarkdownPreviews/);
+  assert.match(settingsTab, /笔记阅读主题/);
+  assert.match(settingsTab, /深度阅读/);
+  assert.match(settingsTab, /笔记最大宽度/);
+  assert.match(noteLayoutCss, /\.yh-mp-note-layout/);
+  assert.match(noteLayoutCss, /\.cm-editor\.yh-mp-note-layout/);
+  assert.doesNotMatch(noteLayoutCss, /\.mp-preview-area/);
+  assert.doesNotMatch(noteLayoutCss, /body\s*\{/);
 });
 
 test('local export renders full article content and fixed-ratio image segments', () => {

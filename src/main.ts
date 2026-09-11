@@ -29,7 +29,7 @@ export default class MPPlugin extends Plugin {
     } catch (error) {
       new Notice(error instanceof Error ? error.message : '笔记排版设置读取失败，已禁用笔记排版增强');
     }
-    this.noteLayoutEnhancement = new NoteLayoutEnhancement(this.app, this.noteLayoutStore);
+    this.noteLayoutEnhancement = new NoteLayoutEnhancement(this, this.app, this.noteLayoutStore);
     this.noteLayoutEnhancement.load();
 
     // 初始化模板管理器

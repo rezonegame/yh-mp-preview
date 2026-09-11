@@ -30,6 +30,8 @@ export interface NoteLayoutBackup {
     checksum: string;
 }
 
+const SUPPORTED_NOTE_THEMES = new Set(['default', 'deep-reading', 'minimal']);
+
 export function createDefaultNoteLayoutSettings(): NoteLayoutSettingsV1 {
     return {
         schemaVersion: NOTE_LAYOUT_SCHEMA_VERSION,
@@ -137,6 +139,17 @@ export class NoteLayoutStore {
 
     getSettings(): NoteLayoutSettingsV1 {
         return JSON.parse(JSON.stringify(this.settings)) as NoteLayoutSettingsV1;
+    }
+
+    getProfileForPath(path: string): NoteLayoutProfile | null {
+        if (!this.settings.enabled) return null;
+        const override = this.settings.files[path];
+        if (override?.mode === 'native') return null;
+        const profile = override?.mode === 'custom' ? override.profile : this.settings.defaults;
+        return {
+            ...profile,
+            themeId: SUPPORTED_NOTE_THEMES.has(profile.themeId) ? profile.themeId : 'default',
+        };
     }
 
     async updateSettings(patch: Partial<NoteLayoutSettingsV1>): Promise<void> {

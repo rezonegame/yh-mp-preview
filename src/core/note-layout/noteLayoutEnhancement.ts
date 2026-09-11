@@ -1,19 +1,48 @@
-import type { App } from 'obsidian';
-import type { NoteLayoutStore } from './noteLayoutStore';
+import type { App, MarkdownPostProcessorContext, Plugin } from 'obsidian';
+import { editorInfoField } from 'obsidian';
+import type { Extension } from '@codemirror/state';
+import { EditorView, ViewPlugin, type ViewUpdate } from '@codemirror/view';
+import type { MarkdownView } from 'obsidian';
+import type { NoteLayoutProfile, NoteLayoutStore } from './noteLayoutStore';
 
-/**
- * Lifecycle boundary for the Obsidian note-layout feature.
- * 3.9.0 intentionally stores the state but does not change document styling.
- */
+const NOTE_LAYOUT_CLASS = 'yh-mp-note-layout';
+const NOTE_THEME_CLASSES = ['yh-mp-note-theme-default', 'yh-mp-note-theme-deep-reading', 'yh-mp-note-theme-minimal'];
+
+function clearLayoutClasses(element: HTMLElement): void {
+    element.classList.remove(NOTE_LAYOUT_CLASS, ...NOTE_THEME_CLASSES);
+    element.style.removeProperty('--yh-mp-note-font-size');
+    element.style.removeProperty('--yh-mp-note-line-height');
+    element.style.removeProperty('--yh-mp-note-max-width');
+}
+
+function applyLayoutProfile(element: HTMLElement, profile: NoteLayoutProfile | null): void {
+    clearLayoutClasses(element);
+    if (!profile) return;
+    const theme = profile.themeId === 'deep-reading' || profile.themeId === 'minimal' ? profile.themeId : 'default';
+    element.classList.add(NOTE_LAYOUT_CLASS, `yh-mp-note-theme-${theme}`);
+    element.style.setProperty('--yh-mp-note-font-size', `${profile.fontSize}px`);
+    element.style.setProperty('--yh-mp-note-line-height', String(profile.lineHeight));
+    element.style.setProperty('--yh-mp-note-max-width', `${profile.maxWidth}px`);
+}
+
 export class NoteLayoutEnhancement {
     private loaded = false;
     private enabled = false;
+    private readonly editorExtensions: Extension[] = [];
 
-    constructor(private readonly app: App, private readonly store: NoteLayoutStore) {}
+    constructor(
+        private readonly plugin: Plugin,
+        private readonly app: App,
+        private readonly store: NoteLayoutStore,
+    ) {}
 
     load(): void {
+        if (this.loaded) return;
         this.loaded = true;
         this.enabled = this.store.getSettings().enabled;
+        this.plugin.registerMarkdownPostProcessor((element, context) => this.processReadingElement(element, context), 1000);
+        this.plugin.registerEditorExtension(this.editorExtensions);
+        this.syncEditorExtension();
     }
 
     isLoaded(): boolean {
@@ -28,10 +57,63 @@ export class NoteLayoutEnhancement {
         if (!this.loaded || !this.store.isAvailable()) throw new Error('笔记排版模块当前不可用');
         await this.store.updateSettings({ enabled });
         this.enabled = enabled;
+        this.syncEditorExtension();
+        this.refreshMarkdownPreviews();
+    }
+
+    refresh(): void {
+        if (!this.loaded) return;
+        this.syncEditorExtension();
+        this.refreshMarkdownPreviews();
     }
 
     unload(): void {
         this.enabled = false;
+        this.editorExtensions.splice(0);
         this.loaded = false;
+    }
+
+    private processReadingElement(element: HTMLElement, context: MarkdownPostProcessorContext): void {
+        const profile = this.enabled ? this.store.getProfileForPath(context.sourcePath) : null;
+        applyLayoutProfile(element, profile);
+    }
+
+    private createEditorExtension(): Extension {
+        const store = this.store;
+        return ViewPlugin.fromClass(class {
+            constructor(private readonly view: EditorView) {
+                this.apply();
+            }
+
+            update(update: ViewUpdate): void {
+                if (update.docChanged || update.viewportChanged || update.selectionSet) this.apply();
+            }
+
+            destroy(): void {
+                clearLayoutClasses(this.view.dom);
+            }
+
+            private apply(): void {
+                const info = this.view.state.field(editorInfoField, false);
+                const profile = info?.file ? store.getProfileForPath(info.file.path) : null;
+                applyLayoutProfile(this.view.dom, profile);
+            }
+        });
+    }
+
+    private syncEditorExtension(): void {
+        if (this.enabled && this.editorExtensions.length === 0) {
+            this.editorExtensions.push(this.createEditorExtension());
+        } else if (!this.enabled) {
+            this.editorExtensions.splice(0);
+        }
+        this.app.workspace.updateOptions();
+    }
+
+    private refreshMarkdownPreviews(): void {
+        this.app.workspace.getLeavesOfType('markdown').forEach(leaf => {
+            const view = leaf.view as MarkdownView;
+            view.previewMode?.rerender(true);
+        });
     }
 }
