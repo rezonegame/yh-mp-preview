@@ -670,6 +670,24 @@ ol {
 .yh-mp-note-layout li {
   line-height: inherit;
 }
+.yh-mp-note-layout :is(ul, ol) {
+  margin-top: 0.85em;
+  margin-bottom: 0.85em;
+  padding-inline-start: 1.55em;
+}
+.yh-mp-note-layout :is(li + li) {
+  margin-top: 0.3em;
+}
+.yh-mp-note-layout :is(.task-list-item) {
+  list-style: none;
+  margin-inline-start: -1.55em;
+  padding-inline-start: 0;
+}
+.yh-mp-note-layout :is(.task-list-item) input[type=checkbox] {
+  margin-inline-end: 0.5em;
+  accent-color: var(--yh-mp-note-accent);
+  vertical-align: middle;
+}
 .yh-mp-note-layout h1,
 .yh-mp-note-layout h2,
 .yh-mp-note-layout h3,
@@ -683,16 +701,76 @@ ol {
   color: var(--yh-mp-note-accent);
 }
 .yh-mp-note-layout blockquote {
+  margin: 1.1em 0;
+  padding: 0.7em 1em;
   border-left-color: var(--yh-mp-note-accent);
+  border-left-width: 3px;
+  border-radius: 0 8px 8px 0;
+  background: color-mix(in srgb, var(--yh-mp-note-accent) 8%, transparent);
   color: var(--yh-mp-note-muted);
+}
+.yh-mp-note-layout :is(.callout, .markdown-callout) {
+  margin: 1.1em 0;
+  border: 1px solid color-mix(in srgb, var(--yh-mp-note-accent) 28%, var(--background-modifier-border));
+  border-left: 4px solid var(--yh-mp-note-accent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--yh-mp-note-accent) 7%, var(--background-primary));
+  overflow: hidden;
+}
+.yh-mp-note-layout :is(.callout-title, .callout-title-inner) {
+  color: var(--yh-mp-note-accent);
+  font-weight: 650;
+}
+.yh-mp-note-layout :is(.callout-content) {
+  color: var(--yh-mp-note-text);
 }
 .yh-mp-note-layout pre,
 .yh-mp-note-layout code {
   font-size: 0.92em;
 }
+.yh-mp-note-layout pre {
+  margin: 1.1em 0;
+  padding: 0.95em 1.05em;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  background: var(--background-secondary);
+  overflow-x: auto;
+}
+.yh-mp-note-layout :not(pre) > code {
+  padding: 0.12em 0.35em;
+  border-radius: 4px;
+  background: var(--background-secondary);
+}
+.yh-mp-note-layout :is(table) {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  max-width: 100%;
+  margin: 1.1em 0;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+.yh-mp-note-layout :is(th, td) {
+  padding: 0.55em 0.75em;
+  border: 1px solid var(--background-modifier-border);
+  text-align: start;
+}
+.yh-mp-note-layout :is(th) {
+  color: var(--yh-mp-note-accent);
+  background: var(--background-secondary);
+  font-weight: 650;
+}
 .yh-mp-note-layout img {
   max-width: 100%;
   height: auto;
+  border-radius: 8px;
+}
+.yh-mp-note-layout :is(.internal-embed, .markdown-embed, .transclusion-container) {
+  max-width: 100%;
+  margin: 1em 0;
+}
+.yh-mp-note-layout :is(.internal-embed, .markdown-embed) img {
+  display: block;
 }
 .yh-mp-note-theme-deep-reading {
   --yh-mp-note-accent: #7b5e45;
@@ -724,6 +802,24 @@ ol {
   padding-left: 20px;
   padding-right: 20px;
   font-size: var(--yh-mp-note-font-size);
+}
+.cm-editor.yh-mp-note-source-mode .cm-line {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.cm-editor.yh-mp-note-source-mode .cm-formatting {
+  color: var(--text-faint);
+}
+.cm-editor.yh-mp-note-source-mode :is(.cm-header, .cm-strong, .cm-em, .cm-link) {
+  color: var(--yh-mp-note-accent);
+}
+.cm-editor.yh-mp-note-source-mode .cm-quote {
+  color: var(--yh-mp-note-muted);
+  border-left: 2px solid var(--yh-mp-note-accent);
+  padding-left: 0.6em;
+}
+.cm-editor.yh-mp-note-source-mode .cm-comment {
+  color: var(--text-faint);
 }
 
 /* src/styles/settings/settings.css */

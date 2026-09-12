@@ -6,20 +6,22 @@ import type { MarkdownView } from 'obsidian';
 import type { NoteLayoutProfile, NoteLayoutStore } from './noteLayoutStore';
 
 const NOTE_LAYOUT_CLASS = 'yh-mp-note-layout';
+const NOTE_SOURCE_MODE_CLASS = 'yh-mp-note-source-mode';
 const NOTE_THEME_CLASSES = ['yh-mp-note-theme-default', 'yh-mp-note-theme-deep-reading', 'yh-mp-note-theme-minimal'];
 
 function clearLayoutClasses(element: HTMLElement): void {
-    element.classList.remove(NOTE_LAYOUT_CLASS, ...NOTE_THEME_CLASSES);
+    element.classList.remove(NOTE_LAYOUT_CLASS, NOTE_SOURCE_MODE_CLASS, ...NOTE_THEME_CLASSES);
     element.style.removeProperty('--yh-mp-note-font-size');
     element.style.removeProperty('--yh-mp-note-line-height');
     element.style.removeProperty('--yh-mp-note-max-width');
 }
 
-function applyLayoutProfile(element: HTMLElement, profile: NoteLayoutProfile | null): void {
+function applyLayoutProfile(element: HTMLElement, profile: NoteLayoutProfile | null, sourceMode = false): void {
     clearLayoutClasses(element);
     if (!profile) return;
     const theme = profile.themeId === 'deep-reading' || profile.themeId === 'minimal' ? profile.themeId : 'default';
     element.classList.add(NOTE_LAYOUT_CLASS, `yh-mp-note-theme-${theme}`);
+    if (sourceMode) element.classList.add(NOTE_SOURCE_MODE_CLASS);
     element.style.setProperty('--yh-mp-note-font-size', `${profile.fontSize}px`);
     element.style.setProperty('--yh-mp-note-line-height', String(profile.lineHeight));
     element.style.setProperty('--yh-mp-note-max-width', `${profile.maxWidth}px`);
@@ -96,7 +98,8 @@ export class NoteLayoutEnhancement {
             private apply(): void {
                 const info = this.view.state.field(editorInfoField, false);
                 const profile = info?.file ? store.getProfileForPath(info.file.path) : null;
-                applyLayoutProfile(this.view.dom, profile);
+                const sourceMode = info?.file ? store.isSourceModeEnabledForPath(info.file.path) : false;
+                applyLayoutProfile(this.view.dom, profile, sourceMode);
             }
         });
     }

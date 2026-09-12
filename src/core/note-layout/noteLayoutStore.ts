@@ -152,6 +152,11 @@ export class NoteLayoutStore {
         };
     }
 
+    isSourceModeEnabledForPath(path: string): boolean {
+        if (!this.settings.enabled || !this.settings.sourceModeEnabled) return false;
+        return this.settings.files[path]?.mode !== 'native';
+    }
+
     async updateSettings(patch: Partial<NoteLayoutSettingsV1>): Promise<void> {
         await this.save({ ...this.getSettings(), ...patch });
     }

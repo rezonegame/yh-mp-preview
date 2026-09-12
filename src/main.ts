@@ -78,12 +78,12 @@ export default class MPPlugin extends Plugin {
 
     this.addCommand({
       id: 'toggle-note-layout-enhancement',
-      name: '切换笔记排版增强（准备中）',
+      name: '切换笔记排版增强',
       callback: async () => {
         try {
           const enabled = !this.noteLayoutEnhancement.isEnabled();
           await this.noteLayoutEnhancement.setEnabled(enabled);
-          new Notice(enabled ? '笔记排版增强已开启；当前版本仅保存设置' : '笔记排版增强已关闭');
+          new Notice(enabled ? '笔记排版增强已开启' : '笔记排版增强已关闭');
         } catch (error) {
           new Notice(error instanceof Error ? error.message : '笔记排版设置保存失败');
         }

@@ -14383,7 +14383,15 @@ var MPSettingTab = class extends import_obsidian11.PluginSettingTab {
         new import_obsidian11.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
       }
     }));
-    new import_obsidian11.Setting(containerEl).setName("\u6E90\u7801\u6A21\u5F0F\u663E\u793A\u589E\u5F3A").setDesc("\u5C06\u5728\u5B9E\u65F6\u9884\u89C8\u7A33\u5B9A\u540E\u63D0\u4F9B\uFF1B\u5F53\u524D\u7248\u672C\u6682\u4E0D\u53EF\u7528").addToggle((toggle) => toggle.setValue(settings.sourceModeEnabled).setDisabled(true));
+    new import_obsidian11.Setting(containerEl).setName("\u6E90\u7801\u6A21\u5F0F\u663E\u793A\u589E\u5F3A").setDesc("\u4E3A\u5B9E\u65F6\u9884\u89C8\u548C\u6E90\u7801\u7F16\u8F91\u589E\u52A0\u6807\u9898\u3001\u5217\u8868\u3001\u5F15\u7528\u548C\u4EE3\u7801\u6807\u8BB0\u7684\u53EF\u8BFB\u6027\u6837\u5F0F\uFF0C\u4E0D\u4FEE\u6539\u5185\u5BB9").addToggle((toggle) => toggle.setValue(settings.sourceModeEnabled).setDisabled(unavailable).onChange(async (value) => {
+      try {
+        await store.updateSettings({ sourceModeEnabled: value });
+        enhancement.refresh();
+      } catch (error) {
+        toggle.setValue(!value);
+        new import_obsidian11.Notice(error instanceof Error ? error.message : "\u6E90\u7801\u6A21\u5F0F\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
+      }
+    }));
     const updateDefaults = async (patch) => {
       const latest = store.getSettings();
       await store.updateSettings({ defaults: { ...latest.defaults, ...patch } });
@@ -14549,6 +14557,12 @@ var NoteLayoutStore = class {
       themeId: SUPPORTED_NOTE_THEMES.has(profile.themeId) ? profile.themeId : "default"
     };
   }
+  isSourceModeEnabledForPath(path) {
+    var _a;
+    if (!this.settings.enabled || !this.settings.sourceModeEnabled)
+      return false;
+    return ((_a = this.settings.files[path]) == null ? void 0 : _a.mode) !== "native";
+  }
   async updateSettings(patch) {
     await this.save({ ...this.getSettings(), ...patch });
   }
@@ -14651,19 +14665,22 @@ var NoteLayoutStore = class {
 var import_obsidian13 = require("obsidian");
 var import_view = require("@codemirror/view");
 var NOTE_LAYOUT_CLASS = "yh-mp-note-layout";
+var NOTE_SOURCE_MODE_CLASS = "yh-mp-note-source-mode";
 var NOTE_THEME_CLASSES = ["yh-mp-note-theme-default", "yh-mp-note-theme-deep-reading", "yh-mp-note-theme-minimal"];
 function clearLayoutClasses(element) {
-  element.classList.remove(NOTE_LAYOUT_CLASS, ...NOTE_THEME_CLASSES);
+  element.classList.remove(NOTE_LAYOUT_CLASS, NOTE_SOURCE_MODE_CLASS, ...NOTE_THEME_CLASSES);
   element.style.removeProperty("--yh-mp-note-font-size");
   element.style.removeProperty("--yh-mp-note-line-height");
   element.style.removeProperty("--yh-mp-note-max-width");
 }
-function applyLayoutProfile(element, profile) {
+function applyLayoutProfile(element, profile, sourceMode = false) {
   clearLayoutClasses(element);
   if (!profile)
     return;
   const theme = profile.themeId === "deep-reading" || profile.themeId === "minimal" ? profile.themeId : "default";
   element.classList.add(NOTE_LAYOUT_CLASS, `yh-mp-note-theme-${theme}`);
+  if (sourceMode)
+    element.classList.add(NOTE_SOURCE_MODE_CLASS);
   element.style.setProperty("--yh-mp-note-font-size", `${profile.fontSize}px`);
   element.style.setProperty("--yh-mp-note-line-height", String(profile.lineHeight));
   element.style.setProperty("--yh-mp-note-max-width", `${profile.maxWidth}px`);
@@ -14732,7 +14749,8 @@ var NoteLayoutEnhancement = class {
       apply() {
         const info = this.view.state.field(import_obsidian13.editorInfoField, false);
         const profile = (info == null ? void 0 : info.file) ? store.getProfileForPath(info.file.path) : null;
-        applyLayoutProfile(this.view.dom, profile);
+        const sourceMode = (info == null ? void 0 : info.file) ? store.isSourceModeEnabledForPath(info.file.path) : false;
+        applyLayoutProfile(this.view.dom, profile, sourceMode);
       }
     });
   }
@@ -14790,12 +14808,12 @@ var MPPlugin = class extends import_obsidian14.Plugin {
     });
     this.addCommand({
       id: "toggle-note-layout-enhancement",
-      name: "\u5207\u6362\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\uFF08\u51C6\u5907\u4E2D\uFF09",
+      name: "\u5207\u6362\u7B14\u8BB0\u6392\u7248\u589E\u5F3A",
       callback: async () => {
         try {
           const enabled = !this.noteLayoutEnhancement.isEnabled();
           await this.noteLayoutEnhancement.setEnabled(enabled);
-          new import_obsidian14.Notice(enabled ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F\uFF1B\u5F53\u524D\u7248\u672C\u4EC5\u4FDD\u5B58\u8BBE\u7F6E" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
+          new import_obsidian14.Notice(enabled ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
         } catch (error) {
           new import_obsidian14.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
         }

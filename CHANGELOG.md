@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.11.0-beta.1
+
+- Added scoped reading-view styles for lists, tasks, quotes, callouts, code,
+  tables, images, and embeds.
+- Added an optional source-mode display enhancement for headings, lists, quotes,
+  emphasis, links, and code markers without changing Markdown content.
+
 ## 3.10.0-beta.2
 
 - Fixed Live Preview becoming a narrow column when note-layout enhancement is enabled.

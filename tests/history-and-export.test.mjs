@@ -48,6 +48,22 @@ test('note layout phase 3.10.0 applies only through reading and editor boundarie
   assert.doesNotMatch(noteLayoutCss, /body\s*\{/);
 });
 
+test('note layout phase 3.11.0 keeps complex Markdown and source mode scoped', () => {
+  assert.match(noteLayoutStore, /isSourceModeEnabledForPath/);
+  assert.match(noteLayoutEnhancement, /NOTE_SOURCE_MODE_CLASS/);
+  assert.match(noteLayoutEnhancement, /isSourceModeEnabledForPath/);
+  assert.match(settingsTab, /源码模式显示增强/);
+  assert.doesNotMatch(settingsTab, /当前版本暂不可用/);
+  for (const selector of ['task-list-item', 'callout', 'markdown-embed']) {
+    assert.match(noteLayoutCss, new RegExp(`\\.${selector}`));
+  }
+  for (const selector of ['pre', 'table', 'img', 'blockquote']) {
+    assert.match(noteLayoutCss, new RegExp(`\\.yh-mp-note-layout[^\\n]*${selector}`));
+  }
+  assert.match(noteLayoutCss, /cm-editor\.yh-mp-note-source-mode/);
+  assert.doesNotMatch(noteLayoutCss, /body\s*\{/);
+});
+
 test('local export renders full article content and fixed-ratio image segments', () => {
   assert.match(view, /exportHtmlFragment/);
   assert.match(view, /text\/html;charset=utf-8/);

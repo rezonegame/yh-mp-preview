@@ -784,10 +784,19 @@ export class MPSettingTab extends PluginSettingTab {
 
         new Setting(containerEl)
             .setName('源码模式显示增强')
-            .setDesc('将在实时预览稳定后提供；当前版本暂不可用')
+            .setDesc('为实时预览和源码编辑增加标题、列表、引用和代码标记的可读性样式，不修改内容')
             .addToggle(toggle => toggle
                 .setValue(settings.sourceModeEnabled)
-                .setDisabled(true));
+                .setDisabled(unavailable)
+                .onChange(async value => {
+                    try {
+                        await store.updateSettings({ sourceModeEnabled: value });
+                        enhancement.refresh();
+                    } catch (error) {
+                        toggle.setValue(!value);
+                        new Notice(error instanceof Error ? error.message : '源码模式设置保存失败');
+                    }
+                }));
 
         const updateDefaults = async (patch: Partial<typeof settings.defaults>) => {
             const latest = store.getSettings();
