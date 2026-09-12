@@ -11,6 +11,7 @@ const settingsTab = readFileSync(new URL('../src/settings/MPSettingTab.ts', impo
 const noteLayoutCss = readFileSync(new URL('../src/styles/view/note-layout.css', import.meta.url), 'utf8');
 const noteThemeGallery = readFileSync(new URL('../src/settings/NoteThemeGalleryModal.ts', import.meta.url), 'utf8');
 const themeCatalog = readFileSync(new URL('../src/core/theme/themeCatalog.ts', import.meta.url), 'utf8');
+const hostCompatibility = readFileSync(new URL('../docs/dual-layout/HOST_COMPATIBILITY.md', import.meta.url), 'utf8');
 
 test('layout snapshots preserve the user-selected local typesetting settings', () => {
   assert.match(settings, /layoutSnapshots: LayoutSnapshot\[\]/);
@@ -92,6 +93,18 @@ test('theme phase 3.13.0 shares framework metadata without crossing scene settin
   assert.match(noteThemeGallery, /getNoteThemeEntries/);
   assert.match(noteLayoutStore, /setDefaultProfile/);
   assert.match(noteLayoutStore, /setFileOverride/);
+});
+
+test('stability phase 3.14.0 documents lifecycle sync and conservative host boundaries', () => {
+  assert.match(noteLayoutStore, /moveFileOverride/);
+  assert.match(noteLayoutStore, /removeFileOverride/);
+  assert.match(noteLayoutEnhancement, /vault\.on\('rename'/);
+  assert.match(noteLayoutEnhancement, /vault\.on\('delete'/);
+  assert.doesNotMatch(noteLayoutEnhancement, /update\.selectionSet/);
+  assert.match(hostCompatibility, /Windows/);
+  assert.match(hostCompatibility, /note-layout\.json/);
+  assert.match(hostCompatibility, /公众号主题选择保存在插件设置/);
+  assert.match(hostCompatibility, /macOS、移动端/);
 });
 
 test('local export renders full article content and fixed-ratio image segments', () => {

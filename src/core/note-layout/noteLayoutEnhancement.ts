@@ -45,6 +45,16 @@ export class NoteLayoutEnhancement {
         this.enabled = this.store.getSettings().enabled;
         this.plugin.registerMarkdownPostProcessor((element, context) => this.processReadingElement(element, context), 1000);
         this.plugin.registerEditorExtension(this.editorExtensions);
+        this.plugin.registerEvent(this.app.vault.on('rename', (file, oldPath) => {
+            void this.store.moveFileOverride(oldPath, file.path).then(changed => {
+                if (changed) this.refresh();
+            }).catch(() => undefined);
+        }));
+        this.plugin.registerEvent(this.app.vault.on('delete', file => {
+            void this.store.removeFileOverride(file.path).then(changed => {
+                if (changed) this.refresh();
+            }).catch(() => undefined);
+        }));
         this.syncEditorExtension();
     }
 
@@ -102,7 +112,7 @@ export class NoteLayoutEnhancement {
             }
 
             update(update: ViewUpdate): void {
-                if (update.docChanged || update.viewportChanged || update.selectionSet) this.apply();
+                if (update.docChanged || update.viewportChanged) this.apply();
             }
 
             destroy(): void {

@@ -13917,7 +13917,6 @@ var NoteThemeGalleryModal = class extends import_obsidian11.Modal {
     super(app);
     this.store = store;
     this.enhancement = enhancement;
-    this.applied = false;
     this.gridContainer = null;
     this.tryHintEl = null;
     this.activePath = ((_a = app.workspace.getActiveFile()) == null ? void 0 : _a.path) || null;
@@ -14023,14 +14022,12 @@ var NoteThemeGalleryModal = class extends import_obsidian11.Modal {
     if (!this.activePath)
       return;
     await this.store.setFileOverride(this.activePath, { mode: "custom", profile: this.getSelectedProfile() });
-    this.applied = true;
     this.enhancement.clearPreviewProfile(this.activePath);
     new import_obsidian11.Notice("\u5DF2\u5E94\u7528\u5230\u5F53\u524D\u7B14\u8BB0");
     this.close();
   }
   async applyDefault() {
     await this.store.setDefaultProfile(this.getSelectedProfile());
-    this.applied = true;
     if (this.activePath)
       this.enhancement.clearPreviewProfile(this.activePath);
     new import_obsidian11.Notice("\u5DF2\u8BBE\u4E3A\u5168\u5E93\u9ED8\u8BA4\u4E3B\u9898");
@@ -14040,7 +14037,6 @@ var NoteThemeGalleryModal = class extends import_obsidian11.Modal {
     if (!this.activePath)
       return;
     await this.store.setFileOverride(this.activePath, { mode: "native" });
-    this.applied = true;
     this.enhancement.clearPreviewProfile(this.activePath);
     new import_obsidian11.Notice("\u5F53\u524D\u7B14\u8BB0\u5DF2\u6062\u590D\u539F\u751F\u6392\u7248");
     this.close();
@@ -14721,7 +14717,7 @@ var NoteLayoutStore = class {
   getProfileForPath(path) {
     if (!this.settings.enabled)
       return null;
-    const override = this.settings.files[path];
+    const override = this.settings.files[(0, import_obsidian13.normalizePath)(path)];
     if ((override == null ? void 0 : override.mode) === "native")
       return null;
     const profile = (override == null ? void 0 : override.mode) === "custom" ? override.profile : this.settings.defaults;
@@ -14734,7 +14730,7 @@ var NoteLayoutStore = class {
     var _a;
     if (!this.settings.enabled || !this.settings.sourceModeEnabled)
       return false;
-    return ((_a = this.settings.files[path]) == null ? void 0 : _a.mode) !== "native";
+    return ((_a = this.settings.files[(0, import_obsidian13.normalizePath)(path)]) == null ? void 0 : _a.mode) !== "native";
   }
   async setDefaultProfile(profile) {
     await this.updateSettings({ defaults: profile });
@@ -14742,6 +14738,27 @@ var NoteLayoutStore = class {
   async setFileOverride(path, override) {
     const files = { ...this.settings.files, [(0, import_obsidian13.normalizePath)(path)]: override };
     await this.updateSettings({ files });
+  }
+  async moveFileOverride(oldPath, newPath) {
+    const normalizedOldPath = (0, import_obsidian13.normalizePath)(oldPath);
+    const normalizedNewPath = (0, import_obsidian13.normalizePath)(newPath);
+    const override = this.settings.files[normalizedOldPath];
+    if (!override || normalizedOldPath === normalizedNewPath)
+      return false;
+    const files = { ...this.settings.files };
+    delete files[normalizedOldPath];
+    files[normalizedNewPath] = override;
+    await this.updateSettings({ files });
+    return true;
+  }
+  async removeFileOverride(path) {
+    const normalizedPath = (0, import_obsidian13.normalizePath)(path);
+    if (!this.settings.files[normalizedPath])
+      return false;
+    const files = { ...this.settings.files };
+    delete files[normalizedPath];
+    await this.updateSettings({ files });
+    return true;
   }
   async updateSettings(patch) {
     await this.save({ ...this.getSettings(), ...patch });
@@ -14882,6 +14899,18 @@ var NoteLayoutEnhancement = class {
     this.enabled = this.store.getSettings().enabled;
     this.plugin.registerMarkdownPostProcessor((element, context) => this.processReadingElement(element, context), 1e3);
     this.plugin.registerEditorExtension(this.editorExtensions);
+    this.plugin.registerEvent(this.app.vault.on("rename", (file, oldPath) => {
+      void this.store.moveFileOverride(oldPath, file.path).then((changed) => {
+        if (changed)
+          this.refresh();
+      }).catch(() => void 0);
+    }));
+    this.plugin.registerEvent(this.app.vault.on("delete", (file) => {
+      void this.store.removeFileOverride(file.path).then((changed) => {
+        if (changed)
+          this.refresh();
+      }).catch(() => void 0);
+    }));
     this.syncEditorExtension();
   }
   isLoaded() {
@@ -14934,7 +14963,7 @@ var NoteLayoutEnhancement = class {
         this.apply();
       }
       update(update) {
-        if (update.docChanged || update.viewportChanged || update.selectionSet)
+        if (update.docChanged || update.viewportChanged)
           this.apply();
       }
       destroy() {

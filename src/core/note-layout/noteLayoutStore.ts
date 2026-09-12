@@ -143,7 +143,7 @@ export class NoteLayoutStore {
 
     getProfileForPath(path: string): NoteLayoutProfile | null {
         if (!this.settings.enabled) return null;
-        const override = this.settings.files[path];
+        const override = this.settings.files[normalizePath(path)];
         if (override?.mode === 'native') return null;
         const profile = override?.mode === 'custom' ? override.profile : this.settings.defaults;
         return {
@@ -154,7 +154,7 @@ export class NoteLayoutStore {
 
     isSourceModeEnabledForPath(path: string): boolean {
         if (!this.settings.enabled || !this.settings.sourceModeEnabled) return false;
-        return this.settings.files[path]?.mode !== 'native';
+        return this.settings.files[normalizePath(path)]?.mode !== 'native';
     }
 
     async setDefaultProfile(profile: NoteLayoutProfile): Promise<void> {
@@ -164,6 +164,27 @@ export class NoteLayoutStore {
     async setFileOverride(path: string, override: NoteLayoutFileOverride): Promise<void> {
         const files = { ...this.settings.files, [normalizePath(path)]: override };
         await this.updateSettings({ files });
+    }
+
+    async moveFileOverride(oldPath: string, newPath: string): Promise<boolean> {
+        const normalizedOldPath = normalizePath(oldPath);
+        const normalizedNewPath = normalizePath(newPath);
+        const override = this.settings.files[normalizedOldPath];
+        if (!override || normalizedOldPath === normalizedNewPath) return false;
+        const files = { ...this.settings.files };
+        delete files[normalizedOldPath];
+        files[normalizedNewPath] = override;
+        await this.updateSettings({ files });
+        return true;
+    }
+
+    async removeFileOverride(path: string): Promise<boolean> {
+        const normalizedPath = normalizePath(path);
+        if (!this.settings.files[normalizedPath]) return false;
+        const files = { ...this.settings.files };
+        delete files[normalizedPath];
+        await this.updateSettings({ files });
+        return true;
     }
 
     async updateSettings(patch: Partial<NoteLayoutSettingsV1>): Promise<void> {

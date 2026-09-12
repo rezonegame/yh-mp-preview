@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.14.0-beta.1
+
+- Synchronized note-layout overrides when notes are renamed, moved, or deleted.
+- Reduced unnecessary Live Preview refresh work on selection-only updates.
+- Added host compatibility and conservative rollback documentation.
+
 ## 3.13.0-beta.1
 
 - Added shared theme framework metadata for WeChat and note-reading surfaces.

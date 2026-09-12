@@ -7,7 +7,6 @@ const NOTE_THEME_ENTRIES = getNoteThemeEntries();
 
 export class NoteThemeGalleryModal extends Modal {
     private currentThemeId: NoteLayoutProfile['themeId'];
-    private applied = false;
     private readonly activePath: string | null;
     private readonly profileBase: NoteLayoutProfile;
     private gridContainer: HTMLElement | null = null;
@@ -132,7 +131,6 @@ export class NoteThemeGalleryModal extends Modal {
     private async applyCurrent(): Promise<void> {
         if (!this.activePath) return;
         await this.store.setFileOverride(this.activePath, { mode: 'custom', profile: this.getSelectedProfile() });
-        this.applied = true;
         this.enhancement.clearPreviewProfile(this.activePath);
         new Notice('已应用到当前笔记');
         this.close();
@@ -140,7 +138,6 @@ export class NoteThemeGalleryModal extends Modal {
 
     private async applyDefault(): Promise<void> {
         await this.store.setDefaultProfile(this.getSelectedProfile());
-        this.applied = true;
         if (this.activePath) this.enhancement.clearPreviewProfile(this.activePath);
         new Notice('已设为全库默认主题');
         this.close();
@@ -149,7 +146,6 @@ export class NoteThemeGalleryModal extends Modal {
     private async applyNative(): Promise<void> {
         if (!this.activePath) return;
         await this.store.setFileOverride(this.activePath, { mode: 'native' });
-        this.applied = true;
         this.enhancement.clearPreviewProfile(this.activePath);
         new Notice('当前笔记已恢复原生排版');
         this.close();
