@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.14.0-rc.1
+
+- Release candidate for the dual-layout upgrade.
+- No new feature scope after `3.14.0-beta.1`; this candidate focuses on stability,
+  compatibility, rollback, and three-day real-use observation.
+
 ## 3.14.0-beta.1
 
 - Synchronized note-layout overrides when notes are renamed, moved, or deleted.
