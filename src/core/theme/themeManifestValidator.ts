@@ -1,4 +1,5 @@
 import type { ThemeManifest } from './themeManifest';
+import type { ThemeSurface } from './themeCatalog';
 
 export interface ThemeManifestValidationIssue {
     path: string;
@@ -54,6 +55,21 @@ export function validateThemeManifest(value: unknown): ThemeManifestValidationRe
     }
     if (value.source !== undefined && !isNonEmptyString(value.source)) {
         issues.push({ path: 'source', message: '如提供来源，必须是非空字符串。' });
+    }
+    if (value.frameworkId !== undefined && !isNonEmptyString(value.frameworkId)) {
+        issues.push({ path: 'frameworkId', message: '如提供框架 ID，必须是非空字符串。' });
+    }
+    if (value.scene !== undefined && !isNonEmptyString(value.scene)) {
+        issues.push({ path: 'scene', message: '如提供场景，必须是非空字符串。' });
+    }
+    if (value.recommendation !== undefined && !isNonEmptyString(value.recommendation)) {
+        issues.push({ path: 'recommendation', message: '如提供推荐作用，必须是非空字符串。' });
+    }
+    if (value.surfaces !== undefined && (!Array.isArray(value.surfaces)
+        || value.surfaces.length === 0
+        || value.surfaces.some(surface => surface !== 'wechat' && surface !== 'note')
+        || new Set(value.surfaces as ThemeSurface[]).size !== value.surfaces.length)) {
+        issues.push({ path: 'surfaces', message: '如提供适用场景，只能使用不重复的 wechat 或 note。' });
     }
 
     if (!isRecord(value.tokens)) {

@@ -1,5 +1,6 @@
 import type { Template } from '../../templateManager';
 import type { ThemeManifest } from './themeManifest';
+import { getCuratedThemeEntry } from './themeCatalog';
 
 function cssValue(style: string | undefined, property: string, fallback: string): string {
     if (!style) return fallback;
@@ -23,6 +24,8 @@ export function adaptLegacyTemplate(template: Template): ThemeManifest {
     const table = (styles.table || {}) as Partial<Template['styles']['table']>;
     const accent = stringValue(styles.accentColor)
         || cssValue(stringValue(h2.content), 'color', '#4285f4');
+    const catalogEntry = getCuratedThemeEntry(template?.id);
+    const metadata = template?.themeMeta;
     return {
         schemaVersion: 3,
         id: stringValue(template?.id, 'legacy-unnamed-theme'),
@@ -30,6 +33,10 @@ export function adaptLegacyTemplate(template: Template): ThemeManifest {
         version: 'legacy-v2',
         license: 'legacy-pending-provenance-review',
         source: template.source || 'yh-mp-preview bundled',
+        frameworkId: catalogEntry?.frameworkId || metadata?.frameworkId,
+        surfaces: catalogEntry ? [...catalogEntry.surfaces] : metadata?.surfaces || ['wechat'],
+        scene: catalogEntry?.scene || metadata?.scene,
+        recommendation: catalogEntry?.recommendation || metadata?.recommendation || template.description,
         tokens: {
             accent,
             text: cssValue(stringValue(styles.paragraph), 'color', '#333333'),

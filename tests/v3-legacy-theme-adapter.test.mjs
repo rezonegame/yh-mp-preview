@@ -1,10 +1,17 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
-import { transformSync } from 'esbuild';
+import { buildSync } from 'esbuild';
 
-const source = readFileSync(new URL('../src/core/theme/legacyThemeAdapter.ts', import.meta.url), 'utf8');
-const compiled = transformSync(source, { loader: 'ts', format: 'esm', target: 'es2020' }).code;
+const entryPoint = new URL('../src/core/theme/legacyThemeAdapter.ts', import.meta.url);
+const compiled = buildSync({
+  entryPoints: [fileURLToPath(entryPoint)],
+  bundle: true,
+  format: 'esm',
+  target: 'es2020',
+  write: false,
+}).outputFiles[0].text;
 const { adaptLegacyTemplate } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
 
 test('legacy theme adapter tolerates incomplete persisted v2 themes', () => {

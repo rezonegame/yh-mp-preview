@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.13.0-beta.1
+
+- Added shared theme framework metadata for WeChat and note-reading surfaces.
+- Added portable surface, scene, framework, and recommendation metadata to V3 theme manifests.
+- Kept note overrides in `note-layout.json` and WeChat selection in plugin settings.
+
 ## 3.12.0-beta.1
 
 - Added a separate note-reading theme gallery with three curated note themes.

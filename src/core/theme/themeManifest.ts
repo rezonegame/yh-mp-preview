@@ -1,3 +1,5 @@
+import type { ThemeFrameworkId, ThemeSurface } from './themeCatalog';
+
 export interface DesignTokens {
     accent: string;
     text: string;
@@ -25,6 +27,10 @@ export interface ThemeManifest {
     version: string;
     license: string;
     source?: string;
+    frameworkId?: ThemeFrameworkId;
+    surfaces?: ThemeSurface[];
+    scene?: string;
+    recommendation?: string;
     tokens: DesignTokens;
     components: ComponentDefinition[];
     recipes: ArticleRecipe[];

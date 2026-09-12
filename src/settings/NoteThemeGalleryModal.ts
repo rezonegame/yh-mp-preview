@@ -1,18 +1,9 @@
 import { App, Modal, Notice, setIcon } from 'obsidian';
 import type { NoteLayoutEnhancement } from '../core/note-layout/noteLayoutEnhancement';
 import type { NoteLayoutProfile, NoteLayoutStore } from '../core/note-layout/noteLayoutStore';
+import { getNoteThemeEntries, type NoteThemeEntry } from '../core/theme/themeCatalog';
 
-interface NoteThemeGalleryEntry {
-    id: NoteLayoutProfile['themeId'];
-    name: string;
-    recommendation: string;
-}
-
-const NOTE_THEME_ENTRIES: NoteThemeGalleryEntry[] = [
-    { id: 'default', name: '默认阅读', recommendation: '适合日常笔记和综合内容' },
-    { id: 'deep-reading', name: '深度阅读', recommendation: '适合长文、研究和知识沉淀' },
-    { id: 'minimal', name: '极简阅读', recommendation: '适合速记和信息密度较高的内容' },
-];
+const NOTE_THEME_ENTRIES = getNoteThemeEntries();
 
 export class NoteThemeGalleryModal extends Modal {
     private currentThemeId: NoteLayoutProfile['themeId'];
@@ -134,7 +125,7 @@ export class NoteThemeGalleryModal extends Modal {
 
     private updateTryHint(): void {
         if (!this.tryHintEl) return;
-        const entry = NOTE_THEME_ENTRIES.find(item => item.id === this.currentThemeId) || NOTE_THEME_ENTRIES[0];
+        const entry: NoteThemeEntry = NOTE_THEME_ENTRIES.find(item => item.id === this.currentThemeId) || NOTE_THEME_ENTRIES[0];
         this.tryHintEl.setText(`推荐作用：${entry.recommendation}`);
     }
 

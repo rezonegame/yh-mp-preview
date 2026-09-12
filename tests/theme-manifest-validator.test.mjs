@@ -15,6 +15,10 @@ function validManifest() {
     version: '1.0.0',
     license: 'AGPL-3.0-or-later',
     source: 'https://example.org/theme',
+    frameworkId: 'structured-guide',
+    surfaces: ['wechat'],
+    scene: '教程与知识',
+    recommendation: '适合教程和方法论内容。',
     tokens: {
       accent: '#2878d4', text: '#25324a', mutedText: '#667085',
       background: '#fff', fontSize: '16px', lineHeight: '1.8',

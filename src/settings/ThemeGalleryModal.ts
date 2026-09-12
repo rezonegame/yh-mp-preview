@@ -188,7 +188,7 @@ export class ThemeGalleryModal extends Modal {
     }
 
     private getTemplateDescription(template: Template): string {
-        const curatedRecommendation = getCuratedThemeEntry(template.id)?.recommendation;
+        const curatedRecommendation = getCuratedThemeEntry(template.id)?.recommendation || template.themeMeta?.recommendation;
         if (curatedRecommendation) return curatedRecommendation;
         const description = template.description?.trim();
         return description ? description.split('（')[0].trim() : '适合当前文章的视觉排版';

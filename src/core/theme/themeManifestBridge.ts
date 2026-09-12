@@ -47,6 +47,12 @@ export function createTemplateFromThemeManifest(manifest: ThemeManifest, baseTem
     template.name = manifest.name;
     template.description = `ThemeManifest v${manifest.version} · ${manifest.license}`;
     template.source = manifest.source || 'ThemeManifest import';
+    template.themeMeta = {
+        frameworkId: manifest.frameworkId,
+        surfaces: manifest.surfaces ? [...manifest.surfaces] : ['wechat'],
+        scene: manifest.scene,
+        recommendation: manifest.recommendation,
+    };
     template.isPreset = false;
     template.isVisible = true;
     template.styles.accentColor = manifest.tokens.accent;

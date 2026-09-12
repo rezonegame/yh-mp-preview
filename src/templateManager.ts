@@ -2,6 +2,7 @@ import { App } from 'obsidian';
 import { SettingsManager } from './settings/settings';
 import type { DialogueStyle, GalleryStyle } from './containers';
 import { appendWechatReadingBaseline, wechatReadingBaseline } from './core/theme/wechatReadingBaseline';
+import type { ThemeFrameworkId, ThemeSurface } from './core/theme/themeCatalog';
 
 export interface Template {
     id: string;
@@ -10,6 +11,12 @@ export interface Template {
     isPreset?: boolean;
     isVisible?: boolean;
     source?: string;  // 来源标记：'yh-mp-preview' | 'xiaohu'
+    themeMeta?: {
+        frameworkId?: ThemeFrameworkId;
+        surfaces?: ThemeSurface[];
+        scene?: string;
+        recommendation?: string;
+    };
     styles: {
         container: string;
         title: {

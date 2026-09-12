@@ -10,6 +10,7 @@ const main = readFileSync(new URL('../src/main.ts', import.meta.url), 'utf8');
 const settingsTab = readFileSync(new URL('../src/settings/MPSettingTab.ts', import.meta.url), 'utf8');
 const noteLayoutCss = readFileSync(new URL('../src/styles/view/note-layout.css', import.meta.url), 'utf8');
 const noteThemeGallery = readFileSync(new URL('../src/settings/NoteThemeGalleryModal.ts', import.meta.url), 'utf8');
+const themeCatalog = readFileSync(new URL('../src/core/theme/themeCatalog.ts', import.meta.url), 'utf8');
 
 test('layout snapshots preserve the user-selected local typesetting settings', () => {
   assert.match(settings, /layoutSnapshots: LayoutSnapshot\[\]/);
@@ -78,6 +79,19 @@ test('note layout phase 3.12.0 separates note and WeChat theme galleries', () =>
   assert.match(noteLayoutEnhancement, /clearPreviewProfile/);
   assert.match(settingsTab, /打开笔记主题画廊/);
   assert.match(noteThemeGallery, /试用不会保存|关闭窗口会取消未应用的试用/);
+});
+
+test('theme phase 3.13.0 shares framework metadata without crossing scene settings', () => {
+  assert.match(themeCatalog, /export type ThemeSurface = 'wechat' \| 'note'/);
+  assert.match(themeCatalog, /frameworkId: ThemeFrameworkId/);
+  assert.match(themeCatalog, /surfaces: readonly ThemeSurface\[\]/);
+  assert.match(themeCatalog, /getThemeFrameworkId/);
+  assert.match(themeCatalog, /getThemeSurfaces/);
+  assert.match(noteThemeGallery, /setFileOverride/);
+  assert.match(noteThemeGallery, /setDefaultProfile/);
+  assert.match(noteThemeGallery, /getNoteThemeEntries/);
+  assert.match(noteLayoutStore, /setDefaultProfile/);
+  assert.match(noteLayoutStore, /setFileOverride/);
 });
 
 test('local export renders full article content and fixed-ratio image segments', () => {

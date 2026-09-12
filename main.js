@@ -10366,24 +10366,32 @@ var import_obsidian2 = require("obsidian");
 // src/core/theme/themeCatalog.ts
 var CURATED_THEME_CATALOG_VERSION = 2;
 var curatedThemeEntries = [
-  { id: "default", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u4E2D\u6027\u3001\u7A33\u5B9A\uFF0C\u9002\u5408\u901A\u77E5\u3001\u6587\u7AE0\u521D\u7A3F\u4E0E\u5E38\u89C4\u957F\u6587\u3002" },
-  { id: "deep-reading", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u4F4E\u88C5\u9970\u6587\u5B57\u5C42\u7EA7\uFF0C\u9002\u5408\u53D9\u4E8B\u3001\u8BBF\u8C08\u4E0E\u6DF1\u5EA6\u957F\u6587\u3002" },
-  { id: "academic-pro", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u7AE0\u8282\u8FB9\u754C\u6E05\u6670\uFF0C\u9002\u5408\u6559\u7A0B\u3001\u65B9\u6CD5\u8BBA\u4E0E\u6280\u672F\u8BF4\u660E\u3002" },
-  { id: "clear-guide", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u66F4\u5F3A\u7684\u64CD\u4F5C\u6B65\u9AA4\u611F\uFF0C\u9002\u5408\u6D41\u7A0B\u3001\u4E0A\u624B\u4E0E\u5DE5\u5177\u6307\u5357\u3002" },
-  { id: "apple-product", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u6E05\u900F\u7684\u4EA7\u54C1\u8BF4\u660E\u5C42\u7EA7\uFF0C\u9002\u5408\u4EA7\u54C1\u4ECB\u7ECD\u4E0E\u54C1\u724C\u5185\u5BB9\u3002" },
-  { id: "product-review", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u5F3A\u8C03\u8981\u70B9\u4E0E\u5BF9\u6BD4\u9605\u8BFB\uFF0C\u9002\u5408\u6D4B\u8BC4\u548C\u5DE5\u5177\u76D8\u70B9\u3002" },
-  { id: "minimal", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u77F3\u58A8\u7070\u5C42\u7EA7\uFF0C\u9002\u5408\u4E13\u4E1A\u89C2\u70B9\u4E0E\u514B\u5236\u8868\u8FBE\u3002" },
-  { id: "red-white-editorial", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u514B\u5236\u7EA2\u8272\u7AE0\u8282\u951A\u70B9\uFF0C\u9002\u5408\u8BC4\u8BBA\u4E0E\u5206\u6790\u8BAE\u9898\u3002" },
-  { id: "modern-report", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u9AD8\u5BF9\u6BD4\u4F46\u4E0D\u8FC7\u5EA6\u88C5\u9970\uFF0C\u9002\u5408\u5468\u62A5\u4E0E\u9636\u6BB5\u603B\u7ED3\u3002" },
-  { id: "data-blueprint", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u6570\u636E\u5C42\u7EA7\u4E0E\u6696\u8272\u6807\u8BB0\uFF0C\u9002\u5408\u7ECF\u8425\u5206\u6790\u548C\u6570\u636E\u590D\u76D8\u3002" },
-  { id: "zen-essence", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u4F4E\u9971\u548C\u7559\u767D\uFF0C\u9002\u5408\u968F\u7B14\u3001\u751F\u6D3B\u65B9\u5F0F\u4E0E\u6C89\u9759\u9605\u8BFB\u3002" },
-  { id: "eastern-notes", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u6E29\u6DA6\u7EB8\u7B3A\u611F\uFF0C\u9002\u5408\u6587\u5316\u968F\u7B14\u3001\u8BFB\u4E66\u4E0E\u751F\u6D3B\u8BB0\u5F55\u3002" },
-  { id: "academic-pro-forest", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u4E13\u4E1A\u6848\u4F8B\u7ED3\u6784\uFF0C\u9002\u5408\u6848\u4F8B\u62C6\u89E3\u4E0E\u7ECF\u9A8C\u603B\u7ED3\u3002" },
-  { id: "olive-journal", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u7F16\u8F91\u90E8\u5185\u520A\u8D28\u611F\uFF0C\u9002\u5408\u7CFB\u7EDF\u590D\u76D8\u4E0E\u7EC4\u7EC7\u6C89\u6DC0\u3002" }
+  { id: "default", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u4E2D\u6027\u3001\u7A33\u5B9A\uFF0C\u9002\u5408\u901A\u77E5\u3001\u6587\u7AE0\u521D\u7A3F\u4E0E\u5E38\u89C4\u957F\u6587\u3002", frameworkId: "neutral-reading", surfaces: ["wechat", "note"], noteThemeId: "default" },
+  { id: "deep-reading", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u4F4E\u88C5\u9970\u6587\u5B57\u5C42\u7EA7\uFF0C\u9002\u5408\u53D9\u4E8B\u3001\u8BBF\u8C08\u4E0E\u6DF1\u5EA6\u957F\u6587\u3002", frameworkId: "deep-reading", surfaces: ["wechat", "note"], noteThemeId: "deep-reading" },
+  { id: "academic-pro", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u7AE0\u8282\u8FB9\u754C\u6E05\u6670\uFF0C\u9002\u5408\u6559\u7A0B\u3001\u65B9\u6CD5\u8BBA\u4E0E\u6280\u672F\u8BF4\u660E\u3002", frameworkId: "structured-guide", surfaces: ["wechat"] },
+  { id: "clear-guide", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u66F4\u5F3A\u7684\u64CD\u4F5C\u6B65\u9AA4\u611F\uFF0C\u9002\u5408\u6D41\u7A0B\u3001\u4E0A\u624B\u4E0E\u5DE5\u5177\u6307\u5357\u3002", frameworkId: "structured-guide", surfaces: ["wechat"] },
+  { id: "apple-product", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u6E05\u900F\u7684\u4EA7\u54C1\u8BF4\u660E\u5C42\u7EA7\uFF0C\u9002\u5408\u4EA7\u54C1\u4ECB\u7ECD\u4E0E\u54C1\u724C\u5185\u5BB9\u3002", frameworkId: "product-editorial", surfaces: ["wechat"] },
+  { id: "product-review", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u5F3A\u8C03\u8981\u70B9\u4E0E\u5BF9\u6BD4\u9605\u8BFB\uFF0C\u9002\u5408\u6D4B\u8BC4\u548C\u5DE5\u5177\u76D8\u70B9\u3002", frameworkId: "product-editorial", surfaces: ["wechat"] },
+  { id: "minimal", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u77F3\u58A8\u7070\u5C42\u7EA7\uFF0C\u9002\u5408\u4E13\u4E1A\u89C2\u70B9\u4E0E\u514B\u5236\u8868\u8FBE\u3002", frameworkId: "opinion-editorial", surfaces: ["wechat", "note"], noteThemeId: "minimal" },
+  { id: "red-white-editorial", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u514B\u5236\u7EA2\u8272\u7AE0\u8282\u951A\u70B9\uFF0C\u9002\u5408\u8BC4\u8BBA\u4E0E\u5206\u6790\u8BAE\u9898\u3002", frameworkId: "opinion-editorial", surfaces: ["wechat"] },
+  { id: "modern-report", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u9AD8\u5BF9\u6BD4\u4F46\u4E0D\u8FC7\u5EA6\u88C5\u9970\uFF0C\u9002\u5408\u5468\u62A5\u4E0E\u9636\u6BB5\u603B\u7ED3\u3002", frameworkId: "reporting", surfaces: ["wechat"] },
+  { id: "data-blueprint", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u6570\u636E\u5C42\u7EA7\u4E0E\u6696\u8272\u6807\u8BB0\uFF0C\u9002\u5408\u7ECF\u8425\u5206\u6790\u548C\u6570\u636E\u590D\u76D8\u3002", frameworkId: "reporting", surfaces: ["wechat"] },
+  { id: "zen-essence", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u4F4E\u9971\u548C\u7559\u767D\uFF0C\u9002\u5408\u968F\u7B14\u3001\u751F\u6D3B\u65B9\u5F0F\u4E0E\u6C89\u9759\u9605\u8BFB\u3002", frameworkId: "lifestyle-editorial", surfaces: ["wechat"] },
+  { id: "eastern-notes", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u6E29\u6DA6\u7EB8\u7B3A\u611F\uFF0C\u9002\u5408\u6587\u5316\u968F\u7B14\u3001\u8BFB\u4E66\u4E0E\u751F\u6D3B\u8BB0\u5F55\u3002", frameworkId: "lifestyle-editorial", surfaces: ["wechat"] },
+  { id: "academic-pro-forest", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u4E13\u4E1A\u6848\u4F8B\u7ED3\u6784\uFF0C\u9002\u5408\u6848\u4F8B\u62C6\u89E3\u4E0E\u7ECF\u9A8C\u603B\u7ED3\u3002", frameworkId: "case-study", surfaces: ["wechat"] },
+  { id: "olive-journal", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u7F16\u8F91\u90E8\u5185\u520A\u8D28\u611F\uFF0C\u9002\u5408\u7CFB\u7EDF\u590D\u76D8\u4E0E\u7EC4\u7EC7\u6C89\u6DC0\u3002", frameworkId: "case-study", surfaces: ["wechat"] }
+];
+var noteThemeEntries = [
+  { id: "default", name: "\u9ED8\u8BA4\u9605\u8BFB", recommendation: "\u9002\u5408\u65E5\u5E38\u7B14\u8BB0\u548C\u7EFC\u5408\u5185\u5BB9", frameworkId: "neutral-reading" },
+  { id: "deep-reading", name: "\u6DF1\u5EA6\u9605\u8BFB", recommendation: "\u9002\u5408\u957F\u6587\u3001\u7814\u7A76\u548C\u77E5\u8BC6\u6C89\u6DC0", frameworkId: "deep-reading" },
+  { id: "minimal", name: "\u6781\u7B80\u9605\u8BFB", recommendation: "\u9002\u5408\u901F\u8BB0\u548C\u4FE1\u606F\u5BC6\u5EA6\u8F83\u9AD8\u7684\u5185\u5BB9", frameworkId: "opinion-editorial" }
 ];
 var curatedThemesById = new Map(curatedThemeEntries.map((entry) => [entry.id, entry]));
 function getCuratedThemeEntry(themeId) {
   return curatedThemesById.get(themeId);
+}
+function getNoteThemeEntries() {
+  return noteThemeEntries;
 }
 
 // src/settings/ThemeGalleryModal.ts
@@ -10545,11 +10553,11 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     this.tryHintEl.setText(`\u63A8\u8350\u4F5C\u7528\uFF1A${description}`);
   }
   getTemplateDescription(template) {
-    var _a, _b;
-    const curatedRecommendation = (_a = getCuratedThemeEntry(template.id)) == null ? void 0 : _a.recommendation;
+    var _a, _b, _c;
+    const curatedRecommendation = ((_a = getCuratedThemeEntry(template.id)) == null ? void 0 : _a.recommendation) || ((_b = template.themeMeta) == null ? void 0 : _b.recommendation);
     if (curatedRecommendation)
       return curatedRecommendation;
-    const description = (_b = template.description) == null ? void 0 : _b.trim();
+    const description = (_c = template.description) == null ? void 0 : _c.trim();
     return description ? description.split("\uFF08")[0].trim() : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
   }
 };
@@ -13683,6 +13691,8 @@ function adaptLegacyTemplate(template) {
   const code = styles.code || {};
   const table = styles.table || {};
   const accent = stringValue(styles.accentColor) || cssValue(stringValue(h2.content), "color", "#4285f4");
+  const catalogEntry = getCuratedThemeEntry(template == null ? void 0 : template.id);
+  const metadata = template == null ? void 0 : template.themeMeta;
   return {
     schemaVersion: 3,
     id: stringValue(template == null ? void 0 : template.id, "legacy-unnamed-theme"),
@@ -13690,6 +13700,10 @@ function adaptLegacyTemplate(template) {
     version: "legacy-v2",
     license: "legacy-pending-provenance-review",
     source: template.source || "yh-mp-preview bundled",
+    frameworkId: (catalogEntry == null ? void 0 : catalogEntry.frameworkId) || (metadata == null ? void 0 : metadata.frameworkId),
+    surfaces: catalogEntry ? [...catalogEntry.surfaces] : (metadata == null ? void 0 : metadata.surfaces) || ["wechat"],
+    scene: (catalogEntry == null ? void 0 : catalogEntry.scene) || (metadata == null ? void 0 : metadata.scene),
+    recommendation: (catalogEntry == null ? void 0 : catalogEntry.recommendation) || (metadata == null ? void 0 : metadata.recommendation) || template.description,
     tokens: {
       accent,
       text: cssValue(stringValue(styles.paragraph), "color", "#333333"),
@@ -13763,6 +13777,12 @@ function createTemplateFromThemeManifest(manifest, baseTemplate) {
   template.name = manifest.name;
   template.description = `ThemeManifest v${manifest.version} \xB7 ${manifest.license}`;
   template.source = manifest.source || "ThemeManifest import";
+  template.themeMeta = {
+    frameworkId: manifest.frameworkId,
+    surfaces: manifest.surfaces ? [...manifest.surfaces] : ["wechat"],
+    scene: manifest.scene,
+    recommendation: manifest.recommendation
+  };
   template.isPreset = false;
   template.isVisible = true;
   template.styles.accentColor = manifest.tokens.accent;
@@ -13804,6 +13824,18 @@ function validateThemeManifest(value) {
   }
   if (value.source !== void 0 && !isNonEmptyString(value.source)) {
     issues.push({ path: "source", message: "\u5982\u63D0\u4F9B\u6765\u6E90\uFF0C\u5FC5\u987B\u662F\u975E\u7A7A\u5B57\u7B26\u4E32\u3002" });
+  }
+  if (value.frameworkId !== void 0 && !isNonEmptyString(value.frameworkId)) {
+    issues.push({ path: "frameworkId", message: "\u5982\u63D0\u4F9B\u6846\u67B6 ID\uFF0C\u5FC5\u987B\u662F\u975E\u7A7A\u5B57\u7B26\u4E32\u3002" });
+  }
+  if (value.scene !== void 0 && !isNonEmptyString(value.scene)) {
+    issues.push({ path: "scene", message: "\u5982\u63D0\u4F9B\u573A\u666F\uFF0C\u5FC5\u987B\u662F\u975E\u7A7A\u5B57\u7B26\u4E32\u3002" });
+  }
+  if (value.recommendation !== void 0 && !isNonEmptyString(value.recommendation)) {
+    issues.push({ path: "recommendation", message: "\u5982\u63D0\u4F9B\u63A8\u8350\u4F5C\u7528\uFF0C\u5FC5\u987B\u662F\u975E\u7A7A\u5B57\u7B26\u4E32\u3002" });
+  }
+  if (value.surfaces !== void 0 && (!Array.isArray(value.surfaces) || value.surfaces.length === 0 || value.surfaces.some((surface) => surface !== "wechat" && surface !== "note") || new Set(value.surfaces).size !== value.surfaces.length)) {
+    issues.push({ path: "surfaces", message: "\u5982\u63D0\u4F9B\u9002\u7528\u573A\u666F\uFF0C\u53EA\u80FD\u4F7F\u7528\u4E0D\u91CD\u590D\u7684 wechat \u6216 note\u3002" });
   }
   if (!isRecord(value.tokens)) {
     issues.push({ path: "tokens", message: "\u5FC5\u987B\u662F\u8BBE\u8BA1\u4EE4\u724C\u5BF9\u8C61\u3002" });
@@ -13878,11 +13910,7 @@ ${formatThemeManifestIssues(result.issues)}`);
 
 // src/settings/NoteThemeGalleryModal.ts
 var import_obsidian11 = require("obsidian");
-var NOTE_THEME_ENTRIES = [
-  { id: "default", name: "\u9ED8\u8BA4\u9605\u8BFB", recommendation: "\u9002\u5408\u65E5\u5E38\u7B14\u8BB0\u548C\u7EFC\u5408\u5185\u5BB9" },
-  { id: "deep-reading", name: "\u6DF1\u5EA6\u9605\u8BFB", recommendation: "\u9002\u5408\u957F\u6587\u3001\u7814\u7A76\u548C\u77E5\u8BC6\u6C89\u6DC0" },
-  { id: "minimal", name: "\u6781\u7B80\u9605\u8BFB", recommendation: "\u9002\u5408\u901F\u8BB0\u548C\u4FE1\u606F\u5BC6\u5EA6\u8F83\u9AD8\u7684\u5185\u5BB9" }
-];
+var NOTE_THEME_ENTRIES = getNoteThemeEntries();
 var NoteThemeGalleryModal = class extends import_obsidian11.Modal {
   constructor(app, store, enhancement) {
     var _a;
