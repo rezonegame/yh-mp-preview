@@ -57,8 +57,8 @@ export class ThemeGalleryModal extends Modal {
 
         const header = contentEl.createDiv('mp-gallery-header');
         const heading = header.createDiv('mp-gallery-heading');
-        heading.createEl('h2', { text: '主题画廊' });
-        heading.createEl('p', { text: '按文章场景挑选视觉风格；点击卡片先试用，确认后再应用。' });
+        heading.createEl('h2', { text: '公众号主题画廊' });
+        heading.createEl('p', { text: '按文章场景挑选公众号视觉风格；点击卡片先试用，确认后再应用。' });
         const search = header.createEl('input', {
             cls: 'mp-gallery-search',
             attr: { type: 'search', placeholder: '搜索主题或文章场景' },
@@ -69,6 +69,7 @@ export class ThemeGalleryModal extends Modal {
         });
 
         const sceneBar = contentEl.createDiv('mp-gallery-scenes');
+        sceneBar.setAttribute('aria-label', '公众号主题场景');
         SCENE_ORDER.forEach(scene => {
             const count = this.getTemplatesForScene(scene).length;
             if (count === 0 && scene !== '全部') return;

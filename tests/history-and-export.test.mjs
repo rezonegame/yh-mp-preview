@@ -9,6 +9,7 @@ const noteLayoutEnhancement = readFileSync(new URL('../src/core/note-layout/note
 const main = readFileSync(new URL('../src/main.ts', import.meta.url), 'utf8');
 const settingsTab = readFileSync(new URL('../src/settings/MPSettingTab.ts', import.meta.url), 'utf8');
 const noteLayoutCss = readFileSync(new URL('../src/styles/view/note-layout.css', import.meta.url), 'utf8');
+const noteThemeGallery = readFileSync(new URL('../src/settings/NoteThemeGalleryModal.ts', import.meta.url), 'utf8');
 
 test('layout snapshots preserve the user-selected local typesetting settings', () => {
   assert.match(settings, /layoutSnapshots: LayoutSnapshot\[\]/);
@@ -62,6 +63,21 @@ test('note layout phase 3.11.0 keeps complex Markdown and source mode scoped', (
   }
   assert.match(noteLayoutCss, /cm-editor\.yh-mp-note-source-mode/);
   assert.doesNotMatch(noteLayoutCss, /body\s*\{/);
+});
+
+test('note layout phase 3.12.0 separates note and WeChat theme galleries', () => {
+  assert.match(noteThemeGallery, /笔记阅读主题/);
+  assert.match(noteThemeGallery, /应用到当前笔记/);
+  assert.match(noteThemeGallery, /设为全库默认/);
+  assert.match(noteThemeGallery, /当前笔记用原生/);
+  assert.match(noteThemeGallery, /setPreviewProfile/);
+  assert.match(noteThemeGallery, /setFileOverride/);
+  assert.match(noteLayoutStore, /setDefaultProfile/);
+  assert.match(noteLayoutStore, /setFileOverride/);
+  assert.match(noteLayoutEnhancement, /previewProfiles/);
+  assert.match(noteLayoutEnhancement, /clearPreviewProfile/);
+  assert.match(settingsTab, /打开笔记主题画廊/);
+  assert.match(noteThemeGallery, /试用不会保存|关闭窗口会取消未应用的试用/);
 });
 
 test('local export renders full article content and fixed-ratio image segments', () => {

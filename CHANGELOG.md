@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.12.0-beta.1
+
+- Added a separate note-reading theme gallery with three curated note themes.
+- Added try-before-apply, current-note override, vault default, and native-layout actions.
+- Kept the existing WeChat gallery as a separate scene and preserved its selection pipeline.
+
 ## 3.11.0-beta.1
 
 - Added scoped reading-view styles for lists, tasks, quotes, callouts, code,

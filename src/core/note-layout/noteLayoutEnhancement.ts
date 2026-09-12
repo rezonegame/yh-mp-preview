@@ -31,6 +31,7 @@ export class NoteLayoutEnhancement {
     private loaded = false;
     private enabled = false;
     private readonly editorExtensions: Extension[] = [];
+    private readonly previewProfiles = new Map<string, NoteLayoutProfile | null>();
 
     constructor(
         private readonly plugin: Plugin,
@@ -69,19 +70,32 @@ export class NoteLayoutEnhancement {
         this.refreshMarkdownPreviews();
     }
 
+    setPreviewProfile(path: string, profile: NoteLayoutProfile | null): void {
+        if (!this.loaded) return;
+        this.previewProfiles.set(path, profile);
+        this.refresh();
+    }
+
+    clearPreviewProfile(path: string): void {
+        if (!this.previewProfiles.delete(path)) return;
+        this.refresh();
+    }
+
     unload(): void {
         this.enabled = false;
+        this.previewProfiles.clear();
         this.editorExtensions.splice(0);
         this.loaded = false;
     }
 
     private processReadingElement(element: HTMLElement, context: MarkdownPostProcessorContext): void {
-        const profile = this.enabled ? this.store.getProfileForPath(context.sourcePath) : null;
+        const profile = this.getProfileForPath(context.sourcePath);
         applyLayoutProfile(element, profile);
     }
 
     private createEditorExtension(): Extension {
         const store = this.store;
+        const getProfile = (path: string): NoteLayoutProfile | null => this.getProfileForPath(path);
         return ViewPlugin.fromClass(class {
             constructor(private readonly view: EditorView) {
                 this.apply();
@@ -97,11 +111,17 @@ export class NoteLayoutEnhancement {
 
             private apply(): void {
                 const info = this.view.state.field(editorInfoField, false);
-                const profile = info?.file ? store.getProfileForPath(info.file.path) : null;
+                const profile = info?.file ? getProfile(info.file.path) : null;
                 const sourceMode = info?.file ? store.isSourceModeEnabledForPath(info.file.path) : false;
                 applyLayoutProfile(this.view.dom, profile, sourceMode);
             }
         });
+    }
+
+    private getProfileForPath(path: string): NoteLayoutProfile | null {
+        if (!this.enabled) return null;
+        if (this.previewProfiles.has(path)) return this.previewProfiles.get(path) || null;
+        return this.store.getProfileForPath(path);
     }
 
     private syncEditorExtension(): void {

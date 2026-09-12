@@ -8,6 +8,7 @@ import { TemplatePreviewModal } from './templatePreviewModal'; // 添加导入
 import type { MPSettings } from './settings';
 import { exportTemplateManifest, createTemplateFromThemeManifest } from '../core/theme/themeManifestBridge';
 import { ThemeManifestImportModal } from './ThemeManifestImportModal';
+import { NoteThemeGalleryModal } from './NoteThemeGalleryModal';
 export class MPSettingTab extends PluginSettingTab {
     plugin: MPPlugin; // 修改插件类型以匹配类名
     private expandedSections: Set<string> = new Set();
@@ -797,6 +798,13 @@ export class MPSettingTab extends PluginSettingTab {
                         new Notice(error instanceof Error ? error.message : '源码模式设置保存失败');
                     }
                 }));
+
+        new Setting(containerEl)
+            .setName('主题画廊')
+            .setDesc('在笔记阅读和公众号两个场景中分别选择主题；当前笔记支持试用和独立应用')
+            .addButton(button => button
+                .setButtonText('打开笔记主题画廊')
+                .onClick(() => new NoteThemeGalleryModal(this.app, store, enhancement).open()));
 
         const updateDefaults = async (patch: Partial<typeof settings.defaults>) => {
             const latest = store.getSettings();

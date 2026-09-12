@@ -157,6 +157,15 @@ export class NoteLayoutStore {
         return this.settings.files[path]?.mode !== 'native';
     }
 
+    async setDefaultProfile(profile: NoteLayoutProfile): Promise<void> {
+        await this.updateSettings({ defaults: profile });
+    }
+
+    async setFileOverride(path: string, override: NoteLayoutFileOverride): Promise<void> {
+        const files = { ...this.settings.files, [normalizePath(path)]: override };
+        await this.updateSettings({ files });
+    }
+
     async updateSettings(patch: Partial<NoteLayoutSettingsV1>): Promise<void> {
         await this.save({ ...this.getSettings(), ...patch });
     }
