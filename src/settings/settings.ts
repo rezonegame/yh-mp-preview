@@ -2,6 +2,7 @@ import { Template } from '../templateManager';
 import { Background } from '../backgroundManager';
 import { migrateSettingsForV3, type V3SettingsMetadata, V3_SETTINGS_SCHEMA_VERSION } from '../core/migration/settingsMigration';
 import { CURATED_THEME_CATALOG_VERSION } from '../core/theme/themeCatalog';
+import { DEFAULT_WECHAT_FONT_STACK } from '../core/theme/wechatReadingBaseline';
 
 export interface MPSettings {
     schemaVersion: number;
@@ -70,7 +71,7 @@ const DEFAULT_SETTINGS: MPSettings = {
     },
     backgroundId: 'default',
     templateId: 'default',
-    fontFamily: '-apple-system',
+    fontFamily: DEFAULT_WECHAT_FONT_STACK,
     fontSize: 16,
     themeCatalogVersion: CURATED_THEME_CATALOG_VERSION,
     templates: [],
@@ -143,7 +144,6 @@ export class SettingsManager {
             isPreset: true,
             isVisible: true
         }));
-        const shouldCuratePresetVisibility = (savedData.themeCatalogVersion || 0) < CURATED_THEME_CATALOG_VERSION;
 
         // 如果没有保存的模板数据，直接使用代码中的模板
         if (!savedData.templates || !Array.isArray(savedData.templates) || savedData.templates.length === 0) {
@@ -171,14 +171,11 @@ export class SettingsManager {
             });
         }
 
-        // Version 2 removes legacy palettes from the distribution. All
-        // retained frameworks are immediately available in the gallery.
-        if (shouldCuratePresetVisibility) {
-            savedData.templates = savedData.templates.map((template: Template) => ({
-                ...template,
-                isVisible: true,
-            }));
-            savedData.themeCatalogVersion = CURATED_THEME_CATALOG_VERSION;
+        // Catalogue upgrades must never reset a user's preset visibility choices.
+        // Featured/legacy placement is presentation metadata, not a saved preference.
+        savedData.themeCatalogVersion = CURATED_THEME_CATALOG_VERSION;
+        if (savedData.fontFamily === '-apple-system') {
+            savedData.fontFamily = DEFAULT_WECHAT_FONT_STACK;
         }
 
         if (!savedData.customTemplates) {

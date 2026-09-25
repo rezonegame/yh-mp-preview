@@ -8,16 +8,17 @@ import type { SettingsManager } from './settings';
 import type { Template } from '../templateManager';
 import { curatedThemeEntries, getCuratedThemeEntry, type CuratedThemeScene } from '../core/theme/themeCatalog';
 
-type ThemeScene = '全部' | CuratedThemeScene | '自定义主题';
+type ThemeScene = '全部' | CuratedThemeScene | '自定义主题' | '历史主题';
 
 const CURATED_SCENE_ORDER = [...new Set(curatedThemeEntries.map(entry => entry.scene))];
 const SCENE_ORDER: ThemeScene[] = [
-    '全部', ...CURATED_SCENE_ORDER, '自定义主题'
+    '全部', ...CURATED_SCENE_ORDER, '自定义主题', '历史主题'
 ];
 
 export function getThemeScene(template: Template): ThemeScene {
     if (!template.isPreset) return '自定义主题';
-    return getCuratedThemeEntry(template.id)?.scene || '通用长文';
+    const entry = getCuratedThemeEntry(template.id);
+    return entry?.status === 'legacy' ? '历史主题' : entry?.scene || '通用长文';
 }
 
 export class ThemeGalleryModal extends Modal {
@@ -58,7 +59,7 @@ export class ThemeGalleryModal extends Modal {
         const header = contentEl.createDiv('mp-gallery-header');
         const heading = header.createDiv('mp-gallery-heading');
         heading.createEl('h2', { text: '公众号主题画廊' });
-        heading.createEl('p', { text: '按文章场景挑选公众号视觉风格；点击卡片先试用，确认后再应用。' });
+        heading.createEl('p', { text: '按文章场景挑选公众号视觉风格；点击卡片先试用，确认后再应用。旧主题可在历史主题中找回。' });
         const search = header.createEl('input', {
             cls: 'mp-gallery-search',
             attr: { type: 'search', placeholder: '搜索主题或文章场景' },
@@ -74,7 +75,7 @@ export class ThemeGalleryModal extends Modal {
             const count = this.getTemplatesForScene(scene).length;
             if (count === 0 && scene !== '全部') return;
             const button = sceneBar.createEl('button', {
-                text: scene === '全部' ? `全部主题 · ${this.templates.length}` : `${scene} · ${count}`,
+                text: `${scene === '全部' ? '全部主题' : scene} · ${count}`,
                 cls: `mp-gallery-scene ${scene === this.selectedScene ? 'is-active' : ''}`,
             });
             button.addEventListener('click', () => {
@@ -112,7 +113,10 @@ export class ThemeGalleryModal extends Modal {
     }
 
     private getTemplatesForScene(scene: ThemeScene): Template[] {
-        return this.templates.filter(template => scene === '全部' || getThemeScene(template) === scene);
+        return this.templates.filter(template => {
+            const themeScene = getThemeScene(template);
+            return scene === '全部' ? themeScene !== '历史主题' : themeScene === scene;
+        });
     }
 
     private matchesSearch(template: Template): boolean {
@@ -135,7 +139,7 @@ export class ThemeGalleryModal extends Modal {
         }
 
         const grouped = this.selectedScene === '全部';
-        const scenes = grouped ? SCENE_ORDER.filter(scene => scene !== '全部') : [this.selectedScene];
+        const scenes = grouped ? SCENE_ORDER.filter(scene => scene !== '全部' && scene !== '历史主题') : [this.selectedScene];
         scenes.forEach(scene => {
             const sceneTemplates = grouped ? templates.filter(template => getThemeScene(template) === scene) : templates;
             if (sceneTemplates.length === 0) return;

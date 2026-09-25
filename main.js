@@ -1417,14 +1417,14 @@ var require_html2canvas = __commonJS({
           Tokenizer2.prototype.consumeEscapedCodePoint = function() {
             var codePoint = this.consumeCodePoint();
             if (isHex(codePoint)) {
-              var hex = fromCodePoint$1(codePoint);
-              while (isHex(this.peekCodePoint(0)) && hex.length < 6) {
-                hex += fromCodePoint$1(this.consumeCodePoint());
+              var hex2 = fromCodePoint$1(codePoint);
+              while (isHex(this.peekCodePoint(0)) && hex2.length < 6) {
+                hex2 += fromCodePoint$1(this.consumeCodePoint());
               }
               if (isWhiteSpace(this.peekCodePoint(0))) {
                 this.consumeCodePoint();
               }
-              var hexCodePoint = parseInt(hex, 16);
+              var hexCodePoint = parseInt(hex2, 16);
               if (hexCodePoint === 0 || isSurrogateCodePoint(hexCodePoint) || hexCodePoint > 1114111) {
                 return REPLACEMENT_CHARACTER;
               }
@@ -1786,7 +1786,7 @@ var require_html2canvas = __commonJS({
         }
         return 0;
       };
-      var rgb = function(_context, args) {
+      var rgb2 = function(_context, args) {
         var tokens = args.filter(nonFunctionArgSeparator);
         if (tokens.length === 3) {
           var _a = tokens.map(getTokenColorValue), r = _a[0], g = _a[1], b = _a[2];
@@ -1835,8 +1835,8 @@ var require_html2canvas = __commonJS({
       var SUPPORTED_COLOR_FUNCTIONS = {
         hsl,
         hsla: hsl,
-        rgb,
-        rgba: rgb
+        rgb: rgb2,
+        rgba: rgb2
       };
       var parseColor = function(context, value) {
         return color$1.parse(context, Parser.create(value).parseComponentValue());
@@ -7936,21 +7936,21 @@ var init_apple_product = __esm({
   "src/templates/apple-product.json"() {
     apple_product_default = {
       id: "apple-product",
-      name: "\u4EA7\u54C1\u4E0E\u5DE5\u5177",
+      name: "\u4EA7\u54C1\u53D9\u4E8B",
       description: "\u6E05\u900F\u7684\u4EA7\u54C1\u8BF4\u660E\u5C42\u7EA7\uFF0C\u9002\u5408\u4EA7\u54C1\u4ECB\u7ECD\u3001\u5DE5\u5177\u8BC4\u6D4B\u4E0E\u54C1\u724C\u5185\u5BB9\u3002",
       source: "yh-mp-preview",
       styles: {
         container: "background: #ffffff; padding: 0; color: #374151;",
         accentColor: "#0a84ff",
         title: {
-          h1: { base: "margin: 28px 0 20px; font-size: 1.85em; padding-bottom: 12px; border-bottom: 2px solid #0a84ff;", content: "font-weight: 700; color: #111827;", after: "" },
-          h2: { base: "margin: 26px 0 12px; font-size: 1.38em;", content: "font-weight: 700; color: #111827;", after: "display: block; width: 28px; height: 2px; margin-top: 8px; background: #0a84ff;" },
-          h3: { base: "margin: 22px 0 10px; font-size: 1.15em;", content: "font-weight: 700; color: #0a84ff;", after: "" },
+          h1: { base: "margin: 32px 0 24px; font-size: 1.82em;", content: "font-weight: 700; color: #111827;", after: "" },
+          h2: { base: "margin: 32px 0 14px; padding-bottom: 8px; border-bottom: 1px solid #dbeafe; font-size: 1.34em;", content: "font-weight: 700; color: #111827;", after: "" },
+          h3: { base: "margin: 22px 0 10px; font-size: 1.15em;", content: "font-weight: 700; color: #0066cc;", after: "" },
           base: { base: "margin: 18px 0 8px; font-size: 1em;", content: "font-weight: 700; color: #1f2937;", after: "" }
         },
         paragraph: "color: #374151;",
         list: { container: "padding-left: 1.45em; color: #374151;", item: "color: #374151;", taskList: "list-style: none; padding-left: 0; color: #374151;" },
-        quote: "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #0a84ff; background: #f4f8ff; color: #4b5563;",
+        quote: "margin: 1.3em 0; padding: 12px 0 12px 16px; border-left: 2px solid #0a84ff; color: #374151;",
         code: { header: { container: "margin-bottom: 6px; padding: 6px 10px; background: #edf5ff;", dot: "display: none;", colors: ["#0a84ff", "#0a84ff", "#0a84ff"] }, block: "margin: 1.2em 0; padding: 14px; background: #f8fafc; border: 1px solid #dbeafe; color: #1f2937;", inline: "padding: 1px 4px; background: #eff6ff; color: #0a84ff;" },
         image: "border: 1px solid #dbeafe; border-radius: 8px;",
         link: "color: #0a84ff; text-decoration: underline;",
@@ -7967,7 +7967,7 @@ var init_apple_product = __esm({
 var clear_guide_default;
 var init_clear_guide = __esm({
   "src/templates/clear-guide.json"() {
-    clear_guide_default = { id: "clear-guide", name: "\u6E05\u6670\u6307\u5357", description: "\u7F16\u53F7\u611F\u66F4\u5F3A\u7684\u64CD\u4F5C\u8BF4\u660E\u98CE\uFF0C\u9002\u5408\u6559\u7A0B\u3001\u6D41\u7A0B\u548C\u5DE5\u5177\u4E0A\u624B\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#263b3a;", accentColor: "#087f75", title: { h1: { base: "margin:28px 0 24px;padding-bottom:14px;border-bottom:6px solid #f0c94d;font-size:1.82em;", content: "font-weight:700;color:#172b29;", after: "" }, h2: { base: "margin:30px 0 14px;padding-bottom:8px;border-bottom:3px solid #172b29;font-size:1.38em;", content: "font-weight:700;color:#172b29;", after: "" }, h3: { base: "margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid #b9d0cd;font-size:1.15em;", content: "font-weight:700;color:#087f75;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#176c65;", after: "" } }, paragraph: "color:#263b3a;", list: { container: "padding-left:1.45em;color:#087f75;", item: "color:#263b3a;", taskList: "list-style:none;padding-left:0;color:#263b3a;" }, quote: "margin:1.2em 0;padding:14px 16px;border:2px solid #172b29;background:#fff7cf;color:#31514f;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#dff1ee;", dot: "display:none;", colors: ["#087f75", "#087f75", "#087f75"] }, block: "margin:1.2em 0;padding:14px;background:#173330;border:1px solid #183f3c;color:#e8f4f2;", inline: "padding:1px 4px;background:#eaf3f2;color:#075f58;" }, image: "border:2px solid #172b29;border-radius:0;", link: "color:#06736a;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#064c47;", em: "color:#476a66;", del: "color:#9bbdb9;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #172b29;", header: "padding:10px;background:#fff7cf;color:#172b29;border-bottom:1px solid #b9d0cd;", cell: "padding:10px;border-bottom:1px solid #d9e9e6;color:#263b3a;" }, hr: "margin:30px 0;border:0;border-top:1px solid #9bbdb9;", footnote: { ref: "color:#06736a;", backref: "color:#06736a;" } } };
+    clear_guide_default = { id: "clear-guide", name: "\u6E05\u6670\u6307\u5357", description: "\u7F16\u53F7\u611F\u66F4\u5F3A\u7684\u64CD\u4F5C\u8BF4\u660E\u98CE\uFF0C\u9002\u5408\u6559\u7A0B\u3001\u6D41\u7A0B\u548C\u5DE5\u5177\u4E0A\u624B\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#263b3a;", accentColor: "#087f75", title: { h1: { base: "margin:26px 0 20px;padding-bottom:10px;border-bottom:3px solid #f0c94d;font-size:1.76em;", content: "font-weight:700;color:#172b29;", after: "" }, h2: { base: "margin:30px 0 14px;padding-bottom:8px;border-bottom:3px solid #172b29;font-size:1.38em;", content: "font-weight:700;color:#172b29;", after: "" }, h3: { base: "margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid #b9d0cd;font-size:1.15em;", content: "font-weight:700;color:#087f75;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#176c65;", after: "" } }, paragraph: "color:#263b3a;", list: { container: "padding-left:1.45em;color:#087f75;", item: "color:#263b3a;", taskList: "list-style:none;padding-left:0;color:#263b3a;" }, quote: "margin:1.1em 0;padding:12px 14px;border-left:3px solid #087f75;background:#f3faf8;color:#254743;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#dff1ee;", dot: "display:none;", colors: ["#087f75", "#087f75", "#087f75"] }, block: "margin:1.2em 0;padding:14px;background:#173330;border:1px solid #183f3c;color:#e8f4f2;", inline: "padding:1px 4px;background:#eaf3f2;color:#075f58;" }, image: "border:2px solid #172b29;border-radius:0;", link: "color:#06736a;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#064c47;", em: "color:#476a66;", del: "color:#9bbdb9;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #172b29;", header: "padding:10px;background:#fff7cf;color:#172b29;border-bottom:1px solid #b9d0cd;", cell: "padding:10px;border-bottom:1px solid #d9e9e6;color:#263b3a;" }, hr: "margin:30px 0;border:0;border-top:1px solid #9bbdb9;", footnote: { ref: "color:#06736a;", backref: "color:#06736a;" } } };
   }
 });
 
@@ -7975,7 +7975,7 @@ var init_clear_guide = __esm({
 var data_blueprint_default;
 var init_data_blueprint = __esm({
   "src/templates/data-blueprint.json"() {
-    data_blueprint_default = { id: "data-blueprint", name: "\u6570\u636E\u84DD\u56FE", description: "\u6DF1\u84DD\u6570\u636E\u5C42\u7EA7\u4E0E\u6696\u8272\u6807\u8BB0\uFF0C\u9002\u5408\u6570\u636E\u5206\u6790\u3001\u7ECF\u8425\u590D\u76D8\u4E0E\u62A5\u544A\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#203047;", accentColor: "#173f7a", title: { h1: { base: "margin:24px 0 24px;padding:20px 18px;background:#102b4e;font-size:1.82em;", content: "font-weight:700;color:#ffffff;", after: "" }, h2: { base: "margin:30px 0 14px;padding-bottom:8px;border-bottom:2px solid #173f7a;font-size:1.38em;", content: "font-weight:700;color:#173f7a;", after: "" }, h3: { base: "margin:22px 0 10px;padding:4px 8px;border:1px solid #7790ac;background:#edf3f8;font-size:1.04em;", content: "font-weight:700;color:#173f7a;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#365777;", after: "" } }, paragraph: "color:#203047;", list: { container: "padding-left:1.45em;color:#a84317;", item: "color:#203047;", taskList: "list-style:none;padding-left:0;color:#203047;" }, quote: "margin:1.2em 0;padding:14px 16px;border-top:1px solid #7790ac;border-bottom:1px solid #7790ac;color:#314765;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#13233a;", dot: "display:none;", colors: ["#a84317", "#a84317", "#a84317"] }, block: "margin:1.2em 0;padding:14px;background:#13233a;border-top:5px solid #a84317;color:#eaf1f8;", inline: "padding:1px 4px;background:#eef3f8;color:#174f8f;" }, image: "padding:4px;border:1px solid #aebdce;border-radius:0;", link: "color:#175da8;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#142e55;", em: "color:#536a84;", del: "color:#94a3b8;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #173f7a;", header: "padding:10px;background:#173f7a;color:#ffffff;border-bottom:1px solid #173f7a;", cell: "padding:10px;border-bottom:1px solid #d8e1eb;color:#203047;" }, hr: "margin:30px 0;border:0;border-top:1px solid #aebdce;", footnote: { ref: "color:#175da8;", backref: "color:#175da8;" } } };
+    data_blueprint_default = { id: "data-blueprint", name: "\u6570\u636E\u84DD\u56FE", description: "\u6DF1\u84DD\u6570\u636E\u5C42\u7EA7\u4E0E\u6696\u8272\u6807\u8BB0\uFF0C\u9002\u5408\u6570\u636E\u5206\u6790\u3001\u7ECF\u8425\u590D\u76D8\u4E0E\u62A5\u544A\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#203047;", accentColor: "#173f7a", title: { h1: { base: "margin:24px 0 22px;padding:10px;background:#102b4e;font-size:1.43em;", content: "font-weight:700;color:#ffffff;", after: "" }, h2: { base: "margin:30px 0 14px;padding-bottom:8px;border-bottom:2px solid #173f7a;font-size:1.38em;", content: "font-weight:700;color:#173f7a;", after: "" }, h3: { base: "margin:24px 0 10px;padding:5px 8px;border-left:2px solid #a84317;background:#f5f7fa;font-size:1.08em;", content: "font-weight:700;color:#173f7a;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#365777;", after: "" } }, paragraph: "color:#203047;", list: { container: "padding-left:1.45em;color:#a84317;", item: "color:#203047;", taskList: "list-style:none;padding-left:0;color:#203047;" }, quote: "margin:1.2em 0;padding:14px 16px;border-top:1px solid #7790ac;border-bottom:1px solid #7790ac;color:#314765;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#13233a;", dot: "display:none;", colors: ["#a84317", "#a84317", "#a84317"] }, block: "margin:1.2em 0;padding:14px;background:#13233a;border-top:5px solid #a84317;color:#eaf1f8;", inline: "padding:1px 4px;background:#eef3f8;color:#174f8f;" }, image: "padding:4px;border:1px solid #aebdce;border-radius:0;", link: "color:#175da8;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#142e55;", em: "color:#536a84;", del: "color:#94a3b8;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #173f7a;", header: "padding:10px;background:#173f7a;color:#ffffff;border-bottom:1px solid #173f7a;", cell: "padding:10px;border-bottom:1px solid #d8e1eb;color:#203047;" }, hr: "margin:30px 0;border:0;border-top:1px solid #aebdce;", footnote: { ref: "color:#175da8;", backref: "color:#175da8;" } } };
   }
 });
 
@@ -7983,7 +7983,7 @@ var init_data_blueprint = __esm({
 var deep_reading_default;
 var init_deep_reading = __esm({
   "src/templates/deep-reading.json"() {
-    deep_reading_default = { id: "deep-reading", name: "\u6DF1\u5EA6\u9605\u8BFB", description: "\u66F4\u5C11\u88C5\u9970\u3001\u66F4\u5F3A\u6587\u5B57\u5C42\u7EA7\uFF0C\u9002\u5408\u53D9\u4E8B\u3001\u8BBF\u8C08\u4E0E\u6DF1\u5EA6\u957F\u6587\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#202124;", accentColor: "#202124", title: { h1: { base: "margin:34px 0 24px;font-size:1.9em;", content: "font-weight:700;color:#111111;", after: "" }, h2: { base: "margin:32px 0 14px;font-size:1.42em;", content: "font-weight:700;color:#111111;", after: "" }, h3: { base: "margin:24px 0 10px;font-size:1.16em;", content: "font-weight:700;color:#303134;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#4b5563;", after: "" } }, paragraph: "color:#202124;", list: { container: "padding-left:1.45em;color:#202124;", item: "color:#202124;", taskList: "list-style:none;padding-left:0;color:#202124;" }, quote: "margin:1.3em 0;padding:14px 18px;border-left:3px solid #202124;background:#fafafa;color:#4b5563;", code: { header: { container: "display:none;", dot: "display:none;", colors: ["#202124", "#202124", "#202124"] }, block: "margin:1.3em 0;padding:14px;background:#f6f8fa;border:1px solid #e5e7eb;color:#202124;", inline: "padding:1px 4px;background:#f3f4f6;color:#202124;" }, image: "border:0;border-radius:0;", link: "color:#202124;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#111111;", em: "color:#4b5563;", del: "color:#9ca3af;" }, table: { container: "margin:1.3em 0;border-collapse:collapse;border-top:1px solid #202124;", header: "padding:10px;color:#111111;border-bottom:1px solid #d1d5db;", cell: "padding:10px;border-bottom:1px solid #e5e7eb;color:#202124;" }, hr: "margin:34px 0;border:0;border-top:1px solid #d1d5db;", footnote: { ref: "color:#4b5563;", backref: "color:#4b5563;" } } };
+    deep_reading_default = { id: "deep-reading", name: "\u6DF1\u5EA6\u9605\u8BFB", description: "\u66F4\u5C11\u88C5\u9970\u3001\u66F4\u5F3A\u6587\u5B57\u5C42\u7EA7\uFF0C\u9002\u5408\u53D9\u4E8B\u3001\u8BBF\u8C08\u4E0E\u6DF1\u5EA6\u957F\u6587\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#202124;", accentColor: "#202124", title: { h1: { base: "margin:34px 0 24px;font-size:1.9em;", content: "font-weight:700;color:#111111;", after: "" }, h2: { base: "margin:38px 0 16px;padding-top:8px;border-top:1px solid #e5e7eb;font-size:1.38em;", content: "font-weight:700;color:#111111;", after: "" }, h3: { base: "margin:24px 0 10px;font-size:1.16em;", content: "font-weight:700;color:#303134;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#4b5563;", after: "" } }, paragraph: "color:#202124;", list: { container: "padding-left:1.45em;color:#202124;", item: "color:#202124;", taskList: "list-style:none;padding-left:0;color:#202124;" }, quote: "margin:1.6em 0;padding:16px 0;border-top:1px solid #d1d5db;border-bottom:1px solid #d1d5db;color:#3f454d;", code: { header: { container: "display:none;", dot: "display:none;", colors: ["#202124", "#202124", "#202124"] }, block: "margin:1.3em 0;padding:14px;background:#f6f8fa;border:1px solid #e5e7eb;color:#202124;", inline: "padding:1px 4px;background:#f3f4f6;color:#202124;" }, image: "border:0;border-radius:0;", link: "color:#202124;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#111111;", em: "color:#4b5563;", del: "color:#9ca3af;" }, table: { container: "margin:1.3em 0;border-collapse:collapse;border-top:1px solid #202124;", header: "padding:10px;color:#111111;border-bottom:1px solid #d1d5db;", cell: "padding:10px;border-bottom:1px solid #e5e7eb;color:#202124;" }, hr: "margin:34px 0;border:0;border-top:1px solid #d1d5db;", footnote: { ref: "color:#4b5563;", backref: "color:#4b5563;" } } };
   }
 });
 
@@ -8000,14 +8000,14 @@ var init_default = __esm({
         container: "background: #ffffff; padding: 0; color: #334155;",
         accentColor: "#475569",
         title: {
-          h1: { base: "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 2px solid #475569;", content: "font-weight: 700; color: #1f2937;", after: "" },
-          h2: { base: "margin: 26px 0 12px; padding-left: 12px; border-left: 4px solid #475569; font-size: 1.38em;", content: "font-weight: 700; color: #1f2937;", after: "" },
+          h1: { base: "margin: 28px 0 20px; font-size: 1.78em; padding-bottom: 10px; border-bottom: 1px solid #cbd5e1;", content: "font-weight: 700; color: #1f2937;", after: "" },
+          h2: { base: "margin: 28px 0 12px; font-size: 1.34em;", content: "font-weight: 700; color: #1f2937;", after: "" },
           h3: { base: "margin: 22px 0 10px; font-size: 1.15em;", content: "font-weight: 700; color: #475569;", after: "" },
           base: { base: "margin: 18px 0 8px; font-size: 1em;", content: "font-weight: 700; color: #475569;", after: "" }
         },
         paragraph: "color: #334155;",
         list: { container: "padding-left: 1.45em; color: #334155;", item: "color: #334155;", taskList: "list-style: none; padding-left: 0; color: #334155;" },
-        quote: "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #94a3b8; background: #f8fafc; color: #475569;",
+        quote: "margin: 1.1em 0; padding: 10px 14px; border-left: 2px solid #94a3b8; background: #f8fafc; color: #475569;",
         code: { header: { container: "margin-bottom: 6px; padding: 6px 10px; background: #eef2f7;", dot: "display: none;", colors: ["#475569", "#475569", "#475569"] }, block: "margin: 1.2em 0; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; color: #334155;", inline: "padding: 1px 4px; background: #f1f5f9; color: #334155;" },
         image: "border: 1px solid #e2e8f0; border-radius: 4px;",
         link: "color: #334155; text-decoration: underline;",
@@ -8098,7 +8098,7 @@ var init_modern_report = __esm({
 var olive_journal_default;
 var init_olive_journal = __esm({
   "src/templates/olive-journal.json"() {
-    olive_journal_default = { id: "olive-journal", name: "\u6A44\u6984\u624B\u8BB0", description: "\u9ED1\u7070\u6B63\u6587\u914D\u6A59\u8272\u7F16\u8F91\u6807\u8BB0\uFF0C\u9002\u5408\u6848\u4F8B\u590D\u76D8\u3001\u5185\u520A\u4E0E\u7CFB\u7EDF\u6027\u8BF4\u660E\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#303236;", accentColor: "#ed7b2f", title: { h1: { base: "margin:28px 0 22px;padding-bottom:12px;border-bottom:3px solid #1e1f23;font-size:1.84em;", content: "font-weight:700;color:#1e1f23;", after: "" }, h2: { base: "margin:30px 0 14px;padding-left:12px;border-left:5px solid #ed7b2f;font-size:1.4em;", content: "font-weight:700;color:#1e1f23;", after: "" }, h3: { base: "margin:22px 0 10px;font-size:1.15em;", content: "font-weight:700;color:#c75f1c;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#45474d;", after: "" } }, paragraph: "color:#303236;", list: { container: "padding-left:1.45em;color:#ed7b2f;", item: "color:#303236;", taskList: "list-style:none;padding-left:0;color:#303236;" }, quote: "margin:1.2em 0;padding:15px 17px;border-left:4px solid #ed7b2f;background:#fff8f2;color:#505158;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#1e1f23;", dot: "display:none;", colors: ["#ed7b2f", "#ed7b2f", "#ed7b2f"] }, block: "margin:1.2em 0;padding:14px;background:#25262b;border-top:4px solid #ed7b2f;color:#f2f3f5;", inline: "padding:1px 4px;background:#f8eee6;color:#b95114;" }, image: "border:1px solid #dedfe2;border-radius:2px;", link: "color:#b95114;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#1e1f23;", em: "color:#505158;", del: "color:#9ca3af;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #1e1f23;", header: "padding:10px;background:#1e1f23;color:#ffffff;border-bottom:1px solid #1e1f23;", cell: "padding:10px;border-bottom:1px solid #dedfe2;color:#303236;" }, hr: "margin:30px 0;border:0;border-top:1px solid #dedfe2;", footnote: { ref: "color:#b95114;", backref: "color:#b95114;" } } };
+    olive_journal_default = { id: "olive-journal", name: "\u6A44\u6984\u624B\u8BB0", description: "\u9ED1\u7070\u6B63\u6587\u914D\u6A59\u8272\u7F16\u8F91\u6807\u8BB0\uFF0C\u9002\u5408\u6848\u4F8B\u590D\u76D8\u3001\u5185\u520A\u4E0E\u7CFB\u7EDF\u6027\u8BF4\u660E\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#303236;", accentColor: "#ed7b2f", title: { h1: { base: "margin:28px 0 22px;padding-bottom:12px;border-bottom:1px solid #1e1f23;font-size:1.82em;", content: "font-weight:700;color:#1e1f23;", after: "" }, h2: { base: "margin:30px 0 14px;padding:8px 12px;border-left:3px solid #ed7b2f;background:#fff8f2;font-size:1.38em;", content: "font-weight:700;color:#1e1f23;", after: "" }, h3: { base: "margin:22px 0 10px;font-size:1.15em;", content: "font-weight:700;color:#a94b0a;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#45474d;", after: "" } }, paragraph: "color:#303236;", list: { container: "padding-left:1.45em;color:#ed7b2f;", item: "color:#303236;", taskList: "list-style:none;padding-left:0;color:#303236;" }, quote: "margin:1.2em 0;padding:15px 17px;border-left:4px solid #ed7b2f;background:#fff8f2;color:#505158;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#1e1f23;", dot: "display:none;", colors: ["#ed7b2f", "#ed7b2f", "#ed7b2f"] }, block: "margin:1.2em 0;padding:14px;background:#25262b;border-top:4px solid #ed7b2f;color:#f2f3f5;", inline: "padding:1px 4px;background:#f8eee6;color:#b95114;" }, image: "border:1px solid #dedfe2;border-radius:2px;", link: "color:#b95114;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#1e1f23;", em: "color:#505158;", del: "color:#9ca3af;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #1e1f23;", header: "padding:10px;background:#1e1f23;color:#ffffff;border-bottom:1px solid #1e1f23;", cell: "padding:10px;border-bottom:1px solid #dedfe2;color:#303236;" }, hr: "margin:30px 0;border:0;border-top:1px solid #dedfe2;", footnote: { ref: "color:#b95114;", backref: "color:#b95114;" } } };
   }
 });
 
@@ -8106,7 +8106,7 @@ var init_olive_journal = __esm({
 var product_review_default;
 var init_product_review = __esm({
   "src/templates/product-review.json"() {
-    product_review_default = { id: "product-review", name: "\u6D4B\u8BC4\u6E05\u5355", description: "\u4EE5\u8BC4\u5206\u3001\u8981\u70B9\u548C\u5BF9\u6BD4\u9605\u8BFB\u4E3A\u4E2D\u5FC3\uFF0C\u9002\u5408\u4EA7\u54C1\u6D4B\u8BC4\u4E0E\u5DE5\u5177\u76D8\u70B9\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#334155;", accentColor: "#059669", title: { h1: { base: "margin:28px 0 20px;padding:12px 14px;border-left:5px solid #059669;background:#ecfdf5;font-size:1.8em;", content: "font-weight:700;color:#14532d;", after: "" }, h2: { base: "margin:28px 0 12px;padding:8px 12px;border-left:4px solid #059669;background:#f0fdf4;font-size:1.36em;", content: "font-weight:700;color:#14532d;", after: "" }, h3: { base: "margin:22px 0 10px;font-size:1.14em;", content: "font-weight:700;color:#047857;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#166534;", after: "" } }, paragraph: "color:#334155;", list: { container: "padding-left:1.45em;color:#059669;", item: "color:#334155;", taskList: "list-style:none;padding-left:0;color:#334155;" }, quote: "margin:1.1em 0;padding:14px 16px;border-left:4px solid #059669;background:#f0fdf4;color:#365248;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#dff8ed;", dot: "display:none;", colors: ["#059669", "#059669", "#059669"] }, block: "margin:1.2em 0;padding:14px;background:#f7fffa;border:1px solid #ccebd8;color:#14532d;", inline: "padding:1px 4px;background:#ecfdf5;color:#047857;" }, image: "border:1px solid #ccebd8;border-radius:6px;", link: "color:#047857;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#047857;", em: "color:#46705c;", del: "color:#94a3b8;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #059669;", header: "padding:10px;background:#059669;color:#ffffff;border-bottom:1px solid #059669;", cell: "padding:10px;border-bottom:1px solid #d9eee1;color:#334155;" }, hr: "margin:28px 0;border:0;border-top:1px solid #ccebd8;", footnote: { ref: "color:#059669;", backref: "color:#059669;" } } };
+    product_review_default = { id: "product-review", name: "\u6D4B\u8BC4\u6E05\u5355", description: "\u4EE5\u8BC4\u5206\u3001\u8981\u70B9\u548C\u5BF9\u6BD4\u9605\u8BFB\u4E3A\u4E2D\u5FC3\uFF0C\u9002\u5408\u4EA7\u54C1\u6D4B\u8BC4\u4E0E\u5DE5\u5177\u76D8\u70B9\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#334155;", accentColor: "#059669", title: { h1: { base: "margin:26px 0 20px;padding:10px 12px;border-left:3px solid #059669;background:#f0fdf4;font-size:1.76em;", content: "font-weight:700;color:#14532d;", after: "" }, h2: { base: "margin:28px 0 12px;padding-left:10px;border-left:3px solid #059669;font-size:1.34em;", content: "font-weight:700;color:#14532d;", after: "" }, h3: { base: "margin:22px 0 10px;font-size:1.14em;", content: "font-weight:700;color:#047857;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#166534;", after: "" } }, paragraph: "color:#334155;", list: { container: "padding-left:1.45em;color:#059669;", item: "color:#334155;", taskList: "list-style:none;padding-left:0;color:#334155;" }, quote: "margin:1.1em 0;padding:14px 16px;border-left:4px solid #059669;background:#f0fdf4;color:#365248;", code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#dff8ed;", dot: "display:none;", colors: ["#059669", "#059669", "#059669"] }, block: "margin:1.2em 0;padding:14px;background:#f7fffa;border:1px solid #ccebd8;color:#14532d;", inline: "padding:1px 4px;background:#ecfdf5;color:#047857;" }, image: "border:1px solid #ccebd8;border-radius:6px;", link: "color:#047857;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#047857;", em: "color:#46705c;", del: "color:#94a3b8;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #059669;", header: "padding:10px;background:#047857;color:#ffffff;border-bottom:1px solid #059669;", cell: "padding:10px;border-bottom:1px solid #d9eee1;color:#334155;" }, hr: "margin:28px 0;border:0;border-top:1px solid #ccebd8;", footnote: { ref: "color:#059669;", backref: "color:#059669;" } } };
   }
 });
 
@@ -8114,7 +8114,7 @@ var init_product_review = __esm({
 var red_white_editorial_default;
 var init_red_white_editorial = __esm({
   "src/templates/red-white-editorial.json"() {
-    red_white_editorial_default = { id: "red-white-editorial", name: "\u7EA2\u767D\u7F16\u8F91", description: "\u514B\u5236\u7684\u7EA2\u8272\u7AE0\u8282\u951A\u70B9\uFF0C\u9002\u5408\u8BC4\u8BBA\u3001\u5206\u6790\u4E0E\u6709\u529B\u91CF\u611F\u7684\u8BAE\u9898\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#292524;", accentColor: "#c2413b", title: { h1: { base: "margin:30px 0 22px;padding-bottom:12px;border-bottom:3px solid #c2413b;font-size:1.86em;", content: "font-weight:700;color:#1c1917;", after: "" }, h2: { base: "margin:30px 0 14px;padding-left:12px;border-left:5px solid #c2413b;font-size:1.4em;", content: "font-weight:700;color:#1c1917;", after: "" }, h3: { base: "margin:22px 0 10px;font-size:1.15em;", content: "font-weight:700;color:#c2413b;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#44403c;", after: "" } }, paragraph: "color:#292524;", list: { container: "padding-left:1.45em;color:#c2413b;", item: "color:#292524;", taskList: "list-style:none;padding-left:0;color:#292524;" }, quote: "margin:1.2em 0;padding:16px 18px;border-left:4px solid #c2413b;background:#fff7f6;color:#57534e;", code: { header: { container: "display:none;", dot: "display:none;", colors: ["#c2413b", "#c2413b", "#c2413b"] }, block: "margin:1.2em 0;padding:14px;background:#fafafa;border:1px solid #e7e5e4;color:#292524;", inline: "padding:1px 4px;background:#fff1f0;color:#b42318;" }, image: "border:0;border-radius:0;", link: "color:#c2413b;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#b42318;", em: "color:#57534e;", del: "color:#a8a29e;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #c2413b;", header: "padding:10px;background:#fff1f0;color:#7f1d1d;border-bottom:1px solid #fecaca;", cell: "padding:10px;border-bottom:1px solid #e7e5e4;color:#292524;" }, hr: "margin:30px 0;border:0;border-top:1px solid #fecaca;", footnote: { ref: "color:#c2413b;", backref: "color:#c2413b;" } } };
+    red_white_editorial_default = { id: "red-white-editorial", name: "\u7EA2\u767D\u7F16\u8F91", description: "\u514B\u5236\u7684\u7EA2\u8272\u7AE0\u8282\u951A\u70B9\uFF0C\u9002\u5408\u8BC4\u8BBA\u3001\u5206\u6790\u4E0E\u6709\u529B\u91CF\u611F\u7684\u8BAE\u9898\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#292524;", accentColor: "#c2413b", title: { h1: { base: "margin:30px 0 22px;padding-bottom:12px;border-bottom:3px solid #c2413b;font-size:1.86em;", content: "font-weight:700;color:#1c1917;", after: "" }, h2: { base: "margin:30px 0 14px;padding-bottom:8px;border-bottom:1px solid #c2413b;font-size:1.38em;", content: "font-weight:700;color:#1c1917;", after: "" }, h3: { base: "margin:22px 0 10px;font-size:1.15em;", content: "font-weight:700;color:#c2413b;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#44403c;", after: "" } }, paragraph: "color:#292524;", list: { container: "padding-left:1.45em;color:#c2413b;", item: "color:#292524;", taskList: "list-style:none;padding-left:0;color:#292524;" }, quote: "margin:1.3em 0;padding:14px 0;border-top:2px solid #c2413b;color:#44403c;", code: { header: { container: "display:none;", dot: "display:none;", colors: ["#c2413b", "#c2413b", "#c2413b"] }, block: "margin:1.2em 0;padding:14px;background:#fafafa;border:1px solid #e7e5e4;color:#292524;", inline: "padding:1px 4px;background:#fff1f0;color:#b42318;" }, image: "border:0;border-radius:0;", link: "color:#c2413b;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#b42318;", em: "color:#57534e;", del: "color:#a8a29e;" }, table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #c2413b;", header: "padding:10px;background:#fff1f0;color:#7f1d1d;border-bottom:1px solid #fecaca;", cell: "padding:10px;border-bottom:1px solid #e7e5e4;color:#292524;" }, hr: "margin:30px 0;border:0;border-top:1px solid #fecaca;", footnote: { ref: "color:#c2413b;", backref: "color:#c2413b;" } } };
   }
 });
 
@@ -8124,21 +8124,21 @@ var init_zen_essence = __esm({
   "src/templates/zen-essence.json"() {
     zen_essence_default = {
       id: "zen-essence",
-      name: "\u968F\u7B14\u4E0E\u751F\u6D3B",
+      name: "\u7559\u767D\u968F\u7B14",
       description: "\u6E29\u548C\u7559\u767D\u4E0E\u4F4E\u9971\u548C\u58A8\u8272\uFF0C\u9002\u5408\u968F\u7B14\u3001\u751F\u6D3B\u65B9\u5F0F\u4E0E\u6C89\u9759\u9605\u8BFB\u3002",
       source: "yh-mp-preview",
       styles: {
         container: "background: #ffffff; padding: 0; color: #5d625d;",
         accentColor: "#79836f",
         title: {
-          h1: { base: "margin: 32px 0 22px; font-size: 1.7em; padding-bottom: 14px; border-bottom: 1px solid #cfd5ca;", content: "font-weight: 700; color: #3f463d;", after: "" },
+          h1: { base: "margin: 34px 0 26px; font-size: 1.72em;", content: "font-weight: 700; color: #3f463d;", after: "" },
           h2: { base: "margin: 30px 0 14px; font-size: 1.32em;", content: "font-weight: 700; color: #4e584a;", after: "display: block; width: 24px; height: 1px; margin-top: 9px; background: #79836f;" },
           h3: { base: "margin: 24px 0 10px; font-size: 1.12em;", content: "font-weight: 700; color: #65705f;", after: "" },
           base: { base: "margin: 18px 0 8px; font-size: 1em;", content: "font-weight: 700; color: #65705f;", after: "" }
         },
         paragraph: "color: #5d625d;",
         list: { container: "padding-left: 1.45em; color: #5d625d;", item: "color: #5d625d;", taskList: "list-style: none; padding-left: 0; color: #5d625d;" },
-        quote: "margin: 1.2em 0; padding: 16px 18px; border-left: 3px solid #aeb7a7; background: #fafbf9; color: #687065;",
+        quote: "margin: 1.7em 0; padding: 18px 0; border-top: 1px solid #cfd5ca; border-bottom: 1px solid #cfd5ca; color: #4e584a;",
         code: { header: { container: "display: none;", dot: "display: none;", colors: ["#79836f", "#79836f", "#79836f"] }, block: "margin: 1.3em 0; padding: 14px; background: #fafbf9; border: 1px solid #e2e6de; color: #4e584a;", inline: "padding: 1px 4px; background: #f2f4ef; color: #65705f;" },
         image: "border: 0; border-radius: 0;",
         link: "color: #65705f; text-decoration: underline;",
@@ -8373,15 +8373,15 @@ function assignSides(lines) {
   }
   return sides;
 }
-function hexToRgba(hex, alpha) {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+function hexToRgba(hex2, alpha) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex2);
   if (result) {
     const r = parseInt(result[1], 16);
     const g = parseInt(result[2], 16);
     const b = parseInt(result[3], 16);
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
-  return hex;
+  return hex2;
 }
 function renderDialogue(dialogue, style = {}) {
   const finalStyle = { ...DEFAULT_STYLE, ...style };
@@ -10111,10 +10111,58 @@ function validateWechatHtml(root) {
       add("error", "missing-image-source", "\u56FE\u7247\u7F3A\u5C11\u53EF\u7528\u7684 src \u5730\u5740", element);
     }
   });
+  root.querySelectorAll("table").forEach((table) => {
+    const widestRow = Math.max(0, ...Array.from(table.querySelectorAll("tr")).map((row) => Array.from(row.children).reduce((columns, cell) => columns + (cell.matches("th, td") ? Number(cell.getAttribute("colspan") || 1) : 0), 0)));
+    if (widestRow > 3) {
+      add("warning", "mobile-wide-table", "\u8868\u683C\u8D85\u8FC7\u4E09\u5217\uFF0C\u5EFA\u8BAE\u5728\u516C\u4F17\u53F7\u624B\u673A\u7AEF\u786E\u8BA4\u662F\u5426\u9700\u8981\u62C6\u4E3A\u5217\u8868\u3002", table);
+    }
+  });
   return {
     issues,
     errors: issues.filter((issue) => issue.severity === "error").length,
     warnings: issues.filter((issue) => issue.severity === "warning").length
+  };
+}
+
+// src/core/theme/wechatPalette.ts
+function rgb(hex2) {
+  const value = hex2.replace("#", "");
+  return [0, 2, 4].map((index) => parseInt(value.slice(index, index + 2), 16));
+}
+function hex(r, g, b) {
+  return `#${[r, g, b].map((value) => Math.round(value).toString(16).padStart(2, "0")).join("")}`;
+}
+function mix(first, second, firstWeight) {
+  const a = rgb(first);
+  const b = rgb(second);
+  return hex(...a.map((value, index) => value * firstWeight + b[index] * (1 - firstWeight)));
+}
+function luminance(color) {
+  const channels = rgb(color).map((value) => {
+    const channel = value / 255;
+    return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+  });
+  return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+}
+function contrast(first, second) {
+  const [lighter, darker] = [luminance(first), luminance(second)].sort((a, b) => b - a);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+function resolveWechatPalette(template) {
+  const rawAccent = (template == null ? void 0 : template.styles.accentColor) || "#475569";
+  const accent = /^#[\da-f]{6}$/i.test(rawAccent) ? rawAccent.toLowerCase() : "#475569";
+  const surface = mix(accent, "#ffffff", 0.06);
+  let accentText = accent;
+  while (contrast(accentText, "#ffffff") < 4.6 || contrast(accentText, surface) < 4.6) {
+    accentText = mix(accentText, "#000000", 0.9);
+  }
+  return {
+    accent,
+    accentText,
+    onAccent: contrast("#ffffff", accent) >= 4.5 ? "#ffffff" : "#111827",
+    surface,
+    border: mix(accent, "#ffffff", 0.25),
+    foreground: "#263238"
   };
 }
 
@@ -10130,81 +10178,91 @@ var recipeIds = /* @__PURE__ */ new Set([
 function normalizeArticleRecipeId(value) {
   return recipeIds.has(value) ? value : "legacy-compatible";
 }
-function applyTutorial(section) {
-  section.querySelectorAll("ol, ul").forEach((list) => {
-    list.style.cssText += "margin: 18px 0; padding: 0; list-style: none;";
-  });
+function setStyles(element, styles) {
+  const style = element.style;
+  Object.entries(styles).forEach(([property, value]) => style.setProperty(property, value));
+}
+function styleLists(section, palette, prefix) {
+  section.querySelectorAll("ol, ul").forEach((list) => setStyles(list, {
+    margin: "18px 0",
+    padding: "0",
+    "list-style": "none"
+  }));
   section.querySelectorAll("ol > li, ul > li").forEach((item, index) => {
-    item.style.cssText += `display: block; margin: 10px 0; padding: 12px 14px; border-left: 4px solid #4285f4; border-radius: 0 8px 8px 0; background: #f5f8ff; line-height: 1.75;`;
-    if (!item.querySelector(":scope > .mp-recipe-step-label")) {
-      const label = document.createElement("span");
-      label.className = "mp-recipe-step-label";
-      label.textContent = `\u6B65\u9AA4 ${index + 1}\u3000`;
-      label.style.cssText = "font-weight: 700; color: #2563eb;";
+    setStyles(item, {
+      display: "block",
+      margin: "10px 0",
+      padding: "12px 14px",
+      "border-left": `3px solid ${palette.accent}`,
+      background: palette.surface,
+      "line-height": "1.72"
+    });
+    const className = prefix === "\u6B65\u9AA4" ? "mp-recipe-step-label" : "mp-recipe-check";
+    let label = item.querySelector(`:scope > .${className}`);
+    if (!label) {
+      label = document.createElement("span");
+      label.className = className;
       item.prepend(label);
     }
+    label.textContent = prefix === "\u6B65\u9AA4" ? `\u6B65\u9AA4 ${index + 1}\u3000` : "\u2713\u3000";
+    setStyles(label, { "font-weight": "700", color: palette.accentText });
   });
 }
-function applyChecklist(section) {
-  section.querySelectorAll("ul, ol").forEach((list) => {
-    list.style.cssText += "margin: 18px 0; padding: 0; list-style: none;";
-  });
-  section.querySelectorAll("ul > li, ol > li").forEach((item) => {
-    const element = item;
-    element.style.cssText += "display: block; margin: 8px 0; padding: 10px 14px; border: 1px solid #b7dfbf; border-radius: 8px; background: #f4fbf5; line-height: 1.75;";
-    if (!element.querySelector(":scope > .mp-recipe-check")) {
-      const marker = document.createElement("span");
-      marker.className = "mp-recipe-check";
-      marker.textContent = "\u2713";
-      marker.style.cssText = "display: inline; color: #16803c; font-weight: 700;";
-      element.prepend(marker);
-    }
-  });
-}
-function applyProductIntro(section) {
+function applyProductIntro(section, palette) {
   const firstParagraph = section.querySelector("p");
-  if (firstParagraph) {
-    firstParagraph.style.cssText += "margin: 0 0 20px; padding: 16px 18px; border: 1px solid #c9d8ff; border-radius: 10px; background: #f5f8ff; color: #234; font-size: 1.05em; line-height: 1.85;";
-  }
-  section.querySelectorAll("h2").forEach((heading) => {
-    heading.style.cssText += "margin-top: 28px; padding: 8px 12px; border-left: 5px solid #4f46e5; border-radius: 0 6px 6px 0; background: #f5f3ff;";
-  });
+  if (firstParagraph)
+    setStyles(firstParagraph, {
+      margin: "0 0 20px",
+      padding: "14px 16px",
+      "border-left": `3px solid ${palette.accent}`,
+      background: palette.surface,
+      "line-height": "1.78"
+    });
+  section.querySelectorAll("h2").forEach((heading) => setStyles(heading, {
+    "border-left": `3px solid ${palette.accent}`,
+    "padding-left": "12px"
+  }));
 }
-function applyCommentary(section) {
-  section.querySelectorAll("blockquote").forEach((quote) => {
-    quote.style.cssText += "margin: 20px 0; padding: 14px 18px; border-left: 5px solid #f59e0b; border-radius: 0 8px 8px 0; background: #fffbeb; color: #78350f; font-size: 1.05em; line-height: 1.8;";
-  });
+function applyCommentary(section, palette) {
+  section.querySelectorAll("blockquote").forEach((quote) => setStyles(quote, {
+    "border-left": `3px solid ${palette.accent}`,
+    background: palette.surface,
+    color: palette.foreground
+  }));
   const paragraphs = Array.from(section.querySelectorAll("p"));
   const conclusion = paragraphs[paragraphs.length - 1];
-  if (conclusion && paragraphs.length > 1) {
-    conclusion.style.cssText += "margin-top: 24px; padding: 14px 16px; border-top: 2px solid #f59e0b; background: #fffdf7; font-weight: 600;";
-  }
+  if (conclusion && paragraphs.length > 1)
+    setStyles(conclusion, {
+      "margin-top": "24px",
+      padding: "12px 0",
+      "border-top": `2px solid ${palette.accent}`,
+      "font-weight": "600"
+    });
 }
-function applyReview(section) {
-  section.querySelectorAll("h2, h3").forEach((heading) => {
-    const element = heading;
-    const accent = "#2563eb";
-    element.style.cssText += `margin-top: 26px; padding: 8px 12px; border-left: 5px solid ${accent}; border-radius: 0 6px 6px 0; background: #f5f8ff;`;
-  });
+function applyReview(section, palette) {
+  section.querySelectorAll("h2, h3").forEach((heading) => setStyles(heading, {
+    "border-left": `3px solid ${palette.accent}`,
+    "padding-left": "12px"
+  }));
 }
-function applyArticleRecipe(section, recipeId) {
+function applyArticleRecipe(section, recipeId, palette = resolveWechatPalette()) {
   const recipe = normalizeArticleRecipeId(recipeId);
   section.setAttribute("data-mp-recipe", recipe);
   switch (recipe) {
     case "tutorial":
-      applyTutorial(section);
+      styleLists(section, palette, "\u6B65\u9AA4");
       break;
     case "checklist":
-      applyChecklist(section);
+      styleLists(section, palette, "\u6E05\u5355");
       break;
     case "product-intro":
-      applyProductIntro(section);
+      applyProductIntro(section, palette);
       break;
     case "commentary":
-      applyCommentary(section);
+      applyCommentary(section, palette);
       break;
     case "review":
-      applyReview(section);
+      applyReview(section, palette);
       break;
     default:
       break;
@@ -10234,7 +10292,7 @@ function prepareLegacyWechatFragment(element, options = {}) {
     themeId: options.themeId || "legacy-active",
     recipeId: options.recipeId || "legacy-compatible"
   });
-  applyArticleRecipe(clone, plan.recipeId);
+  applyArticleRecipe(clone, plan.recipeId, options.palette);
   removeTransientAttributes(clone);
   const outputValidation = validateWechatHtml(clone);
   const blockingIssues = sourceValidation.issues.filter((issue) => issue.severity === "error");
@@ -10364,22 +10422,22 @@ BackgroundManager.BASE_CONTENT_PADDING = "padding: 16px 20px;";
 var import_obsidian2 = require("obsidian");
 
 // src/core/theme/themeCatalog.ts
-var CURATED_THEME_CATALOG_VERSION = 2;
+var CURATED_THEME_CATALOG_VERSION = 3;
 var curatedThemeEntries = [
-  { id: "default", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u4E2D\u6027\u3001\u7A33\u5B9A\uFF0C\u9002\u5408\u901A\u77E5\u3001\u6587\u7AE0\u521D\u7A3F\u4E0E\u5E38\u89C4\u957F\u6587\u3002", frameworkId: "neutral-reading", surfaces: ["wechat", "note"], noteThemeId: "default" },
-  { id: "deep-reading", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u4F4E\u88C5\u9970\u6587\u5B57\u5C42\u7EA7\uFF0C\u9002\u5408\u53D9\u4E8B\u3001\u8BBF\u8C08\u4E0E\u6DF1\u5EA6\u957F\u6587\u3002", frameworkId: "deep-reading", surfaces: ["wechat", "note"], noteThemeId: "deep-reading" },
-  { id: "academic-pro", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u7AE0\u8282\u8FB9\u754C\u6E05\u6670\uFF0C\u9002\u5408\u6559\u7A0B\u3001\u65B9\u6CD5\u8BBA\u4E0E\u6280\u672F\u8BF4\u660E\u3002", frameworkId: "structured-guide", surfaces: ["wechat"] },
-  { id: "clear-guide", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u66F4\u5F3A\u7684\u64CD\u4F5C\u6B65\u9AA4\u611F\uFF0C\u9002\u5408\u6D41\u7A0B\u3001\u4E0A\u624B\u4E0E\u5DE5\u5177\u6307\u5357\u3002", frameworkId: "structured-guide", surfaces: ["wechat"] },
-  { id: "apple-product", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u6E05\u900F\u7684\u4EA7\u54C1\u8BF4\u660E\u5C42\u7EA7\uFF0C\u9002\u5408\u4EA7\u54C1\u4ECB\u7ECD\u4E0E\u54C1\u724C\u5185\u5BB9\u3002", frameworkId: "product-editorial", surfaces: ["wechat"] },
-  { id: "product-review", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u5F3A\u8C03\u8981\u70B9\u4E0E\u5BF9\u6BD4\u9605\u8BFB\uFF0C\u9002\u5408\u6D4B\u8BC4\u548C\u5DE5\u5177\u76D8\u70B9\u3002", frameworkId: "product-editorial", surfaces: ["wechat"] },
-  { id: "minimal", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u77F3\u58A8\u7070\u5C42\u7EA7\uFF0C\u9002\u5408\u4E13\u4E1A\u89C2\u70B9\u4E0E\u514B\u5236\u8868\u8FBE\u3002", frameworkId: "opinion-editorial", surfaces: ["wechat", "note"], noteThemeId: "minimal" },
-  { id: "red-white-editorial", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u514B\u5236\u7EA2\u8272\u7AE0\u8282\u951A\u70B9\uFF0C\u9002\u5408\u8BC4\u8BBA\u4E0E\u5206\u6790\u8BAE\u9898\u3002", frameworkId: "opinion-editorial", surfaces: ["wechat"] },
-  { id: "modern-report", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u9AD8\u5BF9\u6BD4\u4F46\u4E0D\u8FC7\u5EA6\u88C5\u9970\uFF0C\u9002\u5408\u5468\u62A5\u4E0E\u9636\u6BB5\u603B\u7ED3\u3002", frameworkId: "reporting", surfaces: ["wechat"] },
-  { id: "data-blueprint", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u6570\u636E\u5C42\u7EA7\u4E0E\u6696\u8272\u6807\u8BB0\uFF0C\u9002\u5408\u7ECF\u8425\u5206\u6790\u548C\u6570\u636E\u590D\u76D8\u3002", frameworkId: "reporting", surfaces: ["wechat"] },
-  { id: "zen-essence", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u4F4E\u9971\u548C\u7559\u767D\uFF0C\u9002\u5408\u968F\u7B14\u3001\u751F\u6D3B\u65B9\u5F0F\u4E0E\u6C89\u9759\u9605\u8BFB\u3002", frameworkId: "lifestyle-editorial", surfaces: ["wechat"] },
-  { id: "eastern-notes", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u6E29\u6DA6\u7EB8\u7B3A\u611F\uFF0C\u9002\u5408\u6587\u5316\u968F\u7B14\u3001\u8BFB\u4E66\u4E0E\u751F\u6D3B\u8BB0\u5F55\u3002", frameworkId: "lifestyle-editorial", surfaces: ["wechat"] },
-  { id: "academic-pro-forest", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u4E13\u4E1A\u6848\u4F8B\u7ED3\u6784\uFF0C\u9002\u5408\u6848\u4F8B\u62C6\u89E3\u4E0E\u7ECF\u9A8C\u603B\u7ED3\u3002", frameworkId: "case-study", surfaces: ["wechat"] },
-  { id: "olive-journal", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u7F16\u8F91\u90E8\u5185\u520A\u8D28\u611F\uFF0C\u9002\u5408\u7CFB\u7EDF\u590D\u76D8\u4E0E\u7EC4\u7EC7\u6C89\u6DC0\u3002", frameworkId: "case-study", surfaces: ["wechat"] }
+  { id: "default", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u4E2D\u6027\u3001\u7A33\u5B9A\uFF0C\u9002\u5408\u901A\u77E5\u3001\u6587\u7AE0\u521D\u7A3F\u4E0E\u5E38\u89C4\u957F\u6587\u3002", frameworkId: "neutral-reading", status: "featured", readingProfile: "standard", surfaces: ["wechat", "note"], noteThemeId: "default" },
+  { id: "deep-reading", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u5C11\u88C5\u9970\u3001\u5927\u6BB5\u843D\u547C\u5438\u611F\uFF0C\u9002\u5408\u8BBF\u8C08\u4E0E\u6DF1\u5EA6\u957F\u6587\u3002", frameworkId: "deep-reading", status: "featured", readingProfile: "airy", surfaces: ["wechat", "note"], noteThemeId: "deep-reading" },
+  { id: "academic-pro", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u65E7\u7248\u77E5\u8BC6\u4E3B\u9898\uFF1B\u65B0\u7A3F\u5EFA\u8BAE\u4F7F\u7528\u6E05\u6670\u6307\u5357\u3002", frameworkId: "structured-guide", status: "legacy", readingProfile: "compact", surfaces: ["wechat"] },
+  { id: "clear-guide", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u6B65\u9AA4\u8FB9\u754C\u660E\u786E\uFF0C\u9002\u5408\u6D41\u7A0B\u3001\u4E0A\u624B\u4E0E\u5DE5\u5177\u6307\u5357\u3002", frameworkId: "structured-guide", status: "featured", readingProfile: "compact", surfaces: ["wechat"] },
+  { id: "apple-product", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u8F7B\u91CF\u4EA7\u54C1\u53D9\u4E8B\uFF0C\u9002\u5408\u529F\u80FD\u4ECB\u7ECD\u4E0E\u54C1\u724C\u5185\u5BB9\u3002", frameworkId: "product-editorial", status: "featured", readingProfile: "standard", surfaces: ["wechat"] },
+  { id: "product-review", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u5FEB\u901F\u5B9A\u4F4D\u8981\u70B9\u4E0E\u5BF9\u6BD4\uFF0C\u9002\u5408\u6D4B\u8BC4\u548C\u5DE5\u5177\u76D8\u70B9\u3002", frameworkId: "product-editorial", status: "featured", readingProfile: "compact", surfaces: ["wechat"] },
+  { id: "minimal", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u65E7\u7248\u77F3\u58A8\u4E3B\u9898\uFF1B\u65B0\u7A3F\u53EF\u5C1D\u8BD5\u6DF1\u5EA6\u9605\u8BFB\u3002", frameworkId: "opinion-editorial", status: "legacy", readingProfile: "standard", surfaces: ["wechat", "note"], noteThemeId: "minimal" },
+  { id: "red-white-editorial", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u514B\u5236\u7EA2\u8272\u7AE0\u8282\u951A\u70B9\uFF0C\u9002\u5408\u8BC4\u8BBA\u4E0E\u5206\u6790\u8BAE\u9898\u3002", frameworkId: "opinion-editorial", status: "featured", readingProfile: "standard", surfaces: ["wechat"] },
+  { id: "modern-report", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u65E7\u7248\u62A5\u544A\u4E3B\u9898\uFF1B\u65B0\u7A3F\u5EFA\u8BAE\u4F7F\u7528\u6570\u636E\u84DD\u56FE\u3002", frameworkId: "reporting", status: "legacy", readingProfile: "compact", surfaces: ["wechat"] },
+  { id: "data-blueprint", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u660E\u786E\u6570\u636E\u5C42\u7EA7\uFF0C\u9002\u5408\u7ECF\u8425\u5206\u6790\u548C\u6570\u636E\u590D\u76D8\u3002", frameworkId: "reporting", status: "featured", readingProfile: "compact", surfaces: ["wechat"] },
+  { id: "zen-essence", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u4F4E\u9971\u548C\u4E0E\u7559\u767D\uFF0C\u9002\u5408\u968F\u7B14\u3001\u8BFB\u4E66\u4E0E\u6C89\u9759\u9605\u8BFB\u3002", frameworkId: "lifestyle-editorial", status: "featured", readingProfile: "airy", surfaces: ["wechat"] },
+  { id: "eastern-notes", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u65E7\u7248\u7EB8\u7B3A\u4E3B\u9898\uFF1B\u65B0\u7A3F\u53EF\u5C1D\u8BD5\u7559\u767D\u968F\u7B14\u3002", frameworkId: "lifestyle-editorial", status: "legacy", readingProfile: "airy", surfaces: ["wechat"] },
+  { id: "academic-pro-forest", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u65E7\u7248\u6848\u4F8B\u4E3B\u9898\uFF1B\u65B0\u7A3F\u5EFA\u8BAE\u4F7F\u7528\u6A44\u6984\u624B\u8BB0\u3002", frameworkId: "case-study", status: "legacy", readingProfile: "standard", surfaces: ["wechat"] },
+  { id: "olive-journal", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u7F16\u8F91\u90E8\u5185\u520A\u8D28\u611F\uFF0C\u9002\u5408\u7CFB\u7EDF\u590D\u76D8\u4E0E\u7EC4\u7EC7\u6C89\u6DC0\u3002", frameworkId: "case-study", status: "featured", readingProfile: "standard", surfaces: ["wechat"] }
 ];
 var noteThemeEntries = [
   { id: "default", name: "\u9ED8\u8BA4\u9605\u8BFB", recommendation: "\u9002\u5408\u65E5\u5E38\u7B14\u8BB0\u548C\u7EFC\u5408\u5185\u5BB9", frameworkId: "neutral-reading" },
@@ -10399,13 +10457,14 @@ var CURATED_SCENE_ORDER = [...new Set(curatedThemeEntries.map((entry) => entry.s
 var SCENE_ORDER = [
   "\u5168\u90E8",
   ...CURATED_SCENE_ORDER,
-  "\u81EA\u5B9A\u4E49\u4E3B\u9898"
+  "\u81EA\u5B9A\u4E49\u4E3B\u9898",
+  "\u5386\u53F2\u4E3B\u9898"
 ];
 function getThemeScene(template) {
-  var _a;
   if (!template.isPreset)
     return "\u81EA\u5B9A\u4E49\u4E3B\u9898";
-  return ((_a = getCuratedThemeEntry(template.id)) == null ? void 0 : _a.scene) || "\u901A\u7528\u957F\u6587";
+  const entry = getCuratedThemeEntry(template.id);
+  return (entry == null ? void 0 : entry.status) === "legacy" ? "\u5386\u53F2\u4E3B\u9898" : (entry == null ? void 0 : entry.scene) || "\u901A\u7528\u957F\u6587";
 }
 var ThemeGalleryModal = class extends import_obsidian2.Modal {
   constructor(app, settingsManager, currentTemplateId, onSelect, previewCallback) {
@@ -10432,7 +10491,7 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     const header = contentEl.createDiv("mp-gallery-header");
     const heading = header.createDiv("mp-gallery-heading");
     heading.createEl("h2", { text: "\u516C\u4F17\u53F7\u4E3B\u9898\u753B\u5ECA" });
-    heading.createEl("p", { text: "\u6309\u6587\u7AE0\u573A\u666F\u6311\u9009\u516C\u4F17\u53F7\u89C6\u89C9\u98CE\u683C\uFF1B\u70B9\u51FB\u5361\u7247\u5148\u8BD5\u7528\uFF0C\u786E\u8BA4\u540E\u518D\u5E94\u7528\u3002" });
+    heading.createEl("p", { text: "\u6309\u6587\u7AE0\u573A\u666F\u6311\u9009\u516C\u4F17\u53F7\u89C6\u89C9\u98CE\u683C\uFF1B\u70B9\u51FB\u5361\u7247\u5148\u8BD5\u7528\uFF0C\u786E\u8BA4\u540E\u518D\u5E94\u7528\u3002\u65E7\u4E3B\u9898\u53EF\u5728\u5386\u53F2\u4E3B\u9898\u4E2D\u627E\u56DE\u3002" });
     const search = header.createEl("input", {
       cls: "mp-gallery-search",
       attr: { type: "search", placeholder: "\u641C\u7D22\u4E3B\u9898\u6216\u6587\u7AE0\u573A\u666F" }
@@ -10448,7 +10507,7 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       if (count === 0 && scene !== "\u5168\u90E8")
         return;
       const button = sceneBar.createEl("button", {
-        text: scene === "\u5168\u90E8" ? `\u5168\u90E8\u4E3B\u9898 \xB7 ${this.templates.length}` : `${scene} \xB7 ${count}`,
+        text: `${scene === "\u5168\u90E8" ? "\u5168\u90E8\u4E3B\u9898" : scene} \xB7 ${count}`,
         cls: `mp-gallery-scene ${scene === this.selectedScene ? "is-active" : ""}`
       });
       button.addEventListener("click", () => {
@@ -10482,7 +10541,10 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     this.contentEl.empty();
   }
   getTemplatesForScene(scene) {
-    return this.templates.filter((template) => scene === "\u5168\u90E8" || getThemeScene(template) === scene);
+    return this.templates.filter((template) => {
+      const themeScene = getThemeScene(template);
+      return scene === "\u5168\u90E8" ? themeScene !== "\u5386\u53F2\u4E3B\u9898" : themeScene === scene;
+    });
   }
   matchesSearch(template) {
     if (!this.searchQuery)
@@ -10502,7 +10564,7 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       return;
     }
     const grouped = this.selectedScene === "\u5168\u90E8";
-    const scenes = grouped ? SCENE_ORDER.filter((scene) => scene !== "\u5168\u90E8") : [this.selectedScene];
+    const scenes = grouped ? SCENE_ORDER.filter((scene) => scene !== "\u5168\u90E8" && scene !== "\u5386\u53F2\u4E3B\u9898") : [this.selectedScene];
     scenes.forEach((scene) => {
       const sceneTemplates = grouped ? templates2.filter((template) => getThemeScene(template) === scene) : templates2;
       if (sceneTemplates.length === 0)
@@ -10709,10 +10771,30 @@ var MPView = class extends import_obsidian4.ItemView {
     this.updateTimer = null;
     this.isPreviewLocked = false;
     this.isEditMode = false;
+    this.isPhonePreview = false;
+    this.trialTemplateId = null;
     this.validationReport = null;
     this.templateManager = templateManager;
     this.settingsManager = settingsManager;
     this.backgroundManager = new BackgroundManager(this.settingsManager);
+  }
+  getActiveWechatTemplateId() {
+    return this.trialTemplateId || this.settingsManager.getSettings().templateId;
+  }
+  applyThemeTrial(templateId) {
+    const savedId = this.settingsManager.getSettings().templateId;
+    this.trialTemplateId = templateId === savedId ? null : templateId;
+    this.templateManager.setCurrentTemplate(templateId);
+    this.templateManager.applyTemplate(this.previewEl);
+    const section = this.previewEl.querySelector(".mp-content-section");
+    if (section) {
+      applyArticleRecipe(
+        section,
+        this.settingsManager.getSettings().v3.selectedRecipeId,
+        resolveWechatPalette(this.settingsManager.getTemplate(templateId))
+      );
+    }
+    this.refreshValidationReport();
   }
   getViewType() {
     return VIEW_TYPE_MP;
@@ -10848,6 +10930,17 @@ var MPView = class extends import_obsidian4.ItemView {
     });
     (0, import_obsidian4.setIcon)(galleryBtn, "palette");
     galleryBtn.addEventListener("click", () => this.openThemeGallery());
+    const phonePreviewButton = controlsGroup.createEl("button", {
+      text: "\u624B\u673A 375px",
+      cls: "mp-phone-preview-btn",
+      attr: { type: "button", "aria-label": "\u5207\u6362\u624B\u673A 375px \u9884\u89C8", "aria-pressed": "false" }
+    });
+    phonePreviewButton.addEventListener("click", () => {
+      this.isPhonePreview = !this.isPhonePreview;
+      this.previewEl.toggleClass("mp-phone-preview", this.isPhonePreview);
+      phonePreviewButton.setAttribute("aria-pressed", String(this.isPhonePreview));
+      phonePreviewButton.setText(this.isPhonePreview ? "\u81EA\u9002\u5E94" : "\u624B\u673A 375px");
+    });
     this.customFontSelect = createCustomSelect(
       controlsGroup,
       "mp-font-select",
@@ -10992,9 +11085,11 @@ var MPView = class extends import_obsidian4.ItemView {
         this.copyButton.setText("\u590D\u5236\u4E2D...");
         try {
           const copySettings = this.settingsManager.getSettings();
+          const themeId = this.getActiveWechatTemplateId();
           const validation2 = await CopyManager.copyToClipboard(this.previewEl, {
-            themeId: copySettings.templateId,
-            recipeId: copySettings.v3.selectedRecipeId
+            themeId,
+            recipeId: copySettings.v3.selectedRecipeId,
+            palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId))
           });
           this.copyButton.setText(validation2.warnings > 0 ? `\u590D\u5236\u6210\u529F\uFF08${validation2.warnings} \u9879\u517C\u5BB9\u6027\u63D0\u793A\uFF09` : "\u590D\u5236\u6210\u529F");
           setTimeout(() => {
@@ -11047,9 +11142,11 @@ var MPView = class extends import_obsidian4.ItemView {
       return null;
     }
     const settings = this.settingsManager.getSettings();
+    const themeId = this.getActiveWechatTemplateId();
     this.validationReport = prepareLegacyWechatFragment(contentSection, {
-      themeId: settings.templateId,
-      recipeId: settings.v3.selectedRecipeId
+      themeId,
+      recipeId: settings.v3.selectedRecipeId,
+      palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId))
     }).validation;
     this.renderValidationReport();
     this.copyButton.disabled = this.validationReport.errors > 0;
@@ -11135,8 +11232,8 @@ var MPView = class extends import_obsidian4.ItemView {
     const content = this.previewEl.querySelector(".mp-content-section");
     if (!content)
       throw new Error("Preview content is not available");
-    const bounds = content.getBoundingClientRect();
-    const width = Math.max(1, Math.ceil(bounds.width));
+    const previewStyle = window.getComputedStyle(this.previewEl);
+    const width = Math.max(1, Math.ceil(this.previewEl.clientWidth - parseFloat(previewStyle.paddingLeft || "0") - parseFloat(previewStyle.paddingRight || "0")));
     const snapshotHost = document.createElement("div");
     snapshotHost.className = "mp-preview-area mp-export-snapshot";
     snapshotHost.style.cssText = [
@@ -11275,9 +11372,11 @@ var MPView = class extends import_obsidian4.ItemView {
     button.disabled = true;
     try {
       const settings = this.settingsManager.getSettings();
+      const themeId = this.getActiveWechatTemplateId();
       const prepared = prepareLegacyWechatFragment(contentSection, {
-        themeId: settings.templateId,
-        recipeId: settings.v3.selectedRecipeId
+        themeId,
+        recipeId: settings.v3.selectedRecipeId,
+        palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId))
       });
       if (prepared.validation.errors > 0) {
         new import_obsidian4.Notice(`\u5B58\u5728 ${prepared.validation.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u65E0\u6CD5\u5BFC\u51FA HTML`);
@@ -11485,11 +11584,18 @@ var MPView = class extends import_obsidian4.ItemView {
       this
     );
     MPConverter.formatContent(this.previewEl, content, this.settingsManager);
+    const activeThemeId = this.getActiveWechatTemplateId();
+    this.templateManager.setCurrentTemplate(activeThemeId);
     this.templateManager.applyTemplate(this.previewEl);
     this.backgroundManager.applyBackground(this.previewEl);
     const contentSection = this.previewEl.querySelector(".mp-content-section");
     if (contentSection) {
-      applyArticleRecipe(contentSection, this.settingsManager.getSettings().v3.selectedRecipeId);
+      const settings = this.settingsManager.getSettings();
+      applyArticleRecipe(
+        contentSection,
+        settings.v3.selectedRecipeId,
+        resolveWechatPalette(this.settingsManager.getTemplate(activeThemeId))
+      );
     }
     this.refreshValidationReport();
     requestAnimationFrame(() => {
@@ -11588,16 +11694,15 @@ var MPView = class extends import_obsidian4.ItemView {
       currentTemplateId,
       // onSelect 回调
       async (templateId) => {
-        this.templateManager.setCurrentTemplate(templateId);
+        this.applyThemeTrial(templateId);
         await this.settingsManager.updateSettings({ templateId });
-        this.templateManager.applyTemplate(this.previewEl);
+        this.trialTemplateId = null;
         const template = this.settingsManager.getTemplate(templateId);
         new import_obsidian4.Notice(`\u5DF2\u5E94\u7528\u4E3B\u9898: ${(template == null ? void 0 : template.name) || templateId}`);
       },
       // previewCallback 回调 - 实时预览
       (templateId) => {
-        this.templateManager.setCurrentTemplate(templateId);
-        this.templateManager.applyTemplate(this.previewEl);
+        this.applyThemeTrial(templateId);
       }
     );
     modal.open();
@@ -11608,10 +11713,20 @@ var MPView = class extends import_obsidian4.ItemView {
 };
 
 // src/core/theme/wechatReadingBaseline.ts
+var DEFAULT_WECHAT_FONT_STACK = '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif';
+var wechatReadingProfiles = {
+  compact: { lineHeight: 1.72, paragraphGapEm: 0.85 },
+  standard: { lineHeight: 1.78, paragraphGapEm: 0.95 },
+  airy: { lineHeight: 1.82, paragraphGapEm: 1.05 }
+};
+function paragraphRhythm(profile) {
+  const rhythm = wechatReadingProfiles[profile];
+  return `line-height: ${rhythm.lineHeight}; margin-bottom: ${rhythm.paragraphGapEm}em;`;
+}
 var wechatReadingBaseline = {
   title: "line-height: 1.45; letter-spacing: 0; word-break: break-word;",
   sectionTitle: "text-align: left; font-weight: 700; line-height: 1.45; letter-spacing: 0; word-break: break-word;",
-  paragraph: "font-weight: 400; line-height: 1.85; letter-spacing: 0; text-align: left; margin-top: 0; margin-bottom: 1.1em; word-break: break-word;",
+  paragraph: "font-weight: 400; line-height: 1.78; letter-spacing: 0; text-align: left; margin-top: 0; margin-bottom: 0.95em; word-break: break-word; overflow-wrap: anywhere;",
   list: "margin-top: 0.9em; margin-bottom: 1.1em; padding-left: 1.45em; text-align: left;",
   listItem: "font-weight: 400; line-height: 1.8; letter-spacing: 0; text-align: left; margin-bottom: 0.5em; word-break: break-word;",
   quote: "font-weight: 400; line-height: 1.8; letter-spacing: 0; text-align: left; font-style: normal; word-break: break-word;",
@@ -11619,7 +11734,7 @@ var wechatReadingBaseline = {
   inlineCode: "font-size: 0.9em; line-height: 1.5; word-break: break-word;",
   emphasis: "font-weight: 600;",
   table: "width: 100%; max-width: 100%; table-layout: auto;",
-  tableCell: "line-height: 1.65; vertical-align: top; word-break: break-word;",
+  tableCell: "line-height: 1.65; vertical-align: top; word-break: break-word; overflow-wrap: anywhere;",
   image: "max-width: 100%; height: auto; display: block; margin: 1.2em auto;",
   link: "word-break: break-word;"
 };
@@ -11627,11 +11742,98 @@ function appendWechatReadingBaseline(themeStyle, baseline) {
   return `${themeStyle || ""}; ${baseline}`.replace(/;;+/g, ";");
 }
 
+// src/core/theme/applyWechatComponentPalette.ts
+var semanticCallouts = /* @__PURE__ */ new Set([
+  "warning",
+  "caution",
+  "danger",
+  "success",
+  "check",
+  "failure",
+  "bug"
+]);
+var componentAccentColors = /#(?:4285f4|0f766e|ef4444|6366f1|d97706|0ea5e9|16a34a|dc2626|8b5cf6|f59f00|b76e00|b45309|7c6aa8|2f9e44)\b/i;
+function applyWechatComponentPalette(root, palette) {
+  root.querySelectorAll(".mp-layout-card").forEach((element) => {
+    const card = element;
+    card.style.background = palette.surface;
+    card.style.border = `1px solid ${palette.border}`;
+    card.style.borderLeft = `3px solid ${palette.accent}`;
+    card.style.boxShadow = "none";
+    card.style.borderRadius = "4px";
+    card.style.padding = "14px 16px";
+    card.style.textAlign = "left";
+    card.querySelectorAll("*").forEach((child) => {
+      const item = child;
+      const original = item.getAttribute("data-mp-palette-origin") || item.getAttribute("style") || "";
+      if (!item.hasAttribute("data-mp-palette-origin")) {
+        item.setAttribute("data-mp-palette-origin", original);
+      }
+      const semanticStatus = card.getAttribute("data-mp-layout") === "checklist" && /#(?:2f9e44|d97706)\b/i.test(original);
+      if (item.style.display === "flex")
+        item.style.display = "block";
+      if (item.style.display === "inline-flex")
+        item.style.display = "inline-block";
+      if (item.style.backgroundColor && !semanticStatus)
+        item.style.backgroundColor = palette.surface;
+      if (item.style.color && !semanticStatus) {
+        item.style.color = componentAccentColors.test(original) ? palette.accentText : palette.foreground;
+      }
+      if (item.style.boxShadow)
+        item.style.boxShadow = "none";
+    });
+    const title = card.firstElementChild;
+    if (title)
+      title.style.color = palette.accentText;
+    if (card.getAttribute("data-mp-layout") === "comparison-table") {
+      card.querySelectorAll(":scope > div > div").forEach((side) => {
+        const panel = side;
+        panel.style.display = "block";
+        panel.style.marginBottom = "10px";
+        panel.style.background = "#ffffff";
+        panel.style.border = `1px solid ${palette.border}`;
+        panel.style.borderRadius = "4px";
+      });
+    }
+  });
+  root.querySelectorAll(".mp-frontmatter-card").forEach((element) => {
+    const card = element;
+    card.style.background = palette.surface;
+    card.style.borderLeft = `3px solid ${palette.accent}`;
+    card.style.borderRadius = "4px";
+    card.style.padding = "16px";
+    card.style.textAlign = "left";
+    const title = card.querySelector(".mp-fm-title");
+    if (title) {
+      title.style.color = palette.foreground;
+      title.style.border = "0";
+      title.style.padding = "0";
+      title.style.margin = "0 0 8px";
+    }
+    const meta = card.querySelector(".mp-fm-meta");
+    if (meta)
+      meta.style.color = palette.foreground;
+  });
+  root.querySelectorAll(".mp-callout").forEach((element) => {
+    const callout = element;
+    if (semanticCallouts.has(callout.getAttribute("data-callout-type") || ""))
+      return;
+    callout.style.borderLeft = `3px solid ${palette.accent}`;
+    callout.style.background = palette.surface;
+    callout.style.borderRadius = "4px";
+    const title = callout.querySelector(".mp-callout-title");
+    if (title) {
+      title.style.color = palette.accentText;
+      title.style.display = "block";
+    }
+  });
+}
+
 // src/templateManager.ts
 var TemplateManager = class {
   constructor(app, settingsManager) {
     this.templates = /* @__PURE__ */ new Map();
-    this.currentFont = "-apple-system";
+    this.currentFont = DEFAULT_WECHAT_FONT_STACK;
     this.currentFontSize = 16;
     this.app = app;
     this.settingsManager = settingsManager;
@@ -11652,10 +11854,13 @@ var TemplateManager = class {
     this.currentFontSize = size;
   }
   applyTemplate(element, template) {
-    const styles = template ? template.styles : this.currentTemplate.styles;
+    var _a;
+    const activeTemplate = template || this.currentTemplate;
+    const styles = activeTemplate.styles;
+    const readingProfile = ((_a = getCuratedThemeEntry(activeTemplate.id)) == null ? void 0 : _a.readingProfile) || "standard";
     ["h1", "h2", "h3", "h4", "h5", "h6"].forEach((tag) => {
       element.querySelectorAll(tag).forEach((el) => {
-        var _a, _b;
+        var _a2, _b;
         if (!el.querySelector(".content")) {
           const content = document.createElement("span");
           content.className = "content";
@@ -11675,16 +11880,16 @@ var TemplateManager = class {
           `${titleStyle2.base}; font-family: ${this.currentFont};`,
           titleBaseline
         ));
-        (_a = el.querySelector(".content")) == null ? void 0 : _a.setAttribute("style", titleStyle2.content);
+        (_a2 = el.querySelector(".content")) == null ? void 0 : _a2.setAttribute("style", titleStyle2.content);
         (_b = el.querySelector(".after")) == null ? void 0 : _b.setAttribute("style", titleStyle2.after);
       });
     });
     element.querySelectorAll("p").forEach((el) => {
-      var _a, _b;
-      if (!((_a = el.parentElement) == null ? void 0 : _a.closest("p")) && !((_b = el.parentElement) == null ? void 0 : _b.closest("blockquote"))) {
+      var _a2, _b;
+      if (!((_a2 = el.parentElement) == null ? void 0 : _a2.closest("p")) && !((_b = el.parentElement) == null ? void 0 : _b.closest("blockquote"))) {
         el.setAttribute("style", appendWechatReadingBaseline(
           `${styles.paragraph}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
-          wechatReadingBaseline.paragraph
+          `${wechatReadingBaseline.paragraph} ${paragraphRhythm(readingProfile)}`
         ));
       }
     });
@@ -11835,6 +12040,7 @@ var TemplateManager = class {
         });
       }
     }
+    applyWechatComponentPalette(element, resolveWechatPalette(activeTemplate));
   }
 };
 
@@ -11865,7 +12071,7 @@ var DEFAULT_SETTINGS = {
   },
   backgroundId: "default",
   templateId: "default",
-  fontFamily: "-apple-system",
+  fontFamily: DEFAULT_WECHAT_FONT_STACK,
   fontSize: 16,
   themeCatalogVersion: CURATED_THEME_CATALOG_VERSION,
   templates: [],
@@ -11931,7 +12137,6 @@ var SettingsManager = class {
       isPreset: true,
       isVisible: true
     }));
-    const shouldCuratePresetVisibility = (savedData.themeCatalogVersion || 0) < CURATED_THEME_CATALOG_VERSION;
     if (!savedData.templates || !Array.isArray(savedData.templates) || savedData.templates.length === 0) {
       savedData.templates = codeTemplates;
     } else {
@@ -11952,12 +12157,9 @@ var SettingsManager = class {
         return codeTemplate;
       });
     }
-    if (shouldCuratePresetVisibility) {
-      savedData.templates = savedData.templates.map((template) => ({
-        ...template,
-        isVisible: true
-      }));
-      savedData.themeCatalogVersion = CURATED_THEME_CATALOG_VERSION;
+    savedData.themeCatalogVersion = CURATED_THEME_CATALOG_VERSION;
+    if (savedData.fontFamily === "-apple-system") {
+      savedData.fontFamily = DEFAULT_WECHAT_FONT_STACK;
     }
     if (!savedData.customTemplates) {
       savedData.customTemplates = [];

@@ -10,6 +10,14 @@
     border-radius: 12px;
     box-shadow: none;
     border: 1px solid var(--background-modifier-border);
+    min-width: 0;
+}
+
+.mp-preview-area.mp-phone-preview > .mp-content-section {
+    box-sizing: border-box;
+    width: min(100%, 375px);
+    max-width: 375px;
+    margin-inline: auto;
 }
 
 /* 内容区域基础间距 */

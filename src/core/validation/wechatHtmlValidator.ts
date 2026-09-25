@@ -63,6 +63,15 @@ export function validateWechatHtml(root: HTMLElement): ValidationReport {
         }
     });
 
+    root.querySelectorAll('table').forEach((table) => {
+        const widestRow = Math.max(0, ...Array.from(table.querySelectorAll('tr')).map(row =>
+            Array.from(row.children).reduce((columns, cell) =>
+                columns + (cell.matches('th, td') ? Number(cell.getAttribute('colspan') || 1) : 0), 0)));
+        if (widestRow > 3) {
+            add('warning', 'mobile-wide-table', '表格超过三列，建议在公众号手机端确认是否需要拆为列表。', table);
+        }
+    });
+
     return {
         issues,
         errors: issues.filter((issue) => issue.severity === 'error').length,

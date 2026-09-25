@@ -9,8 +9,13 @@ const baseline = await import(`data:text/javascript;base64,${Buffer.from(compile
 const templateManager = readFileSync(new URL('../src/templateManager.ts', import.meta.url), 'utf8');
 
 test('WeChat reading baseline keeps long-form text readable', () => {
-  assert.equal(baseline.WECHAT_READING_BASELINE_VERSION, '2026.07');
-  assert.match(baseline.wechatReadingBaseline.paragraph, /line-height: 1\.85/);
+  assert.equal(baseline.WECHAT_READING_BASELINE_VERSION, '2026.09');
+  assert.match(baseline.wechatReadingBaseline.paragraph, /line-height: 1\.78/);
+  assert.deepEqual(baseline.wechatReadingProfiles, {
+    compact: { lineHeight: 1.72, paragraphGapEm: 0.85 },
+    standard: { lineHeight: 1.78, paragraphGapEm: 0.95 },
+    airy: { lineHeight: 1.82, paragraphGapEm: 1.05 },
+  });
   assert.match(baseline.wechatReadingBaseline.paragraph, /text-align: left/);
   assert.match(baseline.wechatReadingBaseline.quote, /font-style: normal/);
   assert.match(baseline.wechatReadingBaseline.codeBlock, /white-space: pre-wrap/);

@@ -1,8 +1,10 @@
 import { App } from 'obsidian';
 import { SettingsManager } from './settings/settings';
 import type { DialogueStyle, GalleryStyle } from './containers';
-import { appendWechatReadingBaseline, wechatReadingBaseline } from './core/theme/wechatReadingBaseline';
-import type { ThemeFrameworkId, ThemeSurface } from './core/theme/themeCatalog';
+import { appendWechatReadingBaseline, DEFAULT_WECHAT_FONT_STACK, paragraphRhythm, wechatReadingBaseline } from './core/theme/wechatReadingBaseline';
+import { getCuratedThemeEntry, type ThemeFrameworkId, type ThemeSurface } from './core/theme/themeCatalog';
+import { resolveWechatPalette } from './core/theme/wechatPalette';
+import { applyWechatComponentPalette } from './core/theme/applyWechatComponentPalette';
 
 export interface Template {
     id: string;
@@ -90,7 +92,7 @@ export interface Template {
 export class TemplateManager {
     private templates: Map<string, Template> = new Map();
     private currentTemplate: Template;
-    private currentFont: string = '-apple-system';
+    private currentFont: string = DEFAULT_WECHAT_FONT_STACK;
     private currentFontSize: number = 16;
     private app: App;
     private settingsManager: SettingsManager;
@@ -119,7 +121,9 @@ export class TemplateManager {
     }
 
     public applyTemplate(element: HTMLElement, template?: Template): void {
-        const styles = template ? template.styles : this.currentTemplate.styles;
+        const activeTemplate = template || this.currentTemplate;
+        const styles = activeTemplate.styles;
+        const readingProfile = getCuratedThemeEntry(activeTemplate.id)?.readingProfile || 'standard';
         // 应用标题样式
         ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].forEach(tag => {
             element.querySelectorAll(tag).forEach(el => {
@@ -161,7 +165,7 @@ export class TemplateManager {
             if (!el.parentElement?.closest('p') && !el.parentElement?.closest('blockquote')) {
                 el.setAttribute('style', appendWechatReadingBaseline(
                     `${styles.paragraph}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
-                    wechatReadingBaseline.paragraph,
+                    `${wechatReadingBaseline.paragraph} ${paragraphRhythm(readingProfile)}`,
                 ));
             }
         });
@@ -359,6 +363,7 @@ export class TemplateManager {
                 });
             }
         }
+        applyWechatComponentPalette(element, resolveWechatPalette(activeTemplate));
     }
 }
 

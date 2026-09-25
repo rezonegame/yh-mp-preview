@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.15.0-beta.1
+
+- Curated nine distinct WeChat themes; five former presets remain accessible as legacy themes without changing saved IDs or snapshots.
+- Added three theme-specific reading rhythms, theme-aware recipe and component accents, and a 375px phone preview that does not affect export width.
+- Added a mobile warning for tables wider than three columns and retained the original Markdown and Obsidian note themes.
+
 ## 3.14.0
 
 - Stable release of the dual-layout Obsidian and WeChat publishing upgrade.

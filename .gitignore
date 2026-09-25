@@ -3,6 +3,8 @@ node_modules/
 
 # 构建输出
 dist/
+output/playwright/
+.playwright-cli/
 main.js
 data.json
 styles.css

@@ -3,12 +3,26 @@
  * theme's palette while enforcing the reading rhythm required by long-form
  * WeChat articles.
  */
-export const WECHAT_READING_BASELINE_VERSION = '2026.07';
+import type { WechatReadingProfile } from './themeCatalog';
+
+export const WECHAT_READING_BASELINE_VERSION = '2026.09';
+export const DEFAULT_WECHAT_FONT_STACK = '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif';
+
+export const wechatReadingProfiles: Record<WechatReadingProfile, { lineHeight: number; paragraphGapEm: number }> = {
+    compact: { lineHeight: 1.72, paragraphGapEm: 0.85 },
+    standard: { lineHeight: 1.78, paragraphGapEm: 0.95 },
+    airy: { lineHeight: 1.82, paragraphGapEm: 1.05 },
+};
+
+export function paragraphRhythm(profile: WechatReadingProfile): string {
+    const rhythm = wechatReadingProfiles[profile];
+    return `line-height: ${rhythm.lineHeight}; margin-bottom: ${rhythm.paragraphGapEm}em;`;
+}
 
 export const wechatReadingBaseline = {
     title: 'line-height: 1.45; letter-spacing: 0; word-break: break-word;',
     sectionTitle: 'text-align: left; font-weight: 700; line-height: 1.45; letter-spacing: 0; word-break: break-word;',
-    paragraph: 'font-weight: 400; line-height: 1.85; letter-spacing: 0; text-align: left; margin-top: 0; margin-bottom: 1.1em; word-break: break-word;',
+    paragraph: 'font-weight: 400; line-height: 1.78; letter-spacing: 0; text-align: left; margin-top: 0; margin-bottom: 0.95em; word-break: break-word; overflow-wrap: anywhere;',
     list: 'margin-top: 0.9em; margin-bottom: 1.1em; padding-left: 1.45em; text-align: left;',
     listItem: 'font-weight: 400; line-height: 1.8; letter-spacing: 0; text-align: left; margin-bottom: 0.5em; word-break: break-word;',
     quote: 'font-weight: 400; line-height: 1.8; letter-spacing: 0; text-align: left; font-style: normal; word-break: break-word;',
@@ -16,7 +30,7 @@ export const wechatReadingBaseline = {
     inlineCode: 'font-size: 0.9em; line-height: 1.5; word-break: break-word;',
     emphasis: 'font-weight: 600;',
     table: 'width: 100%; max-width: 100%; table-layout: auto;',
-    tableCell: 'line-height: 1.65; vertical-align: top; word-break: break-word;',
+    tableCell: 'line-height: 1.65; vertical-align: top; word-break: break-word; overflow-wrap: anywhere;',
     image: 'max-width: 100%; height: auto; display: block; margin: 1.2em auto;',
     link: 'word-break: break-word;',
 } as const;

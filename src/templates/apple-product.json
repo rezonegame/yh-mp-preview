@@ -1,20 +1,20 @@
 {
   "id": "apple-product",
-  "name": "产品与工具",
+  "name": "产品叙事",
   "description": "清透的产品说明层级，适合产品介绍、工具评测与品牌内容。",
   "source": "yh-mp-preview",
   "styles": {
     "container": "background: #ffffff; padding: 0; color: #374151;",
     "accentColor": "#0a84ff",
     "title": {
-      "h1": { "base": "margin: 28px 0 20px; font-size: 1.85em; padding-bottom: 12px; border-bottom: 2px solid #0a84ff;", "content": "font-weight: 700; color: #111827;", "after": "" },
-      "h2": { "base": "margin: 26px 0 12px; font-size: 1.38em;", "content": "font-weight: 700; color: #111827;", "after": "display: block; width: 28px; height: 2px; margin-top: 8px; background: #0a84ff;" },
-      "h3": { "base": "margin: 22px 0 10px; font-size: 1.15em;", "content": "font-weight: 700; color: #0a84ff;", "after": "" },
+      "h1": { "base": "margin: 32px 0 24px; font-size: 1.82em;", "content": "font-weight: 700; color: #111827;", "after": "" },
+      "h2": { "base": "margin: 32px 0 14px; padding-bottom: 8px; border-bottom: 1px solid #dbeafe; font-size: 1.34em;", "content": "font-weight: 700; color: #111827;", "after": "" },
+      "h3": { "base": "margin: 22px 0 10px; font-size: 1.15em;", "content": "font-weight: 700; color: #0066cc;", "after": "" },
       "base": { "base": "margin: 18px 0 8px; font-size: 1em;", "content": "font-weight: 700; color: #1f2937;", "after": "" }
     },
     "paragraph": "color: #374151;",
     "list": { "container": "padding-left: 1.45em; color: #374151;", "item": "color: #374151;", "taskList": "list-style: none; padding-left: 0; color: #374151;" },
-    "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #0a84ff; background: #f4f8ff; color: #4b5563;",
+    "quote": "margin: 1.3em 0; padding: 12px 0 12px 16px; border-left: 2px solid #0a84ff; color: #374151;",
     "code": { "header": { "container": "margin-bottom: 6px; padding: 6px 10px; background: #edf5ff;", "dot": "display: none;", "colors": ["#0a84ff", "#0a84ff", "#0a84ff"] }, "block": "margin: 1.2em 0; padding: 14px; background: #f8fafc; border: 1px solid #dbeafe; color: #1f2937;", "inline": "padding: 1px 4px; background: #eff6ff; color: #0a84ff;" },
     "image": "border: 1px solid #dbeafe; border-radius: 8px;",
     "link": "color: #0a84ff; text-decoration: underline;",

@@ -3,6 +3,7 @@ import { Notice } from 'obsidian';
 import pangu from 'pangu/browser';
 import { prepareLegacyWechatFragment } from './core/render/legacyWechatPipeline';
 import type { ValidationReport } from './core/validation/wechatHtmlValidator';
+import type { WechatPalette } from './core/theme/wechatPalette';
 
 export class CopyManager {
     public static async processImagesForExport(container: HTMLElement): Promise<void> {
@@ -34,7 +35,7 @@ export class CopyManager {
 
     public static async copyToClipboard(
         element: HTMLElement,
-        options: { themeId?: string; recipeId?: string } = {},
+        options: { themeId?: string; recipeId?: string; palette?: WechatPalette } = {},
     ): Promise<ValidationReport> {
         try {
             const clone = element.cloneNode(true) as HTMLElement;

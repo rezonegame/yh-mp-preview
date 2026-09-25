@@ -2,6 +2,7 @@ import { createArticleModel, type ArticleModel } from '../article/articleModel';
 import { createLocalLayoutPlan, type LayoutPlan } from '../layout/localLayoutPlanner';
 import { validateWechatHtml, type ValidationReport } from '../validation/wechatHtmlValidator';
 import { applyArticleRecipe } from '../recipe/articleRecipeFormatter';
+import type { WechatPalette } from '../theme/wechatPalette';
 
 export interface LegacyWechatPreparation {
     article: ArticleModel;
@@ -13,6 +14,7 @@ export interface LegacyWechatPreparation {
 export interface LegacyWechatOptions {
     themeId?: string;
     recipeId?: string;
+    palette?: WechatPalette;
 }
 
 const removableTags = new Set(['SCRIPT', 'STYLE', 'IFRAME', 'FORM', 'INPUT', 'BUTTON', 'TEXTAREA', 'SELECT']);
@@ -42,7 +44,7 @@ export function prepareLegacyWechatFragment(element: HTMLElement, options: Legac
         themeId: options.themeId || 'legacy-active',
         recipeId: options.recipeId || 'legacy-compatible',
     });
-    applyArticleRecipe(clone, plan.recipeId);
+    applyArticleRecipe(clone, plan.recipeId, options.palette);
     removeTransientAttributes(clone);
     const outputValidation = validateWechatHtml(clone);
     const blockingIssues = sourceValidation.issues.filter((issue) => issue.severity === 'error');

@@ -557,3 +557,20 @@
 .mp-gallery-btn:active {
     box-shadow: none !important;
 }
+
+.mp-phone-preview-btn {
+    min-width: 86px;
+    height: 32px;
+    padding: 0 10px !important;
+    border: 1px solid var(--background-modifier-border) !important;
+    border-radius: 6px !important;
+    background: var(--background-primary) !important;
+    color: var(--text-normal) !important;
+    box-shadow: none !important;
+    white-space: nowrap;
+}
+
+.mp-phone-preview-btn[aria-pressed="true"] {
+    border-color: var(--interactive-accent) !important;
+    color: var(--text-accent) !important;
+}

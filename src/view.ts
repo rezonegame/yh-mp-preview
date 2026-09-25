@@ -10,6 +10,7 @@ import { createCustomSelect, type SelectOption, type CustomSelectControl } from 
 import { handleImageAltEdit } from './ui/ImageAltModal';
 import { applyArticleRecipe } from './core/recipe/articleRecipeFormatter';
 import { prepareLegacyWechatFragment } from './core/render/legacyWechatPipeline';
+import { resolveWechatPalette } from './core/theme/wechatPalette';
 import type { ValidationReport } from './core/validation/wechatHtmlValidator';
 // @ts-ignore - html2canvas has no type declarations
 import html2canvas from 'html2canvas';
@@ -22,6 +23,8 @@ export class MPView extends ItemView {
     private updateTimer: NodeJS.Timeout | null = null;
     private isPreviewLocked: boolean = false;
     private isEditMode: boolean = false;
+    private isPhonePreview: boolean = false;
+    private trialTemplateId: string | null = null;
     private lockButton: HTMLButtonElement;
     private editButton: HTMLButtonElement;
     private copyButton: HTMLButtonElement;
@@ -37,6 +40,23 @@ export class MPView extends ItemView {
 
     private fontSizeSelect: HTMLInputElement;
     private backgroundManager: BackgroundManager;
+
+    private getActiveWechatTemplateId(): string {
+        return this.trialTemplateId || this.settingsManager.getSettings().templateId;
+    }
+
+    private applyThemeTrial(templateId: string): void {
+        const savedId = this.settingsManager.getSettings().templateId;
+        this.trialTemplateId = templateId === savedId ? null : templateId;
+        this.templateManager.setCurrentTemplate(templateId);
+        this.templateManager.applyTemplate(this.previewEl);
+        const section = this.previewEl.querySelector('.mp-content-section') as HTMLElement | null;
+        if (section) {
+            applyArticleRecipe(section, this.settingsManager.getSettings().v3.selectedRecipeId,
+                resolveWechatPalette(this.settingsManager.getTemplate(templateId)));
+        }
+        this.refreshValidationReport();
+    }
 
     constructor(
         leaf: WorkspaceLeaf,
@@ -233,6 +253,18 @@ export class MPView extends ItemView {
         setIcon(galleryBtn, 'palette');
         galleryBtn.addEventListener('click', () => this.openThemeGallery());
 
+        const phonePreviewButton = controlsGroup.createEl('button', {
+            text: '手机 375px',
+            cls: 'mp-phone-preview-btn',
+            attr: { type: 'button', 'aria-label': '切换手机 375px 预览', 'aria-pressed': 'false' },
+        });
+        phonePreviewButton.addEventListener('click', () => {
+            this.isPhonePreview = !this.isPhonePreview;
+            this.previewEl.toggleClass('mp-phone-preview', this.isPhonePreview);
+            phonePreviewButton.setAttribute('aria-pressed', String(this.isPhonePreview));
+            phonePreviewButton.setText(this.isPhonePreview ? '自适应' : '手机 375px');
+        });
+
         // 字体选择器
         this.customFontSelect = createCustomSelect(
             controlsGroup,
@@ -420,9 +452,11 @@ export class MPView extends ItemView {
 
                 try {
                     const copySettings = this.settingsManager.getSettings();
+                    const themeId = this.getActiveWechatTemplateId();
                     const validation = await CopyManager.copyToClipboard(this.previewEl, {
-                        themeId: copySettings.templateId,
+                        themeId,
                         recipeId: copySettings.v3.selectedRecipeId,
+                        palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId)),
                     });
                     this.copyButton.setText(validation.warnings > 0
                         ? `复制成功（${validation.warnings} 项兼容性提示）`
@@ -490,9 +524,11 @@ export class MPView extends ItemView {
         }
 
         const settings = this.settingsManager.getSettings();
+        const themeId = this.getActiveWechatTemplateId();
         this.validationReport = prepareLegacyWechatFragment(contentSection, {
-            themeId: settings.templateId,
+            themeId,
             recipeId: settings.v3.selectedRecipeId,
+            palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId)),
         }).validation;
         this.renderValidationReport();
         this.copyButton.disabled = this.validationReport.errors > 0;
@@ -594,8 +630,12 @@ export class MPView extends ItemView {
         const content = this.previewEl.querySelector('.mp-content-section') as HTMLElement | null;
         if (!content) throw new Error('Preview content is not available');
 
-        const bounds = content.getBoundingClientRect();
-        const width = Math.max(1, Math.ceil(bounds.width));
+        // The phone-width switch is viewport-only. Export at the adaptive width
+        // that this pane would use without the switch.
+        const previewStyle = window.getComputedStyle(this.previewEl);
+        const width = Math.max(1, Math.ceil(this.previewEl.clientWidth
+            - parseFloat(previewStyle.paddingLeft || '0')
+            - parseFloat(previewStyle.paddingRight || '0')));
         const snapshotHost = document.createElement('div');
         snapshotHost.className = 'mp-preview-area mp-export-snapshot';
         snapshotHost.style.cssText = [
@@ -746,9 +786,11 @@ export class MPView extends ItemView {
         button.disabled = true;
         try {
             const settings = this.settingsManager.getSettings();
+            const themeId = this.getActiveWechatTemplateId();
             const prepared = prepareLegacyWechatFragment(contentSection, {
-                themeId: settings.templateId,
+                themeId,
                 recipeId: settings.v3.selectedRecipeId,
+                palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId)),
             });
             if (prepared.validation.errors > 0) {
                 new Notice(`存在 ${prepared.validation.errors} 项阻断问题，无法导出 HTML`);
@@ -1007,11 +1049,15 @@ export class MPView extends ItemView {
         // but user might want them to persist. 
         // For now, these methods below mimic 'injection' by interacting with the preview content.
 
+        const activeThemeId = this.getActiveWechatTemplateId();
+        this.templateManager.setCurrentTemplate(activeThemeId);
         this.templateManager.applyTemplate(this.previewEl);
         this.backgroundManager.applyBackground(this.previewEl);
         const contentSection = this.previewEl.querySelector('.mp-content-section') as HTMLElement | null;
         if (contentSection) {
-            applyArticleRecipe(contentSection, this.settingsManager.getSettings().v3.selectedRecipeId);
+            const settings = this.settingsManager.getSettings();
+            applyArticleRecipe(contentSection, settings.v3.selectedRecipeId,
+                resolveWechatPalette(this.settingsManager.getTemplate(activeThemeId)));
         }
         this.refreshValidationReport();
 
@@ -1137,17 +1183,16 @@ export class MPView extends ItemView {
             currentTemplateId,
             // onSelect 回调
             async (templateId: string) => {
-                this.templateManager.setCurrentTemplate(templateId);
+                this.applyThemeTrial(templateId);
                 await this.settingsManager.updateSettings({ templateId });
-                this.templateManager.applyTemplate(this.previewEl);
+                this.trialTemplateId = null;
 
                 const template = this.settingsManager.getTemplate(templateId);
                 new Notice(`已应用主题: ${template?.name || templateId}`);
             },
             // previewCallback 回调 - 实时预览
             (templateId: string) => {
-                this.templateManager.setCurrentTemplate(templateId);
-                this.templateManager.applyTemplate(this.previewEl);
+                this.applyThemeTrial(templateId);
             }
         );
 

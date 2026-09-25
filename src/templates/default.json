@@ -7,14 +7,14 @@
     "container": "background: #ffffff; padding: 0; color: #334155;",
     "accentColor": "#475569",
     "title": {
-      "h1": { "base": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 2px solid #475569;", "content": "font-weight: 700; color: #1f2937;", "after": "" },
-      "h2": { "base": "margin: 26px 0 12px; padding-left: 12px; border-left: 4px solid #475569; font-size: 1.38em;", "content": "font-weight: 700; color: #1f2937;", "after": "" },
+      "h1": { "base": "margin: 28px 0 20px; font-size: 1.78em; padding-bottom: 10px; border-bottom: 1px solid #cbd5e1;", "content": "font-weight: 700; color: #1f2937;", "after": "" },
+      "h2": { "base": "margin: 28px 0 12px; font-size: 1.34em;", "content": "font-weight: 700; color: #1f2937;", "after": "" },
       "h3": { "base": "margin: 22px 0 10px; font-size: 1.15em;", "content": "font-weight: 700; color: #475569;", "after": "" },
       "base": { "base": "margin: 18px 0 8px; font-size: 1em;", "content": "font-weight: 700; color: #475569;", "after": "" }
     },
     "paragraph": "color: #334155;",
     "list": { "container": "padding-left: 1.45em; color: #334155;", "item": "color: #334155;", "taskList": "list-style: none; padding-left: 0; color: #334155;" },
-    "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #94a3b8; background: #f8fafc; color: #475569;",
+    "quote": "margin: 1.1em 0; padding: 10px 14px; border-left: 2px solid #94a3b8; background: #f8fafc; color: #475569;",
     "code": { "header": { "container": "margin-bottom: 6px; padding: 6px 10px; background: #eef2f7;", "dot": "display: none;", "colors": ["#475569", "#475569", "#475569"] }, "block": "margin: 1.2em 0; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; color: #334155;", "inline": "padding: 1px 4px; background: #f1f5f9; color: #334155;" },
     "image": "border: 1px solid #e2e8f0; border-radius: 4px;",
     "link": "color: #334155; text-decoration: underline;",

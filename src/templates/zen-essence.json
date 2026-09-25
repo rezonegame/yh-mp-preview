@@ -1,20 +1,20 @@
 {
   "id": "zen-essence",
-  "name": "随笔与生活",
+  "name": "留白随笔",
   "description": "温和留白与低饱和墨色，适合随笔、生活方式与沉静阅读。",
   "source": "yh-mp-preview",
   "styles": {
     "container": "background: #ffffff; padding: 0; color: #5d625d;",
     "accentColor": "#79836f",
     "title": {
-      "h1": { "base": "margin: 32px 0 22px; font-size: 1.7em; padding-bottom: 14px; border-bottom: 1px solid #cfd5ca;", "content": "font-weight: 700; color: #3f463d;", "after": "" },
+      "h1": { "base": "margin: 34px 0 26px; font-size: 1.72em;", "content": "font-weight: 700; color: #3f463d;", "after": "" },
       "h2": { "base": "margin: 30px 0 14px; font-size: 1.32em;", "content": "font-weight: 700; color: #4e584a;", "after": "display: block; width: 24px; height: 1px; margin-top: 9px; background: #79836f;" },
       "h3": { "base": "margin: 24px 0 10px; font-size: 1.12em;", "content": "font-weight: 700; color: #65705f;", "after": "" },
       "base": { "base": "margin: 18px 0 8px; font-size: 1em;", "content": "font-weight: 700; color: #65705f;", "after": "" }
     },
     "paragraph": "color: #5d625d;",
     "list": { "container": "padding-left: 1.45em; color: #5d625d;", "item": "color: #5d625d;", "taskList": "list-style: none; padding-left: 0; color: #5d625d;" },
-    "quote": "margin: 1.2em 0; padding: 16px 18px; border-left: 3px solid #aeb7a7; background: #fafbf9; color: #687065;",
+    "quote": "margin: 1.7em 0; padding: 18px 0; border-top: 1px solid #cfd5ca; border-bottom: 1px solid #cfd5ca; color: #4e584a;",
     "code": { "header": { "container": "display: none;", "dot": "display: none;", "colors": ["#79836f", "#79836f", "#79836f"] }, "block": "margin: 1.3em 0; padding: 14px; background: #fafbf9; border: 1px solid #e2e6de; color: #4e584a;", "inline": "padding: 1px 4px; background: #f2f4ef; color: #65705f;" },
     "image": "border: 0; border-radius: 0;",
     "link": "color: #65705f; text-decoration: underline;",
