@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.14.0
+
+- Stable release of the dual-layout Obsidian and WeChat publishing upgrade.
+- Includes the completed reading view, Live Preview, source mode, theme gallery,
+  lifecycle synchronization, compatibility boundaries, and rollback safeguards.
+
 ## 3.14.0-rc.1
 
 - Release candidate for the dual-layout upgrade.
