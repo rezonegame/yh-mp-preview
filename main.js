@@ -7963,6 +7963,72 @@ var init_apple_product = __esm({
   }
 });
 
+// src/templates/briefing-grid.json
+var briefing_grid_default;
+var init_briefing_grid = __esm({
+  "src/templates/briefing-grid.json"() {
+    briefing_grid_default = {
+      id: "briefing-grid",
+      name: "\u8F7B\u91CF\u7B80\u62A5",
+      description: "\u4EE5\u6D45\u8272\u5206\u533A\u548C\u7D27\u51D1\u8868\u683C\u5448\u73B0\u5468\u62A5\u4E0E\u9879\u76EE\u590D\u76D8\u3002",
+      source: "yh-mp-preview",
+      styles: {
+        container: "background:#ffffff;padding:0;color:#273848;",
+        accentColor: "#355a72",
+        title: {
+          h1: { base: "margin:28px 0 24px;padding:0 0 10px;border-bottom:1px solid #91adbd;font-size:1.7em;", content: "font-weight:700;color:#223f52;", after: "" },
+          h2: { base: "margin:30px 0 13px;padding:8px 10px;background:#edf3f6;border-left:3px solid #355a72;font-size:1.25em;", content: "font-weight:700;color:#223f52;", after: "" },
+          h3: { base: "margin:23px 0 9px;padding-bottom:5px;border-bottom:1px dashed #91adbd;font-size:1.08em;", content: "font-weight:700;color:#355a72;", after: "" },
+          base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#355a72;", after: "" }
+        },
+        paragraph: "color:#273848;",
+        list: { container: "padding-left:1.45em;color:#355a72;", item: "color:#273848;", taskList: "list-style:none;padding-left:0;color:#273848;" },
+        quote: "margin:1.1em 0;padding:12px 14px;background:#f3f7f8;border-left:2px solid #91adbd;color:#344d5d;",
+        code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#e9f0f4;", dot: "display:none;", colors: ["#355a72", "#355a72", "#355a72"] }, block: "margin:1.2em 0;padding:14px;background:#f2f6f8;border:1px solid #c9d8e0;color:#273848;", inline: "padding:1px 4px;background:#e9f0f4;color:#294b60;" },
+        image: "border:1px solid #c9d8e0;border-radius:2px;",
+        link: "color:#294b60;text-decoration:underline;",
+        emphasis: { strong: "font-weight:700;color:#223f52;", em: "color:#466173;", del: "color:#677d89;" },
+        table: { container: "margin:1.1em 0;border-collapse:collapse;border-top:1px solid #91adbd;", header: "padding:8px;background:#edf3f6;color:#223f52;border-bottom:1px solid #91adbd;", cell: "padding:8px;border-bottom:1px solid #d5e0e5;color:#273848;" },
+        hr: "margin:28px 0;border:0;border-top:1px dashed #91adbd;",
+        footnote: { ref: "color:#294b60;", backref: "color:#294b60;" }
+      }
+    };
+  }
+});
+
+// src/templates/case-file.json
+var case_file_default;
+var init_case_file = __esm({
+  "src/templates/case-file.json"() {
+    case_file_default = {
+      id: "case-file",
+      name: "\u6863\u6848\u6848\u4F8B",
+      description: "\u6DF1\u8272\u7AE0\u8282\u951A\u70B9\u4E0E\u6E05\u6670\u6570\u636E\u8868\uFF0C\u9002\u5408\u6848\u4F8B\u3001\u8BBF\u8C08\u548C\u5185\u520A\u3002",
+      source: "yh-mp-preview",
+      styles: {
+        container: "background:#ffffff;padding:0;color:#2b3740;",
+        accentColor: "#40505c",
+        title: {
+          h1: { base: "margin:26px 0 25px;padding:14px 16px;background:#293a46;font-size:1.65em;", content: "font-weight:700;color:#ffffff;", after: "" },
+          h2: { base: "margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #40505c;font-size:1.3em;", content: "font-weight:700;color:#293a46;", after: "" },
+          h3: { base: "margin:24px 0 10px;padding:7px 10px;background:#eef2f3;font-size:1.08em;", content: "font-weight:700;color:#334651;", after: "" },
+          base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#40505c;", after: "" }
+        },
+        paragraph: "color:#2b3740;",
+        list: { container: "padding-left:1.45em;color:#40505c;", item: "color:#2b3740;", taskList: "list-style:none;padding-left:0;color:#2b3740;" },
+        quote: "margin:1.25em 0;padding:14px 16px;border-left:3px solid #40505c;background:#f2f5f6;color:#354650;",
+        code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#dfe7ea;", dot: "display:none;", colors: ["#40505c", "#40505c", "#40505c"] }, block: "margin:1.2em 0;padding:14px;background:#263742;border-top:4px solid #64828d;color:#eff6f6;", inline: "padding:1px 4px;background:#e9eff1;color:#334651;" },
+        image: "padding:4px;border:1px solid #b9c9cf;border-radius:0;",
+        link: "color:#334651;text-decoration:underline;",
+        emphasis: { strong: "font-weight:700;color:#293a46;", em: "color:#51646e;", del: "color:#6c7d84;" },
+        table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #40505c;", header: "padding:9px;background:#e9eff1;color:#293a46;border-bottom:1px solid #9fb4bc;", cell: "padding:9px;border-bottom:1px solid #d4e0e3;color:#2b3740;" },
+        hr: "margin:30px 0;border:0;border-top:1px solid #9fb4bc;",
+        footnote: { ref: "color:#334651;", backref: "color:#334651;" }
+      }
+    };
+  }
+});
+
 // src/templates/clear-guide.json
 var clear_guide_default;
 var init_clear_guide = __esm({
@@ -8025,6 +8091,72 @@ var eastern_notes_default;
 var init_eastern_notes = __esm({
   "src/templates/eastern-notes.json"() {
     eastern_notes_default = { id: "eastern-notes", name: "\u4E1C\u65B9\u7B3A\u8C31", description: "\u7EB8\u7B3A\u822C\u7684\u6E29\u6DA6\u4F4E\u9971\u548C\u8272\u8C03\uFF0C\u9002\u5408\u6587\u5316\u968F\u7B14\u3001\u8BFB\u4E66\u4E0E\u751F\u6D3B\u8BB0\u5F55\u3002", source: "yh-mp-preview", styles: { container: "background:#ffffff;padding:0;color:#4b4239;", accentColor: "#8a6248", title: { h1: { base: "margin:34px 0 22px;padding-bottom:14px;border-bottom:1px solid #c9b8a5;font-size:1.78em;", content: "font-weight:700;color:#40362e;", after: "" }, h2: { base: "margin:30px 0 14px;padding-left:10px;border-left:3px solid #8a6248;font-size:1.34em;", content: "font-weight:700;color:#5b4435;", after: "" }, h3: { base: "margin:24px 0 10px;font-size:1.13em;", content: "font-weight:700;color:#8a6248;", after: "" }, base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#725645;", after: "" } }, paragraph: "color:#4b4239;", list: { container: "padding-left:1.45em;color:#8a6248;", item: "color:#4b4239;", taskList: "list-style:none;padding-left:0;color:#4b4239;" }, quote: "margin:1.3em 0;padding:16px 18px;border-left:3px solid #c9b8a5;background:#fcfaf7;color:#66574b;", code: { header: { container: "display:none;", dot: "display:none;", colors: ["#8a6248", "#8a6248", "#8a6248"] }, block: "margin:1.3em 0;padding:14px;background:#fcfaf7;border:1px solid #e6ddd3;color:#4b4239;", inline: "padding:1px 4px;background:#f6f0e9;color:#725645;" }, image: "border:1px solid #e6ddd3;border-radius:2px;", link: "color:#725645;text-decoration:underline;", emphasis: { strong: "font-weight:700;color:#40362e;", em: "color:#725645;", del: "color:#b8a99a;" }, table: { container: "margin:1.3em 0;border-collapse:collapse;border-top:1px solid #8a6248;", header: "padding:10px;background:#f8f2eb;color:#5b4435;border-bottom:1px solid #dfd1c2;", cell: "padding:10px;border-bottom:1px solid #eee5dc;color:#4b4239;" }, hr: "margin:32px 0;border:0;border-top:1px solid #dfd1c2;", footnote: { ref: "color:#8a6248;", backref: "color:#8a6248;" } } };
+  }
+});
+
+// src/templates/ink-opinion.json
+var ink_opinion_default;
+var init_ink_opinion = __esm({
+  "src/templates/ink-opinion.json"() {
+    ink_opinion_default = {
+      id: "ink-opinion",
+      name: "\u9ED1\u767D\u9510\u8BC4",
+      description: "\u4EE5\u9ED1\u767D\u6587\u5B57\u548C\u5F3A\u5F31\u6807\u9898\u5EFA\u7ACB\u89C2\u70B9\u8282\u594F\uFF0C\u9002\u5408\u77ED\u8BC4\u4E0E\u4E13\u680F\u3002",
+      source: "yh-mp-preview",
+      styles: {
+        container: "background:#ffffff;padding:0;color:#292929;",
+        accentColor: "#353535",
+        title: {
+          h1: { base: "margin:24px 0 28px;padding:0 0 16px;border-bottom:4px solid #202020;font-size:1.95em;", content: "font-weight:800;color:#181818;", after: "" },
+          h2: { base: "margin:36px 0 14px;padding-left:12px;border-left:5px solid #202020;font-size:1.3em;", content: "font-weight:800;color:#181818;", after: "" },
+          h3: { base: "margin:26px 0 11px;padding-bottom:6px;border-bottom:1px solid #a9a9a9;font-size:1.08em;", content: "font-weight:700;color:#303030;", after: "" },
+          base: { base: "margin:20px 0 8px;font-size:1em;", content: "font-weight:700;color:#353535;", after: "" }
+        },
+        paragraph: "color:#292929;",
+        list: { container: "padding-left:1.5em;color:#353535;", item: "color:#292929;", taskList: "list-style:none;padding-left:0;color:#292929;" },
+        quote: "margin:1.5em 0;padding:10px 20px;border-top:2px solid #202020;border-bottom:2px solid #202020;color:#303030;",
+        code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#e9e9e9;", dot: "display:none;", colors: ["#353535", "#353535", "#353535"] }, block: "margin:1.2em 0;padding:14px;background:#f4f4f4;border-left:3px solid #353535;color:#292929;", inline: "padding:1px 4px;background:#efefef;color:#292929;" },
+        image: "border:1px solid #d2d2d2;border-radius:0;",
+        link: "color:#303030;text-decoration:underline;",
+        emphasis: { strong: "font-weight:800;color:#181818;", em: "color:#454545;", del: "color:#6d6d6d;" },
+        table: { container: "margin:1.3em 0;border-collapse:collapse;border-top:2px solid #202020;", header: "padding:10px;background:#efefef;color:#181818;border-bottom:1px solid #888888;", cell: "padding:10px;border-bottom:1px solid #d2d2d2;color:#292929;" },
+        hr: "margin:34px 0;border:0;border-top:2px solid #202020;",
+        footnote: { ref: "color:#353535;", backref: "color:#353535;" }
+      }
+    };
+  }
+});
+
+// src/templates/knowledge-notes.json
+var knowledge_notes_default;
+var init_knowledge_notes = __esm({
+  "src/templates/knowledge-notes.json"() {
+    knowledge_notes_default = {
+      id: "knowledge-notes",
+      name: "\u7EB8\u9762\u7B14\u8BB0",
+      description: "\u7EB8\u9762\u6CE8\u91CA\u4E0E\u67D4\u548C\u4FE1\u606F\u5757\uFF0C\u9002\u5408\u77E5\u8BC6\u89E3\u91CA\u548C\u8F7B\u6559\u7A0B\u3002",
+      source: "yh-mp-preview",
+      styles: {
+        container: "background:#ffffff;padding:0;color:#293c39;",
+        accentColor: "#355f59",
+        title: {
+          h1: { base: "margin:28px 0 22px;padding:0 0 14px;border-bottom:1px solid #b9cec8;font-size:1.72em;", content: "font-weight:700;color:#203a36;", after: "" },
+          h2: { base: "margin:30px 0 14px;padding:10px 12px;background:#edf5f2;border-left:3px solid #355f59;font-size:1.28em;", content: "font-weight:700;color:#254b45;", after: "" },
+          h3: { base: "margin:24px 0 10px;padding-left:10px;border-left:1px solid #729990;font-size:1.1em;", content: "font-weight:700;color:#355f59;", after: "" },
+          base: { base: "margin:18px 0 8px;font-size:1em;", content: "font-weight:700;color:#355f59;", after: "" }
+        },
+        paragraph: "color:#293c39;",
+        list: { container: "padding-left:1.55em;color:#355f59;", item: "color:#293c39;", taskList: "list-style:none;padding-left:0;color:#293c39;" },
+        quote: "margin:1.2em 0;padding:14px 16px;background:#f5f8f6;border-left:2px solid #9bb8af;color:#344b45;",
+        code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#eaf1ee;", dot: "display:none;", colors: ["#355f59", "#355f59", "#355f59"] }, block: "margin:1.2em 0;padding:14px;background:#f4f7f5;border:1px solid #d6e2dd;color:#203a36;", inline: "padding:1px 4px;background:#edf3f0;color:#254b45;" },
+        image: "padding:4px;border-bottom:1px solid #b9cec8;",
+        link: "color:#254b45;text-decoration:underline;",
+        emphasis: { strong: "font-weight:700;color:#203a36;", em: "color:#48635b;", del: "color:#677d76;" },
+        table: { container: "margin:1.2em 0;border-collapse:collapse;border-top:1px solid #9bb8af;", header: "padding:9px;background:#edf5f2;color:#203a36;border-bottom:1px solid #9bb8af;", cell: "padding:9px;border-bottom:1px solid #d6e2dd;color:#293c39;" },
+        hr: "margin:30px 0;border:0;border-top:1px dashed #9bb8af;",
+        footnote: { ref: "color:#254b45;", backref: "color:#254b45;" }
+      }
+    };
   }
 });
 
@@ -8151,6 +8283,39 @@ var init_zen_essence = __esm({
   }
 });
 
+// src/templates/warm-paper.json
+var warm_paper_default;
+var init_warm_paper = __esm({
+  "src/templates/warm-paper.json"() {
+    warm_paper_default = {
+      id: "warm-paper",
+      name: "\u6696\u7EB8\u6563\u6587",
+      description: "\u6696\u8272\u7EB8\u611F\u4E0E\u8F7B\u5F15\u7528\uFF0C\u9002\u5408\u751F\u6D3B\u8BB0\u5F55\u3001\u4E66\u4FE1\u548C\u4E2A\u4EBA\u6545\u4E8B\u3002",
+      source: "yh-mp-preview",
+      styles: {
+        container: "background:#ffffff;padding:0;color:#3a332c;",
+        accentColor: "#805c46",
+        title: {
+          h1: { base: "margin:34px 0 26px;padding:0 0 12px;border-bottom:1px solid #d9c5ae;font-size:1.78em;", content: "font-weight:600;color:#47372b;", after: "" },
+          h2: { base: "margin:38px 0 16px;padding-left:10px;border-left:2px solid #a17a57;font-size:1.28em;", content: "font-weight:600;color:#47372b;", after: "" },
+          h3: { base: "margin:28px 0 12px;font-size:1.1em;", content: "font-weight:600;color:#6b4b37;", after: "" },
+          base: { base: "margin:22px 0 9px;font-size:1em;", content: "font-weight:600;color:#6b4b37;", after: "" }
+        },
+        paragraph: "color:#3a332c;",
+        list: { container: "padding-left:1.45em;color:#805c46;", item: "color:#3a332c;", taskList: "list-style:none;padding-left:0;color:#3a332c;" },
+        quote: "margin:1.5em 0;padding:16px 18px;background:#fbf6ef;border-top:1px solid #d9c5ae;border-bottom:1px solid #d9c5ae;color:#594638;",
+        code: { header: { container: "margin-bottom:6px;padding:6px 10px;background:#f2ebe2;", dot: "display:none;", colors: ["#805c46", "#805c46", "#805c46"] }, block: "margin:1.2em 0;padding:14px;background:#faf6f0;border:1px solid #e2d4c3;color:#3a332c;", inline: "padding:1px 4px;background:#f5ece1;color:#614632;" },
+        image: "padding:5px;border:1px solid #e2d4c3;",
+        link: "color:#614632;text-decoration:underline;",
+        emphasis: { strong: "font-weight:700;color:#47372b;", em: "color:#6b4b37;", del: "color:#77685b;" },
+        table: { container: "margin:1.3em 0;border-collapse:collapse;border-top:1px solid #c8aa8d;", header: "padding:10px;background:#fbf6ef;color:#47372b;border-bottom:1px solid #c8aa8d;", cell: "padding:10px;border-bottom:1px solid #e2d4c3;color:#3a332c;" },
+        hr: "margin:38px 0;border:0;border-top:1px solid #d9c5ae;",
+        footnote: { ref: "color:#614632;", backref: "color:#614632;" }
+      }
+    };
+  }
+});
+
 // src/templates/index.ts
 var templates_exports = {};
 __export(templates_exports, {
@@ -8162,32 +8327,42 @@ var init_templates = __esm({
     init_academic_pro_forest();
     init_academic_pro();
     init_apple_product();
+    init_briefing_grid();
+    init_case_file();
     init_clear_guide();
     init_data_blueprint();
     init_deep_reading();
     init_default();
     init_eastern_notes();
+    init_ink_opinion();
+    init_knowledge_notes();
     init_minimal();
     init_modern_report();
     init_olive_journal();
     init_product_review();
     init_red_white_editorial();
     init_zen_essence();
+    init_warm_paper();
     templates = {
       default: default_default,
       "deep-reading": deep_reading_default,
       "academic-pro": academic_pro_default,
       "clear-guide": clear_guide_default,
+      "knowledge-notes": knowledge_notes_default,
       "apple-product": apple_product_default,
       "product-review": product_review_default,
       minimal: minimal_default,
       "red-white-editorial": red_white_editorial_default,
+      "ink-opinion": ink_opinion_default,
       "modern-report": modern_report_default,
       "data-blueprint": data_blueprint_default,
+      "briefing-grid": briefing_grid_default,
       "zen-essence": zen_essence_default,
+      "warm-paper": warm_paper_default,
       "eastern-notes": eastern_notes_default,
       "academic-pro-forest": academic_pro_forest_default,
-      "olive-journal": olive_journal_default
+      "olive-journal": olive_journal_default,
+      "case-file": case_file_default
     };
   }
 });
@@ -10422,22 +10597,27 @@ BackgroundManager.BASE_CONTENT_PADDING = "padding: 16px 20px;";
 var import_obsidian2 = require("obsidian");
 
 // src/core/theme/themeCatalog.ts
-var CURATED_THEME_CATALOG_VERSION = 3;
+var CURATED_THEME_CATALOG_VERSION = 4;
 var curatedThemeEntries = [
   { id: "default", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u4E2D\u6027\u3001\u7A33\u5B9A\uFF0C\u9002\u5408\u901A\u77E5\u3001\u6587\u7AE0\u521D\u7A3F\u4E0E\u5E38\u89C4\u957F\u6587\u3002", frameworkId: "neutral-reading", status: "featured", readingProfile: "standard", surfaces: ["wechat", "note"], noteThemeId: "default" },
   { id: "deep-reading", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u5C11\u88C5\u9970\u3001\u5927\u6BB5\u843D\u547C\u5438\u611F\uFF0C\u9002\u5408\u8BBF\u8C08\u4E0E\u6DF1\u5EA6\u957F\u6587\u3002", frameworkId: "deep-reading", status: "featured", readingProfile: "airy", surfaces: ["wechat", "note"], noteThemeId: "deep-reading" },
   { id: "academic-pro", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u65E7\u7248\u77E5\u8BC6\u4E3B\u9898\uFF1B\u65B0\u7A3F\u5EFA\u8BAE\u4F7F\u7528\u6E05\u6670\u6307\u5357\u3002", frameworkId: "structured-guide", status: "legacy", readingProfile: "compact", surfaces: ["wechat"] },
   { id: "clear-guide", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u6B65\u9AA4\u8FB9\u754C\u660E\u786E\uFF0C\u9002\u5408\u6D41\u7A0B\u3001\u4E0A\u624B\u4E0E\u5DE5\u5177\u6307\u5357\u3002", frameworkId: "structured-guide", status: "featured", readingProfile: "compact", surfaces: ["wechat"] },
+  { id: "knowledge-notes", scene: "\u6559\u7A0B\u4E0E\u77E5\u8BC6", recommendation: "\u7EB8\u9762\u6CE8\u91CA\u4E0E\u67D4\u548C\u4FE1\u606F\u5757\uFF0C\u9002\u5408\u6982\u5FF5\u89E3\u91CA\u3001\u77E5\u8BC6\u5361\u4E0E\u8F7B\u6559\u7A0B\u3002", frameworkId: "structured-guide", status: "featured", readingProfile: "compact", surfaces: ["wechat"] },
   { id: "apple-product", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u8F7B\u91CF\u4EA7\u54C1\u53D9\u4E8B\uFF0C\u9002\u5408\u529F\u80FD\u4ECB\u7ECD\u4E0E\u54C1\u724C\u5185\u5BB9\u3002", frameworkId: "product-editorial", status: "featured", readingProfile: "standard", surfaces: ["wechat"] },
   { id: "product-review", scene: "\u4EA7\u54C1\u4E0E\u5DE5\u5177", recommendation: "\u5FEB\u901F\u5B9A\u4F4D\u8981\u70B9\u4E0E\u5BF9\u6BD4\uFF0C\u9002\u5408\u6D4B\u8BC4\u548C\u5DE5\u5177\u76D8\u70B9\u3002", frameworkId: "product-editorial", status: "featured", readingProfile: "compact", surfaces: ["wechat"] },
   { id: "minimal", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u65E7\u7248\u77F3\u58A8\u4E3B\u9898\uFF1B\u65B0\u7A3F\u53EF\u5C1D\u8BD5\u6DF1\u5EA6\u9605\u8BFB\u3002", frameworkId: "opinion-editorial", status: "legacy", readingProfile: "standard", surfaces: ["wechat", "note"], noteThemeId: "minimal" },
   { id: "red-white-editorial", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u514B\u5236\u7EA2\u8272\u7AE0\u8282\u951A\u70B9\uFF0C\u9002\u5408\u8BC4\u8BBA\u4E0E\u5206\u6790\u8BAE\u9898\u3002", frameworkId: "opinion-editorial", status: "featured", readingProfile: "standard", surfaces: ["wechat"] },
+  { id: "ink-opinion", scene: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", recommendation: "\u7EAF\u9ED1\u6587\u5B57\u5C42\u7EA7\u4E0E\u7559\u767D\u5F15\u8BED\uFF0C\u9002\u5408\u7ACB\u573A\u9C9C\u660E\u7684\u4E13\u680F\u4E0E\u77ED\u8BC4\u3002", frameworkId: "opinion-editorial", status: "featured", readingProfile: "standard", surfaces: ["wechat"] },
   { id: "modern-report", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u65E7\u7248\u62A5\u544A\u4E3B\u9898\uFF1B\u65B0\u7A3F\u5EFA\u8BAE\u4F7F\u7528\u6570\u636E\u84DD\u56FE\u3002", frameworkId: "reporting", status: "legacy", readingProfile: "compact", surfaces: ["wechat"] },
   { id: "data-blueprint", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u660E\u786E\u6570\u636E\u5C42\u7EA7\uFF0C\u9002\u5408\u7ECF\u8425\u5206\u6790\u548C\u6570\u636E\u590D\u76D8\u3002", frameworkId: "reporting", status: "featured", readingProfile: "compact", surfaces: ["wechat"] },
+  { id: "briefing-grid", scene: "\u62A5\u544A\u4E0E\u590D\u76D8", recommendation: "\u4F4E\u88C5\u9970\u7684\u7B80\u62A5\u5206\u533A\uFF0C\u9002\u5408\u5468\u62A5\u3001\u9879\u76EE\u590D\u76D8\u4E0E\u591A\u6307\u6807\u9605\u8BFB\u3002", frameworkId: "reporting", status: "featured", readingProfile: "compact", surfaces: ["wechat"] },
   { id: "zen-essence", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u4F4E\u9971\u548C\u4E0E\u7559\u767D\uFF0C\u9002\u5408\u968F\u7B14\u3001\u8BFB\u4E66\u4E0E\u6C89\u9759\u9605\u8BFB\u3002", frameworkId: "lifestyle-editorial", status: "featured", readingProfile: "airy", surfaces: ["wechat"] },
+  { id: "warm-paper", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u6696\u7EB8\u8272\u6E29\u4E0E\u77ED\u5F15\u8BED\uFF0C\u9002\u5408\u751F\u6D3B\u8BB0\u5F55\u3001\u4E66\u4FE1\u4E0E\u4E2A\u4EBA\u6545\u4E8B\u3002", frameworkId: "lifestyle-editorial", status: "featured", readingProfile: "airy", surfaces: ["wechat"] },
   { id: "eastern-notes", scene: "\u968F\u7B14\u4E0E\u751F\u6D3B", recommendation: "\u65E7\u7248\u7EB8\u7B3A\u4E3B\u9898\uFF1B\u65B0\u7A3F\u53EF\u5C1D\u8BD5\u7559\u767D\u968F\u7B14\u3002", frameworkId: "lifestyle-editorial", status: "legacy", readingProfile: "airy", surfaces: ["wechat"] },
   { id: "academic-pro-forest", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u65E7\u7248\u6848\u4F8B\u4E3B\u9898\uFF1B\u65B0\u7A3F\u5EFA\u8BAE\u4F7F\u7528\u6A44\u6984\u624B\u8BB0\u3002", frameworkId: "case-study", status: "legacy", readingProfile: "standard", surfaces: ["wechat"] },
-  { id: "olive-journal", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u7F16\u8F91\u90E8\u5185\u520A\u8D28\u611F\uFF0C\u9002\u5408\u7CFB\u7EDF\u590D\u76D8\u4E0E\u7EC4\u7EC7\u6C89\u6DC0\u3002", frameworkId: "case-study", status: "featured", readingProfile: "standard", surfaces: ["wechat"] }
+  { id: "olive-journal", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u7F16\u8F91\u90E8\u5185\u520A\u8D28\u611F\uFF0C\u9002\u5408\u7CFB\u7EDF\u590D\u76D8\u4E0E\u7EC4\u7EC7\u6C89\u6DC0\u3002", frameworkId: "case-study", status: "featured", readingProfile: "standard", surfaces: ["wechat"] },
+  { id: "case-file", scene: "\u6848\u4F8B\u4E0E\u5185\u520A", recommendation: "\u6863\u6848\u5F0F\u7AE0\u8282\u548C\u6D45\u8272\u6570\u636E\u8868\uFF0C\u9002\u5408\u9879\u76EE\u6848\u4F8B\u3001\u8BBF\u8C08\u4E0E\u56E2\u961F\u5185\u520A\u3002", frameworkId: "case-study", status: "featured", readingProfile: "standard", surfaces: ["wechat"] }
 ];
 var noteThemeEntries = [
   { id: "default", name: "\u9ED8\u8BA4\u9605\u8BFB", recommendation: "\u9002\u5408\u65E5\u5E38\u7B14\u8BB0\u548C\u7EFC\u5408\u5185\u5BB9", frameworkId: "neutral-reading" },
@@ -10457,8 +10637,7 @@ var CURATED_SCENE_ORDER = [...new Set(curatedThemeEntries.map((entry) => entry.s
 var SCENE_ORDER = [
   "\u5168\u90E8",
   ...CURATED_SCENE_ORDER,
-  "\u81EA\u5B9A\u4E49\u4E3B\u9898",
-  "\u5386\u53F2\u4E3B\u9898"
+  "\u81EA\u5B9A\u4E49\u4E3B\u9898"
 ];
 function getThemeScene(template) {
   if (!template.isPreset)
@@ -10475,6 +10654,8 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     this.gridContainer = null;
     this.applyButton = null;
     this.tryHintEl = null;
+    this.historyButton = null;
+    this.sceneBar = null;
     this.templates = settingsManager.getVisibleTemplates();
     this.originalTemplateId = currentTemplateId;
     this.currentTemplateId = currentTemplateId;
@@ -10491,8 +10672,9 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
     const header = contentEl.createDiv("mp-gallery-header");
     const heading = header.createDiv("mp-gallery-heading");
     heading.createEl("h2", { text: "\u516C\u4F17\u53F7\u4E3B\u9898\u753B\u5ECA" });
-    heading.createEl("p", { text: "\u6309\u6587\u7AE0\u573A\u666F\u6311\u9009\u516C\u4F17\u53F7\u89C6\u89C9\u98CE\u683C\uFF1B\u70B9\u51FB\u5361\u7247\u5148\u8BD5\u7528\uFF0C\u786E\u8BA4\u540E\u518D\u5E94\u7528\u3002\u65E7\u4E3B\u9898\u53EF\u5728\u5386\u53F2\u4E3B\u9898\u4E2D\u627E\u56DE\u3002" });
-    const search = header.createEl("input", {
+    heading.createEl("p", { text: "\u6BCF\u4E2A\u573A\u666F\u4E24\u5957\u4E0D\u540C\u7684\u9605\u8BFB\u7248\u5F0F\uFF1B\u70B9\u51FB\u4E3B\u9898\u5148\u8BD5\u7528\uFF0C\u518D\u786E\u8BA4\u5E94\u7528\u3002" });
+    const headerActions = header.createDiv("mp-gallery-header-actions");
+    const search = headerActions.createEl("input", {
       cls: "mp-gallery-search",
       attr: { type: "search", placeholder: "\u641C\u7D22\u4E3B\u9898\u6216\u6587\u7AE0\u573A\u666F" }
     });
@@ -10500,7 +10682,15 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       this.searchQuery = search.value.trim().toLowerCase();
       this.renderGallery();
     });
+    this.historyButton = headerActions.createEl("button", {
+      cls: `mp-gallery-history-btn ${this.selectedScene === "\u5386\u53F2\u4E3B\u9898" ? "is-active" : ""}`,
+      attr: { type: "button", "aria-label": "\u67E5\u770B\u5386\u53F2\u4E3B\u9898", "aria-pressed": String(this.selectedScene === "\u5386\u53F2\u4E3B\u9898") }
+    });
+    (0, import_obsidian2.setIcon)(this.historyButton, "archive");
+    this.historyButton.createSpan({ text: "\u5386\u53F2\u4E3B\u9898" });
+    this.historyButton.addEventListener("click", () => this.activateScene("\u5386\u53F2\u4E3B\u9898"));
     const sceneBar = contentEl.createDiv("mp-gallery-scenes");
+    this.sceneBar = sceneBar;
     sceneBar.setAttribute("aria-label", "\u516C\u4F17\u53F7\u4E3B\u9898\u573A\u666F");
     SCENE_ORDER.forEach((scene) => {
       const count = this.getTemplatesForScene(scene).length;
@@ -10508,14 +10698,11 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
         return;
       const button = sceneBar.createEl("button", {
         text: `${scene === "\u5168\u90E8" ? "\u5168\u90E8\u4E3B\u9898" : scene} \xB7 ${count}`,
-        cls: `mp-gallery-scene ${scene === this.selectedScene ? "is-active" : ""}`
+        cls: `mp-gallery-scene ${scene === this.selectedScene ? "is-active" : ""}`,
+        attr: { type: "button", "aria-pressed": String(scene === this.selectedScene) }
       });
-      button.addEventListener("click", () => {
-        this.selectedScene = scene;
-        sceneBar.querySelectorAll(".mp-gallery-scene").forEach((el) => el.removeClass("is-active"));
-        button.addClass("is-active");
-        this.renderGallery();
-      });
+      button.dataset.scene = scene;
+      button.addEventListener("click", () => this.activateScene(scene));
     });
     this.gridContainer = contentEl.createDiv("mp-gallery-grid");
     this.renderGallery();
@@ -10539,6 +10726,19 @@ var ThemeGalleryModal = class extends import_obsidian2.Modal {
       this.previewCallback(this.originalTemplateId);
     }
     this.contentEl.empty();
+  }
+  activateScene(scene) {
+    var _a, _b, _c;
+    this.selectedScene = scene;
+    (_a = this.sceneBar) == null ? void 0 : _a.querySelectorAll(".mp-gallery-scene").forEach((element) => {
+      const button = element;
+      const active = button.dataset.scene === scene;
+      button.toggleClass("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    (_b = this.historyButton) == null ? void 0 : _b.toggleClass("is-active", scene === "\u5386\u53F2\u4E3B\u9898");
+    (_c = this.historyButton) == null ? void 0 : _c.setAttribute("aria-pressed", String(scene === "\u5386\u53F2\u4E3B\u9898"));
+    this.renderGallery();
   }
   getTemplatesForScene(scene) {
     return this.templates.filter((template) => {
@@ -10812,7 +11012,8 @@ var MPView = class extends import_obsidian4.ItemView {
     container.classList.remove("view-content");
     container.classList.add("mp-view-content");
     const toolbar = container.createEl("div", { cls: "mp-toolbar" });
-    const controlsGroup = toolbar.createEl("div", { cls: "mp-controls-group" });
+    const controlsGroup = toolbar.createEl("div", { cls: "mp-controls-group mp-appearance-row" });
+    const typographyRow = toolbar.createEl("div", { cls: "mp-controls-group mp-typography-row" });
     const secondaryRow = toolbar.createEl("div", { cls: "mp-controls-group mp-secondary-row" });
     const headerBtn = secondaryRow.createEl("button", {
       cls: "mp-action-button mp-icon-btn",
@@ -10894,9 +11095,10 @@ var MPView = class extends import_obsidian4.ItemView {
     if (!backgroundOptions.find((o) => o.value === "default")) {
       backgroundOptions.unshift({ value: "default", label: "\u9ED8\u8BA4" });
     }
+    const backgroundField = controlsGroup.createDiv("mp-toolbar-field mp-background-field");
+    backgroundField.createSpan({ cls: "mp-toolbar-label", text: "\u80CC\u666F" });
     this.customBackgroundSelect = createCustomSelect(
-      controlsGroup,
-      // Append to main controls
+      backgroundField,
       "mp-background-select",
       backgroundOptions,
       async (value) => {
@@ -10929,6 +11131,7 @@ var MPView = class extends import_obsidian4.ItemView {
       attr: { "aria-label": "\u6253\u5F00\u4E3B\u9898\u753B\u5ECA", "title": "\u4E3B\u9898\u753B\u5ECA" }
     });
     (0, import_obsidian4.setIcon)(galleryBtn, "palette");
+    galleryBtn.createSpan({ text: "\u4E3B\u9898\u753B\u5ECA" });
     galleryBtn.addEventListener("click", () => this.openThemeGallery());
     const phonePreviewButton = controlsGroup.createEl("button", {
       text: "\u624B\u673A 375px",
@@ -10941,8 +11144,10 @@ var MPView = class extends import_obsidian4.ItemView {
       phonePreviewButton.setAttribute("aria-pressed", String(this.isPhonePreview));
       phonePreviewButton.setText(this.isPhonePreview ? "\u81EA\u9002\u5E94" : "\u624B\u673A 375px");
     });
+    const fontField = typographyRow.createDiv("mp-toolbar-field mp-font-field");
+    fontField.createSpan({ cls: "mp-toolbar-label", text: "\u5B57\u4F53" });
     this.customFontSelect = createCustomSelect(
-      controlsGroup,
+      fontField,
       "mp-font-select",
       this.getFontOptions(),
       async (value) => {
@@ -10954,7 +11159,9 @@ var MPView = class extends import_obsidian4.ItemView {
       }
     );
     this.customFontSelect.container.id = "font-select";
-    const fontSizeGroup = controlsGroup.createEl("div", { cls: "mp-font-size-group" });
+    const sizeField = typographyRow.createDiv("mp-toolbar-field mp-size-field");
+    sizeField.createSpan({ cls: "mp-toolbar-label", text: "\u5B57\u53F7" });
+    const fontSizeGroup = sizeField.createEl("div", { cls: "mp-font-size-group" });
     const decreaseButton = fontSizeGroup.createEl("button", {
       cls: "mp-font-size-btn",
       text: "-"
@@ -10972,8 +11179,10 @@ var MPView = class extends import_obsidian4.ItemView {
       text: "+"
     });
     const settings = this.settingsManager.getSettings();
+    const recipeField = typographyRow.createDiv("mp-toolbar-field mp-recipe-field");
+    recipeField.createSpan({ cls: "mp-toolbar-label", text: "\u6587\u7AE0\u914D\u65B9" });
     this.recipeSelect = createCustomSelect(
-      controlsGroup,
+      recipeField,
       "mp-recipe-select",
       [
         { label: "\u901A\u7528\u957F\u6587", value: "legacy-compatible" },

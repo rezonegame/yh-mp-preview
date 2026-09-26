@@ -8,7 +8,8 @@ const styles = readFileSync(new URL('../src/styles/settings/theme-gallery.css', 
 test('theme gallery is scene-first and preserves a safe try-before-apply flow', () => {
   assert.match(modal, /type ThemeScene/);
   assert.match(modal, /new Set\(curatedThemeEntries\.map\(entry => entry\.scene\)\)/);
-  assert.match(modal, /点击卡片先试用，确认后再应用/);
+  assert.match(modal, /点击主题先试用，再确认应用/);
+  assert.match(modal, /mp-gallery-history-btn/);
   assert.match(modal, /getThemeScene/);
   assert.doesNotMatch(modal, /selectedLayoutFamily/);
   assert.match(modal, /!this\.hasApplied && this\.currentTemplateId !== this\.originalTemplateId/);
@@ -19,6 +20,6 @@ test('theme gallery is scene-first and preserves a safe try-before-apply flow', 
   assert.match(modal, /mp-gallery-trial-note/);
   assert.match(styles, /\.mp-gallery-scenes/);
   assert.match(styles, /\.mp-gallery-card-grid/);
-  assert.match(styles, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(styles, /grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
   assert.doesNotMatch(styles, /\.mp-gallery-layouts/);
 });

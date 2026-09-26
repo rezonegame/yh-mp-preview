@@ -1,0 +1,26 @@
+{
+  "id": "ink-opinion",
+  "name": "黑白锐评",
+  "description": "以黑白文字和强弱标题建立观点节奏，适合短评与专栏。",
+  "source": "yh-mp-preview",
+  "styles": {
+    "container": "background:#ffffff;padding:0;color:#292929;",
+    "accentColor": "#353535",
+    "title": {
+      "h1": { "base": "margin:24px 0 28px;padding:0 0 16px;border-bottom:4px solid #202020;font-size:1.95em;", "content": "font-weight:800;color:#181818;", "after": "" },
+      "h2": { "base": "margin:36px 0 14px;padding-left:12px;border-left:5px solid #202020;font-size:1.3em;", "content": "font-weight:800;color:#181818;", "after": "" },
+      "h3": { "base": "margin:26px 0 11px;padding-bottom:6px;border-bottom:1px solid #a9a9a9;font-size:1.08em;", "content": "font-weight:700;color:#303030;", "after": "" },
+      "base": { "base": "margin:20px 0 8px;font-size:1em;", "content": "font-weight:700;color:#353535;", "after": "" }
+    },
+    "paragraph": "color:#292929;",
+    "list": { "container": "padding-left:1.5em;color:#353535;", "item": "color:#292929;", "taskList": "list-style:none;padding-left:0;color:#292929;" },
+    "quote": "margin:1.5em 0;padding:10px 20px;border-top:2px solid #202020;border-bottom:2px solid #202020;color:#303030;",
+    "code": { "header": { "container": "margin-bottom:6px;padding:6px 10px;background:#e9e9e9;", "dot": "display:none;", "colors": ["#353535","#353535","#353535"] }, "block": "margin:1.2em 0;padding:14px;background:#f4f4f4;border-left:3px solid #353535;color:#292929;", "inline": "padding:1px 4px;background:#efefef;color:#292929;" },
+    "image": "border:1px solid #d2d2d2;border-radius:0;",
+    "link": "color:#303030;text-decoration:underline;",
+    "emphasis": { "strong": "font-weight:800;color:#181818;", "em": "color:#454545;", "del": "color:#6d6d6d;" },
+    "table": { "container": "margin:1.3em 0;border-collapse:collapse;border-top:2px solid #202020;", "header": "padding:10px;background:#efefef;color:#181818;border-bottom:1px solid #888888;", "cell": "padding:10px;border-bottom:1px solid #d2d2d2;color:#292929;" },
+    "hr": "margin:34px 0;border:0;border-top:2px solid #202020;",
+    "footnote": { "ref": "color:#353535;", "backref": "color:#353535;" }
+  }
+}

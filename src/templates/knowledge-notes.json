@@ -1,0 +1,26 @@
+{
+  "id": "knowledge-notes",
+  "name": "纸面笔记",
+  "description": "纸面注释与柔和信息块，适合知识解释和轻教程。",
+  "source": "yh-mp-preview",
+  "styles": {
+    "container": "background:#ffffff;padding:0;color:#293c39;",
+    "accentColor": "#355f59",
+    "title": {
+      "h1": { "base": "margin:28px 0 22px;padding:0 0 14px;border-bottom:1px solid #b9cec8;font-size:1.72em;", "content": "font-weight:700;color:#203a36;", "after": "" },
+      "h2": { "base": "margin:30px 0 14px;padding:10px 12px;background:#edf5f2;border-left:3px solid #355f59;font-size:1.28em;", "content": "font-weight:700;color:#254b45;", "after": "" },
+      "h3": { "base": "margin:24px 0 10px;padding-left:10px;border-left:1px solid #729990;font-size:1.1em;", "content": "font-weight:700;color:#355f59;", "after": "" },
+      "base": { "base": "margin:18px 0 8px;font-size:1em;", "content": "font-weight:700;color:#355f59;", "after": "" }
+    },
+    "paragraph": "color:#293c39;",
+    "list": { "container": "padding-left:1.55em;color:#355f59;", "item": "color:#293c39;", "taskList": "list-style:none;padding-left:0;color:#293c39;" },
+    "quote": "margin:1.2em 0;padding:14px 16px;background:#f5f8f6;border-left:2px solid #9bb8af;color:#344b45;",
+    "code": { "header": { "container": "margin-bottom:6px;padding:6px 10px;background:#eaf1ee;", "dot": "display:none;", "colors": ["#355f59","#355f59","#355f59"] }, "block": "margin:1.2em 0;padding:14px;background:#f4f7f5;border:1px solid #d6e2dd;color:#203a36;", "inline": "padding:1px 4px;background:#edf3f0;color:#254b45;" },
+    "image": "padding:4px;border-bottom:1px solid #b9cec8;",
+    "link": "color:#254b45;text-decoration:underline;",
+    "emphasis": { "strong": "font-weight:700;color:#203a36;", "em": "color:#48635b;", "del": "color:#677d76;" },
+    "table": { "container": "margin:1.2em 0;border-collapse:collapse;border-top:1px solid #9bb8af;", "header": "padding:9px;background:#edf5f2;color:#203a36;border-bottom:1px solid #9bb8af;", "cell": "padding:9px;border-bottom:1px solid #d6e2dd;color:#293c39;" },
+    "hr": "margin:30px 0;border:0;border-top:1px dashed #9bb8af;",
+    "footnote": { "ref": "color:#254b45;", "backref": "color:#254b45;" }
+  }
+}

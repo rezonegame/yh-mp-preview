@@ -27,15 +27,31 @@ const signature = template => [
   template.styles.image,
 ].map(shape).join('|');
 
-test('nine featured themes have distinct structural signatures and five legacy IDs remain', () => {
+test('seven scenes each have two structurally distinct themes and five legacy IDs remain', () => {
   const featured = curatedThemeEntries.filter(entry => entry.status === 'featured');
   const legacy = curatedThemeEntries.filter(entry => entry.status === 'legacy');
-  assert.equal(featured.length, 9);
+  assert.equal(featured.length, 14);
   assert.deepEqual(legacy.map(entry => entry.id).sort(), [
     'academic-pro', 'academic-pro-forest', 'eastern-notes', 'minimal', 'modern-report',
   ]);
-  assert.equal(new Set(featured.map(entry => signature(templates.get(entry.id)))).size, 9);
-  assert.equal(templates.size, 14);
+  assert.equal(new Set(featured.map(entry => signature(templates.get(entry.id)))).size, 14);
+  assert.equal(new Set(featured.map(entry => entry.scene)).size, 7);
+  for (const scene of new Set(featured.map(entry => entry.scene))) {
+    const pair = featured.filter(entry => entry.scene === scene);
+    assert.equal(pair.length, 2, scene);
+    assert.notEqual(signature(templates.get(pair[0].id)), signature(templates.get(pair[1].id)), scene);
+  }
+  assert.equal(templates.size, 19);
+});
+
+test('history is a small gallery entry and typography has its own toolbar row', () => {
+  const gallery = readFileSync(new URL('src/settings/ThemeGalleryModal.ts', root), 'utf8');
+  const view = readFileSync(new URL('src/view.ts', root), 'utf8');
+  assert.match(gallery, /mp-gallery-history-btn/);
+  assert.match(gallery, /this\.activateScene\('历史主题'\)/);
+  assert.doesNotMatch(gallery, /\.\.\.CURATED_SCENE_ORDER, '自定义主题', '历史主题'/);
+  assert.match(view, /mp-controls-group mp-typography-row/);
+  assert.match(view, /text: '文章配方'/);
 });
 
 function luminance(hex) {

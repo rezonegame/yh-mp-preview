@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.15.0-beta.2
+
+- Completed the seven-scene gallery with two structurally distinct featured themes per scene, while keeping all five legacy themes behind a small history button.
+- Gave the preview toolbar separate, labelled appearance and typography rows so theme, recipe and font selections do not truncate at typical pane widths.
+- Preserved all prior theme IDs, visibility preferences and layout snapshots; added five new theme IDs without changing Markdown or note themes.
+
 ## 3.15.0-beta.1
 
 - Curated nine distinct WeChat themes; five former presets remain accessible as legacy themes without changing saved IDs or snapshots.

@@ -164,6 +164,57 @@
   border-color: var(--text-accent);
   color: var(--text-accent);
 }
+
+.mp-toolbar .mp-appearance-row,
+.mp-toolbar .mp-typography-row {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+}
+
+.mp-toolbar-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.mp-toolbar-label {
+    flex: 0 0 auto;
+    color: var(--text-muted);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.mp-background-field { flex: 0 1 210px; }
+.mp-font-field { flex: 0 1 220px; }
+.mp-size-field { flex: 0 0 156px; }
+.mp-recipe-field { flex: 0 1 254px; }
+
+.mp-toolbar .mp-toolbar-field .custom-select-container {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+}
+
+.mp-toolbar .mp-size-field .mp-font-size-group {
+    flex: 1 1 auto;
+    max-width: none;
+    min-width: 0;
+}
+
+.mp-toolbar .mp-appearance-row .mp-gallery-btn,
+.mp-toolbar .mp-appearance-row .mp-phone-preview-btn {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 12px;
+    white-space: nowrap;
+}
+
+.mp-toolbar .mp-appearance-row .mp-gallery-btn span { overflow: visible; }
 .mp-validation-panel {
   margin: 10px 0;
   border: 1px solid var(--background-modifier-border);
@@ -198,6 +249,12 @@
     max-width: none;
     flex: 1 1 calc(50% - 4px);
   }
+  .mp-toolbar .mp-toolbar-field .custom-select-container {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .mp-background-field, .mp-font-field { flex: 1 1 200px; }
+  .mp-recipe-field { flex: 1 1 240px; }
   .mp-secondary-row { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; }
   .mp-primary-row button { flex: 1 1 calc(50% - 6px); }
   .mp-preview-area { min-width: 0; }

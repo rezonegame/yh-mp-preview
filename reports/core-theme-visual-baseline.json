@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pluginVersion": "3.15.0-beta.1",
+  "pluginVersion": "3.15.0-beta.2",
   "description": "Deterministic Core theme visual-style baseline. Screenshot comparison is a later RC task.",
   "themes": [
     {
@@ -64,6 +64,21 @@
       }
     },
     {
+      "id": "ink-opinion",
+      "name": "黑白锐评",
+      "fingerprint": "9fea7f04df4d5d1ed5095b89f99c607d0b960f151aba0d701a46a8c46a2c468c",
+      "visualTokens": {
+        "container": "background:#ffffff;padding:0;color:#292929;",
+        "h1": "margin:24px 0 28px;padding:0 0 16px;border-bottom:4px solid #202020;font-size:1.95em;",
+        "h2": "margin:36px 0 14px;padding-left:12px;border-left:5px solid #202020;font-size:1.3em;",
+        "h3": "margin:26px 0 11px;padding-bottom:6px;border-bottom:1px solid #a9a9a9;font-size:1.08em;",
+        "paragraph": "color:#292929;",
+        "quote": "margin:1.5em 0;padding:10px 20px;border-top:2px solid #202020;border-bottom:2px solid #202020;color:#303030;",
+        "codeBlock": "margin:1.2em 0;padding:14px;background:#f4f4f4;border-left:3px solid #353535;color:#292929;",
+        "table": "margin:1.3em 0;border-collapse:collapse;border-top:2px solid #202020;"
+      }
+    },
+    {
       "id": "academic-pro",
       "name": "教程与知识",
       "fingerprint": "f20d92fb8709dae693a89037315859c9dc5ea0c9f319cf997edc6d7645671cfd",
@@ -91,6 +106,21 @@
         "quote": "margin:1.1em 0;padding:12px 14px;border-left:3px solid #087f75;background:#f3faf8;color:#254743;",
         "codeBlock": "margin:1.2em 0;padding:14px;background:#173330;border:1px solid #183f3c;color:#e8f4f2;",
         "table": "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #172b29;"
+      }
+    },
+    {
+      "id": "knowledge-notes",
+      "name": "纸面笔记",
+      "fingerprint": "4fb536d4ecdbd29ba961992c7dc6b460d59841d4fd94ac8b427b6da9190b990d",
+      "visualTokens": {
+        "container": "background:#ffffff;padding:0;color:#293c39;",
+        "h1": "margin:28px 0 22px;padding:0 0 14px;border-bottom:1px solid #b9cec8;font-size:1.72em;",
+        "h2": "margin:30px 0 14px;padding:10px 12px;background:#edf5f2;border-left:3px solid #355f59;font-size:1.28em;",
+        "h3": "margin:24px 0 10px;padding-left:10px;border-left:1px solid #729990;font-size:1.1em;",
+        "paragraph": "color:#293c39;",
+        "quote": "margin:1.2em 0;padding:14px 16px;background:#f5f8f6;border-left:2px solid #9bb8af;color:#344b45;",
+        "codeBlock": "margin:1.2em 0;padding:14px;background:#f4f7f5;border:1px solid #d6e2dd;color:#203a36;",
+        "table": "margin:1.2em 0;border-collapse:collapse;border-top:1px solid #9bb8af;"
       }
     },
     {
@@ -124,6 +154,21 @@
       }
     },
     {
+      "id": "case-file",
+      "name": "档案案例",
+      "fingerprint": "eafe5f8b15bea16b0cf20f0f09102b96ef383be7ac1a81c613afceb48385231b",
+      "visualTokens": {
+        "container": "background:#ffffff;padding:0;color:#2b3740;",
+        "h1": "margin:26px 0 25px;padding:14px 16px;background:#293a46;font-size:1.65em;",
+        "h2": "margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #40505c;font-size:1.3em;",
+        "h3": "margin:24px 0 10px;padding:7px 10px;background:#eef2f3;font-size:1.08em;",
+        "paragraph": "color:#2b3740;",
+        "quote": "margin:1.25em 0;padding:14px 16px;border-left:3px solid #40505c;background:#f2f5f6;color:#354650;",
+        "codeBlock": "margin:1.2em 0;padding:14px;background:#263742;border-top:4px solid #64828d;color:#eff6f6;",
+        "table": "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #40505c;"
+      }
+    },
+    {
       "id": "modern-report",
       "name": "报告与复盘",
       "fingerprint": "dbfbc68fdc70d5ff825697100dc0dea60982d134c1daec8df1c258dfe4bb974f",
@@ -154,6 +199,21 @@
       }
     },
     {
+      "id": "briefing-grid",
+      "name": "轻量简报",
+      "fingerprint": "84681447c6601d3609fbb59b633a57dd622fad4326264faf3afeede595e9cb15",
+      "visualTokens": {
+        "container": "background:#ffffff;padding:0;color:#273848;",
+        "h1": "margin:28px 0 24px;padding:0 0 10px;border-bottom:1px solid #91adbd;font-size:1.7em;",
+        "h2": "margin:30px 0 13px;padding:8px 10px;background:#edf3f6;border-left:3px solid #355a72;font-size:1.25em;",
+        "h3": "margin:23px 0 9px;padding-bottom:5px;border-bottom:1px dashed #91adbd;font-size:1.08em;",
+        "paragraph": "color:#273848;",
+        "quote": "margin:1.1em 0;padding:12px 14px;background:#f3f7f8;border-left:2px solid #91adbd;color:#344d5d;",
+        "codeBlock": "margin:1.2em 0;padding:14px;background:#f2f6f8;border:1px solid #c9d8e0;color:#273848;",
+        "table": "margin:1.1em 0;border-collapse:collapse;border-top:1px solid #91adbd;"
+      }
+    },
+    {
       "id": "zen-essence",
       "name": "留白随笔",
       "fingerprint": "bece2e679e26b4413dfeafa350e4d37039d4544b948b1ef52bd4c8ab476378d2",
@@ -166,6 +226,21 @@
         "quote": "margin: 1.7em 0; padding: 18px 0; border-top: 1px solid #cfd5ca; border-bottom: 1px solid #cfd5ca; color: #4e584a;",
         "codeBlock": "margin: 1.3em 0; padding: 14px; background: #fafbf9; border: 1px solid #e2e6de; color: #4e584a;",
         "table": "margin: 1.3em 0; border-collapse: collapse; border-top: 1px solid #aeb7a7;"
+      }
+    },
+    {
+      "id": "warm-paper",
+      "name": "暖纸散文",
+      "fingerprint": "cb69a17daaf86c82589dbac42d5596c5a896922d621c28d4e63580313f539b5d",
+      "visualTokens": {
+        "container": "background:#ffffff;padding:0;color:#3a332c;",
+        "h1": "margin:34px 0 26px;padding:0 0 12px;border-bottom:1px solid #d9c5ae;font-size:1.78em;",
+        "h2": "margin:38px 0 16px;padding-left:10px;border-left:2px solid #a17a57;font-size:1.28em;",
+        "h3": "margin:28px 0 12px;font-size:1.1em;",
+        "paragraph": "color:#3a332c;",
+        "quote": "margin:1.5em 0;padding:16px 18px;background:#fbf6ef;border-top:1px solid #d9c5ae;border-bottom:1px solid #d9c5ae;color:#594638;",
+        "codeBlock": "margin:1.2em 0;padding:14px;background:#faf6f0;border:1px solid #e2d4c3;color:#3a332c;",
+        "table": "margin:1.3em 0;border-collapse:collapse;border-top:1px solid #c8aa8d;"
       }
     },
     {

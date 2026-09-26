@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "pluginVersion": "3.15.0-beta.1",
+  "pluginVersion": "3.15.0-beta.2",
   "summary": {
-    "total": 14,
-    "bundled": 14,
+    "total": 19,
+    "bundled": 19,
     "xiaohuImported": 0,
     "pendingProvenanceReview": 0,
     "duplicateIds": [],
-    "coreThemes": 14,
+    "coreThemes": 19,
     "missingCoreThemeIds": []
   },
   "templates": [
@@ -31,6 +31,22 @@
       "id": "apple-product",
       "name": "产品叙事",
       "file": "src/templates/apple-product.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
+      "id": "briefing-grid",
+      "name": "轻量简报",
+      "file": "src/templates/briefing-grid.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
+      "id": "case-file",
+      "name": "档案案例",
+      "file": "src/templates/case-file.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
       "v3Disposition": "core"
@@ -76,6 +92,22 @@
       "v3Disposition": "core"
     },
     {
+      "id": "ink-opinion",
+      "name": "黑白锐评",
+      "file": "src/templates/ink-opinion.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
+      "id": "knowledge-notes",
+      "name": "纸面笔记",
+      "file": "src/templates/knowledge-notes.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
       "id": "minimal",
       "name": "观点与评论",
       "file": "src/templates/minimal.json",
@@ -111,6 +143,14 @@
       "id": "red-white-editorial",
       "name": "红白编辑",
       "file": "src/templates/red-white-editorial.json",
+      "source": "yh-mp-preview",
+      "provenanceStatus": "verified-current-distribution",
+      "v3Disposition": "core"
+    },
+    {
+      "id": "warm-paper",
+      "name": "暖纸散文",
+      "file": "src/templates/warm-paper.json",
       "source": "yh-mp-preview",
       "provenanceStatus": "verified-current-distribution",
       "v3Disposition": "core"

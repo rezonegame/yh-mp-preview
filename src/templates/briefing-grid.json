@@ -1,0 +1,26 @@
+{
+  "id": "briefing-grid",
+  "name": "轻量简报",
+  "description": "以浅色分区和紧凑表格呈现周报与项目复盘。",
+  "source": "yh-mp-preview",
+  "styles": {
+    "container": "background:#ffffff;padding:0;color:#273848;",
+    "accentColor": "#355a72",
+    "title": {
+      "h1": { "base": "margin:28px 0 24px;padding:0 0 10px;border-bottom:1px solid #91adbd;font-size:1.7em;", "content": "font-weight:700;color:#223f52;", "after": "" },
+      "h2": { "base": "margin:30px 0 13px;padding:8px 10px;background:#edf3f6;border-left:3px solid #355a72;font-size:1.25em;", "content": "font-weight:700;color:#223f52;", "after": "" },
+      "h3": { "base": "margin:23px 0 9px;padding-bottom:5px;border-bottom:1px dashed #91adbd;font-size:1.08em;", "content": "font-weight:700;color:#355a72;", "after": "" },
+      "base": { "base": "margin:18px 0 8px;font-size:1em;", "content": "font-weight:700;color:#355a72;", "after": "" }
+    },
+    "paragraph": "color:#273848;",
+    "list": { "container": "padding-left:1.45em;color:#355a72;", "item": "color:#273848;", "taskList": "list-style:none;padding-left:0;color:#273848;" },
+    "quote": "margin:1.1em 0;padding:12px 14px;background:#f3f7f8;border-left:2px solid #91adbd;color:#344d5d;",
+    "code": { "header": { "container": "margin-bottom:6px;padding:6px 10px;background:#e9f0f4;", "dot": "display:none;", "colors": ["#355a72","#355a72","#355a72"] }, "block": "margin:1.2em 0;padding:14px;background:#f2f6f8;border:1px solid #c9d8e0;color:#273848;", "inline": "padding:1px 4px;background:#e9f0f4;color:#294b60;" },
+    "image": "border:1px solid #c9d8e0;border-radius:2px;",
+    "link": "color:#294b60;text-decoration:underline;",
+    "emphasis": { "strong": "font-weight:700;color:#223f52;", "em": "color:#466173;", "del": "color:#677d89;" },
+    "table": { "container": "margin:1.1em 0;border-collapse:collapse;border-top:1px solid #91adbd;", "header": "padding:8px;background:#edf3f6;color:#223f52;border-bottom:1px solid #91adbd;", "cell": "padding:8px;border-bottom:1px solid #d5e0e5;color:#273848;" },
+    "hr": "margin:28px 0;border:0;border-top:1px dashed #91adbd;",
+    "footnote": { "ref": "color:#294b60;", "backref": "color:#294b60;" }
+  }
+}

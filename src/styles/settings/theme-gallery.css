@@ -1,6 +1,6 @@
 .mp-theme-gallery-modal {
-    width: min(960px, 94vw) !important;
-    max-width: 960px !important;
+    width: min(800px, 94vw) !important;
+    max-width: 800px !important;
     height: min(780px, 88vh) !important;
     border-radius: 14px !important;
     overflow: hidden !important;
@@ -18,6 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 20px;
     padding: 24px;
     border-bottom: 1px solid var(--background-modifier-border);
@@ -25,6 +26,25 @@
 
 .mp-gallery-heading h2 { margin: 0; font-size: 20px; }
 .mp-gallery-heading p { margin: 7px 0 0; color: var(--text-muted); font-size: 13px; }
+
+.mp-gallery-header-actions { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+.mp-gallery-history-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 32px;
+    padding: 0 9px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.mp-gallery-history-btn:hover,
+.mp-gallery-history-btn.is-active { background: var(--background-modifier-hover); color: var(--text-normal); }
+.mp-gallery-history-btn:focus-visible { outline: 2px solid var(--interactive-accent); outline-offset: 2px; }
 
 .mp-gallery-search {
     width: 240px;
@@ -65,7 +85,7 @@
 
 .mp-gallery-card-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
 }
 
@@ -106,14 +126,11 @@
 .mp-gallery-btn-cancel { border: 1px solid var(--background-modifier-border); background: var(--background-primary); color: var(--text-normal); }
 .mp-gallery-btn-apply { border: 0; background: var(--interactive-accent); color: var(--text-on-accent); }
 
-@media (max-width: 800px) {
-    .mp-gallery-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
 @media (max-width: 640px) {
     .mp-theme-gallery-modal { width: 96vw !important; height: 92vh !important; }
     .mp-gallery-header { align-items: stretch; flex-direction: column; padding: 18px; }
-    .mp-gallery-search { width: 100%; }
+    .mp-gallery-header-actions { width: 100%; }
+    .mp-gallery-search { width: 100%; min-width: 0; }
     .mp-gallery-scenes, .mp-gallery-grid { padding-left: 16px; padding-right: 16px; }
     .mp-gallery-card-grid { grid-template-columns: 1fr; gap: 8px; }
     .mp-theme-info { gap: 9px; padding: 12px; }

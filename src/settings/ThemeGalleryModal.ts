@@ -12,7 +12,7 @@ type ThemeScene = '全部' | CuratedThemeScene | '自定义主题' | '历史主�
 
 const CURATED_SCENE_ORDER = [...new Set(curatedThemeEntries.map(entry => entry.scene))];
 const SCENE_ORDER: ThemeScene[] = [
-    '全部', ...CURATED_SCENE_ORDER, '自定义主题', '历史主题'
+    '全部', ...CURATED_SCENE_ORDER, '自定义主题'
 ];
 
 export function getThemeScene(template: Template): ThemeScene {
@@ -33,6 +33,8 @@ export class ThemeGalleryModal extends Modal {
     private gridContainer: HTMLElement | null = null;
     private applyButton: HTMLButtonElement | null = null;
     private tryHintEl: HTMLElement | null = null;
+    private historyButton: HTMLButtonElement | null = null;
+    private sceneBar: HTMLElement | null = null;
 
     constructor(
         app: any,
@@ -59,8 +61,9 @@ export class ThemeGalleryModal extends Modal {
         const header = contentEl.createDiv('mp-gallery-header');
         const heading = header.createDiv('mp-gallery-heading');
         heading.createEl('h2', { text: '公众号主题画廊' });
-        heading.createEl('p', { text: '按文章场景挑选公众号视觉风格；点击卡片先试用，确认后再应用。旧主题可在历史主题中找回。' });
-        const search = header.createEl('input', {
+        heading.createEl('p', { text: '每个场景两套不同的阅读版式；点击主题先试用，再确认应用。' });
+        const headerActions = header.createDiv('mp-gallery-header-actions');
+        const search = headerActions.createEl('input', {
             cls: 'mp-gallery-search',
             attr: { type: 'search', placeholder: '搜索主题或文章场景' },
         });
@@ -68,8 +71,16 @@ export class ThemeGalleryModal extends Modal {
             this.searchQuery = search.value.trim().toLowerCase();
             this.renderGallery();
         });
+        this.historyButton = headerActions.createEl('button', {
+            cls: `mp-gallery-history-btn ${this.selectedScene === '历史主题' ? 'is-active' : ''}`,
+            attr: { type: 'button', 'aria-label': '查看历史主题', 'aria-pressed': String(this.selectedScene === '历史主题') },
+        });
+        setIcon(this.historyButton, 'archive');
+        this.historyButton.createSpan({ text: '历史主题' });
+        this.historyButton.addEventListener('click', () => this.activateScene('历史主题'));
 
         const sceneBar = contentEl.createDiv('mp-gallery-scenes');
+        this.sceneBar = sceneBar;
         sceneBar.setAttribute('aria-label', '公众号主题场景');
         SCENE_ORDER.forEach(scene => {
             const count = this.getTemplatesForScene(scene).length;
@@ -77,13 +88,10 @@ export class ThemeGalleryModal extends Modal {
             const button = sceneBar.createEl('button', {
                 text: `${scene === '全部' ? '全部主题' : scene} · ${count}`,
                 cls: `mp-gallery-scene ${scene === this.selectedScene ? 'is-active' : ''}`,
+                attr: { type: 'button', 'aria-pressed': String(scene === this.selectedScene) },
             });
-            button.addEventListener('click', () => {
-                this.selectedScene = scene;
-                sceneBar.querySelectorAll('.mp-gallery-scene').forEach(el => el.removeClass('is-active'));
-                button.addClass('is-active');
-                this.renderGallery();
-            });
+            button.dataset.scene = scene;
+            button.addEventListener('click', () => this.activateScene(scene));
         });
 
         this.gridContainer = contentEl.createDiv('mp-gallery-grid');
@@ -110,6 +118,19 @@ export class ThemeGalleryModal extends Modal {
             this.previewCallback(this.originalTemplateId);
         }
         this.contentEl.empty();
+    }
+
+    private activateScene(scene: ThemeScene): void {
+        this.selectedScene = scene;
+        this.sceneBar?.querySelectorAll('.mp-gallery-scene').forEach(element => {
+            const button = element as HTMLButtonElement;
+            const active = button.dataset.scene === scene;
+            button.toggleClass('is-active', active);
+            button.setAttribute('aria-pressed', String(active));
+        });
+        this.historyButton?.toggleClass('is-active', scene === '历史主题');
+        this.historyButton?.setAttribute('aria-pressed', String(scene === '历史主题'));
+        this.renderGallery();
     }
 
     private getTemplatesForScene(scene: ThemeScene): Template[] {

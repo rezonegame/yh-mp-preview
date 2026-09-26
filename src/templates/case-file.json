@@ -1,0 +1,26 @@
+{
+  "id": "case-file",
+  "name": "档案案例",
+  "description": "深色章节锚点与清晰数据表，适合案例、访谈和内刊。",
+  "source": "yh-mp-preview",
+  "styles": {
+    "container": "background:#ffffff;padding:0;color:#2b3740;",
+    "accentColor": "#40505c",
+    "title": {
+      "h1": { "base": "margin:26px 0 25px;padding:14px 16px;background:#293a46;font-size:1.65em;", "content": "font-weight:700;color:#ffffff;", "after": "" },
+      "h2": { "base": "margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #40505c;font-size:1.3em;", "content": "font-weight:700;color:#293a46;", "after": "" },
+      "h3": { "base": "margin:24px 0 10px;padding:7px 10px;background:#eef2f3;font-size:1.08em;", "content": "font-weight:700;color:#334651;", "after": "" },
+      "base": { "base": "margin:18px 0 8px;font-size:1em;", "content": "font-weight:700;color:#40505c;", "after": "" }
+    },
+    "paragraph": "color:#2b3740;",
+    "list": { "container": "padding-left:1.45em;color:#40505c;", "item": "color:#2b3740;", "taskList": "list-style:none;padding-left:0;color:#2b3740;" },
+    "quote": "margin:1.25em 0;padding:14px 16px;border-left:3px solid #40505c;background:#f2f5f6;color:#354650;",
+    "code": { "header": { "container": "margin-bottom:6px;padding:6px 10px;background:#dfe7ea;", "dot": "display:none;", "colors": ["#40505c","#40505c","#40505c"] }, "block": "margin:1.2em 0;padding:14px;background:#263742;border-top:4px solid #64828d;color:#eff6f6;", "inline": "padding:1px 4px;background:#e9eff1;color:#334651;" },
+    "image": "padding:4px;border:1px solid #b9c9cf;border-radius:0;",
+    "link": "color:#334651;text-decoration:underline;",
+    "emphasis": { "strong": "font-weight:700;color:#293a46;", "em": "color:#51646e;", "del": "color:#6c7d84;" },
+    "table": { "container": "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #40505c;", "header": "padding:9px;background:#e9eff1;color:#293a46;border-bottom:1px solid #9fb4bc;", "cell": "padding:9px;border-bottom:1px solid #d4e0e3;color:#2b3740;" },
+    "hr": "margin:30px 0;border:0;border-top:1px solid #9fb4bc;",
+    "footnote": { "ref": "color:#334651;", "backref": "color:#334651;" }
+  }
+}

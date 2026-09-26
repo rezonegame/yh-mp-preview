@@ -89,7 +89,8 @@ export class MPView extends ItemView {
 
         // 顶部工具栏
         const toolbar = container.createEl('div', { cls: 'mp-toolbar' });
-        const controlsGroup = toolbar.createEl('div', { cls: 'mp-controls-group' });
+        const controlsGroup = toolbar.createEl('div', { cls: 'mp-controls-group mp-appearance-row' });
+        const typographyRow = toolbar.createEl('div', { cls: 'mp-controls-group mp-typography-row' });
 
         // === 辅助工具行（图标按钮，位于顶部工具栏下方） ===
         const secondaryRow = toolbar.createEl('div', { cls: 'mp-controls-group mp-secondary-row' });
@@ -200,8 +201,10 @@ export class MPView extends ItemView {
         }
 
 
+        const backgroundField = controlsGroup.createDiv('mp-toolbar-field mp-background-field');
+        backgroundField.createSpan({ cls: 'mp-toolbar-label', text: '背景' });
         this.customBackgroundSelect = createCustomSelect(
-            controlsGroup, // Append to main controls
+            backgroundField,
             'mp-background-select',
             backgroundOptions,
             async (value) => {
@@ -251,6 +254,7 @@ export class MPView extends ItemView {
             attr: { 'aria-label': '打开主题画廊', 'title': '主题画廊' }
         });
         setIcon(galleryBtn, 'palette');
+        galleryBtn.createSpan({ text: '主题画廊' });
         galleryBtn.addEventListener('click', () => this.openThemeGallery());
 
         const phonePreviewButton = controlsGroup.createEl('button', {
@@ -266,8 +270,10 @@ export class MPView extends ItemView {
         });
 
         // 字体选择器
+        const fontField = typographyRow.createDiv('mp-toolbar-field mp-font-field');
+        fontField.createSpan({ cls: 'mp-toolbar-label', text: '字体' });
         this.customFontSelect = createCustomSelect(
-            controlsGroup,
+            fontField,
             'mp-font-select',
             this.getFontOptions(),
             async (value) => {
@@ -281,7 +287,9 @@ export class MPView extends ItemView {
         this.customFontSelect.container.id = 'font-select';
 
         // 字号调整
-        const fontSizeGroup = controlsGroup.createEl('div', { cls: 'mp-font-size-group' });
+        const sizeField = typographyRow.createDiv('mp-toolbar-field mp-size-field');
+        sizeField.createSpan({ cls: 'mp-toolbar-label', text: '字号' });
+        const fontSizeGroup = sizeField.createEl('div', { cls: 'mp-font-size-group' });
         const decreaseButton = fontSizeGroup.createEl('button', {
             cls: 'mp-font-size-btn',
             text: '-'
@@ -304,8 +312,10 @@ export class MPView extends ItemView {
         // 恢复设置状态
         const settings = this.settingsManager.getSettings();
 
+        const recipeField = typographyRow.createDiv('mp-toolbar-field mp-recipe-field');
+        recipeField.createSpan({ cls: 'mp-toolbar-label', text: '文章配方' });
         this.recipeSelect = createCustomSelect(
-            controlsGroup,
+            recipeField,
             'mp-recipe-select',
             [
                 { label: '通用长文', value: 'legacy-compatible' },

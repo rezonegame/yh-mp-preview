@@ -1,0 +1,26 @@
+{
+  "id": "warm-paper",
+  "name": "暖纸散文",
+  "description": "暖色纸感与轻引用，适合生活记录、书信和个人故事。",
+  "source": "yh-mp-preview",
+  "styles": {
+    "container": "background:#ffffff;padding:0;color:#3a332c;",
+    "accentColor": "#805c46",
+    "title": {
+      "h1": { "base": "margin:34px 0 26px;padding:0 0 12px;border-bottom:1px solid #d9c5ae;font-size:1.78em;", "content": "font-weight:600;color:#47372b;", "after": "" },
+      "h2": { "base": "margin:38px 0 16px;padding-left:10px;border-left:2px solid #a17a57;font-size:1.28em;", "content": "font-weight:600;color:#47372b;", "after": "" },
+      "h3": { "base": "margin:28px 0 12px;font-size:1.1em;", "content": "font-weight:600;color:#6b4b37;", "after": "" },
+      "base": { "base": "margin:22px 0 9px;font-size:1em;", "content": "font-weight:600;color:#6b4b37;", "after": "" }
+    },
+    "paragraph": "color:#3a332c;",
+    "list": { "container": "padding-left:1.45em;color:#805c46;", "item": "color:#3a332c;", "taskList": "list-style:none;padding-left:0;color:#3a332c;" },
+    "quote": "margin:1.5em 0;padding:16px 18px;background:#fbf6ef;border-top:1px solid #d9c5ae;border-bottom:1px solid #d9c5ae;color:#594638;",
+    "code": { "header": { "container": "margin-bottom:6px;padding:6px 10px;background:#f2ebe2;", "dot": "display:none;", "colors": ["#805c46","#805c46","#805c46"] }, "block": "margin:1.2em 0;padding:14px;background:#faf6f0;border:1px solid #e2d4c3;color:#3a332c;", "inline": "padding:1px 4px;background:#f5ece1;color:#614632;" },
+    "image": "padding:5px;border:1px solid #e2d4c3;",
+    "link": "color:#614632;text-decoration:underline;",
+    "emphasis": { "strong": "font-weight:700;color:#47372b;", "em": "color:#6b4b37;", "del": "color:#77685b;" },
+    "table": { "container": "margin:1.3em 0;border-collapse:collapse;border-top:1px solid #c8aa8d;", "header": "padding:10px;background:#fbf6ef;color:#47372b;border-bottom:1px solid #c8aa8d;", "cell": "padding:10px;border-bottom:1px solid #e2d4c3;color:#3a332c;" },
+    "hr": "margin:38px 0;border:0;border-top:1px solid #d9c5ae;",
+    "footnote": { "ref": "color:#614632;", "backref": "color:#614632;" }
+  }
+}

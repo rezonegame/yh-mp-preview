@@ -10,8 +10,9 @@ const paletteModule = buildSync({
 }).outputFiles[0].text;
 const { resolveWechatPalette } = await import(`data:text/javascript;base64,${Buffer.from(paletteModule).toString('base64')}`);
 const ids = [
-  'default', 'deep-reading', 'clear-guide', 'apple-product', 'product-review',
-  'red-white-editorial', 'data-blueprint', 'zen-essence', 'olive-journal',
+  'default', 'deep-reading', 'clear-guide', 'knowledge-notes', 'apple-product', 'product-review',
+  'red-white-editorial', 'ink-opinion', 'data-blueprint', 'briefing-grid',
+  'zen-essence', 'warm-paper', 'olive-journal', 'case-file',
 ];
 const rhythm = {
   compact: 'line-height:1.72;margin-bottom:0.85em;',
@@ -19,10 +20,12 @@ const rhythm = {
   airy: 'line-height:1.82;margin-bottom:1.05em;',
 };
 const profiles = {
-  default: 'standard', 'deep-reading': 'airy', 'clear-guide': 'compact',
+  default: 'standard', 'deep-reading': 'airy', 'clear-guide': 'compact', 'knowledge-notes': 'compact',
   'apple-product': 'standard', 'product-review': 'compact',
-  'red-white-editorial': 'standard', 'data-blueprint': 'compact',
-  'zen-essence': 'airy', 'olive-journal': 'standard',
+  'red-white-editorial': 'standard', 'ink-opinion': 'standard',
+  'data-blueprint': 'compact', 'briefing-grid': 'compact',
+  'zen-essence': 'airy', 'warm-paper': 'airy',
+  'olive-journal': 'standard', 'case-file': 'standard',
 };
 const image = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="320"><rect width="640" height="320" fill="#e8edf2"/><text x="320" y="165" text-anchor="middle" fill="#455466" font-size="30">公众号配图示例</text></svg>');
 const escape = value => String(value).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
