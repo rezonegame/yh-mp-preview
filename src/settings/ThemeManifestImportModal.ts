@@ -12,6 +12,7 @@ export class ThemeManifestImportModal extends Modal {
     }
 
     onOpen(): void {
+        this.modalEl.addClass('mp-theme-import-modal');
         this.contentEl.createEl('h2', { text: '导入 ThemeManifest' });
         this.contentEl.createEl('p', { text: '粘贴由 yh-mp-preview V3 导出的主题 JSON。导入前会校验版本、令牌和组件结构。' });
         new Setting(this.contentEl)

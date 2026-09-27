@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.15.0-beta.4
+
+- Refined the preview workbench, settings accordions, theme galleries and editor dialogs with consistent spacing and calmer visual hierarchy.
+- Made the toolbar respond to the plugin pane width; compact and extra-narrow panes keep every action accessible without horizontal page overflow.
+- Let both theme galleries fit short lists while retaining scrolling for long lists; improved narrow-window button layout and reduced-motion behavior.
+- Kept themes, recipes, settings, Markdown, copy and export behavior unchanged.
+
 ## 3.15.0-beta.3
 
 - Restored the theme-gallery control to an icon-only button, fixing clipped text in narrow Obsidian panes.

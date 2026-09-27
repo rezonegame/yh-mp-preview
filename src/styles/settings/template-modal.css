@@ -1,5 +1,5 @@
 /* 基础变量 */
-:root {
+.mp-template-modal {
     --modal-padding: 1.5rem;
     --border-radius: 8px;
     --transition-duration: 0.2s;

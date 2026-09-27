@@ -14336,6 +14336,7 @@ var ThemeManifestImportModal = class extends import_obsidian10.Modal {
     this.onImport = onImport;
   }
   onOpen() {
+    this.modalEl.addClass("mp-theme-import-modal");
     this.contentEl.createEl("h2", { text: "\u5BFC\u5165 ThemeManifest" });
     this.contentEl.createEl("p", { text: "\u7C98\u8D34\u7531 yh-mp-preview V3 \u5BFC\u51FA\u7684\u4E3B\u9898 JSON\u3002\u5BFC\u5165\u524D\u4F1A\u6821\u9A8C\u7248\u672C\u3001\u4EE4\u724C\u548C\u7EC4\u4EF6\u7ED3\u6784\u3002" });
     new import_obsidian10.Setting(this.contentEl).setName("\u4E3B\u9898 JSON").addTextArea((text) => text.setPlaceholder('{ "schemaVersion": 3, ... }').onChange((value) => {
