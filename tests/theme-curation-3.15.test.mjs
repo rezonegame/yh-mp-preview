@@ -51,6 +51,10 @@ test('history is a small gallery entry and typography has its own toolbar row', 
   assert.match(gallery, /this\.activateScene\('历史主题'\)/);
   assert.doesNotMatch(gallery, /\.\.\.CURATED_SCENE_ORDER, '自定义主题', '历史主题'/);
   assert.match(view, /mp-controls-group mp-typography-row/);
+  assert.match(view, /setIcon\(galleryBtn, 'palette'\)/);
+  assert.doesNotMatch(view, /galleryBtn\.createSpan/);
+  assert.match(view, /mp-advanced-typesetting/);
+  assert.match(view, /updateRecipeSummary\(snapshot\.recipeId\)/);
   assert.match(view, /text: '文章配方'/);
 });
 
@@ -74,6 +78,9 @@ test('mobile viewport is presentation-only and export uses adaptive pane width',
   const validator = readFileSync(new URL('src/core/validation/wechatHtmlValidator.ts', root), 'utf8');
   assert.match(css, /\.mp-preview-area\.mp-phone-preview > \.mp-content-section/);
   assert.match(css, /max-width: 375px/);
+  assert.match(view, /mp-preview-width-bar/);
+  assert.match(view, /phoneButton\.disabled = narrow/);
+  assert.match(view, /aria-pressed', String\(phone\)/);
   assert.match(view, /this\.previewEl\.clientWidth[\s\S]*previewStyle\.paddingLeft/);
   assert.match(validator, /mobile-wide-table/);
   const settings = readFileSync(new URL('src/settings/settings.ts', root), 'utf8');

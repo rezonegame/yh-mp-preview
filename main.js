@@ -10981,6 +10981,19 @@ var MPView = class extends import_obsidian4.ItemView {
   getActiveWechatTemplateId() {
     return this.trialTemplateId || this.settingsManager.getSettings().templateId;
   }
+  updateRecipeSummary(recipeId) {
+    var _a;
+    const labels = {
+      tutorial: "\u6559\u7A0B\u4E0E\u6B65\u9AA4",
+      checklist: "\u6E05\u5355\u4E0E\u65B9\u6CD5\u8BBA",
+      "product-intro": "\u4EA7\u54C1\u6216\u5DE5\u5177\u4ECB\u7ECD",
+      commentary: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA",
+      review: "\u5468\u62A5\u4E0E\u590D\u76D8"
+    };
+    const active = recipeId !== "legacy-compatible";
+    this.recipeSummary.setText(active ? `\u9AD8\u7EA7\u6392\u7248 \xB7 ${labels[recipeId] || "\u5DF2\u542F\u7528"}` : "\u9AD8\u7EA7\u6392\u7248");
+    (_a = this.recipeSummary.parentElement) == null ? void 0 : _a.toggleClass("is-active", active);
+  }
   applyThemeTrial(templateId) {
     const savedId = this.settingsManager.getSettings().templateId;
     this.trialTemplateId = templateId === savedId ? null : templateId;
@@ -11131,19 +11144,7 @@ var MPView = class extends import_obsidian4.ItemView {
       attr: { "aria-label": "\u6253\u5F00\u4E3B\u9898\u753B\u5ECA", "title": "\u4E3B\u9898\u753B\u5ECA" }
     });
     (0, import_obsidian4.setIcon)(galleryBtn, "palette");
-    galleryBtn.createSpan({ text: "\u4E3B\u9898\u753B\u5ECA" });
     galleryBtn.addEventListener("click", () => this.openThemeGallery());
-    const phonePreviewButton = controlsGroup.createEl("button", {
-      text: "\u624B\u673A 375px",
-      cls: "mp-phone-preview-btn",
-      attr: { type: "button", "aria-label": "\u5207\u6362\u624B\u673A 375px \u9884\u89C8", "aria-pressed": "false" }
-    });
-    phonePreviewButton.addEventListener("click", () => {
-      this.isPhonePreview = !this.isPhonePreview;
-      this.previewEl.toggleClass("mp-phone-preview", this.isPhonePreview);
-      phonePreviewButton.setAttribute("aria-pressed", String(this.isPhonePreview));
-      phonePreviewButton.setText(this.isPhonePreview ? "\u81EA\u9002\u5E94" : "\u624B\u673A 375px");
-    });
     const fontField = typographyRow.createDiv("mp-toolbar-field mp-font-field");
     fontField.createSpan({ cls: "mp-toolbar-label", text: "\u5B57\u4F53" });
     this.customFontSelect = createCustomSelect(
@@ -11179,7 +11180,13 @@ var MPView = class extends import_obsidian4.ItemView {
       text: "+"
     });
     const settings = this.settingsManager.getSettings();
-    const recipeField = typographyRow.createDiv("mp-toolbar-field mp-recipe-field");
+    const advanced = toolbar.createEl("details", { cls: "mp-advanced-typesetting" });
+    this.recipeSummary = advanced.createEl("summary");
+    advanced.createEl("p", {
+      cls: "mp-advanced-hint",
+      text: "\u53EF\u9009\u7684\u5C40\u90E8\u7ED3\u6784\u589E\u5F3A\uFF1B\u4E3B\u9898\u51B3\u5B9A\u6574\u4F53\u89C6\u89C9\u3002\u9009\u62E9\u201C\u901A\u7528\u957F\u6587\u201D\u5219\u4E0D\u53E0\u52A0\u914D\u65B9\u6837\u5F0F\uFF0C\u4E0D\u4FEE\u6539 Markdown \u539F\u6587\u3002"
+    });
+    const recipeField = advanced.createDiv("mp-toolbar-field mp-recipe-field");
     recipeField.createSpan({ cls: "mp-toolbar-label", text: "\u6587\u7AE0\u914D\u65B9" });
     this.recipeSelect = createCustomSelect(
       recipeField,
@@ -11193,6 +11200,7 @@ var MPView = class extends import_obsidian4.ItemView {
         { label: "\u5468\u62A5\u4E0E\u590D\u76D8", value: "review" }
       ],
       async (value) => {
+        this.updateRecipeSummary(value);
         await this.settingsManager.updateSettings({
           v3: {
             ...this.settingsManager.getSettings().v3,
@@ -11203,6 +11211,7 @@ var MPView = class extends import_obsidian4.ItemView {
       }
     );
     this.recipeSelect.setValue(settings.v3.selectedRecipeId);
+    this.updateRecipeSummary(settings.v3.selectedRecipeId);
     if (settings.backgroundId) {
       this.customBackgroundSelect.setValue(settings.backgroundId);
       this.backgroundManager.setBackground(settings.backgroundId);
@@ -11251,7 +11260,42 @@ var MPView = class extends import_obsidian4.ItemView {
       }
     });
     this.fontSizeSelect.addEventListener("change", updateFontSize);
+    const previewWidthBar = container.createDiv("mp-preview-width-bar");
+    previewWidthBar.createSpan({ cls: "mp-preview-width-label", text: "\u9884\u89C8\u5BBD\u5EA6" });
+    const widthChoices = previewWidthBar.createDiv("mp-preview-width-choices");
+    const adaptiveButton = widthChoices.createEl("button", {
+      text: "\u81EA\u9002\u5E94",
+      attr: { type: "button", "aria-pressed": "true" }
+    });
+    const phoneButton = widthChoices.createEl("button", {
+      text: "\u624B\u673A 375px",
+      attr: { type: "button", "aria-pressed": "false" }
+    });
+    const widthHint = previewWidthBar.createSpan({
+      cls: "mp-preview-width-hint",
+      text: "\u4EC5\u5F71\u54CD\u9884\u89C8\uFF0C\u4E0D\u5F71\u54CD\u590D\u5236\u4E0E\u5BFC\u51FA"
+    });
     this.previewEl = container.createEl("div", { cls: "mp-preview-area" });
+    const setPreviewWidth = (phone) => {
+      this.isPhonePreview = phone;
+      this.previewEl.toggleClass("mp-phone-preview", phone);
+      adaptiveButton.setAttribute("aria-pressed", String(!phone));
+      phoneButton.setAttribute("aria-pressed", String(phone));
+    };
+    const refreshWidthAvailability = () => {
+      const style = window.getComputedStyle(this.previewEl);
+      const available = this.previewEl.clientWidth - parseFloat(style.paddingLeft || "0") - parseFloat(style.paddingRight || "0");
+      const narrow = available <= 375;
+      phoneButton.disabled = narrow;
+      phoneButton.title = narrow ? "\u5F53\u524D\u9884\u89C8\u533A\u57DF\u5DF2\u4E0D\u5BBD\u4E8E 375px\uFF0C\u62C9\u5BBD\u9762\u677F\u540E\u53EF\u6BD4\u8F83\u624B\u673A\u6548\u679C" : "\u4EE5 375px \u68C0\u67E5\u624B\u673A\u6392\u7248";
+      widthHint.setText(narrow ? "\u5F53\u524D\u9762\u677F\u5DF2\u662F\u624B\u673A\u5BBD\u5EA6" : "\u4EC5\u5F71\u54CD\u9884\u89C8\uFF0C\u4E0D\u5F71\u54CD\u590D\u5236\u4E0E\u5BFC\u51FA");
+    };
+    adaptiveButton.addEventListener("click", () => setPreviewWidth(false));
+    phoneButton.addEventListener("click", () => setPreviewWidth(true));
+    const widthObserver = new ResizeObserver(refreshWidthAvailability);
+    widthObserver.observe(this.previewEl);
+    this.register(() => widthObserver.disconnect());
+    refreshWidthAvailability();
     this.validationPanel = container.createEl("section", { cls: "mp-validation-panel" });
     this.previewEl.addEventListener("click", async (e) => {
       const target = e.target;
@@ -11423,6 +11467,7 @@ var MPView = class extends import_obsidian4.ItemView {
     this.customBackgroundSelect.setValue(snapshot.backgroundId);
     this.fontSizeSelect.value = String(snapshot.fontSize);
     this.recipeSelect.setValue(snapshot.recipeId);
+    this.updateRecipeSummary(snapshot.recipeId);
     await this.updatePreview();
     new import_obsidian4.Notice(`\u5DF2\u6062\u590D ${new Date(snapshot.createdAt).toLocaleString()} \u7684\u6392\u7248\u5FEB\u7167`);
   }

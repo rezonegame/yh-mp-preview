@@ -37,12 +37,23 @@ export class MPView extends ItemView {
     private customFontSelect: CustomSelectControl;
     private customBackgroundSelect: CustomSelectControl;
     private recipeSelect: CustomSelectControl;
+    private recipeSummary: HTMLElement;
 
     private fontSizeSelect: HTMLInputElement;
     private backgroundManager: BackgroundManager;
 
     private getActiveWechatTemplateId(): string {
         return this.trialTemplateId || this.settingsManager.getSettings().templateId;
+    }
+
+    private updateRecipeSummary(recipeId: string): void {
+        const labels: Record<string, string> = {
+            tutorial: '教程与步骤', checklist: '清单与方法论',
+            'product-intro': '产品或工具介绍', commentary: '观点与评论', review: '周报与复盘',
+        };
+        const active = recipeId !== 'legacy-compatible';
+        this.recipeSummary.setText(active ? `高级排版 · ${labels[recipeId] || '已启用'}` : '高级排版');
+        this.recipeSummary.parentElement?.toggleClass('is-active', active);
     }
 
     private applyThemeTrial(templateId: string): void {
@@ -254,20 +265,7 @@ export class MPView extends ItemView {
             attr: { 'aria-label': '打开主题画廊', 'title': '主题画廊' }
         });
         setIcon(galleryBtn, 'palette');
-        galleryBtn.createSpan({ text: '主题画廊' });
         galleryBtn.addEventListener('click', () => this.openThemeGallery());
-
-        const phonePreviewButton = controlsGroup.createEl('button', {
-            text: '手机 375px',
-            cls: 'mp-phone-preview-btn',
-            attr: { type: 'button', 'aria-label': '切换手机 375px 预览', 'aria-pressed': 'false' },
-        });
-        phonePreviewButton.addEventListener('click', () => {
-            this.isPhonePreview = !this.isPhonePreview;
-            this.previewEl.toggleClass('mp-phone-preview', this.isPhonePreview);
-            phonePreviewButton.setAttribute('aria-pressed', String(this.isPhonePreview));
-            phonePreviewButton.setText(this.isPhonePreview ? '自适应' : '手机 375px');
-        });
 
         // 字体选择器
         const fontField = typographyRow.createDiv('mp-toolbar-field mp-font-field');
@@ -312,7 +310,13 @@ export class MPView extends ItemView {
         // 恢复设置状态
         const settings = this.settingsManager.getSettings();
 
-        const recipeField = typographyRow.createDiv('mp-toolbar-field mp-recipe-field');
+        const advanced = toolbar.createEl('details', { cls: 'mp-advanced-typesetting' });
+        this.recipeSummary = advanced.createEl('summary');
+        advanced.createEl('p', {
+            cls: 'mp-advanced-hint',
+            text: '可选的局部结构增强；主题决定整体视觉。选择“通用长文”则不叠加配方样式，不修改 Markdown 原文。',
+        });
+        const recipeField = advanced.createDiv('mp-toolbar-field mp-recipe-field');
         recipeField.createSpan({ cls: 'mp-toolbar-label', text: '文章配方' });
         this.recipeSelect = createCustomSelect(
             recipeField,
@@ -326,6 +330,7 @@ export class MPView extends ItemView {
                 { label: '周报与复盘', value: 'review' },
             ],
             async (value) => {
+                this.updateRecipeSummary(value);
                 await this.settingsManager.updateSettings({
                     v3: {
                         ...this.settingsManager.getSettings().v3,
@@ -336,6 +341,7 @@ export class MPView extends ItemView {
             },
         );
         this.recipeSelect.setValue(settings.v3.selectedRecipeId);
+        this.updateRecipeSummary(settings.v3.selectedRecipeId);
 
         // 恢复背景
         if (settings.backgroundId) {
@@ -402,8 +408,44 @@ export class MPView extends ItemView {
         });
 
         this.fontSizeSelect.addEventListener('change', updateFontSize);
-        // 预览区域
+        // Preview width controls belong to the preview, not the article styling toolbar.
+        const previewWidthBar = container.createDiv('mp-preview-width-bar');
+        previewWidthBar.createSpan({ cls: 'mp-preview-width-label', text: '预览宽度' });
+        const widthChoices = previewWidthBar.createDiv('mp-preview-width-choices');
+        const adaptiveButton = widthChoices.createEl('button', {
+            text: '自适应',
+            attr: { type: 'button', 'aria-pressed': 'true' },
+        });
+        const phoneButton = widthChoices.createEl('button', {
+            text: '手机 375px',
+            attr: { type: 'button', 'aria-pressed': 'false' },
+        });
+        const widthHint = previewWidthBar.createSpan({
+            cls: 'mp-preview-width-hint',
+            text: '仅影响预览，不影响复制与导出',
+        });
         this.previewEl = container.createEl('div', { cls: 'mp-preview-area' });
+        const setPreviewWidth = (phone: boolean) => {
+            this.isPhonePreview = phone;
+            this.previewEl.toggleClass('mp-phone-preview', phone);
+            adaptiveButton.setAttribute('aria-pressed', String(!phone));
+            phoneButton.setAttribute('aria-pressed', String(phone));
+        };
+        const refreshWidthAvailability = () => {
+            const style = window.getComputedStyle(this.previewEl);
+            const available = this.previewEl.clientWidth
+                - parseFloat(style.paddingLeft || '0') - parseFloat(style.paddingRight || '0');
+            const narrow = available <= 375;
+            phoneButton.disabled = narrow;
+            phoneButton.title = narrow ? '当前预览区域已不宽于 375px，拉宽面板后可比较手机效果' : '以 375px 检查手机排版';
+            widthHint.setText(narrow ? '当前面板已是手机宽度' : '仅影响预览，不影响复制与导出');
+        };
+        adaptiveButton.addEventListener('click', () => setPreviewWidth(false));
+        phoneButton.addEventListener('click', () => setPreviewWidth(true));
+        const widthObserver = new ResizeObserver(refreshWidthAvailability);
+        widthObserver.observe(this.previewEl);
+        this.register(() => widthObserver.disconnect());
+        refreshWidthAvailability();
         this.validationPanel = container.createEl('section', { cls: 'mp-validation-panel' });
 
         // 点击图片 → 编辑 Alt Text
@@ -615,6 +657,7 @@ export class MPView extends ItemView {
         this.customBackgroundSelect.setValue(snapshot.backgroundId);
         this.fontSizeSelect.value = String(snapshot.fontSize);
         this.recipeSelect.setValue(snapshot.recipeId);
+        this.updateRecipeSummary(snapshot.recipeId);
         await this.updatePreview();
         new Notice(`已恢复 ${new Date(snapshot.createdAt).toLocaleString()} 的排版快照`);
     }

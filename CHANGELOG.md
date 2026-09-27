@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.15.0-beta.3
+
+- Restored the theme-gallery control to an icon-only button, fixing clipped text in narrow Obsidian panes.
+- Moved the 375px/adaptive choice next to the preview, showing the current mode and explaining when a narrow pane already matches phone width.
+- Moved article recipes into collapsed Advanced Typesetting while preserving every saved recipe and its current rendering behavior.
+
 ## 3.15.0-beta.2
 
 - Completed the seven-scene gallery with two structurally distinct featured themes per scene, while keeping all five legacy themes behind a small history button.

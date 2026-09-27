@@ -18,7 +18,11 @@
     width: min(100%, 375px);
     max-width: 375px;
     margin-inline: auto;
+    background: #ffffff;
+    box-shadow: 0 0 0 1px #d9dde2;
 }
+
+.mp-preview-area.mp-phone-preview { background: #e9edf0; }
 
 /* 内容区域基础间距 */
 .mp-content-section {
@@ -112,6 +116,9 @@
     background: #fcfcfc !important;
     color: #333 !important;
     color-scheme: light;
+}
+.theme-dark .mp-preview-area.mp-phone-preview {
+    background: #e9edf0 !important;
 }
 .theme-dark .mp-preview-area * {
     color: inherit;
