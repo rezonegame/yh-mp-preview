@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.15.0
+
+- Stable release of the curated WeChat theme gallery, mobile reading preview, and responsive plugin interface from the 3.15.0 beta series.
+- Confirmed long-form, tutorial, and report paste results in the WeChat editor during acceptance; no feature changes since beta.4.
+
 ## 3.15.0-beta.4
 
 - Refined the preview workbench, settings accordions, theme galleries and editor dialogs with consistent spacing and calmer visual hierarchy.
