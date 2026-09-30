@@ -2,6 +2,8 @@
 
 当前候选版本：`3.15.1-beta.1`。稳定回退版本：`v3.15.0`，固定提交 `74824816a2251299872ab0534c9fb1ff35f84047`。
 
+已同步 GitHub 并发布 [3.15.1-beta.1](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.15.1-beta.1)，固定提交 `1754de1323ea3534e7acf75c1d11c67be1b5bb66`。[GitHub CI](https://github.com/rezonegame/yh-mp-preview/actions/runs/36744930678) 在 Node22.22.2 下成功；发行 main.js、manifest.json、styles.css 的 SHA256 与本地构建逐项相同。GitHub latest 仍指向旧稳定 `v3.15.0`；BRAT需指定beta版本。
+
 ## 阶段状态
 
 | 阶段 | 当前状态 | 本轮交付／下一门禁 |
@@ -41,6 +43,7 @@
 ## 自动验证与局限
 
 - `npm ci`、生产构建、`npm run verify` 已通过；本轮 85 项测试全部通过。
+- 使用 npm 官方 registry 的完整依赖审计为0项漏洞（非只检查生产依赖）；默认镜像的安全接口不支持审计，未把镜像404当作通过。
 - 新增真实 DOM 安全输入、Callout 标题、19主题、20设置／快照往返、设置折叠和复制行为测试。既有正则测试继续保留，不替代运行测试。
 - 内置浏览器使用实际主题／安全模块检查 320／375／414px，各主题普通段落仍为16px并保留对应行高；本次夹具57次检查没有横向溢出。检查文件与截图可由 `scripts/render-security-theme-fixture.mjs` 重建，位于忽略的 `output/refactor/`，不是 Obsidian 截图。
 - 完整推荐 ESLint 未全部通过：当前仍有 **862** 个旧 TypeScript 类型／异步检查位置和 **142** 个警告。宿主／安全阻断项为0。保持全部规则启用，用 [逐文件／规则冻结台账](../reports/host-audit-debt.json) 阻止新增错误；`npm run lint:host` 仍会如实返回失败，`check:host` 只表示分阶段门禁通过。P2/P3需削减旧债，不允许扩大台账冒充修复。
