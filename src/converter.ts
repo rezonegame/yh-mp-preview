@@ -1,6 +1,6 @@
 import { App } from 'obsidian';
 import type { SettingsManager } from './settings/settings';
-import { parseContainers, renderDialogue, renderGallery, resolveImagePath, type ParsedContainer } from './containers';
+import { parseContainers, renderDialogue, renderGallery, resolveImagePath } from './containers';
 import { applyLayoutEnhancements } from './layoutEnhancer';
 import { safeHtmlToElement } from './core/security/safeDom';
 
@@ -12,8 +12,9 @@ export class MPConverter {
     }
 
     static formatContent(element: HTMLElement, markdownContent?: string, settingsManager?: SettingsManager): void {
+        if (element.querySelector(':scope > .mp-content-section[data-mp-converted]')) return;
         // 创建 section 容器
-        const section = document.createElement('section');
+        const section = createEl('section');
         section.className = 'mp-content-section';
         // 移动原有内容到 section 中
         while (element.firstChild) {
@@ -40,6 +41,8 @@ export class MPConverter {
 
         // 处理元素
         this.processElements(section, settingsManager?.getSettings().layoutEnhancements.enableImageCaptions !== false);
+        section.setAttribute('data-mp-converted', 'true');
+        Array.from(section.children).forEach((block, index) => block.setAttribute('data-mp-block-id', `block-${index}`));
     }
 
     private static insertFrontMatterCard(container: HTMLElement, markdown: string): void {
@@ -60,18 +63,18 @@ export class MPConverter {
         // 至少要有标题才显示卡片
         if (!title) return;
 
-        const card = document.createElement('div');
+        const card = createDiv();
         card.className = 'mp-frontmatter-card';
         card.setCssStyles({ cssText: 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 24px 28px; margin: 0 0 24px 0; border-radius: 12px; text-align: center;' });
 
-        const titleEl = document.createElement('h1');
+        const titleEl = createEl('h1');
         titleEl.className = 'mp-fm-title';
         titleEl.textContent = title;
         titleEl.setCssStyles({ cssText: 'margin: 0 0 8px 0; font-size: 1.6em; font-weight: 700; color: #fff; line-height: 1.3;' });
         card.appendChild(titleEl);
 
         if (author || date) {
-            const metaEl = document.createElement('div');
+            const metaEl = createDiv();
             metaEl.className = 'mp-fm-meta';
             metaEl.setCssStyles({ cssText: 'font-size: 0.9em; opacity: 0.85; color: #f0f0f0;' });
             const parts: string[] = [];
@@ -90,9 +93,10 @@ export class MPConverter {
      */
     private static processContainerBlocks(container: HTMLElement, markdown: string): void {
         const containers = parseContainers(markdown);
+        const consumed = new Set<number>();
 
         // 查找所有代码块
-        container.querySelectorAll('pre > code').forEach((codeEl, index) => {
+        container.querySelectorAll('pre > code').forEach((codeEl) => {
             const pre = codeEl.parentElement;
             if (!pre) return;
 
@@ -104,19 +108,13 @@ export class MPConverter {
             if (!isDialogue && !isGallery) return;
 
             // 查找对应的解析结果
-            const containerData = containers.find((c, i) => {
-                // 通过代码块内容匹配
-                const codeContent = codeEl.textContent || '';
-                if (c.type === 'dialogue' && isDialogue) {
-                    return codeContent.includes(':') || codeContent.includes('：');
-                }
-                if (c.type === 'gallery' && isGallery) {
-                    return codeContent.includes('![');
-                }
-                return false;
-            });
+            const matchIndex = containers.findIndex((candidate, index) => !consumed.has(index)
+                && candidate.type === (isDialogue ? 'dialogue' : 'gallery')
+                && candidate.sourceText?.trim() === (codeEl.textContent || '').trim());
+            const containerData = containers[matchIndex];
 
             if (!containerData) return;
+            consumed.add(matchIndex);
 
             // 创建容器元素
             let containerHtml = '';
@@ -139,6 +137,7 @@ export class MPConverter {
             // 替换代码块
             if (containerHtml) {
                 const newElement = safeHtmlToElement(containerHtml);
+                newElement.setAttribute('data-mp-source-id', `${containerData.type}-${containerData.sourceLine ?? matchIndex}`);
                 pre.parentNode?.replaceChild(newElement, pre);
             }
         });
@@ -149,7 +148,7 @@ export class MPConverter {
 
         // 1. 处理列表项内部元素，用section包裹
         container.querySelectorAll('li').forEach(li => {
-            const section = document.createElement('section');
+            const section = createEl('section');
             while (li.firstChild) {
                 section.appendChild(li.firstChild);
             }
@@ -193,25 +192,25 @@ export class MPConverter {
             const contentEl = calloutEl.querySelector('.callout-content');
 
             // 构建美化的 Callout 容器
-            const calloutDiv = document.createElement('div');
+            const calloutDiv = createDiv();
             calloutDiv.className = 'mp-callout';
             calloutDiv.setAttribute('data-callout-type', calloutType);
             calloutDiv.setCssStyles({ cssText: `border-left: 4px solid ${config.color}; background: ${config.color}11; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;` });
 
             // 标题行
-            const titleDiv = document.createElement('div');
+            const titleDiv = createDiv();
             titleDiv.className = 'mp-callout-title';
             titleDiv.setCssStyles({ cssText: `font-weight: bold; color: ${config.color}; margin-bottom: 8px; font-size: 1em; display: flex; align-items: center; gap: 6px;` });
-            const iconEl = document.createElement('span');
+            const iconEl = createSpan();
             iconEl.textContent = config.icon;
-            const labelEl = document.createElement('span');
+            const labelEl = createSpan();
             labelEl.textContent = titleText;
             titleDiv.append(iconEl, labelEl);
             calloutDiv.appendChild(titleDiv);
 
             // 内容区
             if (contentEl) {
-                const contentDiv = document.createElement('div');
+                const contentDiv = createDiv();
                 contentDiv.className = 'mp-callout-content';
                 contentDiv.setCssStyles({ cssText: 'color: #333; line-height: 1.7;' });
                 contentDiv.append(...Array.from(contentEl.childNodes, node => node.cloneNode(true)));
@@ -231,10 +230,10 @@ export class MPConverter {
 
             const codeEl = pre.querySelector('code');
             if (codeEl) {
-                const header = document.createElement('div');
+                const header = createDiv();
                 header.className = 'mp-code-header';
                 for (let i = 0; i < 3; i++) {
-                    const dot = document.createElement('span');
+                    const dot = createSpan();
                     dot.className = 'mp-code-dot';
                     header.appendChild(dot);
                 }
@@ -246,7 +245,7 @@ export class MPConverter {
         });
 
         // 3. 处理图片 (增强版：支持 Alt 文本作为注脚)
-        container.querySelectorAll('span.internal-embed[src]').forEach(async el => {
+        container.querySelectorAll('span.internal-embed[src]').forEach(el => {
             const originalSpan = el as HTMLElement;
             const src = originalSpan.getAttribute('src');
             const alt = originalSpan.getAttribute('alt');
@@ -260,13 +259,13 @@ export class MPConverter {
                     const absolutePath = this.app.vault.adapter.getResourcePath(file.path);
 
                     // 创建 figure 容器
-                    const figure = document.createElement('figure');
+                    const figure = createEl('figure');
                     figure.className = 'mp-image-container';
                     figure.setCssStyles({ margin: '0 auto' });  // 居中
                     figure.setCssStyles({ textAlign: 'center' }); // 内容居中
                     figure.setCssStyles({ display: 'block' });
 
-                    const newImg = document.createElement('img');
+                    const newImg = createEl('img');
                     newImg.src = absolutePath;
                     newImg.dataset.linktext = linktext; // Store original linktext for editing
                     newImg.setCssStyles({ maxWidth: '100%' });
@@ -279,7 +278,7 @@ export class MPConverter {
 
                         if (enableImageCaptions) {
                             // 添加 figcaption
-                            const figcaption = document.createElement('figcaption');
+                            const figcaption = createEl('figcaption');
                             figcaption.textContent = alt;
                             figcaption.className = 'mp-image-caption';
                             figcaption.setCssStyles({ textAlign: 'center' });
@@ -331,17 +330,17 @@ export class MPConverter {
             // 创建新的参考资料区域
             let refSection = container.querySelector('.mp-reference-section');
             if (!refSection) {
-                const hr = document.createElement('hr');
+                const hr = createEl('hr');
                 hr.className = 'mp-footnote-separator';
                 hr.setCssStyles({ margin: '30px 0 20px' });
                 hr.setCssStyles({ border: 'none' });
                 hr.setCssStyles({ borderTop: '1px dashed #ccc' });
                 container.appendChild(hr);
 
-                refSection = document.createElement('section');
+                refSection = createEl('section');
                 refSection.className = 'mp-reference-section';
 
-                const title = document.createElement('h3');
+                const title = createEl('h3');
                 title.textContent = '参考资料';
                 title.className = 'mp-reference-title';
                 title.setCssStyles({ fontSize: '1.1em' });
@@ -354,7 +353,7 @@ export class MPConverter {
 
             // 清空旧内容（如果多次渲染）并添加新列表
             // 这里我们简单追加
-            const list = document.createElement('ol');
+            const list = createEl('ol');
             list.setCssStyles({ paddingLeft: '20px' });
             list.setCssStyles({ margin: '0' });
             list.setCssStyles({ fontSize: '0.9em' });
@@ -370,7 +369,7 @@ export class MPConverter {
 
             // 直接遍历原有注脚列表比较稳妥
             footnoteItems.forEach((item) => {
-                const li = document.createElement('li');
+                const li = createEl('li');
                 li.append(...Array.from(item.childNodes, node => node.cloneNode(true)));
                 li.setCssStyles({ marginBottom: '4px' });
                 list.appendChild(li);

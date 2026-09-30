@@ -55,14 +55,14 @@ export function applyWechatComponentPalette(root: HTMLElement, palette: WechatPa
         card.setCssStyles({ borderRadius: '4px' });
         card.setCssStyles({ padding: '16px' });
         card.setCssStyles({ textAlign: 'left' });
-        const title = card.querySelector('.mp-fm-title') as HTMLElement | null;
+        const title = card.querySelector<HTMLElement>('.mp-fm-title');
         if (title) {
             title.setCssStyles({ color: palette.foreground });
             title.setCssStyles({ border: '0' });
             title.setCssStyles({ padding: '0' });
             title.setCssStyles({ margin: '0 0 8px' });
         }
-        const meta = card.querySelector('.mp-fm-meta') as HTMLElement | null;
+        const meta = card.querySelector<HTMLElement>('.mp-fm-meta');
         if (meta) meta.setCssStyles({ color: palette.foreground });
     });
 
@@ -72,7 +72,7 @@ export function applyWechatComponentPalette(root: HTMLElement, palette: WechatPa
         callout.setCssStyles({ borderLeft: `3px solid ${palette.accent}` });
         callout.setCssStyles({ background: palette.surface });
         callout.setCssStyles({ borderRadius: '4px' });
-        const title = callout.querySelector('.mp-callout-title') as HTMLElement | null;
+        const title = callout.querySelector<HTMLElement>('.mp-callout-title');
         if (title) {
             title.setCssStyles({ color: palette.accentText });
             title.setCssStyles({ display: 'block' });

@@ -3,12 +3,13 @@ import { createLocalLayoutPlan, type LayoutPlan } from '../layout/localLayoutPla
 import { validateWechatHtml, type ValidationReport } from '../validation/wechatHtmlValidator';
 import { applyArticleRecipe } from '../recipe/articleRecipeFormatter';
 import type { WechatPalette } from '../theme/wechatPalette';
+import { safeHtmlToElement } from '../security/safeDom';
+import { normalizeArticleText } from './articleText';
+import type { CanonicalArticle } from '../article/canonicalArticle';
 
-export interface LegacyWechatPreparation {
+export interface LegacyWechatPreparation extends CanonicalArticle {
     article: ArticleModel;
     plan: LayoutPlan;
-    html: string;
-    validation: ValidationReport;
 }
 
 export interface LegacyWechatOptions {
@@ -37,15 +38,18 @@ function removeTransientAttributes(root: HTMLElement): void {
  * through the v3 article, plan and validation contracts.
  */
 export function prepareLegacyWechatFragment(element: HTMLElement, options: LegacyWechatOptions = {}): LegacyWechatPreparation {
-    const clone = element.cloneNode(true) as HTMLElement;
+    let clone = element.cloneNode(true) as HTMLElement;
     const article = createArticleModel(clone);
     const sourceValidation = validateWechatHtml(clone);
     const plan = createLocalLayoutPlan(article, {
         themeId: options.themeId || 'legacy-active',
         recipeId: options.recipeId || 'legacy-compatible',
     });
-    applyArticleRecipe(clone, plan.recipeId, options.palette);
+    if (clone.getAttribute('data-mp-recipe') !== plan.recipeId) applyArticleRecipe(clone, plan.recipeId, options.palette);
+    const blocks = Array.from(clone.children).map((block,index) => ({id:block.getAttribute('data-mp-block-id') || `block-${index}`,tag:block.tagName.toLowerCase()}));
     removeTransientAttributes(clone);
+    clone = element.ownerDocument.importNode(safeHtmlToElement(new XMLSerializer().serializeToString(clone)),true);
+    normalizeArticleText(clone);
     const outputValidation = validateWechatHtml(clone);
     const blockingIssues = sourceValidation.issues.filter((issue) => issue.severity === 'error');
     const validation: ValidationReport = {
@@ -58,5 +62,8 @@ export function prepareLegacyWechatFragment(element: HTMLElement, options: Legac
         plan,
         html: new XMLSerializer().serializeToString(clone),
         validation,
+        root: clone,
+        text: clone.textContent || '',
+        blocks,
     };
 }

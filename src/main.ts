@@ -4,6 +4,7 @@ import { TemplateManager } from './templateManager';
 import { SettingsManager } from './settings/settings';
 import { MPConverter } from './converter';
 import { DonateManager } from './donateManager';
+import { runAction } from './ui/asyncActions';
 import { MPSettingTab } from './settings/MPSettingTab';
 import { ThemeRegistry } from './core/theme/themeRegistry';
 import { adaptLegacyTemplate } from './core/theme/legacyThemeAdapter';
@@ -64,7 +65,7 @@ export default class MPPlugin extends Plugin {
 
     // 添加一个功能按钮用于打开所有面板
     this.addRibbonIcon("eye", "打开公众号预览", () => {
-      this.activateView();
+      runAction(() => this.activateView());
     });
 
     // 添加命令到命令面板
@@ -115,7 +116,7 @@ export default class MPPlugin extends Plugin {
     // 如果视图已经存在，激活它
     const leaves = this.app.workspace.getLeavesOfType(VIEW_TYPE_MP);
     if (leaves.length > 0) {
-      this.app.workspace.revealLeaf(leaves[0]);
+      await this.app.workspace.revealLeaf(leaves[0]);
       return;
     }
 

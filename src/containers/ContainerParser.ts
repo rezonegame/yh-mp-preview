@@ -12,12 +12,16 @@ export interface ParsedDialogue {
     type: 'dialogue';
     title: string;
     lines: DialogueLine[];
+    sourceText?: string;
+    sourceLine?: number;
 }
 
 export interface ParsedGallery {
     type: 'gallery';
     title: string;
     images: string[];  // 图片路径或链接
+    sourceText?: string;
+    sourceLine?: number;
 }
 
 export type ParsedContainer = ParsedDialogue | ParsedGallery;
@@ -100,21 +104,24 @@ export function parseContainers(markdown: string): ParsedContainer[] {
     let currentType = '';
     let currentTitle = '';
     let contentLines: string[] = [];
+    let sourceLine = 0;
+    let fence = '';
 
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
 
         // 检测代码块开始
-        if (line.startsWith('```')) {
+        const opening = line.match(/^\s{0,3}(`{3,}|~{3,})(.*)$/);
+        if (opening && (!inCodeBlock || (opening[1][0] === fence[0] && opening[1].length >= fence.length && !opening[2].trim()))) {
             if (!inCodeBlock) {
                 // 开始新的代码块
-                const meta = parseMetadata(line);
-                if (meta.type === 'dialogue' || meta.type === 'gallery') {
+                const meta = parseMetadata('```' + opening[2].trim());
                     inCodeBlock = true;
+                    fence = opening[1];
+                    sourceLine = i;
                     currentType = meta.type;
                     currentTitle = meta.title;
                     contentLines = [];
-                }
             } else {
                 // 代码块结束
                 if (currentType === 'dialogue') {
@@ -123,6 +130,8 @@ export function parseContainers(markdown: string): ParsedContainer[] {
                         containers.push({
                             type: 'dialogue',
                             title: currentTitle,
+                            sourceText: contentLines.join('\n'),
+                            sourceLine,
                             lines: dialogueLines
                         });
                     }
@@ -132,6 +141,8 @@ export function parseContainers(markdown: string): ParsedContainer[] {
                         containers.push({
                             type: 'gallery',
                             title: currentTitle,
+                            sourceText: contentLines.join('\n'),
+                            sourceLine,
                             images: images
                         });
                     }

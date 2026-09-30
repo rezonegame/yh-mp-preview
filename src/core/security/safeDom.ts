@@ -32,7 +32,7 @@ export function hasUnsafeCss(value: string): boolean {
 
 export function safeInlineCss(value: string): string {
     if (hasUnsafeCss(value)) return '';
-    const probe = document.createElement('span');
+    const probe = createSpan();
     probe.style.cssText = value;
     const declarations: string[] = [];
     for (let index = 0; index < probe.style.length; index++) {

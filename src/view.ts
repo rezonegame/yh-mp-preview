@@ -1,15 +1,20 @@
-import { ItemView, WorkspaceLeaf, MarkdownRenderer, TFile, setIcon, Notice, Modal } from 'obsidian';
+import { ItemView, WorkspaceLeaf, MarkdownRenderer, TFile, setIcon, Notice, Modal, Component } from 'obsidian';
 import { replaceWithSafeHtml } from './core/security/safeDom';
+import { PreviewSession } from './core/render/previewSession';
+import { boundedCanvasRender, queueCanvasRender, shouldIgnoreExportElement } from './core/render/exportCanvas';
+import { createWorkbenchControls } from './ui/workbenchControls';
+import { bindAsyncEvent, runAction } from './ui/asyncActions';
 import { MPConverter } from './converter';
 import { CopyManager } from './copyManager';
-import type { TemplateManager } from './templateManager';
+import { TemplateManager } from './templateManager';
 
 import type { SettingsManager, LayoutSnapshot } from './settings/settings';
 import { BackgroundManager } from './backgroundManager';
 import { ThemeGalleryModal } from './settings/ThemeGalleryModal';
 import { createCustomSelect, type SelectOption, type CustomSelectControl } from './ui/CustomSelect';
 import { handleImageAltEdit } from './ui/ImageAltModal';
-import { applyArticleRecipe } from './core/recipe/articleRecipeFormatter';
+import { applyArticleRecipe, resetArticleRecipe } from './core/recipe/articleRecipeFormatter';
+import { normalizeArticleText } from './core/render/articleText';
 import { prepareLegacyWechatFragment } from './core/render/legacyWechatPipeline';
 import { resolveWechatPalette } from './core/theme/wechatPalette';
 import type { ValidationReport } from './core/validation/wechatHtmlValidator';
@@ -21,11 +26,15 @@ const EXPORT_IMAGE_TIMEOUT_MS = 10_000;
 export class MPView extends ItemView {
     private previewEl: HTMLElement;
     private currentFile: TFile | null = null;
-    private updateTimer: NodeJS.Timeout | null = null;
+    private updateTimer: number | null = null;
     private isPreviewLocked: boolean = false;
     private isEditMode: boolean = false;
     private isPhonePreview: boolean = false;
-    private trialTemplateId: string | null = null;
+    private readonly session = new PreviewSession();
+    private renderComponent: Component | null = null;
+    private readonly exportController = new AbortController();
+    private get trialTemplateId(): string | null { return this.session.trialTemplateId; }
+    private set trialTemplateId(value: string | null) { this.session.trialTemplateId = value; }
     private lockButton: HTMLButtonElement;
     private editButton: HTMLButtonElement;
     private copyButton: HTMLButtonElement;
@@ -60,13 +69,7 @@ export class MPView extends ItemView {
     private applyThemeTrial(templateId: string): void {
         const savedId = this.settingsManager.getSettings().templateId;
         this.trialTemplateId = templateId === savedId ? null : templateId;
-        this.templateManager.setCurrentTemplate(templateId);
-        this.templateManager.applyTemplate(this.previewEl);
-        const section = this.previewEl.querySelector('.mp-content-section') as HTMLElement | null;
-        if (section) {
-            applyArticleRecipe(section, this.settingsManager.getSettings().v3.selectedRecipeId,
-                resolveWechatPalette(this.settingsManager.getTemplate(templateId)));
-        }
+        this.applyPresentation(this.previewEl);
         this.refreshValidationReport();
     }
 
@@ -76,13 +79,35 @@ export class MPView extends ItemView {
         settingsManager: SettingsManager
     ) {
         super(leaf);
-        this.templateManager = templateManager;
+        this.templateManager = new TemplateManager(this.app, settingsManager);
         this.settingsManager = settingsManager;
         this.backgroundManager = new BackgroundManager(this.settingsManager);
     }
 
     getViewType() {
         return VIEW_TYPE_MP;
+    }
+
+    async onClose(): Promise<void> {
+        this.session.close(); this.exportController.abort();
+        if(this.updateTimer) window.clearTimeout(this.updateTimer);
+        this.renderComponent?.unload(); this.renderComponent=null;
+    }
+
+    private applyPresentation(host: HTMLElement): void {
+        const section=host.querySelector<HTMLElement>('.mp-content-section');
+        if(!section) return;
+        resetArticleRecipe(section);
+        const settings=this.settingsManager.getSettings();
+        const themeId=this.getActiveWechatTemplateId();
+        this.templateManager.setCurrentTemplate(themeId);
+        this.templateManager.setFont(settings.fontFamily);
+        this.templateManager.setFontSize(settings.fontSize);
+        this.templateManager.applyTemplate(host);
+        this.backgroundManager.setBackground(settings.backgroundId);
+        this.backgroundManager.applyBackground(host);
+        applyArticleRecipe(section,settings.v3.selectedRecipeId,resolveWechatPalette(this.settingsManager.getTemplate(themeId)));
+        normalizeArticleText(section);
     }
 
     getDisplayText() {
@@ -94,18 +119,13 @@ export class MPView extends ItemView {
     }
 
     async onOpen() {
-        const container = this.containerEl.children[1];
+        const container = this.containerEl.children[1] as HTMLElement;
         container.empty();
         container.classList.remove('view-content');
         container.classList.add('mp-view-content');
 
         // 顶部工具栏
-        const toolbar = container.createEl('div', { cls: 'mp-toolbar' });
-        const controlsGroup = toolbar.createEl('div', { cls: 'mp-controls-group mp-appearance-row' });
-        const typographyRow = toolbar.createEl('div', { cls: 'mp-controls-group mp-typography-row' });
-
-        // === 辅助工具行（图标按钮，位于顶部工具栏下方） ===
-        const secondaryRow = toolbar.createEl('div', { cls: 'mp-controls-group mp-secondary-row' });
+        const { toolbar, controlsGroup, typographyRow, secondaryRow } = createWorkbenchControls(container);
 
         // Inject Header
         const headerBtn = secondaryRow.createEl('button', {
@@ -129,7 +149,7 @@ export class MPView extends ItemView {
             attr: { 'aria-label': '刷新预览', 'title': '刷新预览' }
         });
         setIcon(refreshButton, 'refresh-cw');
-        refreshButton.addEventListener('click', async () => {
+        bindAsyncEvent(refreshButton,'click', async () => {
             await this.updatePreview();
             new Notice('预览已刷新');
         });
@@ -140,7 +160,7 @@ export class MPView extends ItemView {
             attr: { 'aria-label': '开启实时预览状态', 'title': '锁定预览' }
         });
         setIcon(this.lockButton, 'unlock');
-        this.lockButton.addEventListener('click', () => this.togglePreviewLock());
+        bindAsyncEvent(this.lockButton,'click', () => this.togglePreviewLock());
 
         // Edit Mode Button
         this.editButton = secondaryRow.createEl('button', {
@@ -155,14 +175,14 @@ export class MPView extends ItemView {
             attr: { 'aria-label': '保存排版快照', title: '保存排版快照' },
         });
         setIcon(snapshotButton, 'save');
-        snapshotButton.addEventListener('click', async () => this.saveCurrentSnapshot());
+        bindAsyncEvent(snapshotButton,'click', () => this.saveCurrentSnapshot());
 
         const restoreButton = secondaryRow.createEl('button', {
             cls: 'mp-action-button mp-icon-btn',
             attr: { 'aria-label': '恢复最近快照', title: '恢复最近快照' },
         });
         setIcon(restoreButton, 'history');
-        restoreButton.addEventListener('click', async () => this.restoreLatestSnapshot());
+        bindAsyncEvent(restoreButton,'click', () => this.restoreLatestSnapshot());
 
         // SEO Hidden Text Button
         const seoButton = secondaryRow.createEl('button', {
@@ -180,11 +200,11 @@ export class MPView extends ItemView {
         setIcon(helpButton, 'help');
         helpButton.setCssStyles({ position: 'relative' });
         // 帮助提示框
-        secondaryRow.createEl('div', {
+        secondaryRow.createDiv({
             cls: 'mp-help-tooltip',
             text: `使用指南：
-                1. 左侧选择「系列」快速过滤
-                2. 右侧选择「主题」预览效果
+                1. 打开主题画廊，按场景筛选
+                2. 点选主题试用，再确认应用
                 3. 调整字体和字号
                 4. 点击【复制按钮】即可粘贴到公众号
                 5. ✏️ 编辑模式可直接修改预览文字
@@ -220,10 +240,10 @@ export class MPView extends ItemView {
             'mp-background-select',
             backgroundOptions,
             async (value) => {
-                this.backgroundManager.setBackground(value);
                 await this.settingsManager.updateSettings({
                     backgroundId: value
                 });
+                this.backgroundManager.setBackground(value);
                 this.backgroundManager.applyBackground(this.previewEl);
             }
         );
@@ -276,22 +296,21 @@ export class MPView extends ItemView {
             'mp-font-select',
             this.getFontOptions(),
             async (value) => {
-                this.templateManager.setFont(value);
                 await this.settingsManager.updateSettings({
                     fontFamily: value
                 });
-                this.templateManager.applyTemplate(this.previewEl);
+                this.templateManager.setFont(value);
+                this.applyPresentation(this.previewEl);
             }
         );
-        this.customFontSelect.container.id = 'font-select';
 
         // 字号调整
         const sizeField = typographyRow.createDiv('mp-toolbar-field mp-size-field');
         sizeField.createSpan({ cls: 'mp-toolbar-label', text: '字号' });
-        const fontSizeGroup = sizeField.createEl('div', { cls: 'mp-font-size-group' });
+        const fontSizeGroup = sizeField.createDiv({ cls: 'mp-font-size-group' });
         const decreaseButton = fontSizeGroup.createEl('button', {
             cls: 'mp-font-size-btn',
-            text: '-'
+            text: '-', attr:{'aria-label':'减小字号',type:'button'}
         });
         this.fontSizeSelect = fontSizeGroup.createEl('input', {
             cls: 'mp-font-size-input',
@@ -299,11 +318,12 @@ export class MPView extends ItemView {
             value: '16',
             attr: {
                 style: 'border: none; outline: none; background: transparent;'
+                , 'aria-label':'正文字号（12 至 30）', inputmode:'numeric'
             }
         });
         const increaseButton = fontSizeGroup.createEl('button', {
             cls: 'mp-font-size-btn',
-            text: '+'
+            text: '+', attr:{'aria-label':'增大字号',type:'button'}
         });
 
 
@@ -313,6 +333,7 @@ export class MPView extends ItemView {
 
         const advanced = toolbar.createEl('details', { cls: 'mp-advanced-typesetting' });
         this.recipeSummary = advanced.createEl('summary');
+        advanced.appendChild(secondaryRow);
         advanced.createEl('p', {
             cls: 'mp-advanced-hint',
             text: '可选的局部结构增强；主题决定整体视觉。选择“通用长文”则不叠加配方样式，不修改 Markdown 原文。',
@@ -331,14 +352,15 @@ export class MPView extends ItemView {
                 { label: '周报与复盘', value: 'review' },
             ],
             async (value) => {
-                this.updateRecipeSummary(value);
                 await this.settingsManager.updateSettings({
                     v3: {
                         ...this.settingsManager.getSettings().v3,
                         selectedRecipeId: value,
                     },
                 });
-                await this.updatePreview();
+                this.updateRecipeSummary(value);
+                this.applyPresentation(this.previewEl);
+                this.refreshValidationReport();
             },
         );
         this.recipeSelect.setValue(settings.v3.selectedRecipeId);
@@ -383,12 +405,13 @@ export class MPView extends ItemView {
 
         // 更新字号调整事件
         const updateFontSize = async () => {
-            const size = parseInt(this.fontSizeSelect.value);
-            this.templateManager.setFontSize(size);
+            const parsed = Number(this.fontSizeSelect.value);
+            const size = Number.isFinite(parsed) ? Math.max(12,Math.min(30,Math.round(parsed))) : this.settingsManager.getSettings().fontSize;
             await this.settingsManager.updateSettings({
                 fontSize: size
             });
-            this.templateManager.applyTemplate(this.previewEl);
+            this.fontSizeSelect.value=String(size);
+            this.applyPresentation(this.previewEl);
         };
 
         // 字号调整按钮事件
@@ -396,7 +419,7 @@ export class MPView extends ItemView {
             const currentSize = parseInt(this.fontSizeSelect.value);
             if (currentSize > 12) {
                 this.fontSizeSelect.value = (currentSize - 1).toString();
-                updateFontSize();
+                runAction(updateFontSize);
             }
         });
 
@@ -404,11 +427,11 @@ export class MPView extends ItemView {
             const currentSize = parseInt(this.fontSizeSelect.value);
             if (currentSize < 30) {
                 this.fontSizeSelect.value = (currentSize + 1).toString();
-                updateFontSize();
+                runAction(updateFontSize);
             }
         });
 
-        this.fontSizeSelect.addEventListener('change', updateFontSize);
+        bindAsyncEvent(this.fontSizeSelect,'change', updateFontSize);
         // Preview width controls belong to the preview, not the article styling toolbar.
         const previewWidthBar = container.createDiv('mp-preview-width-bar');
         previewWidthBar.createSpan({ cls: 'mp-preview-width-label', text: '预览宽度' });
@@ -425,7 +448,7 @@ export class MPView extends ItemView {
             cls: 'mp-preview-width-hint',
             text: '仅影响预览，不影响复制与导出',
         });
-        this.previewEl = container.createEl('div', { cls: 'mp-preview-area' });
+        this.previewEl = container.createDiv({ cls: 'mp-preview-area' });
         const setPreviewWidth = (phone: boolean) => {
             this.isPhonePreview = phone;
             this.previewEl.toggleClass('mp-phone-preview', phone);
@@ -450,7 +473,7 @@ export class MPView extends ItemView {
         this.validationPanel = container.createEl('section', { cls: 'mp-validation-panel' });
 
         // 点击图片 → 编辑 Alt Text
-        this.previewEl.addEventListener('click', async (e) => {
+        bindAsyncEvent(this.previewEl,'click', async (e) => {
             const target = e.target as HTMLElement;
             if (target.tagName.toLowerCase() === 'img') {
                 e.stopPropagation();
@@ -461,10 +484,10 @@ export class MPView extends ItemView {
 
 
         // 底部工具栏
-        const bottomBar = container.createEl('div', { cls: 'mp-bottom-bar' });
+        const bottomBar = container.createDiv({ cls: 'mp-bottom-bar' });
 
         // === 主要操作（复制 + 导出） ===
-        const primaryRow = bottomBar.createEl('div', { cls: 'mp-controls-group mp-primary-row' });
+        const primaryRow = bottomBar.createDiv({ cls: 'mp-controls-group mp-primary-row' });
 
         // 复制按钮
         this.copyButton = primaryRow.createEl('button', {
@@ -478,22 +501,22 @@ export class MPView extends ItemView {
             cls: 'mp-export-button'
         });
 
-        exportImageButton.addEventListener('click', async () => this.exportLongImage(exportImageButton));
+        bindAsyncEvent(exportImageButton,'click', () => this.exportLongImage(exportImageButton));
 
         // 添加复制按钮点击事件
         const exportHtmlButton = primaryRow.createEl('button', {
             text: '导出 HTML',
             cls: 'mp-export-button',
         });
-        exportHtmlButton.addEventListener('click', async () => this.exportHtmlFragment(exportHtmlButton));
+        bindAsyncEvent(exportHtmlButton,'click', () => this.exportHtmlFragment(exportHtmlButton));
 
         const exportSegmentsButton = primaryRow.createEl('button', {
             text: '导出分段图',
             cls: 'mp-export-button',
         });
-        exportSegmentsButton.addEventListener('click', async () => this.exportSegmentedImages(exportSegmentsButton));
+        bindAsyncEvent(exportSegmentsButton,'click', () => this.exportSegmentedImages(exportSegmentsButton));
 
-        this.copyButton.addEventListener('click', async () => {
+        bindAsyncEvent(this.copyButton,'click', async () => {
             if (this.previewEl) {
                 const validation = this.refreshValidationReport();
                 if (validation?.errors) {
@@ -510,18 +533,18 @@ export class MPView extends ItemView {
                         themeId,
                         recipeId: copySettings.v3.selectedRecipeId,
                         palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId)),
-                    });
+                    }, {signal:this.exportController.signal});
                     this.copyButton.setText(validation.warnings > 0
                         ? `复制成功（${validation.warnings} 项兼容性提示）`
                         : '复制成功');
 
-                    setTimeout(() => {
+                    window.setTimeout(() => {
                         this.copyButton.disabled = false;
                         this.copyButton.setText('Pub 复制'); // Fixed: Consistent text reset
                     }, 2000);
-                } catch (error) {
+                } catch (error: unknown) {
                     this.copyButton.setText('复制失败');
-                    setTimeout(() => {
+                    window.setTimeout(() => {
                         this.copyButton.disabled = false;
                         this.copyButton.setText('Pub 复制'); // Fixed: Consistent text reset
                     }, 2000);
@@ -531,12 +554,12 @@ export class MPView extends ItemView {
 
         // 监听文档变化
         this.registerEvent(
-            this.app.workspace.on('file-open', this.onFileOpen.bind(this))
+            this.app.workspace.on('file-open', file => { runAction(() => this.onFileOpen(file)); })
         );
 
         // 监听文档内容变化
         this.registerEvent(
-            this.app.vault.on('modify', this.onFileModify.bind(this))
+            this.app.vault.on('modify', file => { if (file instanceof TFile) this.onFileModify(file); })
         );
 
         // 检查当前打开的文件
@@ -569,7 +592,7 @@ export class MPView extends ItemView {
     }
 
     private refreshValidationReport(): ValidationReport | null {
-        const contentSection = this.previewEl?.querySelector('.mp-content-section') as HTMLElement | null;
+        const contentSection = this.previewEl?.querySelector<HTMLElement>('.mp-content-section');
         if (!contentSection) {
             this.validationReport = null;
             this.renderValidationReport();
@@ -628,13 +651,15 @@ export class MPView extends ItemView {
             new Notice('请先打开一篇 Markdown 笔记');
             return;
         }
-        const content = await this.app.vault.cachedRead(this.currentFile);
+        const file = this.currentFile;
+        const content = await this.app.vault.cachedRead(file);
+        if (this.currentFile?.path !== file.path) throw new Error('文章已切换，请重新保存快照');
         const settings = this.settingsManager.getSettings();
         const validation = this.refreshValidationReport() || { errors: 0, warnings: 0 };
         const snapshot: LayoutSnapshot = {
             id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
             createdAt: new Date().toISOString(),
-            filePath: this.currentFile.path,
+            filePath: file.path,
             contentHash: this.hashText(content),
             templateId: settings.templateId,
             backgroundId: settings.backgroundId,
@@ -681,7 +706,7 @@ export class MPView extends ItemView {
         height: number;
         cleanup: () => void;
     }> {
-        const content = this.previewEl.querySelector('.mp-content-section') as HTMLElement | null;
+        const content = this.previewEl.querySelector<HTMLElement>('.mp-content-section');
         if (!content) throw new Error('Preview content is not available');
 
         // The phone-width switch is viewport-only. Export at the adaptive width
@@ -690,7 +715,7 @@ export class MPView extends ItemView {
         const width = Math.max(1, Math.ceil(this.previewEl.clientWidth
             - parseFloat(previewStyle.paddingLeft || '0')
             - parseFloat(previewStyle.paddingRight || '0')));
-        const snapshotHost = document.createElement('div');
+        const snapshotHost = createDiv();
         snapshotHost.className = 'mp-preview-area mp-export-snapshot';
         snapshotHost.setCssStyles({ cssText: [
             'position: fixed',
@@ -710,7 +735,10 @@ export class MPView extends ItemView {
 
         const cleanup = () => snapshotHost.remove();
         try {
-            const snapshot = content.cloneNode(true) as HTMLElement;
+            const snapshot = (await CopyManager.prepareForExport(content, {
+                themeId:this.getActiveWechatTemplateId(), recipeId:this.settingsManager.getSettings().v3.selectedRecipeId,
+                palette:resolveWechatPalette(this.settingsManager.getTemplate(this.getActiveWechatTemplateId())),
+            },{signal:this.exportController.signal})).root;
             const computed = window.getComputedStyle(content);
             snapshot.setCssStyles({ cssText: snapshot.style.cssText + (`;${[
                 `width: ${width}px`,
@@ -748,6 +776,8 @@ export class MPView extends ItemView {
     }
 
     private waitForExportImage(image: HTMLImageElement): Promise<boolean> {
+        const signal = this.exportController.signal;
+        if (signal.aborted) return Promise.resolve(false);
         if (image.complete) return Promise.resolve(image.naturalWidth > 0);
         return new Promise((resolve) => {
             let settled = false;
@@ -757,13 +787,16 @@ export class MPView extends ItemView {
                 window.clearTimeout(timeoutId);
                 image.removeEventListener('load', onLoad);
                 image.removeEventListener('error', onError);
+                signal.removeEventListener('abort', onAbort);
                 resolve(loaded);
             };
             const onLoad = () => finish(image.naturalWidth > 0);
             const onError = () => finish(false);
+            const onAbort = () => finish(false);
             const timeoutId = window.setTimeout(() => finish(false), EXPORT_IMAGE_TIMEOUT_MS);
             image.addEventListener('load', onLoad, { once: true });
             image.addEventListener('error', onError, { once: true });
+            signal.addEventListener('abort', onAbort, { once: true });
         });
     }
 
@@ -775,9 +808,15 @@ export class MPView extends ItemView {
         y = 0,
     ): Promise<HTMLCanvasElement> {
         // @ts-ignore html2canvas has no bundled TypeScript declarations.
-        return html2canvas(element, {
+        this.exportController.signal.throwIfAborted();
+        const owner = element.ownerDocument.defaultView;
+        if (!owner) throw new Error('导出窗口已关闭');
+        return queueCanvasRender(element.ownerDocument, async () => {
+        const previousFrames = new Set(Array.from(element.ownerDocument.querySelectorAll('.html2canvas-container')));
+        try {
+        const canvas = await boundedCanvasRender(owner, this.exportController.signal, () => html2canvas(element, {
             useCORS: true,
-            allowTaint: true,
+            allowTaint: false,
             backgroundColor: '#ffffff',
             scale,
             x: 0,
@@ -788,6 +827,13 @@ export class MPView extends ItemView {
             windowHeight: height,
             scrollX: 0,
             scrollY: 0,
+            ignoreElements: (candidate: Element) => shouldIgnoreExportElement(candidate, element),
+        }));
+        this.exportController.signal.throwIfAborted();
+        return canvas;
+        } finally {
+            element.ownerDocument.querySelectorAll('.html2canvas-container').forEach(frame => { if (!previousFrames.has(frame)) frame.remove(); });
+        }
         });
     }
 
@@ -813,7 +859,7 @@ export class MPView extends ItemView {
                 throw new Error('文章过长，无法生成单张长图，请改用“导出分段图”');
             }
             const canvas = await this.renderExportCanvas(snapshot.element, snapshot.width, snapshot.height, scale);
-            const link = document.createElement('a');
+            const link = createEl('a');
             link.download = `yh-mp-preview-${Date.now()}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
@@ -826,7 +872,7 @@ export class MPView extends ItemView {
             button.setText('导出失败');
         } finally {
             cleanup?.();
-            setTimeout(() => {
+            window.setTimeout(() => {
                 button.disabled = false;
                 button.setText(originalText);
             }, 2000);
@@ -834,30 +880,33 @@ export class MPView extends ItemView {
     }
 
     private async exportHtmlFragment(button: HTMLButtonElement): Promise<void> {
-        const contentSection = this.previewEl.querySelector('.mp-content-section') as HTMLElement | null;
+        const contentSection = this.previewEl.querySelector<HTMLElement>('.mp-content-section');
         if (!contentSection) return;
         const originalText = button.textContent || '导出 HTML';
         button.disabled = true;
         try {
             const settings = this.settingsManager.getSettings();
             const themeId = this.getActiveWechatTemplateId();
-            const prepared = prepareLegacyWechatFragment(contentSection, {
+            const prepared = await CopyManager.prepareForExport(contentSection, {
                 themeId,
                 recipeId: settings.v3.selectedRecipeId,
                 palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId)),
-            });
+            },{signal:this.exportController.signal});
             if (prepared.validation.errors > 0) {
                 new Notice(`存在 ${prepared.validation.errors} 项阻断问题，无法导出 HTML`);
                 return;
             }
             const blob = new Blob([prepared.html], { type: 'text/html;charset=utf-8' });
+            this.exportController.signal.throwIfAborted();
             const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
+            const link = createEl('a');
             link.href = url;
             link.download = `yh-mp-preview-${Date.now()}.html`;
             link.click();
-            URL.revokeObjectURL(url);
+            window.setTimeout(() => URL.revokeObjectURL(url),1000);
             new Notice('已导出 HTML 片段');
+        } catch(error) {
+            new Notice(`HTML 导出失败：${error instanceof Error ? error.message : '未知错误'}`);
         } finally {
             button.disabled = false;
             button.setText(originalText);
@@ -889,7 +938,7 @@ export class MPView extends ItemView {
                     2,
                     sourceY,
                 );
-                const link = document.createElement('a');
+                const link = createEl('a');
                 link.download = `yh-mp-preview-${exportedAt}-${index + 1}.png`;
                 link.href = segment.toDataURL('image/png');
                 link.click();
@@ -908,10 +957,22 @@ export class MPView extends ItemView {
     }
 
     async onFileOpen(file: TFile | null) {
+        this.session.invalidate();
+        this.previewEl.removeAttribute('aria-busy');
+        if (this.currentFile?.path !== file?.path) {
+            this.isEditMode = false;
+            this.previewEl.contentEditable = 'false';
+            this.previewEl.classList.remove('mp-edit-mode');
+            setIcon(this.editButton, 'pencil');
+            this.editButton.setAttribute('title', '编辑预览文字');
+            this.renderComponent?.unload(); this.renderComponent = null;
+            this.previewEl.empty();
+        }
+        if(this.currentFile?.path !== file?.path) { this.session.headerEnabled=false;this.session.footerEnabled=false; }
         this.currentFile = file;
         if (!file || file.extension !== 'md') {
             this.previewEl.empty();
-            this.previewEl.createEl('div', {
+            this.previewEl.createDiv({
                 text: '只能预览 markdown 文本文档',
                 cls: 'mp-empty-message'
             });
@@ -996,7 +1057,7 @@ export class MPView extends ItemView {
                 });
                 textarea.focus();
 
-                const btnContainer = contentEl.createEl('div', {
+                const btnContainer = contentEl.createDiv({
                     attr: { style: 'display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px;' }
                 });
 
@@ -1041,7 +1102,7 @@ export class MPView extends ItemView {
             seoSection.textContent = (seoSection.textContent || '') + ' ' + seoText;
         } else {
             // 创建新的 SEO 隐藏块
-            seoSection = document.createElement('section');
+            seoSection = createEl('section');
             seoSection.className = 'mp-seo-hidden';
             seoSection.setCssStyles({ cssText: 'font-size: 0; color: transparent; line-height: 0; height: 0; overflow: hidden; opacity: 0; position: absolute; left: -9999px;' });
             seoSection.textContent = seoText;
@@ -1065,111 +1126,83 @@ export class MPView extends ItemView {
         new Notice('SEO 隐藏文字已插入');
     }
 
-    async onFileModify(file: TFile) {
+    onFileModify(file: TFile): void {
         if (file === this.currentFile && !this.isPreviewLocked) {
             if (this.updateTimer) {
-                clearTimeout(this.updateTimer);
+                window.clearTimeout(this.updateTimer);
             }
 
-            this.updateTimer = setTimeout(() => {
-                this.updatePreview();
+            this.updateTimer = window.setTimeout(() => {
+                runAction(() => this.updatePreview());
             }, 500);
         }
     }
 
     async updatePreview() {
         if (!this.currentFile) return;
-
-        // 保存当前滚动位置（使用百分比以应对 DOM 重建后高度变化）
+        const file=this.currentFile;
+        const lease=this.session.begin();
+        const component=new Component();
+        component.load();
+        const staging=this.previewEl.ownerDocument.createElement('div');
         const scrollHeight = this.previewEl.scrollHeight;
         const scrollRatio = scrollHeight > 0 ? this.previewEl.scrollTop / scrollHeight : 0;
         const isAtBottom = (scrollHeight - this.previewEl.scrollTop) <= (this.previewEl.clientHeight + 100);
-
-        this.previewEl.empty();
-        const content = await this.app.vault.cachedRead(this.currentFile);
-
-        await MarkdownRenderer.render(
-            this.app,
-            content,
-            this.previewEl,
-            this.currentFile.path,
-            this
-        );
-
-        MPConverter.formatContent(this.previewEl, content, this.settingsManager);
-
-        // Apply manual header/footer content if settings allow
-        // Note: The structure requires buttons to inject these into the preview DOM
-        // but user might want them to persist. 
-        // For now, these methods below mimic 'injection' by interacting with the preview content.
-
-        const activeThemeId = this.getActiveWechatTemplateId();
-        this.templateManager.setCurrentTemplate(activeThemeId);
-        this.templateManager.applyTemplate(this.previewEl);
-        this.backgroundManager.applyBackground(this.previewEl);
-        const contentSection = this.previewEl.querySelector('.mp-content-section') as HTMLElement | null;
-        if (contentSection) {
-            const settings = this.settingsManager.getSettings();
-            applyArticleRecipe(contentSection, settings.v3.selectedRecipeId,
-                resolveWechatPalette(this.settingsManager.getTemplate(activeThemeId)));
+        let committed=false;
+        this.previewEl.setAttribute('aria-busy','true');
+        try {
+            const content=await this.app.vault.cachedRead(file);
+            if(!lease.isCurrent()) return;
+            await MarkdownRenderer.render(this.app,content,staging,file.path,component);
+            if(!lease.isCurrent() || this.currentFile?.path !== file.path) return;
+            MPConverter.formatContent(staging,content,this.settingsManager);
+            this.applyPresentation(staging);
+            this.injectArticleChrome(staging);
+            if(!lease.isCurrent()) return;
+            this.renderComponent?.unload();
+            this.previewEl.replaceChildren(...Array.from(staging.childNodes));
+            this.renderComponent=component; committed=true;
+            this.refreshValidationReport();
+            window.requestAnimationFrame(() => {
+                if(!lease.isCurrent()) return;
+                this.previewEl.scrollTop=isAtBottom ? this.previewEl.scrollHeight : scrollRatio*this.previewEl.scrollHeight;
+            });
+        } catch(error) {
+            if(lease.isCurrent()) new Notice(`预览更新失败，保留上次内容：${error instanceof Error ? error.message : '未知错误'}`);
+        } finally {
+            if(!committed) component.unload();
+            if(lease.isCurrent()) this.previewEl.removeAttribute('aria-busy');
         }
-        this.refreshValidationReport();
-
-        // 恢复滚动位置
-        requestAnimationFrame(() => {
-            if (isAtBottom) {
-                this.previewEl.scrollTop = this.previewEl.scrollHeight;
-            } else {
-                this.previewEl.scrollTop = scrollRatio * this.previewEl.scrollHeight;
-            }
-        });
     }
 
     private toggleHeader() {
-        const headerContent = this.settingsManager.getSettings().customHeader;
-        if (!headerContent) {
-            // Optionally notify user no header content is set
-            return;
-        }
-
-        const existingHeader = this.previewEl.querySelector('.mp-custom-header');
-        if (existingHeader) {
-            existingHeader.remove();
-        } else {
-            const headerDiv = document.createElement('div');
-            headerDiv.className = 'mp-custom-header';
-            const removed = replaceWithSafeHtml(headerDiv, headerContent);
-            if (removed > 0) new Notice('头部内容含不安全的 HTML 或资源样式，预览已过滤；原设置未改写。');
-
-            // Add click to remove
-            const removeBtn = document.createElement('button');
-            removeBtn.setCssStyles({ cssText: 'position:absolute; top:-10px; right:10px; font-size:10px; cursor:pointer; padding:2px 6px; border-radius:4px; border:none; background:var(--text-muted); color:white;' });
-            removeBtn.innerText = '移除头部';
-            removeBtn.onclick = (e) => {
-                e.stopPropagation();
-                headerDiv.remove();
-            };
-            // Actually the CSS ::after handles the visual label, we just need functionality if we want explicit btn,
-            // but for now let's just insert content.
-            // The requirement was simple toggle.
-
-            this.previewEl.prepend(headerDiv);
-        }
+        if(!this.settingsManager.getSettings().customHeader) { new Notice('请先在设置中填写自定义头部');return; }
+        this.session.headerEnabled=!this.session.headerEnabled;
+        this.previewEl.querySelector('.mp-custom-header')?.remove();
+        this.injectArticleChrome(this.previewEl);this.refreshValidationReport();
     }
 
     private toggleFooter() {
-        const footerContent = this.settingsManager.getSettings().customFooter;
-        if (!footerContent) return;
+        if(!this.settingsManager.getSettings().customFooter) { new Notice('请先在设置中填写自定义尾部');return; }
+        this.session.footerEnabled=!this.session.footerEnabled;
+        this.previewEl.querySelector('.mp-custom-footer')?.remove();
+        this.injectArticleChrome(this.previewEl);this.refreshValidationReport();
+    }
 
-        const existingFooter = this.previewEl.querySelector('.mp-custom-footer');
-        if (existingFooter) {
-            existingFooter.remove();
-        } else {
-            const footerDiv = document.createElement('div');
-            footerDiv.className = 'mp-custom-footer';
-            const removed = replaceWithSafeHtml(footerDiv, footerContent);
-            if (removed > 0) new Notice('尾部内容含不安全的 HTML 或资源样式，预览已过滤；原设置未改写。');
-            this.previewEl.append(footerDiv);
+    private injectArticleChrome(host: HTMLElement): void {
+        const article=host.querySelector<HTMLElement>('.mp-content-section');
+        if(!article) return;
+        const settings=this.settingsManager.getSettings();
+        for(const [kind,enabled,html] of [
+            ['header',this.session.headerEnabled,settings.customHeader],
+            ['footer',this.session.footerEnabled,settings.customFooter],
+        ] as const) {
+            if(!enabled || !html || article.querySelector(`.mp-custom-${kind}`)) continue;
+            const block=article.ownerDocument.createElement('div');block.className=`mp-custom-${kind}`;
+            block.setAttribute('data-mp-block-id',kind);
+            const removed=replaceWithSafeHtml(block,html);
+            if(removed>0) new Notice('自定义头尾的不安全内容已过滤；原设置未改写。');
+            if(kind==='header') article.prepend(block); else article.append(block);
         }
     }
 

@@ -134,7 +134,9 @@ function renderQuoteCard(content: string): HTMLElement {
     const trimmed = content.trim();
     if (trimmed.startsWith('{')) {
         try {
-            values = JSON.parse(trimmed);
+            const parsed: unknown = JSON.parse(trimmed);
+            values = parsed && typeof parsed === 'object' && !Array.isArray(parsed)
+                ? Object.fromEntries(Object.entries(parsed).filter((entry): entry is [string, string] => typeof entry[1] === 'string')) : {};
         } catch {
             values = {};
         }
@@ -219,30 +221,36 @@ function renderTimeline(content: string): HTMLElement {
 }
 
 function renderComparisonTable(content: string): HTMLElement {
-    let data: any = null;
+    let data: unknown = null;
     try {
         data = JSON.parse(content.trim());
     } catch {
         data = null;
     }
 
-    if (!data || !data.left || !data.right) {
+    const record = data && typeof data === 'object' && !Array.isArray(data) ? data as Record<string, unknown> : {};
+    const readSide = (value: unknown): { title: string; items: string[] } | null => {
+        if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+        const side = value as Record<string, unknown>;
+        return { title: typeof side.title === 'string' ? side.title : '', items: Array.isArray(side.items) ? side.items.filter((item): item is string => typeof item === 'string') : [] };
+    };
+    let left = readSide(record.left);
+    let right = readSide(record.right);
+    if (!left || !right) {
         const rows = parseRows(content);
-        data = {
-            left: { title: rows[0]?.[0] || '方案 A', items: rows.slice(1).map(row => row[0]).filter(Boolean) },
-            right: { title: rows[0]?.[1] || '方案 B', items: rows.slice(1).map(row => row[1]).filter(Boolean) }
-        };
+        left = { title: rows[0]?.[0] || '方案 A', items: rows.slice(1).map(row => row[0]).filter(Boolean) };
+        right = { title: rows[0]?.[1] || '方案 B', items: rows.slice(1).map(row => row[1]).filter(Boolean) };
     }
 
-    const renderSide = (side: any, accent: string) => `<div style="flex: 1; min-width: 0; padding: 14px; border-radius: 10px; background: ${accent}10;">
+    const renderSide = (side: { title: string; items: string[] }, accent: string) => `<div style="flex: 1; min-width: 0; padding: 14px; border-radius: 10px; background: ${accent}10;">
         <div style="color: ${accent}; font-weight: 700; margin-bottom: 8px;">${escapeHtml(side.title || '')}</div>
         ${(side.items || []).map((item: string) => `<div style="padding: 6px 0; color: #394150; line-height: 1.6;">${escapeHtml(item)}</div>`).join('')}
     </div>`;
 
     return htmlToElement(`<section class="mp-layout-card mp-layout-comparison-table" data-mp-layout="comparison-table" style="${cardStyle('#0ea5e9')}">
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            ${renderSide(data.left, '#16a34a')}
-            ${renderSide(data.right, '#dc2626')}
+            ${renderSide(left, '#16a34a')}
+            ${renderSide(right, '#dc2626')}
         </div>
     </section>`);
 }
@@ -304,7 +312,7 @@ function processExplicitComponents(container: HTMLElement, settings: MPSettings)
 function processAutoToc(container: HTMLElement, settings: LayoutSettings, rendered: Set<string>): void {
     if (!settings.enableAutoToc || rendered.has('toc')) return;
 
-    const headings = Array.from(container.querySelectorAll('h2, h3')) as HTMLElement[];
+    const headings = Array.from(container.querySelectorAll<HTMLElement>('h2, h3'));
     if (headings.length < Math.max(1, settings.tocMinHeadings || 3)) return;
 
     const toc = renderToc('', headings);
@@ -325,7 +333,7 @@ function processTaskLists(container: HTMLElement, settings: LayoutSettings): voi
         if (taskItems.length === 0 || taskItems.length !== items.length) return;
 
         const rows = taskItems.map(item => {
-            const input = item.querySelector('input[type="checkbox"]') as HTMLInputElement | null;
+            const input = item.querySelector<HTMLInputElement>('input[type="checkbox"]');
             const status = input?.checked ? 'done' : 'pending';
             const clone = item.cloneNode(true) as HTMLElement;
             clone.querySelector('input[type="checkbox"]')?.remove();
@@ -343,14 +351,14 @@ function processImageCaptions(container: HTMLElement, settings: LayoutSettings):
         const alt = image.alt.trim();
         if (!alt || image.closest('figure')) return;
 
-        const figure = document.createElement('figure');
+        const figure = createEl('figure');
         figure.className = 'mp-image-container';
         figure.setCssStyles({ cssText: 'margin: 1em auto; text-align: center; display: block;' });
 
         const clone = image.cloneNode(true) as HTMLImageElement;
         figure.appendChild(clone);
 
-        const caption = document.createElement('figcaption');
+        const caption = createEl('figcaption');
         caption.className = 'mp-image-caption';
         caption.textContent = alt;
         caption.setCssStyles({ cssText: 'text-align: center; color: #888; font-size: 0.9em; margin-top: 6px; display: block;' });
@@ -365,7 +373,7 @@ function processTables(container: HTMLElement, settings: LayoutSettings): void {
 
     container.querySelectorAll('table').forEach(table => {
         if (table.closest('.mp-table-wrapper')) return;
-        const wrapper = document.createElement('div');
+        const wrapper = createDiv();
         wrapper.className = 'mp-table-wrapper';
         wrapper.setCssStyles({ cssText: 'width: 100%; overflow-x: auto; margin: 1em 0; -webkit-overflow-scrolling: touch;' });
         table.parentNode?.insertBefore(wrapper, table);

@@ -17,8 +17,19 @@ export function normalizeArticleRecipeId(value: string | undefined): ArticleReci
 }
 
 function setStyles(element: Element, styles: Record<string, string>): void {
+    if (!element.hasAttribute('data-mp-recipe-base-style')) element.setAttribute('data-mp-recipe-base-style', element.getAttribute('style') || '');
     const style = (element as HTMLElement).style;
     Object.entries(styles).forEach(([property, value]) => style.setProperty(property, value));
+}
+
+export function resetArticleRecipe(section: HTMLElement): void {
+    section.querySelectorAll('[data-mp-recipe-base-style]').forEach(element => {
+        const style=element.getAttribute('data-mp-recipe-base-style') || '';
+        if(style) element.setAttribute('style',style); else element.removeAttribute('style');
+        element.removeAttribute('data-mp-recipe-base-style');
+    });
+    section.querySelectorAll('.mp-recipe-step-label,.mp-recipe-check').forEach(element=>element.remove());
+    section.removeAttribute('data-mp-recipe');
 }
 
 function styleLists(section: HTMLElement, palette: WechatPalette, prefix: string): void {
@@ -32,12 +43,13 @@ function styleLists(section: HTMLElement, palette: WechatPalette, prefix: string
             background: palette.surface, 'line-height': '1.72',
         });
         const className = prefix === '步骤' ? 'mp-recipe-step-label' : 'mp-recipe-check';
-        let label = item.querySelector(`:scope > .${className}`) as HTMLElement | null;
+        let label = item.querySelector<HTMLElement>(':scope > .mp-recipe-step-label, :scope > .mp-recipe-check');
         if (!label) {
-            label = document.createElement('span');
+            label = createSpan();
             label.className = className;
             item.prepend(label);
         }
+        label.className = className;
         label.textContent = prefix === '步骤' ? `步骤 ${index + 1}\u3000` : '✓\u3000';
         setStyles(label, { 'font-weight': '700', color: palette.accentText });
     });
@@ -80,6 +92,7 @@ export function applyArticleRecipe(
     recipeId: string | undefined,
     palette: WechatPalette = resolveWechatPalette(),
 ): ArticleRecipeId {
+    resetArticleRecipe(section);
     const recipe = normalizeArticleRecipeId(recipeId);
     section.setAttribute('data-mp-recipe', recipe);
 

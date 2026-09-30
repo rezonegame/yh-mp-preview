@@ -140,7 +140,7 @@ export class TemplateManager {
             element.querySelectorAll(tag).forEach(el => {
                 // 检查是否已经处理过
                 if (!el.querySelector('.content')) {
-                    const content = document.createElement('span');
+                    const content = createSpan();
                     content.className = 'content';
                     // 使用 textContent 替代 innerHTML
                     while (el.firstChild) {
@@ -149,7 +149,7 @@ export class TemplateManager {
                     el.textContent = '';
                     el.appendChild(content);
 
-                    const after = document.createElement('span');
+                    const after = createSpan();
                     after.className = 'after';
                     el.appendChild(after);
                 }
@@ -299,7 +299,7 @@ export class TemplateManager {
 
         // 应用图片样式
         element.querySelectorAll('img').forEach(el => {
-            const img = el as HTMLImageElement;
+            const img = el;
             setSafeInlineStyle(el, appendWechatReadingBaseline(styles.image, wechatReadingBaseline.image));
         });
 
@@ -311,12 +311,12 @@ export class TemplateManager {
                     const dialogueEl = el as HTMLElement;
                     // 容器样式
                     if (styles.containers!.dialogue!.container) {
-                        setSafeInlineStyle(dialogueEl, styles.containers!.dialogue!.container!);
+                        setSafeInlineStyle(dialogueEl, styles.containers!.dialogue!.container);
                     }
                     // 标题样式
                     const titleEl = dialogueEl.querySelector('[data-container="dialogue-title"]');
                     if (titleEl && styles.containers!.dialogue!.title) {
-                        setSafeInlineStyle(titleEl, styles.containers!.dialogue!.title!);
+                        setSafeInlineStyle(titleEl, styles.containers!.dialogue!.title);
                     }
                     // 气泡样式
                     dialogueEl.querySelectorAll('[data-container="dialogue-bubble"]').forEach(bubble => {
@@ -330,12 +330,12 @@ export class TemplateManager {
                         // 说话人样式
                         const speakerEl = bubble.querySelector('[data-container="dialogue-speaker"]');
                         if (speakerEl && styles.containers!.dialogue!.speaker) {
-                            setSafeInlineStyle(speakerEl, styles.containers!.dialogue!.speaker!);
+                            setSafeInlineStyle(speakerEl, styles.containers!.dialogue!.speaker);
                         }
                         // 文本样式
                         const textEl = bubble.querySelector('[data-container="dialogue-text"]');
                         if (textEl && styles.containers!.dialogue!.text) {
-                            setSafeInlineStyle(textEl, styles.containers!.dialogue!.text!);
+                            setSafeInlineStyle(textEl, styles.containers!.dialogue!.text);
                         }
                     });
                 });
@@ -347,28 +347,28 @@ export class TemplateManager {
                     const galleryEl = el as HTMLElement;
                     // 容器样式
                     if (styles.containers!.gallery!.container) {
-                        setSafeInlineStyle(galleryEl, styles.containers!.gallery!.container!);
+                        setSafeInlineStyle(galleryEl, styles.containers!.gallery!.container);
                     }
                     // 标题样式
                     const titleEl = galleryEl.querySelector('[data-container="gallery-title"]');
                     if (titleEl && styles.containers!.gallery!.title) {
-                        setSafeInlineStyle(titleEl, styles.containers!.gallery!.title!);
+                        setSafeInlineStyle(titleEl, styles.containers!.gallery!.title);
                     }
                     // 滚动容器样式
                     const scrollEl = galleryEl.querySelector('[data-container="gallery-scroll"]');
                     if (scrollEl && styles.containers!.gallery!.scroll) {
-                        setSafeInlineStyle(scrollEl, styles.containers!.gallery!.scroll!);
+                        setSafeInlineStyle(scrollEl, styles.containers!.gallery!.scroll);
                     }
                     // 图片项样式
                     galleryEl.querySelectorAll('[data-container="gallery-item"]').forEach(item => {
                         if (styles.containers!.gallery!.item) {
-                            setSafeInlineStyle(item, styles.containers!.gallery!.item!);
+                            setSafeInlineStyle(item, styles.containers!.gallery!.item);
                         }
                     });
                     // 图片样式
                     galleryEl.querySelectorAll('[data-container="gallery-image"]').forEach(img => {
                         if (styles.containers!.gallery!.image) {
-                            setSafeInlineStyle(img, styles.containers!.gallery!.image!);
+                            setSafeInlineStyle(img, styles.containers!.gallery!.image);
                         }
                     });
                 });

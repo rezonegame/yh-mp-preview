@@ -50,7 +50,8 @@ test('history is a small gallery entry and typography has its own toolbar row', 
   assert.match(gallery, /mp-gallery-history-btn/);
   assert.match(gallery, /this\.activateScene\('历史主题'\)/);
   assert.doesNotMatch(gallery, /\.\.\.CURATED_SCENE_ORDER, '自定义主题', '历史主题'/);
-  assert.match(view, /mp-controls-group mp-typography-row/);
+  const controls = readFileSync(new URL('src/ui/workbenchControls.ts', root), 'utf8');
+  assert.match(controls, /mp-controls-group mp-typography-row/);
   assert.match(view, /setIcon\(galleryBtn, 'palette'\)/);
   assert.doesNotMatch(view, /galleryBtn\.createSpan/);
   assert.match(view, /mp-advanced-typesetting/);

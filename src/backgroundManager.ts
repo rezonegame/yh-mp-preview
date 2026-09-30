@@ -27,11 +27,7 @@ export class BackgroundManager {
         
         const background = this.settingsManager.getBackground(id);
         if (background) {
-            // 检查背景是否可见
-            if (background.isVisible === false) {
-                console.warn(`尝试设置不可见的背景: ${id}`);
-                return false;
-            }
+            // Visibility controls the picker, not an already selected snapshot.
             
             this.currentBackground = background;
             if (!this.warnedUnsafeBackgrounds.has(id) && hasUnsafeCss(background.style)) {

@@ -64,7 +64,7 @@ export class CreateTemplateModal extends Modal {
                         const css = root.ownerDocument.createElement('span').style;
                         const value = styleFields(this.template.styles).find(item => item.path === field.path)?.value || '';
                         css.cssText = value;
-                        inputs.forEach((input, property) => input.setValue(css.getPropertyValue(property)));
+                        inputs.forEach((input, property) => { input.setValue(css.getPropertyValue(property)); });
                         rawInput?.setValue(value);
                     };
                     for (const [property,label] of Object.entries(properties)) {

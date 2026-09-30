@@ -71,7 +71,7 @@ export function createArticleModel(root: HTMLElement): ArticleModel {
     root.querySelectorAll('blockquote').forEach((element) => addNode(nodes, stats, 'quote', element));
     root.querySelectorAll('pre').forEach((element) => addNode(nodes, stats, 'codeBlock', element));
     root.querySelectorAll('table').forEach((element) => addNode(nodes, stats, 'table', element));
-    root.querySelectorAll('img').forEach((element) => addNode(nodes, stats, 'image', element, { src: (element as HTMLImageElement).src }));
+    root.querySelectorAll('img').forEach((element) => addNode(nodes, stats, 'image', element, { src: (element).src }));
     root.querySelectorAll('a[href]').forEach((element) => addNode(nodes, stats, 'link', element, { href: (element as HTMLAnchorElement).href }));
     root.querySelectorAll('[data-mp-layout], [data-container]').forEach((element) => addNode(nodes, stats, 'component', element));
 

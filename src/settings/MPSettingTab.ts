@@ -10,6 +10,7 @@ import { exportTemplateManifest, createTemplateFromThemeManifest } from '../core
 import { ThemeManifestImportModal } from './ThemeManifestImportModal';
 import { NoteThemeGalleryModal } from './NoteThemeGalleryModal';
 import { setSafeInlineStyle } from '../core/security/safeDom';
+import { bindAsyncEvent } from '../ui/asyncActions';
 export class MPSettingTab extends PluginSettingTab {
     plugin: MPPlugin; // 修改插件类型以匹配类名
     private expandedSections: Set<string> = new Set();
@@ -58,7 +59,7 @@ export class MPSettingTab extends PluginSettingTab {
 
         const header = containerEl.createDiv({ cls: 'mp-settings-header' });
         new Setting(header).setName('排版与预览').setHeading();
-        header.createEl('span', { text: ` v${this.plugin.manifest.version}`, cls: 'mp-settings-version' });
+        header.createSpan({ text: ` v${this.plugin.manifest.version}`, cls: 'mp-settings-version' });
 
         this.createSection(containerEl, '基本选项', el => this.renderBasicSettings(el));
         this.createSection(containerEl, '模板选项', el => this.renderTemplateSettings(el));
@@ -226,7 +227,7 @@ export class MPSettingTab extends PluginSettingTab {
         renderTemplateLists();
 
         // 添加按钮事件
-        addButton.addEventListener('click', async () => {
+        bindAsyncEvent(addButton,'click', async () => {
             const selectedItems = Array.from(allTemplatesList.querySelectorAll('.template-list-item.selected'));
             if (selectedItems.length === 0) return;
 
@@ -246,7 +247,7 @@ export class MPSettingTab extends PluginSettingTab {
         });
 
         // 移除按钮事件
-        removeButton.addEventListener('click', async () => {
+        bindAsyncEvent(removeButton,'click', async () => {
             const selectedItems = Array.from(visibleTemplatesList.querySelectorAll('.template-list-item.selected'));
             if (selectedItems.length === 0) return;
 
@@ -300,8 +301,8 @@ export class MPSettingTab extends PluginSettingTab {
                                 new CreateTemplateModal(
                                     this.app,
                                     this.plugin,
-                                    (updatedTemplate) => {
-                                        this.plugin.settingsManager.updateTemplate(template.id, updatedTemplate);
+                                    async (updatedTemplate) => {
+                                        await this.plugin.settingsManager.updateTemplate(template.id, updatedTemplate);
                                         this.display();
                                         new Notice('请重启 Obsidian 或重新加载以使更改生效');
                                     },
@@ -447,7 +448,7 @@ export class MPSettingTab extends PluginSettingTab {
         renderBackgroundLists();
 
         // 添加按钮事件
-        addButton.addEventListener('click', async () => {
+        bindAsyncEvent(addButton,'click', async () => {
             const selectedItems = Array.from(allBackgroundsList.querySelectorAll('.background-list-item.selected'));
             if (selectedItems.length === 0) return;
 
@@ -467,7 +468,7 @@ export class MPSettingTab extends PluginSettingTab {
         });
 
         // 移除按钮事件
-        removeButton.addEventListener('click', async () => {
+        bindAsyncEvent(removeButton,'click', async () => {
             const selectedItems = Array.from(visibleBackgroundsList.querySelectorAll('.background-list-item.selected'));
             if (selectedItems.length === 0) return;
 

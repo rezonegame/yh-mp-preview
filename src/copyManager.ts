@@ -1,98 +1,36 @@
 import { Notice } from 'obsidian';
-import pangu from 'pangu/browser';
-import { prepareLegacyWechatFragment } from './core/render/legacyWechatPipeline';
+import { prepareLegacyWechatFragment, type LegacyWechatOptions, type LegacyWechatPreparation } from './core/render/legacyWechatPipeline';
 import type { ValidationReport } from './core/validation/wechatHtmlValidator';
-import type { WechatPalette } from './core/theme/wechatPalette';
-import { replaceWithSafeHtml } from './core/security/safeDom';
+import { embedArticleImages, type ResourceOptions } from './core/resources/imageResources';
 
+/** All output adapters consume the same detached, complete article. */
 export class CopyManager {
-    public static async processImagesForExport(container: HTMLElement): Promise<void> {
-        return this.processImages(container);
+    public static async processImagesForExport(container: HTMLElement, options: ResourceOptions = {}): Promise<void> {
+        await embedArticleImages(container, options);
     }
-
-    private static async processImages(container: HTMLElement): Promise<void> {
-        const images = container.querySelectorAll('img');
-        const imageArray = Array.from(images);
-
-        for (const img of imageArray) {
-            try {
-                const response = await fetch(img.src);
-                const blob = await response.blob();
-                const reader = new FileReader();
-                await new Promise((resolve, reject) => {
-                    reader.onload = () => {
-                        img.src = reader.result as string;
-                        resolve(null);
-                    };
-                    reader.onerror = reject;
-                    reader.readAsDataURL(blob);
-                });
-            } catch (error) {
-                console.error('图片转换失败:', error);
-            }
-        }
+    public static async prepareForExport(element: HTMLElement, options: LegacyWechatOptions = {}, resources: ResourceOptions = {}): Promise<LegacyWechatPreparation> {
+        const section=element.matches('.mp-content-section') ? element : element.querySelector<HTMLElement>('.mp-content-section');
+        if(!section) throw new Error('找不到内容区域');
+        const preparation=prepareLegacyWechatFragment(section,options);
+        if(preparation.validation.errors>0) throw new Error(`发现 ${preparation.validation.errors} 项阻断问题，已取消复制或导出`);
+        await this.processImagesForExport(preparation.root,resources);
+        preparation.html=new XMLSerializer().serializeToString(preparation.root);
+        preparation.text=preparation.root.textContent || '';
+        return preparation;
     }
-
-    public static async copyToClipboard(
-        element: HTMLElement,
-        options: { themeId?: string; recipeId?: string; palette?: WechatPalette } = {},
-    ): Promise<ValidationReport> {
+    public static async copyToClipboard(element: HTMLElement, options: LegacyWechatOptions = {}, resources: ResourceOptions = {}): Promise<ValidationReport> {
         try {
-            const clone = element.cloneNode(true) as HTMLElement;
-            await this.processImages(clone);
-
-            const contentSection = clone.querySelector('.mp-content-section');
-            if (!contentSection) {
-                throw new Error('找不到内容区域');
-            }
-            const preparation = prepareLegacyWechatFragment(contentSection as HTMLElement, options);
-            if (preparation.validation.errors > 0) {
-                throw new Error(`发现 ${preparation.validation.errors} 项阻断问题，已取消复制`);
-            }
-            let cleanHtml = preparation.html;
-            let cleanText = contentSection.textContent || '';
-
-            if (preparation.validation.errors > 0 || preparation.validation.warnings > 0) {
-                console.warn('WeChat compatibility report', preparation.validation);
-            }
-
-            // 文本清洗：pangu 自动加空格 + 智能引号转换
-            try {
-                const tempDiv = document.createElement('div');
-                replaceWithSafeHtml(tempDiv, cleanHtml);
-
-                // Use the installed synchronous text API, not the removed
-                // spacingElement API or the asynchronous page scheduler.
-                // 使用 TreeWalker 遍历纯文本节点进行加空格和引号转换
-                //    只操作文本节点，绝不会破坏 HTML 标签
-                const walker = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT);
-                let node;
-                while ((node = walker.nextNode()) !== null) {
-                    if (node.nodeValue) {
-                        if (node.parentElement?.closest('pre,code')) continue;
-                        // 直角引号 → 弯引号（微信公众号常见排版规范）
-                        node.nodeValue = pangu.spacingText(node.nodeValue)
-                            .replace(/「/g, '\u201c').replace(/」/g, '\u201d')   // 「」→ ""
-                            .replace(/『/g, '\u2018').replace(/』/g, '\u2019');  // 『』→ ''
-                    }
-                }
-
-                cleanHtml = tempDiv.innerHTML;
-                cleanText = tempDiv.textContent || '';
-            } catch (e) {
-                console.warn('Text cleaning failed:', e);
-            }
-
-            const clipData = new ClipboardItem({
-                'text/html': new Blob([cleanHtml], { type: 'text/html' }),
-                'text/plain': new Blob([cleanText], { type: 'text/plain' })
+            const prepared=await this.prepareForExport(element,options,resources);
+            const clipData=new ClipboardItem({
+                'text/html':new Blob([prepared.html],{type:'text/html'}),
+                'text/plain':new Blob([prepared.text],{type:'text/plain'}),
             });
-
+            if(resources.signal?.aborted) throw new Error('操作已取消');
             await navigator.clipboard.write([clipData]);
             new Notice('已复制到剪贴板');
-            return preparation.validation;
-        } catch (error) {
-            new Notice('复制失败');
+            return prepared.validation;
+        } catch(error) {
+            new Notice(`复制失败：${error instanceof Error ? error.message : '未知错误'}`);
             throw error;
         }
     }

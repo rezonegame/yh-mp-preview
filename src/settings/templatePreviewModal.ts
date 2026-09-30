@@ -29,12 +29,12 @@ export class TemplatePreviewModal extends Modal {
 
         // 段落样式
         const paragraph1 = content.createEl('p');
-        paragraph1.createEl('span', { text: '插件为您提供各种' });
+        paragraph1.createSpan({ text: '插件为您提供各种' });
         paragraph1.createEl('strong', { text: '优雅的操作，' });
-        paragraph1.createEl('span', { text: '助您轻松发布笔记。' });
+        paragraph1.createSpan({ text: '助您轻松发布笔记。' });
 
         const paragraph2 = content.createEl('p');
-        paragraph2.createEl('span', { text: '通过插件，您可以快速组织内容，' });
+        paragraph2.createSpan({ text: '通过插件，您可以快速组织内容，' });
         paragraph2.createEl('em', { text: '提升工作效率。' });
 
         content.createEl('hr');
@@ -52,7 +52,7 @@ export class TemplatePreviewModal extends Modal {
         const codeBlock = content.createEl('pre');
         const header = codeBlock.createDiv('mp-code-header'); // 添加窗口按钮
         for (let i = 0; i < 3; i++) {
-            const dot = document.createElement('span');
+            const dot = createSpan();
             dot.className = 'mp-code-dot';
             header.appendChild(dot);
         }
