@@ -76,6 +76,18 @@ export function validateThemeManifest(value: unknown): ThemeManifestValidationRe
         issues.push({ path: 'tokens', message: '必须是设计令牌对象。' });
     } else {
         addRequiredStringIssues(value.tokens, ['accent', 'text', 'mutedText', 'background', 'fontSize', 'lineHeight'], 'tokens.', issues);
+        const color = /^(?:#[0-9a-f]{3,4}|#[0-9a-f]{6}|#[0-9a-f]{8}|(?:rgb|hsl)a?\([\d.,%\s/+\-deg]+\)|[a-z]+)$/i;
+        for (const field of ['accent', 'text', 'mutedText', 'background']) {
+            if (typeof value.tokens[field] === 'string' && !color.test(value.tokens[field].trim())) {
+                issues.push({ path: `tokens.${field}`, message: '必须是单一颜色值，不能包含额外 CSS 声明或资源地址。' });
+            }
+        }
+        if (typeof value.tokens.fontSize === 'string' && !/^\d+(?:\.\d+)?(?:px|rem|em|pt|%)$/.test(value.tokens.fontSize.trim())) {
+            issues.push({ path: 'tokens.fontSize', message: '必须是带合法单位的字号。' });
+        }
+        if (typeof value.tokens.lineHeight === 'string' && !/^\d+(?:\.\d+)?(?:px|rem|em|%)?$/.test(value.tokens.lineHeight.trim())) {
+            issues.push({ path: 'tokens.lineHeight', message: '必须是合法的行高。' });
+        }
     }
 
     if (!Array.isArray(value.components)) {
@@ -87,6 +99,10 @@ export function validateThemeManifest(value: unknown): ThemeManifestValidationRe
             }
             if (isRecord(component) && component.legacyStyle !== undefined && typeof component.legacyStyle !== 'string') {
                 issues.push({ path: `components[${index}].legacyStyle`, message: '必须是字符串。' });
+            }
+            if (isRecord(component) && typeof component.legacyStyle === 'string'
+                && /[\\@]|\/\*|url\s*\(|expression\s*\(|(?:behavior|-moz-binding)\s*:/i.test(component.legacyStyle)) {
+                issues.push({ path: `components[${index}].legacyStyle`, message: '不允许加载资源或不安全的 CSS。' });
             }
         });
     }

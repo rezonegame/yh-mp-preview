@@ -46,3 +46,15 @@ test('rejects malformed identifiers and incomplete schema fields', () => {
   assert.ok(result.issues.some(issue => issue.path === 'tokens.lineHeight'));
   assert.ok(result.issues.some(issue => issue.path === 'compatibility'));
 });
+
+test('rejects CSS declaration injection and remote resources in portable themes', () => {
+  const manifest = validManifest();
+  manifest.tokens.text = '#123456; background:url(https://unsafe.invalid)';
+  manifest.tokens.fontSize = '16px; position:fixed';
+  manifest.components[0].legacyStyle = 'background:u\\72l(https://unsafe.invalid)';
+  const result = validateThemeManifest(manifest);
+  assert.equal(result.valid, false);
+  assert.ok(result.issues.some(issue => issue.path === 'tokens.text'));
+  assert.ok(result.issues.some(issue => issue.path === 'tokens.fontSize'));
+  assert.ok(result.issues.some(issue => issue.path === 'components[0].legacyStyle'));
+});

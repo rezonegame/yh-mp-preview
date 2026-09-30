@@ -9,6 +9,7 @@ import type { MPSettings } from './settings';
 import { exportTemplateManifest, createTemplateFromThemeManifest } from '../core/theme/themeManifestBridge';
 import { ThemeManifestImportModal } from './ThemeManifestImportModal';
 import { NoteThemeGalleryModal } from './NoteThemeGalleryModal';
+import { setSafeInlineStyle } from '../core/security/safeDom';
 export class MPSettingTab extends PluginSettingTab {
     plugin: MPPlugin; // 修改插件类型以匹配类名
     private expandedSections: Set<string> = new Set();
@@ -25,7 +26,7 @@ export class MPSettingTab extends PluginSettingTab {
         const toggle = header.createSpan('settings-section-toggle');
         setIcon(toggle, 'chevron-right');
 
-        header.createEl('h4', { text: title });
+        new Setting(header).setName(title).setHeading();
 
         const content = section.createDiv('settings-section-content');
         renderContent(content);
@@ -56,8 +57,8 @@ export class MPSettingTab extends PluginSettingTab {
         containerEl.addClass('mp-settings');
 
         const header = containerEl.createDiv({ cls: 'mp-settings-header' });
-        header.createEl('h2', { text: 'yh-mp-preview', attr: { style: 'display: inline-block; margin-bottom: 0;' } });
-        header.createEl('span', { text: ` v${this.plugin.manifest.version}`, attr: { style: 'font-size: 0.8em; color: var(--text-muted); margin-left: 10px;' } });
+        new Setting(header).setName('排版与预览').setHeading();
+        header.createEl('span', { text: ` v${this.plugin.manifest.version}`, cls: 'mp-settings-version' });
 
         this.createSection(containerEl, '基本选项', el => this.renderBasicSettings(el));
         this.createSection(containerEl, '模板选项', el => this.renderTemplateSettings(el));
@@ -74,7 +75,7 @@ export class MPSettingTab extends PluginSettingTab {
         const fontToggle = fontHeader.createSpan('mp-settings-subsection-toggle');
         setIcon(fontToggle, 'chevron-right');
 
-        fontHeader.createEl('h3', { text: '字体管理' });
+        new Setting(fontHeader).setName('字体管理').setHeading();
 
         const fontContent = fontSection.createDiv('mp-settings-subsection-content');
 
@@ -154,7 +155,7 @@ export class MPSettingTab extends PluginSettingTab {
         const templateVisibilityToggle = templateVisibilityHeader.createSpan('mp-settings-subsection-toggle');
         setIcon(templateVisibilityToggle, 'chevron-right');
 
-        templateVisibilityHeader.createEl('h3', { text: '模板显示选项' });
+        new Setting(templateVisibilityHeader).setName('模板显示选项').setHeading();
 
         const templateVisibilityContent = templateVisibilitySection.createDiv('mp-settings-subsection-content');
 
@@ -170,7 +171,7 @@ export class MPSettingTab extends PluginSettingTab {
 
         // 左侧：所有模板列表
         const allTemplatesContainer = templateSelectionContainer.createDiv('all-templates-container');
-        allTemplatesContainer.createEl('h4', { text: '隐藏模板' });
+        new Setting(allTemplatesContainer).setName('隐藏模板').setHeading();
         const allTemplatesList = allTemplatesContainer.createDiv('templates-list');
 
         // 中间：控制按钮
@@ -180,7 +181,7 @@ export class MPSettingTab extends PluginSettingTab {
 
         // 右侧：显示的模板列表
         const visibleTemplatesContainer = templateSelectionContainer.createDiv('visible-templates-container');
-        visibleTemplatesContainer.createEl('h4', { text: '显示模板' });
+        new Setting(visibleTemplatesContainer).setName('显示模板').setHeading();
         const visibleTemplatesList = visibleTemplatesContainer.createDiv('templates-list');
 
         // 获取所有模板
@@ -267,7 +268,7 @@ export class MPSettingTab extends PluginSettingTab {
         // 模板管理区域
         const templateList = containerEl.createDiv('template-management');
         // 渲染自定义模板
-        templateList.createEl('h4', { text: '自定义模板', cls: 'template-custom-header' });
+        new Setting(templateList).setName('自定义模板').setHeading().settingEl.addClass('template-custom-header');
         this.plugin.settingsManager.getAllTemplates()
             .filter(template => !template.isPreset)
             .forEach(template => {
@@ -375,7 +376,7 @@ export class MPSettingTab extends PluginSettingTab {
         const backgroundVisibilityToggle = backgroundVisibilityHeader.createSpan('mp-settings-subsection-toggle');
         setIcon(backgroundVisibilityToggle, 'chevron-right');
 
-        backgroundVisibilityHeader.createEl('h3', { text: '背景显示' });
+        new Setting(backgroundVisibilityHeader).setName('背景显示').setHeading();
 
         const backgroundVisibilityContent = backgroundVisibilitySection.createDiv('mp-settings-subsection-content');
 
@@ -391,7 +392,7 @@ export class MPSettingTab extends PluginSettingTab {
 
         // 左侧：所有背景列表
         const allBackgroundsContainer = backgroundSelectionContainer.createDiv('all-backgrounds-container');
-        allBackgroundsContainer.createEl('h4', { text: '隐藏背景' });
+        new Setting(allBackgroundsContainer).setName('隐藏背景').setHeading();
         const allBackgroundsList = allBackgroundsContainer.createDiv('backgrounds-list');
 
         // 中间：控制按钮
@@ -401,7 +402,7 @@ export class MPSettingTab extends PluginSettingTab {
 
         // 右侧：显示的背景列表
         const visibleBackgroundsContainer = backgroundSelectionContainer.createDiv('visible-backgrounds-container');
-        visibleBackgroundsContainer.createEl('h4', { text: '显示背景' });
+        new Setting(visibleBackgroundsContainer).setName('显示背景').setHeading();
         const visibleBackgroundsList = visibleBackgroundsContainer.createDiv('backgrounds-list');
 
         // 获取所有背景
@@ -489,7 +490,7 @@ export class MPSettingTab extends PluginSettingTab {
         const backgroundList = containerEl.createDiv('background-management');
 
         // 渲染自定义背景
-        backgroundList.createEl('h4', { text: '自定义背景', cls: 'background-custom-header' });
+        new Setting(backgroundList).setName('自定义背景').setHeading().settingEl.addClass('background-custom-header');
         this.plugin.settingsManager.getAllBackgrounds()
             .filter(background => !background.isPreset)
             .forEach(background => {
@@ -529,7 +530,7 @@ export class MPSettingTab extends PluginSettingTab {
 
                 // 添加背景预览
                 const previewEl = backgroundItem.createDiv('background-preview');
-                previewEl.setAttribute('style', background.style);
+                setSafeInlineStyle(previewEl, background.style);
             });
 
         // 添加新背景按钮
@@ -629,7 +630,7 @@ export class MPSettingTab extends PluginSettingTab {
                     });
                 }));
 
-        containerEl.createEl('h4', { text: '作者卡' });
+        new Setting(containerEl).setName('作者卡').setHeading();
 
         new Setting(containerEl)
             .setName('自动插入作者卡')
@@ -652,7 +653,7 @@ export class MPSettingTab extends PluginSettingTab {
         this.addAuthorTextSetting(containerEl, '链接', 'link');
         this.addAuthorTextSetting(containerEl, '头像 URL', 'avatar');
 
-        containerEl.createEl('h4', { text: '关注引导' });
+        new Setting(containerEl).setName('关注引导').setHeading();
 
         new Setting(containerEl)
             .setName('自动插入关注引导')

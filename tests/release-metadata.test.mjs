@@ -16,6 +16,8 @@ test('release metadata is synchronized', () => {
   assert.equal(packageLock.packages[''].license, packageJson.license);
   execFileSync(process.execPath, ['scripts/version-bump.mjs', '--check'], { stdio: 'pipe' });
   execFileSync(process.execPath, ['scripts/check-release.mjs', '--tag', `v${packageJson.version}`], { stdio: 'pipe' });
+  execFileSync(process.execPath, ['scripts/check-release.mjs', '--tag', packageJson.version], { stdio: 'pipe' });
+  assert.throws(() => execFileSync(process.execPath, ['scripts/check-release.mjs', '--tag', '0.0.0'], { stdio: 'pipe' }));
   execFileSync(process.execPath, ['scripts/check-text-encoding.mjs'], { stdio: 'pipe' });
 });
 

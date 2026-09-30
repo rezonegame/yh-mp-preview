@@ -4,6 +4,7 @@ node_modules/
 # 构建输出
 dist/
 output/playwright/
+output/refactor/
 .playwright-cli/
 main.js
 data.json

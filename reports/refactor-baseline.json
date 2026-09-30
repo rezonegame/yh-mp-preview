@@ -1,0 +1,760 @@
+{
+  "schemaVersion": 1,
+  "capturedDate": "2026-09-30",
+  "baselineCommit": "411ead49f084d8461bdbbde1c82f7504da1ea880",
+  "stableCommit": "74824816a2251299872ab0534c9fb1ff35f84047",
+  "stableTag": "v3.15.0",
+  "upstreamCommit": "49e77aabd62b7c01a812a10e457cf7a12e45199e",
+  "manifest": {
+    "id": "yh-mp-preview",
+    "name": "yh-mp-preview",
+    "version": "3.15.0",
+    "minAppVersion": "0.15.0",
+    "description": "Preview and convert Markdown files to MP format",
+    "author": "yhwang",
+    "isDesktopOnly": true
+  },
+  "package": {
+    "name": "yh-mp-preview",
+    "version": "3.15.0",
+    "description": "一键将 Markdown 文档转换为微信公众号格式",
+    "main": "main.js",
+    "scripts": {
+      "dev": "node esbuild.config.mjs",
+      "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+      "test": "node --test tests/*.test.mjs",
+      "audit:themes": "node scripts/audit-themes.mjs --check",
+      "audit:themes:write": "node scripts/audit-themes.mjs --write",
+      "audit:core-themes": "node scripts/audit-core-theme-baseline.mjs --check",
+      "audit:core-themes:write": "node scripts/audit-core-theme-baseline.mjs --write",
+      "audit:wechat": "node scripts/audit-wechat-compatibility.mjs --check",
+      "audit:wechat:write": "node scripts/audit-wechat-compatibility.mjs --write",
+      "preview:themes": "node scripts/render-mobile-theme-fixture.mjs",
+      "check:text": "node scripts/check-text-encoding.mjs",
+      "sync-version": "node scripts/version-bump.mjs",
+      "check:release": "node scripts/check-release.mjs",
+      "verify": "npm run test && npm run check:text && npm run audit:themes && npm run audit:core-themes && npm run audit:wechat && npm run check:release",
+      "version": "npm run sync-version"
+    },
+    "keywords": [
+      "obsidian",
+      "plugin"
+    ],
+    "author": "yhwang",
+    "license": "AGPL-3.0-or-later",
+    "devDependencies": {
+      "@codemirror/state": "6.5.2",
+      "@codemirror/view": "6.36.3",
+      "@types/node": "^16.11.6",
+      "@typescript-eslint/eslint-plugin": "5.29.0",
+      "@typescript-eslint/parser": "5.29.0",
+      "builtin-modules": "3.3.0",
+      "esbuild": "0.17.3",
+      "obsidian": "latest",
+      "tslib": "2.4.0",
+      "typescript": "4.7.4"
+    },
+    "dependencies": {
+      "html2canvas": "^1.4.1",
+      "nanoid": "^5.1.5",
+      "pangu": "^7.2.0"
+    }
+  },
+  "themeIds": [
+    "academic-pro",
+    "academic-pro-forest",
+    "apple-product",
+    "briefing-grid",
+    "case-file",
+    "clear-guide",
+    "data-blueprint",
+    "deep-reading",
+    "default",
+    "eastern-notes",
+    "ink-opinion",
+    "knowledge-notes",
+    "minimal",
+    "modern-report",
+    "olive-journal",
+    "product-review",
+    "red-white-editorial",
+    "warm-paper",
+    "zen-essence"
+  ],
+  "stableAssets": [
+    {
+      "name": "LICENSE",
+      "size": 34523,
+      "digest": "sha256:0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
+    },
+    {
+      "name": "main.js",
+      "size": 987607,
+      "digest": "sha256:f0ad1b47f3724fbc644ab09ef46dc9b1cc3d6075e5bb6a461ce64b05fc60b20e"
+    },
+    {
+      "name": "manifest.json",
+      "size": 222,
+      "digest": "sha256:ff0d8bfdf3461f72d2eca6c64907b5acc30b1c21e9d31146b3054b3178f1c210"
+    },
+    {
+      "name": "MIT-original.txt",
+      "size": 1068,
+      "digest": "sha256:f34e537197d9fdd7e2f33a37e07ea93e8b830ecdd13daf2e013e80e0a6e5e301"
+    },
+    {
+      "name": "NOTICE",
+      "size": 431,
+      "digest": "sha256:26a98defad5a7343ee50d18108aff9f87b1e4937a9fcefe5e6e825497f09a7e4"
+    },
+    {
+      "name": "styles.css",
+      "size": 59340,
+      "digest": "sha256:3f26a25f6f205d6a99821fb72273fe2e761b32c7e935dfef795ebbe805d8df37"
+    },
+    {
+      "name": "THIRD_PARTY_NOTICES.md",
+      "size": 857,
+      "digest": "sha256:11c15e9dfc7a96471e22295968d29d3efc44d637f5749d726fd0eeaf84a922e5"
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/assets/donate.ts",
+      "blob": "7c3c244e8ad03253ac371d287af7ba3b5fca2079",
+      "upstreamBlob": "7c3c244e8ad03253ac371d287af7ba3b5fca2079",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/assets/donate/alipay.png",
+      "blob": "b46eaaa5295455de3b612c590cc26c0a2c3816aa",
+      "upstreamBlob": "b46eaaa5295455de3b612c590cc26c0a2c3816aa",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/assets/donate/wechat_pay.png",
+      "blob": "84b76415ba25d16937de8935218d472dac749bed",
+      "upstreamBlob": "84b76415ba25d16937de8935218d472dac749bed",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/assets/qrcode.ts",
+      "blob": "74e8a81b5b90668148641b2b46bd0ec4c499d665",
+      "upstreamBlob": "74e8a81b5b90668148641b2b46bd0ec4c499d665",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/backgroundManager.ts",
+      "blob": "d2deeb98a38d8ddb43f5fea28d0d59980a1c4561",
+      "upstreamBlob": "3ae8f69425410b6aec8ce5727085f2df924dd30d",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/backgrounds/index.ts",
+      "blob": "d444e419a4af0e8dc5ef8c07ed8e9f0b549fc105",
+      "upstreamBlob": "949729d96d639c0556c2b330f78049c44c58d0aa",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/containers/ContainerParser.ts",
+      "blob": "b2c62280f8e020c5d6a8433a04aa1511af2f7904",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/containers/DialogueRenderer.ts",
+      "blob": "605ead703b9e6840f50c4d20e292c07ea0c90c41",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/containers/GalleryRenderer.ts",
+      "blob": "ffafb9ee587f9c016dd38e1e26301b7bee2fca97",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/containers/index.ts",
+      "blob": "519b62b1c6fb290e93420a72c23344f00ff98b59",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/converter.ts",
+      "blob": "5b07e4046821cdb6250d57a998e901340821547d",
+      "upstreamBlob": "fe07633885af8d37d536cf67fcee9c3968e90758",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/copyManager.ts",
+      "blob": "bc809e28540d6d83a8d2bbbe92333dc7cc423d57",
+      "upstreamBlob": "75c064dd1ecb4e8ca6bbe7a543e8b93e5aefffe9",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/article/articleModel.ts",
+      "blob": "95583a9c946a450930f2f1403cd55e35596cf292",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/components/standardComponents.ts",
+      "blob": "0f3758535f5270e205890e3f49b1d620d3e77b7b",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/layout/localLayoutPlanner.ts",
+      "blob": "eb4b258df4e67936c2d9faacc441b4e911e86db6",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/migration/settingsMigration.ts",
+      "blob": "a874cb561b2aca98c02ffa187c8f0a3196ac460a",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/note-layout/noteLayoutEnhancement.ts",
+      "blob": "613b4a7f3665a50a7b2076dc0d37c9cff8640b20",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/note-layout/noteLayoutStore.ts",
+      "blob": "bc9de19850a5a7e881efa65b327f50977a161cd4",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/recipe/articleRecipeFormatter.ts",
+      "blob": "974e3c6ae402f8bc6a05612c69a511601ef902a1",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/render/legacyWechatPipeline.ts",
+      "blob": "187d50f528d058fac1561e34d5c0f97abbb600bc",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/theme/applyWechatComponentPalette.ts",
+      "blob": "fd6fca5eff8a91ac52cf50b75f23bda0543328ef",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/theme/legacyThemeAdapter.ts",
+      "blob": "a0f6c6873e33460d4533f8199f0f3d3a897aa2ee",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/theme/themeCatalog.ts",
+      "blob": "e08f6e8f0b13fa50bcf34e457f153a5857fe6987",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/theme/themeManifest.ts",
+      "blob": "4e497f0cf83d984872adaf4eda1b60920367e8ff",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/theme/themeManifestBridge.ts",
+      "blob": "0758212759e72a9f3d73637f95549c3fe965f997",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/theme/themeManifestValidator.ts",
+      "blob": "dd9680f30b60b244fe1cbddd59180bfd90b2b564",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/theme/themeRegistry.ts",
+      "blob": "11bc37809bd1acaecf37cc5a6cbecb3d54acb1e4",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/theme/wechatPalette.ts",
+      "blob": "4aa46b40d2a603dc5d77b415edfa1712b73865a3",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/theme/wechatReadingBaseline.ts",
+      "blob": "795f09c2bdf8136b531d8628f3c2028d5cd64053",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/core/validation/wechatHtmlValidator.ts",
+      "blob": "45db45466e5388872307e17ccba176b57ab5cc1c",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/donateManager.ts",
+      "blob": "5acd75dcb58c7566f7dbc74e973cab28a9aea948",
+      "upstreamBlob": "d2560d028574beff1d33f992a30df2b5688d3580",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/layoutEnhancer.ts",
+      "blob": "aa119b804b60e1bcaf9a11895382d05ddc998bc7",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/main.ts",
+      "blob": "bba73c49219e5e2ae805fa3a0d12c91e93830233",
+      "upstreamBlob": "036e4e2d2d9aeee03dce3e800dd4e1a7170a6117",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/settings/ConfirmModal.ts",
+      "blob": "24ed0d74e98ed1bb34379a47356cde0c17f0c0c4",
+      "upstreamBlob": "24ed0d74e98ed1bb34379a47356cde0c17f0c0c4",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/settings/CreateBackgroundModal.ts",
+      "blob": "16dd635f90574c9c6de03f7d682261714c21a771",
+      "upstreamBlob": "16dd635f90574c9c6de03f7d682261714c21a771",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/settings/CreateFontModal.ts",
+      "blob": "796cc0875952429fd028590711e59598bfbe15bf",
+      "upstreamBlob": "796cc0875952429fd028590711e59598bfbe15bf",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/settings/CreateTemplateModal.ts",
+      "blob": "1e92d00a441e12106bdb26470fad498867a132b6",
+      "upstreamBlob": "1e92d00a441e12106bdb26470fad498867a132b6",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/settings/MPSettingTab.ts",
+      "blob": "6d82182bf950c771c7d4688b3112b2de82884edc",
+      "upstreamBlob": "c59e7a1b50d7c1428bf264739cb29af9825536bd",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/settings/NoteThemeGalleryModal.ts",
+      "blob": "751f5f8e5cee9a5249a56c48babe0c6373160c17",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/settings/ThemeGalleryModal.ts",
+      "blob": "e4f290e168e6b822c3ccda61e4b982255f60bd12",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/settings/ThemeManifestImportModal.ts",
+      "blob": "37d05b81742477324300bbcab48c7c75e8482e16",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/settings/settings.ts",
+      "blob": "383526843f8283dcafceca3e6b3931fb51230c68",
+      "upstreamBlob": "2a05bc7167a52d09f937fbd4d69cdb7266e2f477",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/settings/templatePreviewModal.ts",
+      "blob": "288d88c7efcff9f0b06345af96194acae98f709b",
+      "upstreamBlob": "288d88c7efcff9f0b06345af96194acae98f709b",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/styles/index.css",
+      "blob": "346bf27ce69d85ad8e4e31ef9bfdc494e09aaf71",
+      "upstreamBlob": "8d9f1c9dd15cfc72e6999b43a7f9df0df7040a89",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/styles/settings/background-modal.css",
+      "blob": "c9b31c37d1b4e33f25d5b5033efb08e0a64dd95a",
+      "upstreamBlob": "c9b31c37d1b4e33f25d5b5033efb08e0a64dd95a",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/styles/settings/font-modal.css",
+      "blob": "d15be2521a1d769ef3802e69e478f1a83adf39d4",
+      "upstreamBlob": "d15be2521a1d769ef3802e69e478f1a83adf39d4",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/styles/settings/settings.css",
+      "blob": "c6cc95f78b0c93dd80f037c3e83586ec34eac99c",
+      "upstreamBlob": "c6cc95f78b0c93dd80f037c3e83586ec34eac99c",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/styles/settings/template-modal.css",
+      "blob": "86d1950ec28ca1a2930cf7524a0149272cc30955",
+      "upstreamBlob": "a195f8a785dfbc3e625e0265a44ed3b48b86be57",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/styles/settings/template-preview-modal.css",
+      "blob": "1a574a657a6818aa66c5e4f67f3ef2f864fd16bb",
+      "upstreamBlob": "5935942b159ede8aac884d1f71e6c5f0d4504494",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/styles/settings/theme-gallery.css",
+      "blob": "951f629795df92490492f757010a43c26c86cf61",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/styles/ui-polish.css",
+      "blob": "0c5c00437a68cb433386966131bafa280bab434b",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/styles/view/layout.css",
+      "blob": "558ed5fdab331efe0c5a768e047e3a1d2248ed41",
+      "upstreamBlob": "fe601d01d273c3d23db8d7cc0a1413119c7c7941",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/styles/view/note-layout.css",
+      "blob": "10afbebec426da553ce5c2d44a1df7c6a5d99918",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/styles/view/preview.css",
+      "blob": "7199a38a5cf66e918f835ddcb22413b84be39b25",
+      "upstreamBlob": "399b467e8ecd72c0b33768ea024ad64a4821972d",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templateManager.ts",
+      "blob": "d1249c53b5ed4c95737eb9bc465756fdea6b2296",
+      "upstreamBlob": "cf9f12fd367e7213cb2f57b57c218a41c2992a13",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/academic-pro-forest.json",
+      "blob": "6446b328caa5cad07bbe2d2e9be49b0cc8b78787",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/academic-pro.json",
+      "blob": "e3e9e91eac2ddb9da7d6d08cd4e89e12e2a8f87e",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/apple-product.json",
+      "blob": "94cf3d0b76bb0657f09376795f4f703a8debbf0a",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/briefing-grid.json",
+      "blob": "2c35aa2986d0c56868af79a40bd8d1f910a5a9f3",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/case-file.json",
+      "blob": "d784bfeb7dca9ccde743e5dc4292ad1f73d0a2c8",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/clear-guide.json",
+      "blob": "668e68f2611c7547461bb85514a6a434b7751f87",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/data-blueprint.json",
+      "blob": "445347bc44a119f72d12cfac221f05d6b4b0c59b",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/deep-reading.json",
+      "blob": "54034a58051a4be9555c76d6fa637893838d8411",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/default.json",
+      "blob": "81de7e50b51fae5bc36b3940f13197407e0aa089",
+      "upstreamBlob": "198e3523b594aa4b4f60a78aa0ef0a71b1f27516",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/eastern-notes.json",
+      "blob": "64b40723b186ebfc67e45a69f1655f649b01f2f6",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/index.ts",
+      "blob": "a1f2848859a4c4e87d2bb3d8e933a03beefeebcb",
+      "upstreamBlob": "612595c9795b76f62834ce8015a4232cf105fc6a",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/ink-opinion.json",
+      "blob": "0824b646dd53541b8836c644c0d1e52065499691",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/knowledge-notes.json",
+      "blob": "8fd29d7b8dc3abf358cd3523fb7e69c3ac931f94",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/minimal.json",
+      "blob": "41c1de3504f28597ebf0b74a2730aa997dc9a1ef",
+      "upstreamBlob": "480ef4d5b0af8a103fca8576a2693c3a31c8b1ed",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/modern-report.json",
+      "blob": "402f2e40a2667964162188dfe61f0eef02127349",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/olive-journal.json",
+      "blob": "0c94ec0d982fb04a98979d72febc346284232245",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/product-review.json",
+      "blob": "de66912426a74e66aca4204fcd196e29143de9ac",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/red-white-editorial.json",
+      "blob": "225837d317352e02dcf48106b158f93a0fcbafa8",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/warm-paper.json",
+      "blob": "b8008456530e37bba9418d08542022cf15071bc3",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/templates/zen-essence.json",
+      "blob": "ee7e6385c750ae3dae445a7363765b762b710b1d",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/ui/CustomSelect.ts",
+      "blob": "62b4b95bd44d315ea7a57c62a21f45e39995af99",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/ui/ImageAltModal.ts",
+      "blob": "ae90e91f5c5be16f3378c2ed292063a8dae2f1a7",
+      "upstreamBlob": null,
+      "classification": "maintainer-added-path-review-required",
+      "upstreamLicense": null,
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/utils/nanoid.ts",
+      "blob": "5a7ab6a23bce34ee9c72886db9a95cc0537cbb33",
+      "upstreamBlob": "5a7ab6a23bce34ee9c72886db9a95cc0537cbb33",
+      "classification": "identical-upstream-blob",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    },
+    {
+      "path": "src/view.ts",
+      "blob": "20717d9761a73d2a3b461b7d90f0e9a95ddc9df2",
+      "upstreamBlob": "ed4d9d0c7c469a5bf7a038b178b1d0b5fac591fd",
+      "classification": "retained-or-reworked-review-required",
+      "upstreamLicense": "MIT",
+      "reviewNote": "Path and blob comparison is provenance evidence, not a copyright or independent-implementation verdict."
+    }
+  ],
+  "boundaries": [
+    "No production vault was read or modified.",
+    "QR resource placeholders are already in the baseline.",
+    "Historical source attribution remains applicable."
+  ]
+}

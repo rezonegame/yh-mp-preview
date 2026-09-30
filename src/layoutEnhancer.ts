@@ -1,5 +1,6 @@
 import type { MPSettings } from './settings/settings';
 import { STANDARD_COMPONENT_IDS } from './core/components/standardComponents';
+import { safeHtmlToElement } from './core/security/safeDom';
 
 type LayoutSettings = MPSettings['layoutEnhancements'];
 
@@ -35,9 +36,7 @@ function parseRows(content: string): string[][] {
 }
 
 function htmlToElement(html: string): HTMLElement {
-    const template = document.createElement('template');
-    template.innerHTML = html.trim();
-    return template.content.firstElementChild as HTMLElement;
+    return safeHtmlToElement(html);
 }
 
 function cardStyle(accent = DEFAULT_ACCENT): string {
@@ -346,7 +345,7 @@ function processImageCaptions(container: HTMLElement, settings: LayoutSettings):
 
         const figure = document.createElement('figure');
         figure.className = 'mp-image-container';
-        figure.style.cssText = 'margin: 1em auto; text-align: center; display: block;';
+        figure.setCssStyles({ cssText: 'margin: 1em auto; text-align: center; display: block;' });
 
         const clone = image.cloneNode(true) as HTMLImageElement;
         figure.appendChild(clone);
@@ -354,7 +353,7 @@ function processImageCaptions(container: HTMLElement, settings: LayoutSettings):
         const caption = document.createElement('figcaption');
         caption.className = 'mp-image-caption';
         caption.textContent = alt;
-        caption.style.cssText = 'text-align: center; color: #888; font-size: 0.9em; margin-top: 6px; display: block;';
+        caption.setCssStyles({ cssText: 'text-align: center; color: #888; font-size: 0.9em; margin-top: 6px; display: block;' });
         figure.appendChild(caption);
 
         image.parentNode?.replaceChild(figure, image);
@@ -368,7 +367,7 @@ function processTables(container: HTMLElement, settings: LayoutSettings): void {
         if (table.closest('.mp-table-wrapper')) return;
         const wrapper = document.createElement('div');
         wrapper.className = 'mp-table-wrapper';
-        wrapper.style.cssText = 'width: 100%; overflow-x: auto; margin: 1em 0; -webkit-overflow-scrolling: touch;';
+        wrapper.setCssStyles({ cssText: 'width: 100%; overflow-x: auto; margin: 1em 0; -webkit-overflow-scrolling: touch;' });
         table.parentNode?.insertBefore(wrapper, table);
         wrapper.appendChild(table);
     });

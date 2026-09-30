@@ -40,12 +40,13 @@ assert(existsSync(resolve(rootDir, 'NOTICE')), 'Release must include NOTICE');
 assert(existsSync(resolve(rootDir, 'CHANGELOG.md')), 'Release must include CHANGELOG.md');
 assert(existsSync(resolve(rootDir, 'THIRD_PARTY_NOTICES.md')), 'Release must include third-party notices');
 assert(existsSync(resolve(rootDir, 'LICENSES/MIT-original.txt')), 'Release must preserve the original MIT license');
+assert(existsSync(resolve(rootDir, 'LICENSES/DOMPurify.txt')), 'Release must preserve the DOMPurify license');
 assert(workflow.includes('npm run verify'), 'Release workflow must run the verification suite');
 assert(workflow.includes('LICENSE'), 'Release workflow must ship LICENSE');
 assert(workflow.includes('THIRD_PARTY_NOTICES.md'), 'Release workflow must ship third-party notices');
 
 if (expectedTag) {
-  assert(expectedTag === `v${packageJson.version}`, `Tag ${expectedTag} does not match v${packageJson.version}`);
+  assert([packageJson.version, `v${packageJson.version}`].includes(expectedTag), `Tag ${expectedTag} does not match ${packageJson.version}`);
 }
 
 if (requireBuild) {
@@ -54,4 +55,4 @@ if (requireBuild) {
   }
 }
 
-console.log(`Release metadata is valid for v${packageJson.version}.`);
+console.log(`Release metadata is valid for ${packageJson.version}.`);

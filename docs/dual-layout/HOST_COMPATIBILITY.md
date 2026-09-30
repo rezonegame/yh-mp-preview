@@ -2,6 +2,9 @@
 
 ## 当前支持边界
 
+- `3.15.1-beta.1` 起最低 Obsidian API 版本为 `1.7.2`。已对该版本 SDK 编译核对 `editorInfoField`、`setCssStyles`、`Setting.setHeading` 等所用接口；这不是在 Obsidian 1.7.2 应用中的完整运行验收。发布构建使用固定 SDK `1.8.7`。
+- 既有 `3.15.0` 的 Windows 用户验收不自动覆盖本次安全重构；beta 的真实宿主、剪贴板和图片导出需要重新确认。
+
 - 正式验收平台：Windows。
 - Obsidian 阅读视图：使用 Markdown 后处理器，只添加局部类和变量。
 - Live Preview：使用 Obsidian 提供的 CodeMirror 6 扩展，不接管输入、选择、撤销或折叠。

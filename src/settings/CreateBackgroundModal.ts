@@ -1,3 +1,4 @@
+import { setSafeInlineStyle } from '../core/security/safeDom';
 import { App, Modal, Setting, Notice } from 'obsidian';
 import { Background } from '../backgroundManager';
 import { nanoid } from '../utils/nanoid';
@@ -253,7 +254,7 @@ export class CreateBackgroundModal extends Modal {
                 break;
         }
 
-        el.setAttribute('style', style);
+        setSafeInlineStyle(el, style);
     }
 
     // 生成最终样式

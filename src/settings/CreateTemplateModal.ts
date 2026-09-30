@@ -105,7 +105,7 @@ export class CreateTemplateModal extends Modal {
                     toggle.setValue(this.showSampleTemplate)
                         .onChange(value => {
                             this.showSampleTemplate = value;
-                            this.templateSelect.style.display = this.showSampleTemplate ? 'block' : 'none';
+                            this.templateSelect.setCssStyles({ display: this.showSampleTemplate ? 'block' : 'none' });
                         });
                 });
 
@@ -123,7 +123,7 @@ export class CreateTemplateModal extends Modal {
                             }
                         })
                         .selectEl;
-                    this.templateSelect.style.display = this.showSampleTemplate ? 'block' : 'none'; // 默认隐藏
+                    this.templateSelect.setCssStyles({ display: this.showSampleTemplate ? 'block' : 'none' }); // 默认隐藏
                 });
         }
         new Setting(nameContainer)
@@ -999,11 +999,12 @@ export class CreateTemplateModal extends Modal {
                                     .replace(/background-repeat:[^;]+;/, '')
                                     .replace(/background-position:[^;]+;/, '');
                                 break;
-                            case 'gradient':
+                            case 'gradient': {
                                 const color = styles.link.match(/color:\s*(#[a-fA-F0-9]+)/)?.[1] || '#d2691e';
                                 styles.link = styles.link.replace(/text-decoration:[^;]+;/, 'text-decoration: none;')
                                     + ` background-image: linear-gradient(to right, ${color}80, ${color}80); background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 100%; transition: all 0.3s ease;`;
                                 break;
+                            }
                         }
                     });
             });

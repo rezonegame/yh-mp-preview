@@ -1,9 +1,11 @@
+import { setSafeInlineStyle } from '../core/security/safeDom';
 /**
  * 对话气泡渲染器
  * 将对话内容渲染为左右交替的聊天气泡布局
  */
 
 import type { ParsedDialogue, DialogueLine } from './ContainerParser';
+import { escapeHtml, safeHtmlToElement, safeInlineCss } from '../core/security/safeDom';
 
 export interface DialogueStyle {
     container: string;
@@ -72,25 +74,25 @@ export function renderDialogue(dialogue: ParsedDialogue, style: Partial<Dialogue
         const bubbleStyle = side === 'left' ? finalStyle.bubbleLeft : finalStyle.bubbleRight;
 
         // 右侧气泡使用主题色背景
-        const finalBubbleStyle = side === 'right'
+        const finalBubbleStyle = safeInlineCss(side === 'right'
             ? bubbleStyle.replace('rgba(66, 133, 244, 0.08)', hexToRgba(finalStyle.accentColor, 0.08))
-            : bubbleStyle;
+            : bubbleStyle);
 
         return `
-            <section data-container="dialogue-bubble" data-side="${side}" style="${finalBubbleStyle}">
-                <p data-container="dialogue-speaker" style="${finalStyle.speaker}">${line.speaker}</p>
-                <p data-container="dialogue-text" style="${finalStyle.text}">${line.content}</p>
+            <section data-container="dialogue-bubble" data-side="${side}" style="${escapeHtml(finalBubbleStyle)}">
+                <p data-container="dialogue-speaker" style="${escapeHtml(safeInlineCss(finalStyle.speaker))}">${escapeHtml(line.speaker)}</p>
+                <p data-container="dialogue-text" style="${escapeHtml(safeInlineCss(finalStyle.text))}">${escapeHtml(line.content)}</p>
             </section>
         `;
     }).join('');
 
     // 标题（如果有）
     const titleHtml = dialogue.title
-        ? `<p data-container="dialogue-title" style="${finalStyle.title}">${dialogue.title}</p>`
+        ? `<p data-container="dialogue-title" style="${escapeHtml(safeInlineCss(finalStyle.title))}">${escapeHtml(dialogue.title)}</p>`
         : '';
 
     return `
-        <section data-container="dialogue" style="${finalStyle.container}">
+        <section data-container="dialogue" style="${escapeHtml(safeInlineCss(finalStyle.container))}">
             ${titleHtml}
             ${bubblesHtml}
         </section>
@@ -102,9 +104,7 @@ export function renderDialogue(dialogue: ParsedDialogue, style: Partial<Dialogue
  */
 export function createDialogueElement(dialogue: ParsedDialogue, style: Partial<DialogueStyle> = {}): HTMLElement {
     const html = renderDialogue(dialogue, style);
-    const template = document.createElement('template');
-    template.innerHTML = html.trim();
-    return template.content.firstChild as HTMLElement;
+    return safeHtmlToElement(html);
 }
 
 /**
@@ -114,24 +114,24 @@ export function applyDialogueStyle(container: HTMLElement, style: Partial<Dialog
     const finalStyle = { ...DEFAULT_STYLE, ...style };
 
     // 容器样式
-    container.setAttribute('style', finalStyle.container);
+    setSafeInlineStyle(container, finalStyle.container);
 
     // 标题
     const title = container.querySelector('[data-container="dialogue-title"]');
     if (title) {
-        title.setAttribute('style', finalStyle.title);
+        setSafeInlineStyle(title, finalStyle.title);
     }
 
     // 气泡
     container.querySelectorAll('[data-container="dialogue-bubble"]').forEach(bubble => {
         const side = bubble.getAttribute('data-side');
         const bubbleStyle = side === 'left' ? finalStyle.bubbleLeft : finalStyle.bubbleRight;
-        bubble.setAttribute('style', bubbleStyle);
+        setSafeInlineStyle(bubble, bubbleStyle);
 
         // 右侧气泡主题色
         if (side === 'right') {
             const currentStyle = bubble.getAttribute('style') || '';
-            bubble.setAttribute('style', currentStyle.replace(
+            setSafeInlineStyle(bubble, currentStyle.replace(
                 'rgba(66, 133, 244, 0.08)',
                 hexToRgba(finalStyle.accentColor, 0.08)
             ));
@@ -140,13 +140,13 @@ export function applyDialogueStyle(container: HTMLElement, style: Partial<Dialog
         // 说话人
         const speaker = bubble.querySelector('[data-container="dialogue-speaker"]');
         if (speaker) {
-            speaker.setAttribute('style', finalStyle.speaker);
+            setSafeInlineStyle(speaker, finalStyle.speaker);
         }
 
         // 文本
         const text = bubble.querySelector('[data-container="dialogue-text"]');
         if (text) {
-            text.setAttribute('style', finalStyle.text);
+            setSafeInlineStyle(text, finalStyle.text);
         }
     });
 }

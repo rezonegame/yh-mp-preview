@@ -10,13 +10,13 @@ const componentAccentColors = /#(?:4285f4|0f766e|ef4444|6366f1|d97706|0ea5e9|16a
 export function applyWechatComponentPalette(root: HTMLElement, palette: WechatPalette): void {
     root.querySelectorAll('.mp-layout-card').forEach(element => {
         const card = element as HTMLElement;
-        card.style.background = palette.surface;
-        card.style.border = `1px solid ${palette.border}`;
-        card.style.borderLeft = `3px solid ${palette.accent}`;
-        card.style.boxShadow = 'none';
-        card.style.borderRadius = '4px';
-        card.style.padding = '14px 16px';
-        card.style.textAlign = 'left';
+        card.setCssStyles({ background: palette.surface });
+        card.setCssStyles({ border: `1px solid ${palette.border}` });
+        card.setCssStyles({ borderLeft: `3px solid ${palette.accent}` });
+        card.setCssStyles({ boxShadow: 'none' });
+        card.setCssStyles({ borderRadius: '4px' });
+        card.setCssStyles({ padding: '14px 16px' });
+        card.setCssStyles({ textAlign: 'left' });
 
         card.querySelectorAll('*').forEach(child => {
             const item = child as HTMLElement;
@@ -26,56 +26,56 @@ export function applyWechatComponentPalette(root: HTMLElement, palette: WechatPa
             }
             const semanticStatus = card.getAttribute('data-mp-layout') === 'checklist'
                 && /#(?:2f9e44|d97706)\b/i.test(original);
-            if (item.style.display === 'flex') item.style.display = 'block';
-            if (item.style.display === 'inline-flex') item.style.display = 'inline-block';
-            if (item.style.backgroundColor && !semanticStatus) item.style.backgroundColor = palette.surface;
+            if (item.style.display === 'flex') item.setCssStyles({ display: 'block' });
+            if (item.style.display === 'inline-flex') item.setCssStyles({ display: 'inline-block' });
+            if (item.style.backgroundColor && !semanticStatus) item.setCssStyles({ backgroundColor: palette.surface });
             if (item.style.color && !semanticStatus) {
-                item.style.color = componentAccentColors.test(original) ? palette.accentText : palette.foreground;
+                item.setCssStyles({ color: componentAccentColors.test(original) ? palette.accentText : palette.foreground });
             }
-            if (item.style.boxShadow) item.style.boxShadow = 'none';
+            if (item.style.boxShadow) item.setCssStyles({ boxShadow: 'none' });
         });
         const title = card.firstElementChild as HTMLElement | null;
-        if (title) title.style.color = palette.accentText;
+        if (title) title.setCssStyles({ color: palette.accentText });
         if (card.getAttribute('data-mp-layout') === 'comparison-table') {
             card.querySelectorAll(':scope > div > div').forEach(side => {
                 const panel = side as HTMLElement;
-                panel.style.display = 'block';
-                panel.style.marginBottom = '10px';
-                panel.style.background = '#ffffff';
-                panel.style.border = `1px solid ${palette.border}`;
-                panel.style.borderRadius = '4px';
+                panel.setCssStyles({ display: 'block' });
+                panel.setCssStyles({ marginBottom: '10px' });
+                panel.setCssStyles({ background: '#ffffff' });
+                panel.setCssStyles({ border: `1px solid ${palette.border}` });
+                panel.setCssStyles({ borderRadius: '4px' });
             });
         }
     });
 
     root.querySelectorAll('.mp-frontmatter-card').forEach(element => {
         const card = element as HTMLElement;
-        card.style.background = palette.surface;
-        card.style.borderLeft = `3px solid ${palette.accent}`;
-        card.style.borderRadius = '4px';
-        card.style.padding = '16px';
-        card.style.textAlign = 'left';
+        card.setCssStyles({ background: palette.surface });
+        card.setCssStyles({ borderLeft: `3px solid ${palette.accent}` });
+        card.setCssStyles({ borderRadius: '4px' });
+        card.setCssStyles({ padding: '16px' });
+        card.setCssStyles({ textAlign: 'left' });
         const title = card.querySelector('.mp-fm-title') as HTMLElement | null;
         if (title) {
-            title.style.color = palette.foreground;
-            title.style.border = '0';
-            title.style.padding = '0';
-            title.style.margin = '0 0 8px';
+            title.setCssStyles({ color: palette.foreground });
+            title.setCssStyles({ border: '0' });
+            title.setCssStyles({ padding: '0' });
+            title.setCssStyles({ margin: '0 0 8px' });
         }
         const meta = card.querySelector('.mp-fm-meta') as HTMLElement | null;
-        if (meta) meta.style.color = palette.foreground;
+        if (meta) meta.setCssStyles({ color: palette.foreground });
     });
 
     root.querySelectorAll('.mp-callout').forEach(element => {
         const callout = element as HTMLElement;
         if (semanticCallouts.has(callout.getAttribute('data-callout-type') || '')) return;
-        callout.style.borderLeft = `3px solid ${palette.accent}`;
-        callout.style.background = palette.surface;
-        callout.style.borderRadius = '4px';
+        callout.setCssStyles({ borderLeft: `3px solid ${palette.accent}` });
+        callout.setCssStyles({ background: palette.surface });
+        callout.setCssStyles({ borderRadius: '4px' });
         const title = callout.querySelector('.mp-callout-title') as HTMLElement | null;
         if (title) {
-            title.style.color = palette.accentText;
-            title.style.display = 'block';
+            title.setCssStyles({ color: palette.accentText });
+            title.setCssStyles({ display: 'block' });
         }
     });
 }

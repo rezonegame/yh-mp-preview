@@ -20,7 +20,7 @@ export interface LegacyWechatOptions {
 const removableTags = new Set(['SCRIPT', 'STYLE', 'IFRAME', 'FORM', 'INPUT', 'BUTTON', 'TEXTAREA', 'SELECT']);
 
 function removeTransientAttributes(root: HTMLElement): void {
-    root.querySelectorAll('*').forEach((element) => {
+    [root, ...Array.from(root.querySelectorAll('*'))].forEach((element) => {
         Array.from(element.attributes).forEach((attribute) => {
             if (attribute.name === 'class' || attribute.name === 'id' || attribute.name.startsWith('data-') || attribute.name.startsWith('on')) {
                 element.removeAttribute(attribute.name);

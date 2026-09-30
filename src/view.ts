@@ -1,4 +1,5 @@
 import { ItemView, WorkspaceLeaf, MarkdownRenderer, TFile, setIcon, Notice, Modal } from 'obsidian';
+import { replaceWithSafeHtml } from './core/security/safeDom';
 import { MPConverter } from './converter';
 import { CopyManager } from './copyManager';
 import type { TemplateManager } from './templateManager';
@@ -177,7 +178,7 @@ export class MPView extends ItemView {
             attr: { 'aria-label': '使用指南' }
         });
         setIcon(helpButton, 'help');
-        helpButton.style.position = 'relative';
+        helpButton.setCssStyles({ position: 'relative' });
         // 帮助提示框
         secondaryRow.createEl('div', {
             cls: 'mp-help-tooltip',
@@ -552,7 +553,7 @@ export class MPView extends ItemView {
                 const selectEl = ctrl.container.querySelector('.custom-select');
                 if (selectEl) {
                     selectEl.classList.toggle('disabled', !enabled);
-                    selectEl.setAttribute('style', `pointer-events: ${enabled ? 'auto' : 'none'}`);
+                    (selectEl as HTMLElement).setCssStyles({ pointerEvents: enabled ? 'auto' : 'none' });
                 }
             }
         });
@@ -591,11 +592,11 @@ export class MPView extends ItemView {
         this.validationPanel.empty();
         const report = this.validationReport;
         if (!report) {
-            this.validationPanel.style.display = 'none';
+            this.validationPanel.setCssStyles({ display: 'none' });
             return;
         }
 
-        this.validationPanel.style.display = 'block';
+        this.validationPanel.setCssStyles({ display: 'block' });
         const status = this.validationPanel.createDiv({
             cls: `mp-validation-summary ${report.errors > 0 ? 'is-error' : report.warnings > 0 ? 'is-warning' : 'is-ok'}`,
         });
@@ -691,7 +692,7 @@ export class MPView extends ItemView {
             - parseFloat(previewStyle.paddingRight || '0')));
         const snapshotHost = document.createElement('div');
         snapshotHost.className = 'mp-preview-area mp-export-snapshot';
-        snapshotHost.style.cssText = [
+        snapshotHost.setCssStyles({ cssText: [
             'position: fixed',
             'left: -100000px',
             'top: 0',
@@ -705,13 +706,13 @@ export class MPView extends ItemView {
             'border: 0',
             'box-shadow: none',
             'pointer-events: none',
-        ].join(';');
+        ].join(';') });
 
         const cleanup = () => snapshotHost.remove();
         try {
             const snapshot = content.cloneNode(true) as HTMLElement;
             const computed = window.getComputedStyle(content);
-            snapshot.style.cssText += `;${[
+            snapshot.setCssStyles({ cssText: snapshot.style.cssText + (`;${[
                 `width: ${width}px`,
                 'max-width: none',
                 'height: auto',
@@ -724,7 +725,7 @@ export class MPView extends ItemView {
                 `line-height: ${computed.lineHeight}`,
                 `color: ${computed.color}`,
                 'background: #ffffff',
-            ].join(';')};`;
+            ].join(';')};`) });
             snapshotHost.appendChild(snapshot);
             document.body.appendChild(snapshotHost);
 
@@ -1042,7 +1043,7 @@ export class MPView extends ItemView {
             // 创建新的 SEO 隐藏块
             seoSection = document.createElement('section');
             seoSection.className = 'mp-seo-hidden';
-            seoSection.style.cssText = 'font-size: 0; color: transparent; line-height: 0; height: 0; overflow: hidden; opacity: 0; position: absolute; left: -9999px;';
+            seoSection.setCssStyles({ cssText: 'font-size: 0; color: transparent; line-height: 0; height: 0; overflow: hidden; opacity: 0; position: absolute; left: -9999px;' });
             seoSection.textContent = seoText;
 
             // 插入到预览内容末尾
@@ -1137,11 +1138,12 @@ export class MPView extends ItemView {
         } else {
             const headerDiv = document.createElement('div');
             headerDiv.className = 'mp-custom-header';
-            headerDiv.innerHTML = headerContent;
+            const removed = replaceWithSafeHtml(headerDiv, headerContent);
+            if (removed > 0) new Notice('头部内容含不安全的 HTML 或资源样式，预览已过滤；原设置未改写。');
 
             // Add click to remove
             const removeBtn = document.createElement('button');
-            removeBtn.style.cssText = 'position:absolute; top:-10px; right:10px; font-size:10px; cursor:pointer; padding:2px 6px; border-radius:4px; border:none; background:var(--text-muted); color:white;';
+            removeBtn.setCssStyles({ cssText: 'position:absolute; top:-10px; right:10px; font-size:10px; cursor:pointer; padding:2px 6px; border-radius:4px; border:none; background:var(--text-muted); color:white;' });
             removeBtn.innerText = '移除头部';
             removeBtn.onclick = (e) => {
                 e.stopPropagation();
@@ -1165,7 +1167,8 @@ export class MPView extends ItemView {
         } else {
             const footerDiv = document.createElement('div');
             footerDiv.className = 'mp-custom-footer';
-            footerDiv.innerHTML = footerContent;
+            const removed = replaceWithSafeHtml(footerDiv, footerContent);
+            if (removed > 0) new Notice('尾部内容含不安全的 HTML 或资源样式，预览已过滤；原设置未改写。');
             this.previewEl.append(footerDiv);
         }
     }

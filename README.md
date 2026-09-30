@@ -10,6 +10,8 @@ An independently maintained Markdown typesetting tool for Obsidian, with a WeCha
 
 当前稳定版：`3.15.0`。
 
+重构测试版：`3.15.1-beta.1`（P1 安全与发行基础）。需要 Obsidian **1.7.2 或更新版本**；可在 BRAT 指定该版本测试，验收前稳定版仍为 `3.15.0`。本轮不更改插件 ID、配置格式或 Markdown 原文。
+
 ### 核心能力
 
 - **公众号预览与复制**：在 Obsidian 中实时预览公众号排版效果，一键复制到微信公众号后台。

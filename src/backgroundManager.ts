@@ -1,3 +1,5 @@
+import { hasUnsafeCss, setSafeInlineStyle } from './core/security/safeDom';
+import { Notice } from 'obsidian';
 import { SettingsManager } from "./settings/settings";
 
 export interface Background {
@@ -11,6 +13,7 @@ export interface Background {
 export class BackgroundManager {
     private currentBackground: Background | null = null;
     private settingsManager: SettingsManager;
+    private warnedUnsafeBackgrounds = new Set<string>();
 
     constructor(settingsManager: SettingsManager) {
         this.settingsManager = settingsManager;
@@ -31,6 +34,10 @@ export class BackgroundManager {
             }
             
             this.currentBackground = background;
+            if (!this.warnedUnsafeBackgrounds.has(id) && hasUnsafeCss(background.style)) {
+                this.warnedUnsafeBackgrounds.add(id);
+                new Notice('此背景含资源加载或不安全 CSS，预览将过滤相关样式；原设置未改写。');
+            }
             return true;
         }
         
@@ -45,14 +52,14 @@ export class BackgroundManager {
         if (section) {
             if (!this.currentBackground) {
                 // 无背景时使用基础间距，CSS padding 会生效
-                section.setAttribute('style', '');
+                section.removeAttribute('style');
                 return;
             }
             // 移除背景样式中的 padding: 0，替换为舒适的阅读间距
             const bgStyle = this.currentBackground.style
                 .replace(/padding:\s*0;?/g, '')
                 .replace(/;\s*$/, ';');
-            section.setAttribute('style', bgStyle + ' ' + BackgroundManager.BASE_CONTENT_PADDING);
+            setSafeInlineStyle(section, bgStyle + ' ' + BackgroundManager.BASE_CONTENT_PADDING);
         }
     }
 }

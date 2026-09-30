@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*'
+      - '[0-9]*'
 
 jobs:
   build:
@@ -16,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22.22.2'
           cache: 'npm'
 
       - name: Install dependencies
@@ -41,5 +42,6 @@ jobs:
             NOTICE
             THIRD_PARTY_NOTICES.md
             LICENSES/MIT-original.txt
+            LICENSES/DOMPurify.txt
           draft: false
           prerelease: ${{ contains(github.ref_name, '-') }}

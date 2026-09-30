@@ -1,9 +1,9 @@
 {
   "id": "yh-mp-preview",
   "name": "yh-mp-preview",
-  "version": "3.15.0",
-  "minAppVersion": "0.15.0",
-  "description": "Preview and convert Markdown files to MP format",
+  "version": "3.15.1-beta.1",
+  "minAppVersion": "1.7.2",
+  "description": "Typeset Markdown for WeChat with themes, rich-text copying, image exports, and optional note layout enhancements.",
   "author": "yhwang",
   "isDesktopOnly": true
 }

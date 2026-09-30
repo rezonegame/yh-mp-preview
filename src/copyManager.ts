@@ -1,9 +1,9 @@
 import { Notice } from 'obsidian';
-// @ts-ignore
 import pangu from 'pangu/browser';
 import { prepareLegacyWechatFragment } from './core/render/legacyWechatPipeline';
 import type { ValidationReport } from './core/validation/wechatHtmlValidator';
 import type { WechatPalette } from './core/theme/wechatPalette';
+import { replaceWithSafeHtml } from './core/security/safeDom';
 
 export class CopyManager {
     public static async processImagesForExport(container: HTMLElement): Promise<void> {
@@ -50,6 +50,7 @@ export class CopyManager {
                 throw new Error(`发现 ${preparation.validation.errors} 项阻断问题，已取消复制`);
             }
             let cleanHtml = preparation.html;
+            let cleanText = contentSection.textContent || '';
 
             if (preparation.validation.errors > 0 || preparation.validation.warnings > 0) {
                 console.warn('WeChat compatibility report', preparation.validation);
@@ -58,33 +59,33 @@ export class CopyManager {
             // 文本清洗：pangu 自动加空格 + 智能引号转换
             try {
                 const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = cleanHtml;
+                replaceWithSafeHtml(tempDiv, cleanHtml);
 
-                // 1. 使用 pangu 在 DOM 级别安全地为中英文之间添加空格
-                // @ts-ignore
-                pangu.spacingElement(tempDiv);
-
-                // 2. 使用 TreeWalker 遍历纯文本节点进行引号转换
+                // Use the installed synchronous text API, not the removed
+                // spacingElement API or the asynchronous page scheduler.
+                // 使用 TreeWalker 遍历纯文本节点进行加空格和引号转换
                 //    只操作文本节点，绝不会破坏 HTML 标签
                 const walker = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT);
                 let node;
-                while (node = walker.nextNode()) {
+                while ((node = walker.nextNode()) !== null) {
                     if (node.nodeValue) {
+                        if (node.parentElement?.closest('pre,code')) continue;
                         // 直角引号 → 弯引号（微信公众号常见排版规范）
-                        node.nodeValue = node.nodeValue
+                        node.nodeValue = pangu.spacingText(node.nodeValue)
                             .replace(/「/g, '\u201c').replace(/」/g, '\u201d')   // 「」→ ""
                             .replace(/『/g, '\u2018').replace(/』/g, '\u2019');  // 『』→ ''
                     }
                 }
 
                 cleanHtml = tempDiv.innerHTML;
+                cleanText = tempDiv.textContent || '';
             } catch (e) {
                 console.warn('Text cleaning failed:', e);
             }
 
             const clipData = new ClipboardItem({
                 'text/html': new Blob([cleanHtml], { type: 'text/html' }),
-                'text/plain': new Blob([clone.textContent || ''], { type: 'text/plain' })
+                'text/plain': new Blob([cleanText], { type: 'text/plain' })
             });
 
             await navigator.clipboard.write([clipData]);

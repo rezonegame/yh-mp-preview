@@ -13,11 +13,14 @@ direction. Attribution for retained early implementation remains applicable.
 | Package | Version | License |
 | --- | --- | --- |
 | html2canvas | 1.4.1 | MIT |
-| nanoid | 5.1.5 | MIT |
+| nanoid | 5.1.16 | MIT |
 | pangu | 7.2.0 | MIT |
+| DOMPurify | 3.4.16 | MPL-2.0 OR Apache-2.0 |
 
 The v3 source and distribution are licensed under AGPL-3.0-or-later. These
 dependency notices do not replace the licenses included with their packages.
+DOMPurify is bundled without source modifications; its dual-license text is
+included in [LICENSES/DOMPurify.txt](LICENSES/DOMPurify.txt).
 
 ## Quarantined legacy themes
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.15.1-beta.1
+
+- P0/P1 refactor preview: preserve the 3.15.0 rollback baseline, source provenance, saved theme IDs and snapshots.
+- Sanitize custom HTML before preview insertion, escape dialogue text, validate gallery resource URLs, and retain approved inline article typography with DOMPurify.
+- Warn when unsafe legacy theme/background resource CSS is filtered; keep original saved configuration unchanged.
+- Replace direct static style assignments with the supported host API and settings headings with native Setting headings.
+- Fix nanoid advisories; add frozen full-lint debt reporting rather than claiming the legacy project is fully lint-clean.
+- Fix the clipboard's removed pangu API call found by runtime tests; format text nodes synchronously, keep code literal, and derive plain text from the same cleaned article.
+- Require Obsidian 1.7.2+, accept bare release tags while retaining old v-prefixed releases, and include the DOMPurify license.
+- Add real DOM tests for all 19 themes, custom settings/snapshot round trips, unsafe inputs and Callout text. Manual Obsidian/BRAT and WeChat export acceptance remains required before stable release.
+
 ## 3.15.0
 
 - Stable release of the curated WeChat theme gallery, mobile reading preview, and responsive plugin interface from the 3.15.0 beta series.

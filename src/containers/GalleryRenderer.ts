@@ -1,9 +1,12 @@
+import { setSafeInlineStyle } from '../core/security/safeDom';
 /**
  * 图片画廊渲染器
  * 将多张图片渲染为横向滚动的画廊布局
  */
 
 import type { ParsedGallery } from './ContainerParser';
+import type { App } from 'obsidian';
+import { escapeHtml, safeHtmlToElement, safeInlineCss, safeUrl } from '../core/security/safeDom';
 
 export interface GalleryStyle {
     container: string;
@@ -30,20 +33,20 @@ export function renderGallery(gallery: ParsedGallery, style: Partial<GalleryStyl
 
     // 构建图片项 HTML
     const itemsHtml = gallery.images.map(imagePath => `
-        <figure data-container="gallery-item" style="${finalStyle.item}">
-            <img data-container="gallery-image" src="${imagePath}" alt="" style="${finalStyle.image}" />
+        <figure data-container="gallery-item" style="${escapeHtml(safeInlineCss(finalStyle.item))}">
+            <img data-container="gallery-image" src="${escapeHtml(safeUrl(imagePath, 'image') || '')}" alt="" style="${escapeHtml(safeInlineCss(finalStyle.image))}" />
         </figure>
     `).join('');
 
     // 标题（如果有）
     const titleHtml = gallery.title
-        ? `<p data-container="gallery-title" style="${finalStyle.title}">${gallery.title}</p>`
+        ? `<p data-container="gallery-title" style="${escapeHtml(safeInlineCss(finalStyle.title))}">${escapeHtml(gallery.title)}</p>`
         : '';
 
     return `
-        <section data-container="gallery" style="${finalStyle.container}">
+        <section data-container="gallery" style="${escapeHtml(safeInlineCss(finalStyle.container))}">
             ${titleHtml}
-            <section data-container="gallery-scroll" style="${finalStyle.scroll}">
+            <section data-container="gallery-scroll" style="${escapeHtml(safeInlineCss(finalStyle.scroll))}">
                 ${itemsHtml}
             </section>
         </section>
@@ -55,9 +58,7 @@ export function renderGallery(gallery: ParsedGallery, style: Partial<GalleryStyl
  */
 export function createGalleryElement(gallery: ParsedGallery, style: Partial<GalleryStyle> = {}): HTMLElement {
     const html = renderGallery(gallery, style);
-    const template = document.createElement('template');
-    template.innerHTML = html.trim();
-    return template.content.firstChild as HTMLElement;
+    return safeHtmlToElement(html);
 }
 
 /**
@@ -67,28 +68,28 @@ export function applyGalleryStyle(container: HTMLElement, style: Partial<Gallery
     const finalStyle = { ...DEFAULT_STYLE, ...style };
 
     // 容器样式
-    container.setAttribute('style', finalStyle.container);
+    setSafeInlineStyle(container, finalStyle.container);
 
     // 标题
     const title = container.querySelector('[data-container="gallery-title"]');
     if (title) {
-        title.setAttribute('style', finalStyle.title);
+        setSafeInlineStyle(title, finalStyle.title);
     }
 
     // 滚动容器
     const scroll = container.querySelector('[data-container="gallery-scroll"]');
     if (scroll) {
-        scroll.setAttribute('style', finalStyle.scroll);
+        setSafeInlineStyle(scroll, finalStyle.scroll);
     }
 
     // 图片项
     container.querySelectorAll('[data-container="gallery-item"]').forEach(item => {
-        item.setAttribute('style', finalStyle.item);
+        setSafeInlineStyle(item, finalStyle.item);
     });
 
     // 图片
     container.querySelectorAll('[data-container="gallery-image"]').forEach(img => {
-        img.setAttribute('style', finalStyle.image);
+        setSafeInlineStyle(img, finalStyle.image);
     });
 }
 
@@ -96,7 +97,7 @@ export function applyGalleryStyle(container: HTMLElement, style: Partial<Gallery
  * 解析 Obsidian wikilink 图片路径
  * 返回可用的图片 URL
  */
-export function resolveImagePath(linktext: string, app: any): string | null {
+export function resolveImagePath(linktext: string, app: App): string | null {
     try {
         const file = app.metadataCache.getFirstLinkpathDest(linktext.split('|')[0], '');
         if (file) {

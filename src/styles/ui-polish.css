@@ -80,6 +80,14 @@
     border-bottom: 1px solid var(--mp-ui-line);
 }
 .mp-settings h2 { margin: 0; padding: 0; border: 0; font-size: 21px; line-height: 1.3; }
+.mp-settings .setting-item-heading { margin: 10px 0; padding: 0; border: 0; min-width: 0; }
+.mp-settings .settings-section-header .setting-item-heading,
+.mp-settings .mp-settings-subsection-header .setting-item-heading { margin: 0; padding: 0; flex: 1; cursor: inherit; }
+.mp-settings .setting-item-heading .setting-item-name { font-size: 14px; font-weight: 600; }
+.mp-settings .settings-section-header .setting-item-name { font-size: 15px; font-weight: 650; }
+.mp-settings .mp-settings-header .setting-item-heading { margin: 0; padding: 0; }
+.mp-settings .mp-settings-header .setting-item-name { font-size: 21px; line-height: 1.3; }
+.mp-settings .mp-settings-version { font-size: .8em; color: var(--text-muted); }
 .mp-settings .settings-section {
     margin-bottom: 8px;
     overflow: hidden;

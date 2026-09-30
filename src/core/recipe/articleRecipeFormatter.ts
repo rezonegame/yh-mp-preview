@@ -38,7 +38,7 @@ function styleLists(section: HTMLElement, palette: WechatPalette, prefix: string
             label.className = className;
             item.prepend(label);
         }
-        label.textContent = prefix === '步骤' ? `步骤 ${index + 1}　` : '✓　';
+        label.textContent = prefix === '步骤' ? `步骤 ${index + 1}\u3000` : '✓\u3000';
         setStyles(label, { 'font-weight': '700', color: palette.accentText });
     });
 }
