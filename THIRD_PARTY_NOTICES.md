@@ -1,9 +1,12 @@
 # Third-party notices
 
-## Upstream project
+## Retained early implementation
 
 - `Yeban8090/mp-preview`: the original project and portions retained from it
   are available under the MIT License. See [LICENSES/MIT-original.txt](LICENSES/MIT-original.txt).
+
+The current product is independently maintained and follows its own product
+direction. Attribution for retained early implementation remains applicable.
 
 ## Runtime dependencies
 

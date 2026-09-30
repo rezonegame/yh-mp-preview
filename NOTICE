@@ -1,8 +1,10 @@
-yh-mp-preview v3.0.0 is distributed under the GNU Affero General Public
+yh-mp-preview is distributed under the GNU Affero General Public
 License, version 3 or later (AGPL-3.0-or-later).
 
-This project is based on and extends Yeban8090/mp-preview. The original MIT
-copyright notice and license text are preserved in LICENSES/MIT-original.txt.
+This product is independently maintained by yhwang and has evolved beyond
+its early WeChat preview implementation. Portions of the early implementation
+from Yeban8090/mp-preview remain in the codebase. The original MIT copyright
+notice and license text are preserved in LICENSES/MIT-original.txt.
 
 Theme provenance is tracked in reports/theme-audit.json. Historical themes
 with unverified upstream provenance are excluded from the v3.0.1 distribution.

@@ -1,6 +1,8 @@
 # yh-mp-preview
 
-一个面向微信公众号排版的 Obsidian 插件，可以把当前 Markdown 笔记转换为适合公众号后台粘贴的富文本样式，并在 Obsidian 内完成预览、微调、复制和长图导出。
+一个独立维护、持续演进的 Obsidian 排版工具，同时提供微信公众号排版工作台和可选的笔记阅读／编辑视图增强。公众号工作台可将 Markdown 转换为适合公众号后台粘贴的富文本，在本地完成预览、微调、复制和图片导出；笔记增强不改写 Markdown 原文。
+
+An independently maintained Markdown typesetting tool for Obsidian, with a WeChat Official Account preview, curated themes, rich-text copying, image export, and optional note layout enhancements. The current product has evolved beyond the early implementation; attribution for retained early code is preserved below. Install with BRAT using `rezonegame/yh-mp-preview` and follow the workflow below. No account or payment is required to use this plugin.
 
 ![version](https://img.shields.io/github/v/tag/rezonegame/yh-mp-preview?color=blue&label=version&style=flat) ![license](https://img.shields.io/badge/license-AGPL--3.0--or--later-blue)
 
@@ -99,9 +101,17 @@ bio: 专注于 Obsidian、公众号排版和内容工作流。
 
 ## 来源与致谢
 
-本插件基于 [Yeban8090/mp-preview](https://github.com/Yeban8090/mp-preview) 原始版本进行深度开发和扩展，感谢原作者 **@Yeban8090** 的贡献。
+当前产品由 **@yhwang** 独立维护和持续开发，已从早期公众号预览实现演进为包含公众号排版工作台、主题与组件系统、复制／图片导出和可选笔记排版增强的工具。当前产品定位、升级路线及后续实现由本项目维护者负责，并非原项目的官方版本。
 
-当前版本由 **@yhwang** 维护。
+早期实现采用了 [Yeban8090/mp-preview](https://github.com/Yeban8090/mp-preview) 的部分 MIT 许可代码，目前仍保留部分实现。感谢原作者 **@Yeban8090**；其版权声明及 MIT 许可证保存在 [LICENSES/MIT-original.txt](LICENSES/MIT-original.txt)。
+
+The current product is independently maintained by **@yhwang** and is not an official release of the original project. Portions of the early MIT-licensed implementation from **@Yeban8090** remain in the codebase. Their copyright notice and license are preserved in [LICENSES/MIT-original.txt](LICENSES/MIT-original.txt).
+
+## 网络与隐私
+
+排版、主题应用、笔记增强和图片导出在本地执行，无需注册、付费或 AI 服务，不提供自动发布，也不包含遥测。文章中的远程图片可能由 Obsidian 渲染时加载；复制或导出时，插件会尝试从图片原地址读取图片并转为内嵌数据。这会向文章所引用的图片服务器发出请求，但不向本插件维护者的服务器上传正文。
+
+Typesetting and note enhancements run locally. The plugin has no telemetry or automatic publishing and requires no account, payment, or AI service. Rendering may load remote images referenced by the article; copying or exporting attempts to fetch those images from their original URLs to embed them. Those requests go to the article's image hosts, not to a server operated by this plugin's maintainer.
 
 ## 许可证
 
