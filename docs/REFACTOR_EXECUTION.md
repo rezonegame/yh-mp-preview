@@ -1,6 +1,6 @@
 # 重构实施与验收台账
 
-当前整合候选版：`3.18.0-beta.1`。本轮已实现 P2–P4 并启动自动测试和真实宿主测试；稳定发布、公众号后台验收和官方上架不是同一完成条件。
+当前整合预发布版：[3.18.0-beta.1](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.18.0-beta.1)。本轮已实现 P2–P4，完成自动测试、隔离库真实宿主测试和 GitHub 发行文件核对；稳定发布、公众号后台验收和官方上架不是同一完成条件。
 
 稳定回退版仍为 `v3.15.0`，固定提交 `74824816a2251299872ab0534c9fb1ff35f84047`。不覆盖旧发行资产、不删除配置、不迁移插件 ID。
 
@@ -12,7 +12,7 @@
 | P1 安全与发行 | 已发布 beta；稳定门禁保留 | `1754de1`，[3.15.1-beta.1](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.15.1-beta.1) |
 | P2 配置、草稿与基础 UI | 实现、自测完成 | 独立提交 `42f97c1`，持久化事务和实际编辑器草稿测试 |
 | P3 文章与输出 | 实现、自测完成 | 独立提交 `c9cc9ee`，有序文章、资源、竞态、画布生命周期测试 |
-| P4 呈现与整合 | 实现、自测完成；beta 待验收 | 本版界面、宿主输出和表单证据见下文 |
+| P4 呈现与整合 | 实现、自测完成；beta 已发布，待用户验收 | 独立提交 `9201f08`；本版界面、宿主输出和表单证据见下文 |
 
 维护者授权连续执行 P2–P4，因此保留独立源码检查点，再交付一个整合 beta；没有虚称分别发布过 3.16/3.17 稳定版。代码重构完成不等于所有平台、公众号后台、BRAT 和官方目录审核全部完成。
 
@@ -67,6 +67,8 @@ Windows，**Obsidian 1.13.7**，设备像素比 2。仅使用仓库下 `output/r
 复现入口：`scripts/prepare-native-test-vault.mjs`、`scripts/native-host-regression.js`、`scripts/native-media-regression.js`、`scripts/native-settings-regression.js`。首次准备会重置**隔离夹具**，不能对真实库使用；Obsidian CLI eval 须明确指定 `vault=MPPreview-Refactor-Test`，保持该窗口活动，并先关闭遗留测试弹窗。使用 `scripts/collect-native-evidence.mjs` 汇总成功结果。
 
 ## beta／稳定门禁
+
+`3.18.0-beta.1` 标签固定在 `9201f08deef5861a1631400653e985dfc4ef6cdc`。[GitHub CI](https://github.com/rezonegame/yh-mp-preview/actions/runs/36766836504) 构建和验证成功，发布状态为非草稿、预发布；8 个预期资产齐全（3 个插件文件和 5 个许可／来源文件）。下载发行资产后核对 `main.js`、`manifest.json`、`styles.css`：SHA-256 与本地最终构建及隔离库已测版本完全一致，摘要见宿主报告。插件 ID 仍为 `yh-mp-preview`，版本 `3.18.0-beta.1`，最低 Obsidian `1.7.2`，桌面专用标记未改变。GitHub latest 已核对仍为 `v3.15.0`；未发布新的稳定版。
 
 1. BRAT 指定 `3.18.0-beta.1` 验收更新、重启和设置保持；暂不改 latest 稳定版。
 2. 维护者用长文、教程、报告三篇实际复制到公众号后台核对。本轮没有操作其登录后台，不能把本地剪贴板测试写成公众号粘贴通过。
