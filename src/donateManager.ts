@@ -1,7 +1,5 @@
 
 import { App, Plugin } from 'obsidian';
-import { DONATE_QR } from './assets/donate';
-import { QRCODE_QR } from './assets/qrcode';
 
 export class DonateManager {
     private static overlay: HTMLElement;
@@ -94,11 +92,9 @@ export class DonateManager {
         const donateQR = donateSection.createEl('div', {
             cls: 'mp-about-qr'
         });
-        donateQR.createEl('img', {
-            attr: {
-                src: DONATE_QR,
-                alt: '打赏二维码'
-            }
+        donateQR.createEl('p', {
+            cls: 'mp-about-desc',
+            text: '支持二维码待补充'
         });
 
         // 添加公众号区域
@@ -123,11 +119,9 @@ export class DonateManager {
         const mpQR = mpSection.createEl('div', {
             cls: 'mp-about-qr'
         });
-        mpQR.createEl('img', {
-            attr: {
-                src: QRCODE_QR,
-                alt: '公众号二维码'
-            }
+        mpQR.createEl('p', {
+            cls: 'mp-about-desc',
+            text: '公众号二维码待补充'
         });
 
         const footerEl = mpSection.createEl('p', {
