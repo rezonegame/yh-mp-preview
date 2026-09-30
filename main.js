@@ -8395,10 +8395,10 @@ __export(main_exports, {
   default: () => MPPlugin
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian17 = require("obsidian");
+var import_obsidian21 = require("obsidian");
 
 // src/view.ts
-var import_obsidian5 = require("obsidian");
+var import_obsidian9 = require("obsidian");
 
 // node_modules/dompurify/dist/purify.es.mjs
 function _OverloadYield(e, d) {
@@ -10513,7 +10513,7 @@ function hasUnsafeCss(value) {
 }
 function safeInlineCss(value) {
   if (hasUnsafeCss(value)) return "";
-  const probe = document.createElement("span");
+  const probe = createSpan();
   probe.style.cssText = value;
   const declarations = [];
   for (let index = 0; index < probe.style.length; index++) {
@@ -10588,6 +10588,93 @@ function replaceWithSafeHtml(element, html2) {
   return result.removedCount;
 }
 
+// src/core/render/previewSession.ts
+var PreviewSession = class {
+  constructor() {
+    this.trialTemplateId = null;
+    this.headerEnabled = false;
+    this.footerEnabled = false;
+    this.revision = 0;
+    this.controller = null;
+    this.closed = false;
+  }
+  begin() {
+    var _a;
+    (_a = this.controller) == null ? void 0 : _a.abort();
+    const controller = new AbortController();
+    this.controller = controller;
+    const revision = ++this.revision;
+    return { signal: controller.signal, isCurrent: () => !this.closed && revision === this.revision && !controller.signal.aborted };
+  }
+  invalidate() {
+    var _a;
+    this.revision++;
+    (_a = this.controller) == null ? void 0 : _a.abort();
+  }
+  close() {
+    this.closed = true;
+    this.invalidate();
+  }
+};
+
+// src/core/render/exportCanvas.ts
+var queues = /* @__PURE__ */ new WeakMap();
+function queueCanvasRender(document2, job) {
+  const next = (queues.get(document2) || Promise.resolve()).then(job);
+  queues.set(document2, next.catch(() => void 0));
+  return next;
+}
+function shouldIgnoreExportElement(candidate, article) {
+  if (candidate.contains(article) || article.contains(candidate)) return false;
+  if (["HEAD", "STYLE", "META", "TITLE"].includes(candidate.tagName)) return false;
+  if (candidate.tagName === "LINK" && candidate.getAttribute("rel") === "stylesheet") return false;
+  return true;
+}
+async function boundedCanvasRender(host, signal, render, timeoutMs = 3e4) {
+  signal.throwIfAborted();
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    const finish = (error, value) => {
+      if (settled) return;
+      settled = true;
+      host.clearTimeout(timer);
+      signal.removeEventListener("abort", onAbort);
+      if (error) reject(error instanceof Error ? error : new Error(typeof error === "string" ? error : "\u753B\u5E03\u751F\u6210\u5931\u8D25"));
+      else resolve(value);
+    };
+    const onAbort = () => finish(new Error("\u5BFC\u51FA\u5DF2\u53D6\u6D88"));
+    const timer = host.setTimeout(() => finish(new Error("\u753B\u5E03\u751F\u6210\u8D85\u65F6\uFF0C\u8BF7\u91CD\u8BD5\u6216\u6539\u7528\u5206\u6BB5\u56FE")), timeoutMs);
+    signal.addEventListener("abort", onAbort, { once: true });
+    void Promise.resolve().then(render).then((value) => finish(null, value), (error) => finish(error));
+  });
+}
+
+// src/ui/workbenchControls.ts
+function createWorkbenchControls(container) {
+  const toolbar = container.createDiv("mp-toolbar");
+  toolbar.setAttribute("role", "group");
+  toolbar.setAttribute("aria-label", "\u6587\u7AE0\u5916\u89C2\u4E0E\u6392\u7248");
+  const controlsGroup = toolbar.createDiv("mp-controls-group mp-appearance-row");
+  const typographyRow = toolbar.createDiv("mp-controls-group mp-typography-row");
+  const secondaryRow = toolbar.createDiv("mp-controls-group mp-secondary-row");
+  secondaryRow.setAttribute("role", "group");
+  secondaryRow.setAttribute("aria-label", "\u6587\u7AE0\u64CD\u4F5C");
+  return { toolbar, controlsGroup, typographyRow, secondaryRow };
+}
+
+// src/ui/asyncActions.ts
+var import_obsidian = require("obsidian");
+function runAction(action) {
+  void Promise.resolve().then(action).catch((error) => {
+    new import_obsidian.Notice(`\u64CD\u4F5C\u5931\u8D25\uFF1A${error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF"}`);
+  });
+}
+function bindAsyncEvent(element, type, action) {
+  element.addEventListener(type, (event) => {
+    runAction(() => action(event));
+  });
+}
+
 // src/containers/ContainerParser.ts
 function parseMetadata(line) {
   const match = line.match(/^```(\w+)(?:\s*\{[^}]*title=["']([^"']+)["'][^}]*\})?\s*$/);
@@ -10637,17 +10724,20 @@ function parseContainers(markdown) {
   let currentType = "";
   let currentTitle = "";
   let contentLines = [];
+  let sourceLine = 0;
+  let fence = "";
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    if (line.startsWith("```")) {
+    const opening = line.match(/^\s{0,3}(`{3,}|~{3,})(.*)$/);
+    if (opening && (!inCodeBlock || opening[1][0] === fence[0] && opening[1].length >= fence.length && !opening[2].trim())) {
       if (!inCodeBlock) {
-        const meta = parseMetadata(line);
-        if (meta.type === "dialogue" || meta.type === "gallery") {
-          inCodeBlock = true;
-          currentType = meta.type;
-          currentTitle = meta.title;
-          contentLines = [];
-        }
+        const meta = parseMetadata("```" + opening[2].trim());
+        inCodeBlock = true;
+        fence = opening[1];
+        sourceLine = i;
+        currentType = meta.type;
+        currentTitle = meta.title;
+        contentLines = [];
       } else {
         if (currentType === "dialogue") {
           const dialogueLines = parseDialogueContent(contentLines);
@@ -10655,6 +10745,8 @@ function parseContainers(markdown) {
             containers.push({
               type: "dialogue",
               title: currentTitle,
+              sourceText: contentLines.join("\n"),
+              sourceLine,
               lines: dialogueLines
             });
           }
@@ -10664,6 +10756,8 @@ function parseContainers(markdown) {
             containers.push({
               type: "gallery",
               title: currentTitle,
+              sourceText: contentLines.join("\n"),
+              sourceLine,
               images
             });
           }
@@ -10892,7 +10986,8 @@ function renderQuoteCard(content) {
   const trimmed = content.trim();
   if (trimmed.startsWith("{")) {
     try {
-      values = JSON.parse(trimmed);
+      const parsed = JSON.parse(trimmed);
+      values = parsed && typeof parsed === "object" && !Array.isArray(parsed) ? Object.fromEntries(Object.entries(parsed).filter((entry) => typeof entry[1] === "string")) : {};
     } catch (e) {
       values = {};
     }
@@ -10978,12 +11073,18 @@ function renderComparisonTable(content) {
   } catch (e) {
     data = null;
   }
-  if (!data || !data.left || !data.right) {
+  const record = data && typeof data === "object" && !Array.isArray(data) ? data : {};
+  const readSide = (value) => {
+    if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+    const side = value;
+    return { title: typeof side.title === "string" ? side.title : "", items: Array.isArray(side.items) ? side.items.filter((item) => typeof item === "string") : [] };
+  };
+  let left = readSide(record.left);
+  let right = readSide(record.right);
+  if (!left || !right) {
     const rows = parseRows(content);
-    data = {
-      left: { title: ((_a = rows[0]) == null ? void 0 : _a[0]) || "\u65B9\u6848 A", items: rows.slice(1).map((row) => row[0]).filter(Boolean) },
-      right: { title: ((_b = rows[0]) == null ? void 0 : _b[1]) || "\u65B9\u6848 B", items: rows.slice(1).map((row) => row[1]).filter(Boolean) }
-    };
+    left = { title: ((_a = rows[0]) == null ? void 0 : _a[0]) || "\u65B9\u6848 A", items: rows.slice(1).map((row) => row[0]).filter(Boolean) };
+    right = { title: ((_b = rows[0]) == null ? void 0 : _b[1]) || "\u65B9\u6848 B", items: rows.slice(1).map((row) => row[1]).filter(Boolean) };
   }
   const renderSide = (side, accent) => `<div style="flex: 1; min-width: 0; padding: 14px; border-radius: 10px; background: ${accent}10;">
         <div style="color: ${accent}; font-weight: 700; margin-bottom: 8px;">${escapeHtml2(side.title || "")}</div>
@@ -10991,8 +11092,8 @@ function renderComparisonTable(content) {
     </div>`;
   return htmlToElement(`<section class="mp-layout-card mp-layout-comparison-table" data-mp-layout="comparison-table" style="${cardStyle("#0ea5e9")}">
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            ${renderSide(data.left, "#16a34a")}
-            ${renderSide(data.right, "#dc2626")}
+            ${renderSide(left, "#16a34a")}
+            ${renderSide(right, "#dc2626")}
         </div>
     </section>`);
 }
@@ -11080,12 +11181,12 @@ function processImageCaptions(container, settings) {
     const image = img;
     const alt = image.alt.trim();
     if (!alt || image.closest("figure")) return;
-    const figure = document.createElement("figure");
+    const figure = createEl("figure");
     figure.className = "mp-image-container";
     figure.setCssStyles({ cssText: "margin: 1em auto; text-align: center; display: block;" });
     const clone2 = image.cloneNode(true);
     figure.appendChild(clone2);
-    const caption = document.createElement("figcaption");
+    const caption = createEl("figcaption");
     caption.className = "mp-image-caption";
     caption.textContent = alt;
     caption.setCssStyles({ cssText: "text-align: center; color: #888; font-size: 0.9em; margin-top: 6px; display: block;" });
@@ -11098,7 +11199,7 @@ function processTables(container, settings) {
   container.querySelectorAll("table").forEach((table) => {
     var _a;
     if (table.closest(".mp-table-wrapper")) return;
-    const wrapper = document.createElement("div");
+    const wrapper = createDiv();
     wrapper.className = "mp-table-wrapper";
     wrapper.setCssStyles({ cssText: "width: 100%; overflow-x: auto; margin: 1em 0; -webkit-overflow-scrolling: touch;" });
     (_a = table.parentNode) == null ? void 0 : _a.insertBefore(wrapper, table);
@@ -11128,7 +11229,8 @@ var MPConverter = class {
     this.app = app;
   }
   static formatContent(element, markdownContent, settingsManager) {
-    const section = document.createElement("section");
+    if (element.querySelector(":scope > .mp-content-section[data-mp-converted]")) return;
+    const section = createEl("section");
     section.className = "mp-content-section";
     while (element.firstChild) {
       section.appendChild(element.firstChild);
@@ -11147,6 +11249,8 @@ var MPConverter = class {
       applyLayoutEnhancements(section, settingsManager.getSettings());
     }
     this.processElements(section, (settingsManager == null ? void 0 : settingsManager.getSettings().layoutEnhancements.enableImageCaptions) !== false);
+    section.setAttribute("data-mp-converted", "true");
+    Array.from(section.children).forEach((block, index) => block.setAttribute("data-mp-block-id", `block-${index}`));
   }
   static insertFrontMatterCard(container, markdown) {
     const fmMatch = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---/);
@@ -11160,16 +11264,16 @@ var MPConverter = class {
     const author = parseField("author");
     const date = parseField("date");
     if (!title) return;
-    const card = document.createElement("div");
+    const card = createDiv();
     card.className = "mp-frontmatter-card";
     card.setCssStyles({ cssText: "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 24px 28px; margin: 0 0 24px 0; border-radius: 12px; text-align: center;" });
-    const titleEl = document.createElement("h1");
+    const titleEl = createEl("h1");
     titleEl.className = "mp-fm-title";
     titleEl.textContent = title;
     titleEl.setCssStyles({ cssText: "margin: 0 0 8px 0; font-size: 1.6em; font-weight: 700; color: #fff; line-height: 1.3;" });
     card.appendChild(titleEl);
     if (author || date) {
-      const metaEl = document.createElement("div");
+      const metaEl = createDiv();
       metaEl.className = "mp-fm-meta";
       metaEl.setCssStyles({ cssText: "font-size: 0.9em; opacity: 0.85; color: #f0f0f0;" });
       const parts = [];
@@ -11186,25 +11290,22 @@ var MPConverter = class {
    */
   static processContainerBlocks(container, markdown) {
     const containers = parseContainers(markdown);
-    container.querySelectorAll("pre > code").forEach((codeEl, index) => {
-      var _a;
+    const consumed = /* @__PURE__ */ new Set();
+    container.querySelectorAll("pre > code").forEach((codeEl) => {
+      var _a, _b;
       const pre = codeEl.parentElement;
       if (!pre) return;
       const classList = codeEl.className.split(" ");
       const isDialogue = classList.includes("language-dialogue");
       const isGallery = classList.includes("language-gallery");
       if (!isDialogue && !isGallery) return;
-      const containerData = containers.find((c, i) => {
-        const codeContent = codeEl.textContent || "";
-        if (c.type === "dialogue" && isDialogue) {
-          return codeContent.includes(":") || codeContent.includes("\uFF1A");
-        }
-        if (c.type === "gallery" && isGallery) {
-          return codeContent.includes("![");
-        }
-        return false;
+      const matchIndex = containers.findIndex((candidate, index) => {
+        var _a2;
+        return !consumed.has(index) && candidate.type === (isDialogue ? "dialogue" : "gallery") && ((_a2 = candidate.sourceText) == null ? void 0 : _a2.trim()) === (codeEl.textContent || "").trim();
       });
+      const containerData = containers[matchIndex];
       if (!containerData) return;
+      consumed.add(matchIndex);
       let containerHtml = "";
       if (containerData.type === "dialogue") {
         containerHtml = renderDialogue(containerData, { accentColor: "#4285f4" });
@@ -11220,14 +11321,15 @@ var MPConverter = class {
       }
       if (containerHtml) {
         const newElement = safeHtmlToElement(containerHtml);
-        (_a = pre.parentNode) == null ? void 0 : _a.replaceChild(newElement, pre);
+        newElement.setAttribute("data-mp-source-id", `${containerData.type}-${(_a = containerData.sourceLine) != null ? _a : matchIndex}`);
+        (_b = pre.parentNode) == null ? void 0 : _b.replaceChild(newElement, pre);
       }
     });
   }
   static processElements(container, enableImageCaptions = true) {
     if (!container) return;
     container.querySelectorAll("li").forEach((li) => {
-      const section = document.createElement("section");
+      const section = createEl("section");
       while (li.firstChild) {
         section.appendChild(li.firstChild);
       }
@@ -11261,21 +11363,21 @@ var MPConverter = class {
       const titleEl = calloutEl.querySelector(".callout-title-inner");
       const titleText = (titleEl == null ? void 0 : titleEl.textContent) || calloutType.charAt(0).toUpperCase() + calloutType.slice(1);
       const contentEl = calloutEl.querySelector(".callout-content");
-      const calloutDiv = document.createElement("div");
+      const calloutDiv = createDiv();
       calloutDiv.className = "mp-callout";
       calloutDiv.setAttribute("data-callout-type", calloutType);
       calloutDiv.setCssStyles({ cssText: `border-left: 4px solid ${config.color}; background: ${config.color}11; padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;` });
-      const titleDiv = document.createElement("div");
+      const titleDiv = createDiv();
       titleDiv.className = "mp-callout-title";
       titleDiv.setCssStyles({ cssText: `font-weight: bold; color: ${config.color}; margin-bottom: 8px; font-size: 1em; display: flex; align-items: center; gap: 6px;` });
-      const iconEl = document.createElement("span");
+      const iconEl = createSpan();
       iconEl.textContent = config.icon;
-      const labelEl = document.createElement("span");
+      const labelEl = createSpan();
       labelEl.textContent = titleText;
       titleDiv.append(iconEl, labelEl);
       calloutDiv.appendChild(titleDiv);
       if (contentEl) {
-        const contentDiv = document.createElement("div");
+        const contentDiv = createDiv();
         contentDiv.className = "mp-callout-content";
         contentDiv.setCssStyles({ cssText: "color: #333; line-height: 1.7;" });
         contentDiv.append(...Array.from(contentEl.childNodes, (node) => node.cloneNode(true)));
@@ -11290,10 +11392,10 @@ var MPConverter = class {
       }
       const codeEl = pre.querySelector("code");
       if (codeEl) {
-        const header = document.createElement("div");
+        const header = createDiv();
         header.className = "mp-code-header";
         for (let i = 0; i < 3; i++) {
-          const dot = document.createElement("span");
+          const dot = createSpan();
           dot.className = "mp-code-dot";
           header.appendChild(dot);
         }
@@ -11302,7 +11404,7 @@ var MPConverter = class {
         if (copyButton) copyButton.remove();
       }
     });
-    container.querySelectorAll("span.internal-embed[src]").forEach(async (el) => {
+    container.querySelectorAll("span.internal-embed[src]").forEach((el) => {
       var _a;
       const originalSpan = el;
       const src = originalSpan.getAttribute("src");
@@ -11313,12 +11415,12 @@ var MPConverter = class {
         const file = this.app.metadataCache.getFirstLinkpathDest(linktext, "");
         if (file) {
           const absolutePath = this.app.vault.adapter.getResourcePath(file.path);
-          const figure = document.createElement("figure");
+          const figure = createEl("figure");
           figure.className = "mp-image-container";
           figure.setCssStyles({ margin: "0 auto" });
           figure.setCssStyles({ textAlign: "center" });
           figure.setCssStyles({ display: "block" });
-          const newImg = document.createElement("img");
+          const newImg = createEl("img");
           newImg.src = absolutePath;
           newImg.dataset.linktext = linktext;
           newImg.setCssStyles({ maxWidth: "100%" });
@@ -11328,7 +11430,7 @@ var MPConverter = class {
             newImg.alt = alt;
             figure.appendChild(newImg);
             if (enableImageCaptions) {
-              const figcaption = document.createElement("figcaption");
+              const figcaption = createEl("figcaption");
               figcaption.textContent = alt;
               figcaption.className = "mp-image-caption";
               figcaption.setCssStyles({ textAlign: "center" });
@@ -11367,15 +11469,15 @@ var MPConverter = class {
       });
       let refSection = container.querySelector(".mp-reference-section");
       if (!refSection) {
-        const hr = document.createElement("hr");
+        const hr = createEl("hr");
         hr.className = "mp-footnote-separator";
         hr.setCssStyles({ margin: "30px 0 20px" });
         hr.setCssStyles({ border: "none" });
         hr.setCssStyles({ borderTop: "1px dashed #ccc" });
         container.appendChild(hr);
-        refSection = document.createElement("section");
+        refSection = createEl("section");
         refSection.className = "mp-reference-section";
-        const title = document.createElement("h3");
+        const title = createEl("h3");
         title.textContent = "\u53C2\u8003\u8D44\u6599";
         title.className = "mp-reference-title";
         title.setCssStyles({ fontSize: "1.1em" });
@@ -11384,7 +11486,7 @@ var MPConverter = class {
         refSection.appendChild(title);
         container.appendChild(refSection);
       }
-      const list = document.createElement("ol");
+      const list = createEl("ol");
       list.setCssStyles({ paddingLeft: "20px" });
       list.setCssStyles({ margin: "0" });
       list.setCssStyles({ fontSize: "0.9em" });
@@ -11393,7 +11495,7 @@ var MPConverter = class {
         const href = ref.getAttribute("data-href");
       });
       footnoteItems.forEach((item) => {
-        const li = document.createElement("li");
+        const li = createEl("li");
         li.append(...Array.from(item.childNodes, (node) => node.cloneNode(true)));
         li.setCssStyles({ marginBottom: "4px" });
         list.appendChild(li);
@@ -11406,7 +11508,293 @@ var MPConverter = class {
 };
 
 // src/copyManager.ts
-var import_obsidian = require("obsidian");
+var import_obsidian3 = require("obsidian");
+
+// src/core/article/articleModel.ts
+var emptyStats = () => ({
+  headings: 0,
+  paragraphs: 0,
+  listItems: 0,
+  quotes: 0,
+  codeBlocks: 0,
+  tables: 0,
+  images: 0,
+  links: 0,
+  components: 0
+});
+function normalizedText(element) {
+  return (element.textContent || "").replace(/\s+/g, " ").trim();
+}
+function addNode(nodes, stats, kind, element, extra = {}) {
+  stats[`${kind === "listItem" ? "listItems" : `${kind}s`}`]++;
+  nodes.push({
+    id: `node-${nodes.length + 1}`,
+    kind,
+    text: normalizedText(element),
+    ...extra
+  });
+}
+function createArticleModel(root) {
+  const nodes = [];
+  const stats = emptyStats();
+  root.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((element) => {
+    const level = Number(element.tagName.slice(1));
+    addNode(nodes, stats, "heading", element, { level });
+  });
+  root.querySelectorAll("p").forEach((element) => addNode(nodes, stats, "paragraph", element));
+  root.querySelectorAll("li").forEach((element) => addNode(nodes, stats, "listItem", element));
+  root.querySelectorAll("blockquote").forEach((element) => addNode(nodes, stats, "quote", element));
+  root.querySelectorAll("pre").forEach((element) => addNode(nodes, stats, "codeBlock", element));
+  root.querySelectorAll("table").forEach((element) => addNode(nodes, stats, "table", element));
+  root.querySelectorAll("img").forEach((element) => addNode(nodes, stats, "image", element, { src: element.src }));
+  root.querySelectorAll("a[href]").forEach((element) => addNode(nodes, stats, "link", element, { href: element.href }));
+  root.querySelectorAll("[data-mp-layout], [data-container]").forEach((element) => addNode(nodes, stats, "component", element));
+  return { schemaVersion: 1, nodes, stats };
+}
+
+// src/core/layout/localLayoutPlanner.ts
+function sectionFromHeading(heading, index) {
+  return {
+    id: `section-${index + 1}`,
+    headingNodeId: heading.id,
+    title: heading.text || `Section ${index + 1}`,
+    componentIds: []
+  };
+}
+function createLocalLayoutPlan(article, options) {
+  const headings = article.nodes.filter((node) => node.kind === "heading");
+  const sections = headings.map(sectionFromHeading);
+  if (sections.length === 0) {
+    sections.push({ id: "section-1", title: "\u6B63\u6587", componentIds: [] });
+  }
+  return {
+    schemaVersion: 1,
+    articleType: options.articleType || "general-article",
+    themeId: options.themeId,
+    recipeId: options.recipeId || "legacy-compatible",
+    sections,
+    options: {
+      includeToc: options.includeToc === true,
+      includeEnding: options.includeEnding === true
+    }
+  };
+}
+
+// src/core/validation/wechatHtmlValidator.ts
+var forbiddenTags = /* @__PURE__ */ new Set(["SCRIPT", "STYLE", "IFRAME", "FORM", "INPUT", "BUTTON", "TEXTAREA", "SELECT"]);
+var discouragedStyles = [
+  ["display-flex", /display\s*:\s*(?:inline-)?flex\b/i],
+  ["display-grid", /display\s*:\s*grid\b/i],
+  ["fixed-position", /position\s*:\s*(?:fixed|sticky)\b/i],
+  ["absolute-position", /position\s*:\s*absolute\b/i],
+  ["overflow", /overflow(?:-[xy])?\s*:/i],
+  ["css-variable", /var\s*\(/i]
+];
+function pathFor(element) {
+  const parts = [];
+  let current = element;
+  while (current && parts.length < 4) {
+    parts.unshift(current.tagName.toLowerCase());
+    current = current.parentElement;
+  }
+  return parts.join(" > ");
+}
+function validateWechatHtml(root) {
+  const issues = [];
+  const add = (severity, code, message, element) => {
+    issues.push({ severity, code, message, path: pathFor(element) });
+  };
+  root.querySelectorAll("*").forEach((element) => {
+    if (forbiddenTags.has(element.tagName)) {
+      add("error", "forbidden-tag", `\u4E0D\u5141\u8BB8\u7684\u6807\u7B7E\uFF1A${element.tagName.toLowerCase()}`, element);
+    }
+    Array.from(element.attributes).forEach((attribute) => {
+      if (attribute.name.startsWith("on")) {
+        add("error", "event-attribute", `\u4E0D\u5141\u8BB8\u7684\u4E8B\u4EF6\u5C5E\u6027\uFF1A${attribute.name}`, element);
+      }
+      if (attribute.name === "class" || attribute.name === "id" || attribute.name.startsWith("data-")) {
+        add("warning", "transient-attribute", `\u590D\u5236\u65F6\u5C06\u79FB\u9664\u5C5E\u6027\uFF1A${attribute.name}`, element);
+      }
+    });
+    const style = element.getAttribute("style") || "";
+    discouragedStyles.forEach(([code, pattern]) => {
+      if (pattern.test(style)) {
+        add("warning", code, `\u5FAE\u4FE1\u516C\u4F17\u53F7\u517C\u5BB9\u6027\u98CE\u9669\uFF1A${code}`, element);
+      }
+    });
+    if (element.tagName === "IMG" && !element.getAttribute("src")) {
+      add("error", "missing-image-source", "\u56FE\u7247\u7F3A\u5C11\u53EF\u7528\u7684 src \u5730\u5740", element);
+    }
+  });
+  root.querySelectorAll("table").forEach((table) => {
+    const widestRow = Math.max(0, ...Array.from(table.querySelectorAll("tr")).map((row) => Array.from(row.children).reduce((columns, cell) => columns + (cell.matches("th, td") ? Number(cell.getAttribute("colspan") || 1) : 0), 0)));
+    if (widestRow > 3) {
+      add("warning", "mobile-wide-table", "\u8868\u683C\u8D85\u8FC7\u4E09\u5217\uFF0C\u5EFA\u8BAE\u5728\u516C\u4F17\u53F7\u624B\u673A\u7AEF\u786E\u8BA4\u662F\u5426\u9700\u8981\u62C6\u4E3A\u5217\u8868\u3002", table);
+    }
+  });
+  return {
+    issues,
+    errors: issues.filter((issue) => issue.severity === "error").length,
+    warnings: issues.filter((issue) => issue.severity === "warning").length
+  };
+}
+
+// src/core/theme/wechatPalette.ts
+function rgb(hex2) {
+  const value = hex2.replace("#", "");
+  return [0, 2, 4].map((index) => parseInt(value.slice(index, index + 2), 16));
+}
+function hex(r, g, b) {
+  return `#${[r, g, b].map((value) => Math.round(value).toString(16).padStart(2, "0")).join("")}`;
+}
+function mix(first, second, firstWeight) {
+  const a = rgb(first);
+  const b = rgb(second);
+  return hex(...a.map((value, index) => value * firstWeight + b[index] * (1 - firstWeight)));
+}
+function luminance(color) {
+  const channels = rgb(color).map((value) => {
+    const channel = value / 255;
+    return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+  });
+  return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+}
+function contrast(first, second) {
+  const [lighter, darker] = [luminance(first), luminance(second)].sort((a, b) => b - a);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+function resolveWechatPalette(template) {
+  const rawAccent = (template == null ? void 0 : template.styles.accentColor) || "#475569";
+  const accent = /^#[\da-f]{6}$/i.test(rawAccent) ? rawAccent.toLowerCase() : "#475569";
+  const surface = mix(accent, "#ffffff", 0.06);
+  let accentText = accent;
+  while (contrast(accentText, "#ffffff") < 4.6 || contrast(accentText, surface) < 4.6) {
+    accentText = mix(accentText, "#000000", 0.9);
+  }
+  return {
+    accent,
+    accentText,
+    onAccent: contrast("#ffffff", accent) >= 4.5 ? "#ffffff" : "#111827",
+    surface,
+    border: mix(accent, "#ffffff", 0.25),
+    foreground: "#263238"
+  };
+}
+
+// src/core/recipe/articleRecipeFormatter.ts
+var recipeIds = /* @__PURE__ */ new Set([
+  "legacy-compatible",
+  "tutorial",
+  "checklist",
+  "product-intro",
+  "commentary",
+  "review"
+]);
+function normalizeArticleRecipeId(value) {
+  return recipeIds.has(value) ? value : "legacy-compatible";
+}
+function setStyles(element, styles) {
+  if (!element.hasAttribute("data-mp-recipe-base-style")) element.setAttribute("data-mp-recipe-base-style", element.getAttribute("style") || "");
+  const style = element.style;
+  Object.entries(styles).forEach(([property, value]) => style.setProperty(property, value));
+}
+function resetArticleRecipe(section) {
+  section.querySelectorAll("[data-mp-recipe-base-style]").forEach((element) => {
+    const style = element.getAttribute("data-mp-recipe-base-style") || "";
+    if (style) element.setAttribute("style", style);
+    else element.removeAttribute("style");
+    element.removeAttribute("data-mp-recipe-base-style");
+  });
+  section.querySelectorAll(".mp-recipe-step-label,.mp-recipe-check").forEach((element) => element.remove());
+  section.removeAttribute("data-mp-recipe");
+}
+function styleLists(section, palette, prefix) {
+  section.querySelectorAll("ol, ul").forEach((list) => setStyles(list, {
+    margin: "18px 0",
+    padding: "0",
+    "list-style": "none"
+  }));
+  section.querySelectorAll("ol > li, ul > li").forEach((item, index) => {
+    setStyles(item, {
+      display: "block",
+      margin: "10px 0",
+      padding: "12px 14px",
+      "border-left": `3px solid ${palette.accent}`,
+      background: palette.surface,
+      "line-height": "1.72"
+    });
+    const className = prefix === "\u6B65\u9AA4" ? "mp-recipe-step-label" : "mp-recipe-check";
+    let label = item.querySelector(":scope > .mp-recipe-step-label, :scope > .mp-recipe-check");
+    if (!label) {
+      label = createSpan();
+      label.className = className;
+      item.prepend(label);
+    }
+    label.className = className;
+    label.textContent = prefix === "\u6B65\u9AA4" ? `\u6B65\u9AA4 ${index + 1}\u3000` : "\u2713\u3000";
+    setStyles(label, { "font-weight": "700", color: palette.accentText });
+  });
+}
+function applyProductIntro(section, palette) {
+  const firstParagraph = section.querySelector("p");
+  if (firstParagraph) setStyles(firstParagraph, {
+    margin: "0 0 20px",
+    padding: "14px 16px",
+    "border-left": `3px solid ${palette.accent}`,
+    background: palette.surface,
+    "line-height": "1.78"
+  });
+  section.querySelectorAll("h2").forEach((heading) => setStyles(heading, {
+    "border-left": `3px solid ${palette.accent}`,
+    "padding-left": "12px"
+  }));
+}
+function applyCommentary(section, palette) {
+  section.querySelectorAll("blockquote").forEach((quote) => setStyles(quote, {
+    "border-left": `3px solid ${palette.accent}`,
+    background: palette.surface,
+    color: palette.foreground
+  }));
+  const paragraphs = Array.from(section.querySelectorAll("p"));
+  const conclusion = paragraphs[paragraphs.length - 1];
+  if (conclusion && paragraphs.length > 1) setStyles(conclusion, {
+    "margin-top": "24px",
+    padding: "12px 0",
+    "border-top": `2px solid ${palette.accent}`,
+    "font-weight": "600"
+  });
+}
+function applyReview(section, palette) {
+  section.querySelectorAll("h2, h3").forEach((heading) => setStyles(heading, {
+    "border-left": `3px solid ${palette.accent}`,
+    "padding-left": "12px"
+  }));
+}
+function applyArticleRecipe(section, recipeId, palette = resolveWechatPalette()) {
+  resetArticleRecipe(section);
+  const recipe = normalizeArticleRecipeId(recipeId);
+  section.setAttribute("data-mp-recipe", recipe);
+  switch (recipe) {
+    case "tutorial":
+      styleLists(section, palette, "\u6B65\u9AA4");
+      break;
+    case "checklist":
+      styleLists(section, palette, "\u6E05\u5355");
+      break;
+    case "product-intro":
+      applyProductIntro(section, palette);
+      break;
+    case "commentary":
+      applyCommentary(section, palette);
+      break;
+    case "review":
+      applyReview(section, palette);
+      break;
+    default:
+      break;
+  }
+  return recipe;
+}
 
 // node_modules/pangu/dist/shared/index.js
 var __defProp2 = Object.defineProperty;
@@ -11593,13 +11981,13 @@ var Pangu = class {
     newText = newText.replace(CJK_OPERATOR_ANS, "$1 $2 $3");
     newText = newText.replace(ANS_OPERATOR_CJK, "$1 $2 $3");
     newText = newText.replace(ANS_OPERATOR_ANS, "$1 $2 $3");
-    newText = newText.replace(ANS_HYPHEN_ANS_NOT_COMPOUND, (match, ...groups) => {
-      if (groups[0] && groups[1] && groups[2]) {
-        return `${groups[0]} ${groups[1]} ${groups[2]}`;
-      } else if (groups[3] && groups[4] && groups[5]) {
-        return `${groups[3]} ${groups[4]} ${groups[5]}`;
-      } else if (groups[6] && groups[7] && groups[8]) {
-        return `${groups[6]} ${groups[7]} ${groups[8]}`;
+    newText = newText.replace(ANS_HYPHEN_ANS_NOT_COMPOUND, (match, ...groups2) => {
+      if (groups2[0] && groups2[1] && groups2[2]) {
+        return `${groups2[0]} ${groups2[1]} ${groups2[2]}`;
+      } else if (groups2[3] && groups2[4] && groups2[5]) {
+        return `${groups2[3]} ${groups2[4]} ${groups2[5]}`;
+      } else if (groups2[6] && groups2[7] && groups2[8]) {
+        return `${groups2[6]} ${groups2[7]} ${groups2[8]}`;
       }
       return match;
     });
@@ -12299,277 +12687,15 @@ var BrowserPangu = class extends Pangu {
 };
 var pangu2 = new BrowserPangu();
 
-// src/core/article/articleModel.ts
-var emptyStats = () => ({
-  headings: 0,
-  paragraphs: 0,
-  listItems: 0,
-  quotes: 0,
-  codeBlocks: 0,
-  tables: 0,
-  images: 0,
-  links: 0,
-  components: 0
-});
-function normalizedText(element) {
-  return (element.textContent || "").replace(/\s+/g, " ").trim();
-}
-function addNode(nodes, stats, kind, element, extra = {}) {
-  stats[`${kind === "listItem" ? "listItems" : `${kind}s`}`]++;
-  nodes.push({
-    id: `node-${nodes.length + 1}`,
-    kind,
-    text: normalizedText(element),
-    ...extra
-  });
-}
-function createArticleModel(root) {
-  const nodes = [];
-  const stats = emptyStats();
-  root.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((element) => {
-    const level = Number(element.tagName.slice(1));
-    addNode(nodes, stats, "heading", element, { level });
-  });
-  root.querySelectorAll("p").forEach((element) => addNode(nodes, stats, "paragraph", element));
-  root.querySelectorAll("li").forEach((element) => addNode(nodes, stats, "listItem", element));
-  root.querySelectorAll("blockquote").forEach((element) => addNode(nodes, stats, "quote", element));
-  root.querySelectorAll("pre").forEach((element) => addNode(nodes, stats, "codeBlock", element));
-  root.querySelectorAll("table").forEach((element) => addNode(nodes, stats, "table", element));
-  root.querySelectorAll("img").forEach((element) => addNode(nodes, stats, "image", element, { src: element.src }));
-  root.querySelectorAll("a[href]").forEach((element) => addNode(nodes, stats, "link", element, { href: element.href }));
-  root.querySelectorAll("[data-mp-layout], [data-container]").forEach((element) => addNode(nodes, stats, "component", element));
-  return { schemaVersion: 1, nodes, stats };
-}
-
-// src/core/layout/localLayoutPlanner.ts
-function sectionFromHeading(heading, index) {
-  return {
-    id: `section-${index + 1}`,
-    headingNodeId: heading.id,
-    title: heading.text || `Section ${index + 1}`,
-    componentIds: []
-  };
-}
-function createLocalLayoutPlan(article, options) {
-  const headings = article.nodes.filter((node) => node.kind === "heading");
-  const sections = headings.map(sectionFromHeading);
-  if (sections.length === 0) {
-    sections.push({ id: "section-1", title: "\u6B63\u6587", componentIds: [] });
+// src/core/render/articleText.ts
+function normalizeArticleText(root) {
+  var _a;
+  const walker = root.ownerDocument.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let node;
+  while (node = walker.nextNode()) {
+    if (!node.nodeValue || ((_a = node.parentElement) == null ? void 0 : _a.closest("pre,code"))) continue;
+    node.nodeValue = pangu2.spacingText(node.nodeValue).replace(/「/g, "\u201C").replace(/」/g, "\u201D").replace(/『/g, "\u2018").replace(/』/g, "\u2019");
   }
-  return {
-    schemaVersion: 1,
-    articleType: options.articleType || "general-article",
-    themeId: options.themeId,
-    recipeId: options.recipeId || "legacy-compatible",
-    sections,
-    options: {
-      includeToc: options.includeToc === true,
-      includeEnding: options.includeEnding === true
-    }
-  };
-}
-
-// src/core/validation/wechatHtmlValidator.ts
-var forbiddenTags = /* @__PURE__ */ new Set(["SCRIPT", "STYLE", "IFRAME", "FORM", "INPUT", "BUTTON", "TEXTAREA", "SELECT"]);
-var discouragedStyles = [
-  ["display-flex", /display\s*:\s*(?:inline-)?flex\b/i],
-  ["display-grid", /display\s*:\s*grid\b/i],
-  ["fixed-position", /position\s*:\s*(?:fixed|sticky)\b/i],
-  ["absolute-position", /position\s*:\s*absolute\b/i],
-  ["overflow", /overflow(?:-[xy])?\s*:/i],
-  ["css-variable", /var\s*\(/i]
-];
-function pathFor(element) {
-  const parts = [];
-  let current = element;
-  while (current && parts.length < 4) {
-    parts.unshift(current.tagName.toLowerCase());
-    current = current.parentElement;
-  }
-  return parts.join(" > ");
-}
-function validateWechatHtml(root) {
-  const issues = [];
-  const add = (severity, code, message, element) => {
-    issues.push({ severity, code, message, path: pathFor(element) });
-  };
-  root.querySelectorAll("*").forEach((element) => {
-    if (forbiddenTags.has(element.tagName)) {
-      add("error", "forbidden-tag", `\u4E0D\u5141\u8BB8\u7684\u6807\u7B7E\uFF1A${element.tagName.toLowerCase()}`, element);
-    }
-    Array.from(element.attributes).forEach((attribute) => {
-      if (attribute.name.startsWith("on")) {
-        add("error", "event-attribute", `\u4E0D\u5141\u8BB8\u7684\u4E8B\u4EF6\u5C5E\u6027\uFF1A${attribute.name}`, element);
-      }
-      if (attribute.name === "class" || attribute.name === "id" || attribute.name.startsWith("data-")) {
-        add("warning", "transient-attribute", `\u590D\u5236\u65F6\u5C06\u79FB\u9664\u5C5E\u6027\uFF1A${attribute.name}`, element);
-      }
-    });
-    const style = element.getAttribute("style") || "";
-    discouragedStyles.forEach(([code, pattern]) => {
-      if (pattern.test(style)) {
-        add("warning", code, `\u5FAE\u4FE1\u516C\u4F17\u53F7\u517C\u5BB9\u6027\u98CE\u9669\uFF1A${code}`, element);
-      }
-    });
-    if (element.tagName === "IMG" && !element.getAttribute("src")) {
-      add("error", "missing-image-source", "\u56FE\u7247\u7F3A\u5C11\u53EF\u7528\u7684 src \u5730\u5740", element);
-    }
-  });
-  root.querySelectorAll("table").forEach((table) => {
-    const widestRow = Math.max(0, ...Array.from(table.querySelectorAll("tr")).map((row) => Array.from(row.children).reduce((columns, cell) => columns + (cell.matches("th, td") ? Number(cell.getAttribute("colspan") || 1) : 0), 0)));
-    if (widestRow > 3) {
-      add("warning", "mobile-wide-table", "\u8868\u683C\u8D85\u8FC7\u4E09\u5217\uFF0C\u5EFA\u8BAE\u5728\u516C\u4F17\u53F7\u624B\u673A\u7AEF\u786E\u8BA4\u662F\u5426\u9700\u8981\u62C6\u4E3A\u5217\u8868\u3002", table);
-    }
-  });
-  return {
-    issues,
-    errors: issues.filter((issue) => issue.severity === "error").length,
-    warnings: issues.filter((issue) => issue.severity === "warning").length
-  };
-}
-
-// src/core/theme/wechatPalette.ts
-function rgb(hex2) {
-  const value = hex2.replace("#", "");
-  return [0, 2, 4].map((index) => parseInt(value.slice(index, index + 2), 16));
-}
-function hex(r, g, b) {
-  return `#${[r, g, b].map((value) => Math.round(value).toString(16).padStart(2, "0")).join("")}`;
-}
-function mix(first, second, firstWeight) {
-  const a = rgb(first);
-  const b = rgb(second);
-  return hex(...a.map((value, index) => value * firstWeight + b[index] * (1 - firstWeight)));
-}
-function luminance(color) {
-  const channels = rgb(color).map((value) => {
-    const channel = value / 255;
-    return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
-  });
-  return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
-}
-function contrast(first, second) {
-  const [lighter, darker] = [luminance(first), luminance(second)].sort((a, b) => b - a);
-  return (lighter + 0.05) / (darker + 0.05);
-}
-function resolveWechatPalette(template) {
-  const rawAccent = (template == null ? void 0 : template.styles.accentColor) || "#475569";
-  const accent = /^#[\da-f]{6}$/i.test(rawAccent) ? rawAccent.toLowerCase() : "#475569";
-  const surface = mix(accent, "#ffffff", 0.06);
-  let accentText = accent;
-  while (contrast(accentText, "#ffffff") < 4.6 || contrast(accentText, surface) < 4.6) {
-    accentText = mix(accentText, "#000000", 0.9);
-  }
-  return {
-    accent,
-    accentText,
-    onAccent: contrast("#ffffff", accent) >= 4.5 ? "#ffffff" : "#111827",
-    surface,
-    border: mix(accent, "#ffffff", 0.25),
-    foreground: "#263238"
-  };
-}
-
-// src/core/recipe/articleRecipeFormatter.ts
-var recipeIds = /* @__PURE__ */ new Set([
-  "legacy-compatible",
-  "tutorial",
-  "checklist",
-  "product-intro",
-  "commentary",
-  "review"
-]);
-function normalizeArticleRecipeId(value) {
-  return recipeIds.has(value) ? value : "legacy-compatible";
-}
-function setStyles(element, styles) {
-  const style = element.style;
-  Object.entries(styles).forEach(([property, value]) => style.setProperty(property, value));
-}
-function styleLists(section, palette, prefix) {
-  section.querySelectorAll("ol, ul").forEach((list) => setStyles(list, {
-    margin: "18px 0",
-    padding: "0",
-    "list-style": "none"
-  }));
-  section.querySelectorAll("ol > li, ul > li").forEach((item, index) => {
-    setStyles(item, {
-      display: "block",
-      margin: "10px 0",
-      padding: "12px 14px",
-      "border-left": `3px solid ${palette.accent}`,
-      background: palette.surface,
-      "line-height": "1.72"
-    });
-    const className = prefix === "\u6B65\u9AA4" ? "mp-recipe-step-label" : "mp-recipe-check";
-    let label = item.querySelector(`:scope > .${className}`);
-    if (!label) {
-      label = document.createElement("span");
-      label.className = className;
-      item.prepend(label);
-    }
-    label.textContent = prefix === "\u6B65\u9AA4" ? `\u6B65\u9AA4 ${index + 1}\u3000` : "\u2713\u3000";
-    setStyles(label, { "font-weight": "700", color: palette.accentText });
-  });
-}
-function applyProductIntro(section, palette) {
-  const firstParagraph = section.querySelector("p");
-  if (firstParagraph) setStyles(firstParagraph, {
-    margin: "0 0 20px",
-    padding: "14px 16px",
-    "border-left": `3px solid ${palette.accent}`,
-    background: palette.surface,
-    "line-height": "1.78"
-  });
-  section.querySelectorAll("h2").forEach((heading) => setStyles(heading, {
-    "border-left": `3px solid ${palette.accent}`,
-    "padding-left": "12px"
-  }));
-}
-function applyCommentary(section, palette) {
-  section.querySelectorAll("blockquote").forEach((quote) => setStyles(quote, {
-    "border-left": `3px solid ${palette.accent}`,
-    background: palette.surface,
-    color: palette.foreground
-  }));
-  const paragraphs = Array.from(section.querySelectorAll("p"));
-  const conclusion = paragraphs[paragraphs.length - 1];
-  if (conclusion && paragraphs.length > 1) setStyles(conclusion, {
-    "margin-top": "24px",
-    padding: "12px 0",
-    "border-top": `2px solid ${palette.accent}`,
-    "font-weight": "600"
-  });
-}
-function applyReview(section, palette) {
-  section.querySelectorAll("h2, h3").forEach((heading) => setStyles(heading, {
-    "border-left": `3px solid ${palette.accent}`,
-    "padding-left": "12px"
-  }));
-}
-function applyArticleRecipe(section, recipeId, palette = resolveWechatPalette()) {
-  const recipe = normalizeArticleRecipeId(recipeId);
-  section.setAttribute("data-mp-recipe", recipe);
-  switch (recipe) {
-    case "tutorial":
-      styleLists(section, palette, "\u6B65\u9AA4");
-      break;
-    case "checklist":
-      styleLists(section, palette, "\u6E05\u5355");
-      break;
-    case "product-intro":
-      applyProductIntro(section, palette);
-      break;
-    case "commentary":
-      applyCommentary(section, palette);
-      break;
-    case "review":
-      applyReview(section, palette);
-      break;
-    default:
-      break;
-  }
-  return recipe;
 }
 
 // src/core/render/legacyWechatPipeline.ts
@@ -12587,15 +12713,18 @@ function removeTransientAttributes(root) {
   });
 }
 function prepareLegacyWechatFragment(element, options = {}) {
-  const clone2 = element.cloneNode(true);
+  let clone2 = element.cloneNode(true);
   const article = createArticleModel(clone2);
   const sourceValidation = validateWechatHtml(clone2);
   const plan = createLocalLayoutPlan(article, {
     themeId: options.themeId || "legacy-active",
     recipeId: options.recipeId || "legacy-compatible"
   });
-  applyArticleRecipe(clone2, plan.recipeId, options.palette);
+  if (clone2.getAttribute("data-mp-recipe") !== plan.recipeId) applyArticleRecipe(clone2, plan.recipeId, options.palette);
+  const blocks = Array.from(clone2.children).map((block, index) => ({ id: block.getAttribute("data-mp-block-id") || `block-${index}`, tag: block.tagName.toLowerCase() }));
   removeTransientAttributes(clone2);
+  clone2 = element.ownerDocument.importNode(safeHtmlToElement(new XMLSerializer().serializeToString(clone2)), true);
+  normalizeArticleText(clone2);
   const outputValidation = validateWechatHtml(clone2);
   const blockingIssues = sourceValidation.issues.filter((issue) => issue.severity === "error");
   const validation = {
@@ -12607,130 +12736,168 @@ function prepareLegacyWechatFragment(element, options = {}) {
     article,
     plan,
     html: new XMLSerializer().serializeToString(clone2),
-    validation
+    validation,
+    root: clone2,
+    text: clone2.textContent || "",
+    blocks
   };
+}
+
+// src/core/resources/imageResources.ts
+var import_obsidian2 = require("obsidian");
+var rasterMime = /^image\/(?:png|jpe?g|gif|webp|avif|bmp|x-icon)$/i;
+var loadImage = async (url, signal) => {
+  if (/^https?:/i.test(url)) {
+    const response2 = await (0, import_obsidian2.requestUrl)({ url, throw: false });
+    return { status: response2.status, mime: response2.headers["content-type"] || "", bytes: response2.arrayBuffer };
+  }
+  const response = await fetch(url, { signal });
+  return { status: response.status, mime: response.headers.get("content-type") || "", bytes: await response.arrayBuffer() };
+};
+function asDataUri(bytes, mime) {
+  const array = new Uint8Array(bytes);
+  let binary = "";
+  for (let start = 0; start < array.length; start += 8192) binary += String.fromCharCode(...array.subarray(start, start + 8192));
+  return `data:${mime};base64,${btoa(binary)}`;
+}
+async function embedArticleImages(root, options = {}) {
+  var _a, _b, _c, _d, _e, _f;
+  const ownerWindow = root.ownerDocument.defaultView;
+  if (!ownerWindow) throw new Error("\u6587\u7AE0\u7A97\u53E3\u4E0D\u53EF\u7528");
+  const controller = new AbortController();
+  const abort = () => controller.abort();
+  (_a = options.signal) == null ? void 0 : _a.addEventListener("abort", abort, { once: true });
+  if ((_b = options.signal) == null ? void 0 : _b.aborted) abort();
+  const cache = /* @__PURE__ */ new Map();
+  const maxImage = (_c = options.maxImageBytes) != null ? _c : 12 * 1024 * 1024;
+  const maxTotal = (_d = options.maxTotalBytes) != null ? _d : 40 * 1024 * 1024;
+  let total = 0;
+  const get = (url) => {
+    const cached = cache.get(url);
+    if (cached) return cached;
+    const task = (async () => {
+      var _a2;
+      if (controller.signal.aborted) throw new Error("\u64CD\u4F5C\u5DF2\u53D6\u6D88");
+      if (!safeUrl(url, "image")) throw new Error("\u4E0D\u652F\u6301\u7684\u56FE\u7247\u5730\u5740");
+      if (/^data:/i.test(url)) {
+        const size = Math.ceil((((_a2 = url.split(",")[1]) == null ? void 0 : _a2.length) || 0) * 3 / 4);
+        if (size > maxImage || total + size > maxTotal) throw new Error("\u56FE\u7247\u8D85\u8FC7\u5927\u5C0F\u9650\u5236");
+        total += size;
+        return url;
+      }
+      const response = await new Promise((resolve, reject) => {
+        var _a3, _b2;
+        const finish = (callback) => {
+          ownerWindow.clearTimeout(timer);
+          controller.signal.removeEventListener("abort", cancel);
+          callback();
+        };
+        const cancel = () => finish(() => reject(new Error("\u64CD\u4F5C\u5DF2\u53D6\u6D88")));
+        const timer = ownerWindow.setTimeout(() => finish(() => reject(new Error("\u56FE\u7247\u52A0\u8F7D\u8D85\u65F6"))), (_a3 = options.timeoutMs) != null ? _a3 : 1e4);
+        controller.signal.addEventListener("abort", cancel, { once: true });
+        const loader = (_b2 = options.loader) != null ? _b2 : loadImage;
+        void Promise.resolve().then(() => loader(url, controller.signal)).then((value) => finish(() => resolve(value)), (error) => finish(() => reject(error instanceof Error ? error : new Error("\u56FE\u7247\u8BF7\u6C42\u5931\u8D25"))));
+      });
+      if (controller.signal.aborted) throw new Error("\u64CD\u4F5C\u5DF2\u53D6\u6D88");
+      if (response.status < 200 || response.status >= 300) throw new Error(`\u56FE\u7247\u8BF7\u6C42\u5931\u8D25\uFF08HTTP ${response.status}\uFF09`);
+      const mime = response.mime.split(";")[0].trim().toLowerCase();
+      if (!rasterMime.test(mime)) throw new Error("\u56FE\u7247\u7C7B\u578B\u4E0D\u53D7\u652F\u6301\uFF0C\u9700\u4F7F\u7528 PNG/JPEG \u7B49\u4F4D\u56FE");
+      if (!response.bytes.byteLength || response.bytes.byteLength > maxImage || total + response.bytes.byteLength > maxTotal) throw new Error("\u56FE\u7247\u4E3A\u7A7A\u6216\u8D85\u8FC7\u5927\u5C0F\u9650\u5236");
+      total += response.bytes.byteLength;
+      return asDataUri(response.bytes, mime);
+    })();
+    cache.set(url, task);
+    return task;
+  };
+  const images = Array.from(root.querySelectorAll("img"));
+  let index = 0;
+  const worker = async () => {
+    while (index < images.length) {
+      const image = images[index++];
+      try {
+        const url = await get(image.src);
+        if (controller.signal.aborted) throw new Error("\u64CD\u4F5C\u5DF2\u53D6\u6D88");
+        image.src = url;
+        image.removeAttribute("srcset");
+      } catch (error) {
+        abort();
+        throw new Error(`\u7B2C ${images.indexOf(image) + 1} \u5F20\u56FE\u7247\uFF1A${error instanceof Error ? error.message : "\u52A0\u8F7D\u5931\u8D25"}`);
+      }
+    }
+  };
+  try {
+    await Promise.all(Array.from({ length: Math.min(images.length, Math.max(1, Math.min(4, (_e = options.concurrency) != null ? _e : 3))) }, () => worker()));
+  } finally {
+    (_f = options.signal) == null ? void 0 : _f.removeEventListener("abort", abort);
+  }
 }
 
 // src/copyManager.ts
 var CopyManager = class {
-  static async processImagesForExport(container) {
-    return this.processImages(container);
+  static async processImagesForExport(container, options = {}) {
+    await embedArticleImages(container, options);
   }
-  static async processImages(container) {
-    const images = container.querySelectorAll("img");
-    const imageArray = Array.from(images);
-    for (const img of imageArray) {
-      try {
-        const response = await fetch(img.src);
-        const blob = await response.blob();
-        const reader = new FileReader();
-        await new Promise((resolve, reject) => {
-          reader.onload = () => {
-            img.src = reader.result;
-            resolve(null);
-          };
-          reader.onerror = reject;
-          reader.readAsDataURL(blob);
-        });
-      } catch (error) {
-        console.error("\u56FE\u7247\u8F6C\u6362\u5931\u8D25:", error);
-      }
-    }
+  static async prepareForExport(element, options = {}, resources = {}) {
+    const section = element.matches(".mp-content-section") ? element : element.querySelector(".mp-content-section");
+    if (!section) throw new Error("\u627E\u4E0D\u5230\u5185\u5BB9\u533A\u57DF");
+    const preparation = prepareLegacyWechatFragment(section, options);
+    if (preparation.validation.errors > 0) throw new Error(`\u53D1\u73B0 ${preparation.validation.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u5DF2\u53D6\u6D88\u590D\u5236\u6216\u5BFC\u51FA`);
+    await this.processImagesForExport(preparation.root, resources);
+    preparation.html = new XMLSerializer().serializeToString(preparation.root);
+    preparation.text = preparation.root.textContent || "";
+    return preparation;
   }
-  static async copyToClipboard(element, options = {}) {
+  static async copyToClipboard(element, options = {}, resources = {}) {
     var _a;
     try {
-      const clone2 = element.cloneNode(true);
-      await this.processImages(clone2);
-      const contentSection = clone2.querySelector(".mp-content-section");
-      if (!contentSection) {
-        throw new Error("\u627E\u4E0D\u5230\u5185\u5BB9\u533A\u57DF");
-      }
-      const preparation = prepareLegacyWechatFragment(contentSection, options);
-      if (preparation.validation.errors > 0) {
-        throw new Error(`\u53D1\u73B0 ${preparation.validation.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u5DF2\u53D6\u6D88\u590D\u5236`);
-      }
-      let cleanHtml = preparation.html;
-      let cleanText = contentSection.textContent || "";
-      if (preparation.validation.errors > 0 || preparation.validation.warnings > 0) {
-        console.warn("WeChat compatibility report", preparation.validation);
-      }
-      try {
-        const tempDiv = document.createElement("div");
-        replaceWithSafeHtml(tempDiv, cleanHtml);
-        const walker = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT);
-        let node;
-        while ((node = walker.nextNode()) !== null) {
-          if (node.nodeValue) {
-            if ((_a = node.parentElement) == null ? void 0 : _a.closest("pre,code")) continue;
-            node.nodeValue = pangu2.spacingText(node.nodeValue).replace(/「/g, "\u201C").replace(/」/g, "\u201D").replace(/『/g, "\u2018").replace(/』/g, "\u2019");
-          }
-        }
-        cleanHtml = tempDiv.innerHTML;
-        cleanText = tempDiv.textContent || "";
-      } catch (e) {
-        console.warn("Text cleaning failed:", e);
-      }
+      const prepared = await this.prepareForExport(element, options, resources);
       const clipData = new ClipboardItem({
-        "text/html": new Blob([cleanHtml], { type: "text/html" }),
-        "text/plain": new Blob([cleanText], { type: "text/plain" })
+        "text/html": new Blob([prepared.html], { type: "text/html" }),
+        "text/plain": new Blob([prepared.text], { type: "text/plain" })
       });
+      if ((_a = resources.signal) == null ? void 0 : _a.aborted) throw new Error("\u64CD\u4F5C\u5DF2\u53D6\u6D88");
       await navigator.clipboard.write([clipData]);
-      new import_obsidian.Notice("\u5DF2\u590D\u5236\u5230\u526A\u8D34\u677F");
-      return preparation.validation;
+      new import_obsidian3.Notice("\u5DF2\u590D\u5236\u5230\u526A\u8D34\u677F");
+      return prepared.validation;
     } catch (error) {
-      new import_obsidian.Notice("\u590D\u5236\u5931\u8D25");
+      new import_obsidian3.Notice(`\u590D\u5236\u5931\u8D25\uFF1A${error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF"}`);
       throw error;
     }
   }
 };
 
-// src/backgroundManager.ts
-var import_obsidian2 = require("obsidian");
-var _BackgroundManager = class _BackgroundManager {
-  constructor(settingsManager) {
-    this.currentBackground = null;
-    this.warnedUnsafeBackgrounds = /* @__PURE__ */ new Set();
-    this.settingsManager = settingsManager;
-  }
-  setBackground(id) {
-    if (!id) {
-      this.currentBackground = null;
-      return true;
-    }
-    const background = this.settingsManager.getBackground(id);
-    if (background) {
-      if (background.isVisible === false) {
-        console.warn(`\u5C1D\u8BD5\u8BBE\u7F6E\u4E0D\u53EF\u89C1\u7684\u80CC\u666F: ${id}`);
-        return false;
-      }
-      this.currentBackground = background;
-      if (!this.warnedUnsafeBackgrounds.has(id) && hasUnsafeCss(background.style)) {
-        this.warnedUnsafeBackgrounds.add(id);
-        new import_obsidian2.Notice("\u6B64\u80CC\u666F\u542B\u8D44\u6E90\u52A0\u8F7D\u6216\u4E0D\u5B89\u5168 CSS\uFF0C\u9884\u89C8\u5C06\u8FC7\u6EE4\u76F8\u5173\u6837\u5F0F\uFF1B\u539F\u8BBE\u7F6E\u672A\u6539\u5199\u3002");
-      }
-      return true;
-    }
-    console.warn(`\u672A\u627E\u5230\u80CC\u666F: ${id}`);
-    return false;
-  }
-  applyBackground(element) {
-    const section = element.querySelector(".mp-content-section");
-    if (section) {
-      if (!this.currentBackground) {
-        section.removeAttribute("style");
-        return;
-      }
-      const bgStyle = this.currentBackground.style.replace(/padding:\s*0;?/g, "").replace(/;\s*$/, ";");
-      setSafeInlineStyle(section, bgStyle + " " + _BackgroundManager.BASE_CONTENT_PADDING);
-    }
-  }
-};
-_BackgroundManager.BASE_CONTENT_PADDING = "padding: 16px 20px;";
-var BackgroundManager = _BackgroundManager;
+// src/templateManager.ts
+var import_obsidian4 = require("obsidian");
 
-// src/settings/ThemeGalleryModal.ts
-var import_obsidian3 = require("obsidian");
+// src/core/theme/wechatReadingBaseline.ts
+var DEFAULT_WECHAT_FONT_STACK = '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif';
+var wechatReadingProfiles = {
+  compact: { lineHeight: 1.72, paragraphGapEm: 0.85 },
+  standard: { lineHeight: 1.78, paragraphGapEm: 0.95 },
+  airy: { lineHeight: 1.82, paragraphGapEm: 1.05 }
+};
+function paragraphRhythm(profile) {
+  const rhythm = wechatReadingProfiles[profile];
+  return `line-height: ${rhythm.lineHeight}; margin-bottom: ${rhythm.paragraphGapEm}em;`;
+}
+var wechatReadingBaseline = {
+  title: "line-height: 1.45; letter-spacing: 0; word-break: break-word;",
+  sectionTitle: "text-align: left; font-weight: 700; line-height: 1.45; letter-spacing: 0; word-break: break-word;",
+  paragraph: "font-weight: 400; line-height: 1.78; letter-spacing: 0; text-align: left; margin-top: 0; margin-bottom: 0.95em; word-break: break-word; overflow-wrap: anywhere;",
+  list: "margin-top: 0.9em; margin-bottom: 1.1em; padding-left: 1.45em; text-align: left;",
+  listItem: "font-weight: 400; line-height: 1.8; letter-spacing: 0; text-align: left; margin-bottom: 0.5em; word-break: break-word;",
+  quote: "font-weight: 400; line-height: 1.8; letter-spacing: 0; text-align: left; font-style: normal; word-break: break-word;",
+  codeBlock: "font-size: 14px; line-height: 1.65; white-space: pre-wrap; word-break: break-word;",
+  inlineCode: "font-size: 0.9em; line-height: 1.5; word-break: break-word;",
+  emphasis: "font-weight: 600;",
+  table: "width: 100%; max-width: 100%; table-layout: auto;",
+  tableCell: "line-height: 1.65; vertical-align: top; word-break: break-word; overflow-wrap: anywhere;",
+  image: "max-width: 100%; height: auto; display: block; margin: 1.2em auto;",
+  link: "word-break: break-word;"
+};
+function appendWechatReadingBaseline(themeStyle, baseline) {
+  return `${themeStyle || ""}; ${baseline}`.replace(/;;+/g, ";");
+}
 
 // src/core/theme/themeCatalog.ts
 var CURATED_THEME_CATALOG_VERSION = 4;
@@ -12766,1350 +12933,6 @@ function getCuratedThemeEntry(themeId) {
 }
 function getNoteThemeEntries() {
   return noteThemeEntries;
-}
-
-// src/settings/ThemeGalleryModal.ts
-var CURATED_SCENE_ORDER = [...new Set(curatedThemeEntries.map((entry) => entry.scene))];
-var SCENE_ORDER = [
-  "\u5168\u90E8",
-  ...CURATED_SCENE_ORDER,
-  "\u81EA\u5B9A\u4E49\u4E3B\u9898"
-];
-function getThemeScene(template) {
-  if (!template.isPreset) return "\u81EA\u5B9A\u4E49\u4E3B\u9898";
-  const entry = getCuratedThemeEntry(template.id);
-  return (entry == null ? void 0 : entry.status) === "legacy" ? "\u5386\u53F2\u4E3B\u9898" : (entry == null ? void 0 : entry.scene) || "\u901A\u7528\u957F\u6587";
-}
-var ThemeGalleryModal = class extends import_obsidian3.Modal {
-  constructor(app, settingsManager, currentTemplateId, onSelect, previewCallback) {
-    super(app);
-    this.selectedScene = "\u5168\u90E8";
-    this.searchQuery = "";
-    this.hasApplied = false;
-    this.gridContainer = null;
-    this.applyButton = null;
-    this.tryHintEl = null;
-    this.historyButton = null;
-    this.sceneBar = null;
-    this.templates = settingsManager.getVisibleTemplates();
-    this.originalTemplateId = currentTemplateId;
-    this.currentTemplateId = currentTemplateId;
-    this.onSelect = onSelect;
-    this.previewCallback = previewCallback;
-    const currentTemplate = this.templates.find((template) => template.id === currentTemplateId);
-    if (currentTemplate) this.selectedScene = getThemeScene(currentTemplate);
-  }
-  onOpen() {
-    const { contentEl, modalEl } = this;
-    modalEl.addClass("mp-theme-gallery-modal");
-    contentEl.empty();
-    const header = contentEl.createDiv("mp-gallery-header");
-    const heading = header.createDiv("mp-gallery-heading");
-    heading.createEl("h2", { text: "\u516C\u4F17\u53F7\u4E3B\u9898\u753B\u5ECA" });
-    heading.createEl("p", { text: "\u6BCF\u4E2A\u573A\u666F\u4E24\u5957\u4E0D\u540C\u7684\u9605\u8BFB\u7248\u5F0F\uFF1B\u70B9\u51FB\u4E3B\u9898\u5148\u8BD5\u7528\uFF0C\u518D\u786E\u8BA4\u5E94\u7528\u3002" });
-    const headerActions = header.createDiv("mp-gallery-header-actions");
-    const search = headerActions.createEl("input", {
-      cls: "mp-gallery-search",
-      attr: { type: "search", placeholder: "\u641C\u7D22\u4E3B\u9898\u6216\u6587\u7AE0\u573A\u666F" }
-    });
-    search.addEventListener("input", () => {
-      this.searchQuery = search.value.trim().toLowerCase();
-      this.renderGallery();
-    });
-    this.historyButton = headerActions.createEl("button", {
-      cls: `mp-gallery-history-btn ${this.selectedScene === "\u5386\u53F2\u4E3B\u9898" ? "is-active" : ""}`,
-      attr: { type: "button", "aria-label": "\u67E5\u770B\u5386\u53F2\u4E3B\u9898", "aria-pressed": String(this.selectedScene === "\u5386\u53F2\u4E3B\u9898") }
-    });
-    (0, import_obsidian3.setIcon)(this.historyButton, "archive");
-    this.historyButton.createSpan({ text: "\u5386\u53F2\u4E3B\u9898" });
-    this.historyButton.addEventListener("click", () => this.activateScene("\u5386\u53F2\u4E3B\u9898"));
-    const sceneBar = contentEl.createDiv("mp-gallery-scenes");
-    this.sceneBar = sceneBar;
-    sceneBar.setAttribute("aria-label", "\u516C\u4F17\u53F7\u4E3B\u9898\u573A\u666F");
-    SCENE_ORDER.forEach((scene) => {
-      const count = this.getTemplatesForScene(scene).length;
-      if (count === 0 && scene !== "\u5168\u90E8") return;
-      const button = sceneBar.createEl("button", {
-        text: `${scene === "\u5168\u90E8" ? "\u5168\u90E8\u4E3B\u9898" : scene} \xB7 ${count}`,
-        cls: `mp-gallery-scene ${scene === this.selectedScene ? "is-active" : ""}`,
-        attr: { type: "button", "aria-pressed": String(scene === this.selectedScene) }
-      });
-      button.dataset.scene = scene;
-      button.addEventListener("click", () => this.activateScene(scene));
-    });
-    this.gridContainer = contentEl.createDiv("mp-gallery-grid");
-    this.renderGallery();
-    const footer = contentEl.createDiv("mp-gallery-footer");
-    const trialInfo = footer.createDiv("mp-gallery-trial-info");
-    this.tryHintEl = trialInfo.createDiv("mp-gallery-try-hint");
-    trialInfo.createEl("div", { cls: "mp-gallery-trial-note", text: "\u8BD5\u7528\u4E0D\u4F1A\u4FDD\u5B58\u5230\u7B14\u8BB0\u8BBE\u7F6E\u3002" });
-    this.updateTryHint();
-    const actions = footer.createDiv("mp-gallery-actions");
-    const cancel = actions.createEl("button", { text: "\u53D6\u6D88\u8BD5\u7528", cls: "mp-gallery-btn-cancel" });
-    cancel.addEventListener("click", () => this.close());
-    this.applyButton = actions.createEl("button", { cls: "mp-gallery-btn-apply" });
-    this.updateApplyButton();
-    this.applyButton.addEventListener("click", () => {
-      this.hasApplied = true;
-      void Promise.resolve(this.onSelect(this.currentTemplateId)).then(() => this.close());
-    });
-  }
-  onClose() {
-    if (!this.hasApplied && this.currentTemplateId !== this.originalTemplateId) {
-      this.previewCallback(this.originalTemplateId);
-    }
-    this.contentEl.empty();
-  }
-  activateScene(scene) {
-    var _a, _b, _c;
-    this.selectedScene = scene;
-    (_a = this.sceneBar) == null ? void 0 : _a.querySelectorAll(".mp-gallery-scene").forEach((element) => {
-      const button = element;
-      const active = button.dataset.scene === scene;
-      button.toggleClass("is-active", active);
-      button.setAttribute("aria-pressed", String(active));
-    });
-    (_b = this.historyButton) == null ? void 0 : _b.toggleClass("is-active", scene === "\u5386\u53F2\u4E3B\u9898");
-    (_c = this.historyButton) == null ? void 0 : _c.setAttribute("aria-pressed", String(scene === "\u5386\u53F2\u4E3B\u9898"));
-    this.renderGallery();
-  }
-  getTemplatesForScene(scene) {
-    return this.templates.filter((template) => {
-      const themeScene = getThemeScene(template);
-      return scene === "\u5168\u90E8" ? themeScene !== "\u5386\u53F2\u4E3B\u9898" : themeScene === scene;
-    });
-  }
-  matchesSearch(template) {
-    if (!this.searchQuery) return true;
-    return [template.id, template.name, template.description || "", getThemeScene(template)].join(" ").toLowerCase().includes(this.searchQuery);
-  }
-  getVisibleTemplates() {
-    return this.getTemplatesForScene(this.selectedScene).filter((template) => this.matchesSearch(template));
-  }
-  renderGallery() {
-    if (!this.gridContainer) return;
-    this.gridContainer.empty();
-    const templates2 = this.getVisibleTemplates();
-    if (templates2.length === 0) {
-      this.gridContainer.createEl("div", { cls: "mp-gallery-empty", text: "\u6CA1\u6709\u5339\u914D\u7684\u4E3B\u9898\uFF0C\u6362\u4E2A\u573A\u666F\u6216\u5173\u952E\u8BCD\u8BD5\u8BD5\u3002" });
-      return;
-    }
-    const grouped = this.selectedScene === "\u5168\u90E8";
-    const scenes = grouped ? SCENE_ORDER.filter((scene) => scene !== "\u5168\u90E8" && scene !== "\u5386\u53F2\u4E3B\u9898") : [this.selectedScene];
-    scenes.forEach((scene) => {
-      const sceneTemplates = grouped ? templates2.filter((template) => getThemeScene(template) === scene) : templates2;
-      if (sceneTemplates.length === 0) return;
-      this.gridContainer.createEl("h3", {
-        cls: "mp-gallery-section-title",
-        text: grouped ? scene : `${scene} \xB7 ${sceneTemplates.length} \u4E2A\u4E3B\u9898`
-      });
-      const cardGrid = this.gridContainer.createDiv("mp-gallery-card-grid");
-      sceneTemplates.forEach((template) => this.renderThemeCard(cardGrid, template));
-    });
-  }
-  renderThemeCard(container, template) {
-    const selected = template.id === this.currentTemplateId;
-    const card = container.createEl("button", {
-      cls: `mp-theme-card ${selected ? "is-selected" : ""}`,
-      attr: {
-        type: "button",
-        "aria-pressed": selected ? "true" : "false",
-        title: `\u8BD5\u7528\u4E3B\u9898\uFF1A${template.name}`
-      }
-    });
-    const info = card.createDiv("mp-theme-info");
-    info.createEl("strong", { text: template.name, cls: "mp-theme-name" });
-    if (selected) {
-      const check = info.createDiv("mp-theme-checkmark");
-      (0, import_obsidian3.setIcon)(check, "check");
-    }
-    card.addEventListener("click", () => {
-      this.currentTemplateId = template.id;
-      this.previewCallback(template.id);
-      this.updateApplyButton();
-      this.updateTryHint();
-      this.renderGallery();
-    });
-  }
-  updateApplyButton() {
-    if (!this.applyButton) return;
-    const template = this.templates.find((item) => item.id === this.currentTemplateId);
-    this.applyButton.setText(`\u5E94\u7528\u300C${(template == null ? void 0 : template.name) || "\u4E3B\u9898"}\u300D`);
-  }
-  updateTryHint() {
-    if (!this.tryHintEl) return;
-    const template = this.templates.find((item) => item.id === this.currentTemplateId);
-    const description = template ? this.getTemplateDescription(template) : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
-    this.tryHintEl.setText(`\u63A8\u8350\u4F5C\u7528\uFF1A${description}`);
-  }
-  getTemplateDescription(template) {
-    var _a, _b, _c;
-    const curatedRecommendation = ((_a = getCuratedThemeEntry(template.id)) == null ? void 0 : _a.recommendation) || ((_b = template.themeMeta) == null ? void 0 : _b.recommendation);
-    if (curatedRecommendation) return curatedRecommendation;
-    const description = (_c = template.description) == null ? void 0 : _c.trim();
-    return description ? description.split("\uFF08")[0].trim() : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
-  }
-};
-
-// src/ui/CustomSelect.ts
-function createCustomSelect(parent, className, initialOptions, onChange) {
-  const container = parent.createEl("div", { cls: "custom-select-container" });
-  if (className) container.classList.add(className);
-  const select = container.createEl("div", { cls: "custom-select" });
-  const selectedText = select.createEl("span", { cls: "selected-text" });
-  select.createEl("span", { cls: "select-arrow", text: "\u25BE" });
-  const dropdown = container.createEl("div", { cls: "select-dropdown" });
-  let currentOptions = initialOptions;
-  let currentValue = "";
-  const renderOptions = (opts) => {
-    dropdown.empty();
-    opts.forEach((option) => {
-      if (option.header) {
-        dropdown.createEl("div", {
-          cls: "select-group-header",
-          text: option.label,
-          attr: {
-            style: "padding: 8px 12px; font-weight: bold; color: var(--text-muted); font-size: 0.8em; background-color: var(--background-secondary); border-bottom: 1px solid var(--background-modifier-border); border-top: 1px solid var(--background-modifier-border); pointer-events: none;"
-          }
-        });
-        return;
-      }
-      const item = dropdown.createEl("div", {
-        cls: "select-item",
-        text: option.label
-      });
-      item.dataset.value = option.value;
-      if (option.value === currentValue) {
-        item.classList.add("selected");
-      }
-      item.addEventListener("click", () => {
-        setValue(option.value);
-        dropdown.classList.remove("show");
-        onChange(option.value);
-      });
-    });
-  };
-  const setValue = (value) => {
-    const option = currentOptions.find((o) => o.value === value && !o.header);
-    if (option) {
-      currentValue = value;
-      selectedText.textContent = option.label;
-      select.dataset.value = value;
-      dropdown.querySelectorAll(".select-item").forEach((el) => {
-        if (el.dataset.value === value) {
-          el.classList.add("selected");
-        } else {
-          el.classList.remove("selected");
-        }
-      });
-    }
-  };
-  renderOptions(currentOptions);
-  const firstOption = currentOptions.find((o) => !o.header);
-  if (firstOption && firstOption.value) {
-    setValue(firstOption.value);
-  }
-  select.addEventListener("click", (e) => {
-    e.stopPropagation();
-    document.querySelectorAll(".select-dropdown.show").forEach((el) => {
-      if (el !== dropdown) el.classList.remove("show");
-    });
-    dropdown.classList.toggle("show");
-  });
-  document.addEventListener("click", () => {
-    dropdown.classList.remove("show");
-  });
-  return {
-    container,
-    updateOptions: (newOptions) => {
-      currentOptions = newOptions;
-      renderOptions(newOptions);
-      if (currentOptions.length > 0) {
-        const exists = currentOptions.find((o) => o.value === currentValue && !o.header);
-        if (!exists) {
-          const first = currentOptions.find((o) => !o.header);
-          if (first) setValue(first.value);
-        } else {
-          setValue(currentValue);
-        }
-      }
-    },
-    setValue
-  };
-}
-
-// src/ui/ImageAltModal.ts
-var import_obsidian4 = require("obsidian");
-async function handleImageAltEdit(app, currentFile, img) {
-  const currentAlt = img.getAttribute("alt") || "";
-  const linktext = img.dataset.linktext;
-  const newAlt = window.prompt("\u7F16\u8F91\u56FE\u7247\u6CE8\u91CA (Alt Text):", currentAlt);
-  if (newAlt === null || newAlt === currentAlt) return;
-  try {
-    let fileContent = await app.vault.read(currentFile);
-    let newFileContent = fileContent;
-    let replaced = false;
-    if (linktext) {
-      const escapedLinktext = linktext.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      const wikiRegex = new RegExp(`!\\[\\[\\s*${escapedLinktext}\\s*(?:\\|.*?)?\\]\\]`);
-      if (wikiRegex.test(newFileContent)) {
-        newFileContent = newFileContent.replace(wikiRegex, `![[${linktext}|${newAlt}]]`);
-        replaced = true;
-      }
-    }
-    if (!replaced) {
-      const escapedAlt = currentAlt.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      const stdRegex = new RegExp(`!\\[\\s*${escapedAlt}\\s*\\]\\(`);
-      if (stdRegex.test(newFileContent)) {
-        newFileContent = newFileContent.replace(stdRegex, `![${newAlt}](`);
-        replaced = true;
-      } else if (currentAlt) {
-        const wikiAltRegex = new RegExp(`\\|\\s*${escapedAlt}\\s*\\]\\]`);
-        if (wikiAltRegex.test(newFileContent)) {
-          newFileContent = newFileContent.replace(wikiAltRegex, `|${newAlt}]]`);
-          replaced = true;
-        }
-      }
-    }
-    if (replaced) {
-      await app.vault.modify(currentFile, newFileContent);
-      new import_obsidian4.Notice("\u56FE\u7247\u6CE8\u91CA\u5DF2\u66F4\u65B0");
-    } else {
-      new import_obsidian4.Notice("\u65E0\u6CD5\u5728\u6587\u6863\u4E2D\u7CBE\u786E\u5B9A\u4F4D\u6B64\u56FE\u7247\uFF0C\u8BF7\u68C0\u67E5\u662F\u5426\u4E3A\u6807\u51C6\u683C\u5F0F\u3002");
-    }
-  } catch (err) {
-    console.error("Failed to update image alt text", err);
-    new import_obsidian4.Notice("\u66F4\u65B0\u5931\u8D25");
-  }
-}
-
-// src/view.ts
-var import_html2canvas = __toESM(require_html2canvas());
-var VIEW_TYPE_MP = "yh-mp-preview";
-var EXPORT_IMAGE_TIMEOUT_MS = 1e4;
-var MPView = class extends import_obsidian5.ItemView {
-  constructor(leaf, templateManager, settingsManager) {
-    super(leaf);
-    this.currentFile = null;
-    this.updateTimer = null;
-    this.isPreviewLocked = false;
-    this.isEditMode = false;
-    this.isPhonePreview = false;
-    this.trialTemplateId = null;
-    this.validationReport = null;
-    this.templateManager = templateManager;
-    this.settingsManager = settingsManager;
-    this.backgroundManager = new BackgroundManager(this.settingsManager);
-  }
-  getActiveWechatTemplateId() {
-    return this.trialTemplateId || this.settingsManager.getSettings().templateId;
-  }
-  updateRecipeSummary(recipeId) {
-    var _a;
-    const labels = {
-      tutorial: "\u6559\u7A0B\u4E0E\u6B65\u9AA4",
-      checklist: "\u6E05\u5355\u4E0E\u65B9\u6CD5\u8BBA",
-      "product-intro": "\u4EA7\u54C1\u6216\u5DE5\u5177\u4ECB\u7ECD",
-      commentary: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA",
-      review: "\u5468\u62A5\u4E0E\u590D\u76D8"
-    };
-    const active = recipeId !== "legacy-compatible";
-    this.recipeSummary.setText(active ? `\u9AD8\u7EA7\u6392\u7248 \xB7 ${labels[recipeId] || "\u5DF2\u542F\u7528"}` : "\u9AD8\u7EA7\u6392\u7248");
-    (_a = this.recipeSummary.parentElement) == null ? void 0 : _a.toggleClass("is-active", active);
-  }
-  applyThemeTrial(templateId) {
-    const savedId = this.settingsManager.getSettings().templateId;
-    this.trialTemplateId = templateId === savedId ? null : templateId;
-    this.templateManager.setCurrentTemplate(templateId);
-    this.templateManager.applyTemplate(this.previewEl);
-    const section = this.previewEl.querySelector(".mp-content-section");
-    if (section) {
-      applyArticleRecipe(
-        section,
-        this.settingsManager.getSettings().v3.selectedRecipeId,
-        resolveWechatPalette(this.settingsManager.getTemplate(templateId))
-      );
-    }
-    this.refreshValidationReport();
-  }
-  getViewType() {
-    return VIEW_TYPE_MP;
-  }
-  getDisplayText() {
-    return "yh-mp-preview";
-  }
-  getIcon() {
-    return "eye";
-  }
-  async onOpen() {
-    var _a;
-    const container = this.containerEl.children[1];
-    container.empty();
-    container.classList.remove("view-content");
-    container.classList.add("mp-view-content");
-    const toolbar = container.createEl("div", { cls: "mp-toolbar" });
-    const controlsGroup = toolbar.createEl("div", { cls: "mp-controls-group mp-appearance-row" });
-    const typographyRow = toolbar.createEl("div", { cls: "mp-controls-group mp-typography-row" });
-    const secondaryRow = toolbar.createEl("div", { cls: "mp-controls-group mp-secondary-row" });
-    const headerBtn = secondaryRow.createEl("button", {
-      cls: "mp-action-button mp-icon-btn",
-      attr: { "aria-label": "\u63D2\u5165\u81EA\u5B9A\u4E49\u5934\u90E8", "title": "\u63D2\u5165\u5934\u90E8" }
-    });
-    (0, import_obsidian5.setIcon)(headerBtn, "arrow-down-to-line");
-    headerBtn.addEventListener("click", () => this.toggleHeader());
-    const footerBtn = secondaryRow.createEl("button", {
-      cls: "mp-action-button mp-icon-btn",
-      attr: { "aria-label": "\u63D2\u5165\u81EA\u5B9A\u4E49\u5C3E\u90E8", "title": "\u63D2\u5165\u5C3E\u90E8" }
-    });
-    (0, import_obsidian5.setIcon)(footerBtn, "arrow-up-to-line");
-    footerBtn.addEventListener("click", () => this.toggleFooter());
-    const refreshButton = secondaryRow.createEl("button", {
-      cls: "mp-action-button mp-icon-btn",
-      attr: { "aria-label": "\u5237\u65B0\u9884\u89C8", "title": "\u5237\u65B0\u9884\u89C8" }
-    });
-    (0, import_obsidian5.setIcon)(refreshButton, "refresh-cw");
-    refreshButton.addEventListener("click", async () => {
-      await this.updatePreview();
-      new import_obsidian5.Notice("\u9884\u89C8\u5DF2\u5237\u65B0");
-    });
-    this.lockButton = secondaryRow.createEl("button", {
-      cls: "mp-lock-button mp-icon-btn",
-      attr: { "aria-label": "\u5F00\u542F\u5B9E\u65F6\u9884\u89C8\u72B6\u6001", "title": "\u9501\u5B9A\u9884\u89C8" }
-    });
-    (0, import_obsidian5.setIcon)(this.lockButton, "unlock");
-    this.lockButton.addEventListener("click", () => this.togglePreviewLock());
-    this.editButton = secondaryRow.createEl("button", {
-      cls: "mp-action-button mp-icon-btn",
-      attr: { "aria-label": "\u7F16\u8F91\u6A21\u5F0F", "title": "\u7F16\u8F91\u9884\u89C8\u5185\u5BB9" }
-    });
-    (0, import_obsidian5.setIcon)(this.editButton, "pencil");
-    this.editButton.addEventListener("click", () => this.toggleEditMode());
-    const snapshotButton = secondaryRow.createEl("button", {
-      cls: "mp-action-button mp-icon-btn",
-      attr: { "aria-label": "\u4FDD\u5B58\u6392\u7248\u5FEB\u7167", title: "\u4FDD\u5B58\u6392\u7248\u5FEB\u7167" }
-    });
-    (0, import_obsidian5.setIcon)(snapshotButton, "save");
-    snapshotButton.addEventListener("click", async () => this.saveCurrentSnapshot());
-    const restoreButton = secondaryRow.createEl("button", {
-      cls: "mp-action-button mp-icon-btn",
-      attr: { "aria-label": "\u6062\u590D\u6700\u8FD1\u5FEB\u7167", title: "\u6062\u590D\u6700\u8FD1\u5FEB\u7167" }
-    });
-    (0, import_obsidian5.setIcon)(restoreButton, "history");
-    restoreButton.addEventListener("click", async () => this.restoreLatestSnapshot());
-    const seoButton = secondaryRow.createEl("button", {
-      cls: "mp-action-button mp-icon-btn",
-      attr: { "aria-label": "SEO \u9690\u85CF\u6587\u5B57", "title": "\u63D2\u5165 SEO \u9690\u85CF\u5173\u952E\u8BCD" }
-    });
-    (0, import_obsidian5.setIcon)(seoButton, "search");
-    seoButton.addEventListener("click", () => this.insertSeoText());
-    const helpButton = secondaryRow.createEl("button", {
-      cls: "mp-help-button mp-icon-btn",
-      attr: { "aria-label": "\u4F7F\u7528\u6307\u5357" }
-    });
-    (0, import_obsidian5.setIcon)(helpButton, "help");
-    helpButton.setCssStyles({ position: "relative" });
-    secondaryRow.createEl("div", {
-      cls: "mp-help-tooltip",
-      text: `\u4F7F\u7528\u6307\u5357\uFF1A
-                1. \u5DE6\u4FA7\u9009\u62E9\u300C\u7CFB\u5217\u300D\u5FEB\u901F\u8FC7\u6EE4
-                2. \u53F3\u4FA7\u9009\u62E9\u300C\u4E3B\u9898\u300D\u9884\u89C8\u6548\u679C
-                3. \u8C03\u6574\u5B57\u4F53\u548C\u5B57\u53F7
-                4. \u70B9\u51FB\u3010\u590D\u5236\u6309\u94AE\u3011\u5373\u53EF\u7C98\u8D34\u5230\u516C\u4F17\u53F7
-                5. \u270F\uFE0F \u7F16\u8F91\u6A21\u5F0F\u53EF\u76F4\u63A5\u4FEE\u6539\u9884\u89C8\u6587\u5B57
-                6. \u{1F50D} SEO \u6309\u94AE\u53EF\u63D2\u5165\u9690\u85CF\u5173\u952E\u8BCD
-                `
-    });
-    const backgroundOptions = [
-      ...((_a = this.settingsManager.getVisibleBackgrounds()) == null ? void 0 : _a.map((bg) => ({
-        value: bg.id,
-        label: bg.name
-      }))) || []
-    ];
-    if (!backgroundOptions.find((o) => o.value === "none")) {
-      backgroundOptions.unshift({ value: "none", label: "\u65E0\u80CC\u666F" });
-    }
-    if (!backgroundOptions.find((o) => o.value === "default")) {
-      backgroundOptions.unshift({ value: "default", label: "\u9ED8\u8BA4" });
-    }
-    const backgroundField = controlsGroup.createDiv("mp-toolbar-field mp-background-field");
-    backgroundField.createSpan({ cls: "mp-toolbar-label", text: "\u80CC\u666F" });
-    this.customBackgroundSelect = createCustomSelect(
-      backgroundField,
-      "mp-background-select",
-      backgroundOptions,
-      async (value) => {
-        this.backgroundManager.setBackground(value);
-        await this.settingsManager.updateSettings({
-          backgroundId: value
-        });
-        this.backgroundManager.applyBackground(this.previewEl);
-      }
-    );
-    const allTemplates = await this.getTemplateOptions();
-    const seriesSet = /* @__PURE__ */ new Set();
-    seriesSet.add("\u5168\u90E8");
-    allTemplates.forEach((t) => {
-      if (t.header) {
-        seriesSet.add(t.label);
-      }
-    });
-    const seriesOptions = [
-      { label: "\u5168\u90E8\u7CFB\u5217", value: "all" },
-      { label: "\u57FA\u7840\u4E3B\u9898", value: "\u57FA\u7840\u4E3B\u9898" },
-      { label: "Minimal", value: "Minimal \u7CFB\u5217" },
-      { label: "Focus", value: "Focus \u7CFB\u5217" },
-      { label: "Elegant", value: "Elegant \u7CFB\u5217" },
-      { label: "Bold", value: "Bold \u7CFB\u5217" },
-      { label: "\u5176\u4ED6", value: "\u5176\u4ED6\u4E3B\u9898" }
-    ];
-    const galleryBtn = controlsGroup.createEl("button", {
-      cls: "mp-gallery-btn",
-      attr: { "aria-label": "\u6253\u5F00\u4E3B\u9898\u753B\u5ECA", "title": "\u4E3B\u9898\u753B\u5ECA" }
-    });
-    (0, import_obsidian5.setIcon)(galleryBtn, "palette");
-    galleryBtn.addEventListener("click", () => this.openThemeGallery());
-    const fontField = typographyRow.createDiv("mp-toolbar-field mp-font-field");
-    fontField.createSpan({ cls: "mp-toolbar-label", text: "\u5B57\u4F53" });
-    this.customFontSelect = createCustomSelect(
-      fontField,
-      "mp-font-select",
-      this.getFontOptions(),
-      async (value) => {
-        this.templateManager.setFont(value);
-        await this.settingsManager.updateSettings({
-          fontFamily: value
-        });
-        this.templateManager.applyTemplate(this.previewEl);
-      }
-    );
-    this.customFontSelect.container.id = "font-select";
-    const sizeField = typographyRow.createDiv("mp-toolbar-field mp-size-field");
-    sizeField.createSpan({ cls: "mp-toolbar-label", text: "\u5B57\u53F7" });
-    const fontSizeGroup = sizeField.createEl("div", { cls: "mp-font-size-group" });
-    const decreaseButton = fontSizeGroup.createEl("button", {
-      cls: "mp-font-size-btn",
-      text: "-"
-    });
-    this.fontSizeSelect = fontSizeGroup.createEl("input", {
-      cls: "mp-font-size-input",
-      type: "text",
-      value: "16",
-      attr: {
-        style: "border: none; outline: none; background: transparent;"
-      }
-    });
-    const increaseButton = fontSizeGroup.createEl("button", {
-      cls: "mp-font-size-btn",
-      text: "+"
-    });
-    const settings = this.settingsManager.getSettings();
-    const advanced = toolbar.createEl("details", { cls: "mp-advanced-typesetting" });
-    this.recipeSummary = advanced.createEl("summary");
-    advanced.createEl("p", {
-      cls: "mp-advanced-hint",
-      text: "\u53EF\u9009\u7684\u5C40\u90E8\u7ED3\u6784\u589E\u5F3A\uFF1B\u4E3B\u9898\u51B3\u5B9A\u6574\u4F53\u89C6\u89C9\u3002\u9009\u62E9\u201C\u901A\u7528\u957F\u6587\u201D\u5219\u4E0D\u53E0\u52A0\u914D\u65B9\u6837\u5F0F\uFF0C\u4E0D\u4FEE\u6539 Markdown \u539F\u6587\u3002"
-    });
-    const recipeField = advanced.createDiv("mp-toolbar-field mp-recipe-field");
-    recipeField.createSpan({ cls: "mp-toolbar-label", text: "\u6587\u7AE0\u914D\u65B9" });
-    this.recipeSelect = createCustomSelect(
-      recipeField,
-      "mp-recipe-select",
-      [
-        { label: "\u901A\u7528\u957F\u6587", value: "legacy-compatible" },
-        { label: "\u6559\u7A0B\u4E0E\u6B65\u9AA4", value: "tutorial" },
-        { label: "\u6E05\u5355\u4E0E\u65B9\u6CD5\u8BBA", value: "checklist" },
-        { label: "\u4EA7\u54C1\u6216\u5DE5\u5177\u4ECB\u7ECD", value: "product-intro" },
-        { label: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", value: "commentary" },
-        { label: "\u5468\u62A5\u4E0E\u590D\u76D8", value: "review" }
-      ],
-      async (value) => {
-        this.updateRecipeSummary(value);
-        await this.settingsManager.updateSettings({
-          v3: {
-            ...this.settingsManager.getSettings().v3,
-            selectedRecipeId: value
-          }
-        });
-        await this.updatePreview();
-      }
-    );
-    this.recipeSelect.setValue(settings.v3.selectedRecipeId);
-    this.updateRecipeSummary(settings.v3.selectedRecipeId);
-    if (settings.backgroundId) {
-      this.customBackgroundSelect.setValue(settings.backgroundId);
-      this.backgroundManager.setBackground(settings.backgroundId);
-    }
-    if (settings.templateId) {
-      let targetSeries = "all";
-      const templateId = settings.templateId;
-      if (templateId.startsWith("minimal-")) targetSeries = "Minimal \u7CFB\u5217";
-      else if (templateId.startsWith("focus-")) targetSeries = "Focus \u7CFB\u5217";
-      else if (templateId.startsWith("elegant-")) targetSeries = "Elegant \u7CFB\u5217";
-      else if (templateId.startsWith("bold-")) targetSeries = "Bold \u7CFB\u5217";
-      this.templateManager.setCurrentTemplate(settings.templateId);
-    }
-    if (settings.fontFamily) {
-      this.customFontSelect.setValue(settings.fontFamily);
-      this.templateManager.setFont(settings.fontFamily);
-    }
-    if (settings.fontSize) {
-      this.fontSizeSelect.value = settings.fontSize.toString();
-      this.templateManager.setFontSize(settings.fontSize);
-    }
-    const updateFontSize = async () => {
-      const size = parseInt(this.fontSizeSelect.value);
-      this.templateManager.setFontSize(size);
-      await this.settingsManager.updateSettings({
-        fontSize: size
-      });
-      this.templateManager.applyTemplate(this.previewEl);
-    };
-    decreaseButton.addEventListener("click", () => {
-      const currentSize = parseInt(this.fontSizeSelect.value);
-      if (currentSize > 12) {
-        this.fontSizeSelect.value = (currentSize - 1).toString();
-        updateFontSize();
-      }
-    });
-    increaseButton.addEventListener("click", () => {
-      const currentSize = parseInt(this.fontSizeSelect.value);
-      if (currentSize < 30) {
-        this.fontSizeSelect.value = (currentSize + 1).toString();
-        updateFontSize();
-      }
-    });
-    this.fontSizeSelect.addEventListener("change", updateFontSize);
-    const previewWidthBar = container.createDiv("mp-preview-width-bar");
-    previewWidthBar.createSpan({ cls: "mp-preview-width-label", text: "\u9884\u89C8\u5BBD\u5EA6" });
-    const widthChoices = previewWidthBar.createDiv("mp-preview-width-choices");
-    const adaptiveButton = widthChoices.createEl("button", {
-      text: "\u81EA\u9002\u5E94",
-      attr: { type: "button", "aria-pressed": "true" }
-    });
-    const phoneButton = widthChoices.createEl("button", {
-      text: "\u624B\u673A 375px",
-      attr: { type: "button", "aria-pressed": "false" }
-    });
-    const widthHint = previewWidthBar.createSpan({
-      cls: "mp-preview-width-hint",
-      text: "\u4EC5\u5F71\u54CD\u9884\u89C8\uFF0C\u4E0D\u5F71\u54CD\u590D\u5236\u4E0E\u5BFC\u51FA"
-    });
-    this.previewEl = container.createEl("div", { cls: "mp-preview-area" });
-    const setPreviewWidth = (phone) => {
-      this.isPhonePreview = phone;
-      this.previewEl.toggleClass("mp-phone-preview", phone);
-      adaptiveButton.setAttribute("aria-pressed", String(!phone));
-      phoneButton.setAttribute("aria-pressed", String(phone));
-    };
-    const refreshWidthAvailability = () => {
-      const style = window.getComputedStyle(this.previewEl);
-      const available = this.previewEl.clientWidth - parseFloat(style.paddingLeft || "0") - parseFloat(style.paddingRight || "0");
-      const narrow = available <= 375;
-      phoneButton.disabled = narrow;
-      phoneButton.title = narrow ? "\u5F53\u524D\u9884\u89C8\u533A\u57DF\u5DF2\u4E0D\u5BBD\u4E8E 375px\uFF0C\u62C9\u5BBD\u9762\u677F\u540E\u53EF\u6BD4\u8F83\u624B\u673A\u6548\u679C" : "\u4EE5 375px \u68C0\u67E5\u624B\u673A\u6392\u7248";
-      widthHint.setText(narrow ? "\u5F53\u524D\u9762\u677F\u5DF2\u662F\u624B\u673A\u5BBD\u5EA6" : "\u4EC5\u5F71\u54CD\u9884\u89C8\uFF0C\u4E0D\u5F71\u54CD\u590D\u5236\u4E0E\u5BFC\u51FA");
-    };
-    adaptiveButton.addEventListener("click", () => setPreviewWidth(false));
-    phoneButton.addEventListener("click", () => setPreviewWidth(true));
-    const widthObserver = new ResizeObserver(refreshWidthAvailability);
-    widthObserver.observe(this.previewEl);
-    this.register(() => widthObserver.disconnect());
-    refreshWidthAvailability();
-    this.validationPanel = container.createEl("section", { cls: "mp-validation-panel" });
-    this.previewEl.addEventListener("click", async (e) => {
-      const target = e.target;
-      if (target.tagName.toLowerCase() === "img") {
-        e.stopPropagation();
-        if (!this.currentFile) return;
-        await handleImageAltEdit(this.app, this.currentFile, target);
-      }
-    });
-    const bottomBar = container.createEl("div", { cls: "mp-bottom-bar" });
-    const primaryRow = bottomBar.createEl("div", { cls: "mp-controls-group mp-primary-row" });
-    this.copyButton = primaryRow.createEl("button", {
-      text: "Pub \u590D\u5236",
-      cls: "mp-copy-button"
-    });
-    const exportImageButton = primaryRow.createEl("button", {
-      text: "\u5BFC\u51FA\u957F\u56FE",
-      cls: "mp-export-button"
-    });
-    exportImageButton.addEventListener("click", async () => this.exportLongImage(exportImageButton));
-    const exportHtmlButton = primaryRow.createEl("button", {
-      text: "\u5BFC\u51FA HTML",
-      cls: "mp-export-button"
-    });
-    exportHtmlButton.addEventListener("click", async () => this.exportHtmlFragment(exportHtmlButton));
-    const exportSegmentsButton = primaryRow.createEl("button", {
-      text: "\u5BFC\u51FA\u5206\u6BB5\u56FE",
-      cls: "mp-export-button"
-    });
-    exportSegmentsButton.addEventListener("click", async () => this.exportSegmentedImages(exportSegmentsButton));
-    this.copyButton.addEventListener("click", async () => {
-      if (this.previewEl) {
-        const validation = this.refreshValidationReport();
-        if (validation == null ? void 0 : validation.errors) {
-          new import_obsidian5.Notice(`\u53D1\u73B0 ${validation.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u8BF7\u5148\u5728\u201C\u68C0\u67E5\u201D\u533A\u57DF\u5904\u7406`);
-          return;
-        }
-        this.copyButton.disabled = true;
-        this.copyButton.setText("\u590D\u5236\u4E2D...");
-        try {
-          const copySettings = this.settingsManager.getSettings();
-          const themeId = this.getActiveWechatTemplateId();
-          const validation2 = await CopyManager.copyToClipboard(this.previewEl, {
-            themeId,
-            recipeId: copySettings.v3.selectedRecipeId,
-            palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId))
-          });
-          this.copyButton.setText(validation2.warnings > 0 ? `\u590D\u5236\u6210\u529F\uFF08${validation2.warnings} \u9879\u517C\u5BB9\u6027\u63D0\u793A\uFF09` : "\u590D\u5236\u6210\u529F");
-          setTimeout(() => {
-            this.copyButton.disabled = false;
-            this.copyButton.setText("Pub \u590D\u5236");
-          }, 2e3);
-        } catch (error) {
-          this.copyButton.setText("\u590D\u5236\u5931\u8D25");
-          setTimeout(() => {
-            this.copyButton.disabled = false;
-            this.copyButton.setText("Pub \u590D\u5236");
-          }, 2e3);
-        }
-      }
-    });
-    this.registerEvent(
-      this.app.workspace.on("file-open", this.onFileOpen.bind(this))
-    );
-    this.registerEvent(
-      this.app.vault.on("modify", this.onFileModify.bind(this))
-    );
-    const currentFile = this.app.workspace.getActiveFile();
-    await this.onFileOpen(currentFile);
-  }
-  updateControlsState(enabled) {
-    var _a;
-    this.lockButton.disabled = !enabled;
-    [this.customFontSelect, this.customBackgroundSelect].forEach((ctrl) => {
-      if (ctrl && ctrl.container) {
-        const selectEl = ctrl.container.querySelector(".custom-select");
-        if (selectEl) {
-          selectEl.classList.toggle("disabled", !enabled);
-          selectEl.setCssStyles({ pointerEvents: enabled ? "auto" : "none" });
-        }
-      }
-    });
-    this.fontSizeSelect.disabled = !enabled;
-    this.copyButton.disabled = !enabled || (((_a = this.validationReport) == null ? void 0 : _a.errors) || 0) > 0;
-    const fontSizeButtons = this.containerEl.querySelectorAll(".mp-font-size-btn");
-    fontSizeButtons.forEach((button) => {
-      button.disabled = !enabled;
-    });
-  }
-  refreshValidationReport() {
-    var _a;
-    const contentSection = (_a = this.previewEl) == null ? void 0 : _a.querySelector(".mp-content-section");
-    if (!contentSection) {
-      this.validationReport = null;
-      this.renderValidationReport();
-      return null;
-    }
-    const settings = this.settingsManager.getSettings();
-    const themeId = this.getActiveWechatTemplateId();
-    this.validationReport = prepareLegacyWechatFragment(contentSection, {
-      themeId,
-      recipeId: settings.v3.selectedRecipeId,
-      palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId))
-    }).validation;
-    this.renderValidationReport();
-    this.copyButton.disabled = this.validationReport.errors > 0;
-    return this.validationReport;
-  }
-  renderValidationReport() {
-    this.validationPanel.empty();
-    const report = this.validationReport;
-    if (!report) {
-      this.validationPanel.setCssStyles({ display: "none" });
-      return;
-    }
-    this.validationPanel.setCssStyles({ display: "block" });
-    const status = this.validationPanel.createDiv({
-      cls: `mp-validation-summary ${report.errors > 0 ? "is-error" : report.warnings > 0 ? "is-warning" : "is-ok"}`
-    });
-    status.setText(report.errors > 0 ? `\u68C0\u67E5\uFF1A${report.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u5DF2\u7981\u6B62\u590D\u5236` : report.warnings > 0 ? `\u68C0\u67E5\uFF1A\u53EF\u590D\u5236\uFF0C${report.warnings} \u9879\u517C\u5BB9\u6027\u63D0\u793A` : "\u68C0\u67E5\uFF1A\u53EF\u590D\u5236\uFF0C\u672A\u53D1\u73B0\u517C\u5BB9\u6027\u95EE\u9898");
-    if (report.issues.length > 0) {
-      const list = this.validationPanel.createEl("ul", { cls: "mp-validation-issues" });
-      report.issues.slice(0, 4).forEach((issue) => {
-        list.createEl("li", {
-          text: `${issue.severity === "error" ? "\u963B\u65AD" : "\u63D0\u793A"} \xB7 ${issue.message}\uFF08${issue.path}\uFF09`,
-          cls: issue.severity === "error" ? "is-error" : "is-warning"
-        });
-      });
-      if (report.issues.length > 4) {
-        this.validationPanel.createDiv({
-          text: `\u53E6\u6709 ${report.issues.length - 4} \u9879\u63D0\u793A\u672A\u5C55\u5F00`,
-          cls: "mp-validation-more"
-        });
-      }
-    }
-  }
-  async saveCurrentSnapshot() {
-    if (!this.currentFile) {
-      new import_obsidian5.Notice("\u8BF7\u5148\u6253\u5F00\u4E00\u7BC7 Markdown \u7B14\u8BB0");
-      return;
-    }
-    const content = await this.app.vault.cachedRead(this.currentFile);
-    const settings = this.settingsManager.getSettings();
-    const validation = this.refreshValidationReport() || { errors: 0, warnings: 0 };
-    const snapshot = {
-      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
-      filePath: this.currentFile.path,
-      contentHash: this.hashText(content),
-      templateId: settings.templateId,
-      backgroundId: settings.backgroundId,
-      fontFamily: settings.fontFamily,
-      fontSize: settings.fontSize,
-      recipeId: settings.v3.selectedRecipeId,
-      validation: { errors: validation.errors, warnings: validation.warnings }
-    };
-    await this.settingsManager.saveLayoutSnapshot(snapshot);
-    new import_obsidian5.Notice("\u5DF2\u4FDD\u5B58\u6392\u7248\u5FEB\u7167");
-  }
-  async restoreLatestSnapshot() {
-    const snapshot = this.settingsManager.getSettings().layoutSnapshots[0];
-    if (!snapshot) {
-      new import_obsidian5.Notice("\u5C1A\u65E0\u53EF\u6062\u590D\u7684\u6392\u7248\u5FEB\u7167");
-      return;
-    }
-    await this.settingsManager.restoreLayoutSnapshot(snapshot);
-    this.customFontSelect.setValue(snapshot.fontFamily);
-    this.customBackgroundSelect.setValue(snapshot.backgroundId);
-    this.fontSizeSelect.value = String(snapshot.fontSize);
-    this.recipeSelect.setValue(snapshot.recipeId);
-    this.updateRecipeSummary(snapshot.recipeId);
-    await this.updatePreview();
-    new import_obsidian5.Notice(`\u5DF2\u6062\u590D ${new Date(snapshot.createdAt).toLocaleString()} \u7684\u6392\u7248\u5FEB\u7167`);
-  }
-  hashText(value) {
-    let hash = 5381;
-    for (let index = 0; index < value.length; index += 1) {
-      hash = (hash << 5) + hash ^ value.charCodeAt(index);
-    }
-    return (hash >>> 0).toString(16);
-  }
-  /**
-   * Creates an unconstrained copy of the article. The live preview is a
-   * scroll container, so capturing it directly only includes its viewport.
-   */
-  async createExportSnapshot() {
-    const content = this.previewEl.querySelector(".mp-content-section");
-    if (!content) throw new Error("Preview content is not available");
-    const previewStyle = window.getComputedStyle(this.previewEl);
-    const width = Math.max(1, Math.ceil(this.previewEl.clientWidth - parseFloat(previewStyle.paddingLeft || "0") - parseFloat(previewStyle.paddingRight || "0")));
-    const snapshotHost = document.createElement("div");
-    snapshotHost.className = "mp-preview-area mp-export-snapshot";
-    snapshotHost.setCssStyles({ cssText: [
-      "position: fixed",
-      "left: -100000px",
-      "top: 0",
-      `width: ${width}px`,
-      "height: auto",
-      "min-height: 0",
-      "margin: 0",
-      "padding: 0",
-      "overflow: visible",
-      "background: #ffffff",
-      "border: 0",
-      "box-shadow: none",
-      "pointer-events: none"
-    ].join(";") });
-    const cleanup = () => snapshotHost.remove();
-    try {
-      const snapshot = content.cloneNode(true);
-      const computed = window.getComputedStyle(content);
-      snapshot.setCssStyles({ cssText: snapshot.style.cssText + `;${[
-        `width: ${width}px`,
-        "max-width: none",
-        "height: auto",
-        "max-height: none",
-        "min-height: 0",
-        "overflow: visible",
-        "box-sizing: border-box",
-        `font-family: ${computed.fontFamily}`,
-        `font-size: ${computed.fontSize}`,
-        `line-height: ${computed.lineHeight}`,
-        `color: ${computed.color}`,
-        "background: #ffffff"
-      ].join(";")};` });
-      snapshotHost.appendChild(snapshot);
-      document.body.appendChild(snapshotHost);
-      const imageResults = await Promise.all(Array.from(snapshot.querySelectorAll("img")).map((image) => this.waitForExportImage(image)));
-      const failedImages = imageResults.filter((loaded) => !loaded).length;
-      if (failedImages > 0) {
-        throw new Error(`${failedImages} \u5F20\u56FE\u7247\u672A\u80FD\u5728 ${EXPORT_IMAGE_TIMEOUT_MS / 1e3} \u79D2\u5185\u52A0\u8F7D`);
-      }
-      return {
-        element: snapshot,
-        width,
-        height: Math.max(1, Math.ceil(snapshot.scrollHeight)),
-        cleanup
-      };
-    } catch (error) {
-      cleanup();
-      throw error;
-    }
-  }
-  waitForExportImage(image) {
-    if (image.complete) return Promise.resolve(image.naturalWidth > 0);
-    return new Promise((resolve) => {
-      let settled = false;
-      const finish = (loaded) => {
-        if (settled) return;
-        settled = true;
-        window.clearTimeout(timeoutId);
-        image.removeEventListener("load", onLoad);
-        image.removeEventListener("error", onError);
-        resolve(loaded);
-      };
-      const onLoad = () => finish(image.naturalWidth > 0);
-      const onError = () => finish(false);
-      const timeoutId = window.setTimeout(() => finish(false), EXPORT_IMAGE_TIMEOUT_MS);
-      image.addEventListener("load", onLoad, { once: true });
-      image.addEventListener("error", onError, { once: true });
-    });
-  }
-  async renderExportCanvas(element, width, height, scale, y = 0) {
-    return (0, import_html2canvas.default)(element, {
-      useCORS: true,
-      allowTaint: true,
-      backgroundColor: "#ffffff",
-      scale,
-      x: 0,
-      y,
-      width,
-      height,
-      windowWidth: width,
-      windowHeight: height,
-      scrollX: 0,
-      scrollY: 0
-    });
-  }
-  async exportLongImage(button) {
-    const originalText = button.textContent || "\u5BFC\u51FA\u957F\u56FE";
-    button.disabled = true;
-    button.setText("\u751F\u6210\u4E2D...");
-    let cleanup;
-    try {
-      const snapshot = await this.createExportSnapshot();
-      cleanup = snapshot.cleanup;
-      const maxDimension = 16384;
-      const maxPixels = 64e6;
-      const scale = Math.min(
-        2,
-        maxDimension / snapshot.width,
-        maxDimension / snapshot.height,
-        Math.sqrt(maxPixels / (snapshot.width * snapshot.height))
-      );
-      if (!Number.isFinite(scale) || scale < 0.01) {
-        throw new Error("\u6587\u7AE0\u8FC7\u957F\uFF0C\u65E0\u6CD5\u751F\u6210\u5355\u5F20\u957F\u56FE\uFF0C\u8BF7\u6539\u7528\u201C\u5BFC\u51FA\u5206\u6BB5\u56FE\u201D");
-      }
-      const canvas = await this.renderExportCanvas(snapshot.element, snapshot.width, snapshot.height, scale);
-      const link = document.createElement("a");
-      link.download = `yh-mp-preview-${Date.now()}.png`;
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-      if (scale < 2) new import_obsidian5.Notice("\u6587\u7AE0\u8F83\u957F\uFF0C\u5DF2\u81EA\u52A8\u964D\u4F4E\u957F\u56FE\u5206\u8FA8\u7387\u4EE5\u5B8C\u6574\u5BFC\u51FA\uFF1B\u53EF\u4F7F\u7528\u201C\u5BFC\u51FA\u5206\u6BB5\u56FE\u201D\u83B7\u5F97\u9AD8\u6E05\u5207\u7247\u3002");
-      button.setText("\u5BFC\u51FA\u6210\u529F");
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF";
-      console.error("\u5BFC\u51FA\u957F\u56FE\u5931\u8D25:", error);
-      new import_obsidian5.Notice(`\u957F\u56FE\u5BFC\u51FA\u5931\u8D25\uFF1A${message}`);
-      button.setText("\u5BFC\u51FA\u5931\u8D25");
-    } finally {
-      cleanup == null ? void 0 : cleanup();
-      setTimeout(() => {
-        button.disabled = false;
-        button.setText(originalText);
-      }, 2e3);
-    }
-  }
-  async exportHtmlFragment(button) {
-    const contentSection = this.previewEl.querySelector(".mp-content-section");
-    if (!contentSection) return;
-    const originalText = button.textContent || "\u5BFC\u51FA HTML";
-    button.disabled = true;
-    try {
-      const settings = this.settingsManager.getSettings();
-      const themeId = this.getActiveWechatTemplateId();
-      const prepared = prepareLegacyWechatFragment(contentSection, {
-        themeId,
-        recipeId: settings.v3.selectedRecipeId,
-        palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId))
-      });
-      if (prepared.validation.errors > 0) {
-        new import_obsidian5.Notice(`\u5B58\u5728 ${prepared.validation.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u65E0\u6CD5\u5BFC\u51FA HTML`);
-        return;
-      }
-      const blob = new Blob([prepared.html], { type: "text/html;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `yh-mp-preview-${Date.now()}.html`;
-      link.click();
-      URL.revokeObjectURL(url);
-      new import_obsidian5.Notice("\u5DF2\u5BFC\u51FA HTML \u7247\u6BB5");
-    } finally {
-      button.disabled = false;
-      button.setText(originalText);
-    }
-  }
-  async exportSegmentedImages(button) {
-    const originalText = button.textContent || "\u5BFC\u51FA\u5206\u6BB5\u56FE";
-    button.disabled = true;
-    button.setText("\u751F\u6210\u4E2D...");
-    let cleanup;
-    let completed = 0;
-    try {
-      const snapshot = await this.createExportSnapshot();
-      cleanup = snapshot.cleanup;
-      const segmentHeight = Math.max(1, Math.round(snapshot.width * 4 / 3));
-      const total = Math.ceil(snapshot.height / segmentHeight);
-      const exportedAt = Date.now();
-      for (let index = 0; index < total; index += 1) {
-        const sourceY = index * segmentHeight;
-        const height = Math.min(segmentHeight, snapshot.height - sourceY);
-        button.setText(`\u751F\u6210\u4E2D ${index + 1}/${total}...`);
-        const segment = await this.renderExportCanvas(
-          snapshot.element,
-          snapshot.width,
-          height,
-          2,
-          sourceY
-        );
-        const link = document.createElement("a");
-        link.download = `yh-mp-preview-${exportedAt}-${index + 1}.png`;
-        link.href = segment.toDataURL("image/png");
-        link.click();
-        completed += 1;
-      }
-      new import_obsidian5.Notice(`\u5DF2\u5BFC\u51FA ${total} \u5F20 1:1.33 \u5206\u6BB5\u56FE`);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF";
-      console.error("\u5206\u6BB5\u56FE\u5BFC\u51FA\u5931\u8D25", error);
-      new import_obsidian5.Notice(`\u5206\u6BB5\u56FE\u5BFC\u51FA\u5931\u8D25\uFF1A${message}${completed > 0 ? `\uFF08\u5DF2\u5B8C\u6210 ${completed} \u5F20\uFF09` : ""}`);
-    } finally {
-      cleanup == null ? void 0 : cleanup();
-      button.disabled = false;
-      button.setText(originalText);
-    }
-  }
-  async onFileOpen(file) {
-    this.currentFile = file;
-    if (!file || file.extension !== "md") {
-      this.previewEl.empty();
-      this.previewEl.createEl("div", {
-        text: "\u53EA\u80FD\u9884\u89C8 markdown \u6587\u672C\u6587\u6863",
-        cls: "mp-empty-message"
-      });
-      this.validationReport = null;
-      this.renderValidationReport();
-      this.updateControlsState(false);
-      return;
-    }
-    this.updateControlsState(true);
-    this.isPreviewLocked = false;
-    (0, import_obsidian5.setIcon)(this.lockButton, "unlock");
-    await this.updatePreview();
-  }
-  async togglePreviewLock() {
-    this.isPreviewLocked = !this.isPreviewLocked;
-    const lockIcon = this.isPreviewLocked ? "lock" : "unlock";
-    const lockStatus = this.isPreviewLocked ? "\u5F00\u542F\u5B9E\u65F6\u9884\u89C8\u72B6\u6001" : "\u5173\u95ED\u5B9E\u65F6\u9884\u89C8\u72B6\u6001";
-    (0, import_obsidian5.setIcon)(this.lockButton, lockIcon);
-    this.lockButton.setAttribute("aria-label", lockStatus);
-    if (!this.isPreviewLocked) {
-      await this.updatePreview();
-    }
-  }
-  toggleEditMode() {
-    this.isEditMode = !this.isEditMode;
-    if (this.isEditMode) {
-      this.previewEl.contentEditable = "true";
-      this.previewEl.classList.add("mp-edit-mode");
-      (0, import_obsidian5.setIcon)(this.editButton, "pencil-off");
-      this.editButton.setAttribute("title", "\u9000\u51FA\u7F16\u8F91\u6A21\u5F0F");
-      if (!this.isPreviewLocked) {
-        this.isPreviewLocked = true;
-        (0, import_obsidian5.setIcon)(this.lockButton, "lock");
-        this.lockButton.setAttribute("aria-label", "\u5F00\u542F\u5B9E\u65F6\u9884\u89C8\u72B6\u6001");
-      }
-      new import_obsidian5.Notice("\u5DF2\u8FDB\u5165\u7F16\u8F91\u6A21\u5F0F \u2014 \u4FEE\u6539\u4EC5\u5F71\u54CD\u590D\u5236\u5185\u5BB9");
-    } else {
-      this.previewEl.contentEditable = "false";
-      this.previewEl.classList.remove("mp-edit-mode");
-      (0, import_obsidian5.setIcon)(this.editButton, "pencil");
-      this.editButton.setAttribute("title", "\u7F16\u8F91\u9884\u89C8\u5185\u5BB9");
-      new import_obsidian5.Notice("\u5DF2\u9000\u51FA\u7F16\u8F91\u6A21\u5F0F");
-    }
-  }
-  insertSeoText() {
-    const modal = new class extends import_obsidian5.Modal {
-      constructor(view) {
-        super(view.app);
-        this.result = "";
-        this.view = view;
-      }
-      onOpen() {
-        const { contentEl } = this;
-        contentEl.createEl("h3", { text: "\u{1F50D} \u63D2\u5165 SEO \u9690\u85CF\u5173\u952E\u8BCD" });
-        contentEl.createEl("p", {
-          text: "\u8F93\u5165\u7684\u6587\u5B57\u590D\u5236\u5230\u516C\u4F17\u53F7\u540E\u4E0D\u53EF\u89C1\uFF0C\u4F46\u53EF\u88AB\u641C\u7D22\u5F15\u64CE\u7D22\u5F15\u3002",
-          attr: { style: "color: #888; font-size: 13px; margin-bottom: 12px;" }
-        });
-        const textarea = contentEl.createEl("textarea", {
-          attr: {
-            placeholder: "\u8F93\u5165 SEO \u5173\u952E\u8BCD\uFF0C\u591A\u4E2A\u5173\u952E\u8BCD\u7528\u7A7A\u683C\u5206\u9694...",
-            rows: "3",
-            style: "width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--background-modifier-border); font-size: 14px; resize: vertical;"
-          }
-        });
-        textarea.focus();
-        const btnContainer = contentEl.createEl("div", {
-          attr: { style: "display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px;" }
-        });
-        const cancelBtn = btnContainer.createEl("button", { text: "\u53D6\u6D88" });
-        cancelBtn.addEventListener("click", () => this.close());
-        const submitBtn = btnContainer.createEl("button", {
-          text: "\u63D2\u5165",
-          attr: { style: "background: var(--text-accent); color: var(--text-on-accent); border: none; padding: 6px 16px; border-radius: 6px; cursor: pointer;" }
-        });
-        submitBtn.addEventListener("click", () => {
-          this.result = textarea.value;
-          this.close();
-        });
-        textarea.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            this.result = textarea.value;
-            this.close();
-          }
-        });
-      }
-      onClose() {
-        if (this.result.trim()) {
-          this.view.applySeoText(this.result.trim());
-        }
-      }
-    }(this);
-    modal.open();
-  }
-  applySeoText(seoText) {
-    let seoSection = this.previewEl.querySelector(".mp-seo-hidden");
-    if (seoSection) {
-      seoSection.textContent = (seoSection.textContent || "") + " " + seoText;
-    } else {
-      seoSection = document.createElement("section");
-      seoSection.className = "mp-seo-hidden";
-      seoSection.setCssStyles({ cssText: "font-size: 0; color: transparent; line-height: 0; height: 0; overflow: hidden; opacity: 0; position: absolute; left: -9999px;" });
-      seoSection.textContent = seoText;
-      const contentSection = this.previewEl.querySelector(".mp-content-section");
-      if (contentSection) {
-        contentSection.appendChild(seoSection);
-      } else {
-        this.previewEl.appendChild(seoSection);
-      }
-    }
-    if (!this.isPreviewLocked) {
-      this.isPreviewLocked = true;
-      (0, import_obsidian5.setIcon)(this.lockButton, "lock");
-      this.lockButton.setAttribute("aria-label", "\u5F00\u542F\u5B9E\u65F6\u9884\u89C8\u72B6\u6001");
-    }
-    new import_obsidian5.Notice("SEO \u9690\u85CF\u6587\u5B57\u5DF2\u63D2\u5165");
-  }
-  async onFileModify(file) {
-    if (file === this.currentFile && !this.isPreviewLocked) {
-      if (this.updateTimer) {
-        clearTimeout(this.updateTimer);
-      }
-      this.updateTimer = setTimeout(() => {
-        this.updatePreview();
-      }, 500);
-    }
-  }
-  async updatePreview() {
-    if (!this.currentFile) return;
-    const scrollHeight = this.previewEl.scrollHeight;
-    const scrollRatio = scrollHeight > 0 ? this.previewEl.scrollTop / scrollHeight : 0;
-    const isAtBottom = scrollHeight - this.previewEl.scrollTop <= this.previewEl.clientHeight + 100;
-    this.previewEl.empty();
-    const content = await this.app.vault.cachedRead(this.currentFile);
-    await import_obsidian5.MarkdownRenderer.render(
-      this.app,
-      content,
-      this.previewEl,
-      this.currentFile.path,
-      this
-    );
-    MPConverter.formatContent(this.previewEl, content, this.settingsManager);
-    const activeThemeId = this.getActiveWechatTemplateId();
-    this.templateManager.setCurrentTemplate(activeThemeId);
-    this.templateManager.applyTemplate(this.previewEl);
-    this.backgroundManager.applyBackground(this.previewEl);
-    const contentSection = this.previewEl.querySelector(".mp-content-section");
-    if (contentSection) {
-      const settings = this.settingsManager.getSettings();
-      applyArticleRecipe(
-        contentSection,
-        settings.v3.selectedRecipeId,
-        resolveWechatPalette(this.settingsManager.getTemplate(activeThemeId))
-      );
-    }
-    this.refreshValidationReport();
-    requestAnimationFrame(() => {
-      if (isAtBottom) {
-        this.previewEl.scrollTop = this.previewEl.scrollHeight;
-      } else {
-        this.previewEl.scrollTop = scrollRatio * this.previewEl.scrollHeight;
-      }
-    });
-  }
-  toggleHeader() {
-    const headerContent = this.settingsManager.getSettings().customHeader;
-    if (!headerContent) {
-      return;
-    }
-    const existingHeader = this.previewEl.querySelector(".mp-custom-header");
-    if (existingHeader) {
-      existingHeader.remove();
-    } else {
-      const headerDiv = document.createElement("div");
-      headerDiv.className = "mp-custom-header";
-      const removed = replaceWithSafeHtml(headerDiv, headerContent);
-      if (removed > 0) new import_obsidian5.Notice("\u5934\u90E8\u5185\u5BB9\u542B\u4E0D\u5B89\u5168\u7684 HTML \u6216\u8D44\u6E90\u6837\u5F0F\uFF0C\u9884\u89C8\u5DF2\u8FC7\u6EE4\uFF1B\u539F\u8BBE\u7F6E\u672A\u6539\u5199\u3002");
-      const removeBtn = document.createElement("button");
-      removeBtn.setCssStyles({ cssText: "position:absolute; top:-10px; right:10px; font-size:10px; cursor:pointer; padding:2px 6px; border-radius:4px; border:none; background:var(--text-muted); color:white;" });
-      removeBtn.innerText = "\u79FB\u9664\u5934\u90E8";
-      removeBtn.onclick = (e) => {
-        e.stopPropagation();
-        headerDiv.remove();
-      };
-      this.previewEl.prepend(headerDiv);
-    }
-  }
-  toggleFooter() {
-    const footerContent = this.settingsManager.getSettings().customFooter;
-    if (!footerContent) return;
-    const existingFooter = this.previewEl.querySelector(".mp-custom-footer");
-    if (existingFooter) {
-      existingFooter.remove();
-    } else {
-      const footerDiv = document.createElement("div");
-      footerDiv.className = "mp-custom-footer";
-      const removed = replaceWithSafeHtml(footerDiv, footerContent);
-      if (removed > 0) new import_obsidian5.Notice("\u5C3E\u90E8\u5185\u5BB9\u542B\u4E0D\u5B89\u5168\u7684 HTML \u6216\u8D44\u6E90\u6837\u5F0F\uFF0C\u9884\u89C8\u5DF2\u8FC7\u6EE4\uFF1B\u539F\u8BBE\u7F6E\u672A\u6539\u5199\u3002");
-      this.previewEl.append(footerDiv);
-    }
-  }
-  async getTemplateOptions() {
-    const templates2 = this.settingsManager.getVisibleTemplates();
-    if (templates2.length === 0) {
-      return [{ value: "default", label: "\u9ED8\u8BA4\u6A21\u677F" }];
-    }
-    const seriesOrder = ["\u57FA\u7840\u4E3B\u9898", "Minimal \u7CFB\u5217", "Focus \u7CFB\u5217", "Elegant \u7CFB\u5217", "Bold \u7CFB\u5217", "\u5176\u4ED6\u4E3B\u9898"];
-    const groups = {
-      "\u57FA\u7840\u4E3B\u9898": [],
-      "Minimal \u7CFB\u5217": [],
-      "Focus \u7CFB\u5217": [],
-      "Elegant \u7CFB\u5217": [],
-      "Bold \u7CFB\u5217": [],
-      "\u5176\u4ED6\u4E3B\u9898": []
-    };
-    const isNewSeries = (id) => id.startsWith("minimal-") || id.startsWith("focus-") || id.startsWith("elegant-") || id.startsWith("bold-");
-    templates2.forEach((t) => {
-      if (t.id.startsWith("minimal-")) {
-        groups["Minimal \u7CFB\u5217"].push(t);
-      } else if (t.id.startsWith("focus-")) {
-        groups["Focus \u7CFB\u5217"].push(t);
-      } else if (t.id.startsWith("elegant-")) {
-        groups["Elegant \u7CFB\u5217"].push(t);
-      } else if (t.id.startsWith("bold-")) {
-        groups["Bold \u7CFB\u5217"].push(t);
-      } else if (!isNewSeries(t.id)) {
-        groups["\u57FA\u7840\u4E3B\u9898"].push(t);
-      } else {
-        groups["\u5176\u4ED6\u4E3B\u9898"].push(t);
-      }
-    });
-    const options = [];
-    seriesOrder.forEach((series) => {
-      if (groups[series] && groups[series].length > 0) {
-        options.push({ label: series, value: "", header: true });
-        groups[series].forEach((t) => {
-          options.push({ label: t.name, value: t.id });
-        });
-      }
-    });
-    return options;
-  }
-  /**
-   * 打开主题画廊弹窗
-   */
-  openThemeGallery() {
-    const currentTemplateId = this.settingsManager.getSettings().templateId;
-    const modal = new ThemeGalleryModal(
-      this.app,
-      this.settingsManager,
-      currentTemplateId,
-      // onSelect 回调
-      async (templateId) => {
-        this.applyThemeTrial(templateId);
-        await this.settingsManager.updateSettings({ templateId });
-        this.trialTemplateId = null;
-        const template = this.settingsManager.getTemplate(templateId);
-        new import_obsidian5.Notice(`\u5DF2\u5E94\u7528\u4E3B\u9898: ${(template == null ? void 0 : template.name) || templateId}`);
-      },
-      // previewCallback 回调 - 实时预览
-      (templateId) => {
-        this.applyThemeTrial(templateId);
-      }
-    );
-    modal.open();
-  }
-  getFontOptions() {
-    return this.settingsManager.getFontOptions();
-  }
-};
-
-// src/templateManager.ts
-var import_obsidian6 = require("obsidian");
-
-// src/core/theme/wechatReadingBaseline.ts
-var DEFAULT_WECHAT_FONT_STACK = '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif';
-var wechatReadingProfiles = {
-  compact: { lineHeight: 1.72, paragraphGapEm: 0.85 },
-  standard: { lineHeight: 1.78, paragraphGapEm: 0.95 },
-  airy: { lineHeight: 1.82, paragraphGapEm: 1.05 }
-};
-function paragraphRhythm(profile) {
-  const rhythm = wechatReadingProfiles[profile];
-  return `line-height: ${rhythm.lineHeight}; margin-bottom: ${rhythm.paragraphGapEm}em;`;
-}
-var wechatReadingBaseline = {
-  title: "line-height: 1.45; letter-spacing: 0; word-break: break-word;",
-  sectionTitle: "text-align: left; font-weight: 700; line-height: 1.45; letter-spacing: 0; word-break: break-word;",
-  paragraph: "font-weight: 400; line-height: 1.78; letter-spacing: 0; text-align: left; margin-top: 0; margin-bottom: 0.95em; word-break: break-word; overflow-wrap: anywhere;",
-  list: "margin-top: 0.9em; margin-bottom: 1.1em; padding-left: 1.45em; text-align: left;",
-  listItem: "font-weight: 400; line-height: 1.8; letter-spacing: 0; text-align: left; margin-bottom: 0.5em; word-break: break-word;",
-  quote: "font-weight: 400; line-height: 1.8; letter-spacing: 0; text-align: left; font-style: normal; word-break: break-word;",
-  codeBlock: "font-size: 14px; line-height: 1.65; white-space: pre-wrap; word-break: break-word;",
-  inlineCode: "font-size: 0.9em; line-height: 1.5; word-break: break-word;",
-  emphasis: "font-weight: 600;",
-  table: "width: 100%; max-width: 100%; table-layout: auto;",
-  tableCell: "line-height: 1.65; vertical-align: top; word-break: break-word; overflow-wrap: anywhere;",
-  image: "max-width: 100%; height: auto; display: block; margin: 1.2em auto;",
-  link: "word-break: break-word;"
-};
-function appendWechatReadingBaseline(themeStyle, baseline) {
-  return `${themeStyle || ""}; ${baseline}`.replace(/;;+/g, ";");
 }
 
 // src/core/theme/applyWechatComponentPalette.ts
@@ -14228,20 +13051,20 @@ var TemplateManager = class {
     };
     if (!this.warnedUnsafeThemes.has(activeTemplate.id) && containsUnsafeStyle(styles)) {
       this.warnedUnsafeThemes.add(activeTemplate.id);
-      new import_obsidian6.Notice("\u6B64\u4E3B\u9898\u542B\u8D44\u6E90\u52A0\u8F7D\u6216\u4E0D\u5B89\u5168 CSS\uFF0C\u76F8\u5173\u6837\u5F0F\u5DF2\u8FC7\u6EE4\uFF1B\u539F\u4E3B\u9898\u8BBE\u7F6E\u672A\u6539\u5199\u3002");
+      new import_obsidian4.Notice("\u6B64\u4E3B\u9898\u542B\u8D44\u6E90\u52A0\u8F7D\u6216\u4E0D\u5B89\u5168 CSS\uFF0C\u76F8\u5173\u6837\u5F0F\u5DF2\u8FC7\u6EE4\uFF1B\u539F\u4E3B\u9898\u8BBE\u7F6E\u672A\u6539\u5199\u3002");
     }
     const readingProfile = ((_a = getCuratedThemeEntry(activeTemplate.id)) == null ? void 0 : _a.readingProfile) || "standard";
     ["h1", "h2", "h3", "h4", "h5", "h6"].forEach((tag) => {
       element.querySelectorAll(tag).forEach((el) => {
         if (!el.querySelector(".content")) {
-          const content = document.createElement("span");
+          const content = createSpan();
           content.className = "content";
           while (el.firstChild) {
             content.appendChild(el.firstChild);
           }
           el.textContent = "";
           el.appendChild(content);
-          const after = document.createElement("span");
+          const after = createSpan();
           after.className = "after";
           el.appendChild(after);
         }
@@ -14415,22 +13238,1442 @@ var TemplateManager = class {
   }
 };
 
+// src/backgroundManager.ts
+var import_obsidian5 = require("obsidian");
+var _BackgroundManager = class _BackgroundManager {
+  constructor(settingsManager) {
+    this.currentBackground = null;
+    this.warnedUnsafeBackgrounds = /* @__PURE__ */ new Set();
+    this.settingsManager = settingsManager;
+  }
+  setBackground(id) {
+    if (!id) {
+      this.currentBackground = null;
+      return true;
+    }
+    const background = this.settingsManager.getBackground(id);
+    if (background) {
+      this.currentBackground = background;
+      if (!this.warnedUnsafeBackgrounds.has(id) && hasUnsafeCss(background.style)) {
+        this.warnedUnsafeBackgrounds.add(id);
+        new import_obsidian5.Notice("\u6B64\u80CC\u666F\u542B\u8D44\u6E90\u52A0\u8F7D\u6216\u4E0D\u5B89\u5168 CSS\uFF0C\u9884\u89C8\u5C06\u8FC7\u6EE4\u76F8\u5173\u6837\u5F0F\uFF1B\u539F\u8BBE\u7F6E\u672A\u6539\u5199\u3002");
+      }
+      return true;
+    }
+    console.warn(`\u672A\u627E\u5230\u80CC\u666F: ${id}`);
+    return false;
+  }
+  applyBackground(element) {
+    const section = element.querySelector(".mp-content-section");
+    if (section) {
+      if (!this.currentBackground) {
+        section.removeAttribute("style");
+        return;
+      }
+      const bgStyle = this.currentBackground.style.replace(/padding:\s*0;?/g, "").replace(/;\s*$/, ";");
+      setSafeInlineStyle(section, bgStyle + " " + _BackgroundManager.BASE_CONTENT_PADDING);
+    }
+  }
+};
+_BackgroundManager.BASE_CONTENT_PADDING = "padding: 16px 20px;";
+var BackgroundManager = _BackgroundManager;
+
+// src/settings/ThemeGalleryModal.ts
+var import_obsidian6 = require("obsidian");
+var CURATED_SCENE_ORDER = [...new Set(curatedThemeEntries.map((entry) => entry.scene))];
+var SCENE_ORDER = [
+  "\u5168\u90E8",
+  ...CURATED_SCENE_ORDER,
+  "\u81EA\u5B9A\u4E49\u4E3B\u9898"
+];
+function getThemeScene(template) {
+  if (!template.isPreset) return "\u81EA\u5B9A\u4E49\u4E3B\u9898";
+  const entry = getCuratedThemeEntry(template.id);
+  return (entry == null ? void 0 : entry.status) === "legacy" ? "\u5386\u53F2\u4E3B\u9898" : (entry == null ? void 0 : entry.scene) || "\u901A\u7528\u957F\u6587";
+}
+var ThemeGalleryModal = class extends import_obsidian6.Modal {
+  constructor(app, settingsManager, currentTemplateId, onSelect, previewCallback) {
+    super(app);
+    this.selectedScene = "\u5168\u90E8";
+    this.searchQuery = "";
+    this.hasApplied = false;
+    this.gridContainer = null;
+    this.applyButton = null;
+    this.tryHintEl = null;
+    this.historyButton = null;
+    this.sceneBar = null;
+    this.templates = settingsManager.getVisibleTemplates();
+    this.originalTemplateId = currentTemplateId;
+    this.currentTemplateId = currentTemplateId;
+    this.onSelect = onSelect;
+    this.previewCallback = previewCallback;
+    const currentTemplate = this.templates.find((template) => template.id === currentTemplateId);
+    if (currentTemplate) this.selectedScene = getThemeScene(currentTemplate);
+  }
+  onOpen() {
+    const { contentEl, modalEl } = this;
+    modalEl.addClass("mp-theme-gallery-modal");
+    contentEl.empty();
+    const header = contentEl.createDiv("mp-gallery-header");
+    const heading = header.createDiv("mp-gallery-heading");
+    heading.createEl("h2", { text: "\u516C\u4F17\u53F7\u4E3B\u9898\u753B\u5ECA" });
+    heading.createEl("p", { text: "\u6BCF\u4E2A\u573A\u666F\u4E24\u5957\u4E0D\u540C\u7684\u9605\u8BFB\u7248\u5F0F\uFF1B\u70B9\u51FB\u4E3B\u9898\u5148\u8BD5\u7528\uFF0C\u518D\u786E\u8BA4\u5E94\u7528\u3002" });
+    const headerActions = header.createDiv("mp-gallery-header-actions");
+    const search = headerActions.createEl("input", {
+      cls: "mp-gallery-search",
+      attr: { type: "search", placeholder: "\u641C\u7D22\u4E3B\u9898\u6216\u6587\u7AE0\u573A\u666F", "aria-label": "\u641C\u7D22\u4E3B\u9898\u6216\u6587\u7AE0\u573A\u666F" }
+    });
+    search.addEventListener("input", () => {
+      this.searchQuery = search.value.trim().toLowerCase();
+      this.renderGallery();
+    });
+    this.historyButton = headerActions.createEl("button", {
+      cls: `mp-gallery-history-btn ${this.selectedScene === "\u5386\u53F2\u4E3B\u9898" ? "is-active" : ""}`,
+      attr: { type: "button", "aria-label": "\u67E5\u770B\u5386\u53F2\u4E3B\u9898", "aria-pressed": String(this.selectedScene === "\u5386\u53F2\u4E3B\u9898") }
+    });
+    (0, import_obsidian6.setIcon)(this.historyButton, "archive");
+    this.historyButton.createSpan({ text: "\u5386\u53F2\u4E3B\u9898" });
+    this.historyButton.addEventListener("click", () => this.activateScene("\u5386\u53F2\u4E3B\u9898"));
+    const sceneBar = contentEl.createDiv("mp-gallery-scenes");
+    this.sceneBar = sceneBar;
+    sceneBar.setAttribute("aria-label", "\u516C\u4F17\u53F7\u4E3B\u9898\u573A\u666F");
+    SCENE_ORDER.forEach((scene) => {
+      const count = this.getTemplatesForScene(scene).length;
+      if (count === 0 && scene !== "\u5168\u90E8") return;
+      const button = sceneBar.createEl("button", {
+        text: `${scene === "\u5168\u90E8" ? "\u5168\u90E8\u4E3B\u9898" : scene} \xB7 ${count}`,
+        cls: `mp-gallery-scene ${scene === this.selectedScene ? "is-active" : ""}`,
+        attr: { type: "button", "aria-pressed": String(scene === this.selectedScene) }
+      });
+      button.dataset.scene = scene;
+      button.addEventListener("click", () => this.activateScene(scene));
+    });
+    this.gridContainer = contentEl.createDiv("mp-gallery-grid");
+    this.renderGallery();
+    const footer = contentEl.createDiv("mp-gallery-footer");
+    const trialInfo = footer.createDiv("mp-gallery-trial-info");
+    this.tryHintEl = trialInfo.createDiv("mp-gallery-try-hint");
+    trialInfo.createDiv({ cls: "mp-gallery-trial-note", text: "\u8BD5\u7528\u4E0D\u4F1A\u4FDD\u5B58\u5230\u7B14\u8BB0\u8BBE\u7F6E\u3002" });
+    this.updateTryHint();
+    const actions = footer.createDiv("mp-gallery-actions");
+    const cancel = actions.createEl("button", { text: "\u53D6\u6D88\u8BD5\u7528", cls: "mp-gallery-btn-cancel" });
+    cancel.addEventListener("click", () => this.close());
+    this.applyButton = actions.createEl("button", { cls: "mp-gallery-btn-apply" });
+    this.updateApplyButton();
+    this.applyButton.addEventListener("click", () => {
+      const button = this.applyButton;
+      if (!button || button.disabled) return;
+      button.disabled = true;
+      button.setText("\u4FDD\u5B58\u4E2D\u2026");
+      void Promise.resolve().then(() => this.onSelect(this.currentTemplateId)).then(() => {
+        this.hasApplied = true;
+        this.close();
+      }).catch((error) => {
+        new import_obsidian6.Notice(`\u4E3B\u9898\u4FDD\u5B58\u5931\u8D25\uFF1A${error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF"}`);
+      }).finally(() => {
+        button.disabled = false;
+        this.updateApplyButton();
+      });
+    });
+  }
+  onClose() {
+    if (!this.hasApplied && this.currentTemplateId !== this.originalTemplateId) {
+      this.previewCallback(this.originalTemplateId);
+    }
+    this.contentEl.empty();
+  }
+  activateScene(scene) {
+    var _a, _b, _c;
+    this.selectedScene = scene;
+    (_a = this.sceneBar) == null ? void 0 : _a.querySelectorAll(".mp-gallery-scene").forEach((element) => {
+      const button = element;
+      const active = button.dataset.scene === scene;
+      button.toggleClass("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    (_b = this.historyButton) == null ? void 0 : _b.toggleClass("is-active", scene === "\u5386\u53F2\u4E3B\u9898");
+    (_c = this.historyButton) == null ? void 0 : _c.setAttribute("aria-pressed", String(scene === "\u5386\u53F2\u4E3B\u9898"));
+    this.renderGallery();
+  }
+  getTemplatesForScene(scene) {
+    return this.templates.filter((template) => {
+      const themeScene = getThemeScene(template);
+      return scene === "\u5168\u90E8" ? themeScene !== "\u5386\u53F2\u4E3B\u9898" : themeScene === scene;
+    });
+  }
+  matchesSearch(template) {
+    if (!this.searchQuery) return true;
+    return [template.id, template.name, template.description || "", getThemeScene(template)].join(" ").toLowerCase().includes(this.searchQuery);
+  }
+  getVisibleTemplates() {
+    return this.getTemplatesForScene(this.selectedScene).filter((template) => this.matchesSearch(template));
+  }
+  renderGallery() {
+    if (!this.gridContainer) return;
+    this.gridContainer.empty();
+    const templates2 = this.getVisibleTemplates();
+    if (templates2.length === 0) {
+      this.gridContainer.createDiv({ cls: "mp-gallery-empty", text: "\u6CA1\u6709\u5339\u914D\u7684\u4E3B\u9898\uFF0C\u6362\u4E2A\u573A\u666F\u6216\u5173\u952E\u8BCD\u8BD5\u8BD5\u3002" });
+      return;
+    }
+    const grouped = this.selectedScene === "\u5168\u90E8";
+    const scenes = grouped ? SCENE_ORDER.filter((scene) => scene !== "\u5168\u90E8" && scene !== "\u5386\u53F2\u4E3B\u9898") : [this.selectedScene];
+    scenes.forEach((scene) => {
+      const sceneTemplates = grouped ? templates2.filter((template) => getThemeScene(template) === scene) : templates2;
+      if (sceneTemplates.length === 0) return;
+      this.gridContainer.createEl("h3", {
+        cls: "mp-gallery-section-title",
+        text: grouped ? scene : `${scene} \xB7 ${sceneTemplates.length} \u4E2A\u4E3B\u9898`
+      });
+      const cardGrid = this.gridContainer.createDiv("mp-gallery-card-grid");
+      sceneTemplates.forEach((template) => this.renderThemeCard(cardGrid, template));
+    });
+  }
+  renderThemeCard(container, template) {
+    const selected = template.id === this.currentTemplateId;
+    const card = container.createEl("button", {
+      cls: `mp-theme-card ${selected ? "is-selected" : ""}`,
+      attr: {
+        type: "button",
+        "aria-pressed": selected ? "true" : "false",
+        title: `\u8BD5\u7528\u4E3B\u9898\uFF1A${template.name}`
+      }
+    });
+    card.dataset.themeId = template.id;
+    const info = card.createDiv("mp-theme-info");
+    info.createEl("strong", { text: template.name, cls: "mp-theme-name" });
+    if (selected) {
+      const check = info.createDiv("mp-theme-checkmark");
+      (0, import_obsidian6.setIcon)(check, "check");
+    }
+    card.addEventListener("click", () => {
+      var _a;
+      this.currentTemplateId = template.id;
+      this.previewCallback(template.id);
+      this.updateApplyButton();
+      this.updateTryHint();
+      (_a = this.gridContainer) == null ? void 0 : _a.querySelectorAll(".mp-theme-card").forEach((button) => {
+        var _a2, _b;
+        const active = button.dataset.themeId === template.id;
+        button.toggleClass("is-selected", active);
+        button.setAttribute("aria-pressed", String(active));
+        (_a2 = button.querySelector(".mp-theme-checkmark")) == null ? void 0 : _a2.remove();
+        if (active) {
+          const check = (_b = button.querySelector(".mp-theme-info")) == null ? void 0 : _b.createDiv("mp-theme-checkmark");
+          if (check) (0, import_obsidian6.setIcon)(check, "check");
+        }
+      });
+    });
+  }
+  updateApplyButton() {
+    if (!this.applyButton) return;
+    const template = this.templates.find((item) => item.id === this.currentTemplateId);
+    this.applyButton.setText(`\u5E94\u7528\u300C${(template == null ? void 0 : template.name) || "\u4E3B\u9898"}\u300D`);
+  }
+  updateTryHint() {
+    if (!this.tryHintEl) return;
+    const template = this.templates.find((item) => item.id === this.currentTemplateId);
+    const description = template ? this.getTemplateDescription(template) : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
+    this.tryHintEl.setText(`\u63A8\u8350\u4F5C\u7528\uFF1A${description}`);
+  }
+  getTemplateDescription(template) {
+    var _a, _b, _c;
+    const curatedRecommendation = ((_a = getCuratedThemeEntry(template.id)) == null ? void 0 : _a.recommendation) || ((_b = template.themeMeta) == null ? void 0 : _b.recommendation);
+    if (curatedRecommendation) return curatedRecommendation;
+    const description = (_c = template.description) == null ? void 0 : _c.trim();
+    return description ? description.split("\uFF08")[0].trim() : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
+  }
+};
+
+// src/ui/CustomSelect.ts
+var import_obsidian7 = require("obsidian");
+function createCustomSelect(parent, className, initialOptions, onChange) {
+  const container = parent.createDiv({ cls: `custom-select-container ${className}` });
+  const select = container.createEl("select", { cls: "custom-select dropdown", attr: { "aria-label": className.includes("font") ? "\u5B57\u4F53" : className.includes("background") ? "\u80CC\u666F" : "\u6587\u7AE0\u914D\u65B9" } });
+  const render = (options) => {
+    const current = select.value;
+    select.empty();
+    let group = null;
+    for (const option of options) {
+      if (option.header) {
+        group = select.createEl("optgroup", { attr: { label: option.label } });
+        continue;
+      }
+      (group || select).createEl("option", { text: option.label, attr: { value: option.value } });
+    }
+    if (options.some((option) => !option.header && option.value === current)) select.value = current;
+    select.dataset.value = select.value;
+  };
+  render(initialOptions);
+  select.addEventListener("change", () => {
+    const previous = select.dataset.value || "";
+    const value = select.value;
+    select.disabled = true;
+    void Promise.resolve().then(() => onChange(value)).then(() => {
+      select.dataset.value = value;
+    }).catch((error) => {
+      select.value = previous;
+      select.dataset.value = previous;
+      new import_obsidian7.Notice(`\u8BBE\u7F6E\u5931\u8D25\uFF1A${error instanceof Error ? error.message : String(error)}`);
+    }).finally(() => {
+      select.disabled = false;
+    });
+  });
+  return { container, updateOptions: render, setValue: (value) => {
+    if (!Array.from(select.options).some((option) => option.value === value)) select.createEl("option", { text: className.includes("font") ? "\u5F53\u524D\u5B57\u4F53" : className.includes("background") ? "\u5F53\u524D\u80CC\u666F" : "\u5F53\u524D\u914D\u65B9", attr: { value } });
+    select.value = value;
+    select.dataset.value = value;
+  } };
+}
+
+// src/ui/ImageAltModal.ts
+var import_obsidian8 = require("obsidian");
+async function handleImageAltEdit(app, currentFile, img) {
+  const currentAlt = img.getAttribute("alt") || "";
+  const linktext = img.dataset.linktext;
+  const newAlt = window.prompt("\u7F16\u8F91\u56FE\u7247\u6CE8\u91CA (Alt Text):", currentAlt);
+  if (newAlt === null || newAlt === currentAlt) return;
+  try {
+    let fileContent = await app.vault.read(currentFile);
+    let newFileContent = fileContent;
+    let replaced = false;
+    if (linktext) {
+      const escapedLinktext = linktext.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const wikiRegex = new RegExp(`!\\[\\[\\s*${escapedLinktext}\\s*(?:\\|.*?)?\\]\\]`);
+      if (wikiRegex.test(newFileContent)) {
+        newFileContent = newFileContent.replace(wikiRegex, `![[${linktext}|${newAlt}]]`);
+        replaced = true;
+      }
+    }
+    if (!replaced) {
+      const escapedAlt = currentAlt.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const stdRegex = new RegExp(`!\\[\\s*${escapedAlt}\\s*\\]\\(`);
+      if (stdRegex.test(newFileContent)) {
+        newFileContent = newFileContent.replace(stdRegex, `![${newAlt}](`);
+        replaced = true;
+      } else if (currentAlt) {
+        const wikiAltRegex = new RegExp(`\\|\\s*${escapedAlt}\\s*\\]\\]`);
+        if (wikiAltRegex.test(newFileContent)) {
+          newFileContent = newFileContent.replace(wikiAltRegex, `|${newAlt}]]`);
+          replaced = true;
+        }
+      }
+    }
+    if (replaced) {
+      await app.vault.modify(currentFile, newFileContent);
+      new import_obsidian8.Notice("\u56FE\u7247\u6CE8\u91CA\u5DF2\u66F4\u65B0");
+    } else {
+      new import_obsidian8.Notice("\u65E0\u6CD5\u5728\u6587\u6863\u4E2D\u7CBE\u786E\u5B9A\u4F4D\u6B64\u56FE\u7247\uFF0C\u8BF7\u68C0\u67E5\u662F\u5426\u4E3A\u6807\u51C6\u683C\u5F0F\u3002");
+    }
+  } catch (err) {
+    console.error("Failed to update image alt text", err);
+    new import_obsidian8.Notice("\u66F4\u65B0\u5931\u8D25");
+  }
+}
+
+// src/view.ts
+var import_html2canvas = __toESM(require_html2canvas());
+var VIEW_TYPE_MP = "yh-mp-preview";
+var EXPORT_IMAGE_TIMEOUT_MS = 1e4;
+var MPView = class extends import_obsidian9.ItemView {
+  constructor(leaf, templateManager, settingsManager) {
+    super(leaf);
+    this.currentFile = null;
+    this.updateTimer = null;
+    this.isPreviewLocked = false;
+    this.isEditMode = false;
+    this.isPhonePreview = false;
+    this.session = new PreviewSession();
+    this.renderComponent = null;
+    this.exportController = new AbortController();
+    this.validationReport = null;
+    this.templateManager = new TemplateManager(this.app, settingsManager);
+    this.settingsManager = settingsManager;
+    this.backgroundManager = new BackgroundManager(this.settingsManager);
+  }
+  get trialTemplateId() {
+    return this.session.trialTemplateId;
+  }
+  set trialTemplateId(value) {
+    this.session.trialTemplateId = value;
+  }
+  getActiveWechatTemplateId() {
+    return this.trialTemplateId || this.settingsManager.getSettings().templateId;
+  }
+  updateRecipeSummary(recipeId) {
+    var _a;
+    const labels = {
+      tutorial: "\u6559\u7A0B\u4E0E\u6B65\u9AA4",
+      checklist: "\u6E05\u5355\u4E0E\u65B9\u6CD5\u8BBA",
+      "product-intro": "\u4EA7\u54C1\u6216\u5DE5\u5177\u4ECB\u7ECD",
+      commentary: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA",
+      review: "\u5468\u62A5\u4E0E\u590D\u76D8"
+    };
+    const active = recipeId !== "legacy-compatible";
+    this.recipeSummary.setText(active ? `\u9AD8\u7EA7\u6392\u7248 \xB7 ${labels[recipeId] || "\u5DF2\u542F\u7528"}` : "\u9AD8\u7EA7\u6392\u7248");
+    (_a = this.recipeSummary.parentElement) == null ? void 0 : _a.toggleClass("is-active", active);
+  }
+  applyThemeTrial(templateId) {
+    const savedId = this.settingsManager.getSettings().templateId;
+    this.trialTemplateId = templateId === savedId ? null : templateId;
+    this.applyPresentation(this.previewEl);
+    this.refreshValidationReport();
+  }
+  getViewType() {
+    return VIEW_TYPE_MP;
+  }
+  async onClose() {
+    var _a;
+    this.session.close();
+    this.exportController.abort();
+    if (this.updateTimer) window.clearTimeout(this.updateTimer);
+    (_a = this.renderComponent) == null ? void 0 : _a.unload();
+    this.renderComponent = null;
+  }
+  applyPresentation(host) {
+    const section = host.querySelector(".mp-content-section");
+    if (!section) return;
+    resetArticleRecipe(section);
+    const settings = this.settingsManager.getSettings();
+    const themeId = this.getActiveWechatTemplateId();
+    this.templateManager.setCurrentTemplate(themeId);
+    this.templateManager.setFont(settings.fontFamily);
+    this.templateManager.setFontSize(settings.fontSize);
+    this.templateManager.applyTemplate(host);
+    this.backgroundManager.setBackground(settings.backgroundId);
+    this.backgroundManager.applyBackground(host);
+    applyArticleRecipe(section, settings.v3.selectedRecipeId, resolveWechatPalette(this.settingsManager.getTemplate(themeId)));
+    normalizeArticleText(section);
+  }
+  getDisplayText() {
+    return "yh-mp-preview";
+  }
+  getIcon() {
+    return "eye";
+  }
+  async onOpen() {
+    var _a;
+    const container = this.containerEl.children[1];
+    container.empty();
+    container.classList.remove("view-content");
+    container.classList.add("mp-view-content");
+    const { toolbar, controlsGroup, typographyRow, secondaryRow } = createWorkbenchControls(container);
+    const headerBtn = secondaryRow.createEl("button", {
+      cls: "mp-action-button mp-icon-btn",
+      attr: { "aria-label": "\u63D2\u5165\u81EA\u5B9A\u4E49\u5934\u90E8", "title": "\u63D2\u5165\u5934\u90E8" }
+    });
+    (0, import_obsidian9.setIcon)(headerBtn, "arrow-down-to-line");
+    headerBtn.addEventListener("click", () => this.toggleHeader());
+    const footerBtn = secondaryRow.createEl("button", {
+      cls: "mp-action-button mp-icon-btn",
+      attr: { "aria-label": "\u63D2\u5165\u81EA\u5B9A\u4E49\u5C3E\u90E8", "title": "\u63D2\u5165\u5C3E\u90E8" }
+    });
+    (0, import_obsidian9.setIcon)(footerBtn, "arrow-up-to-line");
+    footerBtn.addEventListener("click", () => this.toggleFooter());
+    const refreshButton = secondaryRow.createEl("button", {
+      cls: "mp-action-button mp-icon-btn",
+      attr: { "aria-label": "\u5237\u65B0\u9884\u89C8", "title": "\u5237\u65B0\u9884\u89C8" }
+    });
+    (0, import_obsidian9.setIcon)(refreshButton, "refresh-cw");
+    bindAsyncEvent(refreshButton, "click", async () => {
+      if (await this.updatePreview()) new import_obsidian9.Notice("\u9884\u89C8\u5DF2\u5237\u65B0");
+    });
+    this.lockButton = secondaryRow.createEl("button", {
+      cls: "mp-lock-button mp-icon-btn",
+      attr: { "aria-label": "\u5F00\u542F\u5B9E\u65F6\u9884\u89C8\u72B6\u6001", "title": "\u9501\u5B9A\u9884\u89C8" }
+    });
+    (0, import_obsidian9.setIcon)(this.lockButton, "unlock");
+    bindAsyncEvent(this.lockButton, "click", () => this.togglePreviewLock());
+    this.editButton = secondaryRow.createEl("button", {
+      cls: "mp-action-button mp-icon-btn",
+      attr: { "aria-label": "\u7F16\u8F91\u6A21\u5F0F", "title": "\u7F16\u8F91\u9884\u89C8\u5185\u5BB9" }
+    });
+    (0, import_obsidian9.setIcon)(this.editButton, "pencil");
+    this.editButton.addEventListener("click", () => this.toggleEditMode());
+    const snapshotButton = secondaryRow.createEl("button", {
+      cls: "mp-action-button mp-icon-btn",
+      attr: { "aria-label": "\u4FDD\u5B58\u6392\u7248\u5FEB\u7167", title: "\u4FDD\u5B58\u6392\u7248\u5FEB\u7167" }
+    });
+    (0, import_obsidian9.setIcon)(snapshotButton, "save");
+    bindAsyncEvent(snapshotButton, "click", () => this.saveCurrentSnapshot());
+    const restoreButton = secondaryRow.createEl("button", {
+      cls: "mp-action-button mp-icon-btn",
+      attr: { "aria-label": "\u6062\u590D\u6700\u8FD1\u5FEB\u7167", title: "\u6062\u590D\u6700\u8FD1\u5FEB\u7167" }
+    });
+    (0, import_obsidian9.setIcon)(restoreButton, "history");
+    bindAsyncEvent(restoreButton, "click", () => this.restoreLatestSnapshot());
+    const seoButton = secondaryRow.createEl("button", {
+      cls: "mp-action-button mp-icon-btn",
+      attr: { "aria-label": "SEO \u9690\u85CF\u6587\u5B57", "title": "\u63D2\u5165 SEO \u9690\u85CF\u5173\u952E\u8BCD" }
+    });
+    (0, import_obsidian9.setIcon)(seoButton, "search");
+    seoButton.addEventListener("click", () => this.insertSeoText());
+    const helpButton = secondaryRow.createEl("button", {
+      cls: "mp-help-button mp-icon-btn",
+      attr: { "aria-label": "\u4F7F\u7528\u6307\u5357" }
+    });
+    (0, import_obsidian9.setIcon)(helpButton, "help");
+    helpButton.setCssStyles({ position: "relative" });
+    secondaryRow.createDiv({
+      cls: "mp-help-tooltip",
+      text: `\u4F7F\u7528\u6307\u5357\uFF1A
+                1. \u6253\u5F00\u4E3B\u9898\u753B\u5ECA\uFF0C\u6309\u573A\u666F\u7B5B\u9009
+                2. \u70B9\u9009\u4E3B\u9898\u8BD5\u7528\uFF0C\u518D\u786E\u8BA4\u5E94\u7528
+                3. \u8C03\u6574\u5B57\u4F53\u548C\u5B57\u53F7
+                4. \u70B9\u51FB\u3010\u590D\u5236\u6309\u94AE\u3011\u5373\u53EF\u7C98\u8D34\u5230\u516C\u4F17\u53F7
+                5. \u270F\uFE0F \u7F16\u8F91\u6A21\u5F0F\u53EF\u76F4\u63A5\u4FEE\u6539\u9884\u89C8\u6587\u5B57
+                6. \u{1F50D} SEO \u6309\u94AE\u53EF\u63D2\u5165\u9690\u85CF\u5173\u952E\u8BCD
+                `
+    });
+    const backgroundOptions = [
+      ...((_a = this.settingsManager.getVisibleBackgrounds()) == null ? void 0 : _a.map((bg) => ({
+        value: bg.id,
+        label: bg.name
+      }))) || []
+    ];
+    if (!backgroundOptions.find((o) => o.value === "none")) {
+      backgroundOptions.unshift({ value: "none", label: "\u65E0\u80CC\u666F" });
+    }
+    if (!backgroundOptions.find((o) => o.value === "default")) {
+      backgroundOptions.unshift({ value: "default", label: "\u9ED8\u8BA4" });
+    }
+    const backgroundField = controlsGroup.createDiv("mp-toolbar-field mp-background-field");
+    backgroundField.createSpan({ cls: "mp-toolbar-label", text: "\u80CC\u666F" });
+    this.customBackgroundSelect = createCustomSelect(
+      backgroundField,
+      "mp-background-select",
+      backgroundOptions,
+      async (value) => {
+        await this.settingsManager.updateSettings({
+          backgroundId: value
+        });
+        this.backgroundManager.setBackground(value);
+        this.backgroundManager.applyBackground(this.previewEl);
+      }
+    );
+    const galleryBtn = controlsGroup.createEl("button", {
+      cls: "mp-gallery-btn",
+      attr: { "aria-label": "\u6253\u5F00\u4E3B\u9898\u753B\u5ECA", "title": "\u4E3B\u9898\u753B\u5ECA" }
+    });
+    (0, import_obsidian9.setIcon)(galleryBtn, "palette");
+    galleryBtn.addEventListener("click", () => this.openThemeGallery());
+    const fontField = typographyRow.createDiv("mp-toolbar-field mp-font-field");
+    fontField.createSpan({ cls: "mp-toolbar-label", text: "\u5B57\u4F53" });
+    this.customFontSelect = createCustomSelect(
+      fontField,
+      "mp-font-select",
+      this.getFontOptions(),
+      async (value) => {
+        await this.settingsManager.updateSettings({
+          fontFamily: value
+        });
+        this.templateManager.setFont(value);
+        this.applyPresentation(this.previewEl);
+      }
+    );
+    const sizeField = typographyRow.createDiv("mp-toolbar-field mp-size-field");
+    sizeField.createSpan({ cls: "mp-toolbar-label", text: "\u5B57\u53F7" });
+    const fontSizeGroup = sizeField.createDiv({ cls: "mp-font-size-group" });
+    const decreaseButton = fontSizeGroup.createEl("button", {
+      cls: "mp-font-size-btn",
+      text: "-",
+      attr: { "aria-label": "\u51CF\u5C0F\u5B57\u53F7", type: "button" }
+    });
+    this.fontSizeSelect = fontSizeGroup.createEl("input", {
+      cls: "mp-font-size-input",
+      type: "text",
+      value: "16",
+      attr: {
+        style: "border: none; outline: none; background: transparent;",
+        "aria-label": "\u6B63\u6587\u5B57\u53F7\uFF0812 \u81F3 30\uFF09",
+        inputmode: "numeric"
+      }
+    });
+    const increaseButton = fontSizeGroup.createEl("button", {
+      cls: "mp-font-size-btn",
+      text: "+",
+      attr: { "aria-label": "\u589E\u5927\u5B57\u53F7", type: "button" }
+    });
+    const settings = this.settingsManager.getSettings();
+    const advanced = toolbar.createEl("details", { cls: "mp-advanced-typesetting" });
+    this.recipeSummary = advanced.createEl("summary");
+    advanced.appendChild(secondaryRow);
+    advanced.createEl("p", {
+      cls: "mp-advanced-hint",
+      text: "\u53EF\u9009\u7684\u5C40\u90E8\u7ED3\u6784\u589E\u5F3A\uFF1B\u4E3B\u9898\u51B3\u5B9A\u6574\u4F53\u89C6\u89C9\u3002\u9009\u62E9\u201C\u901A\u7528\u957F\u6587\u201D\u5219\u4E0D\u53E0\u52A0\u914D\u65B9\u6837\u5F0F\uFF0C\u4E0D\u4FEE\u6539 Markdown \u539F\u6587\u3002"
+    });
+    const recipeField = advanced.createDiv("mp-toolbar-field mp-recipe-field");
+    recipeField.createSpan({ cls: "mp-toolbar-label", text: "\u6587\u7AE0\u914D\u65B9" });
+    this.recipeSelect = createCustomSelect(
+      recipeField,
+      "mp-recipe-select",
+      [
+        { label: "\u901A\u7528\u957F\u6587", value: "legacy-compatible" },
+        { label: "\u6559\u7A0B\u4E0E\u6B65\u9AA4", value: "tutorial" },
+        { label: "\u6E05\u5355\u4E0E\u65B9\u6CD5\u8BBA", value: "checklist" },
+        { label: "\u4EA7\u54C1\u6216\u5DE5\u5177\u4ECB\u7ECD", value: "product-intro" },
+        { label: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", value: "commentary" },
+        { label: "\u5468\u62A5\u4E0E\u590D\u76D8", value: "review" }
+      ],
+      async (value) => {
+        await this.settingsManager.updateSettings({
+          v3: {
+            ...this.settingsManager.getSettings().v3,
+            selectedRecipeId: value
+          }
+        });
+        this.updateRecipeSummary(value);
+        this.applyPresentation(this.previewEl);
+        this.refreshValidationReport();
+      }
+    );
+    this.recipeSelect.setValue(settings.v3.selectedRecipeId);
+    this.updateRecipeSummary(settings.v3.selectedRecipeId);
+    if (settings.backgroundId) {
+      this.customBackgroundSelect.setValue(settings.backgroundId);
+      this.backgroundManager.setBackground(settings.backgroundId);
+    }
+    if (settings.templateId) {
+      this.templateManager.setCurrentTemplate(settings.templateId);
+    }
+    if (settings.fontFamily) {
+      this.customFontSelect.setValue(settings.fontFamily);
+      this.templateManager.setFont(settings.fontFamily);
+    }
+    if (settings.fontSize) {
+      this.fontSizeSelect.value = settings.fontSize.toString();
+      this.templateManager.setFontSize(settings.fontSize);
+    }
+    const updateFontSize = async () => {
+      const parsed = Number(this.fontSizeSelect.value);
+      const size = Number.isFinite(parsed) ? Math.max(12, Math.min(30, Math.round(parsed))) : this.settingsManager.getSettings().fontSize;
+      await this.settingsManager.updateSettings({
+        fontSize: size
+      });
+      this.fontSizeSelect.value = String(size);
+      this.applyPresentation(this.previewEl);
+    };
+    decreaseButton.addEventListener("click", () => {
+      const currentSize = parseInt(this.fontSizeSelect.value);
+      if (currentSize > 12) {
+        this.fontSizeSelect.value = (currentSize - 1).toString();
+        runAction(updateFontSize);
+      }
+    });
+    increaseButton.addEventListener("click", () => {
+      const currentSize = parseInt(this.fontSizeSelect.value);
+      if (currentSize < 30) {
+        this.fontSizeSelect.value = (currentSize + 1).toString();
+        runAction(updateFontSize);
+      }
+    });
+    bindAsyncEvent(this.fontSizeSelect, "change", updateFontSize);
+    const previewWidthBar = container.createDiv("mp-preview-width-bar");
+    previewWidthBar.createSpan({ cls: "mp-preview-width-label", text: "\u9884\u89C8\u5BBD\u5EA6" });
+    const widthChoices = previewWidthBar.createDiv("mp-preview-width-choices");
+    const adaptiveButton = widthChoices.createEl("button", {
+      text: "\u81EA\u9002\u5E94",
+      attr: { type: "button", "aria-pressed": "true" }
+    });
+    const phoneButton = widthChoices.createEl("button", {
+      text: "\u624B\u673A 375px",
+      attr: { type: "button", "aria-pressed": "false" }
+    });
+    const widthHint = previewWidthBar.createSpan({
+      cls: "mp-preview-width-hint",
+      text: "\u4EC5\u5F71\u54CD\u9884\u89C8\uFF0C\u4E0D\u5F71\u54CD\u590D\u5236\u4E0E\u5BFC\u51FA"
+    });
+    this.previewEl = container.createDiv({ cls: "mp-preview-area" });
+    const setPreviewWidth = (phone) => {
+      this.isPhonePreview = phone;
+      this.previewEl.toggleClass("mp-phone-preview", phone);
+      adaptiveButton.setAttribute("aria-pressed", String(!phone));
+      phoneButton.setAttribute("aria-pressed", String(phone));
+    };
+    const refreshWidthAvailability = () => {
+      const style = window.getComputedStyle(this.previewEl);
+      const available = this.previewEl.clientWidth - parseFloat(style.paddingLeft || "0") - parseFloat(style.paddingRight || "0");
+      const narrow = available <= 375;
+      phoneButton.disabled = narrow;
+      phoneButton.title = narrow ? "\u5F53\u524D\u9884\u89C8\u533A\u57DF\u5DF2\u4E0D\u5BBD\u4E8E 375px\uFF0C\u62C9\u5BBD\u9762\u677F\u540E\u53EF\u6BD4\u8F83\u624B\u673A\u6548\u679C" : "\u4EE5 375px \u68C0\u67E5\u624B\u673A\u6392\u7248";
+      widthHint.setText(narrow ? "\u5F53\u524D\u9762\u677F\u5DF2\u662F\u624B\u673A\u5BBD\u5EA6" : "\u4EC5\u5F71\u54CD\u9884\u89C8\uFF0C\u4E0D\u5F71\u54CD\u590D\u5236\u4E0E\u5BFC\u51FA");
+    };
+    adaptiveButton.addEventListener("click", () => setPreviewWidth(false));
+    phoneButton.addEventListener("click", () => setPreviewWidth(true));
+    const widthObserver = new ResizeObserver(refreshWidthAvailability);
+    widthObserver.observe(this.previewEl);
+    this.register(() => widthObserver.disconnect());
+    refreshWidthAvailability();
+    this.validationPanel = container.createEl("section", { cls: "mp-validation-panel" });
+    bindAsyncEvent(this.previewEl, "click", async (e) => {
+      const target = e.target;
+      if (target.tagName.toLowerCase() === "img") {
+        e.stopPropagation();
+        if (!this.currentFile) return;
+        await handleImageAltEdit(this.app, this.currentFile, target);
+      }
+    });
+    const bottomBar = container.createDiv({ cls: "mp-bottom-bar" });
+    const primaryRow = bottomBar.createDiv({ cls: "mp-controls-group mp-primary-row" });
+    this.copyButton = primaryRow.createEl("button", {
+      text: "Pub \u590D\u5236",
+      cls: "mp-copy-button"
+    });
+    const exportImageButton = primaryRow.createEl("button", {
+      text: "\u5BFC\u51FA\u957F\u56FE",
+      cls: "mp-export-button"
+    });
+    bindAsyncEvent(exportImageButton, "click", () => this.exportLongImage(exportImageButton));
+    const exportHtmlButton = primaryRow.createEl("button", {
+      text: "\u5BFC\u51FA HTML",
+      cls: "mp-export-button"
+    });
+    bindAsyncEvent(exportHtmlButton, "click", () => this.exportHtmlFragment(exportHtmlButton));
+    const exportSegmentsButton = primaryRow.createEl("button", {
+      text: "\u5BFC\u51FA\u5206\u6BB5\u56FE",
+      cls: "mp-export-button"
+    });
+    bindAsyncEvent(exportSegmentsButton, "click", () => this.exportSegmentedImages(exportSegmentsButton));
+    bindAsyncEvent(this.copyButton, "click", async () => {
+      if (this.previewEl) {
+        const validation = this.refreshValidationReport();
+        if (validation == null ? void 0 : validation.errors) {
+          new import_obsidian9.Notice(`\u53D1\u73B0 ${validation.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u8BF7\u5148\u5728\u201C\u68C0\u67E5\u201D\u533A\u57DF\u5904\u7406`);
+          return;
+        }
+        this.copyButton.disabled = true;
+        this.copyButton.setText("\u590D\u5236\u4E2D...");
+        try {
+          const copySettings = this.settingsManager.getSettings();
+          const themeId = this.getActiveWechatTemplateId();
+          const validation2 = await CopyManager.copyToClipboard(this.previewEl, {
+            themeId,
+            recipeId: copySettings.v3.selectedRecipeId,
+            palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId))
+          }, { signal: this.exportController.signal });
+          this.copyButton.setText(validation2.warnings > 0 ? `\u590D\u5236\u6210\u529F\uFF08${validation2.warnings} \u9879\u517C\u5BB9\u6027\u63D0\u793A\uFF09` : "\u590D\u5236\u6210\u529F");
+          window.setTimeout(() => {
+            this.copyButton.disabled = false;
+            this.copyButton.setText("Pub \u590D\u5236");
+          }, 2e3);
+        } catch (error) {
+          this.copyButton.setText("\u590D\u5236\u5931\u8D25");
+          window.setTimeout(() => {
+            this.copyButton.disabled = false;
+            this.copyButton.setText("Pub \u590D\u5236");
+          }, 2e3);
+        }
+      }
+    });
+    this.registerEvent(
+      this.app.workspace.on("file-open", (file) => {
+        runAction(() => this.onFileOpen(file));
+      })
+    );
+    this.registerEvent(
+      this.app.vault.on("modify", (file) => {
+        if (file instanceof import_obsidian9.TFile) this.onFileModify(file);
+      })
+    );
+    const currentFile = this.app.workspace.getActiveFile();
+    await this.onFileOpen(currentFile);
+  }
+  updateControlsState(enabled) {
+    var _a;
+    this.lockButton.disabled = !enabled;
+    [this.customFontSelect, this.customBackgroundSelect].forEach((ctrl) => {
+      if (ctrl && ctrl.container) {
+        const selectEl = ctrl.container.querySelector("select.custom-select");
+        if (selectEl) {
+          selectEl.classList.toggle("disabled", !enabled);
+          selectEl.disabled = !enabled;
+        }
+      }
+    });
+    this.fontSizeSelect.disabled = !enabled;
+    this.copyButton.disabled = !enabled || (((_a = this.validationReport) == null ? void 0 : _a.errors) || 0) > 0;
+    const fontSizeButtons = this.containerEl.querySelectorAll(".mp-font-size-btn");
+    fontSizeButtons.forEach((button) => {
+      button.disabled = !enabled;
+    });
+  }
+  refreshValidationReport() {
+    var _a;
+    const contentSection = (_a = this.previewEl) == null ? void 0 : _a.querySelector(".mp-content-section");
+    if (!contentSection) {
+      this.validationReport = null;
+      this.renderValidationReport();
+      return null;
+    }
+    const settings = this.settingsManager.getSettings();
+    const themeId = this.getActiveWechatTemplateId();
+    this.validationReport = prepareLegacyWechatFragment(contentSection, {
+      themeId,
+      recipeId: settings.v3.selectedRecipeId,
+      palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId))
+    }).validation;
+    this.renderValidationReport();
+    this.copyButton.disabled = this.validationReport.errors > 0;
+    return this.validationReport;
+  }
+  renderValidationReport() {
+    this.validationPanel.empty();
+    const report = this.validationReport;
+    if (!report) {
+      this.validationPanel.setCssStyles({ display: "none" });
+      return;
+    }
+    this.validationPanel.setCssStyles({ display: "block" });
+    const status = this.validationPanel.createDiv({
+      cls: `mp-validation-summary ${report.errors > 0 ? "is-error" : report.warnings > 0 ? "is-warning" : "is-ok"}`
+    });
+    status.setText(report.errors > 0 ? `\u68C0\u67E5\uFF1A${report.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u5DF2\u7981\u6B62\u590D\u5236` : report.warnings > 0 ? `\u68C0\u67E5\uFF1A\u53EF\u590D\u5236\uFF0C${report.warnings} \u9879\u517C\u5BB9\u6027\u63D0\u793A` : "\u68C0\u67E5\uFF1A\u53EF\u590D\u5236\uFF0C\u672A\u53D1\u73B0\u517C\u5BB9\u6027\u95EE\u9898");
+    if (report.issues.length > 0) {
+      const list = this.validationPanel.createEl("ul", { cls: "mp-validation-issues" });
+      report.issues.slice(0, 4).forEach((issue) => {
+        list.createEl("li", {
+          text: `${issue.severity === "error" ? "\u963B\u65AD" : "\u63D0\u793A"} \xB7 ${issue.message}\uFF08${issue.path}\uFF09`,
+          cls: issue.severity === "error" ? "is-error" : "is-warning"
+        });
+      });
+      if (report.issues.length > 4) {
+        this.validationPanel.createDiv({
+          text: `\u53E6\u6709 ${report.issues.length - 4} \u9879\u63D0\u793A\u672A\u5C55\u5F00`,
+          cls: "mp-validation-more"
+        });
+      }
+    }
+  }
+  async saveCurrentSnapshot() {
+    var _a;
+    if (!this.currentFile) {
+      new import_obsidian9.Notice("\u8BF7\u5148\u6253\u5F00\u4E00\u7BC7 Markdown \u7B14\u8BB0");
+      return;
+    }
+    const file = this.currentFile;
+    const content = await this.app.vault.cachedRead(file);
+    if (((_a = this.currentFile) == null ? void 0 : _a.path) !== file.path) throw new Error("\u6587\u7AE0\u5DF2\u5207\u6362\uFF0C\u8BF7\u91CD\u65B0\u4FDD\u5B58\u5FEB\u7167");
+    const settings = this.settingsManager.getSettings();
+    const validation = this.refreshValidationReport() || { errors: 0, warnings: 0 };
+    const snapshot = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      filePath: file.path,
+      contentHash: this.hashText(content),
+      templateId: settings.templateId,
+      backgroundId: settings.backgroundId,
+      fontFamily: settings.fontFamily,
+      fontSize: settings.fontSize,
+      recipeId: settings.v3.selectedRecipeId,
+      validation: { errors: validation.errors, warnings: validation.warnings }
+    };
+    await this.settingsManager.saveLayoutSnapshot(snapshot);
+    new import_obsidian9.Notice("\u5DF2\u4FDD\u5B58\u6392\u7248\u5FEB\u7167");
+  }
+  async restoreLatestSnapshot() {
+    const snapshot = this.settingsManager.getSettings().layoutSnapshots[0];
+    if (!snapshot) {
+      new import_obsidian9.Notice("\u5C1A\u65E0\u53EF\u6062\u590D\u7684\u6392\u7248\u5FEB\u7167");
+      return;
+    }
+    await this.settingsManager.restoreLayoutSnapshot(snapshot);
+    this.customFontSelect.setValue(snapshot.fontFamily);
+    this.customBackgroundSelect.setValue(snapshot.backgroundId);
+    this.fontSizeSelect.value = String(snapshot.fontSize);
+    this.recipeSelect.setValue(snapshot.recipeId);
+    this.updateRecipeSummary(snapshot.recipeId);
+    await this.updatePreview();
+    new import_obsidian9.Notice(`\u5DF2\u6062\u590D ${new Date(snapshot.createdAt).toLocaleString()} \u7684\u6392\u7248\u5FEB\u7167`);
+  }
+  hashText(value) {
+    let hash = 5381;
+    for (let index = 0; index < value.length; index += 1) {
+      hash = (hash << 5) + hash ^ value.charCodeAt(index);
+    }
+    return (hash >>> 0).toString(16);
+  }
+  /**
+   * Creates an unconstrained copy of the article. The live preview is a
+   * scroll container, so capturing it directly only includes its viewport.
+   */
+  async createExportSnapshot() {
+    const content = this.previewEl.querySelector(".mp-content-section");
+    if (!content) throw new Error("Preview content is not available");
+    const exportDocument = this.previewEl.ownerDocument;
+    const exportWindow = exportDocument.defaultView;
+    if (!exportWindow) throw new Error("\u9884\u89C8\u7A97\u53E3\u5DF2\u5173\u95ED");
+    const previewStyle = exportWindow.getComputedStyle(this.previewEl);
+    const width = Math.max(1, Math.ceil(this.previewEl.clientWidth - parseFloat(previewStyle.paddingLeft || "0") - parseFloat(previewStyle.paddingRight || "0")));
+    const snapshotHost = exportDocument.createElement("div");
+    snapshotHost.className = "mp-preview-area mp-export-snapshot";
+    snapshotHost.setCssStyles({ cssText: [
+      "position: fixed",
+      "left: -100000px",
+      "top: 0",
+      `width: ${width}px`,
+      "height: auto",
+      "min-height: 0",
+      "margin: 0",
+      "padding: 0",
+      "overflow: visible",
+      "background: #ffffff",
+      "border: 0",
+      "box-shadow: none",
+      "pointer-events: none"
+    ].join(";") });
+    const cleanup = () => snapshotHost.remove();
+    try {
+      const snapshot = (await CopyManager.prepareForExport(content, {
+        themeId: this.getActiveWechatTemplateId(),
+        recipeId: this.settingsManager.getSettings().v3.selectedRecipeId,
+        palette: resolveWechatPalette(this.settingsManager.getTemplate(this.getActiveWechatTemplateId()))
+      }, { signal: this.exportController.signal })).root;
+      const computed = exportWindow.getComputedStyle(content);
+      snapshot.setCssStyles({ cssText: snapshot.style.cssText + `;${[
+        `width: ${width}px`,
+        "max-width: none",
+        "height: auto",
+        "max-height: none",
+        "min-height: 0",
+        "overflow: visible",
+        "box-sizing: border-box",
+        `font-family: ${computed.fontFamily}`,
+        `font-size: ${computed.fontSize}`,
+        `line-height: ${computed.lineHeight}`,
+        `color: ${computed.color}`,
+        "background: #ffffff"
+      ].join(";")};` });
+      snapshotHost.appendChild(snapshot);
+      exportDocument.body.appendChild(snapshotHost);
+      const imageResults = await Promise.all(Array.from(snapshot.querySelectorAll("img")).map((image) => this.waitForExportImage(image)));
+      const failedImages = imageResults.filter((loaded) => !loaded).length;
+      if (failedImages > 0) {
+        throw new Error(`${failedImages} \u5F20\u56FE\u7247\u672A\u80FD\u5728 ${EXPORT_IMAGE_TIMEOUT_MS / 1e3} \u79D2\u5185\u52A0\u8F7D`);
+      }
+      return {
+        element: snapshot,
+        width,
+        height: Math.max(1, Math.ceil(snapshot.scrollHeight)),
+        cleanup
+      };
+    } catch (error) {
+      cleanup();
+      throw error;
+    }
+  }
+  waitForExportImage(image) {
+    const signal = this.exportController.signal;
+    if (signal.aborted) return Promise.resolve(false);
+    if (image.complete) return Promise.resolve(image.naturalWidth > 0);
+    return new Promise((resolve) => {
+      let settled = false;
+      const finish = (loaded) => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeoutId);
+        image.removeEventListener("load", onLoad);
+        image.removeEventListener("error", onError);
+        signal.removeEventListener("abort", onAbort);
+        resolve(loaded);
+      };
+      const onLoad = () => finish(image.naturalWidth > 0);
+      const onError = () => finish(false);
+      const onAbort = () => finish(false);
+      const timeoutId = window.setTimeout(() => finish(false), EXPORT_IMAGE_TIMEOUT_MS);
+      image.addEventListener("load", onLoad, { once: true });
+      image.addEventListener("error", onError, { once: true });
+      signal.addEventListener("abort", onAbort, { once: true });
+    });
+  }
+  async renderExportCanvas(element, width, height, scale, y = 0) {
+    this.exportController.signal.throwIfAborted();
+    const owner = element.ownerDocument.defaultView;
+    if (!owner) throw new Error("\u5BFC\u51FA\u7A97\u53E3\u5DF2\u5173\u95ED");
+    return queueCanvasRender(element.ownerDocument, async () => {
+      const previousFrames = new Set(Array.from(element.ownerDocument.querySelectorAll(".html2canvas-container")));
+      try {
+        const canvas = await boundedCanvasRender(owner, this.exportController.signal, () => (0, import_html2canvas.default)(element, {
+          useCORS: true,
+          allowTaint: false,
+          backgroundColor: "#ffffff",
+          scale,
+          x: 0,
+          y,
+          width,
+          height,
+          windowWidth: width,
+          windowHeight: height,
+          scrollX: 0,
+          scrollY: 0,
+          ignoreElements: (candidate) => shouldIgnoreExportElement(candidate, element)
+        }));
+        this.exportController.signal.throwIfAborted();
+        return canvas;
+      } finally {
+        element.ownerDocument.querySelectorAll(".html2canvas-container").forEach((frame) => {
+          if (!previousFrames.has(frame)) frame.remove();
+        });
+      }
+    });
+  }
+  async exportLongImage(button) {
+    const originalText = button.textContent || "\u5BFC\u51FA\u957F\u56FE";
+    button.disabled = true;
+    button.setText("\u751F\u6210\u4E2D...");
+    let cleanup;
+    try {
+      const snapshot = await this.createExportSnapshot();
+      cleanup = snapshot.cleanup;
+      const maxDimension = 16384;
+      const maxPixels = 64e6;
+      const scale = Math.min(
+        2,
+        maxDimension / snapshot.width,
+        maxDimension / snapshot.height,
+        Math.sqrt(maxPixels / (snapshot.width * snapshot.height))
+      );
+      if (!Number.isFinite(scale) || scale < 0.01) {
+        throw new Error("\u6587\u7AE0\u8FC7\u957F\uFF0C\u65E0\u6CD5\u751F\u6210\u5355\u5F20\u957F\u56FE\uFF0C\u8BF7\u6539\u7528\u201C\u5BFC\u51FA\u5206\u6BB5\u56FE\u201D");
+      }
+      const canvas = await this.renderExportCanvas(snapshot.element, snapshot.width, snapshot.height, scale);
+      const link = createEl("a");
+      link.download = `yh-mp-preview-${Date.now()}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+      if (scale < 2) new import_obsidian9.Notice("\u6587\u7AE0\u8F83\u957F\uFF0C\u5DF2\u81EA\u52A8\u964D\u4F4E\u957F\u56FE\u5206\u8FA8\u7387\u4EE5\u5B8C\u6574\u5BFC\u51FA\uFF1B\u53EF\u4F7F\u7528\u201C\u5BFC\u51FA\u5206\u6BB5\u56FE\u201D\u83B7\u5F97\u9AD8\u6E05\u5207\u7247\u3002");
+      button.setText("\u5BFC\u51FA\u6210\u529F");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF";
+      console.error("\u5BFC\u51FA\u957F\u56FE\u5931\u8D25:", error);
+      new import_obsidian9.Notice(`\u957F\u56FE\u5BFC\u51FA\u5931\u8D25\uFF1A${message}`);
+      button.setText("\u5BFC\u51FA\u5931\u8D25");
+    } finally {
+      cleanup == null ? void 0 : cleanup();
+      window.setTimeout(() => {
+        button.disabled = false;
+        button.setText(originalText);
+      }, 2e3);
+    }
+  }
+  async exportHtmlFragment(button) {
+    const contentSection = this.previewEl.querySelector(".mp-content-section");
+    if (!contentSection) return;
+    const originalText = button.textContent || "\u5BFC\u51FA HTML";
+    button.disabled = true;
+    try {
+      const settings = this.settingsManager.getSettings();
+      const themeId = this.getActiveWechatTemplateId();
+      const prepared = await CopyManager.prepareForExport(contentSection, {
+        themeId,
+        recipeId: settings.v3.selectedRecipeId,
+        palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId))
+      }, { signal: this.exportController.signal });
+      if (prepared.validation.errors > 0) {
+        new import_obsidian9.Notice(`\u5B58\u5728 ${prepared.validation.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u65E0\u6CD5\u5BFC\u51FA HTML`);
+        return;
+      }
+      const blob = new Blob([prepared.html], { type: "text/html;charset=utf-8" });
+      this.exportController.signal.throwIfAborted();
+      const url = URL.createObjectURL(blob);
+      const link = createEl("a");
+      link.href = url;
+      link.download = `yh-mp-preview-${Date.now()}.html`;
+      link.click();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1e3);
+      new import_obsidian9.Notice("\u5DF2\u5BFC\u51FA HTML \u7247\u6BB5");
+    } catch (error) {
+      new import_obsidian9.Notice(`HTML \u5BFC\u51FA\u5931\u8D25\uFF1A${error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF"}`);
+    } finally {
+      button.disabled = false;
+      button.setText(originalText);
+    }
+  }
+  async exportSegmentedImages(button) {
+    const originalText = button.textContent || "\u5BFC\u51FA\u5206\u6BB5\u56FE";
+    button.disabled = true;
+    button.setText("\u751F\u6210\u4E2D...");
+    let cleanup;
+    let completed = 0;
+    try {
+      const snapshot = await this.createExportSnapshot();
+      cleanup = snapshot.cleanup;
+      const segmentHeight = Math.max(1, Math.round(snapshot.width * 4 / 3));
+      const total = Math.ceil(snapshot.height / segmentHeight);
+      const exportedAt = Date.now();
+      for (let index = 0; index < total; index += 1) {
+        const sourceY = index * segmentHeight;
+        const height = Math.min(segmentHeight, snapshot.height - sourceY);
+        button.setText(`\u751F\u6210\u4E2D ${index + 1}/${total}...`);
+        const segment = await this.renderExportCanvas(
+          snapshot.element,
+          snapshot.width,
+          height,
+          2,
+          sourceY
+        );
+        const link = createEl("a");
+        link.download = `yh-mp-preview-${exportedAt}-${index + 1}.png`;
+        link.href = segment.toDataURL("image/png");
+        link.click();
+        completed += 1;
+      }
+      new import_obsidian9.Notice(`\u5DF2\u5BFC\u51FA ${total} \u5F20 1:1.33 \u5206\u6BB5\u56FE`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF";
+      console.error("\u5206\u6BB5\u56FE\u5BFC\u51FA\u5931\u8D25", error);
+      new import_obsidian9.Notice(`\u5206\u6BB5\u56FE\u5BFC\u51FA\u5931\u8D25\uFF1A${message}${completed > 0 ? `\uFF08\u5DF2\u5B8C\u6210 ${completed} \u5F20\uFF09` : ""}`);
+    } finally {
+      cleanup == null ? void 0 : cleanup();
+      button.disabled = false;
+      button.setText(originalText);
+    }
+  }
+  async onFileOpen(file) {
+    var _a, _b, _c;
+    this.session.invalidate();
+    this.previewEl.removeAttribute("aria-busy");
+    if (((_a = this.currentFile) == null ? void 0 : _a.path) !== (file == null ? void 0 : file.path)) {
+      this.isEditMode = false;
+      this.previewEl.contentEditable = "false";
+      this.previewEl.classList.remove("mp-edit-mode");
+      (0, import_obsidian9.setIcon)(this.editButton, "pencil");
+      this.editButton.setAttribute("title", "\u7F16\u8F91\u9884\u89C8\u6587\u5B57");
+      (_b = this.renderComponent) == null ? void 0 : _b.unload();
+      this.renderComponent = null;
+      this.previewEl.empty();
+    }
+    if (((_c = this.currentFile) == null ? void 0 : _c.path) !== (file == null ? void 0 : file.path)) {
+      this.session.headerEnabled = false;
+      this.session.footerEnabled = false;
+    }
+    this.currentFile = file;
+    if (!file || file.extension !== "md") {
+      this.previewEl.empty();
+      this.previewEl.createDiv({
+        text: "\u53EA\u80FD\u9884\u89C8 markdown \u6587\u672C\u6587\u6863",
+        cls: "mp-empty-message"
+      });
+      this.validationReport = null;
+      this.renderValidationReport();
+      this.updateControlsState(false);
+      return;
+    }
+    this.updateControlsState(true);
+    this.isPreviewLocked = false;
+    (0, import_obsidian9.setIcon)(this.lockButton, "unlock");
+    await this.updatePreview();
+  }
+  async togglePreviewLock() {
+    this.isPreviewLocked = !this.isPreviewLocked;
+    const lockIcon = this.isPreviewLocked ? "lock" : "unlock";
+    const lockStatus = this.isPreviewLocked ? "\u5F00\u542F\u5B9E\u65F6\u9884\u89C8\u72B6\u6001" : "\u5173\u95ED\u5B9E\u65F6\u9884\u89C8\u72B6\u6001";
+    (0, import_obsidian9.setIcon)(this.lockButton, lockIcon);
+    this.lockButton.setAttribute("aria-label", lockStatus);
+    if (!this.isPreviewLocked) {
+      await this.updatePreview();
+    }
+  }
+  toggleEditMode() {
+    this.isEditMode = !this.isEditMode;
+    if (this.isEditMode) {
+      this.previewEl.contentEditable = "true";
+      this.previewEl.classList.add("mp-edit-mode");
+      (0, import_obsidian9.setIcon)(this.editButton, "pencil-off");
+      this.editButton.setAttribute("title", "\u9000\u51FA\u7F16\u8F91\u6A21\u5F0F");
+      if (!this.isPreviewLocked) {
+        this.isPreviewLocked = true;
+        (0, import_obsidian9.setIcon)(this.lockButton, "lock");
+        this.lockButton.setAttribute("aria-label", "\u5F00\u542F\u5B9E\u65F6\u9884\u89C8\u72B6\u6001");
+      }
+      new import_obsidian9.Notice("\u5DF2\u8FDB\u5165\u7F16\u8F91\u6A21\u5F0F \u2014 \u4FEE\u6539\u4EC5\u5F71\u54CD\u590D\u5236\u5185\u5BB9");
+    } else {
+      this.previewEl.contentEditable = "false";
+      this.previewEl.classList.remove("mp-edit-mode");
+      (0, import_obsidian9.setIcon)(this.editButton, "pencil");
+      this.editButton.setAttribute("title", "\u7F16\u8F91\u9884\u89C8\u5185\u5BB9");
+      new import_obsidian9.Notice("\u5DF2\u9000\u51FA\u7F16\u8F91\u6A21\u5F0F");
+    }
+  }
+  insertSeoText() {
+    const modal = new class extends import_obsidian9.Modal {
+      constructor(view) {
+        super(view.app);
+        this.result = "";
+        this.view = view;
+      }
+      onOpen() {
+        const { contentEl } = this;
+        contentEl.createEl("h3", { text: "\u{1F50D} \u63D2\u5165 SEO \u9690\u85CF\u5173\u952E\u8BCD" });
+        contentEl.createEl("p", {
+          text: "\u8F93\u5165\u7684\u6587\u5B57\u590D\u5236\u5230\u516C\u4F17\u53F7\u540E\u4E0D\u53EF\u89C1\uFF0C\u4F46\u53EF\u88AB\u641C\u7D22\u5F15\u64CE\u7D22\u5F15\u3002",
+          attr: { style: "color: #888; font-size: 13px; margin-bottom: 12px;" }
+        });
+        const textarea = contentEl.createEl("textarea", {
+          attr: {
+            placeholder: "\u8F93\u5165 SEO \u5173\u952E\u8BCD\uFF0C\u591A\u4E2A\u5173\u952E\u8BCD\u7528\u7A7A\u683C\u5206\u9694...",
+            rows: "3",
+            style: "width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--background-modifier-border); font-size: 14px; resize: vertical;"
+          }
+        });
+        textarea.focus();
+        const btnContainer = contentEl.createDiv({
+          attr: { style: "display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px;" }
+        });
+        const cancelBtn = btnContainer.createEl("button", { text: "\u53D6\u6D88" });
+        cancelBtn.addEventListener("click", () => this.close());
+        const submitBtn = btnContainer.createEl("button", {
+          text: "\u63D2\u5165",
+          attr: { style: "background: var(--text-accent); color: var(--text-on-accent); border: none; padding: 6px 16px; border-radius: 6px; cursor: pointer;" }
+        });
+        submitBtn.addEventListener("click", () => {
+          this.result = textarea.value;
+          this.close();
+        });
+        textarea.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            this.result = textarea.value;
+            this.close();
+          }
+        });
+      }
+      onClose() {
+        if (this.result.trim()) {
+          this.view.applySeoText(this.result.trim());
+        }
+      }
+    }(this);
+    modal.open();
+  }
+  applySeoText(seoText) {
+    let seoSection = this.previewEl.querySelector(".mp-seo-hidden");
+    if (seoSection) {
+      seoSection.textContent = (seoSection.textContent || "") + " " + seoText;
+    } else {
+      seoSection = createEl("section");
+      seoSection.className = "mp-seo-hidden";
+      seoSection.setCssStyles({ cssText: "font-size: 0; color: transparent; line-height: 0; height: 0; overflow: hidden; opacity: 0; position: absolute; left: -9999px;" });
+      seoSection.textContent = seoText;
+      const contentSection = this.previewEl.querySelector(".mp-content-section");
+      if (contentSection) {
+        contentSection.appendChild(seoSection);
+      } else {
+        this.previewEl.appendChild(seoSection);
+      }
+    }
+    if (!this.isPreviewLocked) {
+      this.isPreviewLocked = true;
+      (0, import_obsidian9.setIcon)(this.lockButton, "lock");
+      this.lockButton.setAttribute("aria-label", "\u5F00\u542F\u5B9E\u65F6\u9884\u89C8\u72B6\u6001");
+    }
+    new import_obsidian9.Notice("SEO \u9690\u85CF\u6587\u5B57\u5DF2\u63D2\u5165");
+  }
+  onFileModify(file) {
+    if (file === this.currentFile && !this.isPreviewLocked) {
+      if (this.updateTimer) {
+        window.clearTimeout(this.updateTimer);
+      }
+      this.updateTimer = window.setTimeout(() => {
+        runAction(() => this.updatePreview());
+      }, 500);
+    }
+  }
+  async updatePreview() {
+    var _a, _b;
+    if (!this.currentFile) return false;
+    const file = this.currentFile;
+    const lease = this.session.begin();
+    const component = new import_obsidian9.Component();
+    component.load();
+    const staging = this.previewEl.ownerDocument.createElement("div");
+    const scrollHeight = this.previewEl.scrollHeight;
+    const scrollRatio = scrollHeight > 0 ? this.previewEl.scrollTop / scrollHeight : 0;
+    const isAtBottom = scrollHeight - this.previewEl.scrollTop <= this.previewEl.clientHeight + 100;
+    let committed = false;
+    this.previewEl.setAttribute("aria-busy", "true");
+    try {
+      const content = await this.app.vault.cachedRead(file);
+      if (!lease.isCurrent()) return false;
+      await import_obsidian9.MarkdownRenderer.render(this.app, content, staging, file.path, component);
+      if (!lease.isCurrent() || ((_a = this.currentFile) == null ? void 0 : _a.path) !== file.path) return false;
+      MPConverter.formatContent(staging, content, this.settingsManager);
+      this.applyPresentation(staging);
+      this.injectArticleChrome(staging);
+      if (!lease.isCurrent()) return false;
+      (_b = this.renderComponent) == null ? void 0 : _b.unload();
+      this.previewEl.replaceChildren(...Array.from(staging.childNodes));
+      this.renderComponent = component;
+      committed = true;
+      this.refreshValidationReport();
+      window.requestAnimationFrame(() => {
+        if (!lease.isCurrent()) return;
+        this.previewEl.scrollTop = isAtBottom ? this.previewEl.scrollHeight : scrollRatio * this.previewEl.scrollHeight;
+      });
+      return true;
+    } catch (error) {
+      if (lease.isCurrent()) new import_obsidian9.Notice(`\u9884\u89C8\u66F4\u65B0\u5931\u8D25\uFF0C\u4FDD\u7559\u4E0A\u6B21\u5185\u5BB9\uFF1A${error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF"}`);
+      return false;
+    } finally {
+      if (!committed) component.unload();
+      if (lease.isCurrent()) this.previewEl.removeAttribute("aria-busy");
+    }
+  }
+  toggleHeader() {
+    var _a;
+    if (!this.settingsManager.getSettings().customHeader) {
+      new import_obsidian9.Notice("\u8BF7\u5148\u5728\u8BBE\u7F6E\u4E2D\u586B\u5199\u81EA\u5B9A\u4E49\u5934\u90E8");
+      return;
+    }
+    this.session.headerEnabled = !this.session.headerEnabled;
+    (_a = this.previewEl.querySelector(".mp-custom-header")) == null ? void 0 : _a.remove();
+    this.injectArticleChrome(this.previewEl);
+    this.refreshValidationReport();
+  }
+  toggleFooter() {
+    var _a;
+    if (!this.settingsManager.getSettings().customFooter) {
+      new import_obsidian9.Notice("\u8BF7\u5148\u5728\u8BBE\u7F6E\u4E2D\u586B\u5199\u81EA\u5B9A\u4E49\u5C3E\u90E8");
+      return;
+    }
+    this.session.footerEnabled = !this.session.footerEnabled;
+    (_a = this.previewEl.querySelector(".mp-custom-footer")) == null ? void 0 : _a.remove();
+    this.injectArticleChrome(this.previewEl);
+    this.refreshValidationReport();
+  }
+  injectArticleChrome(host) {
+    const article = host.querySelector(".mp-content-section");
+    if (!article) return;
+    const settings = this.settingsManager.getSettings();
+    for (const [kind, enabled, html2] of [
+      ["header", this.session.headerEnabled, settings.customHeader],
+      ["footer", this.session.footerEnabled, settings.customFooter]
+    ]) {
+      if (!enabled || !html2 || article.querySelector(`.mp-custom-${kind}`)) continue;
+      const block = article.ownerDocument.createElement("div");
+      block.className = `mp-custom-${kind}`;
+      block.setAttribute("data-mp-block-id", kind);
+      const removed = replaceWithSafeHtml(block, html2);
+      if (removed > 0) new import_obsidian9.Notice("\u81EA\u5B9A\u4E49\u5934\u5C3E\u7684\u4E0D\u5B89\u5168\u5185\u5BB9\u5DF2\u8FC7\u6EE4\uFF1B\u539F\u8BBE\u7F6E\u672A\u6539\u5199\u3002");
+      if (kind === "header") article.prepend(block);
+      else article.append(block);
+    }
+  }
+  async getTemplateOptions() {
+    const templates2 = this.settingsManager.getVisibleTemplates();
+    if (templates2.length === 0) {
+      return [{ value: "default", label: "\u9ED8\u8BA4\u6A21\u677F" }];
+    }
+    const seriesOrder = ["\u57FA\u7840\u4E3B\u9898", "Minimal \u7CFB\u5217", "Focus \u7CFB\u5217", "Elegant \u7CFB\u5217", "Bold \u7CFB\u5217", "\u5176\u4ED6\u4E3B\u9898"];
+    const groups2 = {
+      "\u57FA\u7840\u4E3B\u9898": [],
+      "Minimal \u7CFB\u5217": [],
+      "Focus \u7CFB\u5217": [],
+      "Elegant \u7CFB\u5217": [],
+      "Bold \u7CFB\u5217": [],
+      "\u5176\u4ED6\u4E3B\u9898": []
+    };
+    const isNewSeries = (id) => id.startsWith("minimal-") || id.startsWith("focus-") || id.startsWith("elegant-") || id.startsWith("bold-");
+    templates2.forEach((t) => {
+      if (t.id.startsWith("minimal-")) {
+        groups2["Minimal \u7CFB\u5217"].push(t);
+      } else if (t.id.startsWith("focus-")) {
+        groups2["Focus \u7CFB\u5217"].push(t);
+      } else if (t.id.startsWith("elegant-")) {
+        groups2["Elegant \u7CFB\u5217"].push(t);
+      } else if (t.id.startsWith("bold-")) {
+        groups2["Bold \u7CFB\u5217"].push(t);
+      } else if (!isNewSeries(t.id)) {
+        groups2["\u57FA\u7840\u4E3B\u9898"].push(t);
+      } else {
+        groups2["\u5176\u4ED6\u4E3B\u9898"].push(t);
+      }
+    });
+    const options = [];
+    seriesOrder.forEach((series) => {
+      if (groups2[series] && groups2[series].length > 0) {
+        options.push({ label: series, value: "", header: true });
+        groups2[series].forEach((t) => {
+          options.push({ label: t.name, value: t.id });
+        });
+      }
+    });
+    return options;
+  }
+  /**
+   * 打开主题画廊弹窗
+   */
+  openThemeGallery() {
+    const currentTemplateId = this.settingsManager.getSettings().templateId;
+    const modal = new ThemeGalleryModal(
+      this.app,
+      this.settingsManager,
+      currentTemplateId,
+      // onSelect 回调
+      async (templateId) => {
+        this.applyThemeTrial(templateId);
+        await this.settingsManager.updateSettings({ templateId });
+        this.trialTemplateId = null;
+        const template = this.settingsManager.getTemplate(templateId);
+        new import_obsidian9.Notice(`\u5DF2\u5E94\u7528\u4E3B\u9898: ${(template == null ? void 0 : template.name) || templateId}`);
+      },
+      // previewCallback 回调 - 实时预览
+      (templateId) => {
+        this.applyThemeTrial(templateId);
+      }
+    );
+    modal.open();
+  }
+  getFontOptions() {
+    return this.settingsManager.getFontOptions();
+  }
+};
+
 // src/core/migration/settingsMigration.ts
 var V3_SETTINGS_SCHEMA_VERSION = 3;
 function migrateSettingsForV3(savedData) {
-  const existingV3 = savedData.v3 || {};
+  const existingV3 = savedData.v3 && typeof savedData.v3 === "object" ? savedData.v3 : {};
   const legacyTemplateId = typeof existingV3.legacyTemplateId === "string" ? existingV3.legacyTemplateId : void 0;
   return {
     ...savedData,
     schemaVersion: Math.max(Number(savedData.schemaVersion) || 0, V3_SETTINGS_SCHEMA_VERSION),
     v3: {
+      ...existingV3,
       enabled: existingV3.enabled === true,
-      selectedRecipeId: existingV3.selectedRecipeId || "legacy-compatible",
+      selectedRecipeId: typeof existingV3.selectedRecipeId === "string" ? existingV3.selectedRecipeId : "legacy-compatible",
       migrationSource: "v2",
       ...legacyTemplateId ? { legacyTemplateId } : {}
     }
   };
 }
+
+// src/core/settings/settingsRepository.ts
+function cloneSettings(value) {
+  return structuredClone(value);
+}
+var SettingsRepository = class {
+  constructor(initial, persist) {
+    this.persist = persist;
+    this.tail = Promise.resolve();
+    this.state = cloneSettings(initial);
+  }
+  read() {
+    return cloneSettings(this.state);
+  }
+  initialize(value) {
+    this.state = cloneSettings(value);
+  }
+  update(edit) {
+    const task = this.tail.then(async () => {
+      const draft = this.read();
+      const result = edit(draft);
+      await this.persist(cloneSettings(draft));
+      this.state = cloneSettings(draft);
+      return result;
+    });
+    this.tail = task.catch(() => void 0);
+    return task;
+  }
+};
 
 // src/settings/settings.ts
 var DEFAULT_SETTINGS = {
@@ -14492,16 +14735,19 @@ var DEFAULT_SETTINGS = {
   ]
 };
 var SettingsManager = class {
+  get settings() {
+    return this.repository.read();
+  }
+  set settings(value) {
+    this.repository.initialize(value);
+  }
   constructor(plugin) {
     this.plugin = plugin;
-    this.settings = DEFAULT_SETTINGS;
+    this.repository = new SettingsRepository(DEFAULT_SETTINGS, (data) => this.plugin.saveData(data));
   }
   async loadSettings() {
-    let savedData = await this.plugin.loadData();
-    if (!savedData) {
-      savedData = {};
-    }
-    savedData = migrateSettingsForV3(savedData);
+    const input = await this.plugin.loadData();
+    const savedData = migrateSettingsForV3(input && typeof input === "object" && !Array.isArray(input) ? input : {});
     const { templates: templates2 } = await Promise.resolve().then(() => (init_templates(), templates_exports));
     const codeTemplates = Object.values(templates2).map((template) => ({
       ...template,
@@ -14520,6 +14766,7 @@ var SettingsManager = class {
         if (savedTemplate) {
           const isVisible = savedTemplate.isVisible !== void 0 ? savedTemplate.isVisible : true;
           return {
+            ...savedTemplate,
             ...codeTemplate,
             isVisible
           };
@@ -14531,21 +14778,22 @@ var SettingsManager = class {
     if (savedData.fontFamily === "-apple-system") {
       savedData.fontFamily = DEFAULT_WECHAT_FONT_STACK;
     }
-    if (!savedData.customTemplates) {
+    if (!Array.isArray(savedData.customTemplates)) {
       savedData.customTemplates = [];
     }
     const availableTemplateIds = new Set([
-      ...savedData.templates,
+      ...savedData.templates || [],
       ...savedData.customTemplates
     ].map((template) => template.id));
-    if (!availableTemplateIds.has(savedData.templateId)) {
+    if (!savedData.templateId || !availableTemplateIds.has(savedData.templateId)) {
       savedData.v3 = {
+        ...DEFAULT_SETTINGS.v3,
         ...savedData.v3,
         legacyTemplateId: savedData.templateId
       };
       savedData.templateId = DEFAULT_SETTINGS.templateId;
     }
-    if (!savedData.customFonts) {
+    if (!Array.isArray(savedData.customFonts)) {
       savedData.customFonts = DEFAULT_SETTINGS.customFonts;
     }
     if (!Array.isArray(savedData.layoutSnapshots)) {
@@ -14569,6 +14817,7 @@ var SettingsManager = class {
         if (savedBackground) {
           const isVisible = savedBackground.isVisible !== void 0 ? savedBackground.isVisible : true;
           return {
+            ...savedBackground,
             ...codeBackground,
             isVisible
           };
@@ -14576,25 +14825,26 @@ var SettingsManager = class {
         return codeBackground;
       });
     }
-    if (!savedData.customBackgrounds) {
+    if (!Array.isArray(savedData.customBackgrounds)) {
       savedData.customBackgrounds = [];
     }
     if (!savedData.customFonts) {
       savedData.customFonts = DEFAULT_SETTINGS.customFonts;
     }
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, savedData);
-    this.settings.layoutEnhancements = {
+    const loaded = Object.assign(cloneSettings(DEFAULT_SETTINGS), savedData);
+    loaded.layoutEnhancements = {
       ...DEFAULT_SETTINGS.layoutEnhancements,
       ...savedData.layoutEnhancements || {}
     };
-    this.settings.authorCard = {
+    loaded.authorCard = {
       ...DEFAULT_SETTINGS.authorCard,
       ...savedData.authorCard || {}
     };
-    this.settings.subscribeCard = {
+    loaded.subscribeCard = {
       ...DEFAULT_SETTINGS.subscribeCard,
       ...savedData.subscribeCard || {}
     };
+    this.settings = loaded;
   }
   getAllTemplates() {
     return [...this.settings.templates, ...this.settings.customTemplates];
@@ -14606,92 +14856,77 @@ var SettingsManager = class {
     return this.settings.templates.find((template) => template.id === templateId) || this.settings.customTemplates.find((template) => template.id === templateId);
   }
   async addCustomTemplate(template) {
-    template.isPreset = false;
-    template.isVisible = true;
-    this.settings.customTemplates.push(template);
-    await this.saveSettings();
+    await this.repository.update((draft) => {
+      if (draft.customTemplates.some((t) => t.id === template.id)) throw new Error("\u6A21\u677F ID \u5DF2\u5B58\u5728");
+      draft.customTemplates.push({ ...cloneSettings(template), isPreset: false, isVisible: true });
+    });
   }
   async updateTemplate(templateId, updatedTemplate) {
-    const presetTemplateIndex = this.settings.templates.findIndex((t) => t.id === templateId);
-    if (presetTemplateIndex !== -1) {
-      this.settings.templates[presetTemplateIndex] = {
-        ...this.settings.templates[presetTemplateIndex],
-        ...updatedTemplate
-      };
-      await this.saveSettings();
+    return this.repository.update((draft) => {
+      const items = draft.templates.some((t) => t.id === templateId) ? draft.templates : draft.customTemplates;
+      const index = items.findIndex((t) => t.id === templateId);
+      if (index < 0) return false;
+      items[index] = { ...items[index], ...cloneSettings(updatedTemplate), id: templateId };
       return true;
-    }
-    const customTemplateIndex = this.settings.customTemplates.findIndex((t) => t.id === templateId);
-    if (customTemplateIndex !== -1) {
-      this.settings.customTemplates[customTemplateIndex] = {
-        ...this.settings.customTemplates[customTemplateIndex],
-        ...updatedTemplate
-      };
-      await this.saveSettings();
-      return true;
-    }
-    return false;
+    });
   }
   async removeTemplate(templateId) {
-    const template = this.getTemplate(templateId);
-    if (template && !template.isPreset) {
-      this.settings.customTemplates = this.settings.customTemplates.filter((t) => t.id !== templateId);
-      if (this.settings.templateId === templateId) {
-        this.settings.templateId = "default";
-      }
-      await this.saveSettings();
+    return this.repository.update((draft) => {
+      if (!draft.customTemplates.some((t) => t.id === templateId && !t.isPreset)) return false;
+      draft.customTemplates = draft.customTemplates.filter((t) => t.id !== templateId);
+      if (draft.templateId === templateId) draft.templateId = "default";
       return true;
-    }
-    return false;
+    });
   }
   async saveSettings() {
-    await this.plugin.saveData(this.settings);
+    await this.repository.update(() => void 0);
   }
   getSettings() {
     return this.settings;
   }
   async updateSettings(settings) {
-    this.settings = { ...this.settings, ...settings };
-    await this.saveSettings();
+    await this.repository.update((draft) => {
+      Object.assign(draft, cloneSettings(settings));
+    });
   }
   async saveLayoutSnapshot(snapshot) {
-    this.settings.layoutSnapshots = [snapshot, ...this.settings.layoutSnapshots].slice(0, 20);
-    await this.saveSettings();
+    await this.repository.update((draft) => {
+      draft.layoutSnapshots = [cloneSettings(snapshot), ...draft.layoutSnapshots].slice(0, 20);
+    });
   }
   async restoreLayoutSnapshot(snapshot) {
-    this.settings = {
-      ...this.settings,
-      templateId: this.getTemplate(snapshot.templateId) ? snapshot.templateId : "default",
-      backgroundId: snapshot.backgroundId,
-      fontFamily: snapshot.fontFamily,
-      fontSize: snapshot.fontSize,
-      v3: {
-        ...this.settings.v3,
-        selectedRecipeId: snapshot.recipeId
-      }
-    };
-    await this.saveSettings();
+    await this.repository.update((draft) => {
+      Object.assign(draft, {
+        templateId: this.getTemplate(snapshot.templateId) ? snapshot.templateId : "default",
+        backgroundId: snapshot.backgroundId,
+        fontFamily: snapshot.fontFamily,
+        fontSize: snapshot.fontSize,
+        v3: {
+          ...draft.v3,
+          selectedRecipeId: snapshot.recipeId
+        }
+      });
+    });
   }
   getFontOptions() {
-    return this.settings.customFonts;
+    const fonts = this.settings.customFonts;
+    return fonts.some((font) => font.value === DEFAULT_WECHAT_FONT_STACK) ? fonts : [{ value: DEFAULT_WECHAT_FONT_STACK, label: "\u7CFB\u7EDF\u9ED8\u8BA4", isPreset: true }, ...fonts];
   }
   async addCustomFont(font) {
-    this.settings.customFonts.push({ ...font, isPreset: false });
-    await this.saveSettings();
+    await this.repository.update((draft) => {
+      draft.customFonts.push({ ...cloneSettings(font), isPreset: false });
+    });
   }
   async removeFont(value) {
-    const font = this.settings.customFonts.find((f) => f.value === value);
-    if (font && !font.isPreset) {
-      this.settings.customFonts = this.settings.customFonts.filter((f) => f.value !== value);
-      await this.saveSettings();
-    }
+    await this.repository.update((draft) => {
+      draft.customFonts = draft.customFonts.filter((f) => f.value !== value || f.isPreset);
+    });
   }
   async updateFont(oldValue, newFont) {
-    const index = this.settings.customFonts.findIndex((f) => f.value === oldValue);
-    if (index !== -1 && !this.settings.customFonts[index].isPreset) {
-      this.settings.customFonts[index] = { ...newFont, isPreset: false };
-      await this.saveSettings();
-    }
+    await this.repository.update((draft) => {
+      const index = draft.customFonts.findIndex((f) => f.value === oldValue && !f.isPreset);
+      if (index >= 0) draft.customFonts[index] = { ...draft.customFonts[index], ...cloneSettings(newFont), isPreset: false };
+    });
   }
   // 背景相关方法
   getAllBackgrounds() {
@@ -14704,165 +14939,95 @@ var SettingsManager = class {
     return this.settings.backgrounds.find((background) => background.id === backgroundId) || this.settings.customBackgrounds.find((background) => background.id === backgroundId);
   }
   async addCustomBackground(background) {
-    background.isPreset = false;
-    background.isVisible = true;
-    this.settings.customBackgrounds.push(background);
-    await this.saveSettings();
+    await this.repository.update((draft) => {
+      if (draft.customBackgrounds.some((b) => b.id === background.id)) throw new Error("\u80CC\u666F ID \u5DF2\u5B58\u5728");
+      draft.customBackgrounds.push({ ...cloneSettings(background), isPreset: false, isVisible: true });
+    });
   }
   async updateBackground(backgroundId, updatedBackground) {
-    const presetBackgroundIndex = this.settings.backgrounds.findIndex((b) => b.id === backgroundId);
-    if (presetBackgroundIndex !== -1) {
-      this.settings.backgrounds[presetBackgroundIndex] = {
-        ...this.settings.backgrounds[presetBackgroundIndex],
-        ...updatedBackground
-      };
-      await this.saveSettings();
+    return this.repository.update((draft) => {
+      const items = draft.backgrounds.some((b) => b.id === backgroundId) ? draft.backgrounds : draft.customBackgrounds;
+      const index = items.findIndex((b) => b.id === backgroundId);
+      if (index < 0) return false;
+      items[index] = { ...items[index], ...cloneSettings(updatedBackground), id: backgroundId };
       return true;
-    }
-    const customBackgroundIndex = this.settings.customBackgrounds.findIndex((b) => b.id === backgroundId);
-    if (customBackgroundIndex !== -1) {
-      this.settings.customBackgrounds[customBackgroundIndex] = {
-        ...this.settings.customBackgrounds[customBackgroundIndex],
-        ...updatedBackground
-      };
-      await this.saveSettings();
-      return true;
-    }
-    return false;
+    });
   }
   async removeBackground(backgroundId) {
-    const background = this.getBackground(backgroundId);
-    if (background && !background.isPreset) {
-      this.settings.customBackgrounds = this.settings.customBackgrounds.filter((b) => b.id !== backgroundId);
-      if (this.settings.backgroundId === backgroundId) {
-        this.settings.backgroundId = "default";
-      }
-      await this.saveSettings();
+    return this.repository.update((draft) => {
+      if (!draft.customBackgrounds.some((b) => b.id === backgroundId && !b.isPreset)) return false;
+      draft.customBackgrounds = draft.customBackgrounds.filter((b) => b.id !== backgroundId);
+      if (draft.backgroundId === backgroundId) draft.backgroundId = "default";
       return true;
-    }
-    return false;
+    });
   }
 };
 
 // src/donateManager.ts
 var DonateManager = class {
-  static initialize(app, plugin) {
-    this.app = app;
-    this.plugin = plugin;
+  static initialize(_app, _plugin) {
+  }
+  static closeModal(container) {
+    var _a;
+    (_a = this.overlays.get(container)) == null ? void 0 : _a();
   }
   static showDonateModal(container) {
-    this.overlay = container.createEl("div", {
-      cls: "mp-donate-overlay"
-    });
-    this.modal = this.overlay.createEl("div", {
-      cls: "mp-about-modal"
-    });
-    const closeButton = this.modal.createEl("button", {
-      cls: "mp-donate-close",
-      text: "\xD7"
-    });
-    const authorSection = this.modal.createEl("div", {
-      cls: "mp-about-section mp-about-intro-section"
-    });
-    authorSection.createEl("h4", {
-      text: "\u5173\u4E8E\u4F5C\u8005",
-      cls: "mp-about-title"
-    });
-    const introEl = authorSection.createEl("p", {
-      cls: "mp-about-intro"
-    });
-    introEl.createSpan({ text: "\u4F60\u597D\uFF0C\u6211\u662F" });
-    introEl.createSpan({ text: "yhwang", cls: "mp-about-name" });
-    introEl.createSpan({ text: "\uFF0C\u4E00\u540D" });
-    introEl.createSpan({ text: "\u5168\u804C\u5199\u4F5C\u4E0E\u72EC\u7ACB\u5F00\u53D1\u8005", cls: "mp-about-identity" });
-    introEl.createSpan({ text: "\u3002" });
-    const roleList = authorSection.createEl("div", {
-      cls: "mp-about-roles"
-    });
-    const roleEl = roleList.createEl("p", {
-      cls: "mp-about-role"
-    });
-    roleEl.createSpan({ text: "\u8FD9\u6B3E\u63D2\u4EF6\u662F\u6211\u4E3A\u4E86\u5728 Obsidian \u5199\u4F5C\u540E\uFF0C" });
-    roleEl.createEl("br");
-    roleEl.createSpan({ text: "\u65E0\u9700\u7E41\u7410\u6392\u7248\u4E00\u952E\u5373\u53EF\u53D1\u5E03\u5230\u516C\u4F17\u53F7\u800C\u5F00\u53D1\u7684\u5DE5\u5177\uFF0C" });
-    roleEl.createEl("br");
-    roleEl.createSpan({ text: "\u5E0C\u671B\u80FD\u8BA9\u4F60\u7684" });
-    roleEl.createSpan({ text: "\u6392\u7248\u66F4\u8F7B\u677E", cls: "mp-about-highlight" });
-    roleEl.createSpan({ text: "\uFF0C\u8BA9\u4F60\u7684" });
-    roleEl.createSpan({ text: "\u521B\u4F5C\u66F4\u9AD8\u6548", cls: "mp-about-value" });
-    roleEl.createSpan({ text: "\u3002" });
-    const descEl = authorSection.createEl("p", {
-      cls: "mp-about-desc"
-    });
-    descEl.createSpan({ text: "\u5982\u679C\u8FD9\u6B3E\u63D2\u4EF6\u5BF9\u4F60\u6709\u5E2E\u52A9\uFF0C" });
-    descEl.createEl("br");
-    descEl.createSpan({ text: "\u6216\u8005\u4F60\u613F\u610F\u652F\u6301\u6211\u7684\u72EC\u7ACB\u5F00\u53D1\u4E0E\u5199\u4F5C\uFF0C\u6B22\u8FCE\u8BF7\u6211\u559D\u5496\u5561\u2615\uFE0F\u3002" });
-    descEl.createEl("br");
-    descEl.createSpan({ text: "\u4F60\u7684\u652F\u6301\u6765\u8BF4\u610F\u4E49\u91CD\u5927\uFF0C\u5B83\u80FD\u8BA9\u6211\u66F4\u4E13\u6CE8\u5730\u5F00\u53D1\u3001\u5199\u4F5C\u3002" });
-    const donateSection = this.modal.createEl("div", {
-      cls: "mp-about-section mp-about-donate-section"
-    });
-    donateSection.createEl("h4", {
-      text: "\u8BF7\u6211\u559D\u5496\u5561",
-      cls: "mp-about-subtitle"
-    });
-    const donateQR = donateSection.createEl("div", {
-      cls: "mp-about-qr"
-    });
-    donateQR.createEl("p", {
-      cls: "mp-about-desc",
-      text: "\u652F\u6301\u4E8C\u7EF4\u7801\u5F85\u8865\u5145"
-    });
-    const mpSection = this.modal.createEl("div", {
-      cls: "mp-about-section mp-about-mp-section"
-    });
-    const mpDescEl = mpSection.createEl("p", {
-      cls: "mp-about-desc"
-    });
-    mpDescEl.createSpan({ text: "\u5982\u679C\u4F60\u60F3\u4E86\u89E3\u66F4\u591A\u5173\u4E8E\u521B\u4F5C\u3001\u6548\u7387\u5DE5\u5177\u7684\u5C0F\u6280\u5DE7\uFF0C" });
-    mpDescEl.createEl("br");
-    mpDescEl.createSpan({ text: "\u6216\u8005\u5173\u6CE8\u6211\u672A\u6765\u7684\u5199\u4F5C\u52A8\u6001\uFF0C\u6B22\u8FCE\u5173\u6CE8\u6211\u7684\u5FAE\u4FE1\u516C\u4F17\u53F7\u3002" });
-    mpSection.createEl("h4", {
-      text: "\u5FAE\u4FE1\u516C\u4F17\u53F7",
-      cls: "mp-about-subtitle"
-    });
-    const mpQR = mpSection.createEl("div", {
-      cls: "mp-about-qr"
-    });
-    mpQR.createEl("p", {
-      cls: "mp-about-desc",
-      text: "\u516C\u4F17\u53F7\u4E8C\u7EF4\u7801\u5F85\u8865\u5145"
-    });
-    const footerEl = mpSection.createEl("p", {
-      cls: "mp-about-footer"
-    });
-    footerEl.createSpan({ text: "\u671F\u5F85\u4E0E\u4F60\u4E00\u8D77\uFF0C\u5728\u521B\u4F5C\u7684\u4E16\u754C\u91CC" });
-    const strongText = footerEl.createEl("strong");
-    strongText.createSpan({ text: "\u627E\u5230\u5C5E\u4E8E\u81EA\u5DF1\u7684\u610F\u4E49" });
-    footerEl.createSpan({ text: "\u3002" });
-    closeButton.addEventListener("click", () => this.closeDonateModal());
-    this.overlay.addEventListener("click", (e) => {
-      if (e.target === this.overlay) {
-        this.closeDonateModal();
+    var _a, _b;
+    (_a = this.overlays.get(container)) == null ? void 0 : _a();
+    const doc = container.ownerDocument;
+    const previousFocus = doc == null ? void 0 : doc.activeElement;
+    const overlay = container.createDiv({ cls: "mp-donate-overlay" });
+    const modal = overlay.createDiv({ cls: "mp-about-modal", attr: { role: "dialog", "aria-modal": "true", "aria-label": "\u5173\u4E8E\u4E0E\u5E2E\u52A9", tabindex: "-1" } });
+    const close = () => {
+      var _a2;
+      overlay.remove();
+      doc == null ? void 0 : doc.removeEventListener("keydown", onKey, true);
+      (_a2 = previousFocus == null ? void 0 : previousFocus.focus) == null ? void 0 : _a2.call(previousFocus);
+      this.overlays.delete(container);
+    };
+    const onKey = (event) => {
+      var _a2;
+      const visibleOverlays = doc == null ? void 0 : doc.querySelectorAll(".mp-donate-overlay");
+      if (!overlay.isConnected || (visibleOverlays == null ? void 0 : visibleOverlays.length) && visibleOverlays[visibleOverlays.length - 1] !== overlay) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        close();
+      } else if (event.key === "Tab") {
+        event.preventDefault();
+        event.stopPropagation();
+        (_a2 = button.focus) == null ? void 0 : _a2.call(button);
       }
+    };
+    const button = modal.createEl("button", { cls: "mp-donate-close", text: "\xD7", attr: { "aria-label": "\u5173\u95ED\u5173\u4E8E\u4E0E\u5E2E\u52A9" } });
+    button.addEventListener("click", close);
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) close();
     });
-  }
-  static closeDonateModal() {
-    if (this.overlay) {
-      this.overlay.remove();
-    }
+    modal.createEl("h2", { text: "\u5173\u4E8E\u4E0E\u5E2E\u52A9", cls: "mp-about-title" });
+    const intro = modal.createDiv({ cls: "mp-about-section" });
+    intro.createEl("p", { text: "yh-mp-preview \xB7 Markdown \u6392\u7248\u5DE5\u4F5C\u53F0\u3002\u516C\u4F17\u53F7\u6392\u7248\u4E0E\u7B14\u8BB0\u589E\u5F3A\u72EC\u7ACB\u8BBE\u7F6E\uFF0C\u4E0D\u6539\u5199\u6B63\u6587\uFF0C\u4E0D\u81EA\u52A8\u53D1\u5E03\u3002" });
+    const steps = intro.createEl("ol");
+    ["\u9009\u62E9\u573A\u666F\u548C\u4E3B\u9898\uFF0C\u5728\u9884\u89C8\u4E2D\u68C0\u67E5\u9605\u8BFB\u6548\u679C\u3002", "\u9AD8\u7EA7\u6392\u7248\u4E2D\u7684\u6587\u7AE0\u914D\u65B9\u53EA\u5728\u9700\u8981\u65F6\u5F00\u542F\u3002", "\u590D\u5236\u5BCC\u6587\u672C\u5230\u516C\u4F17\u53F7\u540E\u53F0\u5B8C\u6210\u6700\u7EC8\u6838\u5BF9\uFF1B\u4E5F\u53EF\u5BFC\u51FA HTML\u3001\u5B8C\u6574\u957F\u56FE\u6216\u5206\u6BB5\u56FE\u3002", "\u9047\u5230\u95EE\u9898\u53EF\u56DE\u9000 BRAT \u7248\u672C\uFF0C\u4FDD\u7559 data.json \u548C note-layout.json\u3002"].forEach((text2) => steps.createEl("li", { text: text2 }));
+    intro.createEl("p", { text: "\u72EC\u7ACB\u7EF4\u62A4\uFF1Ayhwang\u3002\u65E9\u671F\u4FDD\u7559\u5B9E\u73B0\u6765\u81EA Yeban8090/mp-preview\uFF08MIT\uFF09\uFF1B\u73B0\u884C\u53D1\u884C AGPL-3.0-or-later\uFF0C\u5B8C\u6574\u6765\u6E90\u4E0E\u4F9D\u8D56\u8BB8\u53EF\u89C1 NOTICE \u548C THIRD_PARTY_NOTICES\u3002" });
+    for (const text2 of ["\u652F\u6301\u4E8C\u7EF4\u7801\u5F85\u8865\u5145", "\u516C\u4F17\u53F7\u4E8C\u7EF4\u7801\u5F85\u8865\u5145"]) modal.createDiv({ cls: "mp-about-qr" }).createEl("p", { cls: "mp-about-desc", text: text2 });
+    doc == null ? void 0 : doc.addEventListener("keydown", onKey, true);
+    this.overlays.set(container, close);
+    (_b = modal.focus) == null ? void 0 : _b.call(modal);
   }
 };
+DonateManager.overlays = /* @__PURE__ */ new WeakMap();
 
 // src/settings/MPSettingTab.ts
-var import_obsidian14 = require("obsidian");
+var import_obsidian18 = require("obsidian");
 
 // src/settings/CreateTemplateModal.ts
-var import_obsidian8 = require("obsidian");
+var import_obsidian12 = require("obsidian");
+init_default();
 
 // src/settings/templatePreviewModal.ts
-var import_obsidian7 = require("obsidian");
-var TemplatePreviewModal = class extends import_obsidian7.Modal {
+var import_obsidian10 = require("obsidian");
+var TemplatePreviewModal = class extends import_obsidian10.Modal {
   constructor(app, template, templateManager) {
     super(app);
     this.template = template;
@@ -14874,15 +15039,15 @@ var TemplatePreviewModal = class extends import_obsidian7.Modal {
     contentEl.addClass("template-preview-modal");
     contentEl.createEl("h2", { text: `\u6A21\u677F\u9884\u89C8: ${this.template.name}`, cls: "mp-template-title" });
     const container = contentEl.createDiv("tp-mp-preview-area");
-    const content = container.createDiv("tp-mp-content-section");
-    content.createEl("h2", { text: "\u63A2\u7D22\u591C\u534A\u63D2\u4EF6\u7684\u65E0\u9650\u53EF\u80FD" });
-    content.createEl("h3", { text: "\u63A2\u7D22\u6211\u7684\u63D2\u4EF6\uFF0C\u8BA9\u60A8\u7684\u7B14\u8BB0\u53D1\u5E03\u53D8\u5F97\u66F4\u52A0\u8F7B\u677E\uFF01" });
+    const content = container.createDiv("tp-mp-content-section mp-content-section");
+    content.createEl("h2", { text: "\u540C\u4E00\u7BC7\u6587\u7AE0\u7684\u9605\u8BFB\u5C42\u7EA7" });
+    content.createEl("h3", { text: "\u6807\u9898\u3001\u6B63\u6587\u4E0E\u91CD\u70B9\u4FE1\u606F\u7684\u6E05\u6670\u5BF9\u7167" });
     const paragraph1 = content.createEl("p");
-    paragraph1.createEl("span", { text: "\u63D2\u4EF6\u4E3A\u60A8\u63D0\u4F9B\u5404\u79CD" });
+    paragraph1.createSpan({ text: "\u63D2\u4EF6\u4E3A\u60A8\u63D0\u4F9B\u5404\u79CD" });
     paragraph1.createEl("strong", { text: "\u4F18\u96C5\u7684\u64CD\u4F5C\uFF0C" });
-    paragraph1.createEl("span", { text: "\u52A9\u60A8\u8F7B\u677E\u53D1\u5E03\u7B14\u8BB0\u3002" });
+    paragraph1.createSpan({ text: "\u52A9\u60A8\u8F7B\u677E\u53D1\u5E03\u7B14\u8BB0\u3002" });
     const paragraph2 = content.createEl("p");
-    paragraph2.createEl("span", { text: "\u901A\u8FC7\u63D2\u4EF6\uFF0C\u60A8\u53EF\u4EE5\u5FEB\u901F\u7EC4\u7EC7\u5185\u5BB9\uFF0C" });
+    paragraph2.createSpan({ text: "\u901A\u8FC7\u63D2\u4EF6\uFF0C\u60A8\u53EF\u4EE5\u5FEB\u901F\u7EC4\u7EC7\u5185\u5BB9\uFF0C" });
     paragraph2.createEl("em", { text: "\u63D0\u5347\u5DE5\u4F5C\u6548\u7387\u3002" });
     content.createEl("hr");
     const list = content.createEl("ol");
@@ -14893,13 +15058,13 @@ var TemplatePreviewModal = class extends import_obsidian7.Modal {
     const codeBlock = content.createEl("pre");
     const header = codeBlock.createDiv("mp-code-header");
     for (let i = 0; i < 3; i++) {
-      const dot = document.createElement("span");
+      const dot = createSpan();
       dot.className = "mp-code-dot";
       header.appendChild(dot);
     }
     codeBlock.insertBefore(header, codeBlock.firstChild);
-    codeBlock.createEl("code", { text: 'console.log("\u6B22\u8FCE\u4F7F\u7528\u591C\u534A\u63D2\u4EF6\uFF01");' });
-    content.createEl("strong", { text: "\u5982\u679C\u60A8\u89C9\u5F97\u6211\u7684\u63D2\u4EF6\u5BF9\u60A8\u6709\u5E2E\u52A9\uFF0C\u8BF7\u6253\u8D4F\u652F\u6301\u6211\u3002" });
+    codeBlock.createEl("code", { text: 'const reading = "\u4FDD\u6301\u6E05\u6670\u4E0E\u5B8C\u6574";' });
+    content.createEl("strong", { text: "\u9884\u89C8\u53EA\u5C55\u793A\u6392\u7248\uFF0C\u4E0D\u4F1A\u4FEE\u6539\u4EFB\u4F55\u7B14\u8BB0\u3002" });
     content.createEl("hr");
     this.templateManager.applyTemplate(container, this.template);
   }
@@ -14909,915 +15074,35 @@ var TemplatePreviewModal = class extends import_obsidian7.Modal {
   }
 };
 
-// src/settings/CreateTemplateModal.ts
-var CreateTemplateModal = class extends import_obsidian8.Modal {
-  constructor(app, plugin, onSubmit, existingTemplate) {
-    super(app);
-    this.showSampleTemplate = false;
-    this.plugin = plugin;
-    this.existingTemplate = existingTemplate;
-    this.onSubmit = onSubmit;
-    this.template = existingTemplate ? { ...existingTemplate } : {
-      id: "",
-      name: "",
-      description: "",
-      isPreset: false,
-      isVisible: true,
-      styles: this.initializeStyles()
-    };
-  }
-  initializeStyles() {
-    return {
-      container: "",
-      title: {
-        h1: {
-          base: "margin: 28px 0 0; font-size: 28px; letter-spacing: -0.03em; line-height: 1.5; text-align: center;",
-          content: "font-weight: bold; color: #666b8f; display: inline-block;",
-          after: ""
-        },
-        h2: {
-          base: "margin: 24px 0 0; font-size: 24px; letter-spacing: -0.02em; line-height: 1.5; border-bottom: 1px solid rgba(122,125,160,0.2);",
-          content: "font-weight: bold; color: #ffffff; background: #7a7da0; padding: 1px 4px; border-radius: 3px;",
-          after: ""
-        },
-        h3: {
-          base: "margin: 20px 0 0; font-size: 20px; letter-spacing: -0.01em; line-height: 1.5;",
-          content: "font-weight: bold; color: #7a7da0; padding: 1px 1px;",
-          after: ""
-        },
-        base: {
-          base: "margin: 16px 0 0; font-size: 16px;",
-          content: "font-weight: bold; color: #7a7da0;",
-          after: ""
-        }
-      },
-      paragraph: "line-height: 1.8; margin-top: 1em; font-size: 1em; color: #4a4a4a;",
-      list: {
-        container: "padding-left: 32px; color: #4a4a4a;",
-        item: "font-size: 1em; color: #4a4a4a; line-height: 1.8;",
-        taskList: "list-style: none; font-size: 1em; color: #4a4a4a; line-height: 1.8;"
-      },
-      code: {
-        header: {
-          container: "margin-bottom: 1em; display: flex; gap: 6px;",
-          dot: "width: 12px; height: 12px; border-radius: 50%;",
-          colors: ["#ff5f56", "#ffbd2e", "#27c93f"]
-        },
-        block: "color: #333; background: #f8f9fc; border-radius: 8px; border: 1px solid #eef0f7; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 1.2em 0; padding: 1em 1em 1em;  font-size: 14px; line-height: 1.6; white-space: pre-wrap;",
-        inline: "background: #f8f9fc; padding: 2px 6px; border-radius: 4px; color: #333; font-size: 14px; border: 1px solid #eef0f7;"
-      },
-      quote: "border-left: 4px solid #7a7da0; border-radius: 6px; padding: 10px 10px; background: #f8f9fc; margin: 0.8em 0; color: #666b8f; font-style: italic; word-wrap: break-word;",
-      image: "max-width: 100%; height: auto; margin: 1em auto; display: block;",
-      link: "color: #7a7da0; text-decoration: none; border-bottom: 1px solid #7a7da0; transition: all 0.2s ease;",
-      emphasis: {
-        strong: "font-weight: bold; color: #4a4a4a;",
-        em: "font-style: italic; color: #4a4a4a;",
-        del: "text-decoration: line-through; color: #4a4a4a;"
-      },
-      table: {
-        container: "width: 100%; margin: 1em 0; border-collapse: collapse; border: 1px solid #e1e4e8;",
-        header: "background: #f8f9fc; font-weight: bold; color: #4a4a4a; border-bottom: 2px solid #e1e4e8; font-size: 1em;",
-        cell: "border: 1px solid #f0f0f0; padding: 8px; color: #4a4a4a; font-size: 1em;"
-      },
-      hr: "border: none; border-top: 1px solid #eef0f7; margin: 20px 0;",
-      footnote: {
-        ref: "color: #e0e0e0; text-decoration: none; font-size: 0.9em;",
-        backref: "color: #e0e0e0; text-decoration: none; font-size: 0.9em;"
-      }
-    };
-  }
-  onOpen() {
-    const { contentEl } = this;
-    contentEl.empty();
-    contentEl.addClass("mp-template-modal");
-    const headerEl = contentEl.createDiv("modal-header");
-    headerEl.createEl("h2", { text: this.template.id ? "\u7F16\u8F91\u6A21\u677F" : "\u65B0\u5EFA\u6A21\u677F" });
-    const nameContainer = headerEl.createDiv("name-container");
-    if (!this.existingTemplate) {
-      new import_obsidian8.Setting(nameContainer).setName("\u662F\u5426\u9009\u62E9\u53C2\u8003\u6A21\u677F").addToggle((toggle) => {
-        toggle.setValue(this.showSampleTemplate).onChange((value) => {
-          this.showSampleTemplate = value;
-          this.templateSelect.setCssStyles({ display: this.showSampleTemplate ? "block" : "none" });
-        });
-      });
-      new import_obsidian8.Setting(nameContainer).setName("\u9009\u62E9\u53C2\u8003\u6A21\u677F").addDropdown((dropdown) => {
-        this.templateSelect = dropdown.addOptions(this.getTemplateOptions()).setValue(this.template.id).onChange((value) => {
-          const selectedTemplate = this.getTemplateById(value);
-          if (selectedTemplate) {
-            this.template = { ...selectedTemplate, id: "", name: "", description: "", isPreset: false };
-          }
-        }).selectEl;
-        this.templateSelect.setCssStyles({ display: this.showSampleTemplate ? "block" : "none" });
-      });
-    }
-    new import_obsidian8.Setting(nameContainer).setName("\u6A21\u677F\u540D\u79F0").addText((text2) => {
-      this.nameInput = text2.setPlaceholder("\u8BF7\u8F93\u5165\u6A21\u677F\u540D\u79F0").setValue(this.template.name).onChange((value) => {
-        const trimmedValue = value.trim();
-        this.template.name = trimmedValue;
-        if (!trimmedValue) {
-          new import_obsidian8.Notice("\u6A21\u677F\u540D\u79F0\u4E0D\u80FD\u4E3A\u7A7A");
-        }
-        if (!this.template.id.startsWith("preset-")) {
-          this.template.id = this.generateTemplateId(trimmedValue || "\u672A\u547D\u540D\u6A21\u677F");
-        }
-      }).inputEl;
-      setTimeout(() => this.nameInput.focus(), 0);
-      return text2;
-    });
-    new import_obsidian8.Setting(nameContainer).setName("\u6A21\u677F\u63CF\u8FF0").addText((text2) => {
-      text2.setPlaceholder("\u8BF7\u8F93\u5165\u6A21\u677F\u63CF\u8FF0").setValue(this.template.description).onChange((value) => {
-        const trimmedValue = value.trim();
-        this.template.description = trimmedValue;
-      });
-      return text2;
-    });
-    const scrollContainer = contentEl.createDiv("modal-scroll-container");
-    const settingContainer = scrollContainer.createDiv("setting-container");
-    this.addStyleSettings(settingContainer, "\u5168\u5C40\u6837\u5F0F", this.template.styles);
-    this.addStyleSettings(settingContainer, "\u6807\u9898\u6837\u5F0F", this.template.styles.title);
-    this.addStyleSettings(settingContainer, "\u6BB5\u843D\u6837\u5F0F", this.template.styles);
-    this.addStyleSettings(settingContainer, "\u5217\u8868\u6837\u5F0F", this.template.styles.list);
-    this.addStyleSettings(settingContainer, "\u4EE3\u7801\u6837\u5F0F", this.template.styles.code);
-    this.addStyleSettings(settingContainer, "\u5F15\u7528\u6837\u5F0F", this.template.styles);
-    this.addStyleSettings(settingContainer, "\u56FE\u7247\u6837\u5F0F", this.template.styles);
-    this.addStyleSettings(settingContainer, "\u94FE\u63A5\u6837\u5F0F", this.template.styles);
-    this.addStyleSettings(settingContainer, "\u8868\u683C\u6837\u5F0F", this.template.styles.table);
-    this.addStyleSettings(settingContainer, "\u5206\u9694\u7EBF\u6837\u5F0F", this.template.styles);
-    this.addStyleSettings(settingContainer, "\u811A\u6CE8\u6837\u5F0F", this.template.styles.footnote);
-    const buttonContainer = contentEl.createDiv("modal-button-container");
-    new import_obsidian8.Setting(buttonContainer).addButton((btn) => btn.setButtonText("\u9884\u89C8").onClick(() => {
-      const previewModal = new TemplatePreviewModal(this.app, this.template, this.plugin.templateManager);
-      previewModal.open();
-    })).addButton((btn) => btn.setButtonText("\u53D6\u6D88").onClick(() => this.close())).addButton((btn) => btn.setButtonText("\u4FDD\u5B58").setCta().onClick(async () => {
-      if (await this.validateAndSubmit()) {
-        this.close();
-      }
-    }));
-    this.nameInput.addEventListener("keydown", async (e) => {
-      if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        if (await this.validateAndSubmit()) {
-          this.close();
-        }
-      }
-    });
-  }
-  getTemplateOptions() {
-    const templates2 = this.plugin.settingsManager.getAllTemplates();
-    const options = {};
-    templates2.forEach((template) => {
-      options[template.id] = template.name;
-    });
-    return options;
-  }
-  getTemplateById(id) {
-    return this.plugin.settingsManager.getAllTemplates().find((template) => template.id === id);
-  }
-  addStyleSettings(container, sectionName, styles) {
-    const section = container.createDiv("style-section");
-    const header = section.createDiv("style-section-header");
-    const titleContainer = header.createDiv("style-section-title");
-    const toggle = titleContainer.createSpan("style-section-toggle");
-    (0, import_obsidian8.setIcon)(toggle, "chevron-right");
-    titleContainer.createEl("h3", { text: sectionName });
-    const resetButton = header.createDiv("style-section-reset");
-    const resetIcon = resetButton.createSpan("clickable-icon");
-    (0, import_obsidian8.setIcon)(resetIcon, "reset");
-    resetButton.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const defaultStyles = this.initializeStyles();
-      switch (sectionName) {
-        case "\u5168\u5C40\u6837\u5F0F":
-          this.template.styles = defaultStyles;
-          styles = defaultStyles;
-          break;
-        case "\u6807\u9898\u6837\u5F0F":
-          this.template.styles.title = defaultStyles.title;
-          styles = defaultStyles.title;
-          break;
-        case "\u6BB5\u843D\u6837\u5F0F":
-          this.template.styles.paragraph = defaultStyles.paragraph;
-          styles = { paragraph: defaultStyles.paragraph };
-          break;
-        case "\u5217\u8868\u6837\u5F0F":
-          this.template.styles.list = defaultStyles.list;
-          styles = defaultStyles.list;
-          break;
-        case "\u4EE3\u7801\u6837\u5F0F":
-          this.template.styles.code = defaultStyles.code;
-          styles = defaultStyles.code;
-          break;
-        case "\u5F15\u7528\u6837\u5F0F":
-          this.template.styles.quote = defaultStyles.quote;
-          styles = { quote: defaultStyles.quote };
-          break;
-        case "\u94FE\u63A5\u6837\u5F0F":
-          this.template.styles.link = defaultStyles.link;
-          styles = { link: defaultStyles.link };
-          break;
-        case "\u8868\u683C\u6837\u5F0F":
-          this.template.styles.table = defaultStyles.table;
-          styles = defaultStyles.table;
-          break;
-        case "\u5206\u9694\u7EBF\u6837\u5F0F":
-          this.template.styles.hr = defaultStyles.hr;
-          styles = { hr: defaultStyles.hr };
-          break;
-        case "\u811A\u6CE8\u6837\u5F0F":
-          this.template.styles.footnote = defaultStyles.footnote;
-          styles = defaultStyles.footnote;
-          break;
-        case "\u56FE\u7247\u6837\u5F0F":
-          this.template.styles.image = defaultStyles.image;
-          styles = { image: defaultStyles.image };
-          break;
-      }
-      content.empty();
-      this.addStyleSettingsContent(content, sectionName, styles);
-    });
-    const content = section.createDiv("style-section-content");
-    this.addStyleSettingsContent(content, sectionName, styles);
-    header.addEventListener("click", () => {
-      const isExpanded = !section.hasClass("is-expanded");
-      section.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian8.setIcon)(toggle, isExpanded ? "chevron-down" : "chevron-right");
-    });
-  }
-  // 新增方法，用于处理设置内容
-  addStyleSettingsContent(content, sectionName, styles) {
-    switch (sectionName) {
-      case "\u5168\u5C40\u6837\u5F0F":
-        this.addGlobalStylesSettings(content, styles);
-        break;
-      case "\u6807\u9898\u6837\u5F0F":
-        this.addTitleSettings(content, styles);
-        break;
-      case "\u6BB5\u843D\u6837\u5F0F":
-        this.addParagraphAndEmphasisSettings(content, styles);
-        break;
-      case "\u5217\u8868\u6837\u5F0F":
-        this.addListSettings(content, styles);
-        break;
-      case "\u4EE3\u7801\u6837\u5F0F":
-        this.addCodeSettings(content, styles);
-        break;
-      case "\u5F15\u7528\u6837\u5F0F":
-        this.addQuoteSettings(content, styles);
-        break;
-      case "\u94FE\u63A5\u6837\u5F0F":
-        this.addLinkSettings(content, styles);
-        break;
-      case "\u8868\u683C\u6837\u5F0F":
-        this.addTableSettings(content, styles);
-        break;
-      case "\u5206\u9694\u7EBF\u6837\u5F0F":
-        this.addHrSettings(content, styles);
-        break;
-      case "\u811A\u6CE8\u6837\u5F0F":
-        this.addFootnoteSettings(content, styles);
-        break;
-      case "\u56FE\u7247\u6837\u5F0F":
-        this.addImageSettings(content, styles);
-        break;
-    }
-  }
-  // 示例方法，用于处理具体的样式设置
-  addGlobalStylesSettings(container, styles) {
-    const section = container.createDiv("global-style-section");
-    new import_obsidian8.Setting(section).setName("\u5168\u5C40\u4E3B\u9898\u8272").setDesc("\u4FEE\u6539\u6B64\u989C\u8272\u5C06\u66F4\u65B0\u6240\u6709\u6587\u5B57\u76F8\u5173\u7684\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const defaultColor = ((_a = styles.title.h2.content.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1]) || "#ef7060";
-      color.setValue(defaultColor).onChange((value) => {
-        styles.paragraph = styles.paragraph.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        Object.keys(styles.emphasis).forEach((key) => {
-          styles.emphasis[key] = styles.emphasis[key].replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        });
-        ["h1", "h2", "h3", "base"].forEach((level) => {
-          styles.title[level].content = styles.title[level].content.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        });
-        ["container", "item", "taskList"].forEach((key) => {
-          styles.list[key] = styles.list[key].replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        });
-        styles.quote = styles.quote.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        ["block", "inline"].forEach((key) => {
-          styles.code[key] = styles.code[key].replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        });
-        styles.link = styles.link.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`).replace(/linear-gradient\([^)]+\)/, `linear-gradient(to right, ${value}80, ${value}80)`);
-        styles.table.header = styles.table.header.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        styles.table.cell = styles.table.cell.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        ["ref", "backref"].forEach((key) => {
-          styles.footnote[key] = styles.footnote[key].replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        });
-        styles.image = styles.image.replace(/border:\s*1px solid\s*#[a-fA-F0-9]+80/, `border: 1px solid ${value}80`);
-      });
-    });
-  }
-  addTitleSettings(container, styles) {
-    ["h1", "h2", "h3", "base"].forEach((level) => {
-      const titleSection = container.createDiv("style-section");
-      const header = titleSection.createDiv("style-section-header");
-      const titleContainer = header.createDiv("style-section-title");
-      const toggle = titleContainer.createSpan("style-section-toggle");
-      (0, import_obsidian8.setIcon)(toggle, "chevron-right");
-      titleContainer.createEl("h4", { text: level === "base" ? "\u5176\u4ED6\u6807\u9898\u6837\u5F0F" : `${level.toUpperCase()} \u6807\u9898\u6837\u5F0F` });
-      const content = titleSection.createDiv("style-section-content");
-      content.hide();
-      header.addEventListener("click", () => {
-        const isExpanded = !titleSection.hasClass("is-expanded");
-        titleSection.toggleClass("is-expanded", isExpanded);
-        (0, import_obsidian8.setIcon)(toggle, isExpanded ? "chevron-down" : "chevron-right");
-        content.toggle(isExpanded);
-      });
-      new import_obsidian8.Setting(content).setName("\u4E0A\u8FB9\u8DDD").setDesc("\u8BBE\u7F6E\u6807\u9898\u4E0E\u4E0A\u65B9\u5185\u5BB9\u4E4B\u95F4\u7684\u95F4\u8DDD\uFF08\u5355\u4F4D\uFF1A\u50CF\u7D20\uFF09").addText((text2) => {
-        var _a;
-        const currentMargin = (_a = styles[level].base.match(/margin:\s*(\d+)px/)) == null ? void 0 : _a[1];
-        text2.setValue(currentMargin).onChange((value) => {
-          const margin = parseInt(value) || 10;
-          if (styles[level].base.includes("margin:")) {
-            styles[level].base = styles[level].base.replace(/margin:\s*\d+px/, `margin: ${margin}px`);
-          } else {
-            styles[level].base += ` margin: ${margin}px;`;
-          }
-        });
-      });
-      new import_obsidian8.Setting(content).setName("\u5B57\u4F53\u5927\u5C0F").setDesc("\u8BBE\u7F6E\u6807\u9898\u7684\u5B57\u4F53\u5927\u5C0F\uFF08\u5355\u4F4D\uFF1A\u50CF\u7D20\uFF09").addText((text2) => {
-        const fontSizeMatch = styles[level].base.match(/font-size:\s*(\d+(?:\.\d+)?)(px|em)/);
-        let currentSize = "";
-        if (fontSizeMatch) {
-          const [, size, unit] = fontSizeMatch;
-          currentSize = unit === "em" ? String(parseFloat(size) * 16) : size;
-        }
-        text2.setValue(currentSize).onChange((value) => {
-          const size = parseInt(value) || 16;
-          styles[level].base = styles[level].base.replace(/font-size:\s*\d+(?:\.\d+)?(?:px|em)/, `font-size: ${size}px`);
-        });
-      });
-      new import_obsidian8.Setting(content).setName("\u5B57\u4F53\u989C\u8272").setDesc("\u8BBE\u7F6E\u6807\u9898\u7684\u5B57\u4F53\u989C\u8272").addColorPicker((color) => {
-        var _a;
-        const currentColor = (_a = styles[level].content.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-        color.setValue(currentColor).onChange((value) => {
-          if (styles[level].content.includes("color:")) {
-            styles[level].content = styles[level].content.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-          } else {
-            styles[level].content += ` color: ${value};`;
-          }
-        });
-      });
-      let colorPicker;
-      new import_obsidian8.Setting(content).setName("\u80CC\u666F\u989C\u8272").setDesc("\u8BBE\u7F6E\u6807\u9898\u7684\u80CC\u666F\u989C\u8272").addToggle((toggle2) => {
-        const hasBackground = styles[level].content.includes("background:");
-        toggle2.setValue(hasBackground).onChange((value) => {
-          if (!value) {
-            styles[level].content = styles[level].content.replace(/background:\s*#[a-fA-F0-9]+;/, "");
-            colorPicker.setDisabled(true);
-          } else {
-            colorPicker.setDisabled(false);
-          }
-        });
-      }).addColorPicker((color) => {
-        var _a;
-        const currentBg = (_a = styles[level].content.match(/background:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-        color.setValue(currentBg).onChange((value) => {
-          if (styles[level].content.includes("background:")) {
-            styles[level].content = styles[level].content.replace(/background:\s*#[a-fA-F0-9]+/, `background: ${value}`);
-          } else {
-            styles[level].content += ` background: ${value};`;
-          }
-          if (!styles[level].content.includes("border-radius:")) {
-            styles[level].content += " padding: 1px 4px; border-radius: 3px;";
-          }
-        });
-        colorPicker = color;
-      });
-      new import_obsidian8.Setting(content).setName("\u5C45\u4E2D").setDesc("\u8BBE\u7F6E\u6807\u9898\u662F\u5426\u5C45\u4E2D").addToggle((toggle2) => {
-        const isCentered = styles[level].base.includes("text-align: center;");
-        toggle2.setValue(isCentered).onChange((value) => {
-          styles[level].base = value ? styles[level].base + " text-align: center;" : styles[level].base.replace(/text-align: center;/, "");
-        });
-      });
-      new import_obsidian8.Setting(content).setName("\u5DE6\u8FB9\u6846").setDesc("\u8BBE\u7F6E\u6807\u9898\u5DE6\u4FA7\u8FB9\u6846\u662F\u5426\u663E\u793A").addToggle((toggle2) => {
-        const hasBorder = styles[level].base.includes("border-left");
-        toggle2.setValue(hasBorder).onChange((value) => {
-          var _a, _b;
-          const fontColor = (_a = styles[level].content.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-          const bgColor = (_b = styles[level].content.match(/background:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _b[1];
-          let borderColor = fontColor !== "#ffffff" ? fontColor : bgColor !== "#ffffff" ? bgColor : "#000000";
-          if (value) {
-            styles[level].base += ` border-left: 4px solid ${borderColor}; padding-left: 12px;`;
-          } else {
-            styles[level].base = styles[level].base.replace(/border-left:[^;]+;/, "").replace(/padding-left:[^;]+;/, "");
-          }
-        });
-      });
-      new import_obsidian8.Setting(content).setName("\u4E0B\u5212\u7EBF").setDesc("\u8BBE\u7F6E\u6807\u9898\u4E0B\u5212\u7EBF\u662F\u5426\u663E\u793A").addToggle((toggle2) => {
-        const hasUnderline = styles[level].base.includes("border-bottom");
-        toggle2.setValue(hasUnderline).onChange((value) => {
-          var _a, _b;
-          const fontColor = (_a = styles[level].content.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-          const bgColor = (_b = styles[level].content.match(/background:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _b[1];
-          let underlineColor = fontColor !== "#ffffff" ? fontColor : bgColor !== "#ffffff" ? bgColor : "#000000";
-          const rgbaColor = `rgba(${parseInt(underlineColor.slice(1, 3), 16)}, ${parseInt(underlineColor.slice(3, 5), 16)}, ${parseInt(underlineColor.slice(5, 7), 16)}, 0.2)`;
-          if (value) {
-            styles[level].base += ` border-bottom: 1px solid ${rgbaColor};`;
-          } else {
-            styles[level].base = styles[level].base.replace(/border-bottom:[^;]+;/, "");
-          }
-        });
-      });
-    });
-  }
-  addParagraphAndEmphasisSettings(container, styles) {
-    const paragraphSection = container.createDiv("style-section");
-    const header = paragraphSection.createDiv("style-section-header");
-    const titleContainer = header.createDiv("style-section-title");
-    const toggle = titleContainer.createSpan("style-section-toggle");
-    (0, import_obsidian8.setIcon)(toggle, "chevron-right");
-    titleContainer.createEl("h4", { text: "\u6BB5\u843D\u6837\u5F0F" });
-    const content = paragraphSection.createDiv("style-section-content");
-    content.hide();
-    header.addEventListener("click", () => {
-      const isExpanded = !paragraphSection.hasClass("is-expanded");
-      paragraphSection.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian8.setIcon)(toggle, isExpanded ? "chevron-down" : "chevron-right");
-      content.toggle(isExpanded);
-    });
-    new import_obsidian8.Setting(content).setName("\u884C\u9AD8").setDesc("\u8BBE\u7F6E\u6BB5\u843D\u6587\u672C\u7684\u884C\u9AD8\uFF08\u63A8\u8350\u503C\uFF1A1.5-2.0\uFF09").addText((text2) => {
-      var _a;
-      const currentLineHeight = (_a = styles.paragraph.match(/line-height:\s*([\d.]+)/)) == null ? void 0 : _a[1];
-      text2.setValue(currentLineHeight).onChange((value) => {
-        const lineHeight = parseFloat(value) || 1.75;
-        styles.paragraph = styles.paragraph.replace(/line-height:\s*[\d.]+/, `line-height: ${lineHeight}`);
-      });
-    });
-    new import_obsidian8.Setting(content).setName("\u6BB5\u524D\u8DDD").setDesc("\u8BBE\u7F6E\u6BB5\u843D\u4E0E\u4E0A\u65B9\u5185\u5BB9\u4E4B\u95F4\u7684\u95F4\u8DDD\uFF08\u5355\u4F4D\uFF1Aem\uFF09").addText((text2) => {
-      const marginTopMatch = styles.paragraph.match(/margin-top:\s*([\d.]+)em/);
-      const currentMargin = marginTopMatch ? marginTopMatch[1] : "";
-      text2.setValue(currentMargin).onChange((value) => {
-        const value_num = parseFloat(value);
-        const margin = !isNaN(value_num) ? value_num : 1;
-        if (styles.paragraph.match(/margin-top:\s*[\d.]+em/)) {
-          styles.paragraph = styles.paragraph.replace(/margin-top:\s*[\d.]+em/, `margin-top: ${margin}em`);
-        } else {
-          styles.paragraph += ` margin-top: ${margin}em;`;
-        }
-      });
-    });
-    new import_obsidian8.Setting(content).setName("\u6587\u672C\u989C\u8272").setDesc("\u8BBE\u7F6E\u6BB5\u843D\u6587\u672C\u7684\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.paragraph.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor).onChange((value) => {
-        styles.paragraph = styles.paragraph.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-      });
-    });
-    const emphasisSection = container.createDiv("style-section");
-    const emphasisHeader = emphasisSection.createDiv("style-section-header");
-    const emphasisTitleContainer = emphasisHeader.createDiv("style-section-title");
-    const emphasisToggle = emphasisTitleContainer.createSpan("style-section-toggle");
-    (0, import_obsidian8.setIcon)(emphasisToggle, "chevron-right");
-    emphasisTitleContainer.createEl("h4", { text: "\u5F3A\u8C03\u6837\u5F0F" });
-    const emphasisContent = emphasisSection.createDiv("style-section-content");
-    emphasisContent.hide();
-    emphasisHeader.addEventListener("click", () => {
-      const isExpanded = !emphasisSection.hasClass("is-expanded");
-      emphasisSection.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian8.setIcon)(emphasisToggle, isExpanded ? "chevron-down" : "chevron-right");
-      emphasisContent.toggle(isExpanded);
-    });
-    new import_obsidian8.Setting(emphasisContent).setName("\u7C97\u4F53\u6837\u5F0F").setDesc("\u8BBE\u7F6E\u7C97\u4F53\u6587\u672C\u7684\u6837\u5F0F").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.emphasis.strong.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor).onChange((value) => {
-        styles.emphasis.strong = styles.emphasis.strong.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-      });
-    });
-    new import_obsidian8.Setting(emphasisContent).setName("\u659C\u4F53\u6837\u5F0F").setDesc("\u8BBE\u7F6E\u659C\u4F53\u6587\u672C\u7684\u6837\u5F0F").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.emphasis.em.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor).onChange((value) => {
-        styles.emphasis.em = styles.emphasis.em.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-      });
-    });
-    new import_obsidian8.Setting(emphasisContent).setName("\u5220\u9664\u7EBF\u6837\u5F0F").setDesc("\u8BBE\u7F6E\u5220\u9664\u7EBF\u6587\u672C\u7684\u6837\u5F0F").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.emphasis.del.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor).onChange((value) => {
-        styles.emphasis.del = styles.emphasis.del.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-      });
-    });
-  }
-  addListSettings(container, styles) {
-    const listSection = container.createDiv("list-section");
-    new import_obsidian8.Setting(listSection).setName("\u5217\u8868\u7F29\u8FDB").setDesc("\u8BBE\u7F6E\u5217\u8868\u7684\u5DE6\u4FA7\u7F29\u8FDB\uFF08\u5355\u4F4D\uFF1A\u50CF\u7D20\uFF09").addText((text2) => {
-      var _a;
-      const currentPadding = (_a = styles.container.match(/padding-left:\s*(\d+)px/)) == null ? void 0 : _a[1];
-      text2.setValue(currentPadding).onChange((value) => {
-        const padding = parseInt(value) || 26;
-        styles.container = styles.container.replace(/padding-left:\s*\d+px/, `padding-left: ${padding}px`);
-      });
-    });
-    new import_obsidian8.Setting(listSection).setName("\u5217\u8868\u6587\u672C\u989C\u8272").setDesc("\u8BBE\u7F6E\u5217\u8868\u6587\u672C\u7684\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.item.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor).onChange((value) => {
-        ["container", "item", "taskList"].forEach((key) => {
-          styles[key] = styles[key].replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        });
-      });
-    });
-  }
-  addQuoteSettings(container, styles) {
-    const quoteSection = container.createDiv("quote-section");
-    new import_obsidian8.Setting(quoteSection).setName("\u5F15\u7528\u6587\u672C\u989C\u8272").setDesc("\u8BBE\u7F6E\u5F15\u7528\u5757\u5185\u6587\u672C\u7684\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.quote.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor).onChange((value) => {
-        styles.quote = styles.quote.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-      });
-    });
-    new import_obsidian8.Setting(quoteSection).setName("\u6587\u672C\u6837\u5F0F").setDesc("\u8BBE\u7F6E\u5F15\u7528\u5757\u5185\u6587\u672C\u662F\u5426\u659C\u4F53\u3001\u662F\u5426\u52A0\u7C97").addToggle((toggle) => {
-      const isItalic = styles.quote.includes("font-style: italic");
-      toggle.setValue(isItalic).setTooltip("\u659C\u4F53").onChange((value) => {
-        if (value) {
-          if (!styles.quote.includes("font-style:")) {
-            styles.quote = styles.quote.replace(/;(\s*)$/, `; font-style: italic;$1`);
-          } else {
-            styles.quote = styles.quote.replace(/font-style:[^;]+;/, "font-style: italic;");
-          }
-        } else {
-          styles.quote = styles.quote.replace(/font-style:[^;]+;/, "");
-        }
-      });
-    }).addToggle((toggle) => {
-      const isBold = styles.quote.includes("font-weight: bold");
-      toggle.setValue(isBold).setTooltip("\u7C97\u4F53").onChange((value) => {
-        if (value) {
-          if (!styles.quote.includes("font-weight:")) {
-            styles.quote = styles.quote.replace(/;(\s*)$/, `; font-weight: bold;$1`);
-          } else {
-            styles.quote = styles.quote.replace(/font-weight:[^;]+;/, "font-weight: bold;");
-          }
-        } else {
-          styles.quote = styles.quote.replace(/font-weight:[^;]+;/, "");
-        }
-      });
-    });
-    new import_obsidian8.Setting(quoteSection).setName("\u5F15\u7528\u80CC\u666F\u989C\u8272").setDesc("\u8BBE\u7F6E\u5F15\u7528\u5757\u7684\u80CC\u666F\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentBg = (_a = styles.quote.match(/background:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentBg || "#f8f9fc").onChange((value) => {
-        if (styles.quote.includes("background:")) {
-          styles.quote = styles.quote.replace(/background:\s*#[a-fA-F0-9]+/, `background: ${value}`);
-        } else {
-          styles.quote = styles.quote.replace(/;(\s*)$/, `; background: ${value};$1`);
-        }
-      });
-    });
-    new import_obsidian8.Setting(quoteSection).setName("\u5F15\u7528\u8FB9\u6846").setDesc("\u8BBE\u7F6E\u5F15\u7528\u5757\u5DE6\u4FA7\u8FB9\u6846\u7684\u989C\u8272\u548C\u5706\u89D2").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.quote.match(/border-left:\s*\d+px\s*solid\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor).onChange((value) => {
-        styles.quote = styles.quote.replace(/border-left:\s*\d+px\s*solid\s*#[a-fA-F0-9]+/, `border-left: 4px solid ${value}`);
-        if (styles.quote.includes("linear-gradient")) {
-          styles.quote = styles.quote.replace(/rgba\([^)]+\)/, `rgba(${parseInt(value.slice(1, 3), 16)},${parseInt(value.slice(3, 5), 16)},${parseInt(value.slice(5, 7), 16)},0.1)`);
-        }
-      });
-    }).addToggle((toggle) => {
-      const hasRadius = styles.quote.includes("border-radius:");
-      toggle.setValue(hasRadius).setTooltip("\u5706\u89D2").onChange((value) => {
-        if (value) {
-          if (!styles.quote.includes("border-radius:")) {
-            styles.quote = styles.quote.replace(/;(\s*)$/, `; border-radius: 6px;$1`);
-          }
-        } else {
-          styles.quote = styles.quote.replace(/border-radius:[^;]+;/, "");
-        }
-      });
-    });
-    new import_obsidian8.Setting(quoteSection).setName("\u5185\u8FB9\u8DDD").setDesc("\u8BBE\u7F6E\u5F15\u7528\u5757\u7684\u5185\u8FB9\u8DDD\uFF08\u5355\u4F4D\uFF1A\u50CF\u7D20\uFF09").addText((text2) => {
-      const currentPadding = styles.quote.match(/padding:\s*(\d+)px\s+(\d+)px/);
-      text2.setValue(currentPadding ? currentPadding[1] : "16").setPlaceholder("\u4E0A\u4E0B\u5185\u8FB9\u8DDD").onChange((value) => {
-        var _a;
-        const vPadding = parseInt(value) || 16;
-        const hPadding = ((_a = styles.quote.match(/padding:\s*\d+px\s+(\d+)px/)) == null ? void 0 : _a[1]) || "20";
-        styles.quote = styles.quote.replace(/padding:[^;]+;/, `padding: ${vPadding}px ${hPadding}px;`);
-      });
-    }).addText((text2) => {
-      const currentPadding = styles.quote.match(/padding:\s*\d+px\s+(\d+)px/);
-      text2.setValue(currentPadding ? currentPadding[1] : "20").setPlaceholder("\u5DE6\u53F3\u5185\u8FB9\u8DDD").onChange((value) => {
-        var _a;
-        const hPadding = parseInt(value) || 20;
-        const vPadding = ((_a = styles.quote.match(/padding:\s*(\d+)px/)) == null ? void 0 : _a[1]) || "16";
-        styles.quote = styles.quote.replace(/padding:[^;]+;/, `padding: ${vPadding}px ${hPadding}px;`);
-      });
-    });
-  }
-  addCodeSettings(container, styles) {
-    const codeBlockSection = container.createDiv("style-section");
-    const codeBlockHeader = codeBlockSection.createDiv("style-section-header");
-    const codeBlockTitleContainer = codeBlockHeader.createDiv("style-section-title");
-    const codeBlockToggle = codeBlockTitleContainer.createSpan("style-section-toggle");
-    (0, import_obsidian8.setIcon)(codeBlockToggle, "chevron-right");
-    codeBlockTitleContainer.createEl("h4", { text: "\u4EE3\u7801\u5757\u6837\u5F0F" });
-    const codeBlockContent = codeBlockSection.createDiv("style-section-content");
-    codeBlockContent.hide();
-    codeBlockHeader.addEventListener("click", () => {
-      const isExpanded = !codeBlockSection.hasClass("is-expanded");
-      codeBlockSection.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian8.setIcon)(codeBlockToggle, isExpanded ? "chevron-down" : "chevron-right");
-      codeBlockContent.toggle(isExpanded);
-    });
-    new import_obsidian8.Setting(codeBlockContent).setName("\u6307\u793A\u5668\u989C\u8272").setDesc("\u8BBE\u7F6E\u4EE3\u7801\u5757\u5DE6\u4E0A\u89D2\u4E09\u4E2A\u70B9\u7684\u989C\u8272").addColorPicker((color) => {
-      color.setValue(styles.header.colors[0]).onChange((value) => {
-        styles.header.colors[0] = value;
-      });
-    }).addColorPicker((color) => {
-      color.setValue(styles.header.colors[1]).onChange((value) => {
-        styles.header.colors[1] = value;
-      });
-    }).addColorPicker((color) => {
-      color.setValue(styles.header.colors[2]).onChange((value) => {
-        styles.header.colors[2] = value;
-      });
-    });
-    new import_obsidian8.Setting(codeBlockContent).setName("\u80CC\u666F\u989C\u8272").setDesc("\u8BBE\u7F6E\u4EE3\u7801\u5757\u7684\u80CC\u666F\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentBg = (_a = styles.block.match(/background:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentBg).onChange((value) => {
-        styles.block = styles.block.replace(/background:\s*#[a-fA-F0-9]+/, `background: ${value}`);
-        styles.inline = styles.inline.replace(/background:\s*#[a-fA-F0-9]+/, `background: ${value}`);
-      });
-    });
-    new import_obsidian8.Setting(codeBlockContent).setName("\u8FB9\u6846\u989C\u8272").setDesc("\u8BBE\u7F6E\u4EE3\u7801\u5757\u7684\u8FB9\u6846\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentBorder = (_a = styles.block.match(/border:\s*1px\s*solid\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentBorder).onChange((value) => {
-        styles.block = styles.block.replace(/border:\s*1px\s*solid\s*#[a-fA-F0-9]+/, `border: 1px solid ${value}`);
-        styles.inline = styles.inline.replace(/border:\s*1px\s*solid\s*#[a-fA-F0-9]+/, `border: 1px solid ${value}`);
-      });
-    });
-    new import_obsidian8.Setting(codeBlockContent).setName("\u6587\u672C\u989C\u8272").setDesc("\u8BBE\u7F6E\u4EE3\u7801\u5757\u7684\u6587\u672C\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.block.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor).onChange((value) => {
-        styles.block = styles.block.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        styles.inline = styles.inline.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-      });
-    });
-    new import_obsidian8.Setting(codeBlockContent).setName("\u6587\u672C\u6837\u5F0F").setDesc("\u8BBE\u7F6E\u4EE3\u7801\u5757\u6587\u672C\u7684\u6837\u5F0F").addText((text2) => {
-      var _a;
-      const currentSize = (_a = styles.block.match(/font-size:\s*(\d+)px/)) == null ? void 0 : _a[1];
-      text2.setValue(currentSize || "14").setPlaceholder("\u5B57\u4F53\u5927\u5C0F").onChange((value) => {
-        const size = parseInt(value) || 14;
-        styles.block = styles.block.replace(/font-size:\s*\d+px/, `font-size: ${size}px`);
-        styles.inline = styles.inline.replace(/font-size:\s*\d+px/, `font-size: ${size}px`);
-      });
-    }).addToggle((toggle) => {
-      const isBold = styles.block.includes("font-weight: bold");
-      toggle.setValue(isBold).setTooltip("\u52A0\u7C97").onChange((value) => {
-        if (value) {
-          styles.block = styles.block.replace(/;(\s*)$/, `; font-weight: bold;$1`);
-          styles.inline = styles.inline.replace(/;(\s*)$/, `; font-weight: bold;$1`);
-        } else {
-          styles.block = styles.block.replace(/font-weight:\s*bold;\s*/, "");
-          styles.inline = styles.inline.replace(/font-weight:\s*bold;\s*/, "");
-        }
-      });
-    }).addToggle((toggle) => {
-      const isItalic = styles.block.includes("font-style: italic");
-      toggle.setValue(isItalic).setTooltip("\u503E\u659C").onChange((value) => {
-        if (value) {
-          styles.block = styles.block.replace(/;(\s*)$/, `; font-style: italic;$1`);
-          styles.inline = styles.inline.replace(/;(\s*)$/, `; font-style: italic;$1`);
-        } else {
-          styles.block = styles.block.replace(/font-style:\s*italic;\s*/, "");
-          styles.inline = styles.inline.replace(/font-style:\s*italic;\s*/, "");
-        }
-      });
-    });
-  }
-  addLinkSettings(container, styles) {
-    const linkSection = container.createDiv("link-section");
-    new import_obsidian8.Setting(linkSection).setName("\u94FE\u63A5\u989C\u8272").setDesc("\u8BBE\u7F6E\u94FE\u63A5\u6587\u672C\u7684\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.link.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor).onChange((value) => {
-        styles.link = styles.link.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        if (styles.link.includes("linear-gradient")) {
-          styles.link = styles.link.replace(/linear-gradient\([^)]+\)/, `linear-gradient(to right, ${value}80, ${value}80)`);
-        }
-      });
-    });
-    new import_obsidian8.Setting(linkSection).setName("\u4E0B\u5212\u7EBF\u6837\u5F0F").setDesc("\u9009\u62E9\u94FE\u63A5\u7684\u4E0B\u5212\u7EBF\u6837\u5F0F").addDropdown((dropdown) => {
-      dropdown.addOption("none", "\u65E0\u4E0B\u5212\u7EBF").addOption("underline", "\u5B9E\u7EBF\u4E0B\u5212\u7EBF").addOption("gradient", "\u6E10\u53D8\u4E0B\u5212\u7EBF").setValue(styles.link.includes("text-decoration: none") && !styles.link.includes("background-image") ? "none" : styles.link.includes("text-decoration: underline") ? "underline" : "gradient").onChange((value) => {
-        var _a;
-        switch (value) {
-          case "none":
-            styles.link = styles.link.replace(/text-decoration:[^;]+;/, "text-decoration: none;").replace(/background-image:[^;]+;/, "").replace(/background-size:[^;]+;/, "").replace(/background-repeat:[^;]+;/, "").replace(/background-position:[^;]+;/, "");
-            break;
-          case "underline":
-            styles.link = styles.link.replace(/text-decoration:[^;]+;/, "text-decoration: underline;").replace(/background-image:[^;]+;/, "").replace(/background-size:[^;]+;/, "").replace(/background-repeat:[^;]+;/, "").replace(/background-position:[^;]+;/, "");
-            break;
-          case "gradient": {
-            const color = ((_a = styles.link.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1]) || "#d2691e";
-            styles.link = styles.link.replace(/text-decoration:[^;]+;/, "text-decoration: none;") + ` background-image: linear-gradient(to right, ${color}80, ${color}80); background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 100%; transition: all 0.3s ease;`;
-            break;
-          }
-        }
-      });
-    });
-  }
-  addTableSettings(container, styles) {
-    const tableSection = container.createDiv("table-section");
-    new import_obsidian8.Setting(tableSection).setName("\u8868\u683C\u8FB9\u6846\u989C\u8272").setDesc("\u8BBE\u7F6E\u8868\u683C\u8FB9\u6846\u548C\u5206\u9694\u7EBF\u7684\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentBorder = (_a = styles.container.match(/border:\s*1px\s*solid\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentBorder).onChange((value) => {
-        styles.container = styles.container.replace(/border:\s*1px\s*solid\s*#[a-fA-F0-9]+/, `border: 1px solid ${value}`);
-        styles.header = styles.header.replace(/border-bottom:\s*\d+px\s*solid\s*#[a-fA-F0-9]+/, `border-bottom: 2px solid ${value}`);
-        styles.cell = styles.cell.replace(/border-top:\s*1px\s*solid\s*#[a-fA-F0-9]+/, `border-top: 1px solid ${value}`);
-      });
-    });
-    new import_obsidian8.Setting(tableSection).setName("\u8868\u5934\u80CC\u666F").setDesc("\u8BBE\u7F6E\u8868\u683C\u5934\u90E8\u7684\u80CC\u666F\u989C\u8272").addColorPicker((color) => {
-      var _a, _b;
-      const currentBg = (_a = styles.header.match(/background:\s*([^;]+)/)) == null ? void 0 : _a[1];
-      const firstColor = currentBg.includes("linear-gradient") ? (_b = currentBg.match(/linear-gradient\([^,]+,\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _b[1] : currentBg;
-      color.setValue(firstColor).onChange((value) => {
-        if (currentBg.includes("linear-gradient")) {
-          styles.header = styles.header.replace(/background:\s*linear-gradient\([^)]+\)/, `background: linear-gradient(135deg, ${value}, #fffaf5)`);
-        } else {
-          styles.header = styles.header.replace(/background:\s*[^;]+/, `background: ${value}`);
-        }
-      });
-    });
-    new import_obsidian8.Setting(tableSection).setName("\u5706\u89D2\u5927\u5C0F").setDesc("\u8BBE\u7F6E\u8868\u683C\u7684\u5706\u89D2\u5927\u5C0F\uFF08\u5355\u4F4D\uFF1A\u50CF\u7D20\uFF09").addText((text2) => {
-      var _a;
-      const currentRadius = (_a = styles.container.match(/border-radius:\s*(\d+)px/)) == null ? void 0 : _a[1];
-      text2.setValue(currentRadius).onChange((value) => {
-        const radius = parseInt(value) || 12;
-        styles.container = styles.container.replace(/border-radius:\s*\d+px/, `border-radius: ${radius}px`);
-      });
-    });
-  }
-  addHrSettings(container, styles) {
-    const hrSection = container.createDiv("hr-section");
-    new import_obsidian8.Setting(hrSection).setName("\u5206\u9694\u7EBF\u989C\u8272").setDesc("\u8BBE\u7F6E\u6C34\u5E73\u5206\u9694\u7EBF\u7684\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.hr.match(/border-top:\s*\d+px\s*solid\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor).onChange((value) => {
-        styles.hr = styles.hr.replace(/border-top:\s*\d+px\s*solid\s*#[a-fA-F0-9]+/, `border-top: 2px solid ${value}`);
-      });
-    });
-    new import_obsidian8.Setting(hrSection).setName("\u5206\u9694\u7EBF\u7C97\u7EC6").setDesc("\u8BBE\u7F6E\u6C34\u5E73\u5206\u9694\u7EBF\u7684\u7C97\u7EC6\uFF08\u5355\u4F4D\uFF1A\u50CF\u7D20\uFF09").addText((text2) => {
-      var _a;
-      const currentWidth = (_a = styles.hr.match(/border-top:\s*(\d+)px/)) == null ? void 0 : _a[1];
-      text2.setValue(currentWidth).onChange((value) => {
-        const width = parseInt(value) || 2;
-        styles.hr = styles.hr.replace(/border-top:\s*\d+px/, `border-top: ${width}px`);
-      });
-    });
-    new import_obsidian8.Setting(hrSection).setName("\u4E0A\u4E0B\u8FB9\u8DDD").setDesc("\u8BBE\u7F6E\u5206\u9694\u7EBF\u4E0E\u4E0A\u4E0B\u5185\u5BB9\u7684\u95F4\u8DDD\uFF08\u5355\u4F4D\uFF1A\u50CF\u7D20\uFF09").addText((text2) => {
-      var _a;
-      const currentMargin = (_a = styles.hr.match(/margin:\s*(\d+)px/)) == null ? void 0 : _a[1];
-      text2.setValue(currentMargin).onChange((value) => {
-        const margin = parseInt(value) || 28;
-        styles.hr = styles.hr.replace(/margin:\s*\d+px/, `margin: ${margin}px`);
-      });
-    });
-  }
-  addFootnoteSettings(container, styles) {
-    const footnoteSection = container.createDiv("footnote-section");
-    new import_obsidian8.Setting(footnoteSection).setName("\u811A\u6CE8\u989C\u8272").setDesc("\u8BBE\u7F6E\u811A\u6CE8\u5F15\u7528\u548C\u8FD4\u56DE\u94FE\u63A5\u7684\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.ref.match(/color:\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor).onChange((value) => {
-        styles.ref = styles.ref.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-        styles.backref = styles.backref.replace(/color:\s*#[a-fA-F0-9]+/, `color: ${value}`);
-      });
-    });
-    new import_obsidian8.Setting(footnoteSection).setName("\u5B57\u4F53\u6837\u5F0F").setDesc("\u9009\u62E9\u811A\u6CE8\u7684\u5B57\u4F53\u6837\u5F0F").addDropdown((dropdown) => {
-      dropdown.addOption("normal", "\u5E38\u89C4").addOption("italic", "\u659C\u4F53").setValue(styles.ref.includes("font-style: italic") ? "italic" : "normal").onChange((value) => {
-        const style = value === "italic" ? "italic" : "normal";
-        styles.ref = styles.ref.replace(/font-style:[^;]*;/, `font-style: ${style};`);
-        styles.backref = styles.backref.replace(/font-style:[^;]*;/, `font-style: ${style};`);
-      });
-    });
-  }
-  addImageSettings(container, styles) {
-    const imageSection = container.createDiv("image-section");
-    new import_obsidian8.Setting(imageSection).setName("\u6700\u5927\u5BBD\u5EA6").setDesc("\u8BBE\u7F6E\u56FE\u7247\u7684\u6700\u5927\u663E\u793A\u5BBD\u5EA6\uFF08\u652F\u6301\u767E\u5206\u6BD4\u6216\u50CF\u7D20\u503C\uFF0C\u4F8B\u5982\uFF1A100% \u6216 800px\uFF09").addText((text2) => {
-      var _a;
-      const currentWidth = (_a = styles.image.match(/max-width:\s*([^;]+)/)) == null ? void 0 : _a[1];
-      text2.setValue(currentWidth).onChange((value) => {
-        const isValid = /^\d+(%|px)$/.test(value.trim());
-        const width = isValid ? value.trim() : "100%";
-        styles.image = styles.image.replace(/max-width:\s*[^;]+/, `max-width: ${width}`);
-      });
-    });
-    new import_obsidian8.Setting(imageSection).setName("\u8FB9\u8DDD").setDesc("\u8BBE\u7F6E\u56FE\u7247\u4E0E\u4E0A\u4E0B\u6587\u672C\u7684\u95F4\u8DDD\uFF08\u5355\u4F4D\uFF1Aem\uFF09").addText((text2) => {
-      var _a;
-      const currentMargin = (_a = styles.image.match(/margin:\s*([\d.]+)em/)) == null ? void 0 : _a[1];
-      text2.setValue(currentMargin).onChange((value) => {
-        const margin = parseFloat(value) || 1.5;
-        styles.image = styles.image.replace(/margin:\s*[\d.]+em/, `margin: ${margin}em`);
-      });
-    });
-    new import_obsidian8.Setting(imageSection).setName("\u5706\u89D2\u5927\u5C0F").setDesc("\u8BBE\u7F6E\u56FE\u7247\u7684\u5706\u89D2\u7A0B\u5EA6\uFF08\u5355\u4F4D\uFF1A\u50CF\u7D20\uFF09").addText((text2) => {
-      var _a;
-      const currentRadius = (_a = styles.image.match(/border-radius:\s*(\d+)px/)) == null ? void 0 : _a[1];
-      text2.setValue(currentRadius || "8").onChange((value) => {
-        const radius = parseInt(value) || 8;
-        if (styles.image.includes("border-radius:")) {
-          styles.image = styles.image.replace(/border-radius:\s*\d+px/, `border-radius: ${radius}px`);
-        } else {
-          styles.image = styles.image.replace(/;(\s*)$/, `; border-radius: ${radius}px;$1`);
-        }
-      });
-    });
-    new import_obsidian8.Setting(imageSection).setName("\u8FB9\u6846\u989C\u8272").setDesc("\u8BBE\u7F6E\u56FE\u7247\u8FB9\u6846\u7684\u989C\u8272").addColorPicker((color) => {
-      var _a;
-      const currentColor = (_a = styles.image.match(/border:\s*1px solid\s*(#[a-fA-F0-9]+)/)) == null ? void 0 : _a[1];
-      color.setValue(currentColor || "#d1d5db").onChange((value) => {
-        if (styles.image.includes("border:")) {
-          styles.image = styles.image.replace(/border:\s*1px solid\s*#[a-fA-F0-9]+80/, `border: 1px solid ${value}80`);
-        } else {
-          styles.image = styles.image.replace(/;(\s*)$/, `; border: 1px solid ${value}80;$1`);
-        }
-      });
-    });
-  }
-  async validateAndSubmit() {
-    const trimmedName = this.template.name.trim();
-    if (!trimmedName) {
-      new import_obsidian8.Notice("\u6A21\u677F\u540D\u79F0\u4E0D\u80FD\u4E3A\u7A7A");
-      this.nameInput.focus();
-      return false;
-    }
-    if (this.showSampleTemplate && !this.templateSelect.value) {
-      new import_obsidian8.Notice("\u8BF7\u9009\u62E9\u4E00\u4E2A\u53C2\u8003\u6A21\u677F");
-      this.templateSelect.focus();
-      return false;
-    }
-    try {
-      await this.onSubmit(this.template);
-      return true;
-    } catch (error) {
-      new import_obsidian8.Notice("\u4FDD\u5B58\u5931\u8D25\uFF1A" + error.message, 3e3);
-      return false;
-    }
-  }
-  generateTemplateId(name) {
-    return `template-${name}`;
-  }
-  onClose() {
-    const { contentEl } = this;
-    contentEl.empty();
-  }
-};
+// src/core/settings/styleFields.ts
+function styleFields(value, prefix = "") {
+  if (!value || typeof value !== "object") return [];
+  const record = value;
+  return Object.entries(record).flatMap(([key, item]) => {
+    const path = prefix ? `${prefix}.${key}` : key;
+    return typeof item === "string" ? [{ path, value: item, set: (next) => {
+      record[key] = next;
+    } }] : styleFields(item, path);
+  });
+}
 
-// src/settings/CreateFontModal.ts
-var import_obsidian9 = require("obsidian");
-var CreateFontModal = class extends import_obsidian9.Modal {
-  constructor(app, onSubmit, existingFont) {
-    super(app);
-    this.onSubmit = onSubmit;
-    this.font = existingFont != null ? existingFont : { value: "", label: "" };
+// src/ui/submitDraft.ts
+var import_obsidian11 = require("obsidian");
+async function submitDraft(button, submit, close) {
+  if (button.buttonEl.disabled) return;
+  button.setDisabled(true);
+  const label = button.buttonEl.textContent || "\u4FDD\u5B58";
+  button.setButtonText("\u4FDD\u5B58\u4E2D\u2026");
+  try {
+    await submit();
+    close();
+  } catch (error) {
+    new import_obsidian11.Notice(`\u4FDD\u5B58\u5931\u8D25\uFF1A${error instanceof Error ? error.message : String(error)}`);
+  } finally {
+    button.setDisabled(false);
+    button.setButtonText(label);
   }
-  onOpen() {
-    const { contentEl } = this;
-    contentEl.empty();
-    contentEl.addClass("mp-font-modal");
-    const headerContainer = contentEl.createDiv({ cls: "mfd-header" });
-    headerContainer.createEl("h3", { text: this.font.label ? "\u7F16\u8F91\u5B57\u4F53" : "\u6DFB\u52A0\u5B57\u4F53" });
-    const helpBtnContainer = headerContainer.createDiv({ cls: "mfd-help-trigger" });
-    const helpBtn = helpBtnContainer.createEl("button", { cls: "mfd-help-btn" });
-    (0, import_obsidian9.setIcon)(helpBtn, "help-circle");
-    const helpTooltip = helpBtnContainer.createDiv({ cls: "mfd-help-tooltip" });
-    helpTooltip.setText(`\u{1F44B} \u5B57\u4F53\u503C\u8BBE\u7F6E\u8BF4\u660E
-                                    \u2022 \u5355\u4E2A\u5B57\u4F53\uFF1AArial \u6216 "Microsoft YaHei"
-                                    \u2022 \u4E2D\u6587\u5B57\u4F53\uFF1A\u9700\u8981\u540C\u65F6\u8BBE\u7F6E\u4E2D\u82F1\u6587\u540D\u79F0
-                                    \u2022 \u5B57\u4F53\u65CF\uFF1A\u6DFB\u52A0 serif/sans-serif
-                                    \u2022 \u591A\u4E2A\u5B57\u4F53\u7528\u9017\u53F7\u5206\u9694
-                                    \u793A\u4F8B
-                                    \u2022 \u5B8B\u4F53\uFF1ASimSun, "\u5B8B\u4F53", serif
-                                    \u2022 \u5FAE\u8F6F\u96C5\u9ED1\uFF1A"Microsoft YaHei", "\u5FAE\u8F6F\u96C5\u9ED1", sans-serif`);
-    new import_obsidian9.Setting(contentEl).setName("\u5B57\u4F53\u540D\u79F0").setDesc("\u663E\u793A\u5728\u4E0B\u62C9\u83DC\u5355\u4E2D\u7684\u540D\u79F0").addText((text2) => text2.setValue(this.font.label).onChange((value) => this.font.label = value));
-    new import_obsidian9.Setting(contentEl).setName("\u5B57\u4F53\u503C").setDesc("CSS font-family \u7684\u503C").addText((text2) => text2.setValue(this.font.value).onChange((value) => this.font.value = value));
-    new import_obsidian9.Setting(contentEl).addButton((btn) => btn.setButtonText("\u786E\u5B9A").setCta().onClick(() => {
-      if (!this.font.label || !this.font.value) {
-        return;
-      }
-      this.onSubmit(this.font);
-      this.close();
-    })).addButton((btn) => btn.setButtonText("\u53D6\u6D88").onClick(() => this.close()));
-  }
-  onClose() {
-    const { contentEl } = this;
-    contentEl.empty();
-  }
-};
-
-// src/settings/CreateBackgroundModal.ts
-var import_obsidian10 = require("obsidian");
+}
 
 // node_modules/nanoid/url-alphabet/index.js
 var urlAlphabet = "useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict";
@@ -15832,8 +15117,184 @@ var nanoid = (size = 21) => {
   return id;
 };
 
+// src/settings/CreateTemplateModal.ts
+var groups = { container: "\u5168\u5C40\u6837\u5F0F", title: "\u6807\u9898\u6837\u5F0F", paragraph: "\u6BB5\u843D\u6837\u5F0F", list: "\u5217\u8868\u6837\u5F0F", code: "\u4EE3\u7801\u6837\u5F0F", quote: "\u5F15\u7528\u6837\u5F0F", image: "\u56FE\u7247\u6837\u5F0F", link: "\u94FE\u63A5\u6837\u5F0F", emphasis: "\u5F3A\u8C03\u6837\u5F0F", table: "\u8868\u683C\u6837\u5F0F", hr: "\u5206\u9694\u7EBF\u6837\u5F0F", footnote: "\u811A\u6CE8\u6837\u5F0F", containers: "\u4FE1\u606F\u7EC4\u4EF6", accentColor: "\u5F3A\u8C03\u8272" };
+var properties = { color: "\u6587\u5B57\u989C\u8272", "background-color": "\u5E95\u8272", "font-size": "\u5B57\u53F7", "font-weight": "\u5B57\u91CD", "line-height": "\u884C\u9AD8", margin: "\u5916\u8FB9\u8DDD", padding: "\u5185\u8FB9\u8DDD", border: "\u8FB9\u6846", "border-radius": "\u5706\u89D2", "text-align": "\u5BF9\u9F50" };
+var CreateTemplateModal = class extends import_obsidian12.Modal {
+  constructor(app, plugin, onSubmit, existingTemplate) {
+    super(app);
+    this.plugin = plugin;
+    this.onSubmit = onSubmit;
+    this.existingTemplate = existingTemplate;
+    this.template = existingTemplate ? cloneSettings(existingTemplate) : { ...cloneSettings(default_default), id: `template-${nanoid()}`, name: "", description: "", isPreset: false, isVisible: true };
+  }
+  onOpen() {
+    this.render();
+  }
+  render() {
+    const root = this.contentEl;
+    root.empty();
+    root.addClass("mp-template-modal");
+    this.titleEl.setText(this.existingTemplate ? "\u7F16\u8F91\u6A21\u677F" : "\u65B0\u5EFA\u6A21\u677F");
+    const header = root.createDiv("modal-header");
+    new import_obsidian12.Setting(header).setName("\u6A21\u677F\u540D\u79F0").addText((text2) => {
+      text2.setValue(this.template.name).onChange((value) => {
+        this.template.name = value;
+      });
+    });
+    new import_obsidian12.Setting(header).setName("\u6A21\u677F\u63CF\u8FF0").addText((text2) => {
+      text2.setValue(this.template.description).onChange((value) => {
+        this.template.description = value;
+      });
+    });
+    if (!this.existingTemplate) new import_obsidian12.Setting(header).setName("\u9009\u62E9\u53C2\u8003\u6A21\u677F").setDesc("\u590D\u5236\u4E3A\u72EC\u7ACB\u8349\u7A3F\uFF0C\u4E0D\u4F1A\u4FEE\u6539\u539F\u4E3B\u9898\u3002").addDropdown((dropdown) => {
+      dropdown.addOption("", "\u4E0D\u66F4\u6362\u53C2\u8003");
+      this.plugin.settingsManager.getAllTemplates().forEach((theme) => {
+        dropdown.addOption(theme.id, theme.name);
+      });
+      dropdown.onChange((id) => {
+        const theme = this.plugin.settingsManager.getTemplate(id);
+        if (!theme) return;
+        this.template = { ...cloneSettings(theme), id: this.template.id, name: this.template.name, description: this.template.description, isPreset: false, isVisible: true };
+        this.render();
+      });
+    });
+    const scroll = root.createDiv("modal-scroll-container");
+    const fields = styleFields(this.template.styles);
+    for (const key of new Set(fields.map((field) => field.path.split(".")[0]))) {
+      const details = scroll.createEl("details", { cls: "mp-style-fields" });
+      details.createEl("summary", { text: groups[key] || key });
+      const content = details.createDiv("mp-style-fields-body");
+      let initialized = false;
+      details.addEventListener("toggle", () => {
+        if (!details.open || initialized) return;
+        initialized = true;
+        const defaults = new Map(styleFields(cloneSettings(default_default.styles)).map((field) => [field.path, field.value]));
+        new import_obsidian12.Setting(content).setDesc("\u4FEE\u6539\u4EC5\u4FDD\u5B58\u5728\u8349\u7A3F\uFF1B\u53D6\u6D88\u4E0D\u4F1A\u5F71\u54CD\u5F53\u524D\u4E3B\u9898\u3002").addButton((button) => button.setButtonText("\u6062\u590D\u672C\u7EC4\u9ED8\u8BA4").onClick(() => {
+          fields.filter((field) => field.path.split(".")[0] === key).forEach((field) => {
+            const value = defaults.get(field.path);
+            if (value !== void 0) field.set(value);
+          });
+          this.render();
+        }));
+        for (const field of fields.filter((field2) => field2.path.split(".")[0] === key)) {
+          const isCss = field.value.includes(":") || field.value === "";
+          if (isCss) {
+            const editor = content.createEl("details", { cls: "mp-style-declaration" });
+            editor.createEl("summary", { text: field.path });
+            const controls = editor.createDiv();
+            let editorInitialized = false;
+            editor.addEventListener("toggle", () => {
+              var _a;
+              if (!editor.open || editorInitialized) return;
+              editorInitialized = true;
+              const inputs = /* @__PURE__ */ new Map();
+              let rawInput;
+              const synchronize = () => {
+                var _a2;
+                const css = root.ownerDocument.createElement("span").style;
+                const value = ((_a2 = styleFields(this.template.styles).find((item) => item.path === field.path)) == null ? void 0 : _a2.value) || "";
+                css.cssText = value;
+                inputs.forEach((input, property) => {
+                  input.setValue(css.getPropertyValue(property));
+                });
+                rawInput == null ? void 0 : rawInput.setValue(value);
+              };
+              for (const [property, label] of Object.entries(properties)) {
+                const css = root.ownerDocument.createElement("span").style;
+                css.cssText = ((_a = styleFields(this.template.styles).find((item) => item.path === field.path)) == null ? void 0 : _a.value) || "";
+                new import_obsidian12.Setting(controls).setName(label).addText((text2) => {
+                  inputs.set(property, text2);
+                  text2.setValue(css.getPropertyValue(property)).onChange((value) => {
+                    var _a2;
+                    const current = ((_a2 = styleFields(this.template.styles).find((item) => item.path === field.path)) == null ? void 0 : _a2.value) || "";
+                    css.cssText = current;
+                    if (value.trim()) css.setProperty(property, value.trim());
+                    else css.removeProperty(property);
+                    field.set(css.cssText);
+                    synchronize();
+                  });
+                });
+              }
+              new import_obsidian12.Setting(controls).setName("\u5B8C\u6574\u5185\u8054 CSS").setDesc("\u6240\u6709\u5386\u53F2\u5C5E\u6027\u5747\u53EF\u5728\u6B64\u7F16\u8F91\uFF0C\u5305\u62EC\u672A\u5217\u51FA\u7684\u9AD8\u7EA7\u6837\u5F0F\u3002").addTextArea((text2) => {
+                var _a2;
+                rawInput = text2;
+                text2.setValue(((_a2 = styleFields(this.template.styles).find((item) => item.path === field.path)) == null ? void 0 : _a2.value) || "").onChange((value) => {
+                  field.set(value);
+                  synchronize();
+                });
+                text2.inputEl.rows = 4;
+                text2.inputEl.setAttribute("aria-label", field.path);
+              });
+            });
+          } else new import_obsidian12.Setting(content).setName(field.path).addText((text2) => {
+            text2.setValue(field.value).onChange((value) => field.set(value));
+          });
+        }
+      });
+    }
+    const footer = root.createDiv("modal-button-container");
+    new import_obsidian12.Setting(footer).addButton((button) => button.setButtonText("\u9884\u89C8").onClick(() => new TemplatePreviewModal(this.app, cloneSettings(this.template), this.plugin.templateManager).open())).addButton((button) => button.setButtonText("\u53D6\u6D88").onClick(() => this.close())).addButton((button) => button.setButtonText("\u4FDD\u5B58").setCta().onClick(() => {
+      void submitDraft(button, async () => {
+        if (!this.template.name.trim()) throw new Error("\u6A21\u677F\u540D\u79F0\u4E0D\u80FD\u4E3A\u7A7A");
+        if (styleFields(this.template.styles).some((field) => hasUnsafeCss(field.value))) throw new Error("\u6837\u5F0F\u5305\u542B\u4E0D\u5B89\u5168\u7684\u8D44\u6E90\u5730\u5740\u6216 CSS");
+        await this.onSubmit(cloneSettings(this.template));
+      }, () => this.close());
+    }));
+  }
+  onClose() {
+    this.contentEl.empty();
+  }
+};
+
+// src/settings/CreateFontModal.ts
+var import_obsidian13 = require("obsidian");
+var CreateFontModal = class extends import_obsidian13.Modal {
+  constructor(app, onSubmit, existingFont) {
+    super(app);
+    this.onSubmit = onSubmit;
+    this.font = cloneSettings(existingFont != null ? existingFont : { value: "", label: "" });
+  }
+  onOpen() {
+    const { contentEl } = this;
+    contentEl.empty();
+    contentEl.addClass("mp-font-modal");
+    const headerContainer = contentEl.createDiv({ cls: "mfd-header" });
+    headerContainer.createEl("h3", { text: this.font.label ? "\u7F16\u8F91\u5B57\u4F53" : "\u6DFB\u52A0\u5B57\u4F53" });
+    const helpBtnContainer = headerContainer.createDiv({ cls: "mfd-help-trigger" });
+    const helpBtn = helpBtnContainer.createEl("button", { cls: "mfd-help-btn" });
+    (0, import_obsidian13.setIcon)(helpBtn, "help-circle");
+    const helpTooltip = helpBtnContainer.createDiv({ cls: "mfd-help-tooltip" });
+    helpTooltip.setText(`\u{1F44B} \u5B57\u4F53\u503C\u8BBE\u7F6E\u8BF4\u660E
+                                    \u2022 \u5355\u4E2A\u5B57\u4F53\uFF1AArial \u6216 "Microsoft YaHei"
+                                    \u2022 \u4E2D\u6587\u5B57\u4F53\uFF1A\u9700\u8981\u540C\u65F6\u8BBE\u7F6E\u4E2D\u82F1\u6587\u540D\u79F0
+                                    \u2022 \u5B57\u4F53\u65CF\uFF1A\u6DFB\u52A0 serif/sans-serif
+                                    \u2022 \u591A\u4E2A\u5B57\u4F53\u7528\u9017\u53F7\u5206\u9694
+                                    \u793A\u4F8B
+                                    \u2022 \u5B8B\u4F53\uFF1ASimSun, "\u5B8B\u4F53", serif
+                                    \u2022 \u5FAE\u8F6F\u96C5\u9ED1\uFF1A"Microsoft YaHei", "\u5FAE\u8F6F\u96C5\u9ED1", sans-serif`);
+    new import_obsidian13.Setting(contentEl).setName("\u5B57\u4F53\u540D\u79F0").setDesc("\u663E\u793A\u5728\u4E0B\u62C9\u83DC\u5355\u4E2D\u7684\u540D\u79F0").addText((text2) => text2.setValue(this.font.label).onChange((value) => this.font.label = value));
+    new import_obsidian13.Setting(contentEl).setName("\u5B57\u4F53\u503C").setDesc("CSS font-family \u7684\u503C").addText((text2) => text2.setValue(this.font.value).onChange((value) => this.font.value = value));
+    new import_obsidian13.Setting(contentEl).addButton((btn) => btn.setButtonText("\u786E\u5B9A").setCta().onClick(() => {
+      if (!this.font.label || !this.font.value) {
+        new import_obsidian13.Notice("\u5B57\u4F53\u540D\u79F0\u548C\u5B57\u4F53\u503C\u4E0D\u80FD\u4E3A\u7A7A");
+        return;
+      }
+      void submitDraft(btn, async () => {
+        if (/[;{}]/.test(this.font.value)) throw new Error("\u8BF7\u8F93\u5165\u5B57\u4F53\u65CF\u540D\u79F0\uFF0C\u4E0D\u8981\u8F93\u5165 CSS \u58F0\u660E");
+        await this.onSubmit(cloneSettings(this.font));
+      }, () => this.close());
+    })).addButton((btn) => btn.setButtonText("\u53D6\u6D88").onClick(() => this.close()));
+  }
+  onClose() {
+    const { contentEl } = this;
+    contentEl.empty();
+  }
+};
+
 // src/settings/CreateBackgroundModal.ts
-var CreateBackgroundModal = class extends import_obsidian10.Modal {
+var import_obsidian14 = require("obsidian");
+var CreateBackgroundModal = class extends import_obsidian14.Modal {
   constructor(app, onSubmit, background) {
     super(app);
     // 背景属性
@@ -15889,7 +15350,7 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
     this.onSubmit = onSubmit;
     this.isEditing = !!background;
     if (background) {
-      this.background = { ...background };
+      this.background = cloneSettings(background);
       this.parseStyleToProperties(background.style);
     } else {
       this.background = {
@@ -16042,19 +15503,19 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
   // 表单验证
   validateForm() {
     if (!this.background.name) {
-      new import_obsidian10.Notice("\u8BF7\u8F93\u5165\u80CC\u666F\u540D\u79F0");
+      new import_obsidian14.Notice("\u8BF7\u8F93\u5165\u80CC\u666F\u540D\u79F0");
       return false;
     }
     switch (this.backgroundType) {
       case "color":
         if (!this.backgroundColor) {
-          new import_obsidian10.Notice("\u8BF7\u9009\u62E9\u80CC\u666F\u989C\u8272");
+          new import_obsidian14.Notice("\u8BF7\u9009\u62E9\u80CC\u666F\u989C\u8272");
           return false;
         }
         break;
       case "css":
         if (!this.backgroundCssStyle) {
-          new import_obsidian10.Notice("\u8BF7\u8F93\u5165CSS\u6837\u5F0F");
+          new import_obsidian14.Notice("\u8BF7\u8F93\u5165CSS\u6837\u5F0F");
           return false;
         }
         break;
@@ -16068,12 +15529,12 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
     contentEl.addClass("mp-background-modal");
     contentEl.createEl("h2", { text: this.isEditing ? "\u7F16\u8F91\u80CC\u666F" : "\u521B\u5EFA\u65B0\u80CC\u666F" });
     const basicSection = contentEl.createDiv("background-basic-section");
-    new import_obsidian10.Setting(basicSection).setName("\u80CC\u666F\u540D\u79F0").setDesc("\u8F93\u5165\u80CC\u666F\u7684\u540D\u79F0").addText((text2) => {
+    new import_obsidian14.Setting(basicSection).setName("\u80CC\u666F\u540D\u79F0").setDesc("\u8F93\u5165\u80CC\u666F\u7684\u540D\u79F0").addText((text2) => {
       text2.setValue(this.background.name || "").onChange((value) => {
         this.background.name = value;
       });
     });
-    new import_obsidian10.Setting(basicSection).setName("\u80CC\u666F\u7C7B\u578B").setDesc("\u9009\u62E9\u80CC\u666F\u7684\u7C7B\u578B").addDropdown((dropdown) => {
+    new import_obsidian14.Setting(basicSection).setName("\u80CC\u666F\u7C7B\u578B").setDesc("\u9009\u62E9\u80CC\u666F\u7684\u7C7B\u578B").addDropdown((dropdown) => {
       dropdown.addOption("color", "\u7EAF\u8272\u80CC\u666F").addOption("css", "CSS\u80CC\u666F\u56FE\u6848").setValue(this.backgroundType).onChange((value) => {
         this.backgroundType = value;
         this.updateTypeSpecificSettings();
@@ -16081,18 +15542,19 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
     });
     const typeSpecificSection = contentEl.createDiv("background-type-specific-section");
     const colorSection = typeSpecificSection.createDiv("background-color-section");
-    new import_obsidian10.Setting(colorSection).setName("\u80CC\u666F\u989C\u8272").setDesc("\u9009\u62E9\u80CC\u666F\u7684\u989C\u8272").addColorPicker((color) => {
+    new import_obsidian14.Setting(colorSection).setName("\u80CC\u666F\u989C\u8272").setDesc("\u9009\u62E9\u80CC\u666F\u7684\u989C\u8272").addColorPicker((color) => {
       color.setValue(this.backgroundColor).onChange((value) => {
         this.backgroundColor = value;
         this.updatePreview();
       });
     });
     const cssSection = typeSpecificSection.createDiv("background-css-section");
-    new import_obsidian10.Setting(cssSection).setName("\u80CC\u666F\u6A21\u677F").setDesc("\u9009\u62E9\u9884\u8BBE\u7684\u80CC\u666F\u6A21\u677F").addDropdown((dropdown) => {
+    new import_obsidian14.Setting(cssSection).setName("\u80CC\u666F\u6A21\u677F").setDesc("\u9009\u62E9\u9884\u8BBE\u7684\u80CC\u666F\u6A21\u677F").addDropdown((dropdown) => {
       for (const [key, template] of Object.entries(this.cssTemplates)) {
         dropdown.addOption(key, template.name);
       }
       dropdown.setValue(this.cssTemplateType).onChange((value) => {
+        var _a, _b;
         this.cssTemplateType = value;
         if (value !== "custom") {
           this.backgroundCssStyle = this.cssTemplates[value].style;
@@ -16112,17 +15574,11 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
             const opacityMatch = this.patternColor.match(/rgba\([^,]+,[^,]+,[^,]+,([^)]+)\)/);
             if (opacityMatch && opacityMatch[1]) {
               const opacity = parseFloat(opacityMatch[1]) * 100;
-              const sliderComponent = opacitySlider.parentElement.__component__;
-              if (sliderComponent && typeof sliderComponent.setValue === "function") {
-                sliderComponent.setValue(opacity);
-              }
+              (_a = this.opacityControl) == null ? void 0 : _a.setValue(opacity);
             }
           }
           if (sizeSlider) {
-            const sliderComponent = sizeSlider.parentElement.__component__;
-            if (sliderComponent && typeof sliderComponent.setValue === "function") {
-              sliderComponent.setValue(this.patternSize);
-            }
+            (_b = this.sizeControl) == null ? void 0 : _b.setValue(this.patternSize);
           }
         }
         const customCssContainer2 = cssSection.querySelector(".custom-css-container");
@@ -16136,7 +15592,7 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
       });
     });
     const colorSettingContainer = cssSection.createDiv("pattern-color-setting");
-    new import_obsidian10.Setting(colorSettingContainer).setName("\u56FE\u6848\u989C\u8272").setDesc("\u8BBE\u7F6E\u80CC\u666F\u56FE\u6848\u7684\u989C\u8272").addColorPicker((color) => {
+    new import_obsidian14.Setting(colorSettingContainer).setName("\u56FE\u6848\u989C\u8272").setDesc("\u8BBE\u7F6E\u80CC\u666F\u56FE\u6848\u7684\u989C\u8272").addColorPicker((color) => {
       const rgbaMatch = this.patternColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
       let hexColor = "#320000";
       if (rgbaMatch) {
@@ -16149,6 +15605,7 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
         this.updatePreview();
       });
     }).addSlider((slider) => {
+      this.opacityControl = slider;
       let opacity = 3;
       const alphaMatch = this.patternColor.match(/rgba\([^,]+,[^,]+,[^,]+,([^)]+)\)/);
       if (alphaMatch && alphaMatch[1]) {
@@ -16161,7 +15618,8 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
       });
     });
     const sizeSettingContainer = cssSection.createDiv("pattern-size-setting");
-    new import_obsidian10.Setting(sizeSettingContainer).setName("\u56FE\u6848\u5927\u5C0F").setDesc("\u8BBE\u7F6E\u80CC\u666F\u56FE\u6848\u7684\u5927\u5C0F").addSlider((slider) => {
+    new import_obsidian14.Setting(sizeSettingContainer).setName("\u56FE\u6848\u5927\u5C0F").setDesc("\u8BBE\u7F6E\u80CC\u666F\u56FE\u6848\u7684\u5927\u5C0F").addSlider((slider) => {
+      this.sizeControl = slider;
       slider.setLimits(5, 50, 1).setValue(this.patternSize).setDynamicTooltip().onChange((value) => {
         this.patternSize = value;
         this.updateCssStyle();
@@ -16171,7 +15629,7 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
     const customCssContainer = cssSection.createDiv("custom-css-container");
     const customCssTextArea = customCssContainer.createDiv("custom-css-textarea");
     customCssTextArea.toggleClass("is-hidden", this.cssTemplateType !== "custom");
-    new import_obsidian10.Setting(customCssTextArea).setName("CSS\u4EE3\u7801").setDesc("\u76F4\u63A5\u8F93\u5165CSS\u6837\u5F0F\u4EE3\u7801").addTextArea((text2) => {
+    new import_obsidian14.Setting(customCssTextArea).setName("CSS\u4EE3\u7801").setDesc("\u76F4\u63A5\u8F93\u5165CSS\u6837\u5F0F\u4EE3\u7801").addTextArea((text2) => {
       text2.setValue(this.backgroundCssStyle).onChange((value) => {
         this.backgroundCssStyle = value;
         this.updatePreview();
@@ -16185,7 +15643,7 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
     previewEl.createSpan({ text: "\u9884\u89C8\u6548\u679C" });
     this.updatePreview(previewEl);
     const buttonSection = contentEl.createDiv("background-button-section");
-    new import_obsidian10.Setting(buttonSection).addButton((btn) => {
+    new import_obsidian14.Setting(buttonSection).addButton((btn) => {
       btn.setButtonText("\u53D6\u6D88").onClick(() => {
         this.close();
       });
@@ -16195,8 +15653,9 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
           return;
         }
         this.generateStyle();
-        this.onSubmit(this.background);
-        this.close();
+        void submitDraft(btn, async () => {
+          await this.onSubmit(cloneSettings(this.background));
+        }, () => this.close());
       });
     });
     this.updateTypeSpecificSettings();
@@ -16209,8 +15668,8 @@ var CreateBackgroundModal = class extends import_obsidian10.Modal {
 };
 
 // src/settings/ConfirmModal.ts
-var import_obsidian11 = require("obsidian");
-var ConfirmModal = class extends import_obsidian11.Modal {
+var import_obsidian15 = require("obsidian");
+var ConfirmModal = class extends import_obsidian15.Modal {
   constructor(app, title, message, onConfirm) {
     super(app);
     this.titleEl.setText(title);
@@ -16220,9 +15679,10 @@ var ConfirmModal = class extends import_obsidian11.Modal {
   onOpen() {
     const { contentEl } = this;
     contentEl.createEl("p", { text: this.message });
-    new import_obsidian11.Setting(contentEl).addButton((btn) => btn.setButtonText("\u786E\u8BA4").setCta().onClick(() => {
-      this.onConfirm();
-      this.close();
+    new import_obsidian15.Setting(contentEl).addButton((btn) => btn.setButtonText("\u786E\u8BA4").setCta().onClick(() => {
+      void submitDraft(btn, async () => {
+        await this.onConfirm();
+      }, () => this.close());
     })).addButton((btn) => btn.setButtonText("\u53D6\u6D88").onClick(() => this.close()));
   }
   onClose() {
@@ -16350,7 +15810,7 @@ function createTemplateFromThemeManifest(manifest, baseTemplate) {
 }
 
 // src/settings/ThemeManifestImportModal.ts
-var import_obsidian12 = require("obsidian");
+var import_obsidian16 = require("obsidian");
 
 // src/core/theme/themeManifestValidator.ts
 function isRecord(value) {
@@ -16444,7 +15904,7 @@ function formatThemeManifestIssues(issues) {
 }
 
 // src/settings/ThemeManifestImportModal.ts
-var ThemeManifestImportModal = class extends import_obsidian12.Modal {
+var ThemeManifestImportModal = class extends import_obsidian16.Modal {
   constructor(app, onImport) {
     super(app);
     this.input = "";
@@ -16454,20 +15914,20 @@ var ThemeManifestImportModal = class extends import_obsidian12.Modal {
     this.modalEl.addClass("mp-theme-import-modal");
     this.contentEl.createEl("h2", { text: "\u5BFC\u5165 ThemeManifest" });
     this.contentEl.createEl("p", { text: "\u7C98\u8D34\u7531 yh-mp-preview V3 \u5BFC\u51FA\u7684\u4E3B\u9898 JSON\u3002\u5BFC\u5165\u524D\u4F1A\u6821\u9A8C\u7248\u672C\u3001\u4EE4\u724C\u548C\u7EC4\u4EF6\u7ED3\u6784\u3002" });
-    new import_obsidian12.Setting(this.contentEl).setName("\u4E3B\u9898 JSON").addTextArea((text2) => text2.setPlaceholder('{ "schemaVersion": 3, ... }').onChange((value) => {
+    new import_obsidian16.Setting(this.contentEl).setName("\u4E3B\u9898 JSON").addTextArea((text2) => text2.setPlaceholder('{ "schemaVersion": 3, ... }').onChange((value) => {
       this.input = value;
     }));
-    new import_obsidian12.Setting(this.contentEl).addButton((button) => button.setButtonText("\u5BFC\u5165\u4E3A\u81EA\u5B9A\u4E49\u4E3B\u9898").setCta().onClick(async () => {
+    new import_obsidian16.Setting(this.contentEl).addButton((button) => button.setButtonText("\u5BFC\u5165\u4E3A\u81EA\u5B9A\u4E49\u4E3B\u9898").setCta().onClick(async () => {
       let value;
       try {
         value = JSON.parse(this.input);
       } catch (_) {
-        new import_obsidian12.Notice("\u4E3B\u9898 JSON \u65E0\u6CD5\u89E3\u6790\u3002");
+        new import_obsidian16.Notice("\u4E3B\u9898 JSON \u65E0\u6CD5\u89E3\u6790\u3002");
         return;
       }
       const result = validateThemeManifest(value);
       if (!result.valid || !result.manifest) {
-        new import_obsidian12.Notice(`\u4E3B\u9898\u6E05\u5355\u6821\u9A8C\u5931\u8D25\uFF1A
+        new import_obsidian16.Notice(`\u4E3B\u9898\u6E05\u5355\u6821\u9A8C\u5931\u8D25\uFF1A
 ${formatThemeManifestIssues(result.issues)}`);
         return;
       }
@@ -16481,9 +15941,9 @@ ${formatThemeManifestIssues(result.issues)}`);
 };
 
 // src/settings/NoteThemeGalleryModal.ts
-var import_obsidian13 = require("obsidian");
+var import_obsidian17 = require("obsidian");
 var NOTE_THEME_ENTRIES = getNoteThemeEntries();
-var NoteThemeGalleryModal = class extends import_obsidian13.Modal {
+var NoteThemeGalleryModal = class extends import_obsidian17.Modal {
   constructor(app, store, enhancement) {
     var _a;
     super(app);
@@ -16515,7 +15975,7 @@ var NoteThemeGalleryModal = class extends import_obsidian13.Modal {
     const footer = contentEl.createDiv("mp-gallery-footer");
     const trialInfo = footer.createDiv("mp-gallery-trial-info");
     this.tryHintEl = trialInfo.createDiv("mp-gallery-try-hint");
-    trialInfo.createEl("div", {
+    trialInfo.createDiv({
       cls: "mp-gallery-trial-note",
       text: this.activePath ? "\u70B9\u51FB\u5361\u7247\u8BD5\u7528\uFF1B\u5173\u95ED\u7A97\u53E3\u4F1A\u53D6\u6D88\u672A\u5E94\u7528\u7684\u8BD5\u7528\u3002" : "\u6CA1\u6709\u6253\u5F00\u7684\u7B14\u8BB0\uFF0C\u53EA\u80FD\u8BBE\u7F6E\u5168\u5E93\u9ED8\u8BA4\u4E3B\u9898\u3002"
     });
@@ -16567,7 +16027,7 @@ var NoteThemeGalleryModal = class extends import_obsidian13.Modal {
       info.createEl("strong", { text: entry.name, cls: "mp-theme-name" });
       if (selected) {
         const check = info.createDiv("mp-theme-checkmark");
-        (0, import_obsidian13.setIcon)(check, "check");
+        (0, import_obsidian17.setIcon)(check, "check");
       }
       card.addEventListener("click", () => {
         this.currentThemeId = entry.id;
@@ -16591,26 +16051,26 @@ var NoteThemeGalleryModal = class extends import_obsidian13.Modal {
     if (!this.activePath) return;
     await this.store.setFileOverride(this.activePath, { mode: "custom", profile: this.getSelectedProfile() });
     this.enhancement.clearPreviewProfile(this.activePath);
-    new import_obsidian13.Notice("\u5DF2\u5E94\u7528\u5230\u5F53\u524D\u7B14\u8BB0");
+    new import_obsidian17.Notice("\u5DF2\u5E94\u7528\u5230\u5F53\u524D\u7B14\u8BB0");
     this.close();
   }
   async applyDefault() {
     await this.store.setDefaultProfile(this.getSelectedProfile());
     if (this.activePath) this.enhancement.clearPreviewProfile(this.activePath);
-    new import_obsidian13.Notice("\u5DF2\u8BBE\u4E3A\u5168\u5E93\u9ED8\u8BA4\u4E3B\u9898");
+    new import_obsidian17.Notice("\u5DF2\u8BBE\u4E3A\u5168\u5E93\u9ED8\u8BA4\u4E3B\u9898");
     this.close();
   }
   async applyNative() {
     if (!this.activePath) return;
     await this.store.setFileOverride(this.activePath, { mode: "native" });
     this.enhancement.clearPreviewProfile(this.activePath);
-    new import_obsidian13.Notice("\u5F53\u524D\u7B14\u8BB0\u5DF2\u6062\u590D\u539F\u751F\u6392\u7248");
+    new import_obsidian17.Notice("\u5F53\u524D\u7B14\u8BB0\u5DF2\u6062\u590D\u539F\u751F\u6392\u7248");
     this.close();
   }
 };
 
 // src/settings/MPSettingTab.ts
-var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
+var MPSettingTab = class extends import_obsidian18.PluginSettingTab {
   constructor(app, plugin) {
     super(app, plugin);
     // 修改插件类型以匹配类名
@@ -16620,35 +16080,50 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
   createSection(containerEl, title, renderContent) {
     const section = containerEl.createDiv("settings-section");
     const header = section.createDiv("settings-section-header");
+    header.setAttribute("role", "button");
+    header.setAttribute("tabindex", "0");
+    header.setAttribute("aria-label", title);
+    header.setAttribute("aria-expanded", "false");
     const toggle = header.createSpan("settings-section-toggle");
-    (0, import_obsidian14.setIcon)(toggle, "chevron-right");
-    new import_obsidian14.Setting(header).setName(title).setHeading();
+    (0, import_obsidian18.setIcon)(toggle, "chevron-right");
+    new import_obsidian18.Setting(header).setName(title).setHeading();
     const content = section.createDiv("settings-section-content");
     renderContent(content);
-    header.addEventListener("click", () => {
+    const toggleSection = () => {
       const isExpanded = !section.hasClass("is-expanded");
       section.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian14.setIcon)(toggle, isExpanded ? "chevron-down" : "chevron-right");
+      header.setAttribute("aria-expanded", String(isExpanded));
+      (0, import_obsidian18.setIcon)(toggle, isExpanded ? "chevron-down" : "chevron-right");
       if (isExpanded) {
         this.expandedSections.add(title);
       } else {
         this.expandedSections.delete(title);
       }
+    };
+    header.addEventListener("click", toggleSection);
+    header.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleSection();
+      }
     });
     if (this.expandedSections.has(title) || !containerEl.querySelector(".settings-section")) {
       section.addClass("is-expanded");
-      (0, import_obsidian14.setIcon)(toggle, "chevron-down");
+      header.setAttribute("aria-expanded", "true");
+      (0, import_obsidian18.setIcon)(toggle, "chevron-down");
       this.expandedSections.add(title);
     }
     return section;
   }
   display() {
     const { containerEl } = this;
+    DonateManager.closeModal(containerEl);
     containerEl.empty();
     containerEl.addClass("mp-settings");
     const header = containerEl.createDiv({ cls: "mp-settings-header" });
-    new import_obsidian14.Setting(header).setName("\u6392\u7248\u4E0E\u9884\u89C8").setHeading();
-    header.createEl("span", { text: ` v${this.plugin.manifest.version}`, cls: "mp-settings-version" });
+    new import_obsidian18.Setting(header).setName("\u6392\u7248\u4E0E\u9884\u89C8").setHeading();
+    header.createSpan({ text: ` v${this.plugin.manifest.version}`, cls: "mp-settings-version" });
+    header.createEl("button", { text: "\u5173\u4E8E\u4E0E\u5E2E\u52A9", attr: { type: "button" } }).addEventListener("click", () => DonateManager.showDonateModal(containerEl));
     this.createSection(containerEl, "\u57FA\u672C\u9009\u9879", (el) => this.renderBasicSettings(el));
     this.createSection(containerEl, "\u6A21\u677F\u9009\u9879", (el) => this.renderTemplateSettings(el));
     this.createSection(containerEl, "\u80CC\u666F\u9009\u9879", (el) => this.renderBackgroundSettings(el));
@@ -16660,18 +16135,18 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
     const fontSection = containerEl.createDiv("mp-settings-subsection");
     const fontHeader = fontSection.createDiv("mp-settings-subsection-header");
     const fontToggle = fontHeader.createSpan("mp-settings-subsection-toggle");
-    (0, import_obsidian14.setIcon)(fontToggle, "chevron-right");
-    new import_obsidian14.Setting(fontHeader).setName("\u5B57\u4F53\u7BA1\u7406").setHeading();
+    (0, import_obsidian18.setIcon)(fontToggle, "chevron-right");
+    new import_obsidian18.Setting(fontHeader).setName("\u5B57\u4F53\u7BA1\u7406").setHeading();
     const fontContent = fontSection.createDiv("mp-settings-subsection-content");
     fontHeader.addEventListener("click", () => {
       const isExpanded = !fontSection.hasClass("is-expanded");
       fontSection.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian14.setIcon)(fontToggle, isExpanded ? "chevron-down" : "chevron-right");
+      (0, import_obsidian18.setIcon)(fontToggle, isExpanded ? "chevron-down" : "chevron-right");
     });
     const fontList = fontContent.createDiv("font-management");
     this.plugin.settingsManager.getFontOptions().forEach((font) => {
       const fontItem = fontList.createDiv("font-item");
-      const setting = new import_obsidian14.Setting(fontItem).setName(font.label).setDesc(font.value);
+      const setting = new import_obsidian18.Setting(fontItem).setName(font.label).setDesc(font.value);
       if (!font.isPreset) {
         setting.addExtraButton((btn) => btn.setIcon("pencil").setTooltip("\u7F16\u8F91").onClick(() => {
           new CreateFontModal(
@@ -16679,7 +16154,7 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
             async (updatedFont) => {
               await this.plugin.settingsManager.updateFont(font.value, updatedFont);
               this.display();
-              new import_obsidian14.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+              new import_obsidian18.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
             },
             font
           ).open();
@@ -16691,19 +16166,19 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
             async () => {
               await this.plugin.settingsManager.removeFont(font.value);
               this.display();
-              new import_obsidian14.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+              new import_obsidian18.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
             }
           ).open();
         }));
       }
     });
-    new import_obsidian14.Setting(fontContent).addButton((btn) => btn.setButtonText("+ \u6DFB\u52A0\u5B57\u4F53").setCta().onClick(() => {
+    new import_obsidian18.Setting(fontContent).addButton((btn) => btn.setButtonText("+ \u6DFB\u52A0\u5B57\u4F53").setCta().onClick(() => {
       new CreateFontModal(
         this.app,
         async (newFont) => {
           await this.plugin.settingsManager.addCustomFont(newFont);
           this.display();
-          new import_obsidian14.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+          new import_obsidian18.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
         }
       ).open();
     }));
@@ -16712,23 +16187,23 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
     const templateVisibilitySection = containerEl.createDiv("mp-settings-subsection");
     const templateVisibilityHeader = templateVisibilitySection.createDiv("mp-settings-subsection-header");
     const templateVisibilityToggle = templateVisibilityHeader.createSpan("mp-settings-subsection-toggle");
-    (0, import_obsidian14.setIcon)(templateVisibilityToggle, "chevron-right");
-    new import_obsidian14.Setting(templateVisibilityHeader).setName("\u6A21\u677F\u663E\u793A\u9009\u9879").setHeading();
+    (0, import_obsidian18.setIcon)(templateVisibilityToggle, "chevron-right");
+    new import_obsidian18.Setting(templateVisibilityHeader).setName("\u6A21\u677F\u663E\u793A\u9009\u9879").setHeading();
     const templateVisibilityContent = templateVisibilitySection.createDiv("mp-settings-subsection-content");
     templateVisibilityHeader.addEventListener("click", () => {
       const isExpanded = !templateVisibilitySection.hasClass("is-expanded");
       templateVisibilitySection.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian14.setIcon)(templateVisibilityToggle, isExpanded ? "chevron-down" : "chevron-right");
+      (0, import_obsidian18.setIcon)(templateVisibilityToggle, isExpanded ? "chevron-down" : "chevron-right");
     });
     const templateSelectionContainer = templateVisibilityContent.createDiv("template-selection-container");
     const allTemplatesContainer = templateSelectionContainer.createDiv("all-templates-container");
-    new import_obsidian14.Setting(allTemplatesContainer).setName("\u9690\u85CF\u6A21\u677F").setHeading();
+    new import_obsidian18.Setting(allTemplatesContainer).setName("\u9690\u85CF\u6A21\u677F").setHeading();
     const allTemplatesList = allTemplatesContainer.createDiv("templates-list");
     const controlButtonsContainer = templateSelectionContainer.createDiv("control-buttons-container");
     const addButton = controlButtonsContainer.createEl("button", { text: ">" });
     const removeButton = controlButtonsContainer.createEl("button", { text: "<" });
     const visibleTemplatesContainer = templateSelectionContainer.createDiv("visible-templates-container");
-    new import_obsidian14.Setting(visibleTemplatesContainer).setName("\u663E\u793A\u6A21\u677F").setHeading();
+    new import_obsidian18.Setting(visibleTemplatesContainer).setName("\u663E\u793A\u6A21\u677F").setHeading();
     const visibleTemplatesList = visibleTemplatesContainer.createDiv("templates-list");
     const allTemplates = this.plugin.settingsManager.getAllTemplates();
     const renderTemplateLists = () => {
@@ -16752,7 +16227,7 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
       });
     };
     renderTemplateLists();
-    addButton.addEventListener("click", async () => {
+    bindAsyncEvent(addButton, "click", async () => {
       const selectedItems = Array.from(allTemplatesList.querySelectorAll(".template-list-item.selected"));
       if (selectedItems.length === 0) return;
       for (const item of selectedItems) {
@@ -16765,9 +16240,9 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
         }
       }
       renderTemplateLists();
-      new import_obsidian14.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+      new import_obsidian18.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
     });
-    removeButton.addEventListener("click", async () => {
+    bindAsyncEvent(removeButton, "click", async () => {
       const selectedItems = Array.from(visibleTemplatesList.querySelectorAll(".template-list-item.selected"));
       if (selectedItems.length === 0) return;
       for (const item of selectedItems) {
@@ -16780,29 +16255,29 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
         }
       }
       renderTemplateLists();
-      new import_obsidian14.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+      new import_obsidian18.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
     });
     const templateList = containerEl.createDiv("template-management");
-    new import_obsidian14.Setting(templateList).setName("\u81EA\u5B9A\u4E49\u6A21\u677F").setHeading().settingEl.addClass("template-custom-header");
+    new import_obsidian18.Setting(templateList).setName("\u81EA\u5B9A\u4E49\u6A21\u677F").setHeading().settingEl.addClass("template-custom-header");
     this.plugin.settingsManager.getAllTemplates().filter((template) => !template.isPreset).forEach((template) => {
       const templateItem = templateList.createDiv("template-item");
-      new import_obsidian14.Setting(templateItem).setName(template.name).setDesc(template.description).addExtraButton((btn) => btn.setIcon("eye").setTooltip("\u9884\u89C8").onClick(() => {
+      new import_obsidian18.Setting(templateItem).setName(template.name).setDesc(template.description).addExtraButton((btn) => btn.setIcon("eye").setTooltip("\u9884\u89C8").onClick(() => {
         new TemplatePreviewModal(this.app, template, this.plugin.templateManager).open();
       })).addExtraButton((btn) => btn.setIcon("clipboard-copy").setTooltip("\u590D\u5236 ThemeManifest").onClick(async () => {
         try {
           await navigator.clipboard.writeText(exportTemplateManifest(template));
-          new import_obsidian14.Notice("ThemeManifest \u5DF2\u590D\u5236\u5230\u526A\u8D34\u677F\u3002");
+          new import_obsidian18.Notice("ThemeManifest \u5DF2\u590D\u5236\u5230\u526A\u8D34\u677F\u3002");
         } catch (_) {
-          new import_obsidian14.Notice("\u65E0\u6CD5\u5199\u5165\u526A\u8D34\u677F\uFF0C\u8BF7\u68C0\u67E5 Obsidian \u7684\u7CFB\u7EDF\u6743\u9650\u3002");
+          new import_obsidian18.Notice("\u65E0\u6CD5\u5199\u5165\u526A\u8D34\u677F\uFF0C\u8BF7\u68C0\u67E5 Obsidian \u7684\u7CFB\u7EDF\u6743\u9650\u3002");
         }
       })).addExtraButton((btn) => btn.setIcon("pencil").setTooltip("\u7F16\u8F91").onClick(() => {
         new CreateTemplateModal(
           this.app,
           this.plugin,
-          (updatedTemplate) => {
-            this.plugin.settingsManager.updateTemplate(template.id, updatedTemplate);
+          async (updatedTemplate) => {
+            await this.plugin.settingsManager.updateTemplate(template.id, updatedTemplate);
             this.display();
-            new import_obsidian14.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+            new import_obsidian18.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
           },
           template
         ).open();
@@ -16814,37 +16289,37 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
           async () => {
             await this.plugin.settingsManager.removeTemplate(template.id);
             this.display();
-            new import_obsidian14.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+            new import_obsidian18.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
           }
         ).open();
       }));
     });
-    new import_obsidian14.Setting(containerEl).setName("\u4E3B\u9898\u5DE5\u4F5C\u5BA4\uFF08V3\uFF09").setDesc("ThemeManifest \u53EA\u4F1A\u5BFC\u5165\u4E3A\u81EA\u5B9A\u4E49\u4E3B\u9898\uFF1B\u7248\u672C\u3001\u8BB8\u53EF\u8BC1\u548C\u7EC4\u4EF6\u7ED3\u6784\u4F1A\u5148\u6821\u9A8C\u3002\u81EA\u5B9A\u4E49\u4E3B\u9898\u53F3\u4FA7\u7684\u590D\u5236\u6309\u94AE\u53EF\u5BFC\u51FA\u3002").addButton((btn) => btn.setButtonText("\u4ECE JSON \u5BFC\u5165").onClick(() => {
+    new import_obsidian18.Setting(containerEl).setName("\u4E3B\u9898\u5DE5\u4F5C\u5BA4\uFF08V3\uFF09").setDesc("ThemeManifest \u53EA\u4F1A\u5BFC\u5165\u4E3A\u81EA\u5B9A\u4E49\u4E3B\u9898\uFF1B\u7248\u672C\u3001\u8BB8\u53EF\u8BC1\u548C\u7EC4\u4EF6\u7ED3\u6784\u4F1A\u5148\u6821\u9A8C\u3002\u81EA\u5B9A\u4E49\u4E3B\u9898\u53F3\u4FA7\u7684\u590D\u5236\u6309\u94AE\u53EF\u5BFC\u51FA\u3002").addButton((btn) => btn.setButtonText("\u4ECE JSON \u5BFC\u5165").onClick(() => {
       new ThemeManifestImportModal(this.app, async (manifest) => {
         if (this.plugin.settingsManager.getTemplate(manifest.id)) {
-          new import_obsidian14.Notice(`\u4E3B\u9898 ID \u201C${manifest.id}\u201D \u5DF2\u5B58\u5728\uFF0C\u8BF7\u5728 JSON \u4E2D\u6539\u7528\u65B0\u7684 id\u3002`);
+          new import_obsidian18.Notice(`\u4E3B\u9898 ID \u201C${manifest.id}\u201D \u5DF2\u5B58\u5728\uFF0C\u8BF7\u5728 JSON \u4E2D\u6539\u7528\u65B0\u7684 id\u3002`);
           return;
         }
         const baseTemplate = this.plugin.settingsManager.getTemplate("default");
         if (!baseTemplate) {
-          new import_obsidian14.Notice("\u627E\u4E0D\u5230\u9ED8\u8BA4\u4E3B\u9898\uFF0C\u65E0\u6CD5\u5B8C\u6210\u5BFC\u5165\u3002");
+          new import_obsidian18.Notice("\u627E\u4E0D\u5230\u9ED8\u8BA4\u4E3B\u9898\uFF0C\u65E0\u6CD5\u5B8C\u6210\u5BFC\u5165\u3002");
           return;
         }
         await this.plugin.settingsManager.addCustomTemplate(
           createTemplateFromThemeManifest(manifest, baseTemplate)
         );
         this.display();
-        new import_obsidian14.Notice(`\u5DF2\u5BFC\u5165\u4E3B\u9898\uFF1A${manifest.name}`);
+        new import_obsidian18.Notice(`\u5DF2\u5BFC\u5165\u4E3B\u9898\uFF1A${manifest.name}`);
       }).open();
     }));
-    new import_obsidian14.Setting(containerEl).addButton((btn) => btn.setButtonText("+ \u65B0\u5EFA\u6A21\u677F").setCta().onClick(() => {
+    new import_obsidian18.Setting(containerEl).addButton((btn) => btn.setButtonText("+ \u65B0\u5EFA\u6A21\u677F").setCta().onClick(() => {
       new CreateTemplateModal(
         this.app,
         this.plugin,
         async (newTemplate) => {
           await this.plugin.settingsManager.addCustomTemplate(newTemplate);
           this.display();
-          new import_obsidian14.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
+          new import_obsidian18.Notice("\u8BF7\u91CD\u542F Obsidian \u6216\u91CD\u65B0\u52A0\u8F7D\u4EE5\u4F7F\u66F4\u6539\u751F\u6548");
         }
       ).open();
     }));
@@ -16853,23 +16328,23 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
     const backgroundVisibilitySection = containerEl.createDiv("mp-settings-subsection");
     const backgroundVisibilityHeader = backgroundVisibilitySection.createDiv("mp-settings-subsection-header");
     const backgroundVisibilityToggle = backgroundVisibilityHeader.createSpan("mp-settings-subsection-toggle");
-    (0, import_obsidian14.setIcon)(backgroundVisibilityToggle, "chevron-right");
-    new import_obsidian14.Setting(backgroundVisibilityHeader).setName("\u80CC\u666F\u663E\u793A").setHeading();
+    (0, import_obsidian18.setIcon)(backgroundVisibilityToggle, "chevron-right");
+    new import_obsidian18.Setting(backgroundVisibilityHeader).setName("\u80CC\u666F\u663E\u793A").setHeading();
     const backgroundVisibilityContent = backgroundVisibilitySection.createDiv("mp-settings-subsection-content");
     backgroundVisibilityHeader.addEventListener("click", () => {
       const isExpanded = !backgroundVisibilitySection.hasClass("is-expanded");
       backgroundVisibilitySection.toggleClass("is-expanded", isExpanded);
-      (0, import_obsidian14.setIcon)(backgroundVisibilityToggle, isExpanded ? "chevron-down" : "chevron-right");
+      (0, import_obsidian18.setIcon)(backgroundVisibilityToggle, isExpanded ? "chevron-down" : "chevron-right");
     });
     const backgroundSelectionContainer = backgroundVisibilityContent.createDiv("background-selection-container");
     const allBackgroundsContainer = backgroundSelectionContainer.createDiv("all-backgrounds-container");
-    new import_obsidian14.Setting(allBackgroundsContainer).setName("\u9690\u85CF\u80CC\u666F").setHeading();
+    new import_obsidian18.Setting(allBackgroundsContainer).setName("\u9690\u85CF\u80CC\u666F").setHeading();
     const allBackgroundsList = allBackgroundsContainer.createDiv("backgrounds-list");
     const controlButtonsContainer = backgroundSelectionContainer.createDiv("control-buttons-container");
     const addButton = controlButtonsContainer.createEl("button", { text: ">" });
     const removeButton = controlButtonsContainer.createEl("button", { text: "<" });
     const visibleBackgroundsContainer = backgroundSelectionContainer.createDiv("visible-backgrounds-container");
-    new import_obsidian14.Setting(visibleBackgroundsContainer).setName("\u663E\u793A\u80CC\u666F").setHeading();
+    new import_obsidian18.Setting(visibleBackgroundsContainer).setName("\u663E\u793A\u80CC\u666F").setHeading();
     const visibleBackgroundsList = visibleBackgroundsContainer.createDiv("backgrounds-list");
     const allBackgrounds = this.plugin.settingsManager.getAllBackgrounds();
     const renderBackgroundLists = () => {
@@ -16893,7 +16368,7 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
       });
     };
     renderBackgroundLists();
-    addButton.addEventListener("click", async () => {
+    bindAsyncEvent(addButton, "click", async () => {
       const selectedItems = Array.from(allBackgroundsList.querySelectorAll(".background-list-item.selected"));
       if (selectedItems.length === 0) return;
       for (const item of selectedItems) {
@@ -16906,9 +16381,9 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
         }
       }
       renderBackgroundLists();
-      new import_obsidian14.Notice("\u80CC\u666F\u663E\u793A\u8BBE\u7F6E\u5DF2\u66F4\u65B0");
+      new import_obsidian18.Notice("\u80CC\u666F\u663E\u793A\u8BBE\u7F6E\u5DF2\u66F4\u65B0");
     });
-    removeButton.addEventListener("click", async () => {
+    bindAsyncEvent(removeButton, "click", async () => {
       const selectedItems = Array.from(visibleBackgroundsList.querySelectorAll(".background-list-item.selected"));
       if (selectedItems.length === 0) return;
       for (const item of selectedItems) {
@@ -16921,19 +16396,19 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
         }
       }
       renderBackgroundLists();
-      new import_obsidian14.Notice("\u80CC\u666F\u663E\u793A\u5DF2\u66F4\u65B0");
+      new import_obsidian18.Notice("\u80CC\u666F\u663E\u793A\u5DF2\u66F4\u65B0");
     });
     const backgroundList = containerEl.createDiv("background-management");
-    new import_obsidian14.Setting(backgroundList).setName("\u81EA\u5B9A\u4E49\u80CC\u666F").setHeading().settingEl.addClass("background-custom-header");
+    new import_obsidian18.Setting(backgroundList).setName("\u81EA\u5B9A\u4E49\u80CC\u666F").setHeading().settingEl.addClass("background-custom-header");
     this.plugin.settingsManager.getAllBackgrounds().filter((background) => !background.isPreset).forEach((background) => {
       const backgroundItem = backgroundList.createDiv("background-item");
-      new import_obsidian14.Setting(backgroundItem).setName(background.name).addExtraButton((btn) => btn.setIcon("pencil").setTooltip("\u7F16\u8F91").onClick(() => {
+      new import_obsidian18.Setting(backgroundItem).setName(background.name).addExtraButton((btn) => btn.setIcon("pencil").setTooltip("\u7F16\u8F91").onClick(() => {
         new CreateBackgroundModal(
           this.app,
           async (updatedBackground) => {
             await this.plugin.settingsManager.updateBackground(background.id, updatedBackground);
             this.display();
-            new import_obsidian14.Notice("\u80CC\u666F\u5DF2\u66F4\u65B0");
+            new import_obsidian18.Notice("\u80CC\u666F\u5DF2\u66F4\u65B0");
           },
           background
         ).open();
@@ -16945,20 +16420,20 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
           async () => {
             await this.plugin.settingsManager.removeBackground(background.id);
             this.display();
-            new import_obsidian14.Notice("\u80CC\u666F\u5DF2\u5220\u9664");
+            new import_obsidian18.Notice("\u80CC\u666F\u5DF2\u5220\u9664");
           }
         ).open();
       }));
       const previewEl = backgroundItem.createDiv("background-preview");
       setSafeInlineStyle(previewEl, background.style);
     });
-    new import_obsidian14.Setting(containerEl).addButton((btn) => btn.setButtonText("+ \u65B0\u5EFA\u80CC\u666F").setCta().onClick(() => {
+    new import_obsidian18.Setting(containerEl).addButton((btn) => btn.setButtonText("+ \u65B0\u5EFA\u80CC\u666F").setCta().onClick(() => {
       new CreateBackgroundModal(
         this.app,
         async (newBackground) => {
           await this.plugin.settingsManager.addCustomBackground(newBackground);
           this.display();
-          new import_obsidian14.Notice("\u80CC\u666F\u5DF2\u521B\u5EFA");
+          new import_obsidian18.Notice("\u80CC\u666F\u5DF2\u521B\u5EFA");
         }
       ).open();
     }));
@@ -16968,7 +16443,7 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
   renderLayoutEnhancementSettings(containerEl) {
     const settings = this.plugin.settingsManager.getSettings();
     const layout = settings.layoutEnhancements;
-    new import_obsidian14.Setting(containerEl).setName("\u81EA\u52A8\u9605\u8BFB\u5BFC\u822A").setDesc("\u5F53\u6587\u7AE0 h2/h3 \u6570\u91CF\u8FBE\u5230\u9608\u503C\u65F6\uFF0C\u81EA\u52A8\u5728\u5F00\u5934\u63D2\u5165\u76EE\u5F55\u5361\u7247").addToggle((toggle) => toggle.setValue(layout.enableAutoToc).onChange(async (value) => {
+    new import_obsidian18.Setting(containerEl).setName("\u81EA\u52A8\u9605\u8BFB\u5BFC\u822A").setDesc("\u5F53\u6587\u7AE0 h2/h3 \u6570\u91CF\u8FBE\u5230\u9608\u503C\u65F6\uFF0C\u81EA\u52A8\u5728\u5F00\u5934\u63D2\u5165\u76EE\u5F55\u5361\u7247").addToggle((toggle) => toggle.setValue(layout.enableAutoToc).onChange(async (value) => {
       await this.plugin.settingsManager.updateSettings({
         layoutEnhancements: {
           ...this.plugin.settingsManager.getSettings().layoutEnhancements,
@@ -16976,7 +16451,7 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
         }
       });
     }));
-    new import_obsidian14.Setting(containerEl).setName("\u76EE\u5F55\u89E6\u53D1\u9608\u503C").setDesc("h2/h3 \u6570\u91CF\u8FBE\u5230\u8BE5\u503C\u624D\u81EA\u52A8\u751F\u6210\u9605\u8BFB\u5BFC\u822A").addText((text2) => text2.setPlaceholder("3").setValue(String(layout.tocMinHeadings || 3)).onChange(async (value) => {
+    new import_obsidian18.Setting(containerEl).setName("\u76EE\u5F55\u89E6\u53D1\u9608\u503C").setDesc("h2/h3 \u6570\u91CF\u8FBE\u5230\u8BE5\u503C\u624D\u81EA\u52A8\u751F\u6210\u9605\u8BFB\u5BFC\u822A").addText((text2) => text2.setPlaceholder("3").setValue(String(layout.tocMinHeadings || 3)).onChange(async (value) => {
       const parsed = Math.max(1, parseInt(value, 10) || 3);
       await this.plugin.settingsManager.updateSettings({
         layoutEnhancements: {
@@ -16985,7 +16460,7 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
         }
       });
     }));
-    new import_obsidian14.Setting(containerEl).setName("\u4EFB\u52A1\u5217\u8868\u589E\u5F3A").setDesc("\u5C06 Markdown \u4EFB\u52A1\u5217\u8868\u8F6C\u6362\u4E3A\u516C\u4F17\u53F7\u68C0\u67E5\u6E05\u5355\u5361\u7247").addToggle((toggle) => toggle.setValue(layout.enableTaskListEnhancement).onChange(async (value) => {
+    new import_obsidian18.Setting(containerEl).setName("\u4EFB\u52A1\u5217\u8868\u589E\u5F3A").setDesc("\u5C06 Markdown \u4EFB\u52A1\u5217\u8868\u8F6C\u6362\u4E3A\u516C\u4F17\u53F7\u68C0\u67E5\u6E05\u5355\u5361\u7247").addToggle((toggle) => toggle.setValue(layout.enableTaskListEnhancement).onChange(async (value) => {
       await this.plugin.settingsManager.updateSettings({
         layoutEnhancements: {
           ...this.plugin.settingsManager.getSettings().layoutEnhancements,
@@ -16993,7 +16468,7 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
         }
       });
     }));
-    new import_obsidian14.Setting(containerEl).setName("\u56FE\u7247 Alt \u56FE\u6CE8").setDesc("\u628A\u56FE\u7247 alt \u6587\u672C\u663E\u793A\u4E3A\u56FE\u6CE8").addToggle((toggle) => toggle.setValue(layout.enableImageCaptions).onChange(async (value) => {
+    new import_obsidian18.Setting(containerEl).setName("\u56FE\u7247 Alt \u56FE\u6CE8").setDesc("\u628A\u56FE\u7247 alt \u6587\u672C\u663E\u793A\u4E3A\u56FE\u6CE8").addToggle((toggle) => toggle.setValue(layout.enableImageCaptions).onChange(async (value) => {
       await this.plugin.settingsManager.updateSettings({
         layoutEnhancements: {
           ...this.plugin.settingsManager.getSettings().layoutEnhancements,
@@ -17001,7 +16476,7 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
         }
       });
     }));
-    new import_obsidian14.Setting(containerEl).setName("\u8868\u683C\u6A2A\u5411\u4F18\u5316").setDesc("\u4E3A\u8868\u683C\u589E\u52A0\u79FB\u52A8\u7AEF\u6A2A\u5411\u6EDA\u52A8\u5BB9\u5668\uFF0C\u907F\u514D\u7A84\u5C4F\u6EA2\u51FA").addToggle((toggle) => toggle.setValue(layout.enableTableEnhancement).onChange(async (value) => {
+    new import_obsidian18.Setting(containerEl).setName("\u8868\u683C\u6A2A\u5411\u4F18\u5316").setDesc("\u4E3A\u8868\u683C\u589E\u52A0\u79FB\u52A8\u7AEF\u6A2A\u5411\u6EDA\u52A8\u5BB9\u5668\uFF0C\u907F\u514D\u7A84\u5C4F\u6EA2\u51FA").addToggle((toggle) => toggle.setValue(layout.enableTableEnhancement).onChange(async (value) => {
       await this.plugin.settingsManager.updateSettings({
         layoutEnhancements: {
           ...this.plugin.settingsManager.getSettings().layoutEnhancements,
@@ -17009,8 +16484,8 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
         }
       });
     }));
-    new import_obsidian14.Setting(containerEl).setName("\u4F5C\u8005\u5361").setHeading();
-    new import_obsidian14.Setting(containerEl).setName("\u81EA\u52A8\u63D2\u5165\u4F5C\u8005\u5361").setDesc("\u5728\u6587\u7AE0\u672B\u5C3E\u81EA\u52A8\u63D2\u5165\u4F5C\u8005\u4FE1\u606F\u5361").addToggle((toggle) => toggle.setValue(layout.enableAuthorCard).onChange(async (value) => {
+    new import_obsidian18.Setting(containerEl).setName("\u4F5C\u8005\u5361").setHeading();
+    new import_obsidian18.Setting(containerEl).setName("\u81EA\u52A8\u63D2\u5165\u4F5C\u8005\u5361").setDesc("\u5728\u6587\u7AE0\u672B\u5C3E\u81EA\u52A8\u63D2\u5165\u4F5C\u8005\u4FE1\u606F\u5361").addToggle((toggle) => toggle.setValue(layout.enableAuthorCard).onChange(async (value) => {
       await this.plugin.settingsManager.updateSettings({
         layoutEnhancements: {
           ...this.plugin.settingsManager.getSettings().layoutEnhancements,
@@ -17024,8 +16499,8 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
     this.addAuthorTextSetting(containerEl, "\u6807\u7B7E", "tags");
     this.addAuthorTextSetting(containerEl, "\u94FE\u63A5", "link");
     this.addAuthorTextSetting(containerEl, "\u5934\u50CF URL", "avatar");
-    new import_obsidian14.Setting(containerEl).setName("\u5173\u6CE8\u5F15\u5BFC").setHeading();
-    new import_obsidian14.Setting(containerEl).setName("\u81EA\u52A8\u63D2\u5165\u5173\u6CE8\u5F15\u5BFC").setDesc("\u5728\u6587\u7AE0\u672B\u5C3E\u81EA\u52A8\u63D2\u5165\u5173\u6CE8/\u6536\u85CF\u5F15\u5BFC\u5361").addToggle((toggle) => toggle.setValue(layout.enableSubscribeCard).onChange(async (value) => {
+    new import_obsidian18.Setting(containerEl).setName("\u5173\u6CE8\u5F15\u5BFC").setHeading();
+    new import_obsidian18.Setting(containerEl).setName("\u81EA\u52A8\u63D2\u5165\u5173\u6CE8\u5F15\u5BFC").setDesc("\u5728\u6587\u7AE0\u672B\u5C3E\u81EA\u52A8\u63D2\u5165\u5173\u6CE8/\u6536\u85CF\u5F15\u5BFC\u5361").addToggle((toggle) => toggle.setValue(layout.enableSubscribeCard).onChange(async (value) => {
       await this.plugin.settingsManager.updateSettings({
         layoutEnhancements: {
           ...this.plugin.settingsManager.getSettings().layoutEnhancements,
@@ -17043,7 +16518,7 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
   }
   addAuthorTextSetting(containerEl, name, key, multiline = false) {
     const authorCard = this.plugin.settingsManager.getSettings().authorCard;
-    const setting = new import_obsidian14.Setting(containerEl).setName(name);
+    const setting = new import_obsidian18.Setting(containerEl).setName(name);
     if (multiline) {
       setting.addTextArea((text2) => text2.setValue(authorCard[key] || "").onChange(async (value) => {
         await this.plugin.settingsManager.updateSettings({
@@ -17066,7 +16541,7 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
   }
   addSubscribeTextSetting(containerEl, name, key, multiline = false) {
     const subscribeCard = this.plugin.settingsManager.getSettings().subscribeCard;
-    const setting = new import_obsidian14.Setting(containerEl).setName(name);
+    const setting = new import_obsidian18.Setting(containerEl).setName(name);
     if (multiline) {
       setting.addTextArea((text2) => text2.setValue(subscribeCard[key] || "").onChange(async (value) => {
         await this.plugin.settingsManager.updateSettings({
@@ -17088,60 +16563,63 @@ var MPSettingTab = class extends import_obsidian14.PluginSettingTab {
     }));
   }
   renderAdvancedSettings(containerEl) {
-    new import_obsidian14.Setting(containerEl).setName("\u81EA\u5B9A\u4E49\u5934\u90E8 (HTML)").setDesc("\u5728\u6587\u7AE0\u9876\u90E8\u63D2\u5165\u7684 HTML \u4EE3\u7801\uFF08\u5982\u5173\u6CE8\u5F15\u5BFC\uFF09").addTextArea((text2) => text2.setPlaceholder("<div>...</div>").setValue(this.plugin.settingsManager.getSettings().customHeader || "").onChange(async (value) => {
+    new import_obsidian18.Setting(containerEl).setName("\u81EA\u5B9A\u4E49\u5934\u90E8 (HTML)").setDesc("\u5728\u6587\u7AE0\u9876\u90E8\u63D2\u5165\u7684 HTML \u4EE3\u7801\uFF08\u5982\u5173\u6CE8\u5F15\u5BFC\uFF09").addTextArea((text2) => text2.setPlaceholder("<div>...</div>").setValue(this.plugin.settingsManager.getSettings().customHeader || "").onChange(async (value) => {
       await this.plugin.settingsManager.updateSettings({ customHeader: value });
     }));
-    new import_obsidian14.Setting(containerEl).setName("\u81EA\u5B9A\u4E49\u5C3E\u90E8 (HTML)").setDesc("\u5728\u6587\u7AE0\u5E95\u90E8\u63D2\u5165\u7684 HTML \u4EE3\u7801\uFF08\u5982\u4E8C\u7EF4\u7801\uFF09").addTextArea((text2) => text2.setPlaceholder("<div>...</div>").setValue(this.plugin.settingsManager.getSettings().customFooter || "").onChange(async (value) => {
+    new import_obsidian18.Setting(containerEl).setName("\u81EA\u5B9A\u4E49\u5C3E\u90E8 (HTML)").setDesc("\u5728\u6587\u7AE0\u5E95\u90E8\u63D2\u5165\u7684 HTML \u4EE3\u7801\uFF08\u5982\u4E8C\u7EF4\u7801\uFF09").addTextArea((text2) => text2.setPlaceholder("<div>...</div>").setValue(this.plugin.settingsManager.getSettings().customFooter || "").onChange(async (value) => {
       await this.plugin.settingsManager.updateSettings({ customFooter: value });
     }));
+  }
+  hide() {
+    DonateManager.closeModal(this.containerEl);
   }
   renderNoteLayoutSettings(containerEl) {
     const store = this.plugin.noteLayoutStore;
     const enhancement = this.plugin.noteLayoutEnhancement;
     const settings = store.getSettings();
     const unavailable = !store.isAvailable();
-    new import_obsidian14.Setting(containerEl).setName("\u542F\u7528\u7B14\u8BB0\u6392\u7248\u589E\u5F3A").setDesc(unavailable ? "\u8BBE\u7F6E\u6587\u4EF6\u4E0D\u53EF\u7528\uFF0C\u5DF2\u6682\u505C\u7B14\u8BB0\u6392\u7248\u589E\u5F3A" : "\u81EA\u52A8\u6539\u5584 Obsidian \u9605\u8BFB\u89C6\u56FE\u548C\u5B9E\u65F6\u9884\u89C8\uFF0C\u4E0D\u4FEE\u6539 Markdown \u5185\u5BB9").addToggle((toggle) => toggle.setValue(settings.enabled).setDisabled(unavailable).onChange(async (value) => {
+    new import_obsidian18.Setting(containerEl).setName("\u542F\u7528\u7B14\u8BB0\u6392\u7248\u589E\u5F3A").setDesc(unavailable ? "\u8BBE\u7F6E\u6587\u4EF6\u4E0D\u53EF\u7528\uFF0C\u5DF2\u6682\u505C\u7B14\u8BB0\u6392\u7248\u589E\u5F3A" : "\u81EA\u52A8\u6539\u5584 Obsidian \u9605\u8BFB\u89C6\u56FE\u548C\u5B9E\u65F6\u9884\u89C8\uFF0C\u4E0D\u4FEE\u6539 Markdown \u5185\u5BB9").addToggle((toggle) => toggle.setValue(settings.enabled).setDisabled(unavailable).onChange(async (value) => {
       try {
         await enhancement.setEnabled(value);
-        new import_obsidian14.Notice(value ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
+        new import_obsidian18.Notice(value ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
       } catch (error) {
         toggle.setValue(false);
-        new import_obsidian14.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
+        new import_obsidian18.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
       }
     }));
-    new import_obsidian14.Setting(containerEl).setName("\u6E90\u7801\u6A21\u5F0F\u663E\u793A\u589E\u5F3A").setDesc("\u4E3A\u5B9E\u65F6\u9884\u89C8\u548C\u6E90\u7801\u7F16\u8F91\u589E\u52A0\u6807\u9898\u3001\u5217\u8868\u3001\u5F15\u7528\u548C\u4EE3\u7801\u6807\u8BB0\u7684\u53EF\u8BFB\u6027\u6837\u5F0F\uFF0C\u4E0D\u4FEE\u6539\u5185\u5BB9").addToggle((toggle) => toggle.setValue(settings.sourceModeEnabled).setDisabled(unavailable).onChange(async (value) => {
+    new import_obsidian18.Setting(containerEl).setName("\u6E90\u7801\u6A21\u5F0F\u663E\u793A\u589E\u5F3A").setDesc("\u4E3A\u5B9E\u65F6\u9884\u89C8\u548C\u6E90\u7801\u7F16\u8F91\u589E\u52A0\u6807\u9898\u3001\u5217\u8868\u3001\u5F15\u7528\u548C\u4EE3\u7801\u6807\u8BB0\u7684\u53EF\u8BFB\u6027\u6837\u5F0F\uFF0C\u4E0D\u4FEE\u6539\u5185\u5BB9").addToggle((toggle) => toggle.setValue(settings.sourceModeEnabled).setDisabled(unavailable).onChange(async (value) => {
       try {
         await store.updateSettings({ sourceModeEnabled: value });
         enhancement.refresh();
       } catch (error) {
         toggle.setValue(!value);
-        new import_obsidian14.Notice(error instanceof Error ? error.message : "\u6E90\u7801\u6A21\u5F0F\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
+        new import_obsidian18.Notice(error instanceof Error ? error.message : "\u6E90\u7801\u6A21\u5F0F\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
       }
     }));
-    new import_obsidian14.Setting(containerEl).setName("\u4E3B\u9898\u753B\u5ECA").setDesc("\u5728\u7B14\u8BB0\u9605\u8BFB\u548C\u516C\u4F17\u53F7\u4E24\u4E2A\u573A\u666F\u4E2D\u5206\u522B\u9009\u62E9\u4E3B\u9898\uFF1B\u5F53\u524D\u7B14\u8BB0\u652F\u6301\u8BD5\u7528\u548C\u72EC\u7ACB\u5E94\u7528").addButton((button) => button.setButtonText("\u6253\u5F00\u7B14\u8BB0\u4E3B\u9898\u753B\u5ECA").onClick(() => new NoteThemeGalleryModal(this.app, store, enhancement).open()));
+    new import_obsidian18.Setting(containerEl).setName("\u4E3B\u9898\u753B\u5ECA").setDesc("\u5728\u7B14\u8BB0\u9605\u8BFB\u548C\u516C\u4F17\u53F7\u4E24\u4E2A\u573A\u666F\u4E2D\u5206\u522B\u9009\u62E9\u4E3B\u9898\uFF1B\u5F53\u524D\u7B14\u8BB0\u652F\u6301\u8BD5\u7528\u548C\u72EC\u7ACB\u5E94\u7528").addButton((button) => button.setButtonText("\u6253\u5F00\u7B14\u8BB0\u4E3B\u9898\u753B\u5ECA").onClick(() => new NoteThemeGalleryModal(this.app, store, enhancement).open()));
     const updateDefaults = async (patch) => {
       const latest = store.getSettings();
       await store.updateSettings({ defaults: { ...latest.defaults, ...patch } });
       enhancement.refresh();
     };
-    new import_obsidian14.Setting(containerEl).setName("\u7B14\u8BB0\u9605\u8BFB\u4E3B\u9898").setDesc("\u9996\u6279\u652F\u6301\u9ED8\u8BA4\u3001\u6DF1\u5EA6\u9605\u8BFB\u548C\u6781\u7B80\u4E09\u5957 Obsidian \u9605\u8BFB\u4E3B\u9898").addDropdown((dropdown) => dropdown.addOption("default", "\u9ED8\u8BA4").addOption("deep-reading", "\u6DF1\u5EA6\u9605\u8BFB").addOption("minimal", "\u6781\u7B80").setValue(settings.defaults.themeId).setDisabled(unavailable).onChange((value) => updateDefaults({ themeId: value })));
-    new import_obsidian14.Setting(containerEl).setName("\u7B14\u8BB0\u5B57\u53F7").setDesc("\u8303\u56F4 14\u201324px").addText((text2) => text2.setValue(String(settings.defaults.fontSize)).setDisabled(unavailable).onChange((value) => updateDefaults({ fontSize: Number(value) })));
-    new import_obsidian14.Setting(containerEl).setName("\u7B14\u8BB0\u884C\u9AD8").setDesc("\u8303\u56F4 1.4\u20132.2").addText((text2) => text2.setValue(String(settings.defaults.lineHeight)).setDisabled(unavailable).onChange((value) => updateDefaults({ lineHeight: Number(value) })));
-    new import_obsidian14.Setting(containerEl).setName("\u7B14\u8BB0\u6700\u5927\u5BBD\u5EA6").setDesc("\u8303\u56F4 560\u2013960px").addText((text2) => text2.setValue(String(settings.defaults.maxWidth)).setDisabled(unavailable).onChange((value) => updateDefaults({ maxWidth: Number(value) })));
-    new import_obsidian14.Setting(containerEl).setName("\u5907\u4EFD\u5F53\u524D\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E").setDesc("\u5199\u5165\u72EC\u7ACB\u7684 note-layout.json \u4E4B\u524D\u4FDD\u7559\u53EF\u6062\u590D\u526F\u672C").addButton((button) => button.setButtonText("\u521B\u5EFA\u5907\u4EFD").onClick(async () => {
+    new import_obsidian18.Setting(containerEl).setName("\u7B14\u8BB0\u9605\u8BFB\u4E3B\u9898").setDesc("\u9996\u6279\u652F\u6301\u9ED8\u8BA4\u3001\u6DF1\u5EA6\u9605\u8BFB\u548C\u6781\u7B80\u4E09\u5957 Obsidian \u9605\u8BFB\u4E3B\u9898").addDropdown((dropdown) => dropdown.addOption("default", "\u9ED8\u8BA4").addOption("deep-reading", "\u6DF1\u5EA6\u9605\u8BFB").addOption("minimal", "\u6781\u7B80").setValue(settings.defaults.themeId).setDisabled(unavailable).onChange((value) => updateDefaults({ themeId: value })));
+    new import_obsidian18.Setting(containerEl).setName("\u7B14\u8BB0\u5B57\u53F7").setDesc("\u8303\u56F4 14\u201324px").addText((text2) => text2.setValue(String(settings.defaults.fontSize)).setDisabled(unavailable).onChange((value) => updateDefaults({ fontSize: Number(value) })));
+    new import_obsidian18.Setting(containerEl).setName("\u7B14\u8BB0\u884C\u9AD8").setDesc("\u8303\u56F4 1.4\u20132.2").addText((text2) => text2.setValue(String(settings.defaults.lineHeight)).setDisabled(unavailable).onChange((value) => updateDefaults({ lineHeight: Number(value) })));
+    new import_obsidian18.Setting(containerEl).setName("\u7B14\u8BB0\u6700\u5927\u5BBD\u5EA6").setDesc("\u8303\u56F4 560\u2013960px").addText((text2) => text2.setValue(String(settings.defaults.maxWidth)).setDisabled(unavailable).onChange((value) => updateDefaults({ maxWidth: Number(value) })));
+    new import_obsidian18.Setting(containerEl).setName("\u5907\u4EFD\u5F53\u524D\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E").setDesc("\u5199\u5165\u72EC\u7ACB\u7684 note-layout.json \u4E4B\u524D\u4FDD\u7559\u53EF\u6062\u590D\u526F\u672C").addButton((button) => button.setButtonText("\u521B\u5EFA\u5907\u4EFD").onClick(async () => {
       try {
         const backup = await store.createBackup("manual");
-        new import_obsidian14.Notice(backup ? "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u5907\u4EFD\u5DF2\u521B\u5EFA" : "\u5F53\u524D\u8FD8\u6CA1\u6709\u53EF\u5907\u4EFD\u7684\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E");
+        new import_obsidian18.Notice(backup ? "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u5907\u4EFD\u5DF2\u521B\u5EFA" : "\u5F53\u524D\u8FD8\u6CA1\u6709\u53EF\u5907\u4EFD\u7684\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E");
       } catch (error) {
-        new import_obsidian14.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u5907\u4EFD\u5931\u8D25");
+        new import_obsidian18.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u5907\u4EFD\u5931\u8D25");
       }
     }));
-    new import_obsidian14.Setting(containerEl).setName("\u6062\u590D\u6700\u8FD1\u5907\u4EFD").setDesc("\u6062\u590D\u524D\u4F1A\u81EA\u52A8\u4FDD\u7559\u5F53\u524D\u8BBE\u7F6E").addButton((button) => button.setButtonText("\u6062\u590D").onClick(async () => {
+    new import_obsidian18.Setting(containerEl).setName("\u6062\u590D\u6700\u8FD1\u5907\u4EFD").setDesc("\u6062\u590D\u524D\u4F1A\u81EA\u52A8\u4FDD\u7559\u5F53\u524D\u8BBE\u7F6E").addButton((button) => button.setButtonText("\u6062\u590D").onClick(async () => {
       try {
         const backup = await store.restoreLatestBackup();
-        new import_obsidian14.Notice(backup ? "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u5DF2\u6062\u590D" : "\u6CA1\u6709\u53EF\u6062\u590D\u7684\u7B14\u8BB0\u6392\u7248\u5907\u4EFD");
+        new import_obsidian18.Notice(backup ? "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u5DF2\u6062\u590D" : "\u6CA1\u6709\u53EF\u6062\u590D\u7684\u7B14\u8BB0\u6392\u7248\u5907\u4EFD");
       } catch (error) {
-        new import_obsidian14.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u6062\u590D\u5931\u8D25");
+        new import_obsidian18.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u6062\u590D\u5931\u8D25");
       }
     }));
   }
@@ -17168,7 +16646,7 @@ var ThemeRegistry = class {
 };
 
 // src/core/note-layout/noteLayoutStore.ts
-var import_obsidian15 = require("obsidian");
+var import_obsidian19 = require("obsidian");
 var NOTE_LAYOUT_SCHEMA_VERSION = 1;
 var NOTE_LAYOUT_FILE_NAME = "note-layout.json";
 var NOTE_LAYOUT_BACKUP_DIR = "backups";
@@ -17247,9 +16725,9 @@ var NoteLayoutStore = class {
     this.settings = createDefaultNoteLayoutSettings();
     this.loaded = false;
     this.available = true;
-    const directory = (0, import_obsidian15.normalizePath)(pluginDir || ".obsidian/plugins/yh-mp-preview");
-    this.filePath = (0, import_obsidian15.normalizePath)(`${directory}/${NOTE_LAYOUT_FILE_NAME}`);
-    this.backupDir = (0, import_obsidian15.normalizePath)(`${directory}/${NOTE_LAYOUT_BACKUP_DIR}`);
+    const directory = (0, import_obsidian19.normalizePath)(pluginDir || ".obsidian/plugins/yh-mp-preview");
+    this.filePath = (0, import_obsidian19.normalizePath)(`${directory}/${NOTE_LAYOUT_FILE_NAME}`);
+    this.backupDir = (0, import_obsidian19.normalizePath)(`${directory}/${NOTE_LAYOUT_BACKUP_DIR}`);
   }
   async load() {
     this.loaded = true;
@@ -17271,7 +16749,7 @@ var NoteLayoutStore = class {
   }
   getProfileForPath(path) {
     if (!this.settings.enabled) return null;
-    const override = this.settings.files[(0, import_obsidian15.normalizePath)(path)];
+    const override = this.settings.files[(0, import_obsidian19.normalizePath)(path)];
     if ((override == null ? void 0 : override.mode) === "native") return null;
     const profile = (override == null ? void 0 : override.mode) === "custom" ? override.profile : this.settings.defaults;
     return {
@@ -17282,18 +16760,18 @@ var NoteLayoutStore = class {
   isSourceModeEnabledForPath(path) {
     var _a;
     if (!this.settings.enabled || !this.settings.sourceModeEnabled) return false;
-    return ((_a = this.settings.files[(0, import_obsidian15.normalizePath)(path)]) == null ? void 0 : _a.mode) !== "native";
+    return ((_a = this.settings.files[(0, import_obsidian19.normalizePath)(path)]) == null ? void 0 : _a.mode) !== "native";
   }
   async setDefaultProfile(profile) {
     await this.updateSettings({ defaults: profile });
   }
   async setFileOverride(path, override) {
-    const files = { ...this.settings.files, [(0, import_obsidian15.normalizePath)(path)]: override };
+    const files = { ...this.settings.files, [(0, import_obsidian19.normalizePath)(path)]: override };
     await this.updateSettings({ files });
   }
   async moveFileOverride(oldPath, newPath) {
-    const normalizedOldPath = (0, import_obsidian15.normalizePath)(oldPath);
-    const normalizedNewPath = (0, import_obsidian15.normalizePath)(newPath);
+    const normalizedOldPath = (0, import_obsidian19.normalizePath)(oldPath);
+    const normalizedNewPath = (0, import_obsidian19.normalizePath)(newPath);
     const override = this.settings.files[normalizedOldPath];
     if (!override || normalizedOldPath === normalizedNewPath) return false;
     const files = { ...this.settings.files };
@@ -17303,7 +16781,7 @@ var NoteLayoutStore = class {
     return true;
   }
   async removeFileOverride(path) {
-    const normalizedPath = (0, import_obsidian15.normalizePath)(path);
+    const normalizedPath = (0, import_obsidian19.normalizePath)(path);
     if (!this.settings.files[normalizedPath]) return false;
     const files = { ...this.settings.files };
     delete files[normalizedPath];
@@ -17358,7 +16836,7 @@ var NoteLayoutStore = class {
     const createdAt = (/* @__PURE__ */ new Date()).toISOString();
     const isFirst = (await this.listBackups()).length === 0;
     const name = `${isFirst ? "baseline" : safeName(reason)}-${createdAt.replace(/[:.]/g, "-")}-${checksum.slice(0, 8)}.json`;
-    const path = (0, import_obsidian15.normalizePath)(`${this.backupDir}/${name}`);
+    const path = (0, import_obsidian19.normalizePath)(`${this.backupDir}/${name}`);
     const payload = `${JSON.stringify({ createdAt, reason, checksum, settings }, null, 2)}
 `;
     await this.adapter.write(path, payload);
@@ -17395,7 +16873,7 @@ var NoteLayoutStore = class {
 };
 
 // src/core/note-layout/noteLayoutEnhancement.ts
-var import_obsidian16 = require("obsidian");
+var import_obsidian20 = require("obsidian");
 var import_view = require("@codemirror/view");
 var NOTE_LAYOUT_CLASS = "yh-mp-note-layout";
 var NOTE_SOURCE_MODE_CLASS = "yh-mp-note-source-mode";
@@ -17496,7 +16974,7 @@ var NoteLayoutEnhancement = class {
         clearLayoutClasses(this.view.dom);
       }
       apply() {
-        const info = this.view.state.field(import_obsidian16.editorInfoField, false);
+        const info = this.view.state.field(import_obsidian20.editorInfoField, false);
         const profile = (info == null ? void 0 : info.file) ? getProfile(info.file.path) : null;
         const sourceMode = (info == null ? void 0 : info.file) ? store.isSourceModeEnabledForPath(info.file.path) : false;
         applyLayoutProfile(this.view.dom, profile, sourceMode);
@@ -17526,7 +17004,7 @@ var NoteLayoutEnhancement = class {
 };
 
 // src/main.ts
-var MPPlugin = class extends import_obsidian17.Plugin {
+var MPPlugin = class extends import_obsidian21.Plugin {
   async onload() {
     this.settingsManager = new SettingsManager(this);
     await this.settingsManager.loadSettings();
@@ -17537,7 +17015,7 @@ var MPPlugin = class extends import_obsidian17.Plugin {
     try {
       await this.noteLayoutStore.load();
     } catch (error) {
-      new import_obsidian17.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u8BFB\u53D6\u5931\u8D25\uFF0C\u5DF2\u7981\u7528\u7B14\u8BB0\u6392\u7248\u589E\u5F3A");
+      new import_obsidian21.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u8BFB\u53D6\u5931\u8D25\uFF0C\u5DF2\u7981\u7528\u7B14\u8BB0\u6392\u7248\u589E\u5F3A");
     }
     this.noteLayoutEnhancement = new NoteLayoutEnhancement(this, this.app, this.noteLayoutStore);
     this.noteLayoutEnhancement.load();
@@ -17551,7 +17029,7 @@ var MPPlugin = class extends import_obsidian17.Plugin {
       (leaf) => new MPView(leaf, this.templateManager, this.settingsManager)
     );
     this.addRibbonIcon("eye", "\u6253\u5F00\u516C\u4F17\u53F7\u9884\u89C8", () => {
-      this.activateView();
+      runAction(() => this.activateView());
     });
     this.addCommand({
       id: "open-yh-mp-preview",
@@ -17567,9 +17045,9 @@ var MPPlugin = class extends import_obsidian17.Plugin {
         try {
           const enabled = !this.noteLayoutEnhancement.isEnabled();
           await this.noteLayoutEnhancement.setEnabled(enabled);
-          new import_obsidian17.Notice(enabled ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
+          new import_obsidian21.Notice(enabled ? "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5F00\u542F" : "\u7B14\u8BB0\u6392\u7248\u589E\u5F3A\u5DF2\u5173\u95ED");
         } catch (error) {
-          new import_obsidian17.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
+          new import_obsidian21.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u8BBE\u7F6E\u4FDD\u5B58\u5931\u8D25");
         }
       }
     });
@@ -17579,9 +17057,9 @@ var MPPlugin = class extends import_obsidian17.Plugin {
       callback: async () => {
         try {
           const backup = await this.noteLayoutStore.restoreLatestBackup();
-          new import_obsidian17.Notice(backup ? `\u5DF2\u6062\u590D\u7B14\u8BB0\u6392\u7248\u5907\u4EFD\uFF1A${backup.createdAt}` : "\u6CA1\u6709\u53EF\u6062\u590D\u7684\u7B14\u8BB0\u6392\u7248\u5907\u4EFD");
+          new import_obsidian21.Notice(backup ? `\u5DF2\u6062\u590D\u7B14\u8BB0\u6392\u7248\u5907\u4EFD\uFF1A${backup.createdAt}` : "\u6CA1\u6709\u53EF\u6062\u590D\u7684\u7B14\u8BB0\u6392\u7248\u5907\u4EFD");
         } catch (error) {
-          new import_obsidian17.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u5907\u4EFD\u6062\u590D\u5931\u8D25");
+          new import_obsidian21.Notice(error instanceof Error ? error.message : "\u7B14\u8BB0\u6392\u7248\u5907\u4EFD\u6062\u590D\u5931\u8D25");
         }
       }
     });
@@ -17594,7 +17072,7 @@ var MPPlugin = class extends import_obsidian17.Plugin {
   async activateView() {
     const leaves = this.app.workspace.getLeavesOfType(VIEW_TYPE_MP);
     if (leaves.length > 0) {
-      this.app.workspace.revealLeaf(leaves[0]);
+      await this.app.workspace.revealLeaf(leaves[0]);
       return;
     }
     const rightLeaf = this.app.workspace.getRightLeaf(false);
@@ -17604,7 +17082,7 @@ var MPPlugin = class extends import_obsidian17.Plugin {
         active: true
       });
     } else {
-      new import_obsidian17.Notice("\u65E0\u6CD5\u521B\u5EFA\u89C6\u56FE\u9762\u677F");
+      new import_obsidian21.Notice("\u65E0\u6CD5\u521B\u5EFA\u89C6\u56FE\u9762\u677F");
     }
   }
 };

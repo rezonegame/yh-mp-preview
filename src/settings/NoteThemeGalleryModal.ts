@@ -47,7 +47,7 @@ export class NoteThemeGalleryModal extends Modal {
         const footer = contentEl.createDiv('mp-gallery-footer');
         const trialInfo = footer.createDiv('mp-gallery-trial-info');
         this.tryHintEl = trialInfo.createDiv('mp-gallery-try-hint');
-        trialInfo.createEl('div', {
+        trialInfo.createDiv({
             cls: 'mp-gallery-trial-note',
             text: this.activePath ? '点击卡片试用；关闭窗口会取消未应用的试用。' : '没有打开的笔记，只能设置全库默认主题。',
         });

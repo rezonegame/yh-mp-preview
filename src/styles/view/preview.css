@@ -43,7 +43,8 @@
 }
 
 /* 列表 */
-.mp-content-section ul,ol {
+.mp-content-section ul,
+.mp-content-section ol {
     margin: 0;
     padding: 0;
 }

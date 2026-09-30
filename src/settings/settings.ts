@@ -316,7 +316,9 @@ export class SettingsManager {
     }
 
     getFontOptions() {
-        return this.settings.customFonts;
+        const fonts = this.settings.customFonts;
+        return fonts.some(font => font.value === DEFAULT_WECHAT_FONT_STACK)
+            ? fonts : [{ value: DEFAULT_WECHAT_FONT_STACK, label: '系统默认', isPreset: true }, ...fonts];
     }
 
     async addCustomFont(font: { value: string; label: string }) {

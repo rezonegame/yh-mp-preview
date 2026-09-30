@@ -24,6 +24,7 @@ class ElementDouble {
   }
 
   createSpan(options) { return this.createEl('span', options); }
+  createDiv(options) { return this.createEl('div', options); }
   addEventListener(event, handler) { this.listeners.set(event, handler); }
   remove() { this.removed = true; }
 }

@@ -24,8 +24,8 @@ for (const result of results) {
 if (blockers.length) throw new Error(`Host/security blockers:\n${blockers.join('\n')}`);
 if (process.argv.includes('--write')) {
   writeFileSync(baselinePath, JSON.stringify({
-    status: 'known-legacy-type-debt-not-full-lint-pass',
-    scope: '3.15.1-beta.1 P1; resolve during P2/P3, do not silently enlarge',
+    status: Object.keys(debt).length ? 'known-legacy-type-debt-not-full-lint-pass' : 'zero-error-baseline',
+    scope: `${JSON.parse(readFileSync('package.json', 'utf8')).version}; do not enlarge without explicit review`,
     counts: Object.fromEntries(Object.entries(debt).sort(([a], [b]) => a.localeCompare(b))),
   }, null, 2) + '\n');
 } else {
@@ -35,4 +35,4 @@ if (process.argv.includes('--write')) {
   }
 }
 const count = Object.values(debt).reduce((a, b) => a + b, 0);
-console.log(`Host/security blockers: 0; remaining frozen legacy type findings: ${count}; warnings: ${warnings}. This is not a full lint pass.`);
+console.log(`Host/security blockers: 0; remaining frozen legacy type findings: ${count}; warnings: ${warnings}. ${count ? 'This is not a full lint pass.' : 'Full recommended lint has zero errors; warnings remain visible.'}`);

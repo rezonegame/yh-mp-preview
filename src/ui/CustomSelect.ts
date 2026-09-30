@@ -26,5 +26,8 @@ export function createCustomSelect(parent: HTMLElement, className: string, initi
             new Notice(`设置失败：${error instanceof Error ? error.message : String(error)}`);
         }).finally(() => { select.disabled=false; });
     });
-    return {container,updateOptions:render,setValue:value=> { select.value=value; select.dataset.value=value; }};
+    return {container,updateOptions:render,setValue:value=> {
+        if(!Array.from(select.options).some(option=>option.value===value)) select.createEl('option',{text:className.includes('font')?'当前字体':className.includes('background')?'当前背景':'当前配方',attr:{value}});
+        select.value=value; select.dataset.value=value;
+    }};
 }

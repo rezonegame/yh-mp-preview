@@ -3,7 +3,7 @@
  * recipe remain separate choices, so users can try a visual direction without
  * changing the article structure.
  */
-import { Modal, setIcon } from 'obsidian';
+import { Modal, setIcon, Notice, type App } from 'obsidian';
 import type { SettingsManager } from './settings';
 import type { Template } from '../templateManager';
 import { curatedThemeEntries, getCuratedThemeEntry, type CuratedThemeScene } from '../core/theme/themeCatalog';
@@ -37,7 +37,7 @@ export class ThemeGalleryModal extends Modal {
     private sceneBar: HTMLElement | null = null;
 
     constructor(
-        app: any,
+        app: App,
         settingsManager: SettingsManager,
         currentTemplateId: string,
         onSelect: (templateId: string) => void | Promise<void>,
@@ -65,7 +65,7 @@ export class ThemeGalleryModal extends Modal {
         const headerActions = header.createDiv('mp-gallery-header-actions');
         const search = headerActions.createEl('input', {
             cls: 'mp-gallery-search',
-            attr: { type: 'search', placeholder: '搜索主题或文章场景' },
+            attr: { type: 'search', placeholder: '搜索主题或文章场景', 'aria-label':'搜索主题或文章场景' },
         });
         search.addEventListener('input', () => {
             this.searchQuery = search.value.trim().toLowerCase();
@@ -100,7 +100,7 @@ export class ThemeGalleryModal extends Modal {
         const footer = contentEl.createDiv('mp-gallery-footer');
         const trialInfo = footer.createDiv('mp-gallery-trial-info');
         this.tryHintEl = trialInfo.createDiv('mp-gallery-try-hint');
-        trialInfo.createEl('div', { cls: 'mp-gallery-trial-note', text: '试用不会保存到笔记设置。' });
+        trialInfo.createDiv({ cls: 'mp-gallery-trial-note', text: '试用不会保存到笔记设置。' });
         this.updateTryHint();
         const actions = footer.createDiv('mp-gallery-actions');
         const cancel = actions.createEl('button', { text: '取消试用', cls: 'mp-gallery-btn-cancel' });
@@ -108,8 +108,14 @@ export class ThemeGalleryModal extends Modal {
         this.applyButton = actions.createEl('button', { cls: 'mp-gallery-btn-apply' });
         this.updateApplyButton();
         this.applyButton.addEventListener('click', () => {
-            this.hasApplied = true;
-            void Promise.resolve(this.onSelect(this.currentTemplateId)).then(() => this.close());
+            const button=this.applyButton;
+            if(!button || button.disabled) return;
+            button.disabled=true;button.setText('保存中…');
+            void Promise.resolve().then(() => this.onSelect(this.currentTemplateId)).then(() => {
+                this.hasApplied=true;this.close();
+            }).catch((error: unknown) => {
+                new Notice(`主题保存失败：${error instanceof Error ? error.message : '未知错误'}`);
+            }).finally(() => { button.disabled=false;this.updateApplyButton(); });
         });
     }
 
@@ -155,7 +161,7 @@ export class ThemeGalleryModal extends Modal {
         this.gridContainer.empty();
         const templates = this.getVisibleTemplates();
         if (templates.length === 0) {
-            this.gridContainer.createEl('div', { cls: 'mp-gallery-empty', text: '没有匹配的主题，换个场景或关键词试试。' });
+            this.gridContainer.createDiv({ cls: 'mp-gallery-empty', text: '没有匹配的主题，换个场景或关键词试试。' });
             return;
         }
 
@@ -183,6 +189,7 @@ export class ThemeGalleryModal extends Modal {
                 title: `试用主题：${template.name}`,
             },
         });
+        card.dataset.themeId=template.id;
         const info = card.createDiv('mp-theme-info');
         info.createEl('strong', { text: template.name, cls: 'mp-theme-name' });
         if (selected) {
@@ -195,7 +202,12 @@ export class ThemeGalleryModal extends Modal {
             this.previewCallback(template.id);
             this.updateApplyButton();
             this.updateTryHint();
-            this.renderGallery();
+            this.gridContainer?.querySelectorAll<HTMLButtonElement>('.mp-theme-card').forEach(button => {
+                const active=button.dataset.themeId===template.id;
+                button.toggleClass('is-selected',active);button.setAttribute('aria-pressed',String(active));
+                button.querySelector('.mp-theme-checkmark')?.remove();
+                if(active) {const check=button.querySelector('.mp-theme-info')?.createDiv('mp-theme-checkmark');if(check)setIcon(check,'check');}
+            });
         });
     }
 

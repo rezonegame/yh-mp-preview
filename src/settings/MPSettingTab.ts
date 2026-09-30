@@ -11,6 +11,7 @@ import { ThemeManifestImportModal } from './ThemeManifestImportModal';
 import { NoteThemeGalleryModal } from './NoteThemeGalleryModal';
 import { setSafeInlineStyle } from '../core/security/safeDom';
 import { bindAsyncEvent } from '../ui/asyncActions';
+import { DonateManager } from '../donateManager';
 export class MPSettingTab extends PluginSettingTab {
     plugin: MPPlugin; // 修改插件类型以匹配类名
     private expandedSections: Set<string> = new Set();
@@ -23,6 +24,10 @@ export class MPSettingTab extends PluginSettingTab {
     private createSection(containerEl: HTMLElement, title: string, renderContent: (contentEl: HTMLElement) => void) {
         const section = containerEl.createDiv('settings-section');
         const header = section.createDiv('settings-section-header');
+        header.setAttribute('role', 'button');
+        header.setAttribute('tabindex', '0');
+        header.setAttribute('aria-label', title);
+        header.setAttribute('aria-expanded', 'false');
 
         const toggle = header.createSpan('settings-section-toggle');
         setIcon(toggle, 'chevron-right');
@@ -32,19 +37,25 @@ export class MPSettingTab extends PluginSettingTab {
         const content = section.createDiv('settings-section-content');
         renderContent(content);
 
-        header.addEventListener('click', () => {
+        const toggleSection = () => {
             const isExpanded = !section.hasClass('is-expanded');
             section.toggleClass('is-expanded', isExpanded);
+            header.setAttribute('aria-expanded', String(isExpanded));
             setIcon(toggle, isExpanded ? 'chevron-down' : 'chevron-right');
             if (isExpanded) {
                 this.expandedSections.add(title);
             } else {
                 this.expandedSections.delete(title);
             }
+        };
+        header.addEventListener('click', toggleSection);
+        header.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleSection(); }
         });
 
         if (this.expandedSections.has(title) || (!containerEl.querySelector('.settings-section'))) {
             section.addClass('is-expanded');
+            header.setAttribute('aria-expanded', 'true');
             setIcon(toggle, 'chevron-down');
             this.expandedSections.add(title);
         }
@@ -54,12 +65,15 @@ export class MPSettingTab extends PluginSettingTab {
 
     display(): void {
         const { containerEl } = this;
+        DonateManager.closeModal(containerEl);
         containerEl.empty();
         containerEl.addClass('mp-settings');
 
         const header = containerEl.createDiv({ cls: 'mp-settings-header' });
         new Setting(header).setName('排版与预览').setHeading();
         header.createSpan({ text: ` v${this.plugin.manifest.version}`, cls: 'mp-settings-version' });
+        header.createEl('button', { text: '关于与帮助', attr: { type: 'button' } })
+            .addEventListener('click', () => DonateManager.showDonateModal(containerEl));
 
         this.createSection(containerEl, '基本选项', el => this.renderBasicSettings(el));
         this.createSection(containerEl, '模板选项', el => this.renderTemplateSettings(el));
@@ -762,6 +776,8 @@ export class MPSettingTab extends PluginSettingTab {
                     await this.plugin.settingsManager.updateSettings({ customFooter: value });
                 }));
     }
+
+    hide(): void { DonateManager.closeModal(this.containerEl); }
 
     private renderNoteLayoutSettings(containerEl: HTMLElement): void {
         const store = this.plugin.noteLayoutStore;

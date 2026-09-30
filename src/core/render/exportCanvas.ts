@@ -20,7 +20,7 @@ export async function boundedCanvasRender<T>(host: Window, signal: AbortSignal, 
         const finish = (error: unknown, value?: T) => {
             if (settled) return;
             settled = true; host.clearTimeout(timer); signal.removeEventListener('abort', onAbort);
-            if (error) reject(error instanceof Error ? error : new Error(String(error))); else resolve(value as T);
+            if (error) reject(error instanceof Error ? error : new Error(typeof error === 'string' ? error : '画布生成失败')); else resolve(value as T);
         };
         const onAbort = () => finish(new Error('导出已取消'));
         const timer = host.setTimeout(() => finish(new Error('画布生成超时，请重试或改用分段图')), timeoutMs);

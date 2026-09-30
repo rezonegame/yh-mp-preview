@@ -150,8 +150,7 @@ export class MPView extends ItemView {
         });
         setIcon(refreshButton, 'refresh-cw');
         bindAsyncEvent(refreshButton,'click', async () => {
-            await this.updatePreview();
-            new Notice('预览已刷新');
+            if (await this.updatePreview()) new Notice('预览已刷新');
         });
 
         // Lock Button
@@ -248,39 +247,7 @@ export class MPView extends ItemView {
             }
         );
 
-        // --- 主题选择区域逻辑优化 ---
-
-        // 1. 获取所有可选主题
-        const allTemplates = await this.getTemplateOptions();
-
-        // 2. 提取系列列表
-        const seriesSet = new Set<string>();
-        seriesSet.add('全部'); // 默认选项
-
-        allTemplates.forEach(t => {
-            if (t.header) {
-                // 如果已经是 header 项，跳过，或者作为系列名（如果我们的 getTemplateOptions 已经返回了分组结构）
-                // 现有的 getTemplateOptions 返回的是带 header 的扁平列表
-                // 我们需要解析一下系列名
-                seriesSet.add(t.label);
-            }
-        });
-
-        // 由于 getTemplateOptions 返回的是混合了 header 和 item 的扁平数组，
-        // 我们最好有一个更原始的数据源或者重新处理一下 logic。
-        // 为了方便，我们这里重新定义一下获取系列的逻辑。
-
-        const seriesOptions: SelectOption[] = [
-            { label: '全部系列', value: 'all' },
-            { label: '基础主题', value: '基础主题' },
-            { label: 'Minimal', value: 'Minimal 系列' },
-            { label: 'Focus', value: 'Focus 系列' },
-            { label: 'Elegant', value: 'Elegant 系列' },
-            { label: 'Bold', value: 'Bold 系列' },
-            { label: '其他', value: '其他主题' }
-        ];
-
-        // 3. 主题画廊按钮
+        // 场景筛选由主题画廊负责，不再计算已退出界面的旧系列选择器。
         const galleryBtn = controlsGroup.createEl('button', {
             cls: 'mp-gallery-btn',
             attr: { 'aria-label': '打开主题画廊', 'title': '主题画廊' }
@@ -374,21 +341,6 @@ export class MPView extends ItemView {
 
         // 恢复主题和系列
         if (settings.templateId) {
-            // 1. 找到该主题所属的系列
-            let targetSeries = 'all';
-            const templateId = settings.templateId;
-
-            // 简单的判断逻辑 (复用 getTemplateOptions 里的逻辑或者直接在这里check)
-            if (templateId.startsWith('minimal-')) targetSeries = 'Minimal 系列';
-            else if (templateId.startsWith('focus-')) targetSeries = 'Focus 系列';
-            else if (templateId.startsWith('elegant-')) targetSeries = 'Elegant 系列';
-            else if (templateId.startsWith('bold-')) targetSeries = 'Bold 系列';
-            // 其他归类为基础或其他，为了简单，我们可以保持系列为 'all' 或者尝试匹配
-            // 如果我们想让用户知道当前属于哪个系列，可以设置 seriesSelect
-            // 但如果用户之前选的是 "全部" 下的某个主题，强制切到子系列可能会感到突兀
-            // 策略：默认保留在 "全部系列" (value='all')，除非我们想强制联动。
-            // 鉴于用户体验，保持 'All' 是最安全的，只有用户主动筛选时才变。
-
             this.templateManager.setCurrentTemplate(settings.templateId);
         }
 
@@ -573,10 +525,10 @@ export class MPView extends ItemView {
         // 更新所有自定义选择器
         [this.customFontSelect, this.customBackgroundSelect].forEach(ctrl => {
             if (ctrl && ctrl.container) {
-                const selectEl = ctrl.container.querySelector('.custom-select');
+                const selectEl = ctrl.container.querySelector<HTMLSelectElement>('select.custom-select');
                 if (selectEl) {
                     selectEl.classList.toggle('disabled', !enabled);
-                    (selectEl as HTMLElement).setCssStyles({ pointerEvents: enabled ? 'auto' : 'none' });
+                    selectEl.disabled = !enabled;
                 }
             }
         });
@@ -711,11 +663,14 @@ export class MPView extends ItemView {
 
         // The phone-width switch is viewport-only. Export at the adaptive width
         // that this pane would use without the switch.
-        const previewStyle = window.getComputedStyle(this.previewEl);
+        const exportDocument = this.previewEl.ownerDocument;
+        const exportWindow = exportDocument.defaultView;
+        if (!exportWindow) throw new Error('预览窗口已关闭');
+        const previewStyle = exportWindow.getComputedStyle(this.previewEl);
         const width = Math.max(1, Math.ceil(this.previewEl.clientWidth
             - parseFloat(previewStyle.paddingLeft || '0')
             - parseFloat(previewStyle.paddingRight || '0')));
-        const snapshotHost = createDiv();
+        const snapshotHost = exportDocument.createElement('div');
         snapshotHost.className = 'mp-preview-area mp-export-snapshot';
         snapshotHost.setCssStyles({ cssText: [
             'position: fixed',
@@ -739,7 +694,7 @@ export class MPView extends ItemView {
                 themeId:this.getActiveWechatTemplateId(), recipeId:this.settingsManager.getSettings().v3.selectedRecipeId,
                 palette:resolveWechatPalette(this.settingsManager.getTemplate(this.getActiveWechatTemplateId())),
             },{signal:this.exportController.signal})).root;
-            const computed = window.getComputedStyle(content);
+            const computed = exportWindow.getComputedStyle(content);
             snapshot.setCssStyles({ cssText: snapshot.style.cssText + (`;${[
                 `width: ${width}px`,
                 'max-width: none',
@@ -755,7 +710,7 @@ export class MPView extends ItemView {
                 'background: #ffffff',
             ].join(';')};`) });
             snapshotHost.appendChild(snapshot);
-            document.body.appendChild(snapshotHost);
+            exportDocument.body.appendChild(snapshotHost);
 
             const imageResults = await Promise.all(Array.from(snapshot.querySelectorAll('img')).map((image) => this.waitForExportImage(image)));
             const failedImages = imageResults.filter((loaded) => !loaded).length;
@@ -1138,8 +1093,8 @@ export class MPView extends ItemView {
         }
     }
 
-    async updatePreview() {
-        if (!this.currentFile) return;
+    async updatePreview(): Promise<boolean> {
+        if (!this.currentFile) return false;
         const file=this.currentFile;
         const lease=this.session.begin();
         const component=new Component();
@@ -1152,13 +1107,13 @@ export class MPView extends ItemView {
         this.previewEl.setAttribute('aria-busy','true');
         try {
             const content=await this.app.vault.cachedRead(file);
-            if(!lease.isCurrent()) return;
+            if(!lease.isCurrent()) return false;
             await MarkdownRenderer.render(this.app,content,staging,file.path,component);
-            if(!lease.isCurrent() || this.currentFile?.path !== file.path) return;
+            if(!lease.isCurrent() || this.currentFile?.path !== file.path) return false;
             MPConverter.formatContent(staging,content,this.settingsManager);
             this.applyPresentation(staging);
             this.injectArticleChrome(staging);
-            if(!lease.isCurrent()) return;
+            if(!lease.isCurrent()) return false;
             this.renderComponent?.unload();
             this.previewEl.replaceChildren(...Array.from(staging.childNodes));
             this.renderComponent=component; committed=true;
@@ -1167,8 +1122,10 @@ export class MPView extends ItemView {
                 if(!lease.isCurrent()) return;
                 this.previewEl.scrollTop=isAtBottom ? this.previewEl.scrollHeight : scrollRatio*this.previewEl.scrollHeight;
             });
+            return true;
         } catch(error) {
             if(lease.isCurrent()) new Notice(`预览更新失败，保留上次内容：${error instanceof Error ? error.message : '未知错误'}`);
+            return false;
         } finally {
             if(!committed) component.unload();
             if(lease.isCurrent()) this.previewEl.removeAttribute('aria-busy');

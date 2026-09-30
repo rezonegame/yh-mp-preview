@@ -1,0 +1,17 @@
+import {mkdir,writeFile,copyFile,readFile} from 'node:fs/promises';
+import {resolve,relative} from 'node:path';
+const target=resolve('output/refactor/MPPreview-Refactor-Test');
+if(relative(resolve('output/refactor'),target).startsWith('..')) throw new Error('Test vault must stay inside output/refactor');
+const plugin=JSON.parse(await readFile('manifest.json','utf8'));
+const directory=resolve(target,'.obsidian/plugins',plugin.id);
+await mkdir(directory,{recursive:true});
+for(const file of ['main.js','manifest.json','styles.css']) await copyFile(file,resolve(directory,file));
+await writeFile(resolve(target,'.obsidian/community-plugins.json'),JSON.stringify([plugin.id]));
+await writeFile(resolve(target,'.obsidian/core-plugins.json'),'[]');
+await writeFile(resolve(target,'.obsidian/app.json'),JSON.stringify({showLineNumber:true}));
+await writeFile(resolve(directory,'data.json'),JSON.stringify({customHeader:'<p>隔离测试头部</p>',customFooter:'<p>隔离测试尾部</p>',templateId:'default',fontSize:16}));
+const section=`\n## 章节标题\n\n这是一段用于手机阅读和完整导出验证的正文。中文English「引用」应保持统一显示。\n\n> 引用需要保留原始结构。\n\n1. 第一步\n2. 第二步\n\n\`\`\`js\nconst value = "中文English「code」";\n\`\`\`\n`;
+const components='\n```dialogue {title="第一段对话"}\n甲：第一个组件\n```\n\n```dialogue {title="第二段对话"}\n乙：第二个组件\n```\n';
+await writeFile(resolve(target,'Regression.md'),'# P2–P4 隔离回归文章\n'+section.repeat(15)+components+'\n文章末尾：END-OF-ARTICLE\n');
+await writeFile(resolve(target,'Second.md'),'# 第二篇文章\n\n快速切换文章的最新内容。\n');
+console.log(`Prepared isolated test vault: ${target}\nMarketing vault untouched.`);

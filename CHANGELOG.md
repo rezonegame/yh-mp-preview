@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.18.0-beta.1
+
+- Complete the authorized P2–P4 refactor candidate, retaining plugin IDs, existing theme IDs, visibility preferences, extension fields and layout snapshots. Independent source checkpoints precede this integrated beta; no intermediate stable release is implied.
+- Isolate all editor drafts, serialize settings persistence and publish changes only after successful saves. Rebuild the theme form with lazy grouped native controls and retain advanced CSS fields.
+- Keep gallery keyboard focus during theme trials, preserve cancel rollback, and expose neutral About/Help with QR placeholders and truthful source attribution.
+- Match repeated dialogue/gallery blocks by source position and content, prevent stale renders from replacing newer articles, and keep each preview pane's trial and header/footer state independent.
+- Use one ordered canonical article for clipboard, HTML and image exports, including custom header/footer and manual preview edits; recipe switching restores underlying styles without duplicate labels.
+- Add bounded, cached image embedding with visible HTTP/type/size/timeout errors. Serialize canvas jobs, exclude unrelated host UI/images from cloning, and clean up on timeout/cancellation.
+- Move secondary controls into existing Advanced Typesetting and group output buttons compactly; preserve scene-based name-only theme cards and the small history entry. Add native-select, dark-mode and keyboard-focus fixes.
+- Real Windows Obsidian 1.13.7 tests generated a complete 1012×13196px long image, ten segments, HTML and system clipboard content. Automated regression and host evidence are recorded in the execution ledger; WeChat/BRAT acceptance and other platforms remain gates before stable release.
+
 ## 3.15.1-beta.1
 
 - P0/P1 refactor preview: preserve the 3.15.0 rollback baseline, source provenance, saved theme IDs and snapshots.

@@ -37,4 +37,15 @@ test('native headings retain accordion toggling and expanded state on rerender',
   assert.equal(recreated.hasClass('is-expanded'), false);
   assert.equal(tab.expandedSections.has('模板选项'), false);
 });
+test('settings accordion exposes keyboard control and expanded state', () => {
+  const tab=Object.create(MPSettingTab.prototype);tab.expandedSections=new Set();
+  const root=document.createElement('div');
+  const section=tab.createSection(root,'背景选项',()=>{});
+  const header=section.querySelector('.settings-section-header');
+  assert.equal(header.getAttribute('role'),'button');assert.equal(header.tabIndex,0);
+  header.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
+  assert.equal(header.getAttribute('aria-expanded'),'true');
+  header.dispatchEvent(new window.KeyboardEvent('keydown',{key:' ',bubbles:true}));
+  assert.equal(header.getAttribute('aria-expanded'),'false');
+});
 test.after(() => dom.window.close());
