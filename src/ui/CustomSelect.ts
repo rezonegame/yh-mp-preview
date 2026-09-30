@@ -1,120 +1,30 @@
-/**
- * 可复用的自定义下拉选择器组件
- */
+import { Notice } from 'obsidian';
+export interface SelectOption { label: string; value: string; header?: boolean }
+export interface CustomSelectControl { container: HTMLElement; updateOptions(options: SelectOption[]): void; setValue(value: string): void }
 
-export interface SelectOption {
-    label: string;
-    value: string;
-    header?: boolean;
-}
-
-export interface CustomSelectControl {
-    container: HTMLElement;
-    updateOptions: (newOptions: SelectOption[]) => void;
-    setValue: (value: string) => void;
-}
-
-export function createCustomSelect(
-    parent: HTMLElement,
-    className: string,
-    initialOptions: SelectOption[],
-    onChange: (value: string) => void
-): CustomSelectControl {
-    const container = parent.createEl('div', { cls: 'custom-select-container' });
-    if (className) container.classList.add(className);
-
-    const select = container.createEl('div', { cls: 'custom-select' });
-    const selectedText = select.createEl('span', { cls: 'selected-text' });
-    select.createEl('span', { cls: 'select-arrow', text: '▾' });
-
-    const dropdown = container.createEl('div', { cls: 'select-dropdown' });
-
-    let currentOptions = initialOptions;
-    let currentValue = '';
-
-    const renderOptions = (opts: SelectOption[]) => {
-        dropdown.empty();
-        opts.forEach(option => {
-            if (option.header) {
-                dropdown.createEl('div', {
-                    cls: 'select-group-header',
-                    text: option.label,
-                    attr: {
-                        style: 'padding: 8px 12px; font-weight: bold; color: var(--text-muted); font-size: 0.8em; background-color: var(--background-secondary); border-bottom: 1px solid var(--background-modifier-border); border-top: 1px solid var(--background-modifier-border); pointer-events: none;'
-                    }
-                });
-                return;
-            }
-
-            const item = dropdown.createEl('div', {
-                cls: 'select-item',
-                text: option.label
-            });
-
-            item.dataset.value = option.value;
-            if (option.value === currentValue) {
-                item.classList.add('selected');
-            }
-
-            item.addEventListener('click', () => {
-                setValue(option.value);
-                dropdown.classList.remove('show');
-                onChange(option.value);
-            });
-        });
-    };
-
-    const setValue = (value: string) => {
-        const option = currentOptions.find(o => o.value === value && !o.header);
-        if (option) {
-            currentValue = value;
-            selectedText.textContent = option.label;
-            select.dataset.value = value;
-
-            dropdown.querySelectorAll('.select-item').forEach(el => {
-                if ((el as HTMLElement).dataset.value === value) {
-                    el.classList.add('selected');
-                } else {
-                    el.classList.remove('selected');
-                }
-            });
+/** Native select keeps grouped choices, keyboard navigation and lifecycle without document listeners. */
+export function createCustomSelect(parent: HTMLElement, className: string, initialOptions: SelectOption[], onChange: (value: string) => void | Promise<void>): CustomSelectControl {
+    const container = parent.createDiv({ cls:`custom-select-container ${className}` });
+    const select = container.createEl('select', {cls:'custom-select dropdown',attr:{'aria-label':className.includes('font')?'字体':className.includes('background')?'背景':'文章配方'}});
+    const render = (options: SelectOption[]) => {
+        const current = select.value;
+        select.empty();
+        let group: HTMLOptGroupElement | null = null;
+        for(const option of options) {
+            if(option.header) { group = select.createEl('optgroup',{attr:{label:option.label}}); continue; }
+            (group || select).createEl('option',{text:option.label,attr:{value:option.value}});
         }
+        if(options.some(option => !option.header && option.value === current)) select.value = current;
+        select.dataset.value = select.value;
     };
-
-    renderOptions(currentOptions);
-
-    const firstOption = currentOptions.find(o => !o.header);
-    if (firstOption && firstOption.value) {
-        setValue(firstOption.value);
-    }
-
-    select.addEventListener('click', (e) => {
-        e.stopPropagation();
-        document.querySelectorAll('.select-dropdown.show').forEach(el => {
-            if (el !== dropdown) el.classList.remove('show');
-        });
-        dropdown.classList.toggle('show');
+    render(initialOptions);
+    select.addEventListener('change',() => {
+        const previous=select.dataset.value || ''; const value=select.value;
+        select.disabled=true;
+        void Promise.resolve().then(() => onChange(value)).then(() => { select.dataset.value=value; }).catch((error: unknown) => {
+            select.value=previous; select.dataset.value=previous;
+            new Notice(`设置失败：${error instanceof Error ? error.message : String(error)}`);
+        }).finally(() => { select.disabled=false; });
     });
-
-    document.addEventListener('click', () => {
-        dropdown.classList.remove('show');
-    });
-
-    return {
-        container,
-        updateOptions: (newOptions: SelectOption[]) => {
-            currentOptions = newOptions;
-            renderOptions(newOptions);
-            if (currentOptions.length > 0) {
-                const exists = currentOptions.find(o => o.value === currentValue && !o.header);
-                if (!exists) {
-                    const first = currentOptions.find(o => !o.header);
-                    if (first) setValue(first.value);
-                } else {
-                    setValue(currentValue);
-                }
-            }
-        },
-        setValue
-    };
+    return {container,updateOptions:render,setValue:value=> { select.value=value; select.dataset.value=value; }};
 }

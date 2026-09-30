@@ -1,10 +1,11 @@
 import { App, Modal, Setting } from 'obsidian';
+import { submitDraft } from '../ui/submitDraft';
 
 export class ConfirmModal extends Modal {
     private message: string;
-    private onConfirm: () => void;
+    private onConfirm: () => void | Promise<void>;
 
-    constructor(app: App, title: string, message: string, onConfirm: () => void) {
+    constructor(app: App, title: string, message: string, onConfirm: () => void | Promise<void>) {
         super(app);
         this.titleEl.setText(title);
         this.message = message;
@@ -20,8 +21,7 @@ export class ConfirmModal extends Modal {
                 .setButtonText('确认')
                 .setCta()
                 .onClick(() => {
-                    this.onConfirm();
-                    this.close();
+                    void submitDraft(btn, async () => { await this.onConfirm(); }, () => this.close());
                 }))
             .addButton(btn => btn
                 .setButtonText('取消')

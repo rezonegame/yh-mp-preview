@@ -1,11 +1,11 @@
 import { App, Modal } from 'obsidian';
-import { TemplateManager } from '../templateManager';
+import { TemplateManager, type Template } from '../templateManager';
 
 export class TemplatePreviewModal extends Modal {
-    private template: any;
+    private template: Template;
     private templateManager: TemplateManager;
 
-    constructor(app: App, template: any, templateManager: TemplateManager) {
+    constructor(app: App, template: Template, templateManager: TemplateManager) {
         super(app);
         this.template = template;
         this.templateManager = templateManager;
@@ -21,11 +21,11 @@ export class TemplatePreviewModal extends Modal {
 
         // 添加预览区域
         const container = contentEl.createDiv('tp-mp-preview-area');
-        const content = container.createDiv('tp-mp-content-section');
+        const content = container.createDiv('tp-mp-content-section mp-content-section');
 
         // 标题样式
-        content.createEl('h2', { text: '探索夜半插件的无限可能'});
-        content.createEl('h3', { text: '探索我的插件，让您的笔记发布变得更加轻松！'});
+        content.createEl('h2', { text: '同一篇文章的阅读层级'});
+        content.createEl('h3', { text: '标题、正文与重点信息的清晰对照'});
 
         // 段落样式
         const paragraph1 = content.createEl('p');
@@ -57,10 +57,10 @@ export class TemplatePreviewModal extends Modal {
             header.appendChild(dot);
         }
         codeBlock.insertBefore(header, codeBlock.firstChild);
-        codeBlock.createEl('code', { text: 'console.log("欢迎使用夜半插件！");' });
+        codeBlock.createEl('code', { text: 'const reading = "保持清晰与完整";' });
 
         // 添加打赏引导文案
-        content.createEl('strong', { text: '如果您觉得我的插件对您有帮助，请打赏支持我。'});
+        content.createEl('strong', { text: '预览只展示排版，不会修改任何笔记。'});
 
         // 分隔线样式
         content.createEl('hr');

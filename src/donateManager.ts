@@ -1,151 +1,33 @@
+import type { App, Plugin } from 'obsidian';
 
-import { App, Plugin } from 'obsidian';
-
+/** Compatibility facade; each panel owns its overlay and cleanup independently. */
 export class DonateManager {
-    private static overlay: HTMLElement;
-    private static modal: HTMLElement;
-    private static app: App;
-    private static plugin: Plugin;
-
-    public static initialize(app: App, plugin: Plugin) {
-        this.app = app;
-        this.plugin = plugin;
-    }
-
-    public static showDonateModal(container: HTMLElement) {
-        this.overlay = container.createEl('div', {
-            cls: 'mp-donate-overlay'
-        });
-
-        this.modal = this.overlay.createEl('div', {
-            cls: 'mp-about-modal'
-        });
-
-        // 添加关闭按钮
-        const closeButton = this.modal.createEl('button', {
-            cls: 'mp-donate-close',
-            text: '×'
-        });
-
-        // 添加作者信息区域
-        const authorSection = this.modal.createEl('div', {
-            cls: 'mp-about-section mp-about-intro-section'
-        });
-
-        authorSection.createEl('h4', {
-            text: '关于作者',
-            cls: 'mp-about-title'
-        });
-
-        const introEl = authorSection.createEl('p', {
-            cls: 'mp-about-intro'
-        });
-        
-        // 使用 createEl 替代 innerHTML
-        introEl.createSpan({ text: '你好，我是' });
-        introEl.createSpan({ text: 'yhwang', cls: 'mp-about-name' });
-        introEl.createSpan({ text: '，一名' });
-        introEl.createSpan({ text: '全职写作与独立开发者', cls: 'mp-about-identity' });
-        introEl.createSpan({ text: '。' });
-
-        const roleList = authorSection.createEl('div', {
-            cls: 'mp-about-roles'
-        });
-
-        const roleEl = roleList.createEl('p', {
-            cls: 'mp-about-role'
-        });
-        
-        // 使用 createEl 和 createSpan 替代 innerHTML
-        roleEl.createSpan({ text: '这款插件是我为了在 Obsidian 写作后，' });
-        roleEl.createEl('br');
-        roleEl.createSpan({ text: '无需繁琐排版一键即可发布到公众号而开发的工具，' });
-        roleEl.createEl('br');
-        roleEl.createSpan({ text: '希望能让你的' });
-        roleEl.createSpan({ text: '排版更轻松', cls: 'mp-about-highlight' });
-        roleEl.createSpan({ text: '，让你的' });
-        roleEl.createSpan({ text: '创作更高效', cls: 'mp-about-value' });
-        roleEl.createSpan({ text: '。' });
-
-        // 添加插件介绍
-        const descEl = authorSection.createEl('p', {
-            cls: 'mp-about-desc'
-        });
-        
-        // 使用 createEl 替代 innerHTML
-        descEl.createSpan({ text: '如果这款插件对你有帮助，' });
-        descEl.createEl('br');
-        descEl.createSpan({ text: '或者你愿意支持我的独立开发与写作，欢迎请我喝咖啡☕️。' });
-        descEl.createEl('br');
-        descEl.createSpan({ text: '你的支持来说意义重大，它能让我更专注地开发、写作。' });
-
-        // 添加打赏区域
-        const donateSection = this.modal.createEl('div', {
-            cls: 'mp-about-section mp-about-donate-section'
-        });
-
-        donateSection.createEl('h4', {
-            text: '请我喝咖啡',
-            cls: 'mp-about-subtitle'
-        });
-
-        const donateQR = donateSection.createEl('div', {
-            cls: 'mp-about-qr'
-        });
-        donateQR.createEl('p', {
-            cls: 'mp-about-desc',
-            text: '支持二维码待补充'
-        });
-
-        // 添加公众号区域
-        const mpSection = this.modal.createEl('div', {
-            cls: 'mp-about-section mp-about-mp-section'
-        });
-
-        const mpDescEl = mpSection.createEl('p', {
-            cls: 'mp-about-desc'
-        });
-        
-        // 使用 createEl 替代 innerHTML
-        mpDescEl.createSpan({ text: '如果你想了解更多关于创作、效率工具的小技巧，' });
-        mpDescEl.createEl('br');
-        mpDescEl.createSpan({ text: '或者关注我未来的写作动态，欢迎关注我的微信公众号。' });
-
-        mpSection.createEl('h4', {
-            text: '微信公众号',
-            cls: 'mp-about-subtitle'
-        });
-
-        const mpQR = mpSection.createEl('div', {
-            cls: 'mp-about-qr'
-        });
-        mpQR.createEl('p', {
-            cls: 'mp-about-desc',
-            text: '公众号二维码待补充'
-        });
-
-        const footerEl = mpSection.createEl('p', {
-            cls: 'mp-about-footer'
-        });
-        
-        // 使用 createEl 替代 innerHTML
-        footerEl.createSpan({ text: '期待与你一起，在创作的世界里' });
-        const strongText = footerEl.createEl('strong');
-        strongText.createSpan({ text: '找到属于自己的意义' });
-        footerEl.createSpan({ text: '。' });
-
-        // 添加关闭事件
-        closeButton.addEventListener('click', () => this.closeDonateModal());
-        this.overlay.addEventListener('click', (e) => {
-            if (e.target === this.overlay) {
-                this.closeDonateModal();
-            }
-        });
-    }
-
-    private static closeDonateModal() {
-        if (this.overlay) {
-            this.overlay.remove();
-        }
+    private static overlays = new WeakMap<HTMLElement, () => void>();
+    public static initialize(_app: App, _plugin: Plugin): void { /* no shared UI state */ }
+    public static showDonateModal(container: HTMLElement): void {
+        this.overlays.get(container)?.();
+        const doc = container.ownerDocument;
+        const previousFocus = doc?.activeElement as HTMLElement | null;
+        const overlay = container.createEl('div', { cls:'mp-donate-overlay' });
+        const modal = overlay.createEl('div', { cls:'mp-about-modal', attr:{ role:'dialog', 'aria-modal':'true', 'aria-label':'关于与帮助', tabindex:'-1' } });
+        const close = () => { overlay.remove(); doc?.removeEventListener('keydown', onKey); previousFocus?.focus?.(); this.overlays.delete(container); };
+        const onKey = (event: KeyboardEvent) => {
+            if(!overlay.isConnected || !modal.contains(doc?.activeElement || null)) return;
+            if(event.key === 'Escape') { event.preventDefault(); close(); }
+            else if(event.key === 'Tab') { event.preventDefault(); button.focus?.(); }
+        };
+        const button = modal.createEl('button', { cls:'mp-donate-close', text:'×', attr:{'aria-label':'关闭关于与帮助'} });
+        button.addEventListener('click',close);
+        overlay.addEventListener('click',event => { if(event.target === overlay) close(); });
+        modal.createEl('h2', { text:'关于与帮助', cls:'mp-about-title' });
+        const intro = modal.createEl('div', { cls:'mp-about-section' });
+        intro.createEl('p', { text:'yh-mp-preview · Markdown 排版工作台。公众号排版与笔记增强独立设置，不改写正文，不自动发布。' });
+        const steps = intro.createEl('ol');
+        ['选择场景和主题，在预览中检查阅读效果。','高级排版中的文章配方只在需要时开启。','复制富文本到公众号后台完成最终核对；也可导出 HTML、完整长图或分段图。','遇到问题可回退 BRAT 版本，保留 data.json 和 note-layout.json。'].forEach(text => steps.createEl('li',{text}));
+        intro.createEl('p',{text:'独立维护：yhwang。早期保留实现来自 Yeban8090/mp-preview（MIT）；现行发行 AGPL-3.0-or-later，完整来源与依赖许可见 NOTICE 和 THIRD_PARTY_NOTICES。'});
+        for(const text of ['支持二维码待补充','公众号二维码待补充']) modal.createEl('div',{cls:'mp-about-qr'}).createEl('p',{cls:'mp-about-desc',text});
+        doc?.addEventListener('keydown',onKey);
+        this.overlays.set(container,close);
+        modal.focus?.();
     }
 }

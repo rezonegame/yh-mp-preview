@@ -3,6 +3,7 @@ import { Background } from '../backgroundManager';
 import { migrateSettingsForV3, type V3SettingsMetadata, V3_SETTINGS_SCHEMA_VERSION } from '../core/migration/settingsMigration';
 import { CURATED_THEME_CATALOG_VERSION } from '../core/theme/themeCatalog';
 import { DEFAULT_WECHAT_FONT_STACK } from '../core/theme/wechatReadingBaseline';
+import { cloneSettings, SettingsRepository } from '../core/settings/settingsRepository';
 
 export interface MPSettings {
     schemaVersion: number;
@@ -122,25 +123,24 @@ const DEFAULT_SETTINGS: MPSettings = {
 };
 
 export class SettingsManager {
-    private plugin: any;
-    private settings: MPSettings;
+    private plugin: { loadData(): Promise<unknown>; saveData(data: MPSettings): Promise<void> };
+    private repository: SettingsRepository<MPSettings>;
+    private get settings(): MPSettings { return this.repository.read(); }
+    private set settings(value: MPSettings) { this.repository.initialize(value); }
 
-    constructor(plugin: any) {
+    constructor(plugin: { loadData(): Promise<unknown>; saveData(data: MPSettings): Promise<void> }) {
         this.plugin = plugin;
-        this.settings = DEFAULT_SETTINGS;
+        this.repository = new SettingsRepository(DEFAULT_SETTINGS, data => this.plugin.saveData(data));
     }
 
     async loadSettings() {
-        let savedData = await this.plugin.loadData();
-        if (!savedData) {
-            savedData = {};
-        }
-        savedData = migrateSettingsForV3(savedData);
+        const input: unknown = await this.plugin.loadData();
+        const savedData = migrateSettingsForV3(input && typeof input === 'object' && !Array.isArray(input) ? input as Record<string, unknown> : {}) as Partial<MPSettings>;
 
         // 总是从代码中加载最新的预设模板
         const { templates } = await import('../templates');
-        const codeTemplates = Object.values(templates).map(template => ({
-            ...template,
+        const codeTemplates: Template[] = Object.values(templates).map(template => ({
+            ...template as Template,
             isPreset: true,
             isVisible: true
         }));
@@ -150,8 +150,8 @@ export class SettingsManager {
             savedData.templates = codeTemplates;
         } else {
             // 如果有保存的数据，合并新模板
-            const savedTemplatesMap = new Map<string, any>();
-            savedData.templates.forEach((t: any) => {
+            const savedTemplatesMap = new Map<string, Template>();
+            savedData.templates.forEach((t) => {
                 if (t && t.id) savedTemplatesMap.set(t.id, t);
             });
 
@@ -162,6 +162,7 @@ export class SettingsManager {
                     // 确保 isVisible 存在，如果不存在默认为 true
                     const isVisible = savedTemplate.isVisible !== undefined ? savedTemplate.isVisible : true;
                     return {
+                        ...savedTemplate,
                         ...codeTemplate,
                         isVisible: isVisible
                     };
@@ -178,23 +179,24 @@ export class SettingsManager {
             savedData.fontFamily = DEFAULT_WECHAT_FONT_STACK;
         }
 
-        if (!savedData.customTemplates) {
+        if (!Array.isArray(savedData.customTemplates)) {
             savedData.customTemplates = [];
         }
         const availableTemplateIds = new Set([
-            ...savedData.templates,
+            ...(savedData.templates || []),
             ...savedData.customTemplates,
         ].map((template: Template) => template.id));
-        if (!availableTemplateIds.has(savedData.templateId)) {
+        if (!savedData.templateId || !availableTemplateIds.has(savedData.templateId)) {
             // Removed legacy themes (such as quarantined xiaohu themes) must
             // not leave the view without an active template after upgrade.
             savedData.v3 = {
+                ...DEFAULT_SETTINGS.v3,
                 ...savedData.v3,
                 legacyTemplateId: savedData.templateId,
             };
             savedData.templateId = DEFAULT_SETTINGS.templateId;
         }
-        if (!savedData.customFonts) {
+        if (!Array.isArray(savedData.customFonts)) {
             savedData.customFonts = DEFAULT_SETTINGS.customFonts;
         }
         if (!Array.isArray(savedData.layoutSnapshots)) {
@@ -212,8 +214,8 @@ export class SettingsManager {
         if (!savedData.backgrounds || !Array.isArray(savedData.backgrounds) || savedData.backgrounds.length === 0) {
             savedData.backgrounds = codeBackgrounds;
         } else {
-            const savedBackgroundsMap = new Map<string, any>();
-            savedData.backgrounds.forEach((b: any) => {
+            const savedBackgroundsMap = new Map<string, Background>();
+            savedData.backgrounds.forEach((b) => {
                 if (b && b.id) savedBackgroundsMap.set(b.id, b);
             });
 
@@ -222,6 +224,7 @@ export class SettingsManager {
                 if (savedBackground) {
                     const isVisible = savedBackground.isVisible !== undefined ? savedBackground.isVisible : true;
                     return {
+                        ...savedBackground,
                         ...codeBackground,
                         isVisible: isVisible
                     };
@@ -230,25 +233,26 @@ export class SettingsManager {
             });
         }
 
-        if (!savedData.customBackgrounds) {
+        if (!Array.isArray(savedData.customBackgrounds)) {
             savedData.customBackgrounds = [];
         }
         if (!savedData.customFonts) {
             savedData.customFonts = DEFAULT_SETTINGS.customFonts;
         }
-        this.settings = Object.assign({}, DEFAULT_SETTINGS, savedData);
-        this.settings.layoutEnhancements = {
+        const loaded = Object.assign(cloneSettings(DEFAULT_SETTINGS), savedData);
+        loaded.layoutEnhancements = {
             ...DEFAULT_SETTINGS.layoutEnhancements,
             ...(savedData.layoutEnhancements || {})
         };
-        this.settings.authorCard = {
+        loaded.authorCard = {
             ...DEFAULT_SETTINGS.authorCard,
             ...(savedData.authorCard || {})
         };
-        this.settings.subscribeCard = {
+        loaded.subscribeCard = {
             ...DEFAULT_SETTINGS.subscribeCard,
             ...(savedData.subscribeCard || {})
         };
+        this.settings = loaded;
     }
 
     getAllTemplates(): Template[] {
@@ -265,51 +269,25 @@ export class SettingsManager {
     }
 
     async addCustomTemplate(template: Template) {
-        template.isPreset = false;
-        template.isVisible = true;  // 默认可见
-        this.settings.customTemplates.push(template);
-        await this.saveSettings();
+        await this.repository.update(draft => { if (draft.customTemplates.some(t => t.id === template.id)) throw new Error('模板 ID 已存在'); draft.customTemplates.push({ ...cloneSettings(template), isPreset: false, isVisible: true }); });
     }
 
     async updateTemplate(templateId: string, updatedTemplate: Partial<Template>) {
-        const presetTemplateIndex = this.settings.templates.findIndex(t => t.id === templateId);
-        if (presetTemplateIndex !== -1) {
-            this.settings.templates[presetTemplateIndex] = {
-                ...this.settings.templates[presetTemplateIndex],
-                ...updatedTemplate
-            };
-            await this.saveSettings();
+        return this.repository.update(draft => {
+            const items = draft.templates.some(t => t.id === templateId) ? draft.templates : draft.customTemplates;
+            const index = items.findIndex(t => t.id === templateId);
+            if (index < 0) return false;
+            items[index] = { ...items[index], ...cloneSettings(updatedTemplate), id: templateId };
             return true;
-        }
-
-        const customTemplateIndex = this.settings.customTemplates.findIndex(t => t.id === templateId);
-        if (customTemplateIndex !== -1) {
-            this.settings.customTemplates[customTemplateIndex] = {
-                ...this.settings.customTemplates[customTemplateIndex],
-                ...updatedTemplate
-            };
-            await this.saveSettings();
-            return true;
-        }
-
-        return false;
+        });
     }
 
     async removeTemplate(templateId: string): Promise<boolean> {
-        const template = this.getTemplate(templateId);
-        if (template && !template.isPreset) {
-            this.settings.customTemplates = this.settings.customTemplates.filter(t => t.id !== templateId);
-            if (this.settings.templateId === templateId) {
-                this.settings.templateId = 'default';
-            }
-            await this.saveSettings();
-            return true;
-        }
-        return false;
+        return this.repository.update(draft => { if (!draft.customTemplates.some(t => t.id === templateId && !t.isPreset)) return false; draft.customTemplates = draft.customTemplates.filter(t => t.id !== templateId); if (draft.templateId === templateId) draft.templateId = 'default'; return true; });
     }
 
     async saveSettings() {
-        await this.plugin.saveData(this.settings);
+        await this.repository.update(() => undefined);
     }
 
     getSettings(): MPSettings {
@@ -317,29 +295,24 @@ export class SettingsManager {
     }
 
     async updateSettings(settings: Partial<MPSettings>) {
-        this.settings = { ...this.settings, ...settings };
-        await this.saveSettings();
+        await this.repository.update(draft => { Object.assign(draft, cloneSettings(settings)); });
     }
 
     async saveLayoutSnapshot(snapshot: LayoutSnapshot): Promise<void> {
-        this.settings.layoutSnapshots = [snapshot, ...this.settings.layoutSnapshots]
-            .slice(0, 20);
-        await this.saveSettings();
+        await this.repository.update(draft => { draft.layoutSnapshots = [cloneSettings(snapshot), ...draft.layoutSnapshots].slice(0, 20); });
     }
 
     async restoreLayoutSnapshot(snapshot: LayoutSnapshot): Promise<void> {
-        this.settings = {
-            ...this.settings,
+        await this.repository.update(draft => { Object.assign(draft, {
             templateId: this.getTemplate(snapshot.templateId) ? snapshot.templateId : 'default',
             backgroundId: snapshot.backgroundId,
             fontFamily: snapshot.fontFamily,
             fontSize: snapshot.fontSize,
             v3: {
-                ...this.settings.v3,
+                ...draft.v3,
                 selectedRecipeId: snapshot.recipeId,
             },
-        };
-        await this.saveSettings();
+        }); });
     }
 
     getFontOptions() {
@@ -347,24 +320,15 @@ export class SettingsManager {
     }
 
     async addCustomFont(font: { value: string; label: string }) {
-        this.settings.customFonts.push({ ...font, isPreset: false });
-        await this.saveSettings();
+        await this.repository.update(draft => { draft.customFonts.push({ ...cloneSettings(font), isPreset: false }); });
     }
 
     async removeFont(value: string) {
-        const font = this.settings.customFonts.find(f => f.value === value);
-        if (font && !font.isPreset) {
-            this.settings.customFonts = this.settings.customFonts.filter(f => f.value !== value);
-            await this.saveSettings();
-        }
+        await this.repository.update(draft => { draft.customFonts = draft.customFonts.filter(f => f.value !== value || f.isPreset); });
     }
 
     async updateFont(oldValue: string, newFont: { value: string; label: string }) {
-        const index = this.settings.customFonts.findIndex(f => f.value === oldValue);
-        if (index !== -1 && !this.settings.customFonts[index].isPreset) {
-            this.settings.customFonts[index] = { ...newFont, isPreset: false };
-            await this.saveSettings();
-        }
+        await this.repository.update(draft => { const index = draft.customFonts.findIndex(f => f.value === oldValue && !f.isPreset); if (index >= 0) draft.customFonts[index] = { ...draft.customFonts[index], ...cloneSettings(newFont), isPreset: false }; });
     }
 
     // 背景相关方法
@@ -382,46 +346,14 @@ export class SettingsManager {
     }
 
     async addCustomBackground(background: Background) {
-        background.isPreset = false;
-        background.isVisible = true;  // 默认可见
-        this.settings.customBackgrounds.push(background);
-        await this.saveSettings();
+        await this.repository.update(draft => { if (draft.customBackgrounds.some(b => b.id === background.id)) throw new Error('背景 ID 已存在'); draft.customBackgrounds.push({ ...cloneSettings(background), isPreset: false, isVisible: true }); });
     }
 
     async updateBackground(backgroundId: string, updatedBackground: Partial<Background>) {
-        const presetBackgroundIndex = this.settings.backgrounds.findIndex(b => b.id === backgroundId);
-        if (presetBackgroundIndex !== -1) {
-            this.settings.backgrounds[presetBackgroundIndex] = {
-                ...this.settings.backgrounds[presetBackgroundIndex],
-                ...updatedBackground
-            };
-            await this.saveSettings();
-            return true;
-        }
-
-        const customBackgroundIndex = this.settings.customBackgrounds.findIndex(b => b.id === backgroundId);
-        if (customBackgroundIndex !== -1) {
-            this.settings.customBackgrounds[customBackgroundIndex] = {
-                ...this.settings.customBackgrounds[customBackgroundIndex],
-                ...updatedBackground
-            };
-            await this.saveSettings();
-            return true;
-        }
-
-        return false;
+        return this.repository.update(draft => { const items = draft.backgrounds.some(b => b.id === backgroundId) ? draft.backgrounds : draft.customBackgrounds; const index = items.findIndex(b => b.id === backgroundId); if (index < 0) return false; items[index] = { ...items[index], ...cloneSettings(updatedBackground), id: backgroundId }; return true; });
     }
 
     async removeBackground(backgroundId: string): Promise<boolean> {
-        const background = this.getBackground(backgroundId);
-        if (background && !background.isPreset) {
-            this.settings.customBackgrounds = this.settings.customBackgrounds.filter(b => b.id !== backgroundId);
-            if (this.settings.backgroundId === backgroundId) {
-                this.settings.backgroundId = 'default';
-            }
-            await this.saveSettings();
-            return true;
-        }
-        return false;
+        return this.repository.update(draft => { if (!draft.customBackgrounds.some(b => b.id === backgroundId && !b.isPreset)) return false; draft.customBackgrounds = draft.customBackgrounds.filter(b => b.id !== backgroundId); if (draft.backgroundId === backgroundId) draft.backgroundId = 'default'; return true; });
     }
 }

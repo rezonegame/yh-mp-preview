@@ -1,17 +1,19 @@
-import { App, Modal, Setting, setIcon } from 'obsidian';
+import { App, Modal, Setting, setIcon, Notice } from 'obsidian';
+import { cloneSettings } from '../core/settings/settingsRepository';
+import { submitDraft } from '../ui/submitDraft';
 
 export class CreateFontModal extends Modal {
     private font: { value: string; label: string; isPreset?: boolean };
-    private onSubmit: (font: { value: string; label: string }) => void;
+    private onSubmit: (font: { value: string; label: string }) => void | Promise<void>;
 
     constructor(
         app: App,
-        onSubmit: (font: { value: string; label: string }) => void,
+        onSubmit: (font: { value: string; label: string }) => void | Promise<void>,
         existingFont?: { value: string; label: string; isPreset?: boolean }
     ) {
         super(app);
         this.onSubmit = onSubmit;
-        this.font = existingFont ?? { value: '', label: '' };
+        this.font = cloneSettings(existingFont ?? { value: '', label: '' });
     }
 
     onOpen() {
@@ -59,10 +61,10 @@ export class CreateFontModal extends Modal {
                 .setCta()
                 .onClick(() => {
                     if (!this.font.label || !this.font.value) {
+                        new Notice('字体名称和字体值不能为空');
                         return;
                     }
-                    this.onSubmit(this.font);
-                    this.close();
+                    void submitDraft(btn, async () => { if (/[;{}]/.test(this.font.value)) throw new Error('请输入字体族名称，不要输入 CSS 声明'); await this.onSubmit(cloneSettings(this.font)); }, () => this.close());
                 }))
             .addButton(btn => btn
                 .setButtonText('取消')

@@ -1,7 +1,9 @@
 import { setSafeInlineStyle } from '../core/security/safeDom';
-import { App, Modal, Setting, Notice } from 'obsidian';
+import { App, Modal, Setting, Notice, type SliderComponent } from 'obsidian';
 import { Background } from '../backgroundManager';
 import { nanoid } from '../utils/nanoid';
+import { cloneSettings } from '../core/settings/settingsRepository';
+import { submitDraft } from '../ui/submitDraft';
 
 interface CssTemplate {
     name: string;
@@ -10,7 +12,7 @@ interface CssTemplate {
 }
 
 export class CreateBackgroundModal extends Modal {
-    private onSubmit: (background: Background) => void;
+    private onSubmit: (background: Background) => void | Promise<void>;
     private background: Background;
     private isEditing: boolean;
 
@@ -21,6 +23,8 @@ export class CreateBackgroundModal extends Modal {
     private cssTemplateType: string = 'custom';
     private patternColor: string = 'rgba(50, 0, 0, 0.03)';
     private patternSize: number = 20;
+    private opacityControl?: SliderComponent;
+    private sizeControl?: SliderComponent;
 
     // 预设的CSS模板
     private cssTemplates: Record<string, CssTemplate> = {
@@ -68,7 +72,7 @@ export class CreateBackgroundModal extends Modal {
 
     constructor(
         app: App,
-        onSubmit: (background: Background) => void,
+        onSubmit: (background: Background) => void | Promise<void>,
         background?: Background
     ) {
         super(app);
@@ -76,7 +80,7 @@ export class CreateBackgroundModal extends Modal {
         this.isEditing = !!background;
 
         if (background) {
-            this.background = { ...background };
+            this.background = cloneSettings(background);
             // 从 style 中解析出类型和相关属性
             this.parseStyleToProperties(background.style);
         } else {
@@ -395,19 +399,13 @@ export class CreateBackgroundModal extends Modal {
                                 if (opacityMatch && opacityMatch[1]) {
                                     const opacity = parseFloat(opacityMatch[1]) * 100;
                                     // 使用类型断言来访问__component__属性
-                                    const sliderComponent = (opacitySlider.parentElement as any).__component__;
-                                    if (sliderComponent && typeof sliderComponent.setValue === 'function') {
-                                        sliderComponent.setValue(opacity);
-                                    }
+                                    this.opacityControl?.setValue(opacity);
                                 }
                             }
 
                             if (sizeSlider) {
                                 // 使用类型断言来访问__component__属性
-                                const sliderComponent = (sizeSlider.parentElement as any).__component__;
-                                if (sliderComponent && typeof sliderComponent.setValue === 'function') {
-                                    sliderComponent.setValue(this.patternSize);
-                                }
+                                this.sizeControl?.setValue(this.patternSize);
                             }
                         }
 
@@ -453,6 +451,7 @@ export class CreateBackgroundModal extends Modal {
                     });
             })
             .addSlider(slider => {
+                this.opacityControl = slider;
                 // 提取当前透明度
                 let opacity = 3; // 默认透明度3%
                 const alphaMatch = this.patternColor.match(/rgba\([^,]+,[^,]+,[^,]+,([^)]+)\)/);
@@ -477,6 +476,7 @@ export class CreateBackgroundModal extends Modal {
             .setName('图案大小')
             .setDesc('设置背景图案的大小')
             .addSlider(slider => {
+                this.sizeControl = slider;
                 slider.setLimits(5, 50, 1)
                     .setValue(this.patternSize) // 使用当前模板的大小
                     .setDynamicTooltip()
@@ -529,8 +529,7 @@ export class CreateBackgroundModal extends Modal {
                             return;
                         }
                         this.generateStyle();
-                        this.onSubmit(this.background);
-                        this.close();
+                        void submitDraft(btn, async () => { await this.onSubmit(cloneSettings(this.background)); }, () => this.close());
                     });
             });
 
