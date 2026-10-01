@@ -1,7 +1,7 @@
 {
   "version": "3.18.0",
   "acceptedBaseline": "3.18.0-beta.2",
-  "status": "verified stable candidate; GitHub publication pending",
+  "status": "downloaded release assets match local build",
   "runtimeSourceUnchanged": true,
   "runtimeAssetsUnchanged": [
     "main.js",
@@ -19,7 +19,17 @@
     "manifest.json": "79bc855c746f8f8710b39f0bc3b907b55bb7e4bf6063b82bcfd0c0326b7f998e",
     "styles.css": "461d1275c6d05f4d8205d08d333cd8b82d2de71b6e23840f88f2df5a599cd6a2"
   },
-  "publishedAssetsVerified": [],
+  "publishedAssetsVerified": [
+    "main.js",
+    "manifest.json",
+    "styles.css",
+    "LICENSE",
+    "NOTICE",
+    "THIRD_PARTY_NOTICES.md",
+    "MIT-original.txt",
+    "DOMPurify.txt"
+  ],
+  "licenseAssetByteSource": "canonical Git blobs at the stable tag; not Windows checkout line endings",
   "maintainerAcceptance": "Maintainer reported beta.2 had no problems and explicitly approved stable publication; see execution ledger.",
   "nativeEvidence": {
     "version": "3.18.0-beta.2",

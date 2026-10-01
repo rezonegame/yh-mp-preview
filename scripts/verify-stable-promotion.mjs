@@ -32,11 +32,15 @@ const releaseAssets = [
     ['MIT-original.txt','LICENSES/MIT-original.txt'],['DOMPurify.txt','LICENSES/DOMPurify.txt'],
 ];
 if(published) for(const [name,path] of releaseAssets) {
-    assert.equal(Buffer.compare(readFileSync(path),readFileSync(`output/refactor/release-${manifest.version}/${name}`)),0,`Published asset differs: ${name}`);
+    // License files are copied from Git by CI; Windows checkout can transform LF into CRLF.
+    const expected=['main.js','manifest.json','styles.css'].includes(name)
+        ? readFileSync(path) : execFileSync('git',['show',`${manifest.version}:${path}`]);
+    assert.equal(Buffer.compare(expected,readFileSync(`output/refactor/release-${manifest.version}/${name}`)),0,`Published asset differs: ${name}`);
 }
 const report={version:manifest.version,acceptedBaseline:baseline,status:published?'downloaded release assets match local build':'verified stable candidate; GitHub publication pending',
     runtimeSourceUnchanged:true,runtimeAssetsUnchanged:['main.js','styles.css'],manifestOnlyVersionChanged:true,dependenciesUnchanged:true,tests,assets,
     publishedAssetsVerified:published?releaseAssets.map(([name])=>name):[],
+    licenseAssetByteSource:published?'canonical Git blobs at the stable tag; not Windows checkout line endings':null,
     maintainerAcceptance:'Maintainer reported beta.2 had no problems and explicitly approved stable publication; see execution ledger.',
     nativeEvidence:{version:baseline,file:'reports/workbench-layout-regression.json',scope:'Reuse accepted beta.2 evidence because runtime code/styles are byte-identical; no new stable-host test is claimed.'},
     limitations:['No new BRAT installation by the agent or writes to the Marketing vault.','Stable publication does not imply WeChat-backend/platform-matrix testing or official-directory approval.']};
