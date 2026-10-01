@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.18.0
+
+- Promote the maintainer-accepted 3.18.0-beta.2 to a stable release. Runtime code and styles are unchanged from beta.2; this is a version/metadata/documentation transition, not an additional feature iteration.
+- Include the P2–P4 settings transactions, independent drafts, ordered canonical output, image/canvas lifecycle fixes, safe DOM handling, keyboard-friendly galleries and compact responsive workbench delivered in the betas.
+- Retain plugin/theme/recipe IDs, existing configuration and snapshots, optional note enhancements, original Markdown, desktop-only support and Obsidian 1.7.2 minimum. Preserve AGPL and early MIT provenance; QR placeholders remain pending.
+- Preserve v3.15.0 as a rollback release. Maintainer acceptance is recorded separately from automated/native-host evidence; stable publication does not imply official-directory approval or untested-platform certification.
+
 ## 3.18.0-beta.2
 
 - Place the theme-gallery icon, background, font and font size in one compact responsive group: a single row in wider panes and natural wrapping in narrow panes, without stretching dropdowns across the full toolbar.

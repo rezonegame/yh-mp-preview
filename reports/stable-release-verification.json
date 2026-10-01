@@ -1,0 +1,33 @@
+{
+  "version": "3.18.0",
+  "acceptedBaseline": "3.18.0-beta.2",
+  "status": "verified stable candidate; GitHub publication pending",
+  "runtimeSourceUnchanged": true,
+  "runtimeAssetsUnchanged": [
+    "main.js",
+    "styles.css"
+  ],
+  "manifestOnlyVersionChanged": true,
+  "dependenciesUnchanged": true,
+  "tests": {
+    "total": 109,
+    "passed": 109,
+    "failed": 0
+  },
+  "assets": {
+    "main.js": "7874be49f3298146cce67c900dce15b6266bcbdebcee7995c112a45d32d059d7",
+    "manifest.json": "79bc855c746f8f8710b39f0bc3b907b55bb7e4bf6063b82bcfd0c0326b7f998e",
+    "styles.css": "461d1275c6d05f4d8205d08d333cd8b82d2de71b6e23840f88f2df5a599cd6a2"
+  },
+  "publishedAssetsVerified": [],
+  "maintainerAcceptance": "Maintainer reported beta.2 had no problems and explicitly approved stable publication; see execution ledger.",
+  "nativeEvidence": {
+    "version": "3.18.0-beta.2",
+    "file": "reports/workbench-layout-regression.json",
+    "scope": "Reuse accepted beta.2 evidence because runtime code/styles are byte-identical; no new stable-host test is claimed."
+  },
+  "limitations": [
+    "No new BRAT installation by the agent or writes to the Marketing vault.",
+    "Stable publication does not imply WeChat-backend/platform-matrix testing or official-directory approval."
+  ]
+}
