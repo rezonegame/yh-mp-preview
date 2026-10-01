@@ -10654,12 +10654,25 @@ function createWorkbenchControls(container) {
   const toolbar = container.createDiv("mp-toolbar");
   toolbar.setAttribute("role", "group");
   toolbar.setAttribute("aria-label", "\u6587\u7AE0\u5916\u89C2\u4E0E\u6392\u7248");
-  const controlsGroup = toolbar.createDiv("mp-controls-group mp-appearance-row");
-  const typographyRow = toolbar.createDiv("mp-controls-group mp-typography-row");
+  const controlsGroup = toolbar.createDiv("mp-controls-group mp-compact-controls");
   const secondaryRow = toolbar.createDiv("mp-controls-group mp-secondary-row");
   secondaryRow.setAttribute("role", "group");
   secondaryRow.setAttribute("aria-label", "\u6587\u7AE0\u64CD\u4F5C");
-  return { toolbar, controlsGroup, typographyRow, secondaryRow };
+  return { toolbar, controlsGroup, secondaryRow };
+}
+
+// src/ui/recipeLabels.ts
+var recipeOptions = [
+  { value: "legacy-compatible", label: "\u4E0D\u989D\u5916\u589E\u5F3A" },
+  { value: "tutorial", label: "\u6B65\u9AA4\u5217\u8868" },
+  { value: "checklist", label: "\u52FE\u9009\u6E05\u5355" },
+  { value: "product-intro", label: "\u5BFC\u8BED\u5F3A\u8C03" },
+  { value: "commentary", label: "\u5F15\u7528\u4E0E\u7ED3\u8BED\u5F3A\u8C03" },
+  { value: "review", label: "\u5C0F\u6807\u9898\u5F3A\u8C03" }
+];
+function recipeSummaryLabel(recipeId) {
+  const option = recipeOptions.find((item) => item.value === recipeId);
+  return option && option.value !== "legacy-compatible" ? `\u66F4\u591A\u5DE5\u5177 \xB7 ${option.label}` : "\u66F4\u591A\u5DE5\u5177";
 }
 
 // src/ui/asyncActions.ts
@@ -13489,7 +13502,11 @@ var ThemeGalleryModal = class extends import_obsidian6.Modal {
 var import_obsidian7 = require("obsidian");
 function createCustomSelect(parent, className, initialOptions, onChange) {
   const container = parent.createDiv({ cls: `custom-select-container ${className}` });
-  const select = container.createEl("select", { cls: "custom-select dropdown", attr: { "aria-label": className.includes("font") ? "\u5B57\u4F53" : className.includes("background") ? "\u80CC\u666F" : "\u6587\u7AE0\u914D\u65B9" } });
+  const select = container.createEl("select", { cls: "custom-select dropdown", attr: { "aria-label": className.includes("font") ? "\u5B57\u4F53" : className.includes("background") ? "\u80CC\u666F" : "\u5C40\u90E8\u6392\u7248\u589E\u5F3A" } });
+  const updateTitle = () => {
+    var _a;
+    select.title = ((_a = select.selectedOptions[0]) == null ? void 0 : _a.textContent) || "";
+  };
   const render = (options) => {
     const current = select.value;
     select.empty();
@@ -13503,6 +13520,7 @@ function createCustomSelect(parent, className, initialOptions, onChange) {
     }
     if (options.some((option) => !option.header && option.value === current)) select.value = current;
     select.dataset.value = select.value;
+    updateTitle();
   };
   render(initialOptions);
   select.addEventListener("change", () => {
@@ -13516,13 +13534,15 @@ function createCustomSelect(parent, className, initialOptions, onChange) {
       select.dataset.value = previous;
       new import_obsidian7.Notice(`\u8BBE\u7F6E\u5931\u8D25\uFF1A${error instanceof Error ? error.message : String(error)}`);
     }).finally(() => {
+      updateTitle();
       select.disabled = false;
     });
   });
   return { container, updateOptions: render, setValue: (value) => {
-    if (!Array.from(select.options).some((option) => option.value === value)) select.createEl("option", { text: className.includes("font") ? "\u5F53\u524D\u5B57\u4F53" : className.includes("background") ? "\u5F53\u524D\u80CC\u666F" : "\u5F53\u524D\u914D\u65B9", attr: { value } });
+    if (!Array.from(select.options).some((option) => option.value === value)) select.createEl("option", { text: className.includes("font") ? "\u5F53\u524D\u5B57\u4F53" : className.includes("background") ? "\u5F53\u524D\u80CC\u666F" : "\u5F53\u524D\u589E\u5F3A\u6548\u679C", attr: { value } });
     select.value = value;
     select.dataset.value = value;
+    updateTitle();
   } };
 }
 
@@ -13602,15 +13622,8 @@ var MPView = class extends import_obsidian9.ItemView {
   }
   updateRecipeSummary(recipeId) {
     var _a;
-    const labels = {
-      tutorial: "\u6559\u7A0B\u4E0E\u6B65\u9AA4",
-      checklist: "\u6E05\u5355\u4E0E\u65B9\u6CD5\u8BBA",
-      "product-intro": "\u4EA7\u54C1\u6216\u5DE5\u5177\u4ECB\u7ECD",
-      commentary: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA",
-      review: "\u5468\u62A5\u4E0E\u590D\u76D8"
-    };
     const active = recipeId !== "legacy-compatible";
-    this.recipeSummary.setText(active ? `\u9AD8\u7EA7\u6392\u7248 \xB7 ${labels[recipeId] || "\u5DF2\u542F\u7528"}` : "\u9AD8\u7EA7\u6392\u7248");
+    this.recipeSummary.setText(recipeSummaryLabel(recipeId));
     (_a = this.recipeSummary.parentElement) == null ? void 0 : _a.toggleClass("is-active", active);
   }
   applyThemeTrial(templateId) {
@@ -13657,7 +13670,7 @@ var MPView = class extends import_obsidian9.ItemView {
     container.empty();
     container.classList.remove("view-content");
     container.classList.add("mp-view-content");
-    const { toolbar, controlsGroup, typographyRow, secondaryRow } = createWorkbenchControls(container);
+    const { toolbar, controlsGroup, secondaryRow } = createWorkbenchControls(container);
     const headerBtn = secondaryRow.createEl("button", {
       cls: "mp-action-button mp-icon-btn",
       attr: { "aria-label": "\u63D2\u5165\u81EA\u5B9A\u4E49\u5934\u90E8", "title": "\u63D2\u5165\u5934\u90E8" }
@@ -13757,7 +13770,8 @@ var MPView = class extends import_obsidian9.ItemView {
     });
     (0, import_obsidian9.setIcon)(galleryBtn, "palette");
     galleryBtn.addEventListener("click", () => this.openThemeGallery());
-    const fontField = typographyRow.createDiv("mp-toolbar-field mp-font-field");
+    controlsGroup.prepend(galleryBtn);
+    const fontField = controlsGroup.createDiv("mp-toolbar-field mp-font-field");
     fontField.createSpan({ cls: "mp-toolbar-label", text: "\u5B57\u4F53" });
     this.customFontSelect = createCustomSelect(
       fontField,
@@ -13771,7 +13785,7 @@ var MPView = class extends import_obsidian9.ItemView {
         this.applyPresentation(this.previewEl);
       }
     );
-    const sizeField = typographyRow.createDiv("mp-toolbar-field mp-size-field");
+    const sizeField = controlsGroup.createDiv("mp-toolbar-field mp-size-field");
     sizeField.createSpan({ cls: "mp-toolbar-label", text: "\u5B57\u53F7" });
     const fontSizeGroup = sizeField.createDiv({ cls: "mp-font-size-group" });
     const decreaseButton = fontSizeGroup.createEl("button", {
@@ -13797,24 +13811,23 @@ var MPView = class extends import_obsidian9.ItemView {
     const settings = this.settingsManager.getSettings();
     const advanced = toolbar.createEl("details", { cls: "mp-advanced-typesetting" });
     this.recipeSummary = advanced.createEl("summary");
+    advanced.createEl("h3", { cls: "mp-tools-heading", text: "\u6587\u7AE0\u64CD\u4F5C" });
     advanced.appendChild(secondaryRow);
-    advanced.createEl("p", {
+    const enhancement = advanced.createDiv("mp-enhancement-group");
+    const enhancementHeader = enhancement.createDiv("mp-tools-section-header");
+    enhancementHeader.createEl("h3", { cls: "mp-tools-heading", text: "\u5C40\u90E8\u6392\u7248\u589E\u5F3A" });
+    const enhancementHelp = enhancementHeader.createEl("details", { cls: "mp-enhancement-help" });
+    enhancementHelp.createEl("summary", { text: "\u8BF4\u660E" });
+    enhancementHelp.createEl("p", {
       cls: "mp-advanced-hint",
-      text: "\u53EF\u9009\u7684\u5C40\u90E8\u7ED3\u6784\u589E\u5F3A\uFF1B\u4E3B\u9898\u51B3\u5B9A\u6574\u4F53\u89C6\u89C9\u3002\u9009\u62E9\u201C\u901A\u7528\u957F\u6587\u201D\u5219\u4E0D\u53E0\u52A0\u914D\u65B9\u6837\u5F0F\uFF0C\u4E0D\u4FEE\u6539 Markdown \u539F\u6587\u3002"
+      text: "\u4E3B\u9898\u51B3\u5B9A\u6574\u4F53\u89C6\u89C9\uFF0C\u8FD9\u91CC\u53EA\u5F3A\u5316\u5C40\u90E8\u7ED3\u6784\u3002\u9009\u62E9\u201C\u4E0D\u989D\u5916\u589E\u5F3A\u201D\u5219\u4EC5\u4F7F\u7528\u4E3B\u9898\uFF1B\u6240\u6709\u9009\u9879\u90FD\u4E0D\u4FEE\u6539 Markdown \u539F\u6587\u3002"
     });
-    const recipeField = advanced.createDiv("mp-toolbar-field mp-recipe-field");
-    recipeField.createSpan({ cls: "mp-toolbar-label", text: "\u6587\u7AE0\u914D\u65B9" });
+    const recipeField = enhancement.createDiv("mp-toolbar-field mp-recipe-field");
+    recipeField.createSpan({ cls: "mp-toolbar-label", text: "\u6548\u679C" });
     this.recipeSelect = createCustomSelect(
       recipeField,
       "mp-recipe-select",
-      [
-        { label: "\u901A\u7528\u957F\u6587", value: "legacy-compatible" },
-        { label: "\u6559\u7A0B\u4E0E\u6B65\u9AA4", value: "tutorial" },
-        { label: "\u6E05\u5355\u4E0E\u65B9\u6CD5\u8BBA", value: "checklist" },
-        { label: "\u4EA7\u54C1\u6216\u5DE5\u5177\u4ECB\u7ECD", value: "product-intro" },
-        { label: "\u89C2\u70B9\u4E0E\u8BC4\u8BBA", value: "commentary" },
-        { label: "\u5468\u62A5\u4E0E\u590D\u76D8", value: "review" }
-      ],
+      recipeOptions,
       async (value) => {
         await this.settingsManager.updateSettings({
           v3: {

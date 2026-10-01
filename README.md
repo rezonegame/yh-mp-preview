@@ -10,7 +10,7 @@ An independently maintained Markdown typesetting tool for Obsidian, with a WeCha
 
 当前稳定版：`3.15.0`。
 
-重构测试版：`3.18.0-beta.1`（P2–P4 配置、完整输出与界面整合）。需要 Obsidian **1.7.2 或更新版本**；可在 BRAT 指定该版本测试，验收前稳定版仍为 `3.15.0`。本轮不更改插件 ID、配置格式或 Markdown 原文，详见[实施与验收台账](docs/REFACTOR_EXECUTION.md)。
+重构测试版：`3.18.0-beta.2`（P2–P4 整合，并优化紧凑工具栏与局部增强命名）。需要 Obsidian **1.7.2 或更新版本**；可在 BRAT 指定该版本测试，验收前稳定版仍为 `3.15.0`。本轮不更改插件 ID、配置格式或 Markdown 原文，详见[实施与验收台账](docs/REFACTOR_EXECUTION.md)。
 
 ### 核心能力
 

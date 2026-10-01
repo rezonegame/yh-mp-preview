@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.18.0-beta.2
+
+- Place the theme-gallery icon, background, font and font size in one compact responsive group: a single row in wider panes and natural wrapping in narrow panes, without stretching dropdowns across the full toolbar.
+- Rename Advanced Typesetting to More Tools and split it into Article Actions and Local Layout Enhancements. Retain all nine actions; expose the explanation on demand and show an enabled effect on the collapsed entry.
+- Rename enhancement choices by actual effect (none, steps, checklist, introduction, quotation/conclusion, subheadings) while preserving all six persisted recipe IDs, formatting behavior and existing snapshots. Add full selection labels on hover.
+- Add runtime and isolated native-host layout tests. This prerelease retains the prior formatting algorithms, persisted IDs and desktop-only support; no Marketing vault files, settings or notes are changed.
+
 ## 3.18.0-beta.1
 
 - Complete the authorized P2–P4 refactor candidate, retaining plugin IDs, existing theme IDs, visibility preferences, extension fields and layout snapshots. Independent source checkpoints precede this integrated beta; no intermediate stable release is implied.

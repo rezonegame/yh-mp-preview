@@ -3,6 +3,7 @@ import { replaceWithSafeHtml } from './core/security/safeDom';
 import { PreviewSession } from './core/render/previewSession';
 import { boundedCanvasRender, queueCanvasRender, shouldIgnoreExportElement } from './core/render/exportCanvas';
 import { createWorkbenchControls } from './ui/workbenchControls';
+import { recipeOptions, recipeSummaryLabel } from './ui/recipeLabels';
 import { bindAsyncEvent, runAction } from './ui/asyncActions';
 import { MPConverter } from './converter';
 import { CopyManager } from './copyManager';
@@ -57,12 +58,8 @@ export class MPView extends ItemView {
     }
 
     private updateRecipeSummary(recipeId: string): void {
-        const labels: Record<string, string> = {
-            tutorial: '教程与步骤', checklist: '清单与方法论',
-            'product-intro': '产品或工具介绍', commentary: '观点与评论', review: '周报与复盘',
-        };
         const active = recipeId !== 'legacy-compatible';
-        this.recipeSummary.setText(active ? `高级排版 · ${labels[recipeId] || '已启用'}` : '高级排版');
+        this.recipeSummary.setText(recipeSummaryLabel(recipeId));
         this.recipeSummary.parentElement?.toggleClass('is-active', active);
     }
 
@@ -125,7 +122,7 @@ export class MPView extends ItemView {
         container.classList.add('mp-view-content');
 
         // 顶部工具栏
-        const { toolbar, controlsGroup, typographyRow, secondaryRow } = createWorkbenchControls(container);
+        const { toolbar, controlsGroup, secondaryRow } = createWorkbenchControls(container);
 
         // Inject Header
         const headerBtn = secondaryRow.createEl('button', {
@@ -254,9 +251,10 @@ export class MPView extends ItemView {
         });
         setIcon(galleryBtn, 'palette');
         galleryBtn.addEventListener('click', () => this.openThemeGallery());
+        controlsGroup.prepend(galleryBtn);
 
         // 字体选择器
-        const fontField = typographyRow.createDiv('mp-toolbar-field mp-font-field');
+        const fontField = controlsGroup.createDiv('mp-toolbar-field mp-font-field');
         fontField.createSpan({ cls: 'mp-toolbar-label', text: '字体' });
         this.customFontSelect = createCustomSelect(
             fontField,
@@ -272,7 +270,7 @@ export class MPView extends ItemView {
         );
 
         // 字号调整
-        const sizeField = typographyRow.createDiv('mp-toolbar-field mp-size-field');
+        const sizeField = controlsGroup.createDiv('mp-toolbar-field mp-size-field');
         sizeField.createSpan({ cls: 'mp-toolbar-label', text: '字号' });
         const fontSizeGroup = sizeField.createDiv({ cls: 'mp-font-size-group' });
         const decreaseButton = fontSizeGroup.createEl('button', {
@@ -300,24 +298,23 @@ export class MPView extends ItemView {
 
         const advanced = toolbar.createEl('details', { cls: 'mp-advanced-typesetting' });
         this.recipeSummary = advanced.createEl('summary');
+        advanced.createEl('h3', { cls: 'mp-tools-heading', text: '文章操作' });
         advanced.appendChild(secondaryRow);
-        advanced.createEl('p', {
+        const enhancement = advanced.createDiv('mp-enhancement-group');
+        const enhancementHeader = enhancement.createDiv('mp-tools-section-header');
+        enhancementHeader.createEl('h3', { cls: 'mp-tools-heading', text: '局部排版增强' });
+        const enhancementHelp = enhancementHeader.createEl('details', { cls: 'mp-enhancement-help' });
+        enhancementHelp.createEl('summary', { text: '说明' });
+        enhancementHelp.createEl('p', {
             cls: 'mp-advanced-hint',
-            text: '可选的局部结构增强；主题决定整体视觉。选择“通用长文”则不叠加配方样式，不修改 Markdown 原文。',
+            text: '主题决定整体视觉，这里只强化局部结构。选择“不额外增强”则仅使用主题；所有选项都不修改 Markdown 原文。',
         });
-        const recipeField = advanced.createDiv('mp-toolbar-field mp-recipe-field');
-        recipeField.createSpan({ cls: 'mp-toolbar-label', text: '文章配方' });
+        const recipeField = enhancement.createDiv('mp-toolbar-field mp-recipe-field');
+        recipeField.createSpan({ cls: 'mp-toolbar-label', text: '效果' });
         this.recipeSelect = createCustomSelect(
             recipeField,
             'mp-recipe-select',
-            [
-                { label: '通用长文', value: 'legacy-compatible' },
-                { label: '教程与步骤', value: 'tutorial' },
-                { label: '清单与方法论', value: 'checklist' },
-                { label: '产品或工具介绍', value: 'product-intro' },
-                { label: '观点与评论', value: 'commentary' },
-                { label: '周报与复盘', value: 'review' },
-            ],
+            recipeOptions,
             async (value) => {
                 await this.settingsManager.updateSettings({
                     v3: {

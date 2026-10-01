@@ -1,0 +1,328 @@
+{
+  "status": "tested release candidate; publication and BRAT status recorded in execution ledger",
+  "version": "3.18.0-beta.2",
+  "previousVersion": "3.18.0-beta.1",
+  "host": "Obsidian 1.13.7",
+  "platform": "Windows",
+  "scope": "MPPreview-Refactor-Test only; Marketing plugin/config/notes untouched",
+  "assets": {
+    "main.js": "7874be49f3298146cce67c900dce15b6266bcbdebcee7995c112a45d32d059d7",
+    "manifest.json": "5a24766b208ebac68572d3bbc45e002a58fc14021a6c32ede85771dcee512112",
+    "styles.css": "461d1275c6d05f4d8205d08d333cd8b82d2de71b6e23840f88f2df5a599cd6a2"
+  },
+  "checks": [
+    {
+      "name": "more tools and explanation initially collapsed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "appearance order is gallery background font size",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all nine secondary actions remain available",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "two sections describe tools and local enhancement",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "effect selector has new accessible name",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all six effect labels and old IDs remain",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light controls fit 320",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light controls fit 375",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light narrow appearance uses two rows 375",
+      "pass": true,
+      "detail": [
+        61,
+        101
+      ]
+    },
+    {
+      "name": "theme-light controls fit 414",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light narrow appearance uses two rows 414",
+      "pass": true,
+      "detail": [
+        61,
+        101
+      ]
+    },
+    {
+      "name": "theme-light controls fit 469",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light controls fit 520",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light appearance uses one row 520",
+      "pass": true,
+      "detail": [
+        61
+      ]
+    },
+    {
+      "name": "theme-light controls fit 600",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light appearance uses one row 600",
+      "pass": true,
+      "detail": [
+        61
+      ]
+    },
+    {
+      "name": "theme-light controls fit 900",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light appearance uses one row 900",
+      "pass": true,
+      "detail": [
+        61
+      ]
+    },
+    {
+      "name": "theme-dark controls fit 320",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark controls fit 375",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark narrow appearance uses two rows 375",
+      "pass": true,
+      "detail": [
+        61,
+        101
+      ]
+    },
+    {
+      "name": "theme-dark controls fit 414",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark narrow appearance uses two rows 414",
+      "pass": true,
+      "detail": [
+        61,
+        101
+      ]
+    },
+    {
+      "name": "theme-dark controls fit 469",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark controls fit 520",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark appearance uses one row 520",
+      "pass": true,
+      "detail": [
+        61
+      ]
+    },
+    {
+      "name": "theme-dark controls fit 600",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark appearance uses one row 600",
+      "pass": true,
+      "detail": [
+        61
+      ]
+    },
+    {
+      "name": "theme-dark controls fit 900",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark appearance uses one row 900",
+      "pass": true,
+      "detail": [
+        61
+      ]
+    },
+    {
+      "name": "active enhancement is visible on collapsed entry",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "collapsing more tools does not disable the effect",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "explanation is available on demand",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "no additional enhancement removes effect labels",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "source remains unchanged",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "dimensions": [
+    {
+      "theme": "theme-light",
+      "width": 320,
+      "paneWidth": 320,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 375,
+      "paneWidth": 375,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 414,
+      "paneWidth": 414,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 469,
+      "paneWidth": 469,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 520,
+      "paneWidth": 520,
+      "rows": 1,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 600,
+      "paneWidth": 600,
+      "rows": 1,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 900,
+      "paneWidth": 900,
+      "rows": 1,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 320,
+      "paneWidth": 320,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 375,
+      "paneWidth": 375,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 414,
+      "paneWidth": 414,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 469,
+      "paneWidth": 469,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 520,
+      "paneWidth": 520,
+      "rows": 1,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 600,
+      "paneWidth": 600,
+      "rows": 1,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 900,
+      "paneWidth": 900,
+      "rows": 1,
+      "overflow": []
+    }
+  ],
+  "visualEvidence": [
+    {
+      "name": "workbench-520-light.png",
+      "sha256": "10aa9485927838a70e0b7520b2dc175cde3613ff41ff7224b74f480169a53a61"
+    },
+    {
+      "name": "workbench-375-dark.png",
+      "sha256": "1a25d199efe3d6485f6c8a9641da299e7f7112bf3c534f25c947c04de1b94f8f"
+    }
+  ],
+  "limitations": [
+    "No BRAT installation of this candidate; GitHub release verification is recorded separately in the execution ledger.",
+    "This test covers interface layout and enhancement selection; it does not repeat the prior full image-export/clipboard/platform matrix."
+  ]
+}

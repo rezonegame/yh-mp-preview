@@ -4,6 +4,42 @@ import { createDom, loadModule } from './helpers/dom-runtime.mjs';
 const settle = () => new Promise(resolve => setTimeout(resolve, 20));
 const stub = `export class App {} export class Notice {constructor(message){globalThis.fixtureNotices.push(message)}} export function setIcon(){} export class Modal {constructor(app){this.app=app;this.modalEl=document.body.createDiv();this.contentEl=this.modalEl.createDiv();} open(){this.onOpen()} close(){this.closed=true;this.onClose();this.modalEl.remove()}}`;
 
+test('compact workbench has one appearance group and a separate secondary group', async () => {
+  createDom();
+  const {createWorkbenchControls}=await loadModule('src/ui/workbenchControls.ts');
+  const {toolbar,controlsGroup,secondaryRow}=createWorkbenchControls(document.body);
+  assert.equal(toolbar.querySelectorAll('.mp-compact-controls').length,1);
+  assert.equal(toolbar.querySelector('.mp-typography-row'),null);
+  assert.equal(controlsGroup.getAttribute('class'),'mp-controls-group mp-compact-controls');
+  assert.equal(secondaryRow.getAttribute('aria-label'),'文章操作');
+});
+
+test('local enhancement labels keep all persisted recipe IDs and expose active effect', async () => {
+  const {recipeOptions,recipeSummaryLabel}=await loadModule('src/ui/recipeLabels.ts');
+  assert.deepEqual(recipeOptions.map(option=>option.value),['legacy-compatible','tutorial','checklist','product-intro','commentary','review']);
+  assert.deepEqual(recipeOptions.map(option=>option.label),['不额外增强','步骤列表','勾选清单','导语强调','引用与结语强调','小标题强调']);
+  assert.equal(recipeSummaryLabel('legacy-compatible'),'更多工具');
+  for(const option of recipeOptions.slice(1)) assert.equal(recipeSummaryLabel(option.value),`更多工具 · ${option.label}`);
+  assert.equal(recipeSummaryLabel('unknown'),'更多工具');
+});
+
+test('enhancement selector accessible name matches visible effect terminology', async () => {
+  createDom(); globalThis.fixtureNotices=[];
+  const {createCustomSelect}=await loadModule('src/ui/CustomSelect.ts',stub);
+  const {recipeOptions}=await loadModule('src/ui/recipeLabels.ts');
+  const parent=document.body.createDiv();
+  const changes=[];
+  const control=createCustomSelect(parent,'mp-recipe-select',recipeOptions,value=>changes.push(value));
+  control.setValue('tutorial');
+  const select=parent.querySelector('select');
+  assert.equal(select.getAttribute('aria-label'),'局部排版增强');
+  assert.equal(select.selectedOptions[0].textContent,'步骤列表');
+  assert.equal(select.title,'步骤列表');
+  select.value='legacy-compatible';select.dispatchEvent(new window.Event('change'));await settle();
+  assert.deepEqual(changes,['legacy-compatible']);
+  assert.equal(select.title,'不额外增强');
+});
+
 test('native grouped selector preserves hidden current selection and rolls back failed saves', async () => {
   createDom(); globalThis.fixtureNotices=[];
   const {createCustomSelect}=await loadModule('src/ui/CustomSelect.ts',stub);
@@ -12,9 +48,11 @@ test('native grouped selector preserves hidden current selection and rolls back 
   control.setValue('custom-hidden-font');
   const select=parent.querySelector('select');
   assert.equal(select.value,'custom-hidden-font'); assert.equal(select.querySelectorAll('optgroup').length,1);
+  assert.equal(select.title,'当前字体');
   select.value='serif';select.dispatchEvent(new window.Event('change'));
   assert.equal(select.disabled,true); await settle();
   assert.equal(select.value,'custom-hidden-font'); assert.equal(select.disabled,false);
+  assert.equal(select.title,'当前字体');
   assert.ok(fixtureNotices.some(message=>message.includes('disk full')));
 });
 

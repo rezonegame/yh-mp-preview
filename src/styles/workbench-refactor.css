@@ -9,17 +9,37 @@
     outline: 2px solid var(--interactive-accent);
     outline-offset: 2px;
 }
-.mp-view-content .mp-secondary-row { flex-wrap: wrap; gap: 6px; overflow: visible; }
+.mp-view-content .mp-secondary-row { flex-wrap: wrap; gap: 4px; overflow: visible; }
 .mp-view-content .mp-primary-row { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
 .mp-view-content .mp-primary-row button { min-width: 0; width: 100%; white-space: normal; height: auto; min-height: 34px; }
 .mp-view-content .mp-primary-row .mp-copy-button { grid-column: 1 / -1; }
 .mp-view-content .mp-primary-row button:last-child { grid-column: 1 / -1; }
-.mp-view-content .mp-advanced-typesetting .mp-secondary-row { margin-block: 10px; }
+.mp-view-content .mp-advanced-typesetting .mp-secondary-row { margin-block: 6px 10px; }
 .mp-view-content .mp-toolbar-field { min-width: 0; }
 .mp-view-content .custom-select-container { min-width: 0; max-width: none; }
 .mp-view-content select.custom-select { display: block; width: 100%; min-width: 0; padding-inline: 10px 24px; appearance: auto; background-image: none; text-overflow: ellipsis; }
-.mp-view-content .mp-toolbar :is(.mp-background-field,.mp-font-field) { flex: 1 1 180px; }
-.mp-view-content .mp-size-field { flex: 0 0 auto; }
+.mp-view-content .mp-toolbar .mp-compact-controls {
+    display: grid;
+    grid-template-columns: 32px minmax(116px,140px) minmax(140px,160px) 124px;
+    gap: 8px;
+    align-items: center;
+}
+.mp-view-content .mp-compact-controls > .mp-gallery-btn {
+    width: 32px; min-width: 32px; height: 32px; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+}
+.mp-view-content .mp-compact-controls > .mp-toolbar-field { gap: 6px; }
+.mp-view-content .mp-compact-controls .mp-font-size-group { gap: 0; }
+.mp-view-content .mp-compact-controls .mp-font-size-btn { flex: 0 0 28px; padding: 0; }
+.mp-view-content .mp-compact-controls .mp-font-size-input { width: 34px; min-width: 0; }
+.mp-view-content .mp-tools-heading { margin: 10px 0 0; font-size: 12px; font-weight: 600; color: var(--text-muted); }
+.mp-view-content .mp-enhancement-group { border-top: 1px solid var(--background-modifier-border); padding-top: 8px; }
+.mp-view-content .mp-tools-section-header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-bottom: 8px; }
+.mp-view-content .mp-tools-section-header .mp-tools-heading { margin: 0; }
+.mp-view-content .mp-enhancement-help { min-width: 0; }
+.mp-view-content .mp-enhancement-help > summary { font-size: 12px; color: var(--text-muted); cursor: pointer; }
+.mp-view-content .mp-enhancement-help[open] { flex: 1 1 100%; }
+.mp-view-content .mp-enhancement-help .mp-advanced-hint { margin: 6px 0 0; }
 .mp-view-content .mp-preview-width-choices button { min-height: 30px; }
 .mp-view-content .mp-validation-summary { line-height: 1.5; }
 .mp-view-content .mp-validation-issues { margin: 8px 0 0; padding-left: 20px; }
@@ -45,11 +65,15 @@
 .mp-about-modal { color: var(--text-normal); overflow-y: auto; line-height: 1.65; }
 .mp-about-modal .mp-about-section { margin-inline: 0; }
 .mp-about-modal .mp-about-qr { padding: 8px 12px; margin-top: 10px; border: 1px dashed var(--background-modifier-border); border-radius: 6px; }
-@container (max-width: 440px) {
-    .mp-view-content .mp-appearance-row,
-    .mp-view-content .mp-typography-row { flex-wrap: wrap; }
-    .mp-view-content .mp-font-field { flex: 1 1 100%; }
-    .mp-view-content .mp-size-field { margin-left: auto; }
+@container (max-width: 480px) {
+    .mp-view-content .mp-toolbar .mp-compact-controls { grid-template-columns: 32px minmax(0,1fr) 124px; }
+    .mp-view-content .mp-compact-controls > .mp-background-field { grid-column: 2 / -1; }
+    .mp-view-content .mp-compact-controls > .mp-font-field { grid-column: 1 / 3; }
+}
+@container (max-width: 260px) {
+    .mp-view-content .mp-toolbar .mp-compact-controls { grid-template-columns: 32px minmax(0,1fr); }
+    .mp-view-content .mp-compact-controls > .mp-font-field { grid-column: 1 / -1; }
+    .mp-view-content .mp-compact-controls > .mp-size-field { grid-column: 1 / -1; width: 124px; }
 }
 @media (max-width: 440px) {
     .mp-theme-gallery-modal .mp-gallery-header-actions { flex-wrap: wrap; width: 100%; }

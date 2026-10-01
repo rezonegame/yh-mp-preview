@@ -44,19 +44,22 @@ test('seven scenes each have two structurally distinct themes and five legacy ID
   assert.equal(templates.size, 19);
 });
 
-test('history is a small gallery entry and typography has its own toolbar row', () => {
+test('history is a small gallery entry and appearance controls share a responsive toolbar row', () => {
   const gallery = readFileSync(new URL('src/settings/ThemeGalleryModal.ts', root), 'utf8');
   const view = readFileSync(new URL('src/view.ts', root), 'utf8');
   assert.match(gallery, /mp-gallery-history-btn/);
   assert.match(gallery, /this\.activateScene\('历史主题'\)/);
   assert.doesNotMatch(gallery, /\.\.\.CURATED_SCENE_ORDER, '自定义主题', '历史主题'/);
   const controls = readFileSync(new URL('src/ui/workbenchControls.ts', root), 'utf8');
-  assert.match(controls, /mp-controls-group mp-typography-row/);
+  assert.match(controls, /mp-controls-group mp-compact-controls/);
+  assert.doesNotMatch(controls, /mp-typography-row/);
   assert.match(view, /setIcon\(galleryBtn, 'palette'\)/);
   assert.doesNotMatch(view, /galleryBtn\.createSpan/);
   assert.match(view, /mp-advanced-typesetting/);
   assert.match(view, /updateRecipeSummary\(snapshot\.recipeId\)/);
-  assert.match(view, /text: '文章配方'/);
+  assert.match(view, /text: '局部排版增强'/);
+  assert.match(view, /text: '文章操作'/);
+  assert.match(view, /controlsGroup\.prepend\(galleryBtn\)/);
 });
 
 function luminance(hex) {
