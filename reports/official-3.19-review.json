@@ -5,11 +5,14 @@
   "commit": "7fd37377b1668cbb2d6f32c43646976bccc2818a",
   "url": "https://community.obsidian.md/account/plugins/yh-mp-preview",
   "request": "Check for new releases; manifest recognized; one scan queued",
-  "status": "Pending",
-  "isFinal": false,
+  "status": "Completed",
+  "isFinal": true,
+  "errorFindings": 0,
+  "warningsAndRecommendationsRemain": true,
   "dependencyCheck": "Pass",
-  "buildReproduction": "not yet reported in current review",
+  "buildReproduction": "Pass; release main.js reproduced byte-for-byte",
   "publishedToDirectory": false,
   "sourceQualification": "unresolved-no-public-consent-evidence",
-  "scope": "Read the current 3.19.0 review separately from prior reviews; Pending is not success or approval"
+  "screenshot": "output/refactor/official-3.19-review.jpg",
+  "scope": "Read the terminal 3.19.0 review separately from prior reviews; Completed is technical scan completion, not source qualification or directory publication"
 }
