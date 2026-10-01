@@ -2,6 +2,8 @@
 
 当前稳定版：[3.19.0](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.19.0)；已验收的 P2–P4 稳定版 [3.18.0](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.18.0) 保留回退。GitHub latest 已核对为 `3.19.0`。维护者的确认、自动／宿主证据和发行验证分别记录；官方目录审核仍是独立事项。
 
+最新官方状态：维护者删除旧条目后重新申请并自行确认承诺；新版说明保存后已执行 Publish，官方社区网站 3.19.0 页面已公开。应用内目录同步／安装尚未验收；来源与依赖审计结论不因发布而更改。详情见 [本轮重新提交](OFFICIAL_3.19_RESUBMISSION.md)。下文未 Publish 的表述属于此前阶段。
+
 稳定回退版仍为 `v3.15.0`，固定提交 `74824816a2251299872ab0534c9fb1ff35f84047`。不覆盖旧发行资产、不删除配置、不迁移插件 ID。
 
 ## 3.19.0：原仓库已发行

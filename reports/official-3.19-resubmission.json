@@ -1,0 +1,49 @@
+{
+  "observedDate": "2026-10-01",
+  "version": "3.19.0",
+  "repository": "rezonegame/yh-mp-preview",
+  "releaseCommit": "7fd37377b1668cbb2d6f32c43646976bccc2818a",
+  "listingUrl": "https://community.obsidian.md/plugins/yh-mp-preview",
+  "adminUrl": "https://community.obsidian.md/account/plugins/yh-mp-preview",
+  "priorEntryAbsentBeforeResubmission": true,
+  "maintainerConfirmedPoliciesAndMaintenanceInBrowser": true,
+  "agentCheckedPolicyCheckboxes": false,
+  "listingDescriptionCharacters": 900,
+  "categories": ["Formatting", "Export", "Images"],
+  "payments": "Free",
+  "currentReview": {
+    "version": "3.19.0",
+    "status": "Completed",
+    "errorFindings": 0,
+    "dependencies": "Pass",
+    "build": "Pass; release main.js reproduced byte-for-byte",
+    "warningsAndRecommendationsRemain": true,
+    "freshIndependentScanExecutionClaimed": false
+  },
+  "publishActionExecuted": true,
+  "adminDraftBannerAbsentAfterPublish": true,
+  "adminViewListingLinkPresent": true,
+  "publicListingOpenedAndVerified": true,
+  "publicVersion": "3.19.0",
+  "publicInstallLink": "obsidian://show-plugin?id=yh-mp-preview",
+  "legacyGitHubRegistryEntryObserved": false,
+  "applicationInstallTested": false,
+  "bratAddress": "rezonegame/yh-mp-preview",
+  "assets": "13 release attachments reverified; runtime unchanged from native-tested release",
+  "verification": "126 automated tests passed again; prior 147 native checks remain bound to identical runtime assets",
+  "historicalCopyrightAndDependencyNoticesRetained": true,
+  "independentAuthorshipClearanceClaimed": false,
+  "originalAuthorPublicApprovalObtained": false,
+  "oldGitHubReleasesDeleted": false,
+  "releaseAssetsOverwritten": false,
+  "marketingVaultModified": false,
+  "screenshots": [
+    "output/refactor/official-3.19-resubmitted-published-admin.jpg",
+    "output/refactor/official-3.19-public-listing.jpg"
+  ],
+  "limitations": [
+    "Public website publication is verified; application catalog propagation and installation are not.",
+    "The website publication and Completed scan are not independent-authorship certification or original-author approval.",
+    "The public-page web-fetch tool was unavailable; evidence is the actual browser page and post-publish admin state."
+  ]
+}

@@ -14,7 +14,7 @@ The plugin is free and desktop-only. It requires Obsidian 1.7.2 or later; this r
 
 Version 3.19.0 rebuilds the remaining implementations identified by the source audit and embeds the maintainer-supplied personal-contact QR image offline. It continues in the original repository with the same plugin ID and BRAT address; previous releases remain available. Historical MIT attribution and dependency licenses are preserved. Exact-match checks are not proof of independent authorship or official-directory approval.
 
-Install the published plugin through BRAT using `rezonegame/yh-mp-preview`. It is not yet listed in the official Community directory. Open the preview from the ribbon or command palette, choose a layout, and use the copy or export controls. See [source provenance](docs/SOURCE_PROVENANCE.md), [license notices](THIRD_PARTY_NOTICES.md), and [submission status](docs/COMMUNITY_SUBMISSION.md).
+The [official Community website listing](https://community.obsidian.md/plugins/yh-mp-preview) is public for 3.19.0. Application-directory synchronization and installation have not yet been verified; BRAT remains available using `rezonegame/yh-mp-preview`. Open the preview from the ribbon or command palette, choose a layout, and use the copy or export controls. See [source provenance](docs/SOURCE_PROVENANCE.md), [license notices](THIRD_PARTY_NOTICES.md), and [submission status](docs/COMMUNITY_SUBMISSION.md).
 
 ![version](https://img.shields.io/github/v/tag/rezonegame/yh-mp-preview?color=blue&label=version&style=flat) ![license](https://img.shields.io/badge/license-AGPL--3.0--or--later-blue)
 
@@ -53,15 +53,15 @@ Install the published plugin through BRAT using `rezonegame/yh-mp-preview`. It i
 4. 点击 `Pub 复制`，粘贴到微信公众号后台。
 5. 如需跨平台分发，可导出长图。
 
-## BRAT 安装
+## 官方页面与 BRAT 安装
 
-目前请通过 Obsidian BRAT 安装，在 BRAT 中添加：
+`3.19.0` 已在 [Obsidian 官方社区网站](https://community.obsidian.md/plugins/yh-mp-preview) 公开，页面提供 Add to Obsidian 入口。应用内目录同步与安装尚未验收；旧 GitHub 目录索引在本轮核验时还未包含此 ID。需要现在安装时，可继续通过 Obsidian BRAT 添加：
 
 ```text
 rezonegame/yh-mp-preview
 ```
 
-发行文件为 `main.js`、`manifest.json` 和 `styles.css`；如固定了预发布版本，可切换到 `3.19.0`。本插件尚未正式上架 Obsidian 官方社区目录，不应把 BRAT 可安装或本地测试通过理解为官方审核通过。
+发行文件为 `main.js`、`manifest.json` 和 `styles.css`；如固定了预发布版本，可切换到 `3.19.0`。网站公开、技术扫描、应用内安装和来源独立性是不同结论，分别见提交与验证记录。
 
 ## 组件示例
 
@@ -113,4 +113,4 @@ Typesetting and note enhancements run locally. The plugin has no telemetry or au
 
 本项目由维护者提供的现行代码采用 AGPL-3.0-or-later；保留的上游实现及第三方依赖继续遵守各自许可，不把它们重新声明为维护者独占版权。详情见 [LICENSE](LICENSE)、[NOTICE](NOTICE)、[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 和 [LICENSES](LICENSES/)。
 
-来源署名和开源许可不等同于 Obsidian 官方目录的上架同意。维护者已确认继续原仓库／插件 ID，不采用新仓库路径；历史来源资格仍需独立核验，正式列表仍为草稿。各版本的发行与官方扫描状态见 [官方提交记录](docs/COMMUNITY_SUBMISSION.md)。
+来源署名和开源许可不等同于独立创作证明或原作者公开同意。维护者确认继续原仓库／插件 ID，并自行确认开发者政策及维护承诺；`3.19.0` 的官方社区网站页面现已公开。该发布事实不改写历史来源审计结论，应用内同步与安装仍未核验。各阶段状态见 [官方提交记录](docs/COMMUNITY_SUBMISSION.md)。
