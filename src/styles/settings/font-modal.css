@@ -1,68 +1,9 @@
-/* 组件容器 */
-.mp-font-modal {
-    --mfd-accent: var(--interactive-accent);
-    --mfd-bg: var(--background-primary);
-    --mfd-border: var(--background-modifier-border);
-}
-
-/* 标题容器 */
-.mp-font-modal .mfd-header {
-    display: flex;
-    align-items: center;
-    margin: 0 0 1.5rem;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--mfd-border);
-}
-
-/* 帮助按钮容器 */
-.mp-font-modal .mfd-help-trigger {
-    position: relative;
-    margin-left: 0.8rem;
-}
-
-/* 帮助按钮 */
-.mp-font-modal .mfd-help-btn {
-    background: none;
-    border: none;
-    padding: 4px;
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-    opacity: 0.8;
-}
-.mp-font-modal .mfd-help-btn:hover {
-    opacity: 1;
-    color: var(--mfd-accent);
-}
-
-/* 提示框 */
-.mp-font-modal .mfd-help-tooltip {
-    display: none;
-    position: absolute;
-    top: calc(100% + 10px);
-    width: 390px;
-    padding: 14px;
-    background: var(--mfd-bg);
-    border: 1px solid var(--mfd-border);
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: calc(var(--layer-popover) + 100);
-    font-size: 13px;
-    line-height: 1.6;
-    white-space: pre-line;
-}
-
-/* 交互状态 */
-.mp-font-modal .mfd-help-trigger:hover .mfd-help-tooltip {
-    display: block;
-}
-
-/* 移动端适配 */
-@media (hover: none) and (pointer: coarse) {
-    .mp-font-modal .mfd-help-tooltip {
-        width: 95vw;
-        left: auto;
-        right: 0;
-        transform: none;
-    }
-}
+/* Keyboard-accessible font help is native details, not a hover popover. */
+.mp-font-modal { display: grid; row-gap: 10px; color: var(--text-normal); }
+.mp-font-modal .setting-item-control { flex: 1 1 200px; min-inline-size: 0; }
+.mp-font-modal input { inline-size: 100%; }
+.mp-font-modal .mp-font-guidance { padding: 10px 12px; background: var(--background-secondary); border-radius: 6px; }
+.mp-font-modal .mp-font-guidance summary { cursor: pointer; font-size: 13px; font-weight: 600; }
+.mp-font-modal .mp-font-guidance p { margin-block: 8px 0; line-height: 1.6; overflow-wrap: anywhere; color: var(--text-muted); }
+.mp-confirm-modal .mp-form-error { color: var(--text-error); overflow-wrap: anywhere; }
+.mp-confirm-modal .mp-dialog-actions { display: flex; justify-content: flex-end; column-gap: 8px; }

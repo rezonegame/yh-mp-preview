@@ -7,7 +7,7 @@ import { cloneSettings } from '../core/settings/settingsRepository';
 import { styleFields } from '../core/settings/styleFields';
 import { hasUnsafeCss } from '../core/security/safeDom';
 import { submitDraft } from '../ui/submitDraft';
-import { nanoid } from '../utils/nanoid';
+import { nanoid } from 'nanoid';
 
 const groups: Record<string, string> = { container:'全局样式', title:'标题样式', paragraph:'段落样式', list:'列表样式', code:'代码样式', quote:'引用样式', image:'图片样式', link:'链接样式', emphasis:'强调样式', table:'表格样式', hr:'分隔线样式', footnote:'脚注样式', containers:'信息组件', accentColor:'强调色' };
 const properties: Record<string,string> = { color:'文字颜色', 'background-color':'底色', 'font-size':'字号', 'font-weight':'字重', 'line-height':'行高', margin:'外边距', padding:'内边距', border:'边框', 'border-radius':'圆角', 'text-align':'对齐' };

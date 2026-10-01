@@ -1,12 +1,14 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { officialReleaseIssues } from './official-release-contract.mjs';
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const tagIndex = args.indexOf('--tag');
 const expectedTag = tagIndex >= 0 ? args[tagIndex + 1] : undefined;
 const requireBuild = args.includes('--require-build');
+const official = args.includes('--official');
 const semverPattern = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
 
 function readJson(relativePath) {
@@ -41,12 +43,22 @@ assert(existsSync(resolve(rootDir, 'CHANGELOG.md')), 'Release must include CHANG
 assert(existsSync(resolve(rootDir, 'THIRD_PARTY_NOTICES.md')), 'Release must include third-party notices');
 assert(existsSync(resolve(rootDir, 'LICENSES/MIT-original.txt')), 'Release must preserve the original MIT license');
 assert(existsSync(resolve(rootDir, 'LICENSES/DOMPurify.txt')), 'Release must preserve the DOMPurify license');
+for (const name of ['html2canvas', 'nanoid', 'pangu', 'Microsoft-helpers', 'babel-helpers']) {
+  const file = `LICENSES/${name}.txt`;
+  assert(existsSync(resolve(rootDir, file)), `Release must preserve ${file}`);
+  assert(workflow.includes(file), `Release workflow must ship ${file}`);
+}
 assert(workflow.includes('npm run verify'), 'Release workflow must run the verification suite');
 assert(workflow.includes('LICENSE'), 'Release workflow must ship LICENSE');
 assert(workflow.includes('THIRD_PARTY_NOTICES.md'), 'Release workflow must ship third-party notices');
 
 if (expectedTag) {
   assert([packageJson.version, `v${packageJson.version}`].includes(expectedTag), `Tag ${expectedTag} does not match ${packageJson.version}`);
+}
+
+if (official) {
+  const issues = officialReleaseIssues(manifest, expectedTag);
+  assert(issues.length === 0, `Official release contract failed:\n${issues.join('\n')}`);
 }
 
 if (requireBuild) {

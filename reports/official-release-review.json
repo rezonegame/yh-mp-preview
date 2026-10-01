@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-01",
+  "entry": "https://community.obsidian.md/account/plugins/yh-mp-preview",
+  "repository": "rezonegame/yh-mp-preview",
+  "reviewedVersion": "3.18.0",
+  "reviewedCommit": "fa187fedc64fb73fa7d213ade372ec2e905ea257",
+  "laterLocalValidation": "config-directory-regression.json",
+  "reviewStatus": "Completed",
+  "errorFindings": 0,
+  "dependencyCheck": "Pass: No vulnerable dependencies found.",
+  "buildVerification": "Pass: Build reproduced the release main.js byte-for-byte",
+  "warningsRemain": [
+    "Repository issues are disabled",
+    "Source-code recommendations and warnings",
+    "CSS lint warnings",
+    "README does not appear to contain English text"
+  ],
+  "recommendationsRemain": [
+    "Missing GitHub artifact attestations for release assets",
+    "Additional license assets are not downloaded by the Obsidian installer",
+    "Clipboard access disclosure"
+  ],
+  "listingDescriptions": {
+    "saved": true,
+    "language": "English",
+    "shortCharacters": 113,
+    "longCharacters": 925
+  },
+  "localCandidate": {
+    "version": "3.19.0-beta.1",
+    "onlineScanObtained": false,
+    "published": false,
+    "automationTests": 121,
+    "automationFailed": 0,
+    "officialVersionGate": "expected failure: prerelease suffix is not allowed",
+    "newRuntimeOrAssetChangesThisContinuation": false
+  },
+  "completionAudit": {
+    "currentImplementationAndNativeVerification": "evidenced by source-rebuild-verification.json; not an official approval",
+    "originalHistoryAndLicenseDisclosure": "retained",
+    "independentRepositoryPath": "awaiting maintainer choice; no repository created",
+    "sourceEligibility": "not established by exact-match checks or technical scan",
+    "candidateNumericReleaseAndMatchingArtifacts": "not published",
+    "candidateOfficialScan": "not obtained",
+    "officialPublish": false,
+    "publicDirectoryListing": "not achieved"
+  },
+  "limitations": [
+    "This scan covers published 3.18.0, not the unpublished local rebuild.",
+    "Completed with no Error findings is not source-eligibility approval or public listing.",
+    "Local English README additions have not been published and cannot clear the old-release warning retroactively.",
+    "Historical Failed preview blocks were excluded from the current-review finding count."
+  ]
+}

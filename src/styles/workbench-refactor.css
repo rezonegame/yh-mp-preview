@@ -63,8 +63,6 @@
 .mp-theme-gallery-modal .mp-gallery-btn-apply { max-width: 100%; white-space: normal; height: auto; padding-block: 8px; overflow-wrap: anywhere; }
 .mp-theme-gallery-modal .mp-theme-name { white-space: normal; overflow-wrap: anywhere; }
 .mp-about-modal { color: var(--text-normal); overflow-y: auto; line-height: 1.65; }
-.mp-about-modal .mp-about-section { margin-inline: 0; }
-.mp-about-modal .mp-about-qr { padding: 8px 12px; margin-top: 10px; border: 1px dashed var(--background-modifier-border); border-radius: 6px; }
 @container (max-width: 480px) {
     .mp-view-content .mp-toolbar .mp-compact-controls { grid-template-columns: 32px minmax(0,1fr) 124px; }
     .mp-view-content .mp-compact-controls > .mp-background-field { grid-column: 2 / -1; }

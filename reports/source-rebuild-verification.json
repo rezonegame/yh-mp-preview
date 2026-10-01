@@ -1,0 +1,1392 @@
+{
+  "version": "3.19.0-beta.1",
+  "status": "historical verified local build before the configuration-directory patch; not pushed, tagged or published",
+  "laterLocalValidation": "config-directory-regression.json",
+  "host": "Obsidian 1.13.7",
+  "platform": "Win32",
+  "devicePixelRatio": 2,
+  "scope": "Generated MPPreview-Refactor-Test only; Marketing plugin, settings and notes untouched",
+  "assets": {
+    "main.js": "b5322ab5c099eaf08a31b73ccfeb0c279e05dde8b505523cef34f51d145097f9",
+    "styles.css": "b00282f9c9e83ddf4a98d0c94699ec96b230774d86ffb730215378534e05e61c",
+    "manifest.json": "a66c6360a1dd6536a7ebcc4de55654bbb099cc7e7736a08bbfe3488e117c30a5"
+  },
+  "automation": {
+    "tests": 117,
+    "failed": 0,
+    "recommendedLintErrors": 0,
+    "warnings": 32,
+    "runtimeDependencyVulnerabilities": 0
+  },
+  "native": {
+    "articleOutput": [
+      {
+        "name": "real Markdown renderer preserves both dialogue blocks",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "header and footer inside article boundary",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 320",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 375",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 375",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 414",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 414",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "actual article width 320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 469",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 469",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "actual article width 375",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 508",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 508",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "actual article width 414",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 600",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 600",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "phone mode does not change export width or article height",
+        "pass": true,
+        "detail": {
+          "adaptive": {
+            "width": 506,
+            "height": 6598
+          },
+          "phone": {
+            "width": 506,
+            "height": 6598
+          }
+        }
+      },
+      {
+        "name": "full export includes article below viewport",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery keeps keyboard focus after selection",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery cancel restores persisted theme without writes",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "repeated recipe does not duplicate labels",
+        "pass": true,
+        "detail": {
+          "labels": 30
+        }
+      },
+      {
+        "name": "theme trial is isolated per preview pane",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "late previous render cannot overwrite new article",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "all export adapters generate complete artifacts",
+        "pass": true,
+        "detail": {
+          "names": [
+            "yh-mp-preview-1790836901215.png",
+            "yh-mp-preview-1790836901669.html",
+            "yh-mp-preview-1790836901711-1.png",
+            "yh-mp-preview-1790836901711-2.png",
+            "yh-mp-preview-1790836901711-3.png",
+            "yh-mp-preview-1790836901711-4.png",
+            "yh-mp-preview-1790836901711-5.png",
+            "yh-mp-preview-1790836901711-6.png",
+            "yh-mp-preview-1790836901711-7.png",
+            "yh-mp-preview-1790836901711-8.png",
+            "yh-mp-preview-1790836901711-9.png",
+            "yh-mp-preview-1790836901711-10.png"
+          ]
+        }
+      },
+      {
+        "name": "HTML contains header, footer and final article text",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "long image covers full article",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "real system clipboard contains full canonical article",
+        "pass": null,
+        "skipped": "background-clipboard",
+        "detail": "Foreground access required; do not claim background clipboard verification."
+      },
+      {
+        "name": "source Markdown remains unchanged",
+        "pass": true,
+        "detail": null
+      }
+    ],
+    "layout": [
+      {
+        "name": "more tools and explanation initially collapsed",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "appearance order is gallery background font size",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "all nine secondary actions remain available",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "two sections describe tools and local enhancement",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "effect selector has new accessible name",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "all six effect labels and old IDs remain",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light controls fit 320",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light validation remains readable 320",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-light controls fit 375",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light validation remains readable 375",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-light narrow appearance uses two rows 375",
+        "pass": true,
+        "detail": [
+          63,
+          103
+        ]
+      },
+      {
+        "name": "theme-light controls fit 414",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light validation remains readable 414",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-light narrow appearance uses two rows 414",
+        "pass": true,
+        "detail": [
+          63,
+          103
+        ]
+      },
+      {
+        "name": "theme-light controls fit 469",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light validation remains readable 469",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-light controls fit 520",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light validation remains readable 520",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-light appearance uses one row 520",
+        "pass": true,
+        "detail": [
+          63
+        ]
+      },
+      {
+        "name": "theme-light controls fit 600",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light validation remains readable 600",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-light appearance uses one row 600",
+        "pass": true,
+        "detail": [
+          63
+        ]
+      },
+      {
+        "name": "theme-light controls fit 900",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light validation remains readable 900",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-light appearance uses one row 900",
+        "pass": true,
+        "detail": [
+          63
+        ]
+      },
+      {
+        "name": "theme-dark controls fit 320",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark validation remains readable 320",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-dark controls fit 375",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark validation remains readable 375",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-dark narrow appearance uses two rows 375",
+        "pass": true,
+        "detail": [
+          63,
+          103
+        ]
+      },
+      {
+        "name": "theme-dark controls fit 414",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark validation remains readable 414",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-dark narrow appearance uses two rows 414",
+        "pass": true,
+        "detail": [
+          63,
+          103
+        ]
+      },
+      {
+        "name": "theme-dark controls fit 469",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark validation remains readable 469",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-dark controls fit 520",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark validation remains readable 520",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-dark appearance uses one row 520",
+        "pass": true,
+        "detail": [
+          63
+        ]
+      },
+      {
+        "name": "theme-dark controls fit 600",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark validation remains readable 600",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-dark appearance uses one row 600",
+        "pass": true,
+        "detail": [
+          63
+        ]
+      },
+      {
+        "name": "theme-dark controls fit 900",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark validation remains readable 900",
+        "pass": true,
+        "detail": {
+          "height": 38
+        }
+      },
+      {
+        "name": "theme-dark appearance uses one row 900",
+        "pass": true,
+        "detail": [
+          63
+        ]
+      },
+      {
+        "name": "active enhancement is visible on collapsed entry",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "collapsing more tools does not disable the effect",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "explanation is available on demand",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "no additional enhancement removes effect labels",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "source remains unchanged",
+        "pass": true,
+        "detail": null
+      }
+    ],
+    "settings": [
+      {
+        "name": "theme native form opens and cancel leaves settings unchanged",
+        "pass": true
+      },
+      {
+        "name": "font native form opens and cancel leaves settings unchanged",
+        "pass": true
+      },
+      {
+        "name": "background native form opens and cancel leaves settings unchanged",
+        "pass": true
+      },
+      {
+        "name": "native settings keyboard accordion",
+        "pass": true
+      },
+      {
+        "name": "native personal contact Escape closes even after host focus changes",
+        "pass": true
+      }
+    ],
+    "rebuildContracts": [
+      {
+        "name": "pause state reports pressed and accurate label",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "resume updates all lock accessibility attributes",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "manual edit automatically locks with the same accessible state",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "file opening resets lock attributes",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "hidden-text insertion uses shared lock state",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light code theme color and contrast default",
+        "pass": true,
+        "detail": {
+          "ratio": 9.896764973632585
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast deep-reading",
+        "pass": true,
+        "detail": {
+          "ratio": 15.122244934373345
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast academic-pro",
+        "pass": true,
+        "detail": {
+          "ratio": 11.397338780226393
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast clear-guide",
+        "pass": true,
+        "detail": {
+          "ratio": 12.014096987442032
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast knowledge-notes",
+        "pass": true,
+        "detail": {
+          "ratio": 11.320060170227892
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast apple-product",
+        "pass": true,
+        "detail": {
+          "ratio": 14.029874741046042
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast product-review",
+        "pass": true,
+        "detail": {
+          "ratio": 8.954359813179519
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast minimal",
+        "pass": true,
+        "detail": {
+          "ratio": 14.270056301028625
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast red-white-editorial",
+        "pass": true,
+        "detail": {
+          "ratio": 14.533139232409889
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast ink-opinion",
+        "pass": true,
+        "detail": {
+          "ratio": 13.227238316519387
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast modern-report",
+        "pass": true,
+        "detail": {
+          "ratio": 13.029371258796607
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast data-blueprint",
+        "pass": true,
+        "detail": {
+          "ratio": 13.870048826938152
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast briefing-grid",
+        "pass": true,
+        "detail": {
+          "ratio": 11.06449886522574
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast zen-essence",
+        "pass": true,
+        "detail": {
+          "ratio": 7.177597595473896
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast warm-paper",
+        "pass": true,
+        "detail": {
+          "ratio": 11.542940759224331
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast eastern-notes",
+        "pass": true,
+        "detail": {
+          "ratio": 9.42973044480549
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast academic-pro-forest",
+        "pass": true,
+        "detail": {
+          "ratio": 11.44158969785075
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast olive-journal",
+        "pass": true,
+        "detail": {
+          "ratio": 13.599591055457497
+        }
+      },
+      {
+        "name": "theme-light code theme color and contrast case-file",
+        "pass": true,
+        "detail": {
+          "ratio": 11.234293798602224
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast default",
+        "pass": true,
+        "detail": {
+          "ratio": 9.896764973632585
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast deep-reading",
+        "pass": true,
+        "detail": {
+          "ratio": 15.122244934373345
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast academic-pro",
+        "pass": true,
+        "detail": {
+          "ratio": 11.397338780226393
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast clear-guide",
+        "pass": true,
+        "detail": {
+          "ratio": 12.014096987442032
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast knowledge-notes",
+        "pass": true,
+        "detail": {
+          "ratio": 11.320060170227892
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast apple-product",
+        "pass": true,
+        "detail": {
+          "ratio": 14.029874741046042
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast product-review",
+        "pass": true,
+        "detail": {
+          "ratio": 8.954359813179519
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast minimal",
+        "pass": true,
+        "detail": {
+          "ratio": 14.270056301028625
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast red-white-editorial",
+        "pass": true,
+        "detail": {
+          "ratio": 14.533139232409889
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast ink-opinion",
+        "pass": true,
+        "detail": {
+          "ratio": 13.227238316519387
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast modern-report",
+        "pass": true,
+        "detail": {
+          "ratio": 13.029371258796607
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast data-blueprint",
+        "pass": true,
+        "detail": {
+          "ratio": 13.870048826938152
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast briefing-grid",
+        "pass": true,
+        "detail": {
+          "ratio": 11.06449886522574
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast zen-essence",
+        "pass": true,
+        "detail": {
+          "ratio": 7.177597595473896
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast warm-paper",
+        "pass": true,
+        "detail": {
+          "ratio": 11.542940759224331
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast eastern-notes",
+        "pass": true,
+        "detail": {
+          "ratio": 9.42973044480549
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast academic-pro-forest",
+        "pass": true,
+        "detail": {
+          "ratio": 11.44158969785075
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast olive-journal",
+        "pass": true,
+        "detail": {
+          "ratio": 13.599591055457497
+        }
+      },
+      {
+        "name": "theme-dark code theme color and contrast case-file",
+        "pass": true,
+        "detail": {
+          "ratio": 11.234293798602224
+        }
+      },
+      {
+        "name": "Markdown remains unchanged after theme and lock tests",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "personal QR is the only image and loaded with original dimensions",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "contact dialog fits the actual host and has no horizontal overflow",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "personal contact has no promotion or article image insertion",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native background pattern parses grid",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native background pattern parses diagonalStripes",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native background pattern parses polkaDots",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native background pattern parses zigzag",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native background pattern parses honeycomb",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native background pattern parses wave",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native background pattern parses checkerboard",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "pattern editor cancellation leaves all settings unchanged",
+        "pass": true,
+        "detail": null
+      }
+    ]
+  },
+  "dimensions": [
+    {
+      "width": 320,
+      "paneWidth": 320,
+      "articleWidth": 226,
+      "articleHeight": 7788,
+      "previewHeight": 306,
+      "overflow": []
+    },
+    {
+      "width": 375,
+      "paneWidth": 375,
+      "articleWidth": 281,
+      "articleHeight": 6900,
+      "previewHeight": 306,
+      "overflow": []
+    },
+    {
+      "width": 414,
+      "paneWidth": 414,
+      "articleWidth": 320,
+      "articleHeight": 6861,
+      "previewHeight": 306,
+      "overflow": []
+    },
+    {
+      "width": 469,
+      "paneWidth": 469,
+      "articleWidth": 375,
+      "articleHeight": 6088,
+      "previewHeight": 331,
+      "overflow": []
+    },
+    {
+      "width": 508,
+      "paneWidth": 508,
+      "articleWidth": 414,
+      "articleHeight": 6088,
+      "previewHeight": 371,
+      "overflow": []
+    },
+    {
+      "width": 600,
+      "paneWidth": 600,
+      "articleWidth": 506,
+      "articleHeight": 6088,
+      "previewHeight": 371,
+      "overflow": []
+    }
+  ],
+  "layoutDimensions": [
+    {
+      "theme": "theme-light",
+      "width": 320,
+      "paneWidth": 320,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 375,
+      "paneWidth": 375,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 414,
+      "paneWidth": 414,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 469,
+      "paneWidth": 469,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 520,
+      "paneWidth": 520,
+      "rows": 1,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 600,
+      "paneWidth": 600,
+      "rows": 1,
+      "overflow": []
+    },
+    {
+      "theme": "theme-light",
+      "width": 900,
+      "paneWidth": 900,
+      "rows": 1,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 320,
+      "paneWidth": 320,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 375,
+      "paneWidth": 375,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 414,
+      "paneWidth": 414,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 469,
+      "paneWidth": 469,
+      "rows": 2,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 520,
+      "paneWidth": 520,
+      "rows": 1,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 600,
+      "paneWidth": 600,
+      "rows": 1,
+      "overflow": []
+    },
+    {
+      "theme": "theme-dark",
+      "width": 900,
+      "paneWidth": 900,
+      "rows": 1,
+      "overflow": []
+    }
+  ],
+  "images": [
+    {
+      "name": "yh-mp-preview-1790836901215.png",
+      "width": 1012,
+      "height": 13196
+    },
+    {
+      "name": "yh-mp-preview-1790836901711-1.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790836901711-2.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790836901711-3.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790836901711-4.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790836901711-5.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790836901711-6.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790836901711-7.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790836901711-8.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790836901711-9.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790836901711-10.png",
+      "width": 1012,
+      "height": 1046
+    }
+  ],
+  "media": {
+    "images": 2,
+    "allEmbedded": true,
+    "width": 562,
+    "height": 1332,
+    "sourceUnchanged": true
+  },
+  "codeContrasts": [
+    {
+      "hostTheme": "theme-light",
+      "id": "default",
+      "text": "rgb(51, 65, 85)",
+      "background": "rgb(248, 250, 252)",
+      "ratio": 9.896764973632585
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "deep-reading",
+      "text": "rgb(32, 33, 36)",
+      "background": "rgb(246, 248, 250)",
+      "ratio": 15.122244934373345
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "academic-pro",
+      "text": "rgb(38, 56, 74)",
+      "background": "rgb(247, 249, 252)",
+      "ratio": 11.397338780226393
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "clear-guide",
+      "text": "rgb(232, 244, 242)",
+      "background": "rgb(23, 51, 48)",
+      "ratio": 12.014096987442032
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "knowledge-notes",
+      "text": "rgb(32, 58, 54)",
+      "background": "rgb(244, 247, 245)",
+      "ratio": 11.320060170227892
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "apple-product",
+      "text": "rgb(31, 41, 55)",
+      "background": "rgb(248, 250, 252)",
+      "ratio": 14.029874741046042
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "product-review",
+      "text": "rgb(20, 83, 45)",
+      "background": "rgb(247, 255, 250)",
+      "ratio": 8.954359813179519
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "minimal",
+      "text": "rgb(39, 39, 42)",
+      "background": "rgb(250, 250, 250)",
+      "ratio": 14.270056301028625
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "red-white-editorial",
+      "text": "rgb(41, 37, 36)",
+      "background": "rgb(250, 250, 250)",
+      "ratio": 14.533139232409889
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "ink-opinion",
+      "text": "rgb(41, 41, 41)",
+      "background": "rgb(244, 244, 244)",
+      "ratio": 13.227238316519387
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "modern-report",
+      "text": "rgb(37, 43, 54)",
+      "background": "rgb(244, 245, 247)",
+      "ratio": 13.029371258796607
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "data-blueprint",
+      "text": "rgb(234, 241, 248)",
+      "background": "rgb(19, 35, 58)",
+      "ratio": 13.870048826938152
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "briefing-grid",
+      "text": "rgb(39, 56, 72)",
+      "background": "rgb(242, 246, 248)",
+      "ratio": 11.06449886522574
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "zen-essence",
+      "text": "rgb(78, 88, 74)",
+      "background": "rgb(250, 251, 249)",
+      "ratio": 7.177597595473896
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "warm-paper",
+      "text": "rgb(58, 51, 44)",
+      "background": "rgb(250, 246, 240)",
+      "ratio": 11.542940759224331
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "eastern-notes",
+      "text": "rgb(75, 66, 57)",
+      "background": "rgb(252, 250, 247)",
+      "ratio": 9.42973044480549
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "academic-pro-forest",
+      "text": "rgb(36, 59, 50)",
+      "background": "rgb(247, 250, 248)",
+      "ratio": 11.44158969785075
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "olive-journal",
+      "text": "rgb(242, 243, 245)",
+      "background": "rgb(37, 38, 43)",
+      "ratio": 13.599591055457497
+    },
+    {
+      "hostTheme": "theme-light",
+      "id": "case-file",
+      "text": "rgb(239, 246, 246)",
+      "background": "rgb(38, 55, 66)",
+      "ratio": 11.234293798602224
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "default",
+      "text": "rgb(51, 65, 85)",
+      "background": "rgb(248, 250, 252)",
+      "ratio": 9.896764973632585
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "deep-reading",
+      "text": "rgb(32, 33, 36)",
+      "background": "rgb(246, 248, 250)",
+      "ratio": 15.122244934373345
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "academic-pro",
+      "text": "rgb(38, 56, 74)",
+      "background": "rgb(247, 249, 252)",
+      "ratio": 11.397338780226393
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "clear-guide",
+      "text": "rgb(232, 244, 242)",
+      "background": "rgb(23, 51, 48)",
+      "ratio": 12.014096987442032
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "knowledge-notes",
+      "text": "rgb(32, 58, 54)",
+      "background": "rgb(244, 247, 245)",
+      "ratio": 11.320060170227892
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "apple-product",
+      "text": "rgb(31, 41, 55)",
+      "background": "rgb(248, 250, 252)",
+      "ratio": 14.029874741046042
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "product-review",
+      "text": "rgb(20, 83, 45)",
+      "background": "rgb(247, 255, 250)",
+      "ratio": 8.954359813179519
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "minimal",
+      "text": "rgb(39, 39, 42)",
+      "background": "rgb(250, 250, 250)",
+      "ratio": 14.270056301028625
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "red-white-editorial",
+      "text": "rgb(41, 37, 36)",
+      "background": "rgb(250, 250, 250)",
+      "ratio": 14.533139232409889
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "ink-opinion",
+      "text": "rgb(41, 41, 41)",
+      "background": "rgb(244, 244, 244)",
+      "ratio": 13.227238316519387
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "modern-report",
+      "text": "rgb(37, 43, 54)",
+      "background": "rgb(244, 245, 247)",
+      "ratio": 13.029371258796607
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "data-blueprint",
+      "text": "rgb(234, 241, 248)",
+      "background": "rgb(19, 35, 58)",
+      "ratio": 13.870048826938152
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "briefing-grid",
+      "text": "rgb(39, 56, 72)",
+      "background": "rgb(242, 246, 248)",
+      "ratio": 11.06449886522574
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "zen-essence",
+      "text": "rgb(78, 88, 74)",
+      "background": "rgb(250, 251, 249)",
+      "ratio": 7.177597595473896
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "warm-paper",
+      "text": "rgb(58, 51, 44)",
+      "background": "rgb(250, 246, 240)",
+      "ratio": 11.542940759224331
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "eastern-notes",
+      "text": "rgb(75, 66, 57)",
+      "background": "rgb(252, 250, 247)",
+      "ratio": 9.42973044480549
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "academic-pro-forest",
+      "text": "rgb(36, 59, 50)",
+      "background": "rgb(247, 250, 248)",
+      "ratio": 11.44158969785075
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "olive-journal",
+      "text": "rgb(242, 243, 245)",
+      "background": "rgb(37, 38, 43)",
+      "ratio": 13.599591055457497
+    },
+    {
+      "hostTheme": "theme-dark",
+      "id": "case-file",
+      "text": "rgb(239, 246, 246)",
+      "background": "rgb(38, 55, 66)",
+      "ratio": 11.234293798602224
+    }
+  ],
+  "provenance": {
+    "localSourceFiles": 95,
+    "identicalFiles": 0,
+    "identicalMethodBodies": 0,
+    "longTokenRuns": 0,
+    "cssFilesWithRetainedRules": 0,
+    "independentImplementationVerified": false,
+    "officialSourceGate": "unresolved-no-public-consent-evidence"
+  },
+  "visualEvidence": [
+    {
+      "name": "contact-light.png",
+      "sha256": "42344e36f3e8d30de1628744d64fd21b933e9efc06f90abff998afe26de92796"
+    },
+    {
+      "name": "contact-dark.png",
+      "sha256": "8c4d1f896a10db24529780f53d335197cc279c828731c15e516f5c26922b0bb8"
+    },
+    {
+      "name": "workbench-light-final.png",
+      "sha256": "5d17e4ee396a15acfe0d8686cdaecac9adecc21312cdf4b5de15877945321c9a"
+    },
+    {
+      "name": "workbench-dark-final.png",
+      "sha256": "7be0d951a2a0713b1de7debd160be8861129f15c25f333b53cfa96fb02a6ade9"
+    },
+    {
+      "name": "background-form-final.png",
+      "sha256": "f81ba14206f0dfc442295dbc059a5344f1e620742e3b2b0040cd6b5607f56d40"
+    }
+  ],
+  "limitations": [
+    "No BRAT installation or WeChat backend paste of this candidate; neither is inferred from local evidence.",
+    "Clipboard result is recorded per final run; background skip is not treated as a pass.",
+    "Download anchors captured artifacts into the isolated vault; operating-system save dialogs were not automated.",
+    "Windows focus activation failed on retry; no repeated UI input or permission/security operations were attempted.",
+    "macOS/mobile/older Obsidian and exhaustive scale combinations were not run.",
+    "No exact source match is not a clean-room authorship proof or official-directory approval."
+  ]
+}

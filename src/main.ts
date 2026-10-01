@@ -3,12 +3,11 @@ import { MPView, VIEW_TYPE_MP } from './view';
 import { TemplateManager } from './templateManager';
 import { SettingsManager } from './settings/settings';
 import { MPConverter } from './converter';
-import { DonateManager } from './donateManager';
 import { runAction } from './ui/asyncActions';
 import { MPSettingTab } from './settings/MPSettingTab';
 import { ThemeRegistry } from './core/theme/themeRegistry';
 import { adaptLegacyTemplate } from './core/theme/legacyThemeAdapter';
-import { NoteLayoutStore } from './core/note-layout/noteLayoutStore';
+import { NoteLayoutStore, resolveNoteLayoutDirectory } from './core/note-layout/noteLayoutStore';
 import { NoteLayoutEnhancement } from './core/note-layout/noteLayoutEnhancement';
 export default class MPPlugin extends Plugin {
   settingsManager: SettingsManager;
@@ -23,7 +22,7 @@ export default class MPPlugin extends Plugin {
 
     this.noteLayoutStore = new NoteLayoutStore(
       this.app.vault.adapter,
-      this.manifest.dir || `.obsidian/plugins/${this.manifest.id}`,
+      resolveNoteLayoutDirectory(this.app.vault.configDir, this.manifest.id, this.manifest.dir),
     );
     try {
       await this.noteLayoutStore.load();
@@ -40,8 +39,6 @@ export default class MPPlugin extends Plugin {
 
     // 初始化转换器
     MPConverter.initialize(this.app);
-
-    DonateManager.initialize(this.app, this);
 
     // 注册视图
     this.registerView(

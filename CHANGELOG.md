@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.19.0
+
+- Rebuild the identified retained background editor/presets, font and confirmation dialogs, settings catalog merge/disclosures, preview lock state, theme application and seven stylesheet files around existing behavior contracts.
+- Preserve theme/background/recipe IDs, visibility, unknown settings fields, snapshots and custom CSS. Name-only background edits no longer reconstruct opaque saved CSS. Confirmation waits for one commit, retains errors and permits retries.
+- Isolate article code colors from the host theme while honoring explicit custom syntax styles; keep the established compact responsive workbench and native UI.
+- Replace payment/public-account placeholders and the old manager with a local Personal Contact dialog using the exact maintainer-provided QR image. Preserve keyboard dismissal and focus restoration; no article injection or network loading.
+- Remove the nanoid forwarding file and old QR assets. Re-run the unchanged source-comparison audit; preserve historical MIT attribution, AGPL and complete bundled-library/helper licenses. Zero exact matches are not an authorship or official-directory clearance claim.
+- Resolve note-layout storage from the actual installed plugin directory or Vault.configDir, supporting custom configuration folders without migrating existing settings; reject missing paths instead of guessing .obsidian.
+- Continue in the original repository with the same plugin ID and BRAT address. Preserve previous releases and rollback assets; the Marketing vault is not modified. The development-only 3.19.0-beta.1 was never publicly released. Official-directory source qualification is separate from release verification.
+
 ## 3.18.0
 
 - Promote the maintainer-accepted 3.18.0-beta.2 to a stable release. Runtime code and styles are unchanged from beta.2; this is a version/metadata/documentation transition, not an additional feature iteration.

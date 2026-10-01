@@ -1,381 +1,41 @@
-import { hasUnsafeCss, setSafeInlineStyle } from './core/security/safeDom';
-import { App, Notice } from 'obsidian';
-import { SettingsManager } from './settings/settings';
-import type { DialogueStyle, GalleryStyle } from './containers';
-import { appendWechatReadingBaseline, DEFAULT_WECHAT_FONT_STACK, paragraphRhythm, wechatReadingBaseline } from './core/theme/wechatReadingBaseline';
-import { getCuratedThemeEntry, type ThemeFrameworkId, type ThemeSurface } from './core/theme/themeCatalog';
+import { Notice, type App } from 'obsidian';
+import type { SettingsManager } from './settings/settings';
+import { hasUnsafeCss } from './core/security/safeDom';
+import { DEFAULT_WECHAT_FONT_STACK } from './core/theme/wechatReadingBaseline';
+import { getCuratedThemeEntry } from './core/theme/themeCatalog';
+import { applyStylePlan } from './core/theme/templateStylePlan';
 import { resolveWechatPalette } from './core/theme/wechatPalette';
 import { applyWechatComponentPalette } from './core/theme/applyWechatComponentPalette';
+import type { Template } from './core/theme/templateTypes';
+export type { Template } from './core/theme/templateTypes';
 
-export interface Template {
-    id: string;
-    name: string;
-    description: string;
-    isPreset?: boolean;
-    isVisible?: boolean;
-    source?: string;  // 来源标记：'yh-mp-preview' | 'xiaohu'
-    themeMeta?: {
-        frameworkId?: ThemeFrameworkId;
-        surfaces?: ThemeSurface[];
-        scene?: string;
-        recommendation?: string;
-    };
-    styles: {
-        container: string;
-        title: {
-            h1: {
-                base: string;
-                content: string;
-                after: string;
-            };
-            h2: {
-                base: string;
-                content: string;
-                after: string;
-            };
-            h3: {
-                base: string;
-                content: string;
-                after: string;
-            };
-            base: {
-                base: string;
-                content: string;
-                after: string;
-            };
-        };
-        paragraph: string;
-        list: {
-            container: string;
-            item: string;
-            taskList: string;
-        };
-        quote: string;
-        code: {
-            header: {
-                container: string;
-                dot: string;
-                colors: [string, string, string];
-            };
-            block: string;
-            inline: string;
-            syntax?: {
-                [key: string]: string;
-            };
-        };
-        image: string;
-        link: string;
-        emphasis: {
-            strong: string;
-            em: string;
-            del: string;
-        };
-        table: {
-            container: string;
-            header: string;
-            cell: string;
-        };
-        hr: string;
-        footnote: {
-            ref: string;
-            backref: string;
-        };
-        // 容器样式（对话气泡、图片画廊）
-        containers?: {
-            dialogue?: Partial<DialogueStyle>;
-            gallery?: Partial<GalleryStyle>;
-        };
-        // 主题强调色（用于对话气泡等）
-        accentColor?: string;
-    };
+function unsafeStyleTree(value: unknown): boolean {
+    if (typeof value === 'string') return hasUnsafeCss(value);
+    return Boolean(value && typeof value === 'object' && Object.values(value).some(unsafeStyleTree));
 }
 
 export class TemplateManager {
-    private templates: Map<string, Template> = new Map();
-    private currentTemplate: Template;
-    private currentFont: string = DEFAULT_WECHAT_FONT_STACK;
-    private currentFontSize: number = 16;
-    private app: App;
-    private settingsManager: SettingsManager;
-    private warnedUnsafeThemes = new Set<string>();
-
-    constructor(app: App, settingsManager: SettingsManager) {
-        this.app = app;
-        this.settingsManager = settingsManager;
+    private currentTemplate: Template | undefined;
+    private typography = { family: DEFAULT_WECHAT_FONT_STACK, size: 16 };
+    private readonly warned = new Set<string>();
+    constructor(_app: App, private readonly settingsManager: SettingsManager) {}
+    setCurrentTemplate(id: string): boolean {
+        const selected = this.settingsManager.getTemplate(id);
+        if (!selected) return false;
+        this.currentTemplate = selected;
+        return true;
     }
-
-    public setCurrentTemplate(id: string): boolean {
-        const template = this.settingsManager.getTemplate(id);
-        if (template) {
-            this.currentTemplate = template;
-            return true;
+    setFont(family: string): void { this.typography.family = family; }
+    setFontSize(size: number): void { this.typography.size = size; }
+    applyTemplate(root: HTMLElement, override?: Template): void {
+        const theme = override ?? this.currentTemplate ?? this.settingsManager.getTemplate('default');
+        if (!theme) throw new Error('没有可用的排版主题');
+        if (!this.warned.has(theme.id) && unsafeStyleTree(theme.styles)) {
+            this.warned.add(theme.id);
+            new Notice('此主题含不安全 CSS，预览会过滤；保存的主题保持不变。');
         }
-        console.error('主题未找到:', id);
-        return false;
-    }
-
-    public setFont(fontFamily: string) {
-        this.currentFont = fontFamily;
-    }
-
-    public setFontSize(size: number) {
-        this.currentFontSize = size;
-    }
-
-    public applyTemplate(element: HTMLElement, template?: Template): void {
-        const activeTemplate = template || this.currentTemplate;
-        const styles = activeTemplate.styles;
-        const containsUnsafeStyle = (value: unknown): boolean => {
-            if (typeof value === 'string') return hasUnsafeCss(value);
-            if (value && typeof value === 'object') return Object.values(value).some(containsUnsafeStyle);
-            return false;
-        };
-        if (!this.warnedUnsafeThemes.has(activeTemplate.id) && containsUnsafeStyle(styles)) {
-            this.warnedUnsafeThemes.add(activeTemplate.id);
-            new Notice('此主题含资源加载或不安全 CSS，相关样式已过滤；原主题设置未改写。');
-        }
-        const readingProfile = getCuratedThemeEntry(activeTemplate.id)?.readingProfile || 'standard';
-        // 应用标题样式
-        ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].forEach(tag => {
-            element.querySelectorAll(tag).forEach(el => {
-                // 检查是否已经处理过
-                if (!el.querySelector('.content')) {
-                    const content = createSpan();
-                    content.className = 'content';
-                    // 使用 textContent 替代 innerHTML
-                    while (el.firstChild) {
-                        content.appendChild(el.firstChild);
-                    }
-                    el.textContent = '';
-                    el.appendChild(content);
-
-                    const after = createSpan();
-                    after.className = 'after';
-                    el.appendChild(after);
-                }
-
-                // 根据标签选择对应的样式
-                const styleKey = (tag === 'h4' || tag === 'h5' || tag === 'h6' ? 'base' : tag) as keyof typeof styles.title;
-                const titleStyle = styles.title[styleKey];
-
-                // 应用样式
-                const titleBaseline = tag === 'h1'
-                    ? wechatReadingBaseline.title
-                    : wechatReadingBaseline.sectionTitle;
-                setSafeInlineStyle(el, appendWechatReadingBaseline(
-                    `${titleStyle.base}; font-family: ${this.currentFont};`,
-                    titleBaseline,
-                ));
-                setSafeInlineStyle(el.querySelector('.content'), titleStyle.content);
-                setSafeInlineStyle(el.querySelector('.after'), titleStyle.after);
-            });
-        });
-
-        // 应用段落样式
-        element.querySelectorAll('p').forEach(el => {
-            if (!el.parentElement?.closest('p') && !el.parentElement?.closest('blockquote')) {
-                setSafeInlineStyle(el, appendWechatReadingBaseline(
-                    `${styles.paragraph}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
-                    `${wechatReadingBaseline.paragraph} ${paragraphRhythm(readingProfile)}`,
-                ));
-            }
-        });
-
-        // 应用列表样式
-        element.querySelectorAll('ul, ol').forEach(el => {
-            setSafeInlineStyle(el, appendWechatReadingBaseline(styles.list.container, wechatReadingBaseline.list));
-        });
-        element.querySelectorAll('li').forEach(el => {
-            setSafeInlineStyle(el, appendWechatReadingBaseline(
-                `${styles.list.item}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
-                wechatReadingBaseline.listItem,
-            ));
-        });
-        element.querySelectorAll('.task-list-item').forEach(el => {
-            setSafeInlineStyle(el, appendWechatReadingBaseline(
-                `${styles.list.taskList}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
-                wechatReadingBaseline.listItem,
-            ));
-        });
-
-        // 应用引用样式
-        element.querySelectorAll('blockquote').forEach(el => {
-            setSafeInlineStyle(el, appendWechatReadingBaseline(
-                `${styles.quote}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
-                wechatReadingBaseline.quote,
-            ));
-        });
-
-        // 应用代码样式
-        element.querySelectorAll('pre').forEach(el => {
-            // 应用基础代码块样式
-            setSafeInlineStyle(el, appendWechatReadingBaseline(styles.code.block, wechatReadingBaseline.codeBlock));
-
-            // 设置代码块头部样式
-            const header = el.querySelector('.mp-code-header');
-            if (header) {
-                setSafeInlineStyle(header, styles.code.header.container);
-                // 设置窗口按钮样式
-                header.querySelectorAll('.mp-code-dot').forEach((dot, index) => {
-                    setSafeInlineStyle(dot, `${styles.code.header.dot}; background-color: ${styles.code.header.colors[index]};`);
-                });
-            }
-
-            // 应用代码语法高亮
-            if (styles.code.syntax) {
-                const syntaxStyles = styles.code.syntax;
-                const codeBlock = el.querySelector('code');
-                if (codeBlock) {
-                    // 查找所有带有 token 类的 span
-                    codeBlock.querySelectorAll('span[class*="token"]').forEach((span) => {
-                        const htmlSpan = span as HTMLElement;
-                        const classes = htmlSpan.className.split(/\s+/);
-                        
-                        // 遍历所有类名，查找对应的样式
-                        classes.forEach(cls => {
-                            if (cls === 'token') return;
-                            if (syntaxStyles[cls]) {
-                                // 获取现有样式
-                                const currentStyle = htmlSpan.getAttribute('style') || '';
-                                // 合并样式，避免覆盖
-                                setSafeInlineStyle(htmlSpan, `${currentStyle}; ${syntaxStyles[cls]}`.replace(';;', ';'));
-                            }
-                        });
-                    });
-                }
-            }
-        });
-
-        // 应用内联代码样式
-        element.querySelectorAll('code:not(pre code)').forEach(el => {
-            setSafeInlineStyle(el, appendWechatReadingBaseline(styles.code.inline, wechatReadingBaseline.inlineCode));
-        });
-
-        // 应用链接样式
-        element.querySelectorAll('a').forEach(el => {
-            setSafeInlineStyle(el, appendWechatReadingBaseline(styles.link, wechatReadingBaseline.link));
-        });
-
-        // 应用强调样式
-        element.querySelectorAll('strong').forEach(el => {
-            setSafeInlineStyle(el, appendWechatReadingBaseline(styles.emphasis.strong, wechatReadingBaseline.emphasis));
-        });
-        element.querySelectorAll('em').forEach(el => {
-            setSafeInlineStyle(el, styles.emphasis.em);
-        });
-        element.querySelectorAll('del').forEach(el => {
-            setSafeInlineStyle(el, styles.emphasis.del);
-        });
-
-        // 应用表格样式（内容表格，非包裹表格）
-        element.querySelectorAll('table').forEach(el => {
-            setSafeInlineStyle(el, appendWechatReadingBaseline(styles.table.container, wechatReadingBaseline.table));
-        });
-        element.querySelectorAll('th').forEach(el => {
-            setSafeInlineStyle(el, appendWechatReadingBaseline(
-                `${styles.table.header}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
-                wechatReadingBaseline.tableCell,
-            ));
-        });
-        element.querySelectorAll('td').forEach(el => {
-            setSafeInlineStyle(el, appendWechatReadingBaseline(
-                `${styles.table.cell}; font-family: ${this.currentFont}; font-size: ${this.currentFontSize}px;`,
-                wechatReadingBaseline.tableCell,
-            ));
-        });
-
-        // 应用分割线样式
-        element.querySelectorAll('hr').forEach(el => {
-            setSafeInlineStyle(el, styles.hr);
-        });
-
-        // 应用脚注样式
-        element.querySelectorAll('.footnote-ref').forEach(el => {
-            setSafeInlineStyle(el, styles.footnote.ref);
-        });
-        element.querySelectorAll('.footnote-backref').forEach(el => {
-            setSafeInlineStyle(el, styles.footnote.backref);
-        });
-
-        // 应用图片样式
-        element.querySelectorAll('img').forEach(el => {
-            const img = el;
-            setSafeInlineStyle(el, appendWechatReadingBaseline(styles.image, wechatReadingBaseline.image));
-        });
-
-        // 应用容器样式（对话气泡、图片画廊）
-        if (styles.containers) {
-            // 对话气泡样式
-            if (styles.containers.dialogue) {
-                element.querySelectorAll('[data-container="dialogue"]').forEach(el => {
-                    const dialogueEl = el as HTMLElement;
-                    // 容器样式
-                    if (styles.containers!.dialogue!.container) {
-                        setSafeInlineStyle(dialogueEl, styles.containers!.dialogue!.container);
-                    }
-                    // 标题样式
-                    const titleEl = dialogueEl.querySelector('[data-container="dialogue-title"]');
-                    if (titleEl && styles.containers!.dialogue!.title) {
-                        setSafeInlineStyle(titleEl, styles.containers!.dialogue!.title);
-                    }
-                    // 气泡样式
-                    dialogueEl.querySelectorAll('[data-container="dialogue-bubble"]').forEach(bubble => {
-                        const side = bubble.getAttribute('data-side');
-                        const bubbleStyle = side === 'left'
-                            ? styles.containers!.dialogue!.bubbleLeft
-                            : styles.containers!.dialogue!.bubbleRight;
-                        if (bubbleStyle) {
-                            setSafeInlineStyle(bubble, bubbleStyle);
-                        }
-                        // 说话人样式
-                        const speakerEl = bubble.querySelector('[data-container="dialogue-speaker"]');
-                        if (speakerEl && styles.containers!.dialogue!.speaker) {
-                            setSafeInlineStyle(speakerEl, styles.containers!.dialogue!.speaker);
-                        }
-                        // 文本样式
-                        const textEl = bubble.querySelector('[data-container="dialogue-text"]');
-                        if (textEl && styles.containers!.dialogue!.text) {
-                            setSafeInlineStyle(textEl, styles.containers!.dialogue!.text);
-                        }
-                    });
-                });
-            }
-
-            // 图片画廊样式
-            if (styles.containers.gallery) {
-                element.querySelectorAll('[data-container="gallery"]').forEach(el => {
-                    const galleryEl = el as HTMLElement;
-                    // 容器样式
-                    if (styles.containers!.gallery!.container) {
-                        setSafeInlineStyle(galleryEl, styles.containers!.gallery!.container);
-                    }
-                    // 标题样式
-                    const titleEl = galleryEl.querySelector('[data-container="gallery-title"]');
-                    if (titleEl && styles.containers!.gallery!.title) {
-                        setSafeInlineStyle(titleEl, styles.containers!.gallery!.title);
-                    }
-                    // 滚动容器样式
-                    const scrollEl = galleryEl.querySelector('[data-container="gallery-scroll"]');
-                    if (scrollEl && styles.containers!.gallery!.scroll) {
-                        setSafeInlineStyle(scrollEl, styles.containers!.gallery!.scroll);
-                    }
-                    // 图片项样式
-                    galleryEl.querySelectorAll('[data-container="gallery-item"]').forEach(item => {
-                        if (styles.containers!.gallery!.item) {
-                            setSafeInlineStyle(item, styles.containers!.gallery!.item);
-                        }
-                    });
-                    // 图片样式
-                    galleryEl.querySelectorAll('[data-container="gallery-image"]').forEach(img => {
-                        if (styles.containers!.gallery!.image) {
-                            setSafeInlineStyle(img, styles.containers!.gallery!.image);
-                        }
-                    });
-                });
-            }
-        }
-        applyWechatComponentPalette(element, resolveWechatPalette(activeTemplate));
+        applyStylePlan(root, theme.styles, this.typography, getCuratedThemeEntry(theme.id)?.readingProfile ?? 'standard');
+        applyWechatComponentPalette(root, resolveWechatPalette(theme));
     }
 }
-
-export const templateManager = (app: App, settingsManager: SettingsManager) => new TemplateManager(app, settingsManager);
+export const templateManager = (app: App, settings: SettingsManager) => new TemplateManager(app, settings);

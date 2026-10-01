@@ -207,9 +207,6 @@
 .template-preview-modal { padding: 16px; }
 .template-preview-modal .mp-template-title { margin: 0 0 12px; font-size: 19px; text-align: left; }
 .template-preview-modal .tp-mp-preview-area { margin: 0; padding: 10px; border-color: var(--mp-ui-line); box-shadow: none; }
-.mp-about-modal { width: min(520px, calc(100vw - 24px)); }
-.mp-about-section { margin-inline: 8px; }
-.mp-donate-close { left: auto !important; right: 7px !important; }
 
 @media (max-width: 640px) {
     .mp-view-content { padding: 7px 7px 0; }

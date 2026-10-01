@@ -18,7 +18,8 @@
     const initialTheme = document.body.className;
     const sidebar = app.workspace.rightSplit.containerEl;
     const sidebarStyle = sidebar.getAttribute('style');
-    const delay = ms => new Promise(resolve => window.setTimeout(resolve, ms));
+    // Only the test harness uses a desktop clock; plugin timers are untouched.
+    const delay = ms => new Promise(resolve => require('timers').setTimeout(resolve, ms));
     const article = () => view.previewEl.querySelector('.mp-content-section');
     const dimensions = [];
     const galleryDocument = () => [document, plugin.settingTab.containerEl.ownerDocument].find(doc=>doc.querySelector('.mp-theme-gallery-modal')) || document;
@@ -117,8 +118,18 @@
             } else check('HTML contains header, footer and final article text', new TextDecoder().decode(bytes).includes('END - OF - ARTICLE') && new TextDecoder().decode(bytes).includes('测试头部') && new TextDecoder().decode(bytes).includes('测试尾部'));
         }
         check('long image covers full article', pngSizes[0].height > view.previewEl.clientHeight * 3);
-        if(document.visibilityState === 'visible') {
-            view.containerEl.querySelector('.mp-copy-button').click(); await delay(500);
+        if(document.visibilityState === 'visible' && document.hasFocus()) {
+            const copyButton = view.containerEl.querySelector('.mp-copy-button');
+            check('copy action is enabled after export', !copyButton.disabled);
+            copyButton.click();
+            await delay(50); // The event wrapper starts the action in a microtask.
+            // Wait for the async copy receipt, not an assumed fixed duration.
+            const deadline = Date.now() + 10000;
+            while (copyButton.textContent === '复制中...' && Date.now() < deadline) await delay(50);
+            check('copy action reports successful completion', copyButton.textContent.startsWith('复制成功'), {
+                text: copyButton.textContent, focused: document.hasFocus(),
+                notices: [...document.querySelectorAll('.notice')].map(node => node.textContent),
+            });
             const clipboard = await navigator.clipboard.read();
             const htmlBlob = await clipboard[0].getType('text/html');
             const copied = await htmlBlob.text();

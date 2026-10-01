@@ -1,44 +1,16 @@
-export const backgrounds = {
-    backgrounds: [
-        {
-            id: "default",
-            name: "默认",
-            style: "box-sizing: border-box; margin: 0; padding: 0; background-color: #f8f8f8;"
-        },
-        {
-            id: "none",
-            name: "无背景",
-            style: "box-sizing: border-box; margin: 0; padding: 0; background-color: #ffffff;"
-        },
-        {
-            id: "grid",
-            name: "网格",
-            style: "box-sizing: border-box; margin: 0; padding: 0; background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.03) 2%, rgba(0, 0, 0, 0) 2%), linear-gradient(360deg, rgba(50, 0, 0, 0.03) 2%, rgba(0, 0, 0, 0) 2%); background-size: 20px 20px; background-position: center center;"
-        },
-        {
-            id: "crosshatch",
-            name: "交叉",
-            style: "box-sizing: border-box; margin: 0; padding: 0; background-image: repeating-linear-gradient(45deg, rgba(50, 0, 0, 0.02) 0, rgba(50, 0, 0, 0.02) 1px, transparent 1px, transparent 50%), repeating-linear-gradient(-45deg, rgba(50, 0, 0, 0.02) 0, rgba(50, 0, 0, 0.02) 1px, transparent 1px, transparent 50%); background-size: 20px 20px;"
-        },
-        {
-            id: "dots",
-            name: "圆点",
-            style: "box-sizing: border-box; margin: 0; padding: 0; background-image: radial-gradient(rgba(50, 0, 0, 0.03) 1px, transparent 1px); background-size: 20px 20px; background-position: center center;"
-        },
-        {
-            id: "dash",
-            name: "虚线",
-            style: "box-sizing: border-box; margin: 0; padding: 0;  background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.03) 50%, transparent 50%); background-size: 8px 1px; background-position: center center;"
-        },
-        {
-            id: "wave",
-            name: "波浪",
-            style: "box-sizing: border-box; margin: 0; padding: 0;  background-image: linear-gradient(45deg, rgba(50, 0, 0, 0.04) 12%, transparent 12%, transparent 88%, rgba(50, 0, 0, 0.04) 88%), linear-gradient(135deg, rgba(50, 0, 0, 0.04) 12%, transparent 12%, transparent 88%, rgba(50, 0, 0, 0.04) 88%), linear-gradient(45deg, rgba(50, 0, 0, 0.04) 12%, transparent 12%, transparent 88%, rgba(50, 0, 0, 0.04) 88%), linear-gradient(135deg, rgba(50, 0, 0, 0.04) 12%, transparent 12%, transparent 88%, rgba(50, 0, 0, 0.04) 88%); background-size: 30px 30px; background-position: 0 0, 0 0, 15px 15px, 15px 15px;"
-        },
-        {
-            id: "checkerboard",
-            name: "棋盘",
-            style: "box-sizing: border-box; margin: 0; padding: 0;  background-image: linear-gradient(45deg, rgba(50, 0, 0, 0.04) 25%, transparent 25%), linear-gradient(-45deg, rgba(50, 0, 0, 0.04) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(50, 0, 0, 0.04) 75%), linear-gradient(-45deg, transparent 75%, rgba(50, 0, 0, 0.04) 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px;"
-        }
-    ]
-};
+import { renderPattern } from '../core/settings/backgroundDraft';
+import type { Background } from '../backgroundManager';
+
+const presets: Background[] = [
+    { id: 'default', name: '默认', style: 'background-color: #f8f8f8;' },
+    { id: 'none', name: '无背景', style: 'background-color: #ffffff;' },
+];
+const patterns = [
+    ['grid', '网格', renderPattern('grid', '#320000', 0.03, 20)],
+    ['crosshatch', '交叉', 'background-image: repeating-linear-gradient(45deg, rgba(50, 0, 0, 0.02) 0 1px, transparent 1px 10px), repeating-linear-gradient(-45deg, rgba(50, 0, 0, 0.02) 0 1px, transparent 1px 10px); background-size: 20px 20px;'],
+    ['dots', '圆点', renderPattern('polkaDots', '#320000', 0.03, 20)],
+    ['dash', '虚线', 'background-image: radial-gradient(ellipse 3px 0.5px at center, rgba(50, 0, 0, 0.03) 95%, transparent 100%); background-size: 12px 12px;'],
+    ['wave', '波浪', renderPattern('wave', '#320000', 0.04, 30)],
+    ['checkerboard', '棋盘', renderPattern('checkerboard', '#320000', 0.04, 20)],
+];
+export const backgrounds = { backgrounds: [...presets, ...patterns.map(([id, name, style]) => ({ id, name, style }))] };

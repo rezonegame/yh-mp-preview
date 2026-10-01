@@ -43,5 +43,10 @@ jobs:
             THIRD_PARTY_NOTICES.md
             LICENSES/MIT-original.txt
             LICENSES/DOMPurify.txt
+            LICENSES/html2canvas.txt
+            LICENSES/nanoid.txt
+            LICENSES/pangu.txt
+            LICENSES/Microsoft-helpers.txt
+            LICENSES/babel-helpers.txt
           draft: false
           prerelease: ${{ contains(github.ref_name, '-') }}

@@ -1,184 +1,30 @@
-/* ===== 预览区域 ===== */
+/* Article viewport only; inline theme styles remain authoritative for output. */
 .mp-preview-area {
-    padding: 10px 20px 20px 20px;
-    margin: 10px;
-    min-height: 0;
-    overflow-y: auto;
-    background: #fcfcfc;
-    flex: 1;
-    align-self: stretch;
-    border-radius: 12px;
-    box-shadow: none;
-    border: 1px solid var(--background-modifier-border);
-    min-width: 0;
+    flex: 1 1 0; min-block-size: 0; min-inline-size: 0;
+    align-self: stretch; overflow-y: auto;
+    padding: 10px 20px 20px; margin: 10px;
+    border: 1px solid var(--background-modifier-border); border-radius: 12px;
+    background: #fcfcfc; color: #333; color-scheme: light;
 }
-
-.mp-preview-area.mp-phone-preview > .mp-content-section {
-    box-sizing: border-box;
-    width: min(100%, 375px);
-    max-width: 375px;
-    margin-inline: auto;
-    background: #ffffff;
-    box-shadow: 0 0 0 1px #d9dde2;
-}
-
+.mp-content-section { padding: 16px 20px; }
+.mp-content-section > :is(h1,h2,h3):first-child { margin-block-start: 0; }
+.mp-content-section :is(p,ul,ol) { padding: 0; margin: 0; }
+.mp-content-section :is(a,.footnote-ref,.footnote-backref) { color: var(--text-accent); text-decoration: none; }
+.mp-content-section table { width: 100%; margin-block: 1em; border-collapse: collapse; }
+.mp-content-section :is(td,th) { padding: 8px; border: 1px solid var(--background-modifier-border); }
+.mp-content-section hr { border: 0; border-block-start: 1px solid var(--background-modifier-border); margin-block: 20px; }
+.mp-content-section img { display: block; max-inline-size: 100%; block-size: auto; margin: 1em auto; }
+.mp-content-section .task-list-item { list-style-type: none; }
+.mp-content-section .task-list-item input { margin-inline-end: 6px; }
+.mp-content-section blockquote p { line-height: inherit; }
 .mp-preview-area.mp-phone-preview { background: #e9edf0; }
-
-/* 内容区域基础间距 */
-.mp-content-section {
-    padding: 16px 20px;
-}
-
-/* 首个子元素减少顶部间距（容器已有 padding） */
-.mp-content-section > h1:first-child,
-.mp-content-section > h2:first-child,
-.mp-content-section > h3:first-child {
-    margin-top: 0;
-}
-
-/* 段落 */
-.mp-content-section p {
-    margin: 0;
-    padding: 0;
-}
-
-/* 列表 */
-.mp-content-section ul,
-.mp-content-section ol {
-    margin: 0;
-    padding: 0;
-}
-
-/* 链接样式 */
-.mp-content-section a {
-    color: var(--text-accent);
-    text-decoration: none;
-}
-
-/* 表格样式 */
-.mp-content-section table {
-    border-collapse: collapse;
-    margin: 1em 0;
-    width: 100%;
-}
-
-.mp-content-section th,
-.mp-content-section td {
-    border: 1px solid var(--background-modifier-border);
-    padding: 8px;
-}
-
-/* 分割线样式 */
-.mp-content-section hr {
-    border: none;
-    border-top: 1px solid var(--background-modifier-border);
-    margin: 20px 0;
-}
-
-/* 删除线样式 */
-.mp-content-section del {
-    text-decoration: line-through;
-}
-
-/* 任务列表样式 */
-.mp-content-section .task-list-item {
-    list-style: none;
-}
-
-.mp-content-section .task-list-item input[type="checkbox"] {
-    margin-right: 6px;
-}
-
-/* 脚注样式 */
-.mp-content-section .footnote-ref,
-.mp-content-section .footnote-backref {
-    color: var(--text-accent);
-    text-decoration: none;
-}
-
-/* 图片样式 */
-.mp-content-section img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 1em auto;
-}
-
-/* 引用块样式 */
-.mp-content-section blockquote p {
-    margin: 0;
-    padding: 0;
-    line-height: inherit;
-}
-
-/* ===== 深色模式隔离 ===== */
-/* 确保预览区始终使用浅色背景，不受 Obsidian 主题影响 */
-.theme-dark .mp-preview-area {
-    background: #fcfcfc !important;
-    color: #333 !important;
-    color-scheme: light;
-}
-.theme-dark .mp-preview-area.mp-phone-preview {
-    background: #e9edf0 !important;
-}
-.theme-dark .mp-preview-area * {
-    color: inherit;
-}
-.theme-dark .mp-preview-area a {
-    color: #576b95;
-}
-.theme-dark .mp-preview-area code {
-    color: #c7254e;
-}
-.theme-dark .mp-preview-area .mp-callout-title {
-    color: inherit;
-}
-
-/* ===== 编辑模式 ===== */
-.mp-preview-area.mp-edit-mode {
-    border: 2px dashed var(--text-accent) !important;
-    cursor: text;
-}
-.mp-preview-area.mp-edit-mode::before {
-    content: '✏️ 编辑模式 — 修改仅影响复制内容';
-    display: block;
-    text-align: center;
-    font-size: 12px;
-    color: var(--text-accent);
-    padding: 4px 0 8px 0;
-    opacity: 0.7;
-}
-
-/* ===== SEO 隐藏文字（预览内可见提示） ===== */
-.mp-preview-area .mp-seo-hidden {
-    position: relative !important;
-    left: auto !important;
-    height: auto !important;
-    font-size: 12px !important;
-    color: #999 !important;
-    opacity: 0.6 !important;
-    line-height: 1.4 !important;
-    overflow: visible !important;
-    border: 1px dashed #ccc;
-    padding: 8px 12px;
-    margin-top: 16px;
-    border-radius: 4px;
-}
-.mp-preview-area .mp-seo-hidden::before {
-    content: '🔍 SEO 隐藏文字（复制后不可见）';
-    display: block;
-    font-weight: bold;
-    margin-bottom: 4px;
-    color: #aaa;
-    font-size: 11px;
-}
-
-.mp-empty-message {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    color: var(--text-muted);
-    font-size: 16px;
-}
+.mp-preview-area.mp-phone-preview > .mp-content-section { box-sizing: border-box; width: min(100%, 375px); max-width: 375px; margin-inline: auto; background: #fff; box-shadow: 0 0 0 1px #d9dde2; }
+.theme-dark .mp-preview-area { color-scheme: light; background: #fcfcfc; color: #333; }
+.theme-dark .mp-preview-area.mp-phone-preview { background: #e9edf0; }
+.theme-dark .mp-preview-area :is(a,.footnote-ref,.footnote-backref) { color: #576b95; }
+.mp-preview-area.mp-edit-mode { border: 2px dashed var(--text-accent); cursor: text; }
+.mp-preview-area.mp-edit-mode::before { content: '编辑模式 — 修改仅影响复制内容'; display: block; padding-block: 4px 8px; text-align: center; font-size: 12px; color: var(--text-accent); }
+.mp-preview-area .mp-seo-hidden { position: relative !important; left: auto !important; height: auto !important; font-size: 12px !important; color: #707070 !important; opacity: .8 !important; line-height: 1.4 !important; overflow: visible !important; border: 1px dashed #ccc; padding: 8px 12px; margin-block-start: 16px; border-radius: 4px; }
+.mp-preview-area .mp-seo-hidden::before { content: '隐藏文字（复制后不可见）'; display: block; margin-block-end: 4px; font-size: 11px; font-weight: 600; }
+.mp-preview-area .mp-empty-message { display: grid; place-content: center; min-block-size: 100%; color: #707070; font-size: 14px; text-align: center; }
 

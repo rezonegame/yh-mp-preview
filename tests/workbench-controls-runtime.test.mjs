@@ -80,10 +80,10 @@ test('gallery failed persistence remains open and allows cancellation', async ()
   modal.close();assert.deepEqual(selected,['deep-reading','default']);
 });
 
-test('About traps Tab, closes before host Escape handling and restores focus', async () => {
-  createDom(); const {DonateManager}=await loadModule('src/donateManager.ts');
+test('personal contact traps Tab, closes before host Escape handling and restores focus', async () => {
+  createDom(); const {PersonalContact}=await loadModule('src/personalContact.ts');
   const parent=document.body.createDiv();const button=parent.createEl('button',{text:'帮助'});button.focus();
-  DonateManager.showDonateModal(parent);
+  PersonalContact.show(parent);
   let hostEscapes=0;document.addEventListener('keydown',event=>{if(event.key==='Escape') hostEscapes++});
   document.activeElement.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Tab',bubbles:true,cancelable:true}));
   assert.equal(document.activeElement.className,'mp-donate-close');

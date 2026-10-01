@@ -935,21 +935,24 @@ export class MPView extends ItemView {
         }
 
         this.updateControlsState(true);
-        this.isPreviewLocked = false;
-        setIcon(this.lockButton, 'unlock');
+        this.setPreviewLocked(false);
         await this.updatePreview();
     }
 
-    private async togglePreviewLock() {
-        this.isPreviewLocked = !this.isPreviewLocked;
-        const lockIcon = this.isPreviewLocked ? 'lock' : 'unlock';
-        const lockStatus = this.isPreviewLocked ? '开启实时预览状态' : '关闭实时预览状态';
-        setIcon(this.lockButton, lockIcon);
-        this.lockButton.setAttribute('aria-label', lockStatus);
+    private setPreviewLocked(pause: boolean): void {
+        this.isPreviewLocked = pause;
+        setIcon(this.lockButton, pause ? 'lock' : 'unlock');
+        this.lockButton.setAttribute('aria-pressed', String(pause));
+        const label = pause ? '已暂停实时预览，点击恢复' : '实时预览中，点击暂停';
+        this.lockButton.setAttribute('aria-label', label);
+        this.lockButton.setAttribute('title', label);
+    }
 
-        if (!this.isPreviewLocked) {
-            await this.updatePreview();
-        }
+    private async togglePreviewLock() {
+        const pause = !this.isPreviewLocked;
+        this.setPreviewLocked(pause);
+        if (pause) return;
+        await this.updatePreview();
     }
 
     private toggleEditMode() {
@@ -964,9 +967,7 @@ export class MPView extends ItemView {
 
             // 自动锁定预览（防止编辑内容被刷新覆盖）
             if (!this.isPreviewLocked) {
-                this.isPreviewLocked = true;
-                setIcon(this.lockButton, 'lock');
-                this.lockButton.setAttribute('aria-label', '开启实时预览状态');
+                this.setPreviewLocked(true);
             }
 
             new Notice('已进入编辑模式 — 修改仅影响复制内容');
@@ -1070,9 +1071,7 @@ export class MPView extends ItemView {
 
         // 自动锁定防止刷新丢失
         if (!this.isPreviewLocked) {
-            this.isPreviewLocked = true;
-            setIcon(this.lockButton, 'lock');
-            this.lockButton.setAttribute('aria-label', '开启实时预览状态');
+            this.setPreviewLocked(true);
         }
 
         new Notice('SEO 隐藏文字已插入');

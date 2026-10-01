@@ -4,6 +4,13 @@ export const NOTE_LAYOUT_SCHEMA_VERSION = 1;
 export const NOTE_LAYOUT_FILE_NAME = 'note-layout.json';
 export const NOTE_LAYOUT_BACKUP_DIR = 'backups';
 
+/** Prefer the actual installed directory; otherwise use the vault's configured folder. */
+export function resolveNoteLayoutDirectory(configDir: string, pluginId: string, manifestDir?: string): string {
+    if (manifestDir?.trim()) return normalizePath(manifestDir);
+    if (!configDir.trim() || !pluginId.trim()) throw new Error('插件配置目录不可用');
+    return normalizePath(`${configDir}/plugins/${pluginId}`);
+}
+
 export interface NoteLayoutProfile {
     themeId: string;
     fontSize: number;
@@ -115,7 +122,8 @@ export class NoteLayoutStore {
     private readonly backupDir: string;
 
     constructor(private readonly adapter: DataAdapter, pluginDir: string) {
-        const directory = normalizePath(pluginDir || '.obsidian/plugins/yh-mp-preview');
+        if (!pluginDir.trim()) throw new Error('插件配置目录不可用');
+        const directory = normalizePath(pluginDir);
         this.filePath = normalizePath(`${directory}/${NOTE_LAYOUT_FILE_NAME}`);
         this.backupDir = normalizePath(`${directory}/${NOTE_LAYOUT_BACKUP_DIR}`);
     }
@@ -216,7 +224,7 @@ export class NoteLayoutStore {
                 const parsed = JSON.parse(raw) as NoteLayoutBackup & { settings?: unknown };
                 if (parsed.settings) normalizeNoteLayoutSettings(parsed.settings);
                 backups.push({ path, createdAt: parsed.createdAt, reason: parsed.reason, checksum: parsed.checksum });
-            } catch (_) {
+            } catch {
                 // Ignore incomplete or manually removed backup files.
             }
         }

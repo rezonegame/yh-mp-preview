@@ -11,69 +11,28 @@ import { ThemeManifestImportModal } from './ThemeManifestImportModal';
 import { NoteThemeGalleryModal } from './NoteThemeGalleryModal';
 import { setSafeInlineStyle } from '../core/security/safeDom';
 import { bindAsyncEvent } from '../ui/asyncActions';
-import { DonateManager } from '../donateManager';
+import { PersonalContact } from '../personalContact';
+import { settingsDisclosure } from '../ui/settingsDisclosure';
 export class MPSettingTab extends PluginSettingTab {
-    plugin: MPPlugin; // 修改插件类型以匹配类名
-    private expandedSections: Set<string> = new Set();
+    private expandedSections = new Set<string>();
 
-    constructor(app: App, plugin: MPPlugin) { // 修改插件类型以匹配类名
-        super(app, plugin);
-        this.plugin = plugin;
-    }
+    constructor(app: App, public plugin: MPPlugin) { super(app, plugin); }
 
-    private createSection(containerEl: HTMLElement, title: string, renderContent: (contentEl: HTMLElement) => void) {
-        const section = containerEl.createDiv('settings-section');
-        const header = section.createDiv('settings-section-header');
-        header.setAttribute('role', 'button');
-        header.setAttribute('tabindex', '0');
-        header.setAttribute('aria-label', title);
-        header.setAttribute('aria-expanded', 'false');
-
-        const toggle = header.createSpan('settings-section-toggle');
-        setIcon(toggle, 'chevron-right');
-
-        new Setting(header).setName(title).setHeading();
-
-        const content = section.createDiv('settings-section-content');
-        renderContent(content);
-
-        const toggleSection = () => {
-            const isExpanded = !section.hasClass('is-expanded');
-            section.toggleClass('is-expanded', isExpanded);
-            header.setAttribute('aria-expanded', String(isExpanded));
-            setIcon(toggle, isExpanded ? 'chevron-down' : 'chevron-right');
-            if (isExpanded) {
-                this.expandedSections.add(title);
-            } else {
-                this.expandedSections.delete(title);
-            }
-        };
-        header.addEventListener('click', toggleSection);
-        header.addEventListener('keydown', event => {
-            if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleSection(); }
-        });
-
-        if (this.expandedSections.has(title) || (!containerEl.querySelector('.settings-section'))) {
-            section.addClass('is-expanded');
-            header.setAttribute('aria-expanded', 'true');
-            setIcon(toggle, 'chevron-down');
-            this.expandedSections.add(title);
-        }
-
-        return section;
+    private createSection(parent: HTMLElement, title: string, render: (body: HTMLElement) => void): HTMLElement {
+        return settingsDisclosure(parent, title, this.expandedSections, render);
     }
 
     display(): void {
         const { containerEl } = this;
-        DonateManager.closeModal(containerEl);
+        PersonalContact.close(containerEl);
         containerEl.empty();
         containerEl.addClass('mp-settings');
 
         const header = containerEl.createDiv({ cls: 'mp-settings-header' });
         new Setting(header).setName('排版与预览').setHeading();
         header.createSpan({ text: ` v${this.plugin.manifest.version}`, cls: 'mp-settings-version' });
-        header.createEl('button', { text: '关于与帮助', attr: { type: 'button' } })
-            .addEventListener('click', () => DonateManager.showDonateModal(containerEl));
+        header.createEl('button', { text: '个人联系', attr: { type: 'button' } })
+            .addEventListener('click', () => PersonalContact.show(containerEl));
 
         this.createSection(containerEl, '基本选项', el => this.renderBasicSettings(el));
         this.createSection(containerEl, '模板选项', el => this.renderTemplateSettings(el));
@@ -83,83 +42,36 @@ export class MPSettingTab extends PluginSettingTab {
         this.createSection(containerEl, '高级选项', el => this.renderAdvancedSettings(el));
     }
 
-    private renderBasicSettings(containerEl: HTMLElement): void {
-        // 字体管理区域
-        const fontSection = containerEl.createDiv('mp-settings-subsection');
-        const fontHeader = fontSection.createDiv('mp-settings-subsection-header');
-        const fontToggle = fontHeader.createSpan('mp-settings-subsection-toggle');
-        setIcon(fontToggle, 'chevron-right');
-
-        new Setting(fontHeader).setName('字体管理').setHeading();
-
-        const fontContent = fontSection.createDiv('mp-settings-subsection-content');
-
-        // 折叠/展开逻辑
-        fontHeader.addEventListener('click', () => {
-            const isExpanded = !fontSection.hasClass('is-expanded');
-            fontSection.toggleClass('is-expanded', isExpanded);
-            setIcon(fontToggle, isExpanded ? 'chevron-down' : 'chevron-right');
+    private renderBasicSettings(parent: HTMLElement): void {
+        const manager = this.plugin.settingsManager;
+        const list = parent.createDiv('font-management');
+        for (const font of manager.getFontOptions()) {
+            const row = new Setting(list.createDiv('font-item')).setName(font.label).setDesc(font.value);
+            if (font.isPreset) continue;
+            row.addExtraButton(edit => {
+                edit.setIcon('pencil').setTooltip('编辑').onClick(() => {
+                    new CreateFontModal(this.app, async draft => {
+                        await manager.updateFont(font.value, draft);
+                        this.display();
+                    }, font).open();
+                });
+            }).addExtraButton(remove => {
+                remove.setIcon('trash').setTooltip('删除').onClick(() => {
+                    new ConfirmModal(this.app, '确认删除字体', '确定删除字体配置「' + font.label + '」吗？', async () => {
+                        await manager.removeFont(font.value);
+                        this.display();
+                    }).open();
+                });
+            });
+        }
+        new Setting(parent).addButton(add => {
+            add.setButtonText('+ 添加字体').setCta().onClick(() => {
+                new CreateFontModal(this.app, async draft => {
+                    await manager.addCustomFont(draft);
+                    this.display();
+                }).open();
+            });
         });
-
-        // 字体列表
-        const fontList = fontContent.createDiv('font-management');
-        this.plugin.settingsManager.getFontOptions().forEach(font => {
-            const fontItem = fontList.createDiv('font-item');
-            const setting = new Setting(fontItem)
-                .setName(font.label)
-                .setDesc(font.value);
-
-            // 只为非预设字体添加编辑和删除按钮
-            if (!font.isPreset) {
-                setting
-                    .addExtraButton(btn =>
-                        btn.setIcon('pencil')
-                            .setTooltip('编辑')
-                            .onClick(() => {
-                                new CreateFontModal(
-                                    this.app,
-                                    async (updatedFont) => {
-                                        await this.plugin.settingsManager.updateFont(font.value, updatedFont);
-                                        this.display();
-                                        new Notice('请重启 Obsidian 或重新加载以使更改生效');
-                                    },
-                                    font
-                                ).open();
-                            }))
-                    .addExtraButton(btn =>
-                        btn.setIcon('trash')
-                            .setTooltip('删除')
-                            .onClick(() => {
-                                // 新增确认模态框
-                                new ConfirmModal(
-                                    this.app,
-                                    '确认删除字体',
-                                    `确定要删除「${font.label}」字体配置吗？`,
-                                    async () => {
-                                        await this.plugin.settingsManager.removeFont(font.value);
-                                        this.display();
-                                        new Notice('请重启 Obsidian 或重新加载以使更改生效');
-                                    }
-                                ).open();
-                            }));
-            }
-        });
-
-        // 添加新字体按钮
-        new Setting(fontContent)
-            .addButton(btn => btn
-                .setButtonText('+ 添加字体')
-                .setCta()
-                .onClick(() => {
-                    new CreateFontModal(
-                        this.app,
-                        async (newFont) => {
-                            await this.plugin.settingsManager.addCustomFont(newFont);
-                            this.display();
-                            new Notice('请重启 Obsidian 或重新加载以使更改生效');
-                        }
-                    ).open();
-                }));
     }
 
     private renderTemplateSettings(containerEl: HTMLElement): void {
@@ -777,7 +689,7 @@ export class MPSettingTab extends PluginSettingTab {
                 }));
     }
 
-    hide(): void { DonateManager.closeModal(this.containerEl); }
+    hide(): void { PersonalContact.close(this.containerEl); }
 
     private renderNoteLayoutSettings(containerEl: HTMLElement): void {
         const store = this.plugin.noteLayoutStore;

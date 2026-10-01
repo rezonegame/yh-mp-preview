@@ -1,35 +1,27 @@
-import { App, Modal, Setting } from 'obsidian';
-import { submitDraft } from '../ui/submitDraft';
+import { Modal, type App } from 'obsidian';
 
+/** Single-flight confirmation: cancellation cannot commit and failure stays visible. */
 export class ConfirmModal extends Modal {
-    private message: string;
-    private onConfirm: () => void | Promise<void>;
-
-    constructor(app: App, title: string, message: string, onConfirm: () => void | Promise<void>) {
-        super(app);
-        this.titleEl.setText(title);
-        this.message = message;
-        this.onConfirm = onConfirm;
+    private pending = false;
+    constructor(app: App, private readonly heading: string, private readonly message: string, private readonly action: () => void | Promise<void>) { super(app); }
+    onOpen(): void {
+        const root = this.contentEl;
+        root.empty(); root.addClass('mp-confirm-modal');
+        this.titleEl.setText(this.heading);
+        root.createEl('p', { text: this.message });
+        const status = root.createEl('p', { cls: 'mp-form-error', attr: { role: 'alert' } });
+        const actions = root.createDiv('mp-dialog-actions');
+        const cancel = actions.createEl('button', { text: '取消', attr: { type: 'button' } });
+        const confirm = actions.createEl('button', { text: '确认', cls: 'mod-cta', attr: { type: 'button' } });
+        cancel.addEventListener('click', () => { if (!this.pending) this.close(); });
+        confirm.addEventListener('click', () => { void this.confirm(confirm, cancel, status); });
     }
-
-    onOpen() {
-        const { contentEl } = this;
-        contentEl.createEl('p', { text: this.message });
-
-        new Setting(contentEl)
-            .addButton(btn => btn
-                .setButtonText('确认')
-                .setCta()
-                .onClick(() => {
-                    void submitDraft(btn, async () => { await this.onConfirm(); }, () => this.close());
-                }))
-            .addButton(btn => btn
-                .setButtonText('取消')
-                .onClick(() => this.close()));
+    private async confirm(confirm: HTMLButtonElement, cancel: HTMLButtonElement, status: HTMLElement): Promise<void> {
+        if (this.pending) return;
+        this.pending = true; confirm.disabled = cancel.disabled = true; status.setText('');
+        try { await this.action(); this.close(); }
+        catch (error) { status.setText(error instanceof Error ? error.message : '操作失败，请重试'); }
+        finally { this.pending = false; confirm.disabled = cancel.disabled = false; }
     }
-
-    onClose() {
-        const { contentEl } = this;
-        contentEl.empty();
-    }
+    onClose(): void { this.contentEl.empty(); }
 }

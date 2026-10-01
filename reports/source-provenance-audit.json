@@ -1,0 +1,871 @@
+{
+  "schemaVersion": 1,
+  "auditDate": "2026-10-01",
+  "pluginVersion": "3.19.0",
+  "baselineCommit": "537113c648b47fe359b54c3815d3a2758a8887e2",
+  "scope": "Current working-tree src files; all pinned upstream src blobs; runtime package metadata. Git history and existing release assets are preserved.",
+  "upstream": {
+    "repository": "Yeban8090/mp-preview",
+    "commit": "49e77aabd62b7c01a812a10e457cf7a12e45199e",
+    "sourceFiles": 40,
+    "blobIntegrityVerified": true
+  },
+  "methodology": {
+    "textNormalization": "CRLF to LF only for whole-file comparison",
+    "contentDigest": "sha256: binary bytes or UTF-8 text with CRLF normalized to LF; workingTreeSha256: original audit bytes. Portable digest allows Git checkout line-ending differences, not content changes.",
+    "methodMinimumTokens": 60,
+    "contiguousRunMinimumTokens": 80,
+    "cssRuleMinimumDeclarationCharacters": 60,
+    "limitations": [
+      "No-match is not proof of independent implementation.",
+      "Short fragments, renamed identifiers, altered algorithms, and conceptual similarity require human review.",
+      "This is not a legal opinion or official-directory approval."
+    ]
+  },
+  "summary": {
+    "localSourceFiles": 95,
+    "identicalFiles": 0,
+    "identicalMethodBodies": 0,
+    "longTokenRuns": 0,
+    "cssFilesWithRetainedRules": 0,
+    "independentImplementationVerified": false,
+    "officialSourceGate": "unresolved-no-public-consent-evidence"
+  },
+  "files": [
+    {
+      "path": "src/assets/images.d.ts",
+      "sha256": "c5b3b8537b7bd05f492002cea308b910fd3d3b019d8aa37020e9f1d9259e9d8b",
+      "workingTreeSha256": "c5b3b8537b7bd05f492002cea308b910fd3d3b019d8aa37020e9f1d9259e9d8b",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/assets/personal-wechat.png",
+      "sha256": "187a47d31a962ca7c89b922f3d12a7e8c0ddf682b1ba11dddd06f62ebfaf38bf",
+      "workingTreeSha256": "187a47d31a962ca7c89b922f3d12a7e8c0ddf682b1ba11dddd06f62ebfaf38bf",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/backgroundManager.ts",
+      "sha256": "eac5529b2d30771c4b5c550653ede3970b8e45e0503493966e69343715a5acec",
+      "workingTreeSha256": "daa6caaf2ed504c91217a492c5d5ee35252cf5a6c20d829ee4977e195c976ebe",
+      "upstreamPath": "src/backgroundManager.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/backgrounds/index.ts",
+      "sha256": "351b2a75032a0a27cc30998d9394224bea7b4de97b47e8562744127a600762c9",
+      "workingTreeSha256": "351b2a75032a0a27cc30998d9394224bea7b4de97b47e8562744127a600762c9",
+      "upstreamPath": "src/backgrounds/index.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/containers/ContainerParser.ts",
+      "sha256": "ad03ed094c7672e7f8d287e16405de30ac993c89a6fcc5ac717edd2cca7fb6ef",
+      "workingTreeSha256": "4ba7e3cf85f05fcd06df780cc9d74509c430b831181561f3def724a9a6001ed4",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/containers/DialogueRenderer.ts",
+      "sha256": "e79f560a4225de7eb4cae2344512bbf61defd642ccde7fba65069ebdf0d04bc1",
+      "workingTreeSha256": "c2d433d959c2f2b1695132131da8968d6b85f98c9069090774e9b1bf7a01cbd0",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/containers/GalleryRenderer.ts",
+      "sha256": "39160ac16283c10aaa85052bb0969e05b92c33137f5fc1557408c9beb5a653be",
+      "workingTreeSha256": "66dfbc52b3c091677c7104c948dd4c367db0bbae5a1467d4819185aadc134f8e",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/containers/index.ts",
+      "sha256": "469d832a12e3a922e0f1b8550e883aa6c4c2a7c0286b74bf5057a2de768a9c0f",
+      "workingTreeSha256": "990384618b14e63055c8a9cb7439eb415ec752f4651c796ed6ef8df3dcd91a7b",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/converter.ts",
+      "sha256": "3a471c36bb085b7d93a7ab14e059b004bb75b15ee01abb42dfd750b65a5a9d78",
+      "workingTreeSha256": "581671a9ba49a6cc8b4b59e15a3eb93888571b702c84f403bdfeec9b81a1766a",
+      "upstreamPath": "src/converter.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/copyManager.ts",
+      "sha256": "fa5104b5cdaec5c58b4a07525e310d8663a27fd8ced2a6e7bd46d0f8e603fac6",
+      "workingTreeSha256": "fa5104b5cdaec5c58b4a07525e310d8663a27fd8ced2a6e7bd46d0f8e603fac6",
+      "upstreamPath": "src/copyManager.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/article/articleModel.ts",
+      "sha256": "7dbd9ef757b95917979f023558dfb43900e11b1eb3ba00e41e37f62472c5447b",
+      "workingTreeSha256": "5c7126ff4fe6ae08720e462654f9fa4d638a058e9a66d71d7068934705239329",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/article/canonicalArticle.ts",
+      "sha256": "554aecfd5b6ced4df4298feac9fb43e39be02128303f65e382bbfc3c65cb3d95",
+      "workingTreeSha256": "554aecfd5b6ced4df4298feac9fb43e39be02128303f65e382bbfc3c65cb3d95",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/components/standardComponents.ts",
+      "sha256": "0a46dd496b48197f9f6e7f1e647e4d04522ae4878625563a10c2e14908cd979a",
+      "workingTreeSha256": "0a46dd496b48197f9f6e7f1e647e4d04522ae4878625563a10c2e14908cd979a",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/layout/localLayoutPlanner.ts",
+      "sha256": "ddf29e2de3231562bb233963c0aaa19e49a6c62ac84a0bca44f984e7fadd688a",
+      "workingTreeSha256": "fba035728ecdfccdede410505367f081d81fe19d381604ceed4542eb6e7d2613",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/migration/settingsMigration.ts",
+      "sha256": "63d22f745f3bdafa848899bfaf39283ab3dbee3f806e1827fe90b2dff3cda360",
+      "workingTreeSha256": "e7f5e39997f2f8ebd4dfe4a7e2c27100a4ac77f881b0d1c487e97638c72092d9",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/note-layout/noteLayoutEnhancement.ts",
+      "sha256": "4ef6f6b07968496a6577c971a9b450fe766fb30bfa9d13280cbafcc6b24185d2",
+      "workingTreeSha256": "4ef6f6b07968496a6577c971a9b450fe766fb30bfa9d13280cbafcc6b24185d2",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/note-layout/noteLayoutStore.ts",
+      "sha256": "34ab3e3799bda30e9307f9bd840fded63890d1b88bea826e792af2f2e94767b9",
+      "workingTreeSha256": "34ab3e3799bda30e9307f9bd840fded63890d1b88bea826e792af2f2e94767b9",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/recipe/articleRecipeFormatter.ts",
+      "sha256": "b6f9ba47c7530b2dffe466a10a88d4f7cbfa19926567f6d725ecdd4580988736",
+      "workingTreeSha256": "b6f9ba47c7530b2dffe466a10a88d4f7cbfa19926567f6d725ecdd4580988736",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/render/articleText.ts",
+      "sha256": "2b77d7b4c93eebddd795c650e1d75a94c64612f0caf0e110c765f58ad19a15ce",
+      "workingTreeSha256": "2b77d7b4c93eebddd795c650e1d75a94c64612f0caf0e110c765f58ad19a15ce",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/render/exportCanvas.ts",
+      "sha256": "ab48c4d66f9c2461dec892d903c38903c8be7577067a42a141af522743f8232b",
+      "workingTreeSha256": "ab48c4d66f9c2461dec892d903c38903c8be7577067a42a141af522743f8232b",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/render/legacyWechatPipeline.ts",
+      "sha256": "618ac528382bc0c7ebf9645dbcee6c866e7470722fe03be616d759218102a80d",
+      "workingTreeSha256": "2802b741e1e0fb1be6592e9e83ac7624ed162fe76c012eeaf9a445a3686a6096",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/render/previewSession.ts",
+      "sha256": "53d107d255f04726ecf1a339d8b982fc0233a04db03ad99a4b468a2b092a48c8",
+      "workingTreeSha256": "53d107d255f04726ecf1a339d8b982fc0233a04db03ad99a4b468a2b092a48c8",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/resources/imageResources.ts",
+      "sha256": "b49153122b35259402a246f4b68be24364ad50c0cd7ce6e884e4ff1dfa099c0d",
+      "workingTreeSha256": "b49153122b35259402a246f4b68be24364ad50c0cd7ce6e884e4ff1dfa099c0d",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/security/safeDom.ts",
+      "sha256": "aaef4192923261f3ee16c2e5a96bab0b302259dc6cccc28e0e6c513fedca55a7",
+      "workingTreeSha256": "aaef4192923261f3ee16c2e5a96bab0b302259dc6cccc28e0e6c513fedca55a7",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/settings/backgroundDraft.ts",
+      "sha256": "2f57a5e057ee1ca1553a753d14fb080679012c625a923d1d322d6987946e7111",
+      "workingTreeSha256": "2f57a5e057ee1ca1553a753d14fb080679012c625a923d1d322d6987946e7111",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/settings/catalogMerge.ts",
+      "sha256": "2a7b498316d56bb72730500847d6189f3667c816414d5fafa439830ee91968a6",
+      "workingTreeSha256": "2a7b498316d56bb72730500847d6189f3667c816414d5fafa439830ee91968a6",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/settings/settingsRepository.ts",
+      "sha256": "35221d1070f54029e487c136d31835853c2980f3ec3636acc32faec270d020b0",
+      "workingTreeSha256": "35221d1070f54029e487c136d31835853c2980f3ec3636acc32faec270d020b0",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/settings/styleFields.ts",
+      "sha256": "aad5ffd9d0a64d445b12171240f99b8950a1840d59579be2fe4a6768c0c9cec0",
+      "workingTreeSha256": "aad5ffd9d0a64d445b12171240f99b8950a1840d59579be2fe4a6768c0c9cec0",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/theme/applyWechatComponentPalette.ts",
+      "sha256": "6ef92418760ac84609e1225193a8745576f25aa4cd6bb3d61ec73422595e5fcb",
+      "workingTreeSha256": "6ef92418760ac84609e1225193a8745576f25aa4cd6bb3d61ec73422595e5fcb",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/theme/legacyThemeAdapter.ts",
+      "sha256": "b38e233ca65485d88df02c66285d5a59b874878ca7cef2e2eece1eae74a596a4",
+      "workingTreeSha256": "e60829ebed55a8bf42493381d86a6384299ebe18b8335d628406eb3d7482ca00",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/theme/templateStylePlan.ts",
+      "sha256": "9da1b032f9787a3bd15cca0b269b04dfb00710e6d75af9aab6ef0ca27742c459",
+      "workingTreeSha256": "9da1b032f9787a3bd15cca0b269b04dfb00710e6d75af9aab6ef0ca27742c459",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/theme/templateTypes.ts",
+      "sha256": "6951c0315b04a3852efb179b0b53acac954888398b15ef55b7e2544f6e3f82d8",
+      "workingTreeSha256": "6951c0315b04a3852efb179b0b53acac954888398b15ef55b7e2544f6e3f82d8",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/theme/themeCatalog.ts",
+      "sha256": "2a4ea12a42f96a45a2086a9916fad730dfbb8ea9044a5a739a537e753f6c5962",
+      "workingTreeSha256": "2a4ea12a42f96a45a2086a9916fad730dfbb8ea9044a5a739a537e753f6c5962",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/theme/themeManifest.ts",
+      "sha256": "3b7c4f49c56122a2023f552b5aa63c951dd93f3a4f42124fac7eb6f00cb6f02b",
+      "workingTreeSha256": "ee314cab039f260b3c890bc6ed9c0fd0cee89eda793ae70c5fe850941fee7b92",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/theme/themeManifestBridge.ts",
+      "sha256": "01181e265ac2747e522e3dae8360782a518e114dbbd13e2fe446565e14886aab",
+      "workingTreeSha256": "01181e265ac2747e522e3dae8360782a518e114dbbd13e2fe446565e14886aab",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/theme/themeManifestValidator.ts",
+      "sha256": "d7b59527aea5895353fe876fc3eee54e0ee9eacda1fdc6f14104670825bae347",
+      "workingTreeSha256": "d7b59527aea5895353fe876fc3eee54e0ee9eacda1fdc6f14104670825bae347",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/theme/themeRegistry.ts",
+      "sha256": "eb4eefad7ba77dfaa6f9785d75dea43030104e40d7e4a21f96e42df8b789fdcc",
+      "workingTreeSha256": "7e28220f22c37886e4aa8ead1115a92f316daac59a8356cf5eeddc63efe4ba56",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/theme/wechatPalette.ts",
+      "sha256": "0a148ae87cc2e37ab946a6bcf5a37b83d249a8a8b2dac4f24117331c69f8b0a2",
+      "workingTreeSha256": "0a148ae87cc2e37ab946a6bcf5a37b83d249a8a8b2dac4f24117331c69f8b0a2",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/theme/wechatReadingBaseline.ts",
+      "sha256": "231d73b94d1bfcbfbbbba8e76ae8ec617f7bafe5ce6b92992032cfd919bf1afe",
+      "workingTreeSha256": "231d73b94d1bfcbfbbbba8e76ae8ec617f7bafe5ce6b92992032cfd919bf1afe",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/core/validation/wechatHtmlValidator.ts",
+      "sha256": "c2d2f86dcfc06a178cae0ea58d915c70eb18f8a4f1891210bc220492632c4e10",
+      "workingTreeSha256": "9a941506ec9d1d9b30df5b3deaefd95f3ae69054bb64228c1404d76c2ae8ba87",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/layoutEnhancer.ts",
+      "sha256": "38e11c00756bc2f77864c2a742fb24197cdd0c2c1db5fe0ea355ba1d158ba853",
+      "workingTreeSha256": "9406973743a1852dc9983a5dc8f405c5c908cb239f7951f60676dd89f7cfaec5",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/main.ts",
+      "sha256": "2a1ca6ac0fae60e851f16f3d6bcf57fad1c078c4cc74327b20c24cbd15ebb95f",
+      "workingTreeSha256": "b844a3f07b05940f0769b2e28d83bec463c6760ca6a876e125067e8e5a7d9bc4",
+      "upstreamPath": "src/main.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/personalContact.ts",
+      "sha256": "2cc37965916fe29cd8172a25ed3a10c7145d1ba189938827c458f4142290b885",
+      "workingTreeSha256": "2cc37965916fe29cd8172a25ed3a10c7145d1ba189938827c458f4142290b885",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/settings/ConfirmModal.ts",
+      "sha256": "af970bb9cde7ed0679d1f01e6f8af36ffefaa019745e7b276910a8525403975c",
+      "workingTreeSha256": "af970bb9cde7ed0679d1f01e6f8af36ffefaa019745e7b276910a8525403975c",
+      "upstreamPath": "src/settings/ConfirmModal.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/settings/CreateBackgroundModal.ts",
+      "sha256": "01742ef65ccd4a25ac5c7f626dbae6352e9e76cc073e6b41cf8ba6ea66a9b528",
+      "workingTreeSha256": "01742ef65ccd4a25ac5c7f626dbae6352e9e76cc073e6b41cf8ba6ea66a9b528",
+      "upstreamPath": "src/settings/CreateBackgroundModal.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/settings/CreateFontModal.ts",
+      "sha256": "8b8d47323f63919e6a11007614888defd1f271c1eebf2738afec1a5d69444fab",
+      "workingTreeSha256": "8b8d47323f63919e6a11007614888defd1f271c1eebf2738afec1a5d69444fab",
+      "upstreamPath": "src/settings/CreateFontModal.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/settings/CreateTemplateModal.ts",
+      "sha256": "f7daeccdcb1f02b8f7c39f00fb25348ee69162d20f23422bdacb47d0840a8f81",
+      "workingTreeSha256": "f7daeccdcb1f02b8f7c39f00fb25348ee69162d20f23422bdacb47d0840a8f81",
+      "upstreamPath": "src/settings/CreateTemplateModal.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/settings/MPSettingTab.ts",
+      "sha256": "ee66ecefb30d715b21130655e287c93fa2f762cb2ddd046ce30a7850b93ade00",
+      "workingTreeSha256": "ee66ecefb30d715b21130655e287c93fa2f762cb2ddd046ce30a7850b93ade00",
+      "upstreamPath": "src/settings/MPSettingTab.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/settings/NoteThemeGalleryModal.ts",
+      "sha256": "881c625482128417b9f070b9c33617b9ef59a6ba96727777fdfb3d5421c79678",
+      "workingTreeSha256": "881c625482128417b9f070b9c33617b9ef59a6ba96727777fdfb3d5421c79678",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/settings/ThemeGalleryModal.ts",
+      "sha256": "bff8e64b09926d326b698c74186577bba3f754a400f5d0dd0202fd1438229c1b",
+      "workingTreeSha256": "bff8e64b09926d326b698c74186577bba3f754a400f5d0dd0202fd1438229c1b",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/settings/ThemeManifestImportModal.ts",
+      "sha256": "86673ad29cdfd8afaa9ccbb03f7f9537bfa43e3c2535bcfc0d22f6cc918e5296",
+      "workingTreeSha256": "86673ad29cdfd8afaa9ccbb03f7f9537bfa43e3c2535bcfc0d22f6cc918e5296",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/settings/settings.ts",
+      "sha256": "83e2c3b174b941223d15533198a33494cfa4a290e3e1713e4fe313fca677ae6c",
+      "workingTreeSha256": "83e2c3b174b941223d15533198a33494cfa4a290e3e1713e4fe313fca677ae6c",
+      "upstreamPath": "src/settings/settings.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/settings/templatePreviewModal.ts",
+      "sha256": "79c539b9e8e6462de7efe24769d8fca2581820c39502b21bf27d749f990335d1",
+      "workingTreeSha256": "ae9443989a0d6df6e8d1d877d55d8c0b21169d90e1895471eb9a011a9cd76eea",
+      "upstreamPath": "src/settings/templatePreviewModal.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/index.css",
+      "sha256": "a6d40227d3089a2a196d1ad276689a7e6fd14c495cccdc57b742b3d8c758228e",
+      "workingTreeSha256": "4c556dccb2d9ee1eed1f4d6d754197572a15bdb6d7f683b7d15962b877b7b214",
+      "upstreamPath": "src/styles/index.css",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/settings/background-modal.css",
+      "sha256": "e605768fa2446e24da0da941d330d21c9b8b3ae52360c55513815903bf340f0d",
+      "workingTreeSha256": "e605768fa2446e24da0da941d330d21c9b8b3ae52360c55513815903bf340f0d",
+      "upstreamPath": "src/styles/settings/background-modal.css",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/settings/font-modal.css",
+      "sha256": "9242fa3706e037f3d1c82076cb9fffb7659bae123187ae134776d84d3b8a5c2c",
+      "workingTreeSha256": "9242fa3706e037f3d1c82076cb9fffb7659bae123187ae134776d84d3b8a5c2c",
+      "upstreamPath": "src/styles/settings/font-modal.css",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/settings/settings.css",
+      "sha256": "e0cedb4bee1a7bcd08badf5456563240530e310fc70bc7d026f2b92b9e84b6b6",
+      "workingTreeSha256": "e0cedb4bee1a7bcd08badf5456563240530e310fc70bc7d026f2b92b9e84b6b6",
+      "upstreamPath": "src/styles/settings/settings.css",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/settings/template-modal.css",
+      "sha256": "c6dd3ff05fe4a610192759add370b4b8877daa8a7db800f70cd6b69fec6cb5bd",
+      "workingTreeSha256": "c6dd3ff05fe4a610192759add370b4b8877daa8a7db800f70cd6b69fec6cb5bd",
+      "upstreamPath": "src/styles/settings/template-modal.css",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/settings/template-preview-modal.css",
+      "sha256": "ccbd2782da3a2fe060fc0cffda0e8aea1e70e4779b29ef7399f5a67223d59011",
+      "workingTreeSha256": "ccbd2782da3a2fe060fc0cffda0e8aea1e70e4779b29ef7399f5a67223d59011",
+      "upstreamPath": "src/styles/settings/template-preview-modal.css",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/settings/theme-gallery.css",
+      "sha256": "d1403eda4d5b40550437a56efc07274301d86b513ad5fb3f9fc16a6145411cdb",
+      "workingTreeSha256": "d1403eda4d5b40550437a56efc07274301d86b513ad5fb3f9fc16a6145411cdb",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/ui-polish.css",
+      "sha256": "a7692bdcd4281255df2ec15fb04856ac5b71923bfdf74d5ea7544ab6e2212dc4",
+      "workingTreeSha256": "a7692bdcd4281255df2ec15fb04856ac5b71923bfdf74d5ea7544ab6e2212dc4",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/view/layout.css",
+      "sha256": "afa408995ed006e63471fe6460233ea9ed56decd3ca338881d9b269c6415ffc0",
+      "workingTreeSha256": "afa408995ed006e63471fe6460233ea9ed56decd3ca338881d9b269c6415ffc0",
+      "upstreamPath": "src/styles/view/layout.css",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/view/note-layout.css",
+      "sha256": "5dd6f6eaa20035bacdd9c08278553d4f2f31970c60f8ed61686501da445edf35",
+      "workingTreeSha256": "5dd6f6eaa20035bacdd9c08278553d4f2f31970c60f8ed61686501da445edf35",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/view/preview.css",
+      "sha256": "c363e1913166a0409a5467e2bcbe8f93eaf679eff1c3d651d9df99765bde323f",
+      "workingTreeSha256": "647be7ebd19abd979862415ff80689645b455c362973a7965d8d2e39caa6805e",
+      "upstreamPath": "src/styles/view/preview.css",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/workbench-refactor.css",
+      "sha256": "c1911b4507eec1ec3b5185a1805d713b4bf43f0b6316048db8a5fbf0becc59c5",
+      "workingTreeSha256": "c1911b4507eec1ec3b5185a1805d713b4bf43f0b6316048db8a5fbf0becc59c5",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templateManager.ts",
+      "sha256": "5357cc0b444a6067978ea6b310eeb59e823149f5189f1e67e3e45b296a9d6b43",
+      "workingTreeSha256": "5357cc0b444a6067978ea6b310eeb59e823149f5189f1e67e3e45b296a9d6b43",
+      "upstreamPath": "src/templateManager.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/academic-pro-forest.json",
+      "sha256": "e44f5dabe9e125b2f2b3b3ee2ccf1ee879255c6399358e65d9fc156469ec567d",
+      "workingTreeSha256": "e44f5dabe9e125b2f2b3b3ee2ccf1ee879255c6399358e65d9fc156469ec567d",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/academic-pro.json",
+      "sha256": "e8ab7df066b05a54d0ca2042877279b3aaf1e09313faaaca58695e8e58994ae3",
+      "workingTreeSha256": "e8ab7df066b05a54d0ca2042877279b3aaf1e09313faaaca58695e8e58994ae3",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/apple-product.json",
+      "sha256": "74e663611b9b516a1b5321049f76deaaa0d2c4c2fd57f1d00e21580dafbebdee",
+      "workingTreeSha256": "74e663611b9b516a1b5321049f76deaaa0d2c4c2fd57f1d00e21580dafbebdee",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/briefing-grid.json",
+      "sha256": "0fb888ab7d943cd280a1304b93bb16eabb9e4e95434773eac32530d6ef8a68aa",
+      "workingTreeSha256": "0fb888ab7d943cd280a1304b93bb16eabb9e4e95434773eac32530d6ef8a68aa",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/case-file.json",
+      "sha256": "53a5758efaaf631f56bbb5098d917d3deb6979a54d31fb41a6a93563ac8ad0b6",
+      "workingTreeSha256": "53a5758efaaf631f56bbb5098d917d3deb6979a54d31fb41a6a93563ac8ad0b6",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/clear-guide.json",
+      "sha256": "1bbc70c95053f1e395c99eb46576274f844738b114c80031997ef17f89d6f029",
+      "workingTreeSha256": "1bbc70c95053f1e395c99eb46576274f844738b114c80031997ef17f89d6f029",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/data-blueprint.json",
+      "sha256": "14dee1e1987748cc1aa45d3fcd98d34143418e9e9351de61513ecf3ac25ddd49",
+      "workingTreeSha256": "14dee1e1987748cc1aa45d3fcd98d34143418e9e9351de61513ecf3ac25ddd49",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/deep-reading.json",
+      "sha256": "97a380927d950b456c29c7e520287b89ea18e49abb413c36d29d53fe1dc50c97",
+      "workingTreeSha256": "97a380927d950b456c29c7e520287b89ea18e49abb413c36d29d53fe1dc50c97",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/default.json",
+      "sha256": "420e28bb3e377bea5161e7af4e1c392b90d19cff19c6b003d371f19eb8fadf4f",
+      "workingTreeSha256": "420e28bb3e377bea5161e7af4e1c392b90d19cff19c6b003d371f19eb8fadf4f",
+      "upstreamPath": "src/templates/default.json",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/eastern-notes.json",
+      "sha256": "72bf6eb2f039f28ab5f30c2d8513c34939466d34f946fdaba1f76cc77fa13f8e",
+      "workingTreeSha256": "72bf6eb2f039f28ab5f30c2d8513c34939466d34f946fdaba1f76cc77fa13f8e",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/index.ts",
+      "sha256": "fe432ec570ec65661d71adc995cb280d888ce986488950a350d96e36677fd8a3",
+      "workingTreeSha256": "fe432ec570ec65661d71adc995cb280d888ce986488950a350d96e36677fd8a3",
+      "upstreamPath": "src/templates/index.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/ink-opinion.json",
+      "sha256": "004ad128ce2fc0748ed162ae924f00c27ef34992d6a70d1590371783233a7c4d",
+      "workingTreeSha256": "004ad128ce2fc0748ed162ae924f00c27ef34992d6a70d1590371783233a7c4d",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/knowledge-notes.json",
+      "sha256": "9954585db9db6bc4e2d362bff3e1267d0c921ef2e96708b3cbe41a1ffd2b34ac",
+      "workingTreeSha256": "9954585db9db6bc4e2d362bff3e1267d0c921ef2e96708b3cbe41a1ffd2b34ac",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/minimal.json",
+      "sha256": "3753a69e41adde692ca7d58f06606223399e5a7b0e26e5b418239b0062d1125d",
+      "workingTreeSha256": "3753a69e41adde692ca7d58f06606223399e5a7b0e26e5b418239b0062d1125d",
+      "upstreamPath": "src/templates/minimal.json",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/modern-report.json",
+      "sha256": "7fe86fe2e1dcae04f09d788b8d37491229dd612c8e6fc3dcff4a4f865c920fff",
+      "workingTreeSha256": "7fe86fe2e1dcae04f09d788b8d37491229dd612c8e6fc3dcff4a4f865c920fff",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/olive-journal.json",
+      "sha256": "dfe5c30c3042c449f0412c3a9d8f3eba3df02be10698fc1a622f006463cd05dc",
+      "workingTreeSha256": "dfe5c30c3042c449f0412c3a9d8f3eba3df02be10698fc1a622f006463cd05dc",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/product-review.json",
+      "sha256": "423fbd4af2cbac644934ed139b5446712563535e2d8340b871577d8d62bac7e5",
+      "workingTreeSha256": "423fbd4af2cbac644934ed139b5446712563535e2d8340b871577d8d62bac7e5",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/red-white-editorial.json",
+      "sha256": "a161340b2c0c6d508643a66d3c1cf13c9911d7b6b1c65cb9d1457ba60067b765",
+      "workingTreeSha256": "a161340b2c0c6d508643a66d3c1cf13c9911d7b6b1c65cb9d1457ba60067b765",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/warm-paper.json",
+      "sha256": "58e5f1111ba876358748ade17fb065403da4683bc0d11c94b611502ba8488cc5",
+      "workingTreeSha256": "58e5f1111ba876358748ade17fb065403da4683bc0d11c94b611502ba8488cc5",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/templates/zen-essence.json",
+      "sha256": "dc2d78f0c6192aeca2aa506b847beacaeb5b5c4e844a8506d98c730a2d67a2ab",
+      "workingTreeSha256": "dc2d78f0c6192aeca2aa506b847beacaeb5b5c4e844a8506d98c730a2d67a2ab",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/types/pangu-browser.d.ts",
+      "sha256": "08a4d5ba459d76bfc0eab2e57c2c9e1480509dde46c55c9ca01d41c447402b40",
+      "workingTreeSha256": "08a4d5ba459d76bfc0eab2e57c2c9e1480509dde46c55c9ca01d41c447402b40",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/ui/CustomSelect.ts",
+      "sha256": "75ee979e142f14ab7103b3f56d667cdc85cae807da595b5697a101c7b1fe5d2f",
+      "workingTreeSha256": "75ee979e142f14ab7103b3f56d667cdc85cae807da595b5697a101c7b1fe5d2f",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/ui/ImageAltModal.ts",
+      "sha256": "fd73ce79804f75aea71c9b5259e8f6bed9ee175ff9833017111a0491c53e3eee",
+      "workingTreeSha256": "5feed2b047890d6be48849ed78021ab6072ac1050d0744760bee77efc9992dcf",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/ui/asyncActions.ts",
+      "sha256": "a775aa9d7d543e1e67a8149b1260a17fda383d64bb6aad8df4f10391a1b4c337",
+      "workingTreeSha256": "a775aa9d7d543e1e67a8149b1260a17fda383d64bb6aad8df4f10391a1b4c337",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/ui/recipeLabels.ts",
+      "sha256": "06aafb8fc61c795374a98c26a9cba84cde5dc29e64a0b6e49de6b543dcb641fa",
+      "workingTreeSha256": "06aafb8fc61c795374a98c26a9cba84cde5dc29e64a0b6e49de6b543dcb641fa",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/ui/settingsDisclosure.ts",
+      "sha256": "91104f70828ba299bea2b42ec2cab42549c1fc2e1832711a2e7b6b09d75859c3",
+      "workingTreeSha256": "91104f70828ba299bea2b42ec2cab42549c1fc2e1832711a2e7b6b09d75859c3",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/ui/submitDraft.ts",
+      "sha256": "323944fa534c8dce7e44b32bd2b513fa165ecc79da232ca18e433e14e8306c89",
+      "workingTreeSha256": "323944fa534c8dce7e44b32bd2b513fa165ecc79da232ca18e433e14e8306c89",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/ui/workbenchControls.ts",
+      "sha256": "9f15b3460614ce291403a2740a6285870a6901229e008826cb12f475786b0b4a",
+      "workingTreeSha256": "9f15b3460614ce291403a2740a6285870a6901229e008826cb12f475786b0b4a",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
+      "path": "src/view.ts",
+      "sha256": "ff2553c115041144a67a19fbc5f73580340973683198c81d5828e8446d1fccbb",
+      "workingTreeSha256": "ff2553c115041144a67a19fbc5f73580340973683198c81d5828e8446d1fccbb",
+      "upstreamPath": "src/view.ts",
+      "identicalUpstreamPaths": [],
+      "classification": "changed-upstream-path-not-independent-proof"
+    }
+  ],
+  "identicalMethods": [],
+  "longTokenRuns": [],
+  "retainedCssRules": [],
+  "dependencies": [
+    {
+      "name": "dompurify",
+      "version": "3.4.16",
+      "license": "(MPL-2.0 OR Apache-2.0)",
+      "repository": "git://github.com/cure53/DOMPurify.git",
+      "installedLicenseFiles": [
+        "LICENSE"
+      ],
+      "projectLicenseFiles": [
+        "LICENSES/DOMPurify.txt"
+      ]
+    },
+    {
+      "name": "html2canvas",
+      "version": "1.4.1",
+      "license": "MIT",
+      "repository": "git@github.com:niklasvh/html2canvas.git",
+      "installedLicenseFiles": [
+        "LICENSE"
+      ],
+      "projectLicenseFiles": [
+        "LICENSES/html2canvas.txt"
+      ]
+    },
+    {
+      "name": "nanoid",
+      "version": "5.1.16",
+      "license": "MIT",
+      "repository": "ai/nanoid",
+      "installedLicenseFiles": [
+        "LICENSE"
+      ],
+      "projectLicenseFiles": [
+        "LICENSES/nanoid.txt"
+      ]
+    },
+    {
+      "name": "pangu",
+      "version": "7.2.0",
+      "license": "MIT",
+      "repository": "git://github.com/vinta/pangu.js.git",
+      "installedLicenseFiles": [
+        "LICENSE"
+      ],
+      "projectLicenseFiles": [
+        "LICENSES/pangu.txt"
+      ]
+    }
+  ],
+  "removedLegacyResources": [
+    {
+      "path": "src/assets/donate.ts",
+      "upstreamBlob": "7c3c244e8ad03253ac371d287af7ba3b5fca2079",
+      "status": "absent-from-current-source-preserved-in-git-history"
+    },
+    {
+      "path": "src/assets/donate/alipay.png",
+      "upstreamBlob": "b46eaaa5295455de3b612c590cc26c0a2c3816aa",
+      "status": "absent-from-current-source-preserved-in-git-history"
+    },
+    {
+      "path": "src/assets/donate/wechat_pay.png",
+      "upstreamBlob": "84b76415ba25d16937de8935218d472dac749bed",
+      "status": "absent-from-current-source-preserved-in-git-history"
+    },
+    {
+      "path": "src/assets/qrcode.ts",
+      "upstreamBlob": "74e8a81b5b90668148641b2b46bd0ec4c499d665",
+      "status": "absent-from-current-source-preserved-in-git-history"
+    }
+  ]
+}

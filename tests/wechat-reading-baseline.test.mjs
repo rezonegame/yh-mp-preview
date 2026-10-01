@@ -6,7 +6,7 @@ import { transformSync } from 'esbuild';
 const source = readFileSync(new URL('../src/core/theme/wechatReadingBaseline.ts', import.meta.url), 'utf8');
 const compiled = transformSync(source, { loader: 'ts', format: 'esm', target: 'es2020' }).code;
 const baseline = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
-const templateManager = readFileSync(new URL('../src/templateManager.ts', import.meta.url), 'utf8');
+const stylePlan = readFileSync(new URL('../src/core/theme/templateStylePlan.ts', import.meta.url), 'utf8');
 
 test('WeChat reading baseline keeps long-form text readable', () => {
   assert.equal(baseline.WECHAT_READING_BASELINE_VERSION, '2026.09');
@@ -25,17 +25,17 @@ test('WeChat reading baseline keeps long-form text readable', () => {
 
 test('every bundled theme receives the shared reading baseline at render time', () => {
   for (const selector of [
-    'wechatReadingBaseline.paragraph',
-    'wechatReadingBaseline.list',
-    'wechatReadingBaseline.listItem',
-    'wechatReadingBaseline.quote',
-    'wechatReadingBaseline.codeBlock',
-    'wechatReadingBaseline.inlineCode',
-    'wechatReadingBaseline.table',
-    'wechatReadingBaseline.tableCell',
-    'wechatReadingBaseline.image',
+    'reading.paragraph',
+    'reading.list',
+    'reading.listItem',
+    'reading.quote',
+    'reading.codeBlock',
+    'reading.inlineCode',
+    'reading.table',
+    'reading.tableCell',
+    'reading.image',
   ]) {
     const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    assert.match(templateManager, new RegExp(escaped));
+    assert.match(stylePlan, new RegExp(escaped));
   }
 });

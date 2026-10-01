@@ -46,6 +46,7 @@ export function createDom() {
 export async function loadModule(path, stub = '') {
   const result = await build({
     entryPoints: [path], bundle: true, write: false, format: 'esm', platform: 'browser', target: 'es2020',
+    loader: { '.png': 'dataurl' },
     plugins: [{ name: 'obsidian-fixture', setup(builder) {
       builder.onResolve({ filter: /^obsidian$/ }, () => ({ path: 'obsidian', namespace: 'fixture' }));
       builder.onLoad({ filter: /.*/, namespace: 'fixture' }, () => ({ contents: stub || 'export class Notice {} export class App {} export function requestUrl(){throw new Error("fixture requires an explicit resource loader");}', loader: 'js' }));

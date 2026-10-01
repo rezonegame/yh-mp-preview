@@ -18,7 +18,7 @@ for (const file of readdirSync('src/templates').filter(file => file.endsWith('.j
     section.createEl('p', { text: '长段落 中文 English 文字保留，排版不改写内容。' });
     const quote = section.createEl('blockquote'); quote.createEl('p', { text: '引用内容' });
     const list = section.createEl('ol'); list.createEl('li', { text: '步骤一' });
-    const pre = section.createEl('pre'); pre.createEl('code', { text: 'const value = 1;' });
+    const pre = section.createEl('pre'); const code = pre.createEl('code'); code.createSpan({ cls: 'token keyword', text: 'const' }); code.append(' value = 1;');
     const table = section.createEl('table'); const row = table.createEl('tr'); row.createEl('td', { text: '数据' });
     const manager = new TemplateManager({}, { getTemplate: () => template });
     manager.setCurrentTemplate(template.id);
@@ -29,6 +29,8 @@ for (const file of readdirSync('src/templates').filter(file => file.endsWith('.j
     assert.ok(Number(section.querySelector('p').style.lineHeight) >= 1.72);
     assert.equal(section.querySelectorAll('h1,h2,h3,h4,h5,h6').length, 6);
     assert.equal(section.querySelector('pre').style.whiteSpace, 'pre-wrap');
+    assert.equal(code.style.color, 'inherit');
+    assert.equal(code.querySelector('.token').style.color, 'inherit');
     const result = prepareLegacyWechatFragment(section, { themeId: template.id, recipeId: 'legacy-compatible' });
     assert.equal(result.validation.errors, 0);
     const parsed = document.createElement('div');

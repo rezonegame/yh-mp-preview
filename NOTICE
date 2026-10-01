@@ -1,10 +1,35 @@
-yh-mp-preview is distributed under the GNU Affero General Public
-License, version 3 or later (AGPL-3.0-or-later).
+yh-mp-preview
+Maintained by yhwang. Maintainer-provided current work is distributed under
+GNU Affero General Public License, version 3 or later (AGPL-3.0-or-later).
+Third-party portions remain subject to their original licenses.
 
-This product is independently maintained by yhwang and has evolved beyond
-its early WeChat preview implementation. Portions of the early implementation
-from Yeban8090/mp-preview remain in the codebase. The original MIT copyright
-notice and license text are preserved in LICENSES/MIT-original.txt.
+Early implementation source: Yeban8090/mp-preview, MIT License.
+Original copyright: Copyright (c) 2025 夜半Yeban
+Full original notice: LICENSES/MIT-original.txt
+Pinned comparison: 49e77aabd62b7c01a812a10e457cf7a12e45199e
 
-Theme provenance is tracked in reports/theme-audit.json. Historical themes
-with unverified upstream provenance are excluded from the v3.0.1 distribution.
+P2–P4 architecture work was delivered in 3.18.0. Version 3.19.0, continuing
+in the original repository, additionally rebuilds the previously identified
+background editor/presets, font and confirmation forms, settings catalog and
+disclosures, preview lock state, theme style application and seven stylesheet
+files. The nanoid forwarding file and old QR manager have been removed.
+
+The 2026-10-01 source audit now finds no whole-file matches, method-body matches,
+long token runs or qualifying CSS-rule matches under its documented tests.
+This is not a claim that all upstream implementation or derivative expression
+has been independently verified. Exact scope, limits and current source hashes:
+docs/SOURCE_PROVENANCE.md and reports/source-provenance-audit.json.
+Historical copyright and provenance are preserved, not erased by rebuilding.
+This is not an official upstream release or evidence of approval for the
+Obsidian Community directory.
+
+Old payment and public-account QR assets and text placeholders are absent.
+The personal-contact dialog embeds the maintainer-supplied Akira WeChat image
+unchanged and offline. It contains no payment or public-account promotion.
+Earlier releases and Git history are not overwritten.
+Unverified historical xiaohu imports remain excluded from the current bundle.
+reports/theme-audit.json inventories themes, not blanket copyright clearance.
+
+Bundled libraries: DOMPurify, html2canvas, nanoid, and pangu. Also preserve
+Microsoft helper notices carried by html2canvas and Babel helper notices
+carried by DOMPurify. See THIRD_PARTY_NOTICES.md and LICENSES/ for full texts.

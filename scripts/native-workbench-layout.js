@@ -18,7 +18,8 @@
         if (!pass) throw new Error(name + ': ' + JSON.stringify(detail));
     };
     const dimensions = [];
-    const delay = ms => new Promise(resolve => window.setTimeout(resolve, ms));
+    // Desktop test clock: preserve elapsed time without background-tab throttling.
+    const delay = ms => new Promise(resolve => require('timers').setTimeout(resolve, ms));
     const advanced = toolbar.querySelector('.mp-advanced-typesetting');
     const explanation = toolbar.querySelector('.mp-enhancement-help');
     try {
@@ -44,6 +45,8 @@
                 }).map(el=>el.getAttribute('aria-label') || el.textContent);
                 dimensions.push({theme,width,paneWidth:view.containerEl.clientWidth,rows:rows.length,overflow});
                 check(theme+' controls fit '+width, overflow.length === 0, overflow);
+                const validation = root.querySelector('.mp-validation-panel');
+                check(theme+' validation remains readable '+width, validation.clientHeight >= 30, {height:validation.clientHeight});
                 if (width >= 520) check(theme+' appearance uses one row '+width, rows.length === 1, rows);
                 if (width === 375 || width === 414) check(theme+' narrow appearance uses two rows '+width, rows.length === 2, rows);
             }

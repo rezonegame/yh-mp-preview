@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-10-01",
+  "version": "3.19.0-beta.1",
+  "status": "local unpublished candidate after custom configuration-directory fix",
+  "assets": {
+    "main.js": "24b235663a8afae5c3ff4a48076184234c62690f2d1cffe2a410af10757e5985",
+    "styles.css": "b00282f9c9e83ddf4a98d0c94699ec96b230774d86ffb730215378534e05e61c",
+    "manifest.json": "a66c6360a1dd6536a7ebcc4de55654bbb099cc7e7736a08bbfe3488e117c30a5"
+  },
+  "installedMainMatchesLocal": true,
+  "scope": "MPPreview-Refactor-Test only; Marketing untouched",
+  "automation": {
+    "tests": 126,
+    "failed": 0,
+    "hostErrors": 0,
+    "hostWarnings": 30,
+    "newDirectoryTests": 5,
+    "buildSucceeded": true,
+    "verifySucceeded": true
+  },
+  "native": {
+    "host": "Obsidian 1.13.7",
+    "vault": "MPPreview-Refactor-Test",
+    "checksPassed": 7,
+    "checks": [
+      "installed store uses actual plugin directory",
+      "custom directory receives the settings file",
+      "custom directory survives reload",
+      "backup stays under the custom directory",
+      "backup restore preserves original profile",
+      "installed plugin configuration remains unchanged",
+      "Markdown remains unchanged"
+    ],
+    "errorsCaptured": 0,
+    "artifacts": "_test-artifacts/config-directory-1790838395547"
+  },
+  "sourceAudit": {
+    "sourceFiles": 95,
+    "identicalFiles": 0,
+    "identicalMethodBodies": 0,
+    "longTokenRuns": 0,
+    "cssFilesWithRetainedRules": 0,
+    "independentImplementationVerified": false
+  },
+  "limits": [
+    "Unit tests cover resolution from a nondefault Vault.configDir and precedence of manifest.dir.",
+    "Native tests exercise a custom storage directory with the real store and vault adapter; the host vault configDir was not changed.",
+    "The earlier 137 native passes and one clipboard skip belong to the older asset digest in source-rebuild-verification.json, not this main.js.",
+    "No new full article-export or BRAT installation round was performed after this storage-only change.",
+    "No new repository, public release or official Publish was performed."
+  ]
+}
