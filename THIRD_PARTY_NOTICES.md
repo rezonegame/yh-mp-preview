@@ -1,7 +1,7 @@
 # Third-party notices
 
-Updated: 2026-10-01. This describes the current source tree. Published `3.18.0`
-and earlier releases keep their original assets; this update is not a new release.
+Updated: 2026-10-01. This describes the current 3.19.0 source tree in the
+original repository. Published `3.18.0` and earlier releases keep their original assets.
 
 ## Early implementation, refactor, and retained portions
 
@@ -13,7 +13,7 @@ and earlier releases keep their original assets; this update is not a new releas
 The current product is independently maintained and follows its own product
 direction. P2–P4 architecture work is complete, including settings transactions,
 isolated drafts, canonical article output, resource handling, and rendering lifecycle.
-The unpublished 3.19.0-beta.1 candidate additionally rebuilds the previously
+Version 3.19.0 (developed as an unpublished 3.19.0-beta.1 candidate) additionally rebuilds the previously
 identified background editor, forms, settings catalog, lock state, theme application
 and seven stylesheets. The nanoid package forwarding file is removed. Current
 comparison finds zero exact matches under the unchanged documented thresholds.

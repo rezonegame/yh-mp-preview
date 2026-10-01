@@ -12,6 +12,8 @@
 
 以下“独立上架目标续办”记录的是此前 `3.18.0` 扫描与本地 beta 阶段，时间边界保留，不代表当前还在等待路径确认。最终发行及复核结果将补充于本节。
 
+已在原仓库发行 [3.19.0](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.19.0)，固定提交 `7fd37377b1668cbb2d6f32c43646976bccc2818a`。GitHub CI success，13 个下载资产与标签一致，三个核心文件也与真实宿主受测文件一致，见 [发行验证](../reports/release-3.19-publication.json)。官方草稿“Check for new releases”已识别数字版 3.19.0 并排队扫描；当前 Pending，未点击 Publish。只提交一次刷新请求，不重复排队。
+
 ### 历史：独立上架目标续办
 
 维护者再次明确目标为独立完成官方上架，并要求 agent 自行验收与处理。本轮重新查看登录的官方草稿，发现它此前仍缓存 `v3.15.0` 的发行信息和旧预检结果；已通过“Check for new releases”刷新，后台识别出 `3.18.0`／`fa187fedc64fb73fa7d213ade372ec2e905ea257` 并排队扫描，随后完成。扫描已是终态，不继续等待或重复创建相同请求。当前草稿仍未 Publish。

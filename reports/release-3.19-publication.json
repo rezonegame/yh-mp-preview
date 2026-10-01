@@ -1,0 +1,104 @@
+{
+  "version": "3.19.0",
+  "repository": "rezonegame/yh-mp-preview",
+  "commit": "7fd37377b1668cbb2d6f32c43646976bccc2818a",
+  "publishedAt": "2026-10-01T13:35:22Z",
+  "url": "https://github.com/rezonegame/yh-mp-preview/releases/tag/3.19.0",
+  "status": "published stable; CI passed; downloaded assets byte-verified against tag and native-tested core files",
+  "latestStable": "3.19.0",
+  "isDraft": false,
+  "isPrerelease": false,
+  "ci": {
+    "conclusion": "success",
+    "databaseId": 36869703771,
+    "headBranch": "3.19.0",
+    "headSha": "7fd37377b1668cbb2d6f32c43646976bccc2818a",
+    "status": "completed",
+    "url": "https://github.com/rezonegame/yh-mp-preview/actions/runs/36869703771"
+  },
+  "assets": [
+    {
+      "name": "main.js",
+      "size": 1078413,
+      "sha256": "24b235663a8afae5c3ff4a48076184234c62690f2d1cffe2a410af10757e5985",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/main.js"
+    },
+    {
+      "name": "manifest.json",
+      "size": 287,
+      "sha256": "7f19d10f03dfed83356c1659bc2b30f6fd5a43b9f282a5846ac8e43118627730",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/manifest.json"
+    },
+    {
+      "name": "styles.css",
+      "size": 46493,
+      "sha256": "b00282f9c9e83ddf4a98d0c94699ec96b230774d86ffb730215378534e05e61c",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/styles.css"
+    },
+    {
+      "name": "LICENSE",
+      "size": 34523,
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/LICENSE"
+    },
+    {
+      "name": "NOTICE",
+      "size": 2067,
+      "sha256": "63a9677f3091b93912b771103fbca3deffe65026137e32fcb9dfdd4946853c7f",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/NOTICE"
+    },
+    {
+      "name": "THIRD_PARTY_NOTICES.md",
+      "size": 6317,
+      "sha256": "2271bdddb557f26781f3b4f4b5ac04671168dd316ebb1404f842c402365b217f",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/THIRD_PARTY_NOTICES.md"
+    },
+    {
+      "name": "MIT-original.txt",
+      "size": 1068,
+      "sha256": "f34e537197d9fdd7e2f33a37e07ea93e8b830ecdd13daf2e013e80e0a6e5e301",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/MIT-original.txt"
+    },
+    {
+      "name": "DOMPurify.txt",
+      "size": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/DOMPurify.txt"
+    },
+    {
+      "name": "html2canvas.txt",
+      "size": 1062,
+      "sha256": "f3eca6ff762533fa5a77caf954a143e48afa204668cf97dce758c45a9e006be3",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/html2canvas.txt"
+    },
+    {
+      "name": "nanoid.txt",
+      "size": 1095,
+      "sha256": "4383cb2c3608397ce7a4159502614ed66890f8999c2a9c056dd3b1024d6721f0",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/nanoid.txt"
+    },
+    {
+      "name": "pangu.txt",
+      "size": 1072,
+      "sha256": "eeccd5776471b1e421a3b647c616722db5439e38a62f07bf378d8de476979c9d",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/pangu.txt"
+    },
+    {
+      "name": "Microsoft-helpers.txt",
+      "size": 645,
+      "sha256": "5989359645911c04a140c49d89496b13feca980bbf36d2250a12d3b9d06250d6",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/Microsoft-helpers.txt"
+    },
+    {
+      "name": "babel-helpers.txt",
+      "size": 1189,
+      "sha256": "4be9d87b56a306293223b490c0d0b245e9e94f39884147bf051a6c7b825aeb30",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.19.0/babel-helpers.txt"
+    }
+  ],
+  "priorReleaseAssetsOverwritten": false,
+  "pluginIdMigrated": false,
+  "marketingVaultModified": false,
+  "brat": "Same repository and three-file contract; actual BRAT installation UI not run",
+  "officialDirectory": "Separate draft review; source qualification unresolved, not a publication claim"
+}

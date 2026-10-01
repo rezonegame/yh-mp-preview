@@ -1,0 +1,15 @@
+{
+  "observedDate": "2026-10-01",
+  "repository": "rezonegame/yh-mp-preview",
+  "version": "3.19.0",
+  "commit": "7fd37377b1668cbb2d6f32c43646976bccc2818a",
+  "url": "https://community.obsidian.md/account/plugins/yh-mp-preview",
+  "request": "Check for new releases; manifest recognized; one scan queued",
+  "status": "Pending",
+  "isFinal": false,
+  "dependencyCheck": "Pass",
+  "buildReproduction": "not yet reported in current review",
+  "publishedToDirectory": false,
+  "sourceQualification": "unresolved-no-public-consent-evidence",
+  "scope": "Read the current 3.19.0 review separately from prior reviews; Pending is not success or approval"
+}

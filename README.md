@@ -10,7 +10,7 @@ Prepare WeChat Official Account articles without leaving your vault. The workben
 
 Optional note-layout enhancements have separate settings and are disabled by default. Preview formatting does not rewrite Markdown. Editing an image caption is a separate, explicit action that updates the corresponding source text. Custom themes, hidden-theme preferences and typesetting snapshots remain supported.
 
-The plugin is free and desktop-only. It requires Obsidian 1.7.2 or later; the current candidate was tested on Windows with Obsidian 1.13.7. Other platforms and older supported hosts were not tested in this round. There is no telemetry, payment requirement, account requirement or AI service. Referenced remote images may be requested from their original hosts during rendering, copying or export. No article text is uploaded to a maintainer-operated server.
+The plugin is free and desktop-only. It requires Obsidian 1.7.2 or later; this release was tested on Windows with Obsidian 1.13.7. Other platforms and older supported hosts were not tested in this round. There is no telemetry, payment requirement, account requirement or AI service. Referenced remote images may be requested from their original hosts during rendering, copying or export. No article text is uploaded to a maintainer-operated server.
 
 Version 3.19.0 rebuilds the remaining implementations identified by the source audit and embeds the maintainer-supplied personal-contact QR image offline. It continues in the original repository with the same plugin ID and BRAT address; previous releases remain available. Historical MIT attribution and dependency licenses are preserved. Exact-match checks are not proof of independent authorship or official-directory approval.
 
