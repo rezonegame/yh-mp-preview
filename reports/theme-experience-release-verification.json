@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "pluginVersion": "3.20.0-beta.1",
+  "repository": "rezonegame/yh-mp-preview",
+  "branch": "beta/theme-gallery-3.20.0",
+  "tag": "3.20.0-beta.1",
+  "implementationCommit": "5aa9420870328fd3901f6d7b90df4a98e03deba9",
+  "releaseUrl": "https://github.com/rezonegame/yh-mp-preview/releases/tag/3.20.0-beta.1",
+  "publishedAt": "2026-10-02T15:56:05Z",
+  "isPrerelease": true,
+  "ci": {
+    "runId": 37030367125,
+    "url": "https://github.com/rezonegame/yh-mp-preview/actions/runs/37030367125",
+    "conclusion": "success"
+  },
+  "installationAssets": [
+    { "name": "main.js", "sha256": "1dcc2ec591222a64a62411780cb042d254b2b185487171c8b723b1d4ee7c36e0", "matchesTestedLocalBuild": true },
+    { "name": "manifest.json", "sha256": "ba9ae7edd3584c601288937d387554664b65415aaf744b8ecabf39721b2bafd3", "matchesTestedLocalBuild": true },
+    { "name": "styles.css", "sha256": "722d3b5ee4b066448f244e470ff775ed0601ee7b59475783178d5ecee5537860", "matchesTestedLocalBuild": true }
+  ],
+  "manifest": { "id": "yh-mp-preview", "version": "3.20.0-beta.1", "minAppVersion": "1.7.2", "isDesktopOnly": true },
+  "releaseAssetCount": 13,
+  "licenseAndNoticeAssetsPresent": true,
+  "stableMain": { "version": "3.19.1", "manifestBlobSha": "67b4dbb5d0d538a19fe043440d9352bb7c37dbd9", "promoted": false },
+  "userBratAcceptance": "pending",
+  "nextStage": "P2 blocked by planned P1 user acceptance gate, not started"
+}

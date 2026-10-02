@@ -19,7 +19,7 @@
 
 - [x] P0：真实旧输出、不可变主题定义、发行与测试库配置备份。
 - [x] P1：外观引用及快照兼容、试用事务、真实共享预览、响应布局。
-- [ ] P1：自动测试、隔离宿主回归、候选发行资产校验。
+- [x] P1：自动测试、隔离宿主回归、候选发行资产校验。
 - [ ] 用户 BRAT 验收；这是进入 P2 的停止点。
 - [ ] P2、P3、P4：尚未启动。
 
@@ -57,4 +57,15 @@
 
 Windows Obsidian 1.13.7、DPR 2；未实测最低宿主、其他系统、完整 100/125/150% 缩放矩阵或新版公众号后台粘贴。源文、笔记增强及 Marketing 未改。P2 新结构和 P3 配色／密度尚未实施。
 
-候选经原 CI 发行后，用户用 BRAT 固定 `3.20.0-beta.1` 测试画廊切换、取消、保存、当前文章与示例对照。验收前不提升稳定版、不启动 P2。发布状态与证据资产在完成校验后补记。
+用户用 BRAT 固定 `3.20.0-beta.1` 测试画廊切换、取消、保存、当前文章与示例对照。验收前不提升稳定版、不启动 P2。
+
+## 候选发行完成
+
+- 原仓库分支与不可变标签已推送：`beta/theme-gallery-3.20.0` / `3.20.0-beta.1`。
+- 标签对应实现提交：`5aa9420870328fd3901f6d7b90df4a98e03deba9`。后续仅补记发布文档，不移动标签。
+- [原 CI 构建及测试成功](https://github.com/rezonegame/yh-mp-preview/actions/runs/37030367125)。
+- [GitHub 预发行](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.20.0-beta.1) 于 `2026-10-02T15:56:05Z` 发布，`isPrerelease=true`。
+- 从该发行重新下载 main.js、manifest.json、styles.css，三者 SHA-256 均与本轮已测试本地产物完全相同；插件 ID `yh-mp-preview`、版本 `3.20.0-beta.1`、最低宿主 `1.7.2` 均核对通过。详情见 `reports/theme-experience-release-verification.json`。
+- 发行共 13 个资产，包含安装三文件、LICENSE、NOTICE、THIRD_PARTY_NOTICES.md 及七份依赖／历史来源许可证。没有删去来源声明。
+- 远端 main 的 manifest 文件指纹仍为 `67b4dbb5d0d538a19fe043440d9352bb7c37dbd9`，版本仍为 `3.19.1`；没有发布官方稳定升级。
+- 用户实际 BRAT 安装与验收仍待完成。停在 P1 验收门，不将自动测试冒充用户验收。
