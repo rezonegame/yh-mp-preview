@@ -1,8 +1,14 @@
 # Obsidian 官方目录提交记录
 
-## 当前状态（2026-10-01）
+## 当前状态（2026-10-02）
 
-### 官方旧条目删除后重新申请
+### 3.19.1 已同步官方公开条目
+
+按维护者确认验收后的发布授权，在原仓库发布稳定版 `3.19.1`，沿用现有官方条目。GitHub CI 成功，下载的 13 个发行文件与标签、GitHub 摘要一致，三个核心文件也与验收晋级记录一致。官方管理页的“Check for new releases”仅提交一次，识别 `3.19.1`／`834e87e77fead70e7819c807cc1cee45837d1b86`。扫描到达 Completed：0 Error、16 Warning、7 Recommendation，依赖检查 Pass，官方逐字节复现发行 `main.js`。现有条目在扫描后自动把 Current release 更新为 `3.19.1`，无需再次 Publish；公开页面 Current version 也已实查为 `3.19.1`。
+
+长介绍已同步本版预览优先工作台，保留分类、免费模式、所有权和来源声明。发行说明补齐后的 GitHub 内容已核验；扫描较早缓存的“缺少发行说明”建议未以重复扫描清除。历史许可附件继续分发，不为消除“额外文件”建议而删除。应用内实际更新安装未运行，网站同步不冒充安装验收；Marketing 库未修改。证据见 [发行验证](../reports/release-3.19.1-publication.json) 和 [官方更新记录](../reports/official-3.19.1-update.json)。
+
+### 历史：官方旧条目删除后重新申请
 
 维护者要求重新提交完整的 3.19.0。此次核验确认官方账号中旧 `yh-mp-preview` 条目已删除；GitHub Release／标签仍存在，未删除或重复覆盖。维护者自行在浏览器确认政策及持续维护承诺后，新条目已建立。当前条目显示 3.19.0 Completed、0 Error、依赖及构建复现 Pass；新版介绍已保存并执行 Publish。后台草稿状态消失，实际打开的 [官方公开页面](https://community.obsidian.md/plugins/yh-mp-preview) 显示版本 3.19.0 及 Add to Obsidian 入口。网站公开已核验；旧 GitHub 目录索引尚未发现该 ID，应用内搜索／安装未验收。发布不是独立创作或原作者同意的证明，来源声明保留。详见 [重新提交记录](OFFICIAL_3.19_RESUBMISSION.md) 和 [当前公开验证](../reports/official-3.19-resubmission.json)。以下为此前草稿阶段的历史报告。
 

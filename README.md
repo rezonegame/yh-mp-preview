@@ -14,7 +14,7 @@ The plugin is free and desktop-only. It requires Obsidian 1.7.2 or later; this r
 
 Version 3.19.0 rebuilds the remaining implementations identified by the source audit and embeds the maintainer-supplied personal-contact QR image offline. It continues in the original repository with the same plugin ID and BRAT address; previous releases remain available. Historical MIT attribution and dependency licenses are preserved. Exact-match checks are not proof of independent authorship or official-directory approval.
 
-The [official Community website listing](https://community.obsidian.md/plugins/yh-mp-preview) is public for 3.19.0. Application-directory synchronization and installation have not yet been verified; BRAT remains available using `rezonegame/yh-mp-preview`. Open the preview from the ribbon or command palette, choose a layout, and use the copy or export controls. See [source provenance](docs/SOURCE_PROVENANCE.md), [license notices](THIRD_PARTY_NOTICES.md), and [submission status](docs/COMMUNITY_SUBMISSION.md).
+The [official Community website listing](https://community.obsidian.md/plugins/yh-mp-preview) now shows current version 3.19.1 after its completed release scan. An actual in-app update installation has not yet been verified; BRAT remains available using `rezonegame/yh-mp-preview`. Open the preview from the ribbon or command palette, choose a layout, and use the copy or export controls. See [source provenance](docs/SOURCE_PROVENANCE.md), [license notices](THIRD_PARTY_NOTICES.md), and [submission status](docs/COMMUNITY_SUBMISSION.md).
 
 ![version](https://img.shields.io/github/v/tag/rezonegame/yh-mp-preview?color=blue&label=version&style=flat) ![license](https://img.shields.io/badge/license-AGPL--3.0--or--later-blue)
 
@@ -57,13 +57,13 @@ The [official Community website listing](https://community.obsidian.md/plugins/y
 
 ## 官方页面与 BRAT 安装
 
-`3.19.0` 已在 [Obsidian 官方社区网站](https://community.obsidian.md/plugins/yh-mp-preview) 公开，页面提供 Add to Obsidian 入口。应用内目录同步与安装尚未验收；旧 GitHub 目录索引在本轮核验时还未包含此 ID。需要现在安装时，可继续通过 Obsidian BRAT 添加：
+`3.19.1` 已同步到 [Obsidian 官方社区网站](https://community.obsidian.md/plugins/yh-mp-preview)，管理页和公开页当前版本均已核验，页面提供 Add to Obsidian 入口。应用内实际更新安装尚未验收；也可继续通过 Obsidian BRAT 添加：
 
 ```text
 rezonegame/yh-mp-preview
 ```
 
-发行文件为 `main.js`、`manifest.json` 和 `styles.css`；如固定了预发布版本，可切换到 `3.19.0`。网站公开、技术扫描、应用内安装和来源独立性是不同结论，分别见提交与验证记录。
+发行文件为 `main.js`、`manifest.json` 和 `styles.css`；如固定了预发布版本，可切换到 `3.19.1`，需要回退时保留 `3.19.0`。网站公开、技术扫描、应用内安装和来源独立性是不同结论，分别见提交与验证记录。
 
 ## 组件示例
 
