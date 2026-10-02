@@ -56,6 +56,7 @@
         view.openThemeGallery();
         await delay(100);
         const galleryDoc=galleryDocument();
+        const selector=galleryDoc.querySelector('.mp-gallery-selector'); if(selector) selector.open=true;
         const cards = galleryDoc.querySelectorAll('.mp-theme-card');
         const alternate = [...cards].find(card => card.dataset.themeId !== originalSettings.templateId);
         if (alternate) {

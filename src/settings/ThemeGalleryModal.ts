@@ -7,6 +7,17 @@ import { Modal, setIcon, Notice, type App } from 'obsidian';
 import type { SettingsManager } from './settings';
 import type { Template } from '../templateManager';
 import { curatedThemeEntries, getCuratedThemeEntry, type CuratedThemeScene } from '../core/theme/themeCatalog';
+import { ThemeTrialSession } from '../core/render/themeTrialSession';
+import { ThemeGalleryPreview } from '../ui/themeGalleryPreview';
+
+export interface ThemeGalleryOptions {
+    renderPreview: (id: string, saved: boolean, example: boolean) => Promise<HTMLElement | null>;
+    fontFamily: string; fontSize: number;
+    cancel: () => void;
+    settled: (applied: boolean) => void;
+    disposed: () => void;
+    isValid: () => boolean;
+}
 
 type ThemeScene = '全部' | CuratedThemeScene | '自定义主题' | '历史主题';
 
@@ -35,6 +46,18 @@ export class ThemeGalleryModal extends Modal {
     private tryHintEl: HTMLElement | null = null;
     private historyButton: HTMLButtonElement | null = null;
     private sceneBar: HTMLElement | null = null;
+    private readonly transaction: ThemeTrialSession;
+    private preview: ThemeGalleryPreview | null = null;
+    private previewGeneration = 0;
+    private example = false;
+    private compareSaved = false;
+    private observer: ResizeObserver | null = null;
+    private selector: HTMLElement | null = null;
+    private isClosed = false;
+    private compactLayout: boolean | undefined;
+    private returnFocus: HTMLElement | null = null;
+    private statusEl: HTMLElement | null = null;
+    private cancelButton: HTMLButtonElement | null = null;
 
     constructor(
         app: App,
@@ -42,9 +65,13 @@ export class ThemeGalleryModal extends Modal {
         currentTemplateId: string,
         onSelect: (templateId: string) => void | Promise<void>,
         previewCallback: (templateId: string) => void,
+        private readonly options?: ThemeGalleryOptions,
     ) {
         super(app);
+        this.transaction = new ThemeTrialSession(() => this.updateSavingState(), 10_000, this.contentEl.ownerDocument.defaultView ?? window);
         this.templates = settingsManager.getVisibleTemplates();
+        const hiddenCurrent = settingsManager.getTemplate?.(currentTemplateId);
+        if (hiddenCurrent && !this.templates.some(template => template.id === currentTemplateId)) this.templates.push(hiddenCurrent);
         this.originalTemplateId = currentTemplateId;
         this.currentTemplateId = currentTemplateId;
         this.onSelect = onSelect;
@@ -56,6 +83,7 @@ export class ThemeGalleryModal extends Modal {
     onOpen(): void {
         const { contentEl, modalEl } = this;
         modalEl.addClass('mp-theme-gallery-modal');
+        this.returnFocus = contentEl.ownerDocument.activeElement as HTMLElement | null;
         contentEl.empty();
 
         const header = contentEl.createDiv('mp-gallery-header');
@@ -79,7 +107,12 @@ export class ThemeGalleryModal extends Modal {
         this.historyButton.createSpan({ text: '历史主题' });
         this.historyButton.addEventListener('click', () => this.activateScene('历史主题'));
 
-        const sceneBar = contentEl.createDiv('mp-gallery-scenes');
+        const body = contentEl.createDiv('mp-gallery-body');
+        const selector = body.createEl('details', { cls: 'mp-gallery-selector' });
+        selector.open = false; this.selector = selector;
+        const selectionSummary = selector.createEl('summary', { cls: 'mp-gallery-selection-summary', text: '选择主题' });
+        selectionSummary.setAttribute('aria-label', '展开主题选择');
+        const sceneBar = selector.createDiv('mp-gallery-scenes');
         this.sceneBar = sceneBar;
         sceneBar.setAttribute('aria-label', '公众号主题场景');
         SCENE_ORDER.forEach(scene => {
@@ -94,36 +127,122 @@ export class ThemeGalleryModal extends Modal {
             button.addEventListener('click', () => this.activateScene(scene));
         });
 
-        this.gridContainer = contentEl.createDiv('mp-gallery-grid');
+        this.gridContainer = selector.createDiv('mp-gallery-grid');
         this.renderGallery();
+
+        if (this.options) {
+            const previewColumn = body.createDiv('mp-gallery-preview-column');
+            const toggles = previewColumn.createDiv('mp-gallery-preview-toggles');
+            const addToggle = (labels: [string, string], label: string, change: (second: boolean) => void) => {
+                const group = toggles.createDiv('mp-gallery-toggle-group'); group.setAttribute('role', 'group'); group.setAttribute('aria-label', label);
+                labels.forEach((text, index) => {
+                    const button = group.createEl('button', { text, attr: { type: 'button', 'aria-pressed': String(index === 0) } });
+                    button.addEventListener('click', () => {
+                        group.querySelectorAll('button').forEach((item, position) => item.setAttribute('aria-pressed', String(position === index)));
+                        change(index === 1); void this.refreshPreview().catch(error => new Notice(`预览失败：${error instanceof Error ? error.message : '未知错误'}`));
+                    });
+                });
+            };
+            addToggle(['当前文章', '统一示例'], '画廊预览来源', value => { this.example = value; });
+            addToggle(['正在试用', '已保存'], '画廊外观对照', value => { this.compareSaved = value; });
+            const previewHost = previewColumn.createDiv('mp-gallery-preview-host');
+            this.preview = new ThemeGalleryPreview(previewHost, this.options.fontFamily, this.options.fontSize, contentEl.ownerDocument.body.classList.contains('theme-dark'));
+            void this.refreshPreview().catch(error => new Notice(`预览失败：${error instanceof Error ? error.message : '未知错误'}`));
+        } else selector.open = true;
 
         const footer = contentEl.createDiv('mp-gallery-footer');
         const trialInfo = footer.createDiv('mp-gallery-trial-info');
         this.tryHintEl = trialInfo.createDiv('mp-gallery-try-hint');
-        trialInfo.createDiv({ cls: 'mp-gallery-trial-note', text: '试用不会保存到笔记设置。' });
+        this.statusEl = trialInfo.createDiv({ cls: 'mp-gallery-trial-note', text: '试用不会保存到笔记设置。' });
+        this.statusEl.setAttribute('role', 'status');
         this.updateTryHint();
         const actions = footer.createDiv('mp-gallery-actions');
         const cancel = actions.createEl('button', { text: '取消试用', cls: 'mp-gallery-btn-cancel' });
+        this.cancelButton = cancel;
         cancel.addEventListener('click', () => this.close());
         this.applyButton = actions.createEl('button', { cls: 'mp-gallery-btn-apply' });
         this.updateApplyButton();
         this.applyButton.addEventListener('click', () => {
             const button=this.applyButton;
             if(!button || button.disabled) return;
-            button.disabled=true;button.setText('保存中…');
-            void Promise.resolve().then(() => this.onSelect(this.currentTemplateId)).then(() => {
+            void this.transaction.apply(async () => {
+                if (this.options && !this.options.isValid()) throw new Error('文章或外观已变化，请重新打开画廊。');
+                await this.onSelect(this.currentTemplateId);
+            }).then(() => {
+                if (this.transaction.state !== 'applied') return;
+                this.options?.settled(true);
                 this.hasApplied=true;this.close();
             }).catch((error: unknown) => {
+                if (this.isClosed) this.options?.settled(false);
                 new Notice(`主题保存失败：${error instanceof Error ? error.message : '未知错误'}`);
-            }).finally(() => { button.disabled=false;this.updateApplyButton(); });
+            });
         });
+        contentEl.addEventListener('keydown', this.onKeyDown, true);
+        const win = contentEl.ownerDocument.defaultView;
+        if (this.options && win?.ResizeObserver) {
+            this.observer = new win.ResizeObserver(() => this.updateLayout()); this.observer.observe(modalEl);
+        }
+        this.updateLayout();
+    }
+
+    get isSaving(): boolean { return this.transaction.busy; }
+    invalidate(): void { this.close(true); }
+    close(force = false): void {
+        if (this.isClosed || !this.transaction.close(force)) return;
+        super.close();
     }
 
     onClose(): void {
-        if (!this.hasApplied && this.currentTemplateId !== this.originalTemplateId) {
+        this.isClosed = true; ++this.previewGeneration;
+        this.observer?.disconnect(); this.observer = null;
+        this.preview?.destroy(); this.preview = null;
+        this.contentEl.removeEventListener('keydown', this.onKeyDown, true);
+        if (!this.transaction.busy && this.options && !this.hasApplied) this.options.cancel();
+        else if (!this.options && !this.hasApplied && this.currentTemplateId !== this.originalTemplateId) {
             this.previewCallback(this.originalTemplateId);
         }
+        this.options?.disposed();
         this.contentEl.empty();
+        if (this.returnFocus?.isConnected) this.returnFocus.focus();
+    }
+
+    private readonly onKeyDown = (event: KeyboardEvent): void => {
+        if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); this.close(); return; }
+        const target = event.target as HTMLElement;
+        if (!target?.classList.contains('mp-theme-card') || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return;
+        event.preventDefault();
+        const cards = Array.from(this.gridContainer?.querySelectorAll<HTMLButtonElement>('.mp-theme-card') ?? []);
+        const index = cards.indexOf(target as HTMLButtonElement);
+        cards[(index + (['ArrowLeft', 'ArrowUp'].includes(event.key) ? -1 : 1) + cards.length) % cards.length]?.focus();
+    };
+
+    private updateLayout(): void {
+        if (!this.options || this.isClosed) return;
+        const compact = this.modalEl.clientWidth < 820 || this.modalEl.clientHeight < 560;
+        this.modalEl.toggleClass('is-compact', compact);
+        this.modalEl.toggleClass('is-tiny', this.modalEl.clientWidth < 360 || this.modalEl.clientHeight < 430);
+        if (this.selector && compact !== this.compactLayout) (this.selector as HTMLDetailsElement).open = !compact;
+        this.compactLayout = compact;
+    }
+
+    private updateSavingState(): void {
+        if (this.isClosed) return;
+        const busy = this.transaction.busy;
+        this.contentEl.querySelectorAll<HTMLButtonElement | HTMLInputElement>('button,input').forEach(control => { control.disabled = busy; });
+        if (this.cancelButton) { this.cancelButton.disabled = this.transaction.state === 'saving'; this.cancelButton.setText(this.transaction.state === 'saving-unknown' ? '关闭窗口' : '取消试用'); }
+        if (this.applyButton) { this.applyButton.disabled = busy; if (busy) this.applyButton.setText('保存中…'); else this.updateApplyButton(); }
+        this.statusEl?.setText(this.transaction.state === 'saving-unknown' ? '保存仍在处理中，可关闭窗口但结果尚未确定。' : busy ? '正在保存，请稍候…' : '试用不会保存到笔记设置。');
+    }
+
+    private async refreshPreview(): Promise<void> {
+        if (!this.options || this.isClosed) return;
+        const generation = ++this.previewGeneration;
+        try {
+            const article = await this.options.renderPreview(this.currentTemplateId, this.compareSaved, this.example);
+            if (!this.isClosed && generation === this.previewGeneration) this.preview?.show(article);
+        } catch (error) {
+            if (!this.isClosed && generation === this.previewGeneration) { this.statusEl?.setText('预览失败，请重试或取消。'); throw error; }
+        }
     }
 
     private activateScene(scene: ThemeScene): void {
@@ -198,8 +317,13 @@ export class ThemeGalleryModal extends Modal {
         }
 
         card.addEventListener('click', () => {
+            if (this.transaction.busy) return;
             this.currentTemplateId = template.id;
-            this.previewCallback(template.id);
+            void this.transaction.preview(async isCurrent => {
+                if (!isCurrent()) return;
+                this.previewCallback(template.id);
+                await this.refreshPreview();
+            });
             this.updateApplyButton();
             this.updateTryHint();
             this.gridContainer?.querySelectorAll<HTMLButtonElement>('.mp-theme-card').forEach(button => {
@@ -214,6 +338,7 @@ export class ThemeGalleryModal extends Modal {
     private updateApplyButton(): void {
         if (!this.applyButton) return;
         const template = this.templates.find(item => item.id === this.currentTemplateId);
+        this.selector?.querySelector('summary')?.setText(`选择主题 · ${template?.name || '当前主题'}`);
         this.applyButton.setText(`应用「${template?.name || '主题'}」`);
     }
 

@@ -1,3 +1,4 @@
+@import './article-base.css';
 /* Article viewport only; inline theme styles remain authoritative for output. */
 .mp-preview-area {
     flex: 1 1 0; min-block-size: 0; min-inline-size: 0;
@@ -6,17 +7,6 @@
     border: 1px solid var(--background-modifier-border); border-radius: 12px;
     background: #fcfcfc; color: #333; color-scheme: light;
 }
-.mp-content-section { padding: 16px 20px; }
-.mp-content-section > :is(h1,h2,h3):first-child { margin-block-start: 0; }
-.mp-content-section :is(p,ul,ol) { padding: 0; margin: 0; }
-.mp-content-section :is(a,.footnote-ref,.footnote-backref) { color: var(--text-accent); text-decoration: none; }
-.mp-content-section table { width: 100%; margin-block: 1em; border-collapse: collapse; }
-.mp-content-section :is(td,th) { padding: 8px; border: 1px solid var(--background-modifier-border); }
-.mp-content-section hr { border: 0; border-block-start: 1px solid var(--background-modifier-border); margin-block: 20px; }
-.mp-content-section img { display: block; max-inline-size: 100%; block-size: auto; margin: 1em auto; }
-.mp-content-section .task-list-item { list-style-type: none; }
-.mp-content-section .task-list-item input { margin-inline-end: 6px; }
-.mp-content-section blockquote p { line-height: inherit; }
 .mp-preview-area.mp-phone-preview { background: #e9edf0; }
 .mp-preview-area.mp-phone-preview > .mp-content-section { box-sizing: border-box; width: min(100%, 375px); max-width: 375px; margin-inline: auto; background: #fff; box-shadow: 0 0 0 1px #d9dde2; }
 .theme-dark .mp-preview-area { color-scheme: light; background: #fcfcfc; color: #333; }

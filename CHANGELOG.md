@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.20.0-beta.1
+
+- Add one shared, read-only theme-gallery preview with Current Article / Local Example and Trial / Saved comparison. Keep name-only cards, scene pairs and the small historical-theme entry; compact windows prioritize the article.
+- Keep all 19 existing theme definitions and six recipe outputs unchanged. Freeze legacy 3.19.1 references, migrate appearance metadata without writing on load, and include revision/fingerprint plus detached custom definitions in new snapshots.
+- Make theme trials pane-local, preserve manual preview edits and article order, restore exact saved content on cancellation, detect article/global appearance conflicts and merge only appearance fields when saving.
+- Wait for the latest trial before persistence, retain failed drafts for retry, block accidental closing during writes, and truthfully handle an unresolved save after ten seconds without duplicating writes or claiming cancellation.
+- This prerelease is the P0/P1 gate only. Main and the official stable track remain 3.19.1; the 14-theme structural refresh and palette/density controls are deferred until beta acceptance. No Marketing vault, Markdown, note themes, AI or publishing workflow changes.
+
 ## 3.19.1
 
 - Promote the user-accepted preview-priority workbench to a stable release. Keep the tested JavaScript and CSS unchanged from the final 3.19.1-beta.1 candidate; only version metadata and publication records change.

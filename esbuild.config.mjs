@@ -30,7 +30,7 @@ const config = {
     logLevel: "info",
     sourcemap: prod ? false : "inline",
     treeShaking: true,
-    loader: { '.png': 'dataurl' },
+    loader: { '.png': 'dataurl', '.css': 'text' },
     outfile: "main.js",
 };
 

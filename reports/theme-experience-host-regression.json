@@ -1,0 +1,2445 @@
+{
+  "version": "3.20.0-beta.1",
+  "host": "Obsidian 1.13.7 Windows",
+  "scope": "MPPreview-Refactor-Test only; Marketing not modified",
+  "assets": {
+    "main.js": "1dcc2ec591222a64a62411780cb042d254b2b185487171c8b723b1d4ee7c36e0",
+    "manifest.json": "ba9ae7edd3584c601288937d387554664b65415aaf744b8ecabf39721b2bafd3",
+    "styles.css": "722d3b5ee4b066448f244e470ff775ed0601ee7b59475783178d5ecee5537860"
+  },
+  "performance": {
+    "baseline": {
+      "version": "3.19.1",
+      "chars": 5528,
+      "iterations": 20,
+      "p50": 152.90000009536743,
+      "p95": 200.29999995231628,
+      "values": [
+        192.60000014305115,
+        156.89999985694885,
+        169.10000014305115,
+        130.29999995231628,
+        157,
+        117,
+        105.59999990463257,
+        152.90000009536743,
+        130,
+        153.90000009536743,
+        123.5,
+        137.09999990463257,
+        114.10000014305115,
+        119.30000019073486,
+        216,
+        191.40000009536743,
+        190.69999980926514,
+        183.60000014305115,
+        200.29999995231628,
+        105.80000019073486
+      ],
+      "last": "default",
+      "includes": "legacy trial and layout flush"
+    },
+    "candidate": {
+      "version": "3.20.0-beta.1",
+      "chars": 5528,
+      "iterations": 20,
+      "p50": 164.90000009536743,
+      "p95": 195.69999980926514,
+      "values": [
+        146.59999990463257,
+        162.80000019073486,
+        172,
+        148.19999980926514,
+        164.90000009536743,
+        166.20000004768372,
+        203.20000004768372,
+        129.5,
+        195.69999980926514,
+        158.5,
+        149.5,
+        165.5,
+        133.39999985694885,
+        153.89999985694885,
+        171.20000004768372,
+        194.60000014305115,
+        114.79999995231628,
+        167.20000004768372,
+        181.79999995231628,
+        177.20000004768372
+      ],
+      "last": "default",
+      "includes": "main trial, shared sanitizer and layout flush"
+    },
+    "threshold": 250.37499994039536,
+    "pass": true
+  },
+  "legacyOutputs": {
+    "version": "3.19.1",
+    "combinations": 114,
+    "exactMatch": true,
+    "sourceAndDataUnchanged": true,
+    "outputs": {
+      "default/legacy-compatible": {
+        "sha256": "8eac94c859e2339fce2b1ca492602a85c99c6fef5b5390f7ff116a4c7506a096",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "default/tutorial": {
+        "sha256": "f8dd8831013ac4bb3656c2ce71857e13f85d837f6207e436819052f2060ada7a",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "default/checklist": {
+        "sha256": "6166250bcf743bf77d44e9ebd4c4cb717605f298d080f3bd9442aa90a1bc69b6",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "default/product-intro": {
+        "sha256": "5c1b63458129adf24fce03b150cf039a80ac490674ffdd57ab70d500e74f6a4f",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "default/commentary": {
+        "sha256": "e56b66a47d8edf1ef1f1fe524c790b7eca40aa7fa3e6e4f7f1c5b9a636bf97da",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "default/review": {
+        "sha256": "5d364b70222e1e4f9690f2d5c0bb39268afc0db9cfc34a54eb25cd45b9291a3b",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "deep-reading/legacy-compatible": {
+        "sha256": "d67bc794f0700f886b5defa62d39c8e485c5ef05b2e18467d6dbefe3b7803d36",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "deep-reading/tutorial": {
+        "sha256": "d933eea3609931f09c9d7c4011fc9ae17e567f38c3a40f0abb82db4e283df9ec",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "deep-reading/checklist": {
+        "sha256": "e5ca818aad1c3bc3ad4d7cf9752ac3c4f7a6dbae50556a82e2e89ef650f75ae9",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "deep-reading/product-intro": {
+        "sha256": "e1ceab37617b8ec5a11f00021ea00406fbb855cd6b7d967216e66de30f0a010d",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "deep-reading/commentary": {
+        "sha256": "62f2a74813484a61e4c817299692ddda208f13844107b7cac0a5360160dafa13",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "deep-reading/review": {
+        "sha256": "74bb8ed27febb6dbf660945b2b3b2e1409a1fd015007b47258bc2c961d32207c",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro/legacy-compatible": {
+        "sha256": "0fc4a65dba1a2ccdac2216e3402d7484a5f0e2d7ffb5458d30de6e61100e58d4",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro/tutorial": {
+        "sha256": "e91728fd3802abbc4ac8580b816c929bb066090582db34c85ced2b0261f64922",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro/checklist": {
+        "sha256": "88192086b710ac4c3f605024203f546268b1b68247c7b42ede031d606b10b73a",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro/product-intro": {
+        "sha256": "31c8f4f24f7e3640dec1d621322fd29a6173edfbdf7be3d78c8ea2fd7b01be71",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro/commentary": {
+        "sha256": "3e632e86f6ddc04ab06aa35b5957e94515eec6ba26069c3c7526a9686fc3c639",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro/review": {
+        "sha256": "7b12a5cdb04b276dbc6143352e7f34cfb3d043f44ebc4048f2d5069025dd7f54",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "clear-guide/legacy-compatible": {
+        "sha256": "9ad497c9ee91cf38a2693fd942de0aa41c612da141a19574c89c96fa80f07dff",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "clear-guide/tutorial": {
+        "sha256": "81db5924dbfd90fe96225914caa372731cc56a4be21b960bc415ec24e18b6a1c",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "clear-guide/checklist": {
+        "sha256": "6e96f66b9a49197e2494acb5dfbbad06dac668065056d771f79ae7e7834d19a2",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "clear-guide/product-intro": {
+        "sha256": "2f092abfcb908445bbd68ed4c9b392940ce36809d19f3dc4ca29a826cf78155b",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "clear-guide/commentary": {
+        "sha256": "05da89dfbe7d5c80f17a26a57b3cf0d0876a1dab40ab34443bbc3f79c0b1042f",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "clear-guide/review": {
+        "sha256": "3975c2de2bf9a58c34baae5af1f4ef8d5640fbb5bfc2250eb8e6f17ff3b3d068",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "knowledge-notes/legacy-compatible": {
+        "sha256": "78f0e897a830eb9f6c639e8409191ac8f297f6cfedefbaf1d045ab635e76008b",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "knowledge-notes/tutorial": {
+        "sha256": "d6c59fe17373cf9bf683417f612f351668e9cb27468e3a702cb68705fa7854cc",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "knowledge-notes/checklist": {
+        "sha256": "362d24b3d01ea0087349f7349293cb5703645e7a83a2d0c8d53e2c1e76339abf",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "knowledge-notes/product-intro": {
+        "sha256": "fb0e49793861db287ed0002ce0c38c95bab43235097898b51a76d14c67fbbfb6",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "knowledge-notes/commentary": {
+        "sha256": "8585a9f81444ea995b36bfb4a9eba1fc5d5df1fde0604459f79d8f42e4a8114f",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "knowledge-notes/review": {
+        "sha256": "d703d258b34092b1bd19720a9345c9f2a91ebb30b681a58e80303e9e89c6eed5",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "apple-product/legacy-compatible": {
+        "sha256": "401c5b237f4b352209444baca3b5c663b6e4a96a65259b9d5023fdf4aa02b5a0",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "apple-product/tutorial": {
+        "sha256": "26b4723c9d835417a84715765b9c739106c54f2a1a91e84465f8181354b17696",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "apple-product/checklist": {
+        "sha256": "6d4f3b89d0f8e28e63cc9a24fb3b554e2bee976d33633e7ab71d71688b50a2c8",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "apple-product/product-intro": {
+        "sha256": "2247ce89d2112331488de2f8af78763bfd3bdbfb96710d5da83f260203813e15",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "apple-product/commentary": {
+        "sha256": "661a46da9f81b36b1f5ad872c2404d4d676392aac3c4bca2905a4d686d962e69",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "apple-product/review": {
+        "sha256": "8c778d132ca43cc7450730608f8e2108ea945ce2e3c3bd7538b4d3364bbe05b7",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "product-review/legacy-compatible": {
+        "sha256": "2780f7af90bf78fabad22a2274b6fa50f49dcff3a184dcc218ece2ff5a3544de",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "product-review/tutorial": {
+        "sha256": "bbef53d0e43d10feb91179de8bddd70891b8a9bb17fcce95f069c5b40eb26044",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "product-review/checklist": {
+        "sha256": "fe720e234c8155683608c2563faac42187a41a45f0b03ae639f8719b2816a88c",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "product-review/product-intro": {
+        "sha256": "18d2677550e33a91b322f3b6728ea0f87d068973fd6d3c1e02c6b4a32c3c81d7",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "product-review/commentary": {
+        "sha256": "0488cf8065ca85b28f11c60ac9376c2689f22970eaf4dc438415df207a3811c2",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "product-review/review": {
+        "sha256": "24414b5441480981fc6674970ae6d6bbaaf3e8c2a57b836bb3e6ed3b1cbdfcd3",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "minimal/legacy-compatible": {
+        "sha256": "52d4936cb4d33e14ed8eaf098a2adc76b0af3083a13640840a5e689abfa0fae2",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "minimal/tutorial": {
+        "sha256": "f4e093bef786e535c766956ad3443aabc2c1533a77bc3f506826b5bcd74de2fb",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "minimal/checklist": {
+        "sha256": "d774daa8c391683de3c9a2660e2ae06c905208b85b96a77a61149c30f2ca05f2",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "minimal/product-intro": {
+        "sha256": "b412a1ced2797ae36a932a7a42edfb3d6cedf23056518a3ec8fa1a7803601314",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "minimal/commentary": {
+        "sha256": "bce26d8e94f06b5a55140122b264fee9b3389cf599722cfb9348b9047404528a",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "minimal/review": {
+        "sha256": "9672ad206faffc7fc4462b12123e1d40ab85d940b1c55d7afa6516d86223bbab",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "red-white-editorial/legacy-compatible": {
+        "sha256": "0fe251615b95577ef09e444276d42b37b8221a3e2d52fababa7e085230b87488",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "red-white-editorial/tutorial": {
+        "sha256": "62e10825ea952a21993897d9a16202bb9dd7dc460f48f3d1ccfa5aac18234856",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "red-white-editorial/checklist": {
+        "sha256": "c187eebe51ab4f0b9d5bea2e4d8ffcaab4b58569d9e0cd74fe4f76e5d773cf3a",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "red-white-editorial/product-intro": {
+        "sha256": "f009253031a52d6617636c0ec8647849f527e8bbbb155670b5c07904267c0fc0",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "red-white-editorial/commentary": {
+        "sha256": "9bb969175245c2794d68446f56975669cf5e8c6f961ee132644776e61a693cba",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "red-white-editorial/review": {
+        "sha256": "26dab91b2aa219f87d5b06a257bb11634c6b8c8922506d1bd209a1585f0375c5",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "ink-opinion/legacy-compatible": {
+        "sha256": "edc90d1fe5ec8318653a27282d020a279494627eadbf57e64dada71a5e651b01",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "ink-opinion/tutorial": {
+        "sha256": "bd92b3da8893ece4f39e2cb531e33b77baa2970d1e4be7ba4dde34350de0c53c",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "ink-opinion/checklist": {
+        "sha256": "b4133f42d33a1f23247286c822926e682e2844e3dca3a2ca4da7fff83c89f677",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "ink-opinion/product-intro": {
+        "sha256": "2a16cbaea806031d40ef5e04508425335d07afc1c9aa83baa0bc2f2a14945609",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "ink-opinion/commentary": {
+        "sha256": "52079ddc06a483a9b52323d6bf8e3f98a68512b053e2e169e0ecef420c136539",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "ink-opinion/review": {
+        "sha256": "4554545c01ee80f352d9935b81938f601d55574aa5aeed9133755044c8c8ea68",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "modern-report/legacy-compatible": {
+        "sha256": "b8101a34faeb569164ead503a4d84ca4c8b64502f3a6b22360753f8b080c056f",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "modern-report/tutorial": {
+        "sha256": "470cac2d03f80331cf2066ce1502cf58966d7bf9f7bf2ed998b1d8955b1f1c8e",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "modern-report/checklist": {
+        "sha256": "9328a583a2458f107a9a0eb549a29dc32d1a1b70d90098018bb16eaf4baf12c0",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "modern-report/product-intro": {
+        "sha256": "6f681e7d1b145de12189c8b1db98891fb8f55bd89fca1ee505aa45d19cc7ad79",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "modern-report/commentary": {
+        "sha256": "cfa1c3d36968c21be26b3a1f0eb2b61f8b33572e8e818a67a3f834c3b236e1b0",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "modern-report/review": {
+        "sha256": "be706f954ab8ce089c648390041adc7f51230e633df7ea7376ec793371d10b24",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "data-blueprint/legacy-compatible": {
+        "sha256": "7f141c88a8596a390343ad1e78d9020dbed80330b6c4ededb9fd68bbedc2b4c3",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "data-blueprint/tutorial": {
+        "sha256": "71c56a568d9731a7537657238e452d1353b9dd036b02d37005044f96e291fd72",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "data-blueprint/checklist": {
+        "sha256": "19867a16ce6f3a3df98b496c3994fe5c012fd2998401dd3daaa6daebd2e68c72",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "data-blueprint/product-intro": {
+        "sha256": "ea08ec2c98ff43fcd3eaef7f7c8638483f2a6be1b6957d96b3df249b9821f48e",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "data-blueprint/commentary": {
+        "sha256": "126587de9ae2493ebb9f1ccd5f7f8af10cc9cb18486baf870a629af4ae48f31d",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "data-blueprint/review": {
+        "sha256": "df04241bd92ea15b04786dedac5c159b709d9bfbd806638819031f3a93fffc7d",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "briefing-grid/legacy-compatible": {
+        "sha256": "94533f4cfed84339f6b539ef8ddb8b68bb3cb0de7093075175680a2ec066d134",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "briefing-grid/tutorial": {
+        "sha256": "6c662ea4d8147a791fc3c25a0785282fbaaf0280ddc6ff795aea25441cf841f4",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "briefing-grid/checklist": {
+        "sha256": "ca676a90c4119402055ba1806e16fdac54bc4bfc966d2a7db7faf4b8bd30cd6e",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "briefing-grid/product-intro": {
+        "sha256": "70ac60d0a1df2c93abbd59d697139481ca84a8f519fb39a07cd2b1f3bb522b4c",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "briefing-grid/commentary": {
+        "sha256": "0e0514c2eb2c5cd12feee844bb5fd09661dc389548e6d5cc65374a8b7af193b1",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "briefing-grid/review": {
+        "sha256": "5f38341a1908dfedeac29614c68c29c7129105fc20a2634f39d4d864ef4ffe4a",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "zen-essence/legacy-compatible": {
+        "sha256": "621deb249a77e4b56381c7b89332b05dbae7951cbe48b5b97d21bfc1b134864a",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "zen-essence/tutorial": {
+        "sha256": "35b408aa76b2e5f19aaf6cd4fc5c4a29b4bafb59530ed7716565553a1deb33ae",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "zen-essence/checklist": {
+        "sha256": "ee5dd4d127a5bac00207f731c8c93e71e231406aed2fabcce8876a62056076d1",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "zen-essence/product-intro": {
+        "sha256": "1479089f1b51d261396bf3e36f650526760701582693a342f2b5a0e2f778008b",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "zen-essence/commentary": {
+        "sha256": "d234f5d3f898b8b055827a14c8f9849401031325ec2af5179b9d55b10aa2c1f5",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "zen-essence/review": {
+        "sha256": "cc7669e42c81fa38c9b72f112c214e0d6a4f4c490657233c20f7f86e097050e0",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "warm-paper/legacy-compatible": {
+        "sha256": "d13852add14053b8e83a2ddda55040239a109722c60d24dca4441751c27dca9e",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "warm-paper/tutorial": {
+        "sha256": "c5517a591bc9bb2c6e346b0c9c0ba63b46575529ba622df541396573e5be04ee",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "warm-paper/checklist": {
+        "sha256": "1a38228278a370318749a84c3cfc0a7777989e8237631695c0fc41adf88a4baf",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "warm-paper/product-intro": {
+        "sha256": "9dd1d0bcd6f58fc53599a749705da809966b0cadeefb33b102debe96a3b679be",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "warm-paper/commentary": {
+        "sha256": "4ce69540226196605e7ef97d63f1960088279c63952d9194ba5e84b1b8f58330",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "warm-paper/review": {
+        "sha256": "b3e96235966990fa04bedc5a3fbd763299a08921def712194c50ece8eb4022c6",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "eastern-notes/legacy-compatible": {
+        "sha256": "c666e1bf7eb1ab481fd5e2e7ae5c9325b3ffebe54fe1cc9dfd6b98735b31a42b",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "eastern-notes/tutorial": {
+        "sha256": "b9f81fecb4b6eb42a553316ed3a0fda83379433904fa0c55a85c7457a960178e",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "eastern-notes/checklist": {
+        "sha256": "6ac9ea05aa33cf2f9244b6b02a8a2f2d4eb94b1874b1f93b8b0fa28ecc7ff80a",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "eastern-notes/product-intro": {
+        "sha256": "b1fe37d9ded6d6ca52eb04d7aa6f6e7b4f003bcdf701a7ddba6b981e0abd02b3",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "eastern-notes/commentary": {
+        "sha256": "b9b3501b351269cdbfe7e03e2d5195efecdf403560883306814299060770ec4c",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "eastern-notes/review": {
+        "sha256": "511bdef00f9bf040c3b52aa1406d1959654ccfc5d26f52eee87ec1d14d023073",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro-forest/legacy-compatible": {
+        "sha256": "d6ba9f201c18d79d6a9b7024056b395387ac4cbd27b0852935ce736a85c2b9c3",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro-forest/tutorial": {
+        "sha256": "25583376db12f2b4b979701b21111aab0ee51e681d29b216ae099bcd93297806",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro-forest/checklist": {
+        "sha256": "bf038052cae7377e27512ea4e4283d97897632f73ce37cd2ca327d5d601bc0ac",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro-forest/product-intro": {
+        "sha256": "e999e50fdfea3189aac5a0b6a60be4d2920130c2f3e8bf22f78370e3cd18cfab",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro-forest/commentary": {
+        "sha256": "48fdd44d127c1cf8ef06c06a2110ccd9e7a90e048799f1fde541f554fdc2d02f",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "academic-pro-forest/review": {
+        "sha256": "aa718beb2669686dd2684eba5527c4567d514728193b7545e134693e60b6a0fd",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "olive-journal/legacy-compatible": {
+        "sha256": "9370a80a5d8041313a851b5a061a0ae8e70a476e13c8e5c63afbacf3f3a7a40e",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "olive-journal/tutorial": {
+        "sha256": "329bd45dfdfdb1dc22aefdb89a41943ee4eaadc41d00e6e173365ee39370446c",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "olive-journal/checklist": {
+        "sha256": "5aadbff568b73662e969f32129bac9a8268922c9f8b7dab46e2ac13dfb199aa6",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "olive-journal/product-intro": {
+        "sha256": "15ebf2e4e434af4599d3f517a1b86b268bb847c2f4c2fe5a42db472127156e3a",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "olive-journal/commentary": {
+        "sha256": "2be9c6236353e783e5aeeb19e255c796984f4e5e903fccb93c59cb4548b178ec",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "olive-journal/review": {
+        "sha256": "ef52f52efbfb07033075b3321a4131824b6b7292b3d9ae2e26fb5b4b0cf38caf",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "case-file/legacy-compatible": {
+        "sha256": "25272b1d51a55f4835ddaa336a2d42d6637c5e091fafebe4384d7f6389c51588",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "case-file/tutorial": {
+        "sha256": "fce24673cb2ab5352073b2e717c5c64afdd28868a447201568888881546f3793",
+        "textHash": "02e37aebb0d4fee4129166ec4a8f256ebd0bdbe6bc77a544c1345bbdf7babf59",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "case-file/checklist": {
+        "sha256": "9c413ee8af54d845f775effaa7041ba6da723324a78b2de6fe0338e11b86af30",
+        "textHash": "b496f35d8b36ef83e7c19f6ca8f5b7818051283703763a73915d587d55820dc3",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "case-file/product-intro": {
+        "sha256": "47d97b440075e8db68e311339301eb6a2f8a747319edd4b1fd8754bec82ed38b",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "case-file/commentary": {
+        "sha256": "056cb89606bc79a2b62ce0bdf40a010bf3714f6d2f5eedd6af158fed54228b80",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      },
+      "case-file/review": {
+        "sha256": "0dd8d2b7514b75115ff7631b5139671cf07342c6e70acb055082e489d91abee0",
+        "textHash": "ffadf90714df9183672e800964f9a726f33eff269512aa4974d757f3078a7717",
+        "head": "DIV",
+        "tail": "隔离测试尾部"
+      }
+    }
+  },
+  "gallery": {
+    "version": "3.20.0-beta.1",
+    "host": "1.13.7",
+    "checks": [
+      {
+        "name": "shared current article preserves manual edit and full tail",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery uses a separate read-only shadow root",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme change reuses the existing image resource",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "saved comparison does not change actual draft or export identity",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "example contains local sample only in gallery",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "example and comparison leave actual current article unchanged",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "cancel restores exact saved HTML and preserves manual edit",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "trial/source/comparison/cancel do not write data.json",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery controls fit theme-light 900x700",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "shared preview remains visible theme-light 900x700",
+        "pass": true,
+        "detail": 496.3671875
+      },
+      {
+        "name": "gallery article does not create horizontal canvas scrolling theme-light 900",
+        "pass": true,
+        "detail": {
+          "width": 633,
+          "scroll": 633
+        }
+      },
+      {
+        "name": "expanded selection and apply remain reachable 900x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery controls fit theme-light 600x460",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "shared preview remains visible theme-light 600x460",
+        "pass": true,
+        "detail": 193.3671875
+      },
+      {
+        "name": "gallery article does not create horizontal canvas scrolling theme-light 600",
+        "pass": true,
+        "detail": {
+          "width": 583,
+          "scroll": 583
+        }
+      },
+      {
+        "name": "expanded selection and apply remain reachable 600x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery controls fit theme-light 375x700",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "shared preview remains visible theme-light 375x700",
+        "pass": true,
+        "detail": 433.3671875
+      },
+      {
+        "name": "gallery article does not create horizontal canvas scrolling theme-light 375",
+        "pass": true,
+        "detail": {
+          "width": 358,
+          "scroll": 358
+        }
+      },
+      {
+        "name": "expanded selection and apply remain reachable 375x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery controls fit theme-light 320x460",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "shared preview remains visible theme-light 320x460",
+        "pass": true,
+        "detail": 212.359375
+      },
+      {
+        "name": "gallery article does not create horizontal canvas scrolling theme-light 320",
+        "pass": true,
+        "detail": {
+          "width": 303,
+          "scroll": 303
+        }
+      },
+      {
+        "name": "expanded selection and apply remain reachable 320x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery controls fit theme-light 260x360",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "shared preview remains visible theme-light 260x360",
+        "pass": true,
+        "detail": 96.9609375
+      },
+      {
+        "name": "gallery article does not create horizontal canvas scrolling theme-light 260",
+        "pass": true,
+        "detail": {
+          "width": 243,
+          "scroll": 243
+        }
+      },
+      {
+        "name": "expanded selection and apply remain reachable 260x360",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "shared typography matches theme-light p",
+        "pass": true,
+        "detail": {
+          "mode": "theme-light",
+          "selector": "p",
+          "main": {
+            "font": "16px",
+            "line": "28.48px",
+            "width": 335,
+            "margin": "15.2px"
+          },
+          "shared": {
+            "font": "16px",
+            "line": "28.48px",
+            "width": 335,
+            "margin": "15.2px"
+          }
+        }
+      },
+      {
+        "name": "shared typography matches theme-light h2",
+        "pass": true,
+        "detail": {
+          "mode": "theme-light",
+          "selector": "h2",
+          "main": {
+            "font": "20.1px",
+            "line": "29.145px",
+            "width": 335,
+            "margin": "12px"
+          },
+          "shared": {
+            "font": "20.1px",
+            "line": "29.145px",
+            "width": 335,
+            "margin": "12px"
+          }
+        }
+      },
+      {
+        "name": "shared typography matches theme-light blockquote p",
+        "pass": true,
+        "detail": {
+          "mode": "theme-light",
+          "selector": "blockquote p",
+          "main": {
+            "font": "16px",
+            "line": "28.8px",
+            "width": 305,
+            "margin": "0px"
+          },
+          "shared": {
+            "font": "16px",
+            "line": "28.8px",
+            "width": 305,
+            "margin": "0px"
+          }
+        }
+      },
+      {
+        "name": "shared typography matches theme-light img",
+        "pass": true,
+        "detail": {
+          "mode": "theme-light",
+          "selector": "img",
+          "main": {
+            "font": "15px",
+            "line": "19.5px",
+            "width": 335,
+            "margin": "15px"
+          },
+          "shared": {
+            "font": "15px",
+            "line": "19.5px",
+            "width": 335,
+            "margin": "15px"
+          }
+        }
+      },
+      {
+        "name": "gallery controls fit theme-dark 900x700",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "shared preview remains visible theme-dark 900x700",
+        "pass": true,
+        "detail": 496.3671875
+      },
+      {
+        "name": "gallery article does not create horizontal canvas scrolling theme-dark 900",
+        "pass": true,
+        "detail": {
+          "width": 633,
+          "scroll": 633
+        }
+      },
+      {
+        "name": "expanded selection and apply remain reachable 900x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery controls fit theme-dark 600x460",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "shared preview remains visible theme-dark 600x460",
+        "pass": true,
+        "detail": 193.3671875
+      },
+      {
+        "name": "gallery article does not create horizontal canvas scrolling theme-dark 600",
+        "pass": true,
+        "detail": {
+          "width": 583,
+          "scroll": 583
+        }
+      },
+      {
+        "name": "expanded selection and apply remain reachable 600x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery controls fit theme-dark 375x700",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "shared preview remains visible theme-dark 375x700",
+        "pass": true,
+        "detail": 433.3671875
+      },
+      {
+        "name": "gallery article does not create horizontal canvas scrolling theme-dark 375",
+        "pass": true,
+        "detail": {
+          "width": 358,
+          "scroll": 358
+        }
+      },
+      {
+        "name": "expanded selection and apply remain reachable 375x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery controls fit theme-dark 320x460",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "shared preview remains visible theme-dark 320x460",
+        "pass": true,
+        "detail": 212.359375
+      },
+      {
+        "name": "gallery article does not create horizontal canvas scrolling theme-dark 320",
+        "pass": true,
+        "detail": {
+          "width": 303,
+          "scroll": 303
+        }
+      },
+      {
+        "name": "expanded selection and apply remain reachable 320x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery controls fit theme-dark 260x360",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "shared preview remains visible theme-dark 260x360",
+        "pass": true,
+        "detail": 96.9609375
+      },
+      {
+        "name": "gallery article does not create horizontal canvas scrolling theme-dark 260",
+        "pass": true,
+        "detail": {
+          "width": 243,
+          "scroll": 243
+        }
+      },
+      {
+        "name": "expanded selection and apply remain reachable 260x360",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "shared typography matches theme-dark p",
+        "pass": true,
+        "detail": {
+          "mode": "theme-dark",
+          "selector": "p",
+          "main": {
+            "font": "16px",
+            "line": "28.48px",
+            "width": 335,
+            "margin": "15.2px"
+          },
+          "shared": {
+            "font": "16px",
+            "line": "28.48px",
+            "width": 335,
+            "margin": "15.2px"
+          }
+        }
+      },
+      {
+        "name": "shared typography matches theme-dark h2",
+        "pass": true,
+        "detail": {
+          "mode": "theme-dark",
+          "selector": "h2",
+          "main": {
+            "font": "20.1px",
+            "line": "29.145px",
+            "width": 335,
+            "margin": "12px"
+          },
+          "shared": {
+            "font": "20.1px",
+            "line": "29.145px",
+            "width": 335,
+            "margin": "12px"
+          }
+        }
+      },
+      {
+        "name": "shared typography matches theme-dark blockquote p",
+        "pass": true,
+        "detail": {
+          "mode": "theme-dark",
+          "selector": "blockquote p",
+          "main": {
+            "font": "16px",
+            "line": "28.8px",
+            "width": 305,
+            "margin": "0px"
+          },
+          "shared": {
+            "font": "16px",
+            "line": "28.8px",
+            "width": 305,
+            "margin": "0px"
+          }
+        }
+      },
+      {
+        "name": "shared typography matches theme-dark img",
+        "pass": true,
+        "detail": {
+          "mode": "theme-dark",
+          "selector": "img",
+          "main": {
+            "font": "15px",
+            "line": "19.5px",
+            "width": 335,
+            "margin": "15px"
+          },
+          "shared": {
+            "font": "15px",
+            "line": "19.5px",
+            "width": 335,
+            "margin": "15px"
+          }
+        }
+      },
+      {
+        "name": "failed persistence retains live draft and enables retry",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "uncertain save permits closing without a second write",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "closing a pending save releases old article draft",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "late successful save does not restore an old article over the new one",
+        "pass": true,
+        "detail": {
+          "file": "Second.md",
+          "sameText": true,
+          "gallery": false,
+          "saved": "deep-reading",
+          "state": "applied"
+        }
+      },
+      {
+        "name": "manual article change invalidates draft without discarding new text",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "external appearance commit invalidates stale pane trial",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "two panes have independent drafts",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "one pane commit invalidates the other stale transaction",
+        "pass": true,
+        "detail": {
+          "first": false,
+          "second": false,
+          "state": "applied",
+          "saved": "deep-reading"
+        }
+      },
+      {
+        "name": "source Markdown remains unchanged",
+        "pass": true,
+        "detail": null
+      }
+    ],
+    "dimensions": [
+      {
+        "mode": "theme-light",
+        "width": 900,
+        "height": 700,
+        "previewHeight": 496.3671875,
+        "overflow": []
+      },
+      {
+        "mode": "theme-light",
+        "width": 600,
+        "height": 460,
+        "previewHeight": 193.3671875,
+        "overflow": []
+      },
+      {
+        "mode": "theme-light",
+        "width": 375,
+        "height": 700,
+        "previewHeight": 433.3671875,
+        "overflow": []
+      },
+      {
+        "mode": "theme-light",
+        "width": 320,
+        "height": 460,
+        "previewHeight": 212.359375,
+        "overflow": []
+      },
+      {
+        "mode": "theme-light",
+        "width": 260,
+        "height": 360,
+        "previewHeight": 96.9609375,
+        "overflow": []
+      },
+      {
+        "mode": "theme-dark",
+        "width": 900,
+        "height": 700,
+        "previewHeight": 496.3671875,
+        "overflow": []
+      },
+      {
+        "mode": "theme-dark",
+        "width": 600,
+        "height": 460,
+        "previewHeight": 193.3671875,
+        "overflow": []
+      },
+      {
+        "mode": "theme-dark",
+        "width": 375,
+        "height": 700,
+        "previewHeight": 433.3671875,
+        "overflow": []
+      },
+      {
+        "mode": "theme-dark",
+        "width": 320,
+        "height": 460,
+        "previewHeight": 212.359375,
+        "overflow": []
+      },
+      {
+        "mode": "theme-dark",
+        "width": 260,
+        "height": 360,
+        "previewHeight": 96.9609375,
+        "overflow": []
+      }
+    ],
+    "typography": [
+      {
+        "mode": "theme-light",
+        "selector": "p",
+        "main": {
+          "font": "16px",
+          "line": "28.48px",
+          "width": 335,
+          "margin": "15.2px"
+        },
+        "shared": {
+          "font": "16px",
+          "line": "28.48px",
+          "width": 335,
+          "margin": "15.2px"
+        }
+      },
+      {
+        "mode": "theme-light",
+        "selector": "h2",
+        "main": {
+          "font": "20.1px",
+          "line": "29.145px",
+          "width": 335,
+          "margin": "12px"
+        },
+        "shared": {
+          "font": "20.1px",
+          "line": "29.145px",
+          "width": 335,
+          "margin": "12px"
+        }
+      },
+      {
+        "mode": "theme-light",
+        "selector": "blockquote p",
+        "main": {
+          "font": "16px",
+          "line": "28.8px",
+          "width": 305,
+          "margin": "0px"
+        },
+        "shared": {
+          "font": "16px",
+          "line": "28.8px",
+          "width": 305,
+          "margin": "0px"
+        }
+      },
+      {
+        "mode": "theme-light",
+        "selector": "img",
+        "main": {
+          "font": "15px",
+          "line": "19.5px",
+          "width": 335,
+          "margin": "15px"
+        },
+        "shared": {
+          "font": "15px",
+          "line": "19.5px",
+          "width": 335,
+          "margin": "15px"
+        }
+      },
+      {
+        "mode": "theme-dark",
+        "selector": "p",
+        "main": {
+          "font": "16px",
+          "line": "28.48px",
+          "width": 335,
+          "margin": "15.2px"
+        },
+        "shared": {
+          "font": "16px",
+          "line": "28.48px",
+          "width": 335,
+          "margin": "15.2px"
+        }
+      },
+      {
+        "mode": "theme-dark",
+        "selector": "h2",
+        "main": {
+          "font": "20.1px",
+          "line": "29.145px",
+          "width": 335,
+          "margin": "12px"
+        },
+        "shared": {
+          "font": "20.1px",
+          "line": "29.145px",
+          "width": 335,
+          "margin": "12px"
+        }
+      },
+      {
+        "mode": "theme-dark",
+        "selector": "blockquote p",
+        "main": {
+          "font": "16px",
+          "line": "28.8px",
+          "width": 305,
+          "margin": "0px"
+        },
+        "shared": {
+          "font": "16px",
+          "line": "28.8px",
+          "width": 305,
+          "margin": "0px"
+        }
+      },
+      {
+        "mode": "theme-dark",
+        "selector": "img",
+        "main": {
+          "font": "15px",
+          "line": "19.5px",
+          "width": 335,
+          "margin": "15px"
+        },
+        "shared": {
+          "font": "15px",
+          "line": "19.5px",
+          "width": 335,
+          "margin": "15px"
+        }
+      }
+    ],
+    "sourceUnchanged": true
+  },
+  "workspace": {
+    "version": "3.20.0-beta.1",
+    "scope": "isolated Windows Obsidian native workbench; no Marketing writes",
+    "results": [
+      {
+        "name": "theme-light responsive settings 900x700",
+        "pass": true,
+        "detail": {
+          "compact": false,
+          "open": true
+        }
+      },
+      {
+        "name": "theme-light controls fit 900x700",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light preview gets majority 900x700",
+        "pass": true,
+        "detail": 0.5742857142857143
+      },
+      {
+        "name": "theme-light footer stays one row 900x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light responsive settings 600x460",
+        "pass": true,
+        "detail": {
+          "compact": true,
+          "open": false
+        }
+      },
+      {
+        "name": "theme-light controls fit 600x460",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light preview gets majority 600x460",
+        "pass": true,
+        "detail": 0.6934782608695652
+      },
+      {
+        "name": "theme-light footer stays one row 600x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light settings remain reachable 600x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light settings overlay does not shrink preview 600x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light focus remains usable 600x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light responsive settings 375x700",
+        "pass": true,
+        "detail": {
+          "compact": true,
+          "open": false
+        }
+      },
+      {
+        "name": "theme-light controls fit 375x700",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light preview gets majority 375x700",
+        "pass": true,
+        "detail": 0.7985714285714286
+      },
+      {
+        "name": "theme-light footer stays one row 375x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light settings remain reachable 375x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light settings overlay does not shrink preview 375x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light focus remains usable 375x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light responsive settings 320x460",
+        "pass": true,
+        "detail": {
+          "compact": true,
+          "open": false
+        }
+      },
+      {
+        "name": "theme-light controls fit 320x460",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light preview gets majority 320x460",
+        "pass": true,
+        "detail": 0.6934782608695652
+      },
+      {
+        "name": "theme-light footer stays one row 320x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light settings remain reachable 320x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light settings overlay does not shrink preview 320x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light focus remains usable 320x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light responsive settings 260x360",
+        "pass": true,
+        "detail": {
+          "compact": true,
+          "open": false
+        }
+      },
+      {
+        "name": "theme-light controls fit 260x360",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light preview gets majority 260x360",
+        "pass": true,
+        "detail": 0.6083333333333333
+      },
+      {
+        "name": "theme-light footer stays one row 260x360",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light settings remain reachable 260x360",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light settings overlay does not shrink preview 260x360",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light focus remains usable 260x360",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light responsive settings 900x320",
+        "pass": true,
+        "detail": {
+          "compact": true,
+          "open": false
+        }
+      },
+      {
+        "name": "theme-light controls fit 900x320",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-light preview gets majority 900x320",
+        "pass": true,
+        "detail": 0.559375
+      },
+      {
+        "name": "theme-light footer stays one row 900x320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light settings remain reachable 900x320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light settings overlay does not shrink preview 900x320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-light focus remains usable 900x320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark responsive settings 900x700",
+        "pass": true,
+        "detail": {
+          "compact": false,
+          "open": true
+        }
+      },
+      {
+        "name": "theme-dark controls fit 900x700",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark preview gets majority 900x700",
+        "pass": true,
+        "detail": 0.5742857142857143
+      },
+      {
+        "name": "theme-dark footer stays one row 900x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark responsive settings 600x460",
+        "pass": true,
+        "detail": {
+          "compact": true,
+          "open": false
+        }
+      },
+      {
+        "name": "theme-dark controls fit 600x460",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark preview gets majority 600x460",
+        "pass": true,
+        "detail": 0.6934782608695652
+      },
+      {
+        "name": "theme-dark footer stays one row 600x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark settings remain reachable 600x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark settings overlay does not shrink preview 600x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark focus remains usable 600x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark responsive settings 375x700",
+        "pass": true,
+        "detail": {
+          "compact": true,
+          "open": false
+        }
+      },
+      {
+        "name": "theme-dark controls fit 375x700",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark preview gets majority 375x700",
+        "pass": true,
+        "detail": 0.7985714285714286
+      },
+      {
+        "name": "theme-dark footer stays one row 375x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark settings remain reachable 375x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark settings overlay does not shrink preview 375x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark focus remains usable 375x700",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark responsive settings 320x460",
+        "pass": true,
+        "detail": {
+          "compact": true,
+          "open": false
+        }
+      },
+      {
+        "name": "theme-dark controls fit 320x460",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark preview gets majority 320x460",
+        "pass": true,
+        "detail": 0.6934782608695652
+      },
+      {
+        "name": "theme-dark footer stays one row 320x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark settings remain reachable 320x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark settings overlay does not shrink preview 320x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark focus remains usable 320x460",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark responsive settings 260x360",
+        "pass": true,
+        "detail": {
+          "compact": true,
+          "open": false
+        }
+      },
+      {
+        "name": "theme-dark controls fit 260x360",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark preview gets majority 260x360",
+        "pass": true,
+        "detail": 0.6083333333333333
+      },
+      {
+        "name": "theme-dark footer stays one row 260x360",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark settings remain reachable 260x360",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark settings overlay does not shrink preview 260x360",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark focus remains usable 260x360",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark responsive settings 900x320",
+        "pass": true,
+        "detail": {
+          "compact": true,
+          "open": false
+        }
+      },
+      {
+        "name": "theme-dark controls fit 900x320",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "theme-dark preview gets majority 900x320",
+        "pass": true,
+        "detail": 0.559375
+      },
+      {
+        "name": "theme-dark footer stays one row 900x320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark settings remain reachable 900x320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark settings overlay does not shrink preview 900x320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "theme-dark focus remains usable 900x320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "focus preserves exact export dimensions and HTML",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "nonblocking warnings initially collapsed",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "all warning paths retained",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "actual blocking issue disables copy and opens details",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "blocking status remains visible in focus preview",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "copy recovers after blocking issue removed",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native export menu contains 导出长图",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native export menu invokes exportLongImage",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native export menu contains 导出 HTML",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native export menu invokes exportHtmlFragment",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native export menu contains 导出分段图",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "native export menu invokes exportSegmentedImages",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "settings are unchanged",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "Markdown is unchanged",
+        "pass": true,
+        "detail": null
+      }
+    ],
+    "dimensions": [
+      {
+        "mode": "theme-light",
+        "width": 900,
+        "height": 700,
+        "paneWidth": 900,
+        "previewHeight": 402,
+        "ratio": 0.5742857142857143,
+        "compact": false
+      },
+      {
+        "mode": "theme-light",
+        "width": 600,
+        "height": 460,
+        "paneWidth": 600,
+        "previewHeight": 319,
+        "ratio": 0.6934782608695652,
+        "compact": true
+      },
+      {
+        "mode": "theme-light",
+        "width": 375,
+        "height": 700,
+        "paneWidth": 375,
+        "previewHeight": 559,
+        "ratio": 0.7985714285714286,
+        "compact": true
+      },
+      {
+        "mode": "theme-light",
+        "width": 320,
+        "height": 460,
+        "paneWidth": 320,
+        "previewHeight": 319,
+        "ratio": 0.6934782608695652,
+        "compact": true
+      },
+      {
+        "mode": "theme-light",
+        "width": 260,
+        "height": 360,
+        "paneWidth": 260,
+        "previewHeight": 219,
+        "ratio": 0.6083333333333333,
+        "compact": true
+      },
+      {
+        "mode": "theme-light",
+        "width": 900,
+        "height": 320,
+        "paneWidth": 900,
+        "previewHeight": 179,
+        "ratio": 0.559375,
+        "compact": true
+      },
+      {
+        "mode": "theme-dark",
+        "width": 900,
+        "height": 700,
+        "paneWidth": 900,
+        "previewHeight": 402,
+        "ratio": 0.5742857142857143,
+        "compact": false
+      },
+      {
+        "mode": "theme-dark",
+        "width": 600,
+        "height": 460,
+        "paneWidth": 600,
+        "previewHeight": 319,
+        "ratio": 0.6934782608695652,
+        "compact": true
+      },
+      {
+        "mode": "theme-dark",
+        "width": 375,
+        "height": 700,
+        "paneWidth": 375,
+        "previewHeight": 559,
+        "ratio": 0.7985714285714286,
+        "compact": true
+      },
+      {
+        "mode": "theme-dark",
+        "width": 320,
+        "height": 460,
+        "paneWidth": 320,
+        "previewHeight": 319,
+        "ratio": 0.6934782608695652,
+        "compact": true
+      },
+      {
+        "mode": "theme-dark",
+        "width": 260,
+        "height": 360,
+        "paneWidth": 260,
+        "previewHeight": 219,
+        "ratio": 0.6083333333333333,
+        "compact": true
+      },
+      {
+        "mode": "theme-dark",
+        "width": 900,
+        "height": 320,
+        "paneWidth": 900,
+        "previewHeight": 179,
+        "ratio": 0.559375,
+        "compact": true
+      }
+    ]
+  },
+  "hostRegression": {
+    "vault": "MPPreview-Refactor-Test",
+    "platform": "Win32",
+    "devicePixelRatio": 2,
+    "results": [
+      {
+        "name": "real Markdown renderer preserves both dialogue blocks",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "header and footer inside article boundary",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 320",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 375",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 375",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 414",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 414",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "actual article width 320",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 469",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 469",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "actual article width 375",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 508",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 508",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "actual article width 414",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "workbench controls fit 600",
+        "pass": true,
+        "detail": []
+      },
+      {
+        "name": "article has no horizontal overflow 600",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "phone mode does not change export width or article height",
+        "pass": true,
+        "detail": {
+          "adaptive": {
+            "width": 506,
+            "height": 6598
+          },
+          "phone": {
+            "width": 506,
+            "height": 6598
+          }
+        }
+      },
+      {
+        "name": "full export includes article below viewport",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery keeps keyboard focus after selection",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "gallery cancel restores persisted theme without writes",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "repeated recipe does not duplicate labels",
+        "pass": true,
+        "detail": {
+          "labels": 30
+        }
+      },
+      {
+        "name": "theme trial is isolated per preview pane",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "late previous render cannot overwrite new article",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "all export adapters generate complete artifacts",
+        "pass": true,
+        "detail": {
+          "names": [
+            "yh-mp-preview-1790955903921.png",
+            "yh-mp-preview-1790955904164.html",
+            "yh-mp-preview-1790955904195-1.png",
+            "yh-mp-preview-1790955904195-2.png",
+            "yh-mp-preview-1790955904195-3.png",
+            "yh-mp-preview-1790955904195-4.png",
+            "yh-mp-preview-1790955904195-5.png",
+            "yh-mp-preview-1790955904195-6.png",
+            "yh-mp-preview-1790955904195-7.png",
+            "yh-mp-preview-1790955904195-8.png",
+            "yh-mp-preview-1790955904195-9.png",
+            "yh-mp-preview-1790955904195-10.png"
+          ]
+        }
+      },
+      {
+        "name": "HTML contains header, footer and final article text",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "long image covers full article",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "copy action is enabled after export",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "copy action reports successful completion",
+        "pass": true,
+        "detail": {
+          "text": "复制成功",
+          "focused": true,
+          "notices": [
+            "已导出 HTML 片段",
+            "已导出 10 张 1:1.33 分段图",
+            "已复制到剪贴板"
+          ]
+        }
+      },
+      {
+        "name": "real system clipboard contains full canonical article",
+        "pass": true,
+        "detail": null
+      },
+      {
+        "name": "source Markdown remains unchanged",
+        "pass": true,
+        "detail": null
+      }
+    ],
+    "dimensions": [
+      {
+        "width": 320,
+        "paneWidth": 320,
+        "articleWidth": 226,
+        "articleHeight": 7788,
+        "previewHeight": 851,
+        "overflow": []
+      },
+      {
+        "width": 375,
+        "paneWidth": 375,
+        "articleWidth": 281,
+        "articleHeight": 6900,
+        "previewHeight": 851,
+        "overflow": []
+      },
+      {
+        "width": 414,
+        "paneWidth": 414,
+        "articleWidth": 320,
+        "articleHeight": 6861,
+        "previewHeight": 851,
+        "overflow": []
+      },
+      {
+        "width": 469,
+        "paneWidth": 469,
+        "articleWidth": 375,
+        "articleHeight": 6088,
+        "previewHeight": 851,
+        "overflow": []
+      },
+      {
+        "width": 508,
+        "paneWidth": 508,
+        "articleWidth": 414,
+        "articleHeight": 6088,
+        "previewHeight": 851,
+        "overflow": []
+      },
+      {
+        "width": 600,
+        "paneWidth": 600,
+        "articleWidth": 506,
+        "articleHeight": 6088,
+        "previewHeight": 694,
+        "overflow": []
+      }
+    ],
+    "pngSizes": [
+      {
+        "name": "yh-mp-preview-1790955903921.png",
+        "width": 1012,
+        "height": 13196
+      },
+      {
+        "name": "yh-mp-preview-1790955904195-1.png",
+        "width": 1012,
+        "height": 1350
+      },
+      {
+        "name": "yh-mp-preview-1790955904195-2.png",
+        "width": 1012,
+        "height": 1350
+      },
+      {
+        "name": "yh-mp-preview-1790955904195-3.png",
+        "width": 1012,
+        "height": 1350
+      },
+      {
+        "name": "yh-mp-preview-1790955904195-4.png",
+        "width": 1012,
+        "height": 1350
+      },
+      {
+        "name": "yh-mp-preview-1790955904195-5.png",
+        "width": 1012,
+        "height": 1350
+      },
+      {
+        "name": "yh-mp-preview-1790955904195-6.png",
+        "width": 1012,
+        "height": 1350
+      },
+      {
+        "name": "yh-mp-preview-1790955904195-7.png",
+        "width": 1012,
+        "height": 1350
+      },
+      {
+        "name": "yh-mp-preview-1790955904195-8.png",
+        "width": 1012,
+        "height": 1350
+      },
+      {
+        "name": "yh-mp-preview-1790955904195-9.png",
+        "width": 1012,
+        "height": 1350
+      },
+      {
+        "name": "yh-mp-preview-1790955904195-10.png",
+        "width": 1012,
+        "height": 1046
+      }
+    ],
+    "artifacts": "_test-artifacts"
+  },
+  "visuals": [
+    {
+      "path": "reports/assets/theme-gallery-900x700-theme-light.png",
+      "size": {
+        "width": 1800,
+        "height": 1400
+      },
+      "rect": {
+        "x": 360,
+        "y": 166,
+        "width": 900,
+        "height": 700
+      },
+      "sha256": "0515fb8a0175103bc313732aeb692ef0bfafab6d1fbcd50b4ec13bb3ed54fd0c"
+    },
+    {
+      "path": "reports/assets/theme-gallery-375x700-theme-dark.png",
+      "size": {
+        "width": 750,
+        "height": 1400
+      },
+      "rect": {
+        "x": 623,
+        "y": 166,
+        "width": 375,
+        "height": 700
+      },
+      "sha256": "26fd4895b255ff832a3b62f1f1f662d43aab7ca132af02b6c4dccbd253c397ab"
+    },
+    {
+      "path": "reports/assets/theme-gallery-320x460-theme-light-expanded.png",
+      "size": {
+        "width": 640,
+        "height": 920
+      },
+      "rect": {
+        "x": 650,
+        "y": 286,
+        "width": 320,
+        "height": 460
+      },
+      "sha256": "bc060b7d19271d9556d54c6f78d1fccc50bfd966a01c2a7fc6d95c12c557d0eb"
+    },
+    {
+      "path": "reports/assets/theme-gallery-260x360-theme-dark.png",
+      "size": {
+        "width": 520,
+        "height": 720
+      },
+      "rect": {
+        "x": 680,
+        "y": 336,
+        "width": 260,
+        "height": 360
+      },
+      "sha256": "e66a55b7b461136a09111758dd74a9e2a9188087cea88e0ac371812f26234b35"
+    }
+  ],
+  "limitations": [
+    "No user BRAT acceptance or WeChat-backend paste of this candidate yet. Stable track unchanged.",
+    "Windows Obsidian 1.13.7 / devicePixelRatio 2 only. Older hosts, other OS and explicit 100/125/150% scaling matrix not tested.",
+    "Real system clipboard foreground access skipped; canonical copying and complete HTML/image output checked separately.",
+    "OS Save As dialogs not automated; native download artifacts captured in the isolated test vault.",
+    "Frozen definitions guarantee the 3.19.1 revision, not every earlier historical visual revision.",
+    "P2 structural themes / background priority and P3 palettes / density not implemented before P1 acceptance."
+  ]
+}

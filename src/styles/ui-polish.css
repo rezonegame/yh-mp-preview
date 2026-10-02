@@ -134,42 +134,7 @@
     .mp-settings .setting-item-control { min-width: 0; }
 }
 
-/* Both galleries share the same component: short lists should fit their content. */
-.mp-theme-gallery-modal {
-    width: min(800px, calc(100vw - 24px)) !important;
-    height: auto !important;
-    max-height: min(760px, calc(100vh - 28px)) !important;
-}
-.mp-theme-gallery-modal .modal-content { height: auto; max-height: inherit; }
-.mp-gallery-header { gap: 12px 18px; padding: 18px 22px 16px; }
-.mp-gallery-heading h2 { font-size: 19px; line-height: 1.35; }
-.mp-gallery-heading p { margin-top: 4px; line-height: 1.5; }
-.mp-gallery-search { min-height: 34px; background: var(--background-primary); }
-.mp-gallery-scenes {
-    flex-wrap: wrap;
-    overflow-x: visible;
-    gap: 6px;
-    padding: 11px 22px;
-}
-.mp-gallery-scene { padding: 6px 10px; line-height: 1.35; }
-.mp-gallery-grid {
-    flex: 0 1 auto;
-    max-height: min(480px, 52vh);
-    padding: 16px 22px 20px;
-}
-.mp-gallery-section-title { margin-bottom: 9px; font-size: 13px; font-weight: 650; }
-.mp-gallery-section-title:not(:first-child) { margin-top: 20px; }
-.mp-gallery-card-grid { gap: 8px; }
-.mp-theme-card { min-height: 46px; border-radius: 8px; transition: border-color .16s ease, background-color .16s ease; }
-.mp-theme-card:hover { transform: none; box-shadow: none; background: var(--background-secondary); }
-.mp-theme-card.is-selected { box-shadow: 0 0 0 2px color-mix(in srgb, var(--interactive-accent) 14%, transparent); }
-.mp-theme-info { padding: 10px 12px; }
-.mp-theme-name { font-weight: 650; }
-.mp-gallery-footer { gap: 12px; min-height: 68px; padding: 11px 22px; }
-.mp-gallery-try-hint { white-space: normal; }
-.mp-gallery-actions { gap: 7px; }
-.mp-gallery-btn-cancel,
-.mp-gallery-btn-apply { min-height: 34px; padding: 0 12px; font-weight: 600; }
+/* Shared-preview gallery owns its sizing and spacing in theme-gallery.css. */
 
 /* The older editors keep their controls, with consistent spacing and reflow. */
 .mp-template-modal { max-height: calc(100vh - 40px); }
@@ -213,16 +178,8 @@
     .mp-toolbar,
     .mp-bottom-bar { padding: 8px; }
     .mp-preview-width-hint { margin-left: 0; width: 100%; }
-    .mp-gallery-header { padding: 16px; }
-    .mp-gallery-scenes { padding: 10px 16px; }
-    .mp-gallery-grid { padding: 14px 16px 18px; max-height: 48vh; }
-    .mp-gallery-footer { padding: 11px 16px; }
-    .mp-gallery-header-actions { flex-wrap: wrap; }
-    .mp-gallery-search { flex: 1 1 180px; }
-    .mp-gallery-actions { justify-content: flex-start; }
     .mp-note-gallery-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .mp-note-gallery-actions button { min-width: 0; white-space: normal; }
-    .mp-theme-gallery-modal { width: calc(100vw - 16px) !important; max-height: calc(100vh - 20px) !important; }
     .mp-background-modal .setting-item { flex-wrap: wrap; }
     .mp-background-modal .setting-item-info,
     .mp-background-modal .setting-item-control { flex: 1 1 100%; }

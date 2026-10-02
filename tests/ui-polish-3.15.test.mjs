@@ -13,7 +13,11 @@ test('UI polish is loaded after existing styles and stays out of article renderi
   assert.match(polish, /\.mp-view-content \{[^}]*container-type: inline-size/);
   assert.match(polish, /@container \(max-width: 380px\)/);
   assert.match(polish, /\.mp-settings \{[\s\S]*?container-type: inline-size/);
-  assert.match(polish, /\.mp-theme-gallery-modal \{[\s\S]*?height: auto !important/);
+  // The shared article preview now owns a bounded canvas instead of the old short-list auto height.
+  assert.doesNotMatch(polish, /\.mp-theme-gallery-modal \{[\s\S]*?height: auto !important/);
+  const gallery = read('src/styles/settings/theme-gallery.css');
+  assert.match(gallery, /height: min\(820px, 90vh\) !important/);
+  assert.match(gallery, /\.mp-gallery-preview-host \{[^}]*flex:1/);
   assert.match(polish, /@media \(max-width: 640px\)/);
   assert.match(polish, /@media \(prefers-reduced-motion: reduce\)/);
 });

@@ -8,6 +8,8 @@ import { pathToFileURL } from 'node:url';
 export function createDom() {
   const dom = new JSDOM('', { url: 'https://fixture.invalid/' });
   const { window } = dom;
+  // JSDOM has no layout engine; native host tests validate the actual adopted sheet.
+  if (!window.CSSStyleSheet.prototype.replaceSync) window.CSSStyleSheet.prototype.replaceSync = function(source) { this.fixtureSource = source; };
   for (const name of ['window', 'document', 'Node', 'NodeFilter', 'HTMLElement', 'Element', 'XMLSerializer']) {
     globalThis[name] = name === 'window' ? window : window[name];
   }
@@ -46,7 +48,7 @@ export function createDom() {
 export async function loadModule(path, stub = '') {
   const result = await build({
     entryPoints: [path], bundle: true, write: false, format: 'esm', platform: 'browser', target: 'es2020',
-    loader: { '.png': 'dataurl' },
+    loader: { '.png': 'dataurl', '.css': 'text' },
     plugins: [{ name: 'obsidian-fixture', setup(builder) {
       builder.onResolve({ filter: /^obsidian$/ }, () => ({ path: 'obsidian', namespace: 'fixture' }));
       builder.onLoad({ filter: /.*/, namespace: 'fixture' }, () => ({ contents: stub || 'export class Notice {} export class App {} export function requestUrl(){throw new Error("fixture requires an explicit resource loader");}', loader: 'js' }));

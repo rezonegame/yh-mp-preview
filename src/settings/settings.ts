@@ -5,8 +5,12 @@ import { CURATED_THEME_CATALOG_VERSION } from '../core/theme/themeCatalog';
 import { DEFAULT_WECHAT_FONT_STACK } from '../core/theme/wechatReadingBaseline';
 import { cloneSettings, SettingsRepository } from '../core/settings/settingsRepository';
 import { mergePresetCatalog } from '../core/settings/catalogMerge';
+import { Notice } from 'obsidian';
+import { migrateWechatAppearance, type ThemeReference, type AppearancePreferences, isAppearanceV1, themeReference, originalPreferences, LEGACY_THEME_REVISION } from '../core/theme/themeRevisionRegistry';
+import { recordAppearance, appearanceConflictKey, type AppearanceSnapshot } from '../core/theme/wechatAppearance';
 
 export interface MPSettings {
+    wechatAppearance?: unknown;
     schemaVersion: number;
     v3: V3SettingsMetadata;
     backgroundId: string;
@@ -52,6 +56,7 @@ export interface MPSettings {
 }
 
 export interface LayoutSnapshot {
+    appearance?: AppearanceSnapshot;
     id: string;
     createdAt: string;
     filePath: string;
@@ -149,7 +154,15 @@ export class SettingsManager {
         const available = new Set(loaded.templates.concat(loaded.customTemplates).map(theme => theme.id));
         if (!available.has(loaded.templateId)) {
             loaded.v3.legacyTemplateId = loaded.templateId;
+            new Notice(`已选主题「${loaded.templateId}」无法找到，暂用通用长文；原记录已保留。`);
             loaded.templateId = DEFAULT_SETTINGS.templateId;
+        }
+        loaded.wechatAppearance = migrateWechatAppearance(loaded.wechatAppearance, loaded.templates.concat(loaded.customTemplates));
+        if (isAppearanceV1(loaded.wechatAppearance)) {
+            const reference = loaded.wechatAppearance.referencesById[loaded.templateId];
+            if (reference?.revision && loaded.templates.some(template => template.id === loaded.templateId) && reference.revision !== LEGACY_THEME_REVISION) {
+                new Notice('本版暂不支持已保存的主题修订，使用同主题的 3.19.1 排版；原外观记录未改写。');
+            }
         }
         this.repository.initialize(loaded);
     }
@@ -188,6 +201,15 @@ export class SettingsManager {
         return this.settings;
     }
 
+    subscribe(listener: () => void): () => void { return this.repository.subscribe(listener); }
+
+    async commitWechatAppearance(reference: ThemeReference, preferences: AppearancePreferences, expectedKey: string): Promise<void> {
+        await this.repository.update(draft => {
+            if (appearanceConflictKey(draft) !== expectedKey) throw new Error('全局外观已变化，请重新打开画廊。');
+            recordAppearance(draft, reference, preferences);
+        });
+    }
+
     async updateSettings(settings: Partial<MPSettings>) {
         await this.repository.update(draft => { Object.assign(draft, cloneSettings(settings)); });
     }
@@ -197,8 +219,15 @@ export class SettingsManager {
     }
 
     async restoreLayoutSnapshot(snapshot: LayoutSnapshot): Promise<void> {
-        await this.repository.update(draft => { Object.assign(draft, {
-            templateId: this.getTemplate(snapshot.templateId) ? snapshot.templateId : 'default',
+        await this.repository.update(draft => {
+            if (snapshot.appearance?.customDefinition) {
+                const definition = cloneSettings(snapshot.appearance.customDefinition);
+                const index = draft.customTemplates.findIndex(item => item.id === definition.id);
+                if (index >= 0) draft.customTemplates[index] = definition;
+                else draft.customTemplates.push(definition);
+            }
+            Object.assign(draft, {
+            templateId: draft.templates.concat(draft.customTemplates).some(item => item.id === snapshot.templateId) ? snapshot.templateId : 'default',
             backgroundId: snapshot.backgroundId,
             fontFamily: snapshot.fontFamily,
             fontSize: snapshot.fontSize,
@@ -206,7 +235,12 @@ export class SettingsManager {
                 ...draft.v3,
                 selectedRecipeId: snapshot.recipeId,
             },
-        }); });
+        });
+            if (isAppearanceV1(draft.wechatAppearance)) {
+                const template = draft.templates.concat(draft.customTemplates).find(item => item.id === draft.templateId)!;
+                recordAppearance(draft, snapshot.appearance?.reference ?? themeReference(template), snapshot.appearance?.preferences ?? originalPreferences());
+            }
+        });
     }
 
     getFontOptions() {

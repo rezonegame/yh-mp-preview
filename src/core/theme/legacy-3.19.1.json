@@ -1,0 +1,1313 @@
+{
+  "product-review": {
+    "id": "product-review",
+    "name": "测评清单",
+    "description": "以评分、要点和对比阅读为中心，适合产品测评与工具盘点。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#334155;",
+      "accentColor": "#059669",
+      "title": {
+        "h1": {
+          "base": "margin:26px 0 20px;padding:10px 12px;border-left:3px solid #059669;background:#f0fdf4;font-size:1.76em;",
+          "content": "font-weight:700;color:#14532d;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:28px 0 12px;padding-left:10px;border-left:3px solid #059669;font-size:1.34em;",
+          "content": "font-weight:700;color:#14532d;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:22px 0 10px;font-size:1.14em;",
+          "content": "font-weight:700;color:#047857;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:18px 0 8px;font-size:1em;",
+          "content": "font-weight:700;color:#166534;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#334155;",
+      "list": {
+        "container": "padding-left:1.45em;color:#059669;",
+        "item": "color:#334155;",
+        "taskList": "list-style:none;padding-left:0;color:#334155;"
+      },
+      "quote": "margin:1.1em 0;padding:14px 16px;border-left:4px solid #059669;background:#f0fdf4;color:#365248;",
+      "code": {
+        "header": {
+          "container": "margin-bottom:6px;padding:6px 10px;background:#dff8ed;",
+          "dot": "display:none;",
+          "colors": [
+            "#059669",
+            "#059669",
+            "#059669"
+          ]
+        },
+        "block": "margin:1.2em 0;padding:14px;background:#f7fffa;border:1px solid #ccebd8;color:#14532d;",
+        "inline": "padding:1px 4px;background:#ecfdf5;color:#047857;"
+      },
+      "image": "border:1px solid #ccebd8;border-radius:6px;",
+      "link": "color:#047857;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:700;color:#047857;",
+        "em": "color:#46705c;",
+        "del": "color:#94a3b8;"
+      },
+      "table": {
+        "container": "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #059669;",
+        "header": "padding:10px;background:#047857;color:#ffffff;border-bottom:1px solid #059669;",
+        "cell": "padding:10px;border-bottom:1px solid #d9eee1;color:#334155;"
+      },
+      "hr": "margin:28px 0;border:0;border-top:1px solid #ccebd8;",
+      "footnote": {
+        "ref": "color:#059669;",
+        "backref": "color:#059669;"
+      }
+    }
+  },
+  "clear-guide": {
+    "id": "clear-guide",
+    "name": "清晰指南",
+    "description": "编号感更强的操作说明风，适合教程、流程和工具上手。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#263b3a;",
+      "accentColor": "#087f75",
+      "title": {
+        "h1": {
+          "base": "margin:26px 0 20px;padding-bottom:10px;border-bottom:3px solid #f0c94d;font-size:1.76em;",
+          "content": "font-weight:700;color:#172b29;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:30px 0 14px;padding-bottom:8px;border-bottom:3px solid #172b29;font-size:1.38em;",
+          "content": "font-weight:700;color:#172b29;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid #b9d0cd;font-size:1.15em;",
+          "content": "font-weight:700;color:#087f75;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:18px 0 8px;font-size:1em;",
+          "content": "font-weight:700;color:#176c65;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#263b3a;",
+      "list": {
+        "container": "padding-left:1.45em;color:#087f75;",
+        "item": "color:#263b3a;",
+        "taskList": "list-style:none;padding-left:0;color:#263b3a;"
+      },
+      "quote": "margin:1.1em 0;padding:12px 14px;border-left:3px solid #087f75;background:#f3faf8;color:#254743;",
+      "code": {
+        "header": {
+          "container": "margin-bottom:6px;padding:6px 10px;background:#dff1ee;",
+          "dot": "display:none;",
+          "colors": [
+            "#087f75",
+            "#087f75",
+            "#087f75"
+          ]
+        },
+        "block": "margin:1.2em 0;padding:14px;background:#173330;border:1px solid #183f3c;color:#e8f4f2;",
+        "inline": "padding:1px 4px;background:#eaf3f2;color:#075f58;"
+      },
+      "image": "border:2px solid #172b29;border-radius:0;",
+      "link": "color:#06736a;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:700;color:#064c47;",
+        "em": "color:#476a66;",
+        "del": "color:#9bbdb9;"
+      },
+      "table": {
+        "container": "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #172b29;",
+        "header": "padding:10px;background:#fff7cf;color:#172b29;border-bottom:1px solid #b9d0cd;",
+        "cell": "padding:10px;border-bottom:1px solid #d9e9e6;color:#263b3a;"
+      },
+      "hr": "margin:30px 0;border:0;border-top:1px solid #9bbdb9;",
+      "footnote": {
+        "ref": "color:#06736a;",
+        "backref": "color:#06736a;"
+      }
+    }
+  },
+  "case-file": {
+    "id": "case-file",
+    "name": "档案案例",
+    "description": "深色章节锚点与清晰数据表，适合案例、访谈和内刊。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#2b3740;",
+      "accentColor": "#40505c",
+      "title": {
+        "h1": {
+          "base": "margin:26px 0 25px;padding:14px 16px;background:#293a46;font-size:1.65em;",
+          "content": "font-weight:700;color:#ffffff;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #40505c;font-size:1.3em;",
+          "content": "font-weight:700;color:#293a46;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:24px 0 10px;padding:7px 10px;background:#eef2f3;font-size:1.08em;",
+          "content": "font-weight:700;color:#334651;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:18px 0 8px;font-size:1em;",
+          "content": "font-weight:700;color:#40505c;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#2b3740;",
+      "list": {
+        "container": "padding-left:1.45em;color:#40505c;",
+        "item": "color:#2b3740;",
+        "taskList": "list-style:none;padding-left:0;color:#2b3740;"
+      },
+      "quote": "margin:1.25em 0;padding:14px 16px;border-left:3px solid #40505c;background:#f2f5f6;color:#354650;",
+      "code": {
+        "header": {
+          "container": "margin-bottom:6px;padding:6px 10px;background:#dfe7ea;",
+          "dot": "display:none;",
+          "colors": [
+            "#40505c",
+            "#40505c",
+            "#40505c"
+          ]
+        },
+        "block": "margin:1.2em 0;padding:14px;background:#263742;border-top:4px solid #64828d;color:#eff6f6;",
+        "inline": "padding:1px 4px;background:#e9eff1;color:#334651;"
+      },
+      "image": "padding:4px;border:1px solid #b9c9cf;border-radius:0;",
+      "link": "color:#334651;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:700;color:#293a46;",
+        "em": "color:#51646e;",
+        "del": "color:#6c7d84;"
+      },
+      "table": {
+        "container": "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #40505c;",
+        "header": "padding:9px;background:#e9eff1;color:#293a46;border-bottom:1px solid #9fb4bc;",
+        "cell": "padding:9px;border-bottom:1px solid #d4e0e3;color:#2b3740;"
+      },
+      "hr": "margin:30px 0;border:0;border-top:1px solid #9fb4bc;",
+      "footnote": {
+        "ref": "color:#334651;",
+        "backref": "color:#334651;"
+      }
+    }
+  },
+  "red-white-editorial": {
+    "id": "red-white-editorial",
+    "name": "红白编辑",
+    "description": "克制的红色章节锚点，适合评论、分析与有力量感的议题。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#292524;",
+      "accentColor": "#c2413b",
+      "title": {
+        "h1": {
+          "base": "margin:30px 0 22px;padding-bottom:12px;border-bottom:3px solid #c2413b;font-size:1.86em;",
+          "content": "font-weight:700;color:#1c1917;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:30px 0 14px;padding-bottom:8px;border-bottom:1px solid #c2413b;font-size:1.38em;",
+          "content": "font-weight:700;color:#1c1917;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:22px 0 10px;font-size:1.15em;",
+          "content": "font-weight:700;color:#c2413b;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:18px 0 8px;font-size:1em;",
+          "content": "font-weight:700;color:#44403c;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#292524;",
+      "list": {
+        "container": "padding-left:1.45em;color:#c2413b;",
+        "item": "color:#292524;",
+        "taskList": "list-style:none;padding-left:0;color:#292524;"
+      },
+      "quote": "margin:1.3em 0;padding:14px 0;border-top:2px solid #c2413b;color:#44403c;",
+      "code": {
+        "header": {
+          "container": "display:none;",
+          "dot": "display:none;",
+          "colors": [
+            "#c2413b",
+            "#c2413b",
+            "#c2413b"
+          ]
+        },
+        "block": "margin:1.2em 0;padding:14px;background:#fafafa;border:1px solid #e7e5e4;color:#292524;",
+        "inline": "padding:1px 4px;background:#fff1f0;color:#b42318;"
+      },
+      "image": "border:0;border-radius:0;",
+      "link": "color:#c2413b;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:700;color:#b42318;",
+        "em": "color:#57534e;",
+        "del": "color:#a8a29e;"
+      },
+      "table": {
+        "container": "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #c2413b;",
+        "header": "padding:10px;background:#fff1f0;color:#7f1d1d;border-bottom:1px solid #fecaca;",
+        "cell": "padding:10px;border-bottom:1px solid #e7e5e4;color:#292524;"
+      },
+      "hr": "margin:30px 0;border:0;border-top:1px solid #fecaca;",
+      "footnote": {
+        "ref": "color:#c2413b;",
+        "backref": "color:#c2413b;"
+      }
+    }
+  },
+  "ink-opinion": {
+    "id": "ink-opinion",
+    "name": "黑白锐评",
+    "description": "以黑白文字和强弱标题建立观点节奏，适合短评与专栏。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#292929;",
+      "accentColor": "#353535",
+      "title": {
+        "h1": {
+          "base": "margin:24px 0 28px;padding:0 0 16px;border-bottom:4px solid #202020;font-size:1.95em;",
+          "content": "font-weight:800;color:#181818;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:36px 0 14px;padding-left:12px;border-left:5px solid #202020;font-size:1.3em;",
+          "content": "font-weight:800;color:#181818;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:26px 0 11px;padding-bottom:6px;border-bottom:1px solid #a9a9a9;font-size:1.08em;",
+          "content": "font-weight:700;color:#303030;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:20px 0 8px;font-size:1em;",
+          "content": "font-weight:700;color:#353535;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#292929;",
+      "list": {
+        "container": "padding-left:1.5em;color:#353535;",
+        "item": "color:#292929;",
+        "taskList": "list-style:none;padding-left:0;color:#292929;"
+      },
+      "quote": "margin:1.5em 0;padding:10px 20px;border-top:2px solid #202020;border-bottom:2px solid #202020;color:#303030;",
+      "code": {
+        "header": {
+          "container": "margin-bottom:6px;padding:6px 10px;background:#e9e9e9;",
+          "dot": "display:none;",
+          "colors": [
+            "#353535",
+            "#353535",
+            "#353535"
+          ]
+        },
+        "block": "margin:1.2em 0;padding:14px;background:#f4f4f4;border-left:3px solid #353535;color:#292929;",
+        "inline": "padding:1px 4px;background:#efefef;color:#292929;"
+      },
+      "image": "border:1px solid #d2d2d2;border-radius:0;",
+      "link": "color:#303030;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:800;color:#181818;",
+        "em": "color:#454545;",
+        "del": "color:#6d6d6d;"
+      },
+      "table": {
+        "container": "margin:1.3em 0;border-collapse:collapse;border-top:2px solid #202020;",
+        "header": "padding:10px;background:#efefef;color:#181818;border-bottom:1px solid #888888;",
+        "cell": "padding:10px;border-bottom:1px solid #d2d2d2;color:#292929;"
+      },
+      "hr": "margin:34px 0;border:0;border-top:2px solid #202020;",
+      "footnote": {
+        "ref": "color:#353535;",
+        "backref": "color:#353535;"
+      }
+    }
+  },
+  "academic-pro-forest": {
+    "id": "academic-pro-forest",
+    "name": "案例与内刊",
+    "description": "森林绿强调色，适合案例拆解、组织内刊与深度经验总结。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background: #ffffff; padding: 0; color: #25332d;",
+      "accentColor": "#216a52",
+      "title": {
+        "h1": {
+          "base": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 2px solid #216a52;",
+          "content": "font-weight: 700; color: #183f31;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin: 26px 0 12px; padding-left: 12px; border-left: 4px solid #216a52; font-size: 1.38em;",
+          "content": "font-weight: 700; color: #183f31;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin: 22px 0 10px; font-size: 1.15em;",
+          "content": "font-weight: 700; color: #216a52;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin: 18px 0 8px; font-size: 1em;",
+          "content": "font-weight: 700; color: #2c5948;",
+          "after": ""
+        }
+      },
+      "paragraph": "color: #334155;",
+      "list": {
+        "container": "padding-left: 1.45em; color: #334155;",
+        "item": "color: #334155;",
+        "taskList": "list-style: none; padding-left: 0; color: #334155;"
+      },
+      "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #216a52; background: #f3f8f5; color: #365248;",
+      "code": {
+        "header": {
+          "container": "margin-bottom: 6px; padding: 6px 10px; background: #e8f1eb;",
+          "dot": "display: none;",
+          "colors": [
+            "#216a52",
+            "#216a52",
+            "#216a52"
+          ]
+        },
+        "block": "margin: 1.2em 0; padding: 14px; background: #f7faf8; border: 1px solid #d9e6dd; color: #243b32;",
+        "inline": "padding: 1px 4px; background: #edf5ef; color: #216a52;"
+      },
+      "image": "border: 1px solid #d9e6dd; border-radius: 4px;",
+      "link": "color: #216a52; text-decoration: underline;",
+      "emphasis": {
+        "strong": "font-weight: 700; color: #183f31;",
+        "em": "color: #476457;",
+        "del": "color: #94a3b8;"
+      },
+      "table": {
+        "container": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #216a52;",
+        "header": "padding: 10px; background: #f3f8f5; color: #183f31; border-bottom: 1px solid #cfe0d4;",
+        "cell": "padding: 10px; border-bottom: 1px solid #e1ebe4; color: #334155;"
+      },
+      "hr": "margin: 28px 0; border: 0; border-top: 1px solid #d9e6dd;",
+      "footnote": {
+        "ref": "color: #216a52;",
+        "backref": "color: #216a52;"
+      }
+    }
+  },
+  "default": {
+    "id": "default",
+    "name": "通用长文",
+    "description": "中性、稳定的正文框架，适合通知、文章初稿与常规长文。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background: #ffffff; padding: 0; color: #334155;",
+      "accentColor": "#475569",
+      "title": {
+        "h1": {
+          "base": "margin: 28px 0 20px; font-size: 1.78em; padding-bottom: 10px; border-bottom: 1px solid #cbd5e1;",
+          "content": "font-weight: 700; color: #1f2937;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin: 28px 0 12px; font-size: 1.34em;",
+          "content": "font-weight: 700; color: #1f2937;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin: 22px 0 10px; font-size: 1.15em;",
+          "content": "font-weight: 700; color: #475569;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin: 18px 0 8px; font-size: 1em;",
+          "content": "font-weight: 700; color: #475569;",
+          "after": ""
+        }
+      },
+      "paragraph": "color: #334155;",
+      "list": {
+        "container": "padding-left: 1.45em; color: #334155;",
+        "item": "color: #334155;",
+        "taskList": "list-style: none; padding-left: 0; color: #334155;"
+      },
+      "quote": "margin: 1.1em 0; padding: 10px 14px; border-left: 2px solid #94a3b8; background: #f8fafc; color: #475569;",
+      "code": {
+        "header": {
+          "container": "margin-bottom: 6px; padding: 6px 10px; background: #eef2f7;",
+          "dot": "display: none;",
+          "colors": [
+            "#475569",
+            "#475569",
+            "#475569"
+          ]
+        },
+        "block": "margin: 1.2em 0; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; color: #334155;",
+        "inline": "padding: 1px 4px; background: #f1f5f9; color: #334155;"
+      },
+      "image": "border: 1px solid #e2e8f0; border-radius: 4px;",
+      "link": "color: #334155; text-decoration: underline;",
+      "emphasis": {
+        "strong": "font-weight: 700; color: #1f2937;",
+        "em": "color: #475569;",
+        "del": "color: #94a3b8;"
+      },
+      "table": {
+        "container": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #475569;",
+        "header": "padding: 10px; background: #f8fafc; color: #1f2937; border-bottom: 1px solid #dbe3ec;",
+        "cell": "padding: 10px; border-bottom: 1px solid #e2e8f0; color: #334155;"
+      },
+      "hr": "margin: 28px 0; border: 0; border-top: 1px solid #e2e8f0;",
+      "footnote": {
+        "ref": "color: #475569;",
+        "backref": "color: #475569;"
+      }
+    }
+  },
+  "modern-report": {
+    "id": "modern-report",
+    "name": "报告与复盘",
+    "description": "高对比但不过度装饰，适合周报、复盘、数据说明与阶段总结。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background: #ffffff; padding: 0; color: #30343b;",
+      "accentColor": "#252b36",
+      "title": {
+        "h1": {
+          "base": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 3px solid #252b36;",
+          "content": "font-weight: 700; color: #17191d;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin: 26px 0 12px; padding: 8px 12px; border-left: 4px solid #252b36; background: #f4f5f7; font-size: 1.35em;",
+          "content": "font-weight: 700; color: #17191d;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin: 22px 0 10px; font-size: 1.15em;",
+          "content": "font-weight: 700; color: #30343b;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin: 18px 0 8px; font-size: 1em;",
+          "content": "font-weight: 700; color: #30343b;",
+          "after": ""
+        }
+      },
+      "paragraph": "color: #30343b;",
+      "list": {
+        "container": "padding-left: 1.45em; color: #30343b;",
+        "item": "color: #30343b;",
+        "taskList": "list-style: none; padding-left: 0; color: #30343b;"
+      },
+      "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #252b36; background: #f7f7f8; color: #4b5563;",
+      "code": {
+        "header": {
+          "container": "margin-bottom: 6px; padding: 6px 10px; background: #e9ebef;",
+          "dot": "display: none;",
+          "colors": [
+            "#252b36",
+            "#252b36",
+            "#252b36"
+          ]
+        },
+        "block": "margin: 1.2em 0; padding: 14px; background: #f4f5f7; border: 1px solid #d9dde4; color: #252b36;",
+        "inline": "padding: 1px 4px; background: #eceef1; color: #252b36;"
+      },
+      "image": "border: 1px solid #d9dde4; border-radius: 2px;",
+      "link": "color: #252b36; text-decoration: underline;",
+      "emphasis": {
+        "strong": "font-weight: 700; color: #17191d;",
+        "em": "color: #4b5563;",
+        "del": "color: #9ca3af;"
+      },
+      "table": {
+        "container": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #252b36;",
+        "header": "padding: 10px; background: #252b36; color: #ffffff; border-bottom: 1px solid #252b36;",
+        "cell": "padding: 10px; border-bottom: 1px solid #d9dde4; color: #30343b;"
+      },
+      "hr": "margin: 28px 0; border: 0; border-top: 1px solid #d9dde4;",
+      "footnote": {
+        "ref": "color: #252b36;",
+        "backref": "color: #252b36;"
+      }
+    }
+  },
+  "zen-essence": {
+    "id": "zen-essence",
+    "name": "留白随笔",
+    "description": "温和留白与低饱和墨色，适合随笔、生活方式与沉静阅读。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background: #ffffff; padding: 0; color: #5d625d;",
+      "accentColor": "#79836f",
+      "title": {
+        "h1": {
+          "base": "margin: 34px 0 26px; font-size: 1.72em;",
+          "content": "font-weight: 700; color: #3f463d;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin: 30px 0 14px; font-size: 1.32em;",
+          "content": "font-weight: 700; color: #4e584a;",
+          "after": "display: block; width: 24px; height: 1px; margin-top: 9px; background: #79836f;"
+        },
+        "h3": {
+          "base": "margin: 24px 0 10px; font-size: 1.12em;",
+          "content": "font-weight: 700; color: #65705f;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin: 18px 0 8px; font-size: 1em;",
+          "content": "font-weight: 700; color: #65705f;",
+          "after": ""
+        }
+      },
+      "paragraph": "color: #5d625d;",
+      "list": {
+        "container": "padding-left: 1.45em; color: #5d625d;",
+        "item": "color: #5d625d;",
+        "taskList": "list-style: none; padding-left: 0; color: #5d625d;"
+      },
+      "quote": "margin: 1.7em 0; padding: 18px 0; border-top: 1px solid #cfd5ca; border-bottom: 1px solid #cfd5ca; color: #4e584a;",
+      "code": {
+        "header": {
+          "container": "display: none;",
+          "dot": "display: none;",
+          "colors": [
+            "#79836f",
+            "#79836f",
+            "#79836f"
+          ]
+        },
+        "block": "margin: 1.3em 0; padding: 14px; background: #fafbf9; border: 1px solid #e2e6de; color: #4e584a;",
+        "inline": "padding: 1px 4px; background: #f2f4ef; color: #65705f;"
+      },
+      "image": "border: 0; border-radius: 0;",
+      "link": "color: #65705f; text-decoration: underline;",
+      "emphasis": {
+        "strong": "font-weight: 700; color: #3f463d;",
+        "em": "color: #687065;",
+        "del": "color: #aeb7a7;"
+      },
+      "table": {
+        "container": "margin: 1.3em 0; border-collapse: collapse; border-top: 1px solid #aeb7a7;",
+        "header": "padding: 10px; color: #4e584a; border-bottom: 1px solid #dce1d7;",
+        "cell": "padding: 10px; border-bottom: 1px solid #e7ebe3; color: #5d625d;"
+      },
+      "hr": "margin: 32px 0; border: 0; border-top: 1px solid #dce1d7;",
+      "footnote": {
+        "ref": "color: #79836f;",
+        "backref": "color: #79836f;"
+      }
+    }
+  },
+  "deep-reading": {
+    "id": "deep-reading",
+    "name": "深度阅读",
+    "description": "更少装饰、更强文字层级，适合叙事、访谈与深度长文。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#202124;",
+      "accentColor": "#202124",
+      "title": {
+        "h1": {
+          "base": "margin:34px 0 24px;font-size:1.9em;",
+          "content": "font-weight:700;color:#111111;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:38px 0 16px;padding-top:8px;border-top:1px solid #e5e7eb;font-size:1.38em;",
+          "content": "font-weight:700;color:#111111;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:24px 0 10px;font-size:1.16em;",
+          "content": "font-weight:700;color:#303134;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:18px 0 8px;font-size:1em;",
+          "content": "font-weight:700;color:#4b5563;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#202124;",
+      "list": {
+        "container": "padding-left:1.45em;color:#202124;",
+        "item": "color:#202124;",
+        "taskList": "list-style:none;padding-left:0;color:#202124;"
+      },
+      "quote": "margin:1.6em 0;padding:16px 0;border-top:1px solid #d1d5db;border-bottom:1px solid #d1d5db;color:#3f454d;",
+      "code": {
+        "header": {
+          "container": "display:none;",
+          "dot": "display:none;",
+          "colors": [
+            "#202124",
+            "#202124",
+            "#202124"
+          ]
+        },
+        "block": "margin:1.3em 0;padding:14px;background:#f6f8fa;border:1px solid #e5e7eb;color:#202124;",
+        "inline": "padding:1px 4px;background:#f3f4f6;color:#202124;"
+      },
+      "image": "border:0;border-radius:0;",
+      "link": "color:#202124;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:700;color:#111111;",
+        "em": "color:#4b5563;",
+        "del": "color:#9ca3af;"
+      },
+      "table": {
+        "container": "margin:1.3em 0;border-collapse:collapse;border-top:1px solid #202124;",
+        "header": "padding:10px;color:#111111;border-bottom:1px solid #d1d5db;",
+        "cell": "padding:10px;border-bottom:1px solid #e5e7eb;color:#202124;"
+      },
+      "hr": "margin:34px 0;border:0;border-top:1px solid #d1d5db;",
+      "footnote": {
+        "ref": "color:#4b5563;",
+        "backref": "color:#4b5563;"
+      }
+    }
+  },
+  "minimal": {
+    "id": "minimal",
+    "name": "观点与评论",
+    "description": "石墨灰层级，适合观点、评论与克制的专业表达。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background: #ffffff; padding: 0; color: #3f3f46;",
+      "accentColor": "#3f3f46",
+      "title": {
+        "h1": {
+          "base": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 1px solid #a1a1aa;",
+          "content": "font-weight: 700; color: #18181b;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin: 26px 0 12px; font-size: 1.38em;",
+          "content": "font-weight: 700; color: #18181b;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin: 22px 0 10px; font-size: 1.15em;",
+          "content": "font-weight: 700; color: #3f3f46;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin: 18px 0 8px; font-size: 1em;",
+          "content": "font-weight: 700; color: #52525b;",
+          "after": ""
+        }
+      },
+      "paragraph": "color: #3f3f46;",
+      "list": {
+        "container": "padding-left: 1.45em; color: #3f3f46;",
+        "item": "color: #3f3f46;",
+        "taskList": "list-style: none; padding-left: 0; color: #3f3f46;"
+      },
+      "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 3px solid #71717a; background: #fafafa; color: #52525b;",
+      "code": {
+        "header": {
+          "container": "display: none;",
+          "dot": "display: none;",
+          "colors": [
+            "#52525b",
+            "#52525b",
+            "#52525b"
+          ]
+        },
+        "block": "margin: 1.2em 0; padding: 14px; background: #fafafa; border: 1px solid #e4e4e7; color: #27272a;",
+        "inline": "padding: 1px 4px; background: #f4f4f5; color: #3f3f46;"
+      },
+      "image": "border: 0; border-radius: 0;",
+      "link": "color: #27272a; text-decoration: underline;",
+      "emphasis": {
+        "strong": "font-weight: 700; color: #18181b;",
+        "em": "color: #52525b;",
+        "del": "color: #a1a1aa;"
+      },
+      "table": {
+        "container": "margin: 1.2em 0; border-collapse: collapse; border-top: 1px solid #71717a;",
+        "header": "padding: 10px; color: #18181b; border-bottom: 1px solid #d4d4d8;",
+        "cell": "padding: 10px; border-bottom: 1px solid #e4e4e7; color: #3f3f46;"
+      },
+      "hr": "margin: 28px 0; border: 0; border-top: 1px solid #d4d4d8;",
+      "footnote": {
+        "ref": "color: #52525b;",
+        "backref": "color: #52525b;"
+      }
+    }
+  },
+  "warm-paper": {
+    "id": "warm-paper",
+    "name": "暖纸散文",
+    "description": "暖色纸感与轻引用，适合生活记录、书信和个人故事。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#3a332c;",
+      "accentColor": "#805c46",
+      "title": {
+        "h1": {
+          "base": "margin:34px 0 26px;padding:0 0 12px;border-bottom:1px solid #d9c5ae;font-size:1.78em;",
+          "content": "font-weight:600;color:#47372b;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:38px 0 16px;padding-left:10px;border-left:2px solid #a17a57;font-size:1.28em;",
+          "content": "font-weight:600;color:#47372b;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:28px 0 12px;font-size:1.1em;",
+          "content": "font-weight:600;color:#6b4b37;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:22px 0 9px;font-size:1em;",
+          "content": "font-weight:600;color:#6b4b37;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#3a332c;",
+      "list": {
+        "container": "padding-left:1.45em;color:#805c46;",
+        "item": "color:#3a332c;",
+        "taskList": "list-style:none;padding-left:0;color:#3a332c;"
+      },
+      "quote": "margin:1.5em 0;padding:16px 18px;background:#fbf6ef;border-top:1px solid #d9c5ae;border-bottom:1px solid #d9c5ae;color:#594638;",
+      "code": {
+        "header": {
+          "container": "margin-bottom:6px;padding:6px 10px;background:#f2ebe2;",
+          "dot": "display:none;",
+          "colors": [
+            "#805c46",
+            "#805c46",
+            "#805c46"
+          ]
+        },
+        "block": "margin:1.2em 0;padding:14px;background:#faf6f0;border:1px solid #e2d4c3;color:#3a332c;",
+        "inline": "padding:1px 4px;background:#f5ece1;color:#614632;"
+      },
+      "image": "padding:5px;border:1px solid #e2d4c3;",
+      "link": "color:#614632;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:700;color:#47372b;",
+        "em": "color:#6b4b37;",
+        "del": "color:#77685b;"
+      },
+      "table": {
+        "container": "margin:1.3em 0;border-collapse:collapse;border-top:1px solid #c8aa8d;",
+        "header": "padding:10px;background:#fbf6ef;color:#47372b;border-bottom:1px solid #c8aa8d;",
+        "cell": "padding:10px;border-bottom:1px solid #e2d4c3;color:#3a332c;"
+      },
+      "hr": "margin:38px 0;border:0;border-top:1px solid #d9c5ae;",
+      "footnote": {
+        "ref": "color:#614632;",
+        "backref": "color:#614632;"
+      }
+    }
+  },
+  "apple-product": {
+    "id": "apple-product",
+    "name": "产品叙事",
+    "description": "清透的产品说明层级，适合产品介绍、工具评测与品牌内容。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background: #ffffff; padding: 0; color: #374151;",
+      "accentColor": "#0a84ff",
+      "title": {
+        "h1": {
+          "base": "margin: 32px 0 24px; font-size: 1.82em;",
+          "content": "font-weight: 700; color: #111827;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin: 32px 0 14px; padding-bottom: 8px; border-bottom: 1px solid #dbeafe; font-size: 1.34em;",
+          "content": "font-weight: 700; color: #111827;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin: 22px 0 10px; font-size: 1.15em;",
+          "content": "font-weight: 700; color: #0066cc;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin: 18px 0 8px; font-size: 1em;",
+          "content": "font-weight: 700; color: #1f2937;",
+          "after": ""
+        }
+      },
+      "paragraph": "color: #374151;",
+      "list": {
+        "container": "padding-left: 1.45em; color: #374151;",
+        "item": "color: #374151;",
+        "taskList": "list-style: none; padding-left: 0; color: #374151;"
+      },
+      "quote": "margin: 1.3em 0; padding: 12px 0 12px 16px; border-left: 2px solid #0a84ff; color: #374151;",
+      "code": {
+        "header": {
+          "container": "margin-bottom: 6px; padding: 6px 10px; background: #edf5ff;",
+          "dot": "display: none;",
+          "colors": [
+            "#0a84ff",
+            "#0a84ff",
+            "#0a84ff"
+          ]
+        },
+        "block": "margin: 1.2em 0; padding: 14px; background: #f8fafc; border: 1px solid #dbeafe; color: #1f2937;",
+        "inline": "padding: 1px 4px; background: #eff6ff; color: #0a84ff;"
+      },
+      "image": "border: 1px solid #dbeafe; border-radius: 8px;",
+      "link": "color: #0a84ff; text-decoration: underline;",
+      "emphasis": {
+        "strong": "font-weight: 700; color: #111827;",
+        "em": "color: #4b5563;",
+        "del": "color: #9ca3af;"
+      },
+      "table": {
+        "container": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #0a84ff;",
+        "header": "padding: 10px; background: #f4f8ff; color: #111827; border-bottom: 1px solid #bfdbfe;",
+        "cell": "padding: 10px; border-bottom: 1px solid #e5edf8; color: #374151;"
+      },
+      "hr": "margin: 28px 0; border: 0; border-top: 1px solid #dbeafe;",
+      "footnote": {
+        "ref": "color: #0a84ff;",
+        "backref": "color: #0a84ff;"
+      }
+    }
+  },
+  "eastern-notes": {
+    "id": "eastern-notes",
+    "name": "东方笺谱",
+    "description": "纸笺般的温润低饱和色调，适合文化随笔、读书与生活记录。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#4b4239;",
+      "accentColor": "#8a6248",
+      "title": {
+        "h1": {
+          "base": "margin:34px 0 22px;padding-bottom:14px;border-bottom:1px solid #c9b8a5;font-size:1.78em;",
+          "content": "font-weight:700;color:#40362e;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:30px 0 14px;padding-left:10px;border-left:3px solid #8a6248;font-size:1.34em;",
+          "content": "font-weight:700;color:#5b4435;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:24px 0 10px;font-size:1.13em;",
+          "content": "font-weight:700;color:#8a6248;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:18px 0 8px;font-size:1em;",
+          "content": "font-weight:700;color:#725645;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#4b4239;",
+      "list": {
+        "container": "padding-left:1.45em;color:#8a6248;",
+        "item": "color:#4b4239;",
+        "taskList": "list-style:none;padding-left:0;color:#4b4239;"
+      },
+      "quote": "margin:1.3em 0;padding:16px 18px;border-left:3px solid #c9b8a5;background:#fcfaf7;color:#66574b;",
+      "code": {
+        "header": {
+          "container": "display:none;",
+          "dot": "display:none;",
+          "colors": [
+            "#8a6248",
+            "#8a6248",
+            "#8a6248"
+          ]
+        },
+        "block": "margin:1.3em 0;padding:14px;background:#fcfaf7;border:1px solid #e6ddd3;color:#4b4239;",
+        "inline": "padding:1px 4px;background:#f6f0e9;color:#725645;"
+      },
+      "image": "border:1px solid #e6ddd3;border-radius:2px;",
+      "link": "color:#725645;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:700;color:#40362e;",
+        "em": "color:#725645;",
+        "del": "color:#b8a99a;"
+      },
+      "table": {
+        "container": "margin:1.3em 0;border-collapse:collapse;border-top:1px solid #8a6248;",
+        "header": "padding:10px;background:#f8f2eb;color:#5b4435;border-bottom:1px solid #dfd1c2;",
+        "cell": "padding:10px;border-bottom:1px solid #eee5dc;color:#4b4239;"
+      },
+      "hr": "margin:32px 0;border:0;border-top:1px solid #dfd1c2;",
+      "footnote": {
+        "ref": "color:#8a6248;",
+        "backref": "color:#8a6248;"
+      }
+    }
+  },
+  "knowledge-notes": {
+    "id": "knowledge-notes",
+    "name": "纸面笔记",
+    "description": "纸面注释与柔和信息块，适合知识解释和轻教程。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#293c39;",
+      "accentColor": "#355f59",
+      "title": {
+        "h1": {
+          "base": "margin:28px 0 22px;padding:0 0 14px;border-bottom:1px solid #b9cec8;font-size:1.72em;",
+          "content": "font-weight:700;color:#203a36;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:30px 0 14px;padding:10px 12px;background:#edf5f2;border-left:3px solid #355f59;font-size:1.28em;",
+          "content": "font-weight:700;color:#254b45;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:24px 0 10px;padding-left:10px;border-left:1px solid #729990;font-size:1.1em;",
+          "content": "font-weight:700;color:#355f59;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:18px 0 8px;font-size:1em;",
+          "content": "font-weight:700;color:#355f59;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#293c39;",
+      "list": {
+        "container": "padding-left:1.55em;color:#355f59;",
+        "item": "color:#293c39;",
+        "taskList": "list-style:none;padding-left:0;color:#293c39;"
+      },
+      "quote": "margin:1.2em 0;padding:14px 16px;background:#f5f8f6;border-left:2px solid #9bb8af;color:#344b45;",
+      "code": {
+        "header": {
+          "container": "margin-bottom:6px;padding:6px 10px;background:#eaf1ee;",
+          "dot": "display:none;",
+          "colors": [
+            "#355f59",
+            "#355f59",
+            "#355f59"
+          ]
+        },
+        "block": "margin:1.2em 0;padding:14px;background:#f4f7f5;border:1px solid #d6e2dd;color:#203a36;",
+        "inline": "padding:1px 4px;background:#edf3f0;color:#254b45;"
+      },
+      "image": "padding:4px;border-bottom:1px solid #b9cec8;",
+      "link": "color:#254b45;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:700;color:#203a36;",
+        "em": "color:#48635b;",
+        "del": "color:#677d76;"
+      },
+      "table": {
+        "container": "margin:1.2em 0;border-collapse:collapse;border-top:1px solid #9bb8af;",
+        "header": "padding:9px;background:#edf5f2;color:#203a36;border-bottom:1px solid #9bb8af;",
+        "cell": "padding:9px;border-bottom:1px solid #d6e2dd;color:#293c39;"
+      },
+      "hr": "margin:30px 0;border:0;border-top:1px dashed #9bb8af;",
+      "footnote": {
+        "ref": "color:#254b45;",
+        "backref": "color:#254b45;"
+      }
+    }
+  },
+  "academic-pro": {
+    "id": "academic-pro",
+    "name": "教程与知识",
+    "description": "清晰的章节边界，适合教程、方法论、知识整理与技术说明。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background: #ffffff; padding: 0; color: #26384a;",
+      "accentColor": "#285b92",
+      "title": {
+        "h1": {
+          "base": "margin: 28px 0 20px; font-size: 1.8em; padding-bottom: 12px; border-bottom: 2px solid #285b92;",
+          "content": "font-weight: 700; color: #1d3958;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin: 26px 0 12px; padding-left: 12px; border-left: 4px solid #285b92; font-size: 1.38em;",
+          "content": "font-weight: 700; color: #1d3958;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin: 22px 0 10px; font-size: 1.15em;",
+          "content": "font-weight: 700; color: #285b92;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin: 18px 0 8px; font-size: 1em;",
+          "content": "font-weight: 700; color: #385a7b;",
+          "after": ""
+        }
+      },
+      "paragraph": "color: #334155;",
+      "list": {
+        "container": "padding-left: 1.45em; color: #334155;",
+        "item": "color: #334155;",
+        "taskList": "list-style: none; padding-left: 0; color: #334155;"
+      },
+      "quote": "margin: 1.1em 0; padding: 14px 16px; border-left: 4px solid #285b92; background: #f3f7fb; color: #3f5871;",
+      "code": {
+        "header": {
+          "container": "margin-bottom: 6px; padding: 6px 10px; background: #eaf1f8;",
+          "dot": "display: none;",
+          "colors": [
+            "#285b92",
+            "#285b92",
+            "#285b92"
+          ]
+        },
+        "block": "margin: 1.2em 0; padding: 14px; background: #f7f9fc; border: 1px solid #d9e3ef; color: #26384a;",
+        "inline": "padding: 1px 4px; background: #edf3f9; color: #285b92;"
+      },
+      "image": "border: 1px solid #d9e3ef; border-radius: 4px;",
+      "link": "color: #285b92; text-decoration: underline;",
+      "emphasis": {
+        "strong": "font-weight: 700; color: #1d3958;",
+        "em": "color: #536b84;",
+        "del": "color: #94a3b8;"
+      },
+      "table": {
+        "container": "margin: 1.2em 0; border-collapse: collapse; border-top: 2px solid #285b92;",
+        "header": "padding: 10px; background: #f3f7fb; color: #1d3958; border-bottom: 1px solid #cfdeec;",
+        "cell": "padding: 10px; border-bottom: 1px solid #e2e8f0; color: #334155;"
+      },
+      "hr": "margin: 28px 0; border: 0; border-top: 1px solid #d9e3ef;",
+      "footnote": {
+        "ref": "color: #285b92;",
+        "backref": "color: #285b92;"
+      }
+    }
+  },
+  "briefing-grid": {
+    "id": "briefing-grid",
+    "name": "轻量简报",
+    "description": "以浅色分区和紧凑表格呈现周报与项目复盘。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#273848;",
+      "accentColor": "#355a72",
+      "title": {
+        "h1": {
+          "base": "margin:28px 0 24px;padding:0 0 10px;border-bottom:1px solid #91adbd;font-size:1.7em;",
+          "content": "font-weight:700;color:#223f52;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:30px 0 13px;padding:8px 10px;background:#edf3f6;border-left:3px solid #355a72;font-size:1.25em;",
+          "content": "font-weight:700;color:#223f52;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:23px 0 9px;padding-bottom:5px;border-bottom:1px dashed #91adbd;font-size:1.08em;",
+          "content": "font-weight:700;color:#355a72;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:18px 0 8px;font-size:1em;",
+          "content": "font-weight:700;color:#355a72;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#273848;",
+      "list": {
+        "container": "padding-left:1.45em;color:#355a72;",
+        "item": "color:#273848;",
+        "taskList": "list-style:none;padding-left:0;color:#273848;"
+      },
+      "quote": "margin:1.1em 0;padding:12px 14px;background:#f3f7f8;border-left:2px solid #91adbd;color:#344d5d;",
+      "code": {
+        "header": {
+          "container": "margin-bottom:6px;padding:6px 10px;background:#e9f0f4;",
+          "dot": "display:none;",
+          "colors": [
+            "#355a72",
+            "#355a72",
+            "#355a72"
+          ]
+        },
+        "block": "margin:1.2em 0;padding:14px;background:#f2f6f8;border:1px solid #c9d8e0;color:#273848;",
+        "inline": "padding:1px 4px;background:#e9f0f4;color:#294b60;"
+      },
+      "image": "border:1px solid #c9d8e0;border-radius:2px;",
+      "link": "color:#294b60;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:700;color:#223f52;",
+        "em": "color:#466173;",
+        "del": "color:#677d89;"
+      },
+      "table": {
+        "container": "margin:1.1em 0;border-collapse:collapse;border-top:1px solid #91adbd;",
+        "header": "padding:8px;background:#edf3f6;color:#223f52;border-bottom:1px solid #91adbd;",
+        "cell": "padding:8px;border-bottom:1px solid #d5e0e5;color:#273848;"
+      },
+      "hr": "margin:28px 0;border:0;border-top:1px dashed #91adbd;",
+      "footnote": {
+        "ref": "color:#294b60;",
+        "backref": "color:#294b60;"
+      }
+    }
+  },
+  "olive-journal": {
+    "id": "olive-journal",
+    "name": "橄榄手记",
+    "description": "黑灰正文配橙色编辑标记，适合案例复盘、内刊与系统性说明。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#303236;",
+      "accentColor": "#ed7b2f",
+      "title": {
+        "h1": {
+          "base": "margin:28px 0 22px;padding-bottom:12px;border-bottom:1px solid #1e1f23;font-size:1.82em;",
+          "content": "font-weight:700;color:#1e1f23;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:30px 0 14px;padding:8px 12px;border-left:3px solid #ed7b2f;background:#fff8f2;font-size:1.38em;",
+          "content": "font-weight:700;color:#1e1f23;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:22px 0 10px;font-size:1.15em;",
+          "content": "font-weight:700;color:#a94b0a;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:18px 0 8px;font-size:1em;",
+          "content": "font-weight:700;color:#45474d;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#303236;",
+      "list": {
+        "container": "padding-left:1.45em;color:#ed7b2f;",
+        "item": "color:#303236;",
+        "taskList": "list-style:none;padding-left:0;color:#303236;"
+      },
+      "quote": "margin:1.2em 0;padding:15px 17px;border-left:4px solid #ed7b2f;background:#fff8f2;color:#505158;",
+      "code": {
+        "header": {
+          "container": "margin-bottom:6px;padding:6px 10px;background:#1e1f23;",
+          "dot": "display:none;",
+          "colors": [
+            "#ed7b2f",
+            "#ed7b2f",
+            "#ed7b2f"
+          ]
+        },
+        "block": "margin:1.2em 0;padding:14px;background:#25262b;border-top:4px solid #ed7b2f;color:#f2f3f5;",
+        "inline": "padding:1px 4px;background:#f8eee6;color:#b95114;"
+      },
+      "image": "border:1px solid #dedfe2;border-radius:2px;",
+      "link": "color:#b95114;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:700;color:#1e1f23;",
+        "em": "color:#505158;",
+        "del": "color:#9ca3af;"
+      },
+      "table": {
+        "container": "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #1e1f23;",
+        "header": "padding:10px;background:#1e1f23;color:#ffffff;border-bottom:1px solid #1e1f23;",
+        "cell": "padding:10px;border-bottom:1px solid #dedfe2;color:#303236;"
+      },
+      "hr": "margin:30px 0;border:0;border-top:1px solid #dedfe2;",
+      "footnote": {
+        "ref": "color:#b95114;",
+        "backref": "color:#b95114;"
+      }
+    }
+  },
+  "data-blueprint": {
+    "id": "data-blueprint",
+    "name": "数据蓝图",
+    "description": "深蓝数据层级与暖色标记，适合数据分析、经营复盘与报告。",
+    "source": "yh-mp-preview",
+    "styles": {
+      "container": "background:#ffffff;padding:0;color:#203047;",
+      "accentColor": "#173f7a",
+      "title": {
+        "h1": {
+          "base": "margin:24px 0 22px;padding:10px;background:#102b4e;font-size:1.43em;",
+          "content": "font-weight:700;color:#ffffff;",
+          "after": ""
+        },
+        "h2": {
+          "base": "margin:30px 0 14px;padding-bottom:8px;border-bottom:2px solid #173f7a;font-size:1.38em;",
+          "content": "font-weight:700;color:#173f7a;",
+          "after": ""
+        },
+        "h3": {
+          "base": "margin:24px 0 10px;padding:5px 8px;border-left:2px solid #a84317;background:#f5f7fa;font-size:1.08em;",
+          "content": "font-weight:700;color:#173f7a;",
+          "after": ""
+        },
+        "base": {
+          "base": "margin:18px 0 8px;font-size:1em;",
+          "content": "font-weight:700;color:#365777;",
+          "after": ""
+        }
+      },
+      "paragraph": "color:#203047;",
+      "list": {
+        "container": "padding-left:1.45em;color:#a84317;",
+        "item": "color:#203047;",
+        "taskList": "list-style:none;padding-left:0;color:#203047;"
+      },
+      "quote": "margin:1.2em 0;padding:14px 16px;border-top:1px solid #7790ac;border-bottom:1px solid #7790ac;color:#314765;",
+      "code": {
+        "header": {
+          "container": "margin-bottom:6px;padding:6px 10px;background:#13233a;",
+          "dot": "display:none;",
+          "colors": [
+            "#a84317",
+            "#a84317",
+            "#a84317"
+          ]
+        },
+        "block": "margin:1.2em 0;padding:14px;background:#13233a;border-top:5px solid #a84317;color:#eaf1f8;",
+        "inline": "padding:1px 4px;background:#eef3f8;color:#174f8f;"
+      },
+      "image": "padding:4px;border:1px solid #aebdce;border-radius:0;",
+      "link": "color:#175da8;text-decoration:underline;",
+      "emphasis": {
+        "strong": "font-weight:700;color:#142e55;",
+        "em": "color:#536a84;",
+        "del": "color:#94a3b8;"
+      },
+      "table": {
+        "container": "margin:1.2em 0;border-collapse:collapse;border-top:2px solid #173f7a;",
+        "header": "padding:10px;background:#173f7a;color:#ffffff;border-bottom:1px solid #173f7a;",
+        "cell": "padding:10px;border-bottom:1px solid #d8e1eb;color:#203047;"
+      },
+      "hr": "margin:30px 0;border:0;border-top:1px solid #aebdce;",
+      "footnote": {
+        "ref": "color:#175da8;",
+        "backref": "color:#175da8;"
+      }
+    }
+  }
+}

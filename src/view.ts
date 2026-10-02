@@ -18,7 +18,9 @@ import { handleImageAltEdit } from './ui/ImageAltModal';
 import { applyArticleRecipe, resetArticleRecipe } from './core/recipe/articleRecipeFormatter';
 import { normalizeArticleText } from './core/render/articleText';
 import { prepareLegacyWechatFragment } from './core/render/legacyWechatPipeline';
-import { resolveWechatPalette } from './core/theme/wechatPalette';
+import { resolveWechatAppearance, snapshotAppearance, appearanceConflictKey, type ResolvedWechatAppearance } from './core/theme/wechatAppearance';
+import { capturePreviewAnchor, restorePreviewAnchor } from './core/render/previewAnchor';
+import { galleryExampleMarkdown } from './ui/themeGalleryPreview';
 import type { ValidationReport } from './core/validation/wechatHtmlValidator';
 // @ts-ignore - html2canvas has no type declarations
 import html2canvas from 'html2canvas';
@@ -53,6 +55,15 @@ export class MPView extends ItemView {
 
     private fontSizeSelect: HTMLInputElement;
     private backgroundManager: BackgroundManager;
+    private gallery: ThemeGalleryModal | null = null;
+    private galleryBaseline: HTMLElement | null = null;
+    private galleryLastPaint = '';
+    private galleryObserver: MutationObserver | null = null;
+    private trialAppearance: ResolvedWechatAppearance | null = null;
+
+    private getActiveWechatAppearance(): ResolvedWechatAppearance {
+        return this.trialAppearance ?? resolveWechatAppearance(this.settingsManager.getSettings(), this.getActiveWechatTemplateId());
+    }
 
     private getActiveWechatTemplateId(): string {
         return this.trialTemplateId || this.settingsManager.getSettings().templateId;
@@ -67,7 +78,15 @@ export class MPView extends ItemView {
     private applyThemeTrial(templateId: string): void {
         const savedId = this.settingsManager.getSettings().templateId;
         this.trialTemplateId = templateId === savedId ? null : templateId;
+        this.trialAppearance = resolveWechatAppearance(this.settingsManager.getSettings(),templateId);
+        const article = this.previewEl.querySelector<HTMLElement>('.mp-content-section');
+        const anchor = article ? capturePreviewAnchor(this.previewEl, article) : null;
+        if (this.galleryBaseline && article) article.replaceWith(this.galleryBaseline.cloneNode(true));
         this.applyPresentation(this.previewEl);
+        const nextArticle = this.previewEl.querySelector<HTMLElement>('.mp-content-section');
+        if (anchor && nextArticle) restorePreviewAnchor(this.previewEl, nextArticle, anchor);
+        this.galleryLastPaint = nextArticle?.outerHTML ?? '';
+        this.galleryObserver?.takeRecords();
         this.refreshValidationReport();
     }
 
@@ -87,24 +106,25 @@ export class MPView extends ItemView {
     }
 
     async onClose(): Promise<void> {
+        this.gallery?.invalidate(); this.galleryObserver?.disconnect(); this.galleryObserver = null;
         this.session.close(); this.exportController.abort();
         if(this.updateTimer) window.clearTimeout(this.updateTimer);
         this.renderComponent?.unload(); this.renderComponent=null;
     }
 
-    private applyPresentation(host: HTMLElement): void {
+    private applyPresentation(host: HTMLElement, themeId = this.getActiveWechatTemplateId()): void {
         const section=host.querySelector<HTMLElement>('.mp-content-section');
         if(!section) return;
         resetArticleRecipe(section);
         const settings=this.settingsManager.getSettings();
-        const themeId=this.getActiveWechatTemplateId();
+        const appearance=this.trialAppearance?.reference.id === themeId ? this.trialAppearance : resolveWechatAppearance(settings,themeId);
         this.templateManager.setCurrentTemplate(themeId);
         this.templateManager.setFont(settings.fontFamily);
         this.templateManager.setFontSize(settings.fontSize);
-        this.templateManager.applyTemplate(host);
+        this.templateManager.applyTemplate(host,appearance.template);
         this.backgroundManager.setBackground(settings.backgroundId);
         this.backgroundManager.applyBackground(host);
-        applyArticleRecipe(section,settings.v3.selectedRecipeId,resolveWechatPalette(this.settingsManager.getTemplate(themeId)));
+        applyArticleRecipe(section,settings.v3.selectedRecipeId,appearance.palette);
         normalizeArticleText(section);
     }
 
@@ -486,7 +506,7 @@ export class MPView extends ItemView {
                     const validation = await CopyManager.copyToClipboard(this.previewEl, {
                         themeId,
                         recipeId: copySettings.v3.selectedRecipeId,
-                        palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId)),
+                        palette: this.getActiveWechatAppearance().palette,
                     }, {signal:this.exportController.signal});
                     this.copyButton.setText(validation.warnings > 0
                         ? `复制成功（${validation.warnings} 项兼容性提示）`
@@ -558,7 +578,7 @@ export class MPView extends ItemView {
         this.validationReport = prepareLegacyWechatFragment(contentSection, {
             themeId,
             recipeId: settings.v3.selectedRecipeId,
-            palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId)),
+            palette: this.getActiveWechatAppearance().palette,
         }).validation;
         this.renderValidationReport();
         this.copyButton.disabled = this.validationReport.errors > 0;
@@ -570,6 +590,7 @@ export class MPView extends ItemView {
     }
 
     private async saveCurrentSnapshot(): Promise<void> {
+        if (this.gallery || this.trialTemplateId) { new Notice('请先在画廊确认应用主题，再保存快照。'); return; }
         if (!this.currentFile) {
             new Notice('请先打开一篇 Markdown 笔记');
             return;
@@ -580,6 +601,7 @@ export class MPView extends ItemView {
         const settings = this.settingsManager.getSettings();
         const validation = this.refreshValidationReport() || { errors: 0, warnings: 0 };
         const snapshot: LayoutSnapshot = {
+            appearance: snapshotAppearance(settings),
             id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
             createdAt: new Date().toISOString(),
             filePath: file.path,
@@ -596,6 +618,7 @@ export class MPView extends ItemView {
     }
 
     private async restoreLatestSnapshot(): Promise<void> {
+        this.gallery?.invalidate();
         const snapshot = this.settingsManager.getSettings().layoutSnapshots[0];
         if (!snapshot) {
             new Notice('尚无可恢复的排版快照');
@@ -663,7 +686,7 @@ export class MPView extends ItemView {
         try {
             const snapshot = (await CopyManager.prepareForExport(content, {
                 themeId:this.getActiveWechatTemplateId(), recipeId:this.settingsManager.getSettings().v3.selectedRecipeId,
-                palette:resolveWechatPalette(this.settingsManager.getTemplate(this.getActiveWechatTemplateId())),
+                palette:this.getActiveWechatAppearance().palette,
             },{signal:this.exportController.signal})).root;
             const computed = exportWindow.getComputedStyle(content);
             snapshot.setCssStyles({ cssText: snapshot.style.cssText + (`;${[
@@ -816,7 +839,7 @@ export class MPView extends ItemView {
             const prepared = await CopyManager.prepareForExport(contentSection, {
                 themeId,
                 recipeId: settings.v3.selectedRecipeId,
-                palette: resolveWechatPalette(this.settingsManager.getTemplate(themeId)),
+                palette: this.getActiveWechatAppearance().palette,
             },{signal:this.exportController.signal});
             if (prepared.validation.errors > 0) {
                 new Notice(`存在 ${prepared.validation.errors} 项阻断问题，无法导出 HTML`);
@@ -883,6 +906,7 @@ export class MPView extends ItemView {
     }
 
     async onFileOpen(file: TFile | null) {
+        this.gallery?.invalidate();
         this.session.invalidate();
         this.previewEl.removeAttribute('aria-busy');
         if (this.currentFile?.path !== file?.path) {
@@ -930,6 +954,7 @@ export class MPView extends ItemView {
     }
 
     private toggleEditMode() {
+        this.gallery?.invalidate();
         this.isEditMode = !this.isEditMode;
 
         if (this.isEditMode) {
@@ -1064,6 +1089,7 @@ export class MPView extends ItemView {
     }
 
     async updatePreview(): Promise<boolean> {
+        this.gallery?.invalidate();
         if (!this.currentFile) return false;
         const file=this.currentFile;
         const lease=this.session.begin();
@@ -1103,6 +1129,7 @@ export class MPView extends ItemView {
     }
 
     private toggleHeader() {
+        this.gallery?.invalidate();
         if(!this.settingsManager.getSettings().customHeader) { new Notice('请先在设置中填写自定义头部');return; }
         this.session.headerEnabled=!this.session.headerEnabled;
         this.previewEl.querySelector('.mp-custom-header')?.remove();
@@ -1110,6 +1137,7 @@ export class MPView extends ItemView {
     }
 
     private toggleFooter() {
+        this.gallery?.invalidate();
         if(!this.settingsManager.getSettings().customFooter) { new Notice('请先在设置中填写自定义尾部');return; }
         this.session.footerEnabled=!this.session.footerEnabled;
         this.previewEl.querySelector('.mp-custom-footer')?.remove();
@@ -1191,27 +1219,102 @@ export class MPView extends ItemView {
      * 打开主题画廊弹窗
      */
     private openThemeGallery() {
+        if (this.gallery) { new Notice('画廊仍在试用或保存，请先完成当前操作。'); return; }
+        const settings = this.settingsManager.getSettings();
         const currentTemplateId = this.settingsManager.getSettings().templateId;
-
+        const filePath = this.currentFile?.path ?? null;
+        const expectedKey = appearanceConflictKey(settings);
+        this.galleryBaseline = this.previewEl.querySelector<HTMLElement>('.mp-content-section')?.cloneNode(true) as HTMLElement | null;
+        this.galleryLastPaint = this.galleryBaseline?.outerHTML ?? '';
+        let valid = true;
+        let settled = false;
+        let examplePromise: Promise<HTMLElement> | null = null;
+        let component: Component | null = null;
+        let disposed = false;
+        const cleanup = (applied = false) => {
+            this.trialTemplateId = null;
+            this.trialAppearance = null;
+            if (applied && disposed) { this.applyPresentation(this.previewEl); this.refreshValidationReport(); }
+            if (!applied) {
+                const current = this.previewEl.querySelector<HTMLElement>('.mp-content-section');
+                const anchor = current ? capturePreviewAnchor(this.previewEl, current) : null;
+                if (current && this.galleryBaseline) current.replaceWith(this.galleryBaseline.cloneNode(true));
+                if (!valid || appearanceConflictKey(this.settingsManager.getSettings()) !== expectedKey) this.applyPresentation(this.previewEl);
+                const restored = this.previewEl.querySelector<HTMLElement>('.mp-content-section');
+                if (anchor && restored) restorePreviewAnchor(this.previewEl, restored, anchor);
+                this.galleryObserver?.takeRecords(); this.refreshValidationReport();
+            }
+            this.galleryBaseline = null;
+            this.galleryObserver?.disconnect(); this.galleryObserver = null;
+            this.gallery = null;
+        };
         const modal = new ThemeGalleryModal(
             this.app,
             this.settingsManager,
             currentTemplateId,
             // onSelect 回调
             async (templateId: string) => {
-                this.applyThemeTrial(templateId);
-                await this.settingsManager.updateSettings({ templateId });
-                this.trialTemplateId = null;
-
+                if (!valid || this.currentFile?.path !== (filePath ?? undefined) || appearanceConflictKey(this.settingsManager.getSettings()) !== expectedKey) throw new Error('文章或全局外观已变化，请重新打开画廊。');
+                const appearance = resolveWechatAppearance(settings, templateId);
+                await this.settingsManager.commitWechatAppearance(appearance.reference, appearance.preferences, expectedKey);
                 const template = this.settingsManager.getTemplate(templateId);
                 new Notice(`已应用主题: ${template?.name || templateId}`);
             },
             // previewCallback 回调 - 实时预览
             (templateId: string) => {
                 this.applyThemeTrial(templateId);
+            },
+            {
+                fontFamily: this.previewEl.ownerDocument.defaultView?.getComputedStyle(this.previewEl).fontFamily ?? settings.fontFamily,
+                fontSize: parseFloat(this.previewEl.ownerDocument.defaultView?.getComputedStyle(this.previewEl).fontSize ?? '') || settings.fontSize,
+                isValid: () => valid && (this.currentFile?.path ?? null) === filePath && (this.previewEl.querySelector('.mp-content-section')?.outerHTML ?? '') === this.galleryLastPaint,
+                cancel: () => { settled = true; cleanup(); },
+                settled: applied => { settled = true; cleanup(applied); },
+                disposed: () => {
+                    disposed = true; unsubscribe(); component?.unload(); component = null;
+                    this.galleryObserver?.disconnect(); this.galleryObserver = null;
+                    if (modal.isSaving) {
+                        // A pending disk write is not cancelled, but its old article draft must stop owning this pane.
+                        valid = false; this.trialTemplateId = null; this.trialAppearance = null; this.galleryBaseline = null;
+                        this.applyPresentation(this.previewEl); this.refreshValidationReport();
+                    } else if (!settled) cleanup();
+                },
+                renderPreview: async (id, saved, example) => {
+                    let source = saved ? this.galleryBaseline : this.previewEl.querySelector<HTMLElement>('.mp-content-section');
+                    if (example) {
+                        if (!examplePromise) examplePromise = (async () => {
+                            const sampleComponent = new Component(); component = sampleComponent; sampleComponent.load();
+                            const host = this.previewEl.ownerDocument.defaultView!.createDiv();
+                            await MarkdownRenderer.render(this.app, galleryExampleMarkdown, host, filePath ?? '', sampleComponent);
+                            if (disposed) { sampleComponent.unload(); throw new Error('画廊已关闭'); }
+                            MPConverter.formatContent(host, galleryExampleMarkdown, this.settingsManager);
+                            return host.querySelector<HTMLElement>('.mp-content-section')!;
+                        })();
+                        source = await examplePromise;
+                    }
+                    if (!source) return null;
+                    if (!example) return source;
+                    const host = this.previewEl.ownerDocument.defaultView!.createDiv(); host.appendChild(source.cloneNode(true));
+                    if (example) this.applyPresentation(host, saved ? currentTemplateId : id);
+                    return host.querySelector<HTMLElement>('.mp-content-section');
+                },
             }
         );
-
+        const unsubscribe = this.settingsManager.subscribe(() => {
+            if (appearanceConflictKey(this.settingsManager.getSettings()) === expectedKey || modal.isSaving) return;
+            valid = false; modal.invalidate(); new Notice('全局外观已变化，未保存试用已取消。');
+        });
+        const win = this.previewEl.ownerDocument.defaultView;
+        if (win) {
+            this.galleryObserver = new win.MutationObserver(() => {
+                if ((this.previewEl.querySelector('.mp-content-section')?.outerHTML ?? '') === this.galleryLastPaint) return;
+                valid = false;
+                this.galleryBaseline = this.previewEl.querySelector<HTMLElement>('.mp-content-section')?.cloneNode(true) as HTMLElement | null;
+                modal.invalidate(); new Notice('文章内容已变化，主题试用已取消。');
+            });
+            this.galleryObserver.observe(this.previewEl, { childList: true, subtree: true, characterData: true });
+        }
+        this.gallery = modal;
         modal.open();
     }
 
