@@ -20,7 +20,7 @@ const assets = {};
 for (const name of ['main.js', 'styles.css', 'manifest.json']) {
   const bytes = readFileSync(name);
   assets[name] = createHash('sha256').update(bytes).digest('hex');
-  if (name !== 'manifest.json') assert.deepEqual(bytes, git('show', `${baseline}:${name}`), `${name} changed after acceptance`);
+  if (name !== 'manifest.json') assert.equal(Buffer.compare(bytes, git('show', `${baseline}:${name}`)), 0, `${name} differs; run the production build before raw-byte verification (Git checkout may convert line endings).`);
 }
 const log = readFileSync('output/refactor/theme-experience-stable-verify.log', 'utf8');
 assert.ok(/(?:#|ℹ)\s*tests\s+141/.test(log), 'Completed verification must report 141 tests (TAP or spec reporter).');

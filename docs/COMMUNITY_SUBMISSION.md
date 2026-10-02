@@ -1,6 +1,14 @@
 # Obsidian 官方目录提交记录
 
-## 当前状态（2026-10-02）
+## 当前状态（2026-10-03）
+
+### 3.20.0 已验收稳定晋级并同步官方条目
+
+维护者于 2026-10-03 回复“好的，已验收”，确认 `3.20.0-beta.1`。已按原升级与发布授权提升为 [3.20.0](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.20.0)，固定提交 `0221c342575c5083153a2fd570f383cfbf47334d`。JS/CSS、源码、依赖与验收候选不变，manifest 仅改版本；141 项自动测试和原 CI 通过，13 个下载资产与标签及 GitHub 摘要一致。证据见 [晋级核验](../reports/release-3.20.0-promotion.json) 与 [发行核验](../reports/release-3.20.0-publication.json)。
+
+现有官方条目已识别数字版 `3.20.0`／`0221c34`，仅提交一次“Check for new releases”。扫描已到终态 Completed：0 Error、16 Warning、6 Recommendation，依赖检查 Pass、发行 main.js 逐字节构建复现 Pass。管理页 Current release 与实际打开的公开页 Current version 均为 `3.20.0`；没有重新创建条目、点击 Publish、接受新的政策承诺或更改所有权。证据见 [官方同步记录](../reports/official-3.20.0-update.json) 及公开页版本卡截图。应用内实际稳定安装未运行；Marketing 未改。
+
+现有警告仍完整保留，包含类型／宿主 API、CSS、仓库建议；本次官方报告还指出修订注册表中的类型位置，留待后续有运行验证的修订处理，不在稳定晋级混入代码变更。旧“缺少发行说明”建议不再出现，新发行说明在提交扫描前已保存。许可证额外资产和来源披露不为清除建议而删除。来源独立性及未测环境仍单独说明，不将 Completed 表述为完整认证。
 
 ### 3.19.1 已同步官方公开条目
 

@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-03",
+  "timezone": "Asia/Shanghai",
+  "version": "3.20.0",
+  "commit": "0221c342575c5083153a2fd570f383cfbf47334d",
+  "adminUrl": "https://community.obsidian.md/account/plugins/yh-mp-preview",
+  "publicUrl": "https://community.obsidian.md/plugins/yh-mp-preview",
+  "newReleaseCheckCount": 1,
+  "officialManifestDetected": "3.20.0",
+  "scanStatus": "Completed",
+  "scanErrors": 0,
+  "scanWarnings": 16,
+  "scanRecommendations": 6,
+  "dependencyCheck": "Pass; no vulnerable dependencies found",
+  "buildVerification": "Pass; official build reproduced release main.js byte-for-byte",
+  "officialCurrentVersion": "3.20.0",
+  "publicCurrentVersion": "3.20.0",
+  "versionAutomaticallyUpdatedAfterScan": true,
+  "listingRecreated": false,
+  "additionalPublishButtonUsed": false,
+  "newPolicyCommitmentsAcceptedByAgent": false,
+  "ownershipChanged": false,
+  "applicationStableUpdateInstalled": false,
+  "userBetaAccepted": true,
+  "marketingVaultModified": false,
+  "evidence": {
+    "publicScreenshot": "reports/assets/official-3.20.0-public.png",
+    "publicVersionScreenshot": "reports/assets/official-3.20.0-public-version.png"
+  },
+  "limits": [
+    "Website scan uses its own UTC date display; this report date uses the client Asia/Shanghai date.",
+    "Warnings remain, including grouped type warnings with revision-registry locations; zero errors is not zero warnings.",
+    "Completed is not independent-authorship certification. Historical attribution and dependency notices remain.",
+    "Public Current version, not cached README/About text, is the version evidence.",
+    "The maintainer accepted the beta; no separate official in-app stable update installation was run.",
+    "Cross-platform and minimum-host coverage remain as recorded in the candidate evidence."
+  ]
+}
