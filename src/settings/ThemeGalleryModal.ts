@@ -9,9 +9,11 @@ import type { Template } from '../templateManager';
 import { curatedThemeEntries, getCuratedThemeEntry, type CuratedThemeScene } from '../core/theme/themeCatalog';
 import { ThemeTrialSession } from '../core/render/themeTrialSession';
 import { ThemeGalleryPreview } from '../ui/themeGalleryPreview';
+import { latestThemeReference, isAppearanceV1, isSupportedThemeRevision, LEGACY_THEME_REVISION, READING_THEME_REVISION } from '../core/theme/themeRevisionRegistry';
+import { recipeOptions } from '../ui/recipeLabels';
 
 export interface ThemeGalleryOptions {
-    renderPreview: (id: string, saved: boolean, example: boolean) => Promise<HTMLElement | null>;
+    renderPreview: (id: string, saved: boolean, example: boolean, revision?: string) => Promise<HTMLElement | null>;
     fontFamily: string; fontSize: number;
     cancel: () => void;
     settled: (applied: boolean) => void;
@@ -36,8 +38,13 @@ export class ThemeGalleryModal extends Modal {
     private readonly templates: Template[];
     private readonly originalTemplateId: string;
     private currentTemplateId: string;
-    private readonly onSelect: (templateId: string) => void | Promise<void>;
-    private readonly previewCallback: (templateId: string) => void;
+    private readonly onSelect: (templateId: string, revision?: string) => void | Promise<void>;
+    private readonly previewCallback: (templateId: string, revision?: string) => void;
+    private currentRevision: string;
+    private readonly originalRevision: string;
+    private readonly enhancementLabel: string;
+    private revisionButton: HTMLButtonElement | null = null;
+    private revisionHint: HTMLElement | null = null;
     private selectedScene: ThemeScene = '全部';
     private searchQuery = '';
     private hasApplied = false;
@@ -63,8 +70,8 @@ export class ThemeGalleryModal extends Modal {
         app: App,
         settingsManager: SettingsManager,
         currentTemplateId: string,
-        onSelect: (templateId: string) => void | Promise<void>,
-        previewCallback: (templateId: string) => void,
+        onSelect: (templateId: string, revision?: string) => void | Promise<void>,
+        previewCallback: (templateId: string, revision?: string) => void,
         private readonly options?: ThemeGalleryOptions,
     ) {
         super(app);
@@ -74,6 +81,11 @@ export class ThemeGalleryModal extends Modal {
         if (hiddenCurrent && !this.templates.some(template => template.id === currentTemplateId)) this.templates.push(hiddenCurrent);
         this.originalTemplateId = currentTemplateId;
         this.currentTemplateId = currentTemplateId;
+        const settings = settingsManager.getSettings?.();
+        const saved = settings && isAppearanceV1(settings.wechatAppearance) ? settings.wechatAppearance.referencesById[currentTemplateId] : undefined;
+        this.originalRevision = saved?.id === currentTemplateId && isSupportedThemeRevision(currentTemplateId,saved.revision) ? saved.revision : LEGACY_THEME_REVISION;
+        this.currentRevision = this.originalRevision;
+        this.enhancementLabel = recipeOptions.find(item => item.value === settings?.v3.selectedRecipeId)?.label ?? '不额外增强';
         this.onSelect = onSelect;
         this.previewCallback = previewCallback;
         const currentTemplate = this.templates.find(template => template.id === currentTemplateId);
@@ -153,6 +165,19 @@ export class ThemeGalleryModal extends Modal {
         const footer = contentEl.createDiv('mp-gallery-footer');
         const trialInfo = footer.createDiv('mp-gallery-trial-info');
         this.tryHintEl = trialInfo.createDiv('mp-gallery-try-hint');
+        const revisionRow = trialInfo.createDiv('mp-gallery-revision-row');
+        this.revisionHint = revisionRow.createDiv('mp-gallery-trial-note');
+        this.revisionButton = revisionRow.createEl('button', { cls: 'mp-gallery-revision-btn', attr: { type: 'button' } });
+        this.revisionButton.addEventListener('click', () => {
+            if (this.transaction.busy) return;
+            this.currentRevision = this.currentRevision === READING_THEME_REVISION ? LEGACY_THEME_REVISION : READING_THEME_REVISION;
+            void this.transaction.preview(async isCurrent => {
+                if (!isCurrent()) return;
+                this.previewCallback(this.currentTemplateId, this.currentRevision);
+                await this.refreshPreview();
+            });
+            this.updateTryHint();
+        });
         this.statusEl = trialInfo.createDiv({ cls: 'mp-gallery-trial-note', text: '试用不会保存到笔记设置。' });
         this.statusEl.setAttribute('role', 'status');
         this.updateTryHint();
@@ -167,7 +192,7 @@ export class ThemeGalleryModal extends Modal {
             if(!button || button.disabled) return;
             void this.transaction.apply(async () => {
                 if (this.options && !this.options.isValid()) throw new Error('文章或外观已变化，请重新打开画廊。');
-                await this.onSelect(this.currentTemplateId);
+                await this.onSelect(this.currentTemplateId, this.currentRevision);
             }).then(() => {
                 if (this.transaction.state !== 'applied') return;
                 this.options?.settled(true);
@@ -198,8 +223,8 @@ export class ThemeGalleryModal extends Modal {
         this.preview?.destroy(); this.preview = null;
         this.contentEl.removeEventListener('keydown', this.onKeyDown, true);
         if (!this.transaction.busy && this.options && !this.hasApplied) this.options.cancel();
-        else if (!this.options && !this.hasApplied && this.currentTemplateId !== this.originalTemplateId) {
-            this.previewCallback(this.originalTemplateId);
+        else if (!this.options && !this.hasApplied && (this.currentTemplateId !== this.originalTemplateId || this.currentRevision !== this.originalRevision)) {
+            this.previewCallback(this.originalTemplateId, this.originalRevision);
         }
         this.options?.disposed();
         this.contentEl.empty();
@@ -228,6 +253,7 @@ export class ThemeGalleryModal extends Modal {
     private updateSavingState(): void {
         if (this.isClosed) return;
         const busy = this.transaction.busy;
+        this.modalEl.toggleClass('is-saving', busy);
         this.contentEl.querySelectorAll<HTMLButtonElement | HTMLInputElement>('button,input').forEach(control => { control.disabled = busy; });
         if (this.cancelButton) { this.cancelButton.disabled = this.transaction.state === 'saving'; this.cancelButton.setText(this.transaction.state === 'saving-unknown' ? '关闭窗口' : '取消试用'); }
         if (this.applyButton) { this.applyButton.disabled = busy; if (busy) this.applyButton.setText('保存中…'); else this.updateApplyButton(); }
@@ -238,7 +264,7 @@ export class ThemeGalleryModal extends Modal {
         if (!this.options || this.isClosed) return;
         const generation = ++this.previewGeneration;
         try {
-            const article = await this.options.renderPreview(this.currentTemplateId, this.compareSaved, this.example);
+            const article = await this.options.renderPreview(this.currentTemplateId, this.compareSaved, this.example, this.currentRevision);
             if (!this.isClosed && generation === this.previewGeneration) this.preview?.show(article);
         } catch (error) {
             if (!this.isClosed && generation === this.previewGeneration) { this.statusEl?.setText('预览失败，请重试或取消。'); throw error; }
@@ -319,9 +345,10 @@ export class ThemeGalleryModal extends Modal {
         card.addEventListener('click', () => {
             if (this.transaction.busy) return;
             this.currentTemplateId = template.id;
+            this.currentRevision = latestThemeReference(template).revision;
             void this.transaction.preview(async isCurrent => {
                 if (!isCurrent()) return;
-                this.previewCallback(template.id);
+                this.previewCallback(template.id, this.currentRevision);
                 await this.refreshPreview();
             });
             this.updateApplyButton();
@@ -347,6 +374,15 @@ export class ThemeGalleryModal extends Modal {
         const template = this.templates.find(item => item.id === this.currentTemplateId);
         const description = template ? this.getTemplateDescription(template) : '适合当前文章的视觉排版';
         this.tryHintEl.setText(`推荐作用：${description}`);
+        const saved = this.currentTemplateId === this.originalTemplateId && this.currentRevision === this.originalRevision;
+        const modern = this.currentRevision === READING_THEME_REVISION;
+        const custom = template && !template.isPreset;
+        this.revisionHint?.setText(`${saved ? '已保存' : '试用'}${custom ? '自定义' : modern ? '升级版' : '旧版'} · ${this.enhancementLabel}`);
+        this.revisionHint?.setAttribute('title','当前文章保留局部增强；统一示例不额外增强。');
+        if (this.revisionButton) {
+            this.revisionButton.hidden = !template || latestThemeReference(template).revision !== READING_THEME_REVISION;
+            this.revisionButton.setText(modern ? '使用旧版排版' : '试用升级版');
+        }
     }
 
     private getTemplateDescription(template: Template): string {

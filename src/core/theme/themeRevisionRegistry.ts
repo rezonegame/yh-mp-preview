@@ -1,5 +1,7 @@
 import legacyDefinitions from './legacy-3.19.1.json';
 import type { Template } from './templateTypes';
+import { buildReadingTheme, hasReadingTheme, READING_THEME_REVISION } from './wechatThemeTokens';
+export { READING_THEME_REVISION } from './wechatThemeTokens';
 
 /** Never replace this revision's definitions when adding a later theme release. */
 export const LEGACY_THEME_REVISION = 'legacy-3.19.1';
@@ -18,6 +20,15 @@ export function legacyTheme(id: string): Template | undefined {
     const definition = (legacyDefinitions as unknown as Record<string, Template>)[id];
     return definition ? { ...structuredClone(definition), isPreset: true } : undefined;
 }
+export function readingTheme(id: string): Template | undefined {
+    const base = legacyTheme(id); return base ? buildReadingTheme(base) : undefined;
+}
+export function latestThemeReference(template: Template): ThemeReference {
+    return template.isPreset && hasReadingTheme(template.id) ? { id:template.id,kind:'builtin',revision:READING_THEME_REVISION } : themeReference(template);
+}
+export function isSupportedThemeRevision(id: string, revision: string): boolean {
+    return revision === LEGACY_THEME_REVISION || revision === READING_THEME_REVISION && hasReadingTheme(id);
+}
 export function isAppearanceV1(value: unknown): value is WechatAppearanceSettings {
     if (!value || typeof value !== 'object') return false;
     const object = value as Partial<WechatAppearanceSettings>;
@@ -26,8 +37,11 @@ export function isAppearanceV1(value: unknown): value is WechatAppearanceSetting
         && !Array.isArray(object.preferencesByReference);
 }
 /** Read migration only. Unknown future schemas/values remain untouched. */
-export function migrateWechatAppearance(value: unknown, templates: Template[]): unknown {
+export function migrateWechatAppearance(value: unknown, templates: Template[], fresh = false): unknown {
     if (value !== undefined) return structuredClone(value);
-    return { schemaVersion: 1, referencesById: Object.fromEntries(templates.map(template => [template.id, themeReference(template)])),
-        preferencesByReference: Object.fromEntries(templates.map(template => { const ref = themeReference(template); return [`${ref.id}@${ref.revision}`, originalPreferences()]; })) } satisfies WechatAppearanceSettings;
+    const references=templates.map(template=>fresh?latestThemeReference(template):themeReference(template));
+    const referencesById = Object.create(null) as Record<string, ThemeReference>;
+    const preferencesByReference: Record<string, AppearancePreferences> = {};
+    for(const ref of references){referencesById[ref.id]=ref;preferencesByReference[`${ref.id}@${ref.revision}`]=originalPreferences();}
+    return { schemaVersion:1,referencesById,preferencesByReference } satisfies WechatAppearanceSettings;
 }

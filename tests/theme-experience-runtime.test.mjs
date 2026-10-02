@@ -35,7 +35,7 @@ test('settings migrate without load writes, preserve unknown schema and revision
   const {resolveWechatAppearance,appearanceConflictKey}=await loadModule('src/core/theme/wechatAppearance.ts');
   let writes=0,saved={templateId:'deep-reading',templates:[{id:'deep-reading',isVisible:false}],unknownSetting:42};
   const manager=new SettingsManager({loadData:async()=>saved,saveData:async value=>{writes++;saved=structuredClone(value)}});
-  await manager.loadSettings();assert.equal(writes,0);assert.equal(manager.getSettings().themeCatalogVersion,4);
+  await manager.loadSettings();assert.equal(writes,0);assert.equal(manager.getSettings().themeCatalogVersion,5);
   assert.equal(manager.getTemplate('deep-reading').isVisible,false);
   const appearance=resolveWechatAppearance(manager.getSettings(),'default'), key=appearanceConflictKey(manager.getSettings());
   await Promise.all([manager.updateSettings({enableFrontMatterCard:true}),manager.commitWechatAppearance(appearance.reference,appearance.preferences,key)]);
@@ -82,7 +82,7 @@ test('gallery controls cannot change or close a saving transaction; eventual com
   const write=deferred(),themes=[{id:'default',name:'通用长文',isPreset:true},{id:'deep-reading',name:'深度阅读',isPreset:true}];
   let writes=0,cancels=0,commits=0;
   const options={fontFamily:'serif',fontSize:15,renderPreview:async()=>null,isValid:()=>true,cancel:()=>{cancels++},settled:applied=>{if(applied)commits++},disposed:()=>{}};
-  const modal=new ThemeGalleryModal({}, {getVisibleTemplates:()=>themes},'default',()=>{writes++;return write.promise},()=>{},options);modal.open();
+  const modal=new ThemeGalleryModal({}, {getVisibleTemplates:()=>themes,getSettings:()=>({templates:themes,customTemplates:[],v3:{selectedRecipeId:'legacy-compatible'}})},'default',()=>{writes++;return write.promise},()=>{},options);modal.open();
   modal.contentEl.querySelector('[data-theme-id="deep-reading"]').click();modal.contentEl.querySelector('.mp-gallery-btn-apply').click();
   await delay(5);assert.equal(writes,1);assert.equal(modal.isSaving,true);modal.close();assert.equal(modal.closed,undefined);
   assert.equal(modal.contentEl.querySelector('.mp-gallery-btn-cancel').disabled,true);assert.equal(modal.contentEl.querySelector('[data-theme-id="default"]').disabled,true);
@@ -92,8 +92,8 @@ test('gallery controls cannot change or close a saving transaction; eventual com
 test('layout refresh respects an explicitly expanded compact selector and display switches never select a theme',async()=>{
   createDom();globalThis.notices=[];const {ThemeGalleryModal}=await loadModule('src/settings/ThemeGalleryModal.ts',modalStub);
   const themes=[{id:'default',name:'通用长文',isPreset:true}],events=[],selected=[];
-  const modal=new ThemeGalleryModal({}, {getVisibleTemplates:()=>themes},'default',()=>{},id=>selected.push(id),{fontFamily:'serif',fontSize:15,renderPreview:async(...args)=>{events.push(args);return null},isValid:()=>true,cancel:()=>{},settled:()=>{},disposed:()=>{}});
+  const modal=new ThemeGalleryModal({}, {getVisibleTemplates:()=>themes,getSettings:()=>({templates:themes,customTemplates:[],v3:{selectedRecipeId:'legacy-compatible'}})},'default',()=>{},id=>selected.push(id),{fontFamily:'serif',fontSize:15,renderPreview:async(...args)=>{events.push(args);return null},isValid:()=>true,cancel:()=>{},settled:()=>{},disposed:()=>{}});
   modal.open();const selector=modal.contentEl.querySelector('.mp-gallery-selector');selector.open=true;modal.updateLayout();assert.equal(selector.open,true);
   modal.contentEl.querySelector('[aria-label="画廊预览来源"] button:nth-child(2)').click();modal.contentEl.querySelector('[aria-label="画廊外观对照"] button:nth-child(2)').click();await delay(5);
-  assert.deepEqual(selected,[]);assert.deepEqual(events.at(-1),['default',true,true]);modal.close();
+  assert.deepEqual(selected,[]);assert.deepEqual(events.at(-1),['default',true,true,'legacy-3.19.1']);modal.close();
 });

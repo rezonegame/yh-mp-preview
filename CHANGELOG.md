@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.21.0-beta.1
+
+- Add the reading-2026.1 revision for all 14 featured themes. Each scene pair differs in chapter hierarchy, quotations, list rhythm and image/component framing, rather than colour alone. Keep all 19 IDs and frozen legacy-3.19.1 definitions.
+- Existing configurations and old snapshots keep their saved revision; fresh installs use new featured revisions. Clicking a featured card explicitly trials the upgrade, with a small reversible old/new layout control and revision/active-enhancement hint. No duplicate theme cards.
+- Define all six heading levels, retain user typography, separate visual rhythm from wrapping/image safety, and compose theme paper and padding with explicit user backgrounds. Preserve semantic warning/success colours with readable text. Warn about low-contrast or unprovable custom backgrounds.
+- Keep real-article enhancements; disable them only for the comparison example. Share one presentation/output path and preserve cancellation, saved comparisons, snapshots, custom-theme definitions, note enhancement and all export modes.
+- This is the P2 BRAT acceptance candidate, not a stable/official upgrade. Main remains 3.20.0. WeChat backend paste and mobile checks are manual gates; P3 palette/density controls remain deferred. Historical and dependency license notices remain intact.
+
 ## 3.20.0
 
 - Promote the user-accepted 3.20.0-beta.1 shared theme-gallery preview to stable. Runtime source, JavaScript, CSS, theme definitions and dependencies are unchanged from the accepted candidate; only version metadata and publication records change.

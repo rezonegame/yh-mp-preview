@@ -39,6 +39,17 @@ export function validateWechatHtml(root: HTMLElement): ValidationReport {
         issues.push({ severity, code, message, path: pathFor(element) });
     };
 
+    if(root.getAttribute('data-mp-reading-background')==='custom'){
+        const channels=(value:string)=>/^rgba?\(/.test(value)?value.match(/[\d.]+/g)?.map(Number):undefined;
+        const bg=channels(root.style.backgroundColor),fg=channels(root.style.color);
+        if(!bg||!fg||(bg[3]??1)<1||(root.style.backgroundImage && root.style.backgroundImage!=='none')){
+            add('warning','reading-background-unverified','自定义背景含渐变、透明或复杂样式，无法自动证明文字对比度；请核对公众号手机预览。',root);
+        } else {
+            const luminance=(rgb:number[])=>rgb.slice(0,3).map(n=>{n/=255;return n<=.04045?n/12.92:((n+.055)/1.055)**2.4;}).reduce((sum,n,i)=>sum+n*[.2126,.7152,.0722][i],0);
+            const a=luminance(bg),b=luminance(fg),ratio=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+            if(ratio<4.5)add('warning','reading-background-low-contrast',`自定义背景与正文对比度约 ${ratio.toFixed(2)}:1，低于 4.5:1；建议选择更浅的背景。`,root);
+        }
+    }
     root.querySelectorAll('*').forEach((element) => {
         if (forbiddenTags.has(element.tagName)) {
             add('error', 'forbidden-tag', `不允许的标签：${element.tagName.toLowerCase()}`, element);

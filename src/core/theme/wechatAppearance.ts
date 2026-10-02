@@ -1,6 +1,6 @@
 import type { MPSettings } from '../../settings/settings';
 import type { Template } from './templateTypes';
-import { isAppearanceV1, legacyTheme, originalPreferences, themeReference, type ThemeReference, type AppearancePreferences } from './themeRevisionRegistry';
+import { isAppearanceV1, legacyTheme, readingTheme, READING_THEME_REVISION, originalPreferences, themeReference, type ThemeReference, type AppearancePreferences } from './themeRevisionRegistry';
 import { resolveWechatPalette, type WechatPalette } from './wechatPalette';
 
 export interface AppearanceSnapshot {
@@ -12,18 +12,23 @@ function fingerprint(value: unknown): string {
     for (let index = 0; index < source.length; index++) hash = Math.imul(hash ^ source.charCodeAt(index), 16777619);
     return `legacy-${(hash >>> 0).toString(16)}`;
 }
-export function resolveWechatAppearance(settings: MPSettings, id = settings.templateId): ResolvedWechatAppearance {
+export function resolveWechatAppearance(settings: MPSettings, id = settings.templateId, trialRevision?: string): ResolvedWechatAppearance {
     const catalog = settings.templates.concat(settings.customTemplates);
     const selected = catalog.find(template => template.id === id) ?? catalog.find(template => template.id === 'default') ?? legacyTheme('default')!;
-    const reference = themeReference(selected);
-    // P1 exposes only the frozen legacy revision. Unknown saved revisions are preserved, not executed.
-    const template = reference.kind === 'builtin' ? legacyTheme(reference.id) ?? selected : structuredClone(selected);
+    let reference = themeReference(selected);
+    const saved=isAppearanceV1(settings.wechatAppearance)?settings.wechatAppearance.referencesById[id]:undefined;
+    const revision=trialRevision??(saved?.id===id&&saved.kind===reference.kind?saved.revision:undefined);
+    const updated=reference.kind==='builtin'&&revision===READING_THEME_REVISION?readingTheme(reference.id):undefined;
+    if(updated)reference={...reference,revision:READING_THEME_REVISION};
+    const template = updated ?? (reference.kind === 'builtin' ? legacyTheme(reference.id) ?? selected : structuredClone(selected));
+    // A user-defined extension cannot silently opt into a built-in renderer revision.
+    if (!updated) delete template.reading;
     const preferences = originalPreferences();
     const palette = resolveWechatPalette(template);
-    const renderRevision = 'legacy-presentation-3.19.1';
+    const renderRevision = updated ? 'reading-presentation-2026.1' : 'legacy-presentation-3.19.1';
     return { reference, preferences, template, palette, renderRevision,
         fingerprint: fingerprint({ reference, template, fontFamily: settings.fontFamily, fontSize: settings.fontSize, background: settings.backgrounds.concat(settings.customBackgrounds).find(item => item.id === settings.backgroundId), recipe: settings.v3.selectedRecipeId }),
-        ...(reference.kind === 'custom' ? { customDefinition: structuredClone(template) } : {}) };
+        ...(reference.kind === 'custom' ? { customDefinition: structuredClone(selected) } : {}) };
 }
 export function snapshotAppearance(settings: MPSettings): AppearanceSnapshot {
     const { template: _template, palette: _palette, ...snapshot } = resolveWechatAppearance(settings);

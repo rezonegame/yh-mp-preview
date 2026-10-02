@@ -11123,22 +11123,22 @@ function bodyStyle() {
   return "margin: 0; color: #3f4652; line-height: 1.8; font-size: 1em;";
 }
 function renderToc(content, headings) {
-  const rows = headings ? headings.map((heading, index) => {
+  const rows = headings ? headings.map((heading2, index) => {
     var _a;
     return [
       String(index + 1).padStart(2, "0"),
-      ((_a = heading.textContent) == null ? void 0 : _a.trim()) || "",
+      ((_a = heading2.textContent) == null ? void 0 : _a.trim()) || "",
       ""
     ];
   }) : parseRows(content);
   const title = parseKeyValues(content).title || "\u9605\u8BFB\u5BFC\u822A";
   const items = rows.map((row, index) => {
     const number = row[0] || String(index + 1).padStart(2, "0");
-    const heading = row[1] || row[0] || "";
+    const heading2 = row[1] || row[0] || "";
     const desc = row[2] || "";
     return `<div style="display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px dashed #e8edf5;">
             <span style="min-width: 32px; color: ${DEFAULT_ACCENT}; font-weight: 700;">${escapeHtml2(number)}</span>
-            <span style="flex: 1;"><span style="display: block; color: #2f3a4a; font-weight: 600;">${escapeHtml2(heading)}</span>${desc ? `<span style="display: block; margin-top: 2px; color: #7a8494; font-size: 0.92em;">${escapeHtml2(desc)}</span>` : ""}</span>
+            <span style="flex: 1;"><span style="display: block; color: #2f3a4a; font-weight: 600;">${escapeHtml2(heading2)}</span>${desc ? `<span style="display: block; margin-top: 2px; color: #7a8494; font-size: 0.92em;">${escapeHtml2(desc)}</span>` : ""}</span>
         </div>`;
   }).join("");
   return htmlToElement(`<section class="mp-layout-card mp-layout-toc" data-mp-layout="toc" style="${cardStyle()}">
@@ -11757,11 +11757,11 @@ function createArticleModel(root) {
 }
 
 // src/core/layout/localLayoutPlanner.ts
-function sectionFromHeading(heading, index) {
+function sectionFromHeading(heading2, index) {
   return {
     id: `section-${index + 1}`,
-    headingNodeId: heading.id,
-    title: heading.text || `Section ${index + 1}`,
+    headingNodeId: heading2.id,
+    title: heading2.text || `Section ${index + 1}`,
     componentIds: []
   };
 }
@@ -11804,10 +11804,28 @@ function pathFor(element) {
   return parts.join(" > ");
 }
 function validateWechatHtml(root) {
+  var _a;
   const issues = [];
   const add = (severity, code, message, element) => {
     issues.push({ severity, code, message, path: pathFor(element) });
   };
+  if (root.getAttribute("data-mp-reading-background") === "custom") {
+    const channels = (value) => {
+      var _a2;
+      return /^rgba?\(/.test(value) ? (_a2 = value.match(/[\d.]+/g)) == null ? void 0 : _a2.map(Number) : void 0;
+    };
+    const bg = channels(root.style.backgroundColor), fg = channels(root.style.color);
+    if (!bg || !fg || ((_a = bg[3]) != null ? _a : 1) < 1 || root.style.backgroundImage && root.style.backgroundImage !== "none") {
+      add("warning", "reading-background-unverified", "\u81EA\u5B9A\u4E49\u80CC\u666F\u542B\u6E10\u53D8\u3001\u900F\u660E\u6216\u590D\u6742\u6837\u5F0F\uFF0C\u65E0\u6CD5\u81EA\u52A8\u8BC1\u660E\u6587\u5B57\u5BF9\u6BD4\u5EA6\uFF1B\u8BF7\u6838\u5BF9\u516C\u4F17\u53F7\u624B\u673A\u9884\u89C8\u3002", root);
+    } else {
+      const luminance2 = (rgb2) => rgb2.slice(0, 3).map((n) => {
+        n /= 255;
+        return n <= 0.04045 ? n / 12.92 : ((n + 0.055) / 1.055) ** 2.4;
+      }).reduce((sum, n, i) => sum + n * [0.2126, 0.7152, 0.0722][i], 0);
+      const a = luminance2(bg), b = luminance2(fg), ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+      if (ratio < 4.5) add("warning", "reading-background-low-contrast", `\u81EA\u5B9A\u4E49\u80CC\u666F\u4E0E\u6B63\u6587\u5BF9\u6BD4\u5EA6\u7EA6 ${ratio.toFixed(2)}:1\uFF0C\u4F4E\u4E8E 4.5:1\uFF1B\u5EFA\u8BAE\u9009\u62E9\u66F4\u6D45\u7684\u80CC\u666F\u3002`, root);
+    }
+  }
   root.querySelectorAll("*").forEach((element) => {
     if (forbiddenTags.has(element.tagName)) {
       add("error", "forbidden-tag", `\u4E0D\u5141\u8BB8\u7684\u6807\u7B7E\uFF1A${element.tagName.toLowerCase()}`, element);
@@ -11913,6 +11931,10 @@ function resetArticleRecipe(section) {
   section.removeAttribute("data-mp-recipe");
 }
 function styleLists(section, palette, prefix) {
+  if (section.hasAttribute("data-mp-reading-background")) {
+    styleReadingLists(section, palette, prefix);
+    return;
+  }
   section.querySelectorAll("ol, ul").forEach((list) => setStyles(list, {
     margin: "18px 0",
     padding: "0",
@@ -11939,6 +11961,28 @@ function styleLists(section, palette, prefix) {
     setStyles(label, { "font-weight": "700", color: palette.accentText });
   });
 }
+function styleReadingLists(section, palette, prefix) {
+  section.querySelectorAll(prefix === "\u6B65\u9AA4" ? "ol" : "ol,ul").forEach((list) => {
+    if (list.closest(".mp-reference-section,.mp-layout-card,.mp-frontmatter-card,.mp-custom-header,.mp-custom-footer")) return;
+    const items = Array.from(list.children).filter((node) => node.tagName === "LI");
+    const reversed = list.hasAttribute("reversed");
+    const start = list.getAttribute("start");
+    let number = start !== null ? Number(start) : reversed ? items.length : 1;
+    if (!Number.isFinite(number)) number = 1;
+    setStyles(list, { margin: "18px 0", padding: "0", "list-style": "none" });
+    items.forEach((item) => {
+      const value = item.getAttribute("value");
+      if (value !== null && Number.isFinite(Number(value))) number = Number(value);
+      setStyles(item, { display: "block", margin: "10px 0", padding: "12px 14px", "border-left": `3px solid ${palette.accent}`, background: palette.surface, "line-height": "1.72" });
+      const label = createSpan();
+      label.className = prefix === "\u6B65\u9AA4" ? "mp-recipe-step-label" : "mp-recipe-check";
+      label.textContent = prefix === "\u6B65\u9AA4" ? `\u6B65\u9AA4 ${number}\u3000` : "\u2713\u3000";
+      item.prepend(label);
+      setStyles(label, { "font-weight": "700", color: palette.accentText });
+      number += reversed ? -1 : 1;
+    });
+  });
+}
 function applyProductIntro(section, palette) {
   const firstParagraph = section.querySelector("p");
   if (firstParagraph) setStyles(firstParagraph, {
@@ -11948,7 +11992,7 @@ function applyProductIntro(section, palette) {
     background: palette.surface,
     "line-height": "1.78"
   });
-  section.querySelectorAll("h2").forEach((heading) => setStyles(heading, {
+  section.querySelectorAll("h2").forEach((heading2) => setStyles(heading2, {
     "border-left": `3px solid ${palette.accent}`,
     "padding-left": "12px"
   }));
@@ -11969,7 +12013,7 @@ function applyCommentary(section, palette) {
   });
 }
 function applyReview(section, palette) {
-  section.querySelectorAll("h2, h3").forEach((heading) => setStyles(heading, {
+  section.querySelectorAll("h2, h3").forEach((heading2) => setStyles(heading2, {
     "border-left": `3px solid ${palette.accent}`,
     "padding-left": "12px"
   }));
@@ -12931,10 +12975,11 @@ function prepareLegacyWechatFragment(element, options = {}) {
   normalizeArticleText(clone2);
   const outputValidation = validateWechatHtml(clone2);
   const blockingIssues = sourceValidation.issues.filter((issue) => issue.severity === "error");
+  const backgroundWarnings = sourceValidation.issues.filter((issue) => issue.code.startsWith("reading-background-"));
   const validation = {
-    issues: [...blockingIssues, ...outputValidation.issues],
+    issues: [...blockingIssues, ...backgroundWarnings, ...outputValidation.issues],
     errors: blockingIssues.length + outputValidation.errors,
-    warnings: outputValidation.warnings
+    warnings: outputValidation.warnings + backgroundWarnings.length
   };
   return {
     article,
@@ -13104,7 +13149,7 @@ function appendWechatReadingBaseline(themeStyle, baseline) {
 }
 
 // src/core/theme/themeCatalog.ts
-var CURATED_THEME_CATALOG_VERSION = 4;
+var CURATED_THEME_CATALOG_VERSION = 5;
 var curatedThemeEntries = [
   { id: "default", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u4E2D\u6027\u3001\u7A33\u5B9A\uFF0C\u9002\u5408\u901A\u77E5\u3001\u6587\u7AE0\u521D\u7A3F\u4E0E\u5E38\u89C4\u957F\u6587\u3002", frameworkId: "neutral-reading", status: "featured", readingProfile: "standard", surfaces: ["wechat", "note"], noteThemeId: "default" },
   { id: "deep-reading", scene: "\u901A\u7528\u957F\u6587", recommendation: "\u5C11\u88C5\u9970\u3001\u5927\u6BB5\u843D\u547C\u5438\u611F\uFF0C\u9002\u5408\u8BBF\u8C08\u4E0E\u6DF1\u5EA6\u957F\u6587\u3002", frameworkId: "deep-reading", status: "featured", readingProfile: "airy", surfaces: ["wechat", "note"], noteThemeId: "deep-reading" },
@@ -13139,51 +13184,224 @@ function getNoteThemeEntries() {
   return noteThemeEntries;
 }
 
+// src/core/theme/wechatThemeTokens.ts
+var READING_THEME_REVISION = "reading-2026.1";
+var designs = {
+  default: { accent: "#475569", h1: 1.8, h2: 1.32, chapterGap: 1.9, chapter: "line", quote: "side", quoteGap: 1.1, listGap: 0.35, imageGap: 1.1, imageFrame: true, component: "side" },
+  "deep-reading": { accent: "#202124", h1: 2, h2: 1.48, chapterGap: 2.5, chapter: "open", quote: "open", quoteGap: 1.6, listGap: 0.8, imageGap: 1.9, imageFrame: false, component: "open" },
+  "clear-guide": { accent: "#087f75", h1: 1.8, h2: 1.3, chapterGap: 1.7, chapter: "anchor", quote: "side", quoteGap: 1, listGap: 0.25, listRule: true, imageGap: 0.85, imageFrame: true, component: "box" },
+  "knowledge-notes": { accent: "#355f59", paper: "#fbfcfa", h1: 1.72, h2: 1.23, chapterGap: 2.2, chapter: "line", quote: "note", quoteGap: 1.35, listGap: 0.55, imageGap: 1.25, imageFrame: false, component: "note" },
+  "apple-product": { accent: "#0a84ff", h1: 2.1, h2: 1.48, chapterGap: 2.4, chapter: "open", quote: "open", quoteGap: 1.65, listGap: 0.65, imageGap: 1.8, imageFrame: false, component: "open" },
+  "product-review": { accent: "#059669", h1: 1.78, h2: 1.25, chapterGap: 1.6, chapter: "bar", quote: "box", quoteGap: 1, listGap: 0.22, listRule: true, imageGap: 0.8, imageFrame: true, component: "box" },
+  "red-white-editorial": { accent: "#c2413b", h1: 1.9, h2: 1.34, chapterGap: 1.8, chapter: "anchor", quote: "side", quoteGap: 1.15, listGap: 0.3, imageGap: 1.05, imageFrame: true, component: "side" },
+  "ink-opinion": { accent: "#353535", h1: 2.04, h2: 1.48, chapterGap: 2.45, chapter: "line", quote: "open", quoteGap: 1.65, listGap: 0.78, imageGap: 1.65, imageFrame: false, component: "rule" },
+  "data-blueprint": { accent: "#173f7a", h1: 1.8, h2: 1.26, chapterGap: 1.65, chapter: "bar", quote: "side", quoteGap: 1, listGap: 0.24, listRule: true, imageGap: 0.85, imageFrame: true, component: "box" },
+  "briefing-grid": { accent: "#355a72", h1: 1.72, h2: 1.23, chapterGap: 2, chapter: "double", quote: "note", quoteGap: 1.35, listGap: 0.52, imageGap: 1.25, imageFrame: false, component: "rule" },
+  "zen-essence": { accent: "#79836f", h1: 1.8, h2: 1.26, chapterGap: 2.6, chapter: "open", quote: "open", quoteGap: 1.8, listGap: 0.82, imageGap: 1.9, imageFrame: false, component: "open" },
+  "warm-paper": { accent: "#805c46", paper: "#fbf7ef", h1: 1.76, h2: 1.32, chapterGap: 1.85, chapter: "line", quote: "box", quoteGap: 1.1, listGap: 0.36, imageGap: 1, imageFrame: true, component: "note" },
+  "olive-journal": { accent: "#4a6041", h1: 1.84, h2: 1.36, chapterGap: 1.9, chapter: "anchor", quote: "side", quoteGap: 1.1, listGap: 0.4, imageGap: 1.1, imageFrame: false, component: "side" },
+  "case-file": { accent: "#40505c", h1: 1.72, h2: 1.25, chapterGap: 2.3, chapter: "double", quote: "note", quoteGap: 1.5, listGap: 0.72, listRule: true, imageGap: 1.55, imageFrame: true, component: "rule" }
+};
+function hasReadingTheme(id) {
+  return Boolean(Object.prototype.hasOwnProperty.call(designs, id));
+}
+function buildReadingTheme(base) {
+  var _a, _b, _c, _d;
+  const design = designs[base.id];
+  if (!design) return void 0;
+  const palette = resolveWechatPalette({ ...base, styles: { ...base.styles, accentColor: design.accent } });
+  const profile = (_b = (_a = getCuratedThemeEntry(base.id)) == null ? void 0 : _a.readingProfile) != null ? _b : "standard";
+  const line = profile === "airy" ? 1.82 : profile === "compact" ? 1.72 : 1.78;
+  const gap = profile === "airy" ? 1.05 : profile === "compact" ? 0.85 : 0.95;
+  const foreground = "#263238", secondary = "#52606d";
+  const chapter = {
+    line: `border-bottom:1px solid ${palette.border};padding-bottom:.5em;`,
+    open: "border:0;padding:0;",
+    anchor: `border-left:3px solid ${palette.accent};padding:.12em 0 .12em .7em;`,
+    bar: `border-left:3px solid ${palette.accent};background:${palette.surface};padding:.5em .65em;`,
+    double: `border-bottom:3px double ${palette.border};padding-bottom:.55em;`
+  }[design.chapter];
+  const title = {
+    h1: heading(design.h1, 1.9, 0.8, "", foreground),
+    h2: heading(design.h2, design.chapterGap, 0.75, chapter, foreground),
+    h3: heading(1.14, 1.65, 0.55, design.chapter === "anchor" ? `border-left:2px solid ${palette.border};padding-left:.65em;` : "", palette.accentText),
+    h4: heading(1.07, 1.4, 0.5, "", foreground),
+    h5: heading(1.02, 1.25, 0.45, "", foreground),
+    h6: heading(0.98, 1.15, 0.4, "", secondary),
+    base: heading(1, 1.2, 0.5, "", foreground)
+  };
+  const quote = {
+    side: `border-left:3px solid ${palette.accent};background:${palette.surface};padding:.7em .9em;`,
+    open: `border:0;border-top:1px solid ${palette.border};border-bottom:1px solid ${palette.border};background:transparent;padding:1em .25em;`,
+    note: `border:0;border-top:1px solid ${palette.border};background:transparent;padding:.7em .2em;`,
+    box: `border:1px solid ${palette.border};background:${palette.surface};padding:.8em 1em;`
+  }[design.quote];
+  const styles = {
+    container: `background:${(_c = design.paper) != null ? _c : "#ffffff"};padding:16px 20px;color:${foreground};`,
+    accentColor: design.accent,
+    title,
+    paragraph: `color:${foreground};font-weight:400;line-height:${line};letter-spacing:0;text-align:left;margin:0 0 ${gap}em;`,
+    list: {
+      container: `margin:.85em 0 1.15em;padding:0 0 0 1.45em;color:${foreground};text-align:left;`,
+      item: `color:${foreground};line-height:${line};margin:0 0 ${design.listGap}em;padding:0 0 ${design.listRule ? ".3em" : "0"};${design.listRule ? `border-bottom:1px solid ${palette.border};` : ""}`,
+      taskList: `list-style:none;color:${foreground};line-height:${line};margin-bottom:${design.listGap}em;`
+    },
+    quote: `margin:${design.quoteGap}em 0;${quote}color:${secondary};font-style:normal;line-height:${line};`,
+    code: {
+      header: { container: "display:none;", dot: "display:none;", colors: [design.accent, design.accent, design.accent] },
+      block: `margin:1.2em 0;padding:14px;background:${palette.surface};border:1px solid ${palette.border};color:${foreground};font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:14px;line-height:1.65;`,
+      inline: `padding:.1em .3em;background:${palette.surface};color:${foreground};font-family:ui-monospace,Consolas,monospace;font-size:.9em;line-height:1.5;`
+    },
+    image: `display:block;margin:${design.imageGap}em auto;border:${design.imageFrame ? `1px solid ${palette.border}` : "0"};border-radius:${design.imageFrame ? "2px" : "0"};`,
+    link: `color:${palette.accentText};text-decoration:underline;background-image:none;`,
+    emphasis: { strong: `font-weight:700;color:${foreground};`, em: `color:${foreground};font-style:italic;`, del: `color:${secondary};text-decoration:line-through;` },
+    table: {
+      container: `margin:1.2em 0;border-collapse:collapse;border-top:${design.chapter === "double" ? "3px double" : "2px solid"} ${palette.accent};`,
+      header: `padding:8px;background:${palette.surface};color:${foreground};font-weight:700;border:0;border-bottom:1px solid ${palette.border};font-size:.9em;line-height:1.6;`,
+      cell: `padding:8px;background:transparent;color:${foreground};border:0;border-bottom:1px solid ${palette.border};font-size:.9em;line-height:1.65;`
+    },
+    hr: `margin:1.8em 0;border:0;border-top:1px solid ${palette.border};`,
+    footnote: { ref: `color:${palette.accentText};`, backref: `color:${palette.accentText};` }
+  };
+  return { ...structuredClone(base), styles, reading: {
+    revision: READING_THEME_REVISION,
+    profile,
+    rootCss: `background:${(_d = design.paper) != null ? _d : "#ffffff"};margin:0;padding:16px 20px;color:${foreground};box-sizing:border-box;max-width:100%;`,
+    captionCss: `font-size:.85em;line-height:1.6;color:${secondary};text-align:left;margin:.4em 0 ${design.imageGap}em;`,
+    component: { shape: design.component, padding: design.component === "open" ? 4 : 14, gap: design.component === "open" ? 1.6 : 1.1, radius: design.component === "box" ? 4 : 0 }
+  } };
+}
+function heading(size, before, after, decoration, color) {
+  return { base: `font-size:${size}em;font-weight:700;line-height:1.45;letter-spacing:0;text-align:left;margin:${before}em 0 ${after}em;${decoration}`, content: `color:${color};font-weight:inherit;`, after: "display:none;" };
+}
+function readingRootCss(tokens, typography, background) {
+  const explicit = background && background.id !== "default" ? background.style : "";
+  return joinReadingCss(tokens.rootCss, explicit, `font-family:${typography.family};font-size:${typography.size}px;`);
+}
+function joinReadingCss(...parts) {
+  return parts.map((part) => part.replace(/;+\s*$/, "")).filter(Boolean).join("; ");
+}
+var marker = "data-mp-reading-base-style";
+function resetReadingSpecifics(root) {
+  root.querySelectorAll(`[${marker}]`).forEach((node) => {
+    const saved = node.getAttribute(marker);
+    if (saved) node.setAttribute("style", saved);
+    else node.removeAttribute("style");
+    node.removeAttribute(marker);
+  });
+}
+function ownStyle(element, css) {
+  var _a;
+  if (!element.hasAttribute(marker)) element.setAttribute(marker, (_a = element.getAttribute("style")) != null ? _a : "");
+  setSafeInlineStyle(element, css);
+}
+function applyReadingComponentRoles(root, palette, tokens) {
+  const c = tokens.component;
+  const frame = {
+    side: `border:0;border-left:3px solid ${palette.accent};background:${palette.surface};`,
+    box: `border:1px solid ${palette.border};background:${palette.surface};`,
+    rule: `border:0;border-top:2px solid ${palette.accent};background:transparent;`,
+    open: "border:0;background:transparent;",
+    note: `border:1px solid ${palette.border};background:${palette.surface};`
+  }[c.shape];
+  root.querySelectorAll(".mp-layout-card,.mp-frontmatter-card").forEach((card) => {
+    var _a;
+    ownStyle(card, `margin:${c.gap}em 0;padding:${c.padding}px;border-radius:${c.radius}px;box-shadow:none;text-align:left;box-sizing:border-box;max-width:100%;${frame}color:${palette.foreground};`);
+    card.querySelectorAll("*").forEach((item) => {
+      var _a2, _b, _c, _d;
+      if (item.tagName === "IMG") return;
+      const semantic = card.getAttribute("data-mp-layout") === "checklist" && item.tagName === "SPAN" && item === ((_a2 = item.parentElement) == null ? void 0 : _a2.firstElementChild);
+      const status = semantic && ((_b = item.textContent) == null ? void 0 : _b.trim()) === "\u2713" ? "#1a6c32" : semantic && ((_c = item.textContent) == null ? void 0 : _c.trim()) === "!" ? "#885100" : null;
+      const inline = item.style.display === "inline-flex";
+      ownStyle(item, joinReadingCss((_d = item.getAttribute("style")) != null ? _d : "", `color:${status != null ? status : palette.foreground};box-shadow:none;${item.style.backgroundColor ? `background:${palette.surface};` : ""}${inline ? "display:inline-block;width:auto;height:auto;min-width:1.7em;padding:.1em .3em;text-align:center;border-radius:.25em;" : item.style.display === "flex" ? "display:block;width:auto;" : ""}max-width:100%;box-sizing:border-box;`));
+    });
+    if (card.firstElementChild) ownStyle(card.firstElementChild, joinReadingCss((_a = card.firstElementChild.getAttribute("style")) != null ? _a : "", `color:${palette.accentText};`));
+    card.querySelectorAll(".mp-layout-author-card img").forEach((image) => {
+      var _a2;
+      return ownStyle(image, joinReadingCss((_a2 = image.getAttribute("style")) != null ? _a2 : "", "width:54px;height:54px;object-fit:cover;border-radius:50%;"));
+    });
+  });
+  const semanticCallouts2 = /* @__PURE__ */ new Set(["warning", "caution", "danger", "success", "check", "failure", "bug"]);
+  root.querySelectorAll(".mp-callout").forEach((callout) => {
+    var _a, _b;
+    const type = (_a = callout.getAttribute("data-callout-type")) != null ? _a : "";
+    if (semanticCallouts2.has(type)) {
+      const warning = type === "warning" || type === "caution", success = type === "success" || type === "check";
+      const foreground = warning ? "#885100" : success ? "#1a6c32" : "#9b2626";
+      const surface = warning ? "#fff5e6" : success ? "#eff8f0" : "#fff2f2";
+      ownStyle(callout, joinReadingCss((_b = callout.getAttribute("style")) != null ? _b : "", `background:${surface};`));
+      callout.querySelectorAll(".mp-callout-title").forEach((title) => {
+        var _a2;
+        return ownStyle(title, joinReadingCss((_a2 = title.getAttribute("style")) != null ? _a2 : "", `color:${foreground};display:block;`));
+      });
+      return;
+    }
+    ownStyle(callout, `margin:${c.gap}em 0;padding:${c.padding}px;border-radius:${c.radius}px;${frame}color:${palette.foreground};`);
+    callout.querySelectorAll(".mp-callout-title").forEach((title) => {
+      var _a2;
+      return ownStyle(title, joinReadingCss((_a2 = title.getAttribute("style")) != null ? _a2 : "", `color:${palette.accentText};display:block;`));
+    });
+  });
+}
+
 // src/core/theme/templateStylePlan.ts
-function applyStylePlan(root, styles, typography, profile) {
-  var _a, _b;
+function applyStylePlan(root, styles, typography, profile, modern = false) {
+  var _a, _b, _c, _d;
+  resetReadingSpecifics(root);
   const font = "font-family: " + typography.family + ";";
   const text2 = font + " font-size: " + typography.size + "px;";
+  const safe = "word-break:break-word;overflow-wrap:anywhere;box-sizing:border-box;";
+  const visual = (css, old, extra = "") => modern ? joinReadingCss(css.replace(/;\s*;/g, ";"), safe, extra) : appendWechatReadingBaseline(css, old);
   const rules = [
-    { selector: "p", css: appendWechatReadingBaseline(styles.paragraph + ";" + text2, wechatReadingBaseline.paragraph + " " + paragraphRhythm(profile)), include: (node) => {
+    { selector: "p", css: visual(styles.paragraph + ";" + text2, wechatReadingBaseline.paragraph + " " + paragraphRhythm(profile)), include: (node) => {
       var _a2;
       return !((_a2 = node.parentElement) == null ? void 0 : _a2.closest("p,blockquote"));
     } },
-    { selector: "ul,ol", css: appendWechatReadingBaseline(styles.list.container, wechatReadingBaseline.list) },
-    { selector: "li", css: appendWechatReadingBaseline(styles.list.item + ";" + text2, wechatReadingBaseline.listItem) },
-    { selector: ".task-list-item", css: appendWechatReadingBaseline(styles.list.taskList + ";" + text2, wechatReadingBaseline.listItem) },
-    { selector: "blockquote", css: appendWechatReadingBaseline(styles.quote + ";" + text2, wechatReadingBaseline.quote) },
-    { selector: "pre", css: appendWechatReadingBaseline(styles.code.block, wechatReadingBaseline.codeBlock) },
-    { selector: "code:not(pre code)", css: appendWechatReadingBaseline(styles.code.inline, wechatReadingBaseline.inlineCode) },
-    { selector: "a", css: appendWechatReadingBaseline(styles.link, wechatReadingBaseline.link) },
-    { selector: "strong", css: appendWechatReadingBaseline(styles.emphasis.strong, wechatReadingBaseline.emphasis) },
+    { selector: "ul,ol", css: visual(styles.list.container, wechatReadingBaseline.list) },
+    { selector: "li", css: visual(styles.list.item + ";" + text2, wechatReadingBaseline.listItem) },
+    { selector: ".task-list-item", css: visual(styles.list.taskList + ";" + text2, wechatReadingBaseline.listItem) },
+    { selector: "blockquote", css: visual(styles.quote + ";" + text2, wechatReadingBaseline.quote) },
+    { selector: "pre", css: visual(styles.code.block, wechatReadingBaseline.codeBlock, "max-width:100%;white-space:pre-wrap;") },
+    { selector: "code:not(pre code)", css: visual(styles.code.inline, wechatReadingBaseline.inlineCode) },
+    { selector: "a", css: visual(styles.link, wechatReadingBaseline.link) },
+    { selector: "strong", css: visual(styles.emphasis.strong, wechatReadingBaseline.emphasis) },
     { selector: "em", css: styles.emphasis.em },
     { selector: "del", css: styles.emphasis.del },
-    { selector: "table", css: appendWechatReadingBaseline(styles.table.container, wechatReadingBaseline.table) },
-    { selector: "th", css: appendWechatReadingBaseline(styles.table.header + ";" + text2, wechatReadingBaseline.tableCell) },
-    { selector: "td", css: appendWechatReadingBaseline(styles.table.cell + ";" + text2, wechatReadingBaseline.tableCell) },
+    { selector: "table", css: visual(styles.table.container, wechatReadingBaseline.table, "width:100%;max-width:100%;table-layout:auto;") },
+    { selector: "th", css: visual(styles.table.header + ";" + (modern ? font : text2), wechatReadingBaseline.tableCell, "vertical-align:top;") },
+    { selector: "td", css: visual(styles.table.cell + ";" + (modern ? font : text2), wechatReadingBaseline.tableCell, "vertical-align:top;") },
     { selector: "hr", css: styles.hr },
     { selector: ".footnote-ref", css: styles.footnote.ref },
     { selector: ".footnote-backref", css: styles.footnote.backref },
-    { selector: "img", css: appendWechatReadingBaseline(styles.image, wechatReadingBaseline.image) }
+    { selector: "img", css: visual(styles.image, wechatReadingBaseline.image, "max-width:100%;height:auto;") }
   ];
   for (const rule of rules) {
     for (const element of Array.from(root.querySelectorAll(rule.selector))) {
       if (!rule.include || rule.include(element)) setSafeInlineStyle(element, rule.css);
     }
   }
-  for (const heading of Array.from(root.querySelectorAll("h1,h2,h3,h4,h5,h6"))) {
-    let content = Array.from(heading.children).find((node) => node.classList.contains("content"));
+  if (modern) {
+    root.querySelectorAll("ol").forEach((node) => node.setCssStyles({ listStyleType: "decimal" }));
+    root.querySelectorAll("ul").forEach((node) => node.setCssStyles({ listStyleType: "disc" }));
+    root.querySelectorAll("blockquote").forEach((quote) => {
+      const paragraphs = Array.from(quote.querySelectorAll("p"));
+      paragraphs.forEach((paragraph, index) => ownStyle(paragraph, `color:inherit;font-family:inherit;font-size:inherit;line-height:inherit;margin:0 0 ${index === paragraphs.length - 1 ? "0" : ".6em"};${safe}`));
+    });
+    root.querySelectorAll("li > p").forEach((node) => ownStyle(node, "color:inherit;font:inherit;margin:0 0 .25em;" + safe));
+  }
+  for (const heading2 of Array.from(root.querySelectorAll("h1,h2,h3,h4,h5,h6"))) {
+    let content = Array.from(heading2.children).find((node) => node.classList.contains("content"));
     if (!content) {
-      content = heading.createSpan({ cls: "content" });
-      const nodes = Array.from(heading.childNodes).filter((node) => node !== content);
+      content = heading2.createSpan({ cls: "content" });
+      const nodes = Array.from(heading2.childNodes).filter((node) => node !== content);
       content.append(...nodes);
     }
-    let after = Array.from(heading.children).find((node) => node.classList.contains("after"));
-    if (!after) after = heading.createSpan({ cls: "after", attr: { "aria-hidden": "true" } });
-    const level = heading.tagName.toLowerCase();
-    const title = styles.title[level === "h1" || level === "h2" || level === "h3" ? level : "base"];
-    setSafeInlineStyle(heading, appendWechatReadingBaseline(title.base + ";" + font, level === "h1" ? wechatReadingBaseline.title : wechatReadingBaseline.sectionTitle));
+    let after = Array.from(heading2.children).find((node) => node.classList.contains("after"));
+    if (!after) after = heading2.createSpan({ cls: "after", attr: { "aria-hidden": "true" } });
+    const level = heading2.tagName.toLowerCase();
+    const title = (_a = styles.title[level]) != null ? _a : styles.title.base;
+    const first = modern && ((_b = heading2.parentElement) == null ? void 0 : _b.classList.contains("mp-content-section")) && heading2 === heading2.parentElement.firstElementChild;
+    setSafeInlineStyle(heading2, visual(title.base + ";" + font, level === "h1" ? wechatReadingBaseline.title : wechatReadingBaseline.sectionTitle, first ? "margin-top:0;" : ""));
     setSafeInlineStyle(content, title.content);
     setSafeInlineStyle(after, title.after);
   }
@@ -13204,7 +13422,7 @@ function applyStylePlan(root, styles, typography, profile) {
       setSafeInlineStyle(token, css);
     }
   }
-  const dialogue = (_a = styles.containers) == null ? void 0 : _a.dialogue;
+  const dialogue = (_c = styles.containers) == null ? void 0 : _c.dialogue;
   if (dialogue) {
     for (const block of Array.from(root.querySelectorAll('[data-container="dialogue"]'))) {
       if (dialogue.container) setSafeInlineStyle(block, dialogue.container);
@@ -13217,7 +13435,7 @@ function applyStylePlan(root, styles, typography, profile) {
       }
     }
   }
-  const gallery = (_b = styles.containers) == null ? void 0 : _b.gallery;
+  const gallery = (_d = styles.containers) == null ? void 0 : _d.gallery;
   if (gallery) {
     const mappings = { gallery: gallery.container, "gallery-title": gallery.title, "gallery-scroll": gallery.scroll, "gallery-item": gallery.item, "gallery-image": gallery.image };
     for (const [kind, css] of Object.entries(mappings)) {
@@ -13337,8 +13555,11 @@ var TemplateManager = class {
       this.warned.add(theme.id);
       new import_obsidian4.Notice("\u6B64\u4E3B\u9898\u542B\u4E0D\u5B89\u5168 CSS\uFF0C\u9884\u89C8\u4F1A\u8FC7\u6EE4\uFF1B\u4FDD\u5B58\u7684\u4E3B\u9898\u4FDD\u6301\u4E0D\u53D8\u3002");
     }
-    applyStylePlan(root, theme.styles, this.typography, (_c = (_b = getCuratedThemeEntry(theme.id)) == null ? void 0 : _b.readingProfile) != null ? _c : "standard");
-    applyWechatComponentPalette(root, resolveWechatPalette(theme));
+    applyStylePlan(root, theme.styles, this.typography, (_c = (_b = getCuratedThemeEntry(theme.id)) == null ? void 0 : _b.readingProfile) != null ? _c : "standard", !!theme.reading);
+    if (theme.reading) {
+      root.querySelectorAll(".mp-image-caption,figcaption").forEach((node) => ownStyle(node, theme.reading.captionCss));
+      applyReadingComponentRoles(root, resolveWechatPalette(theme), theme.reading);
+    } else applyWechatComponentPalette(root, resolveWechatPalette(theme));
   }
 };
 
@@ -13367,9 +13588,16 @@ var _BackgroundManager = class _BackgroundManager {
     console.warn(`\u672A\u627E\u5230\u80CC\u666F: ${id}`);
     return false;
   }
-  applyBackground(element) {
+  applyBackground(element, reading, typography = { family: DEFAULT_WECHAT_FONT_STACK, size: 16 }) {
+    var _a;
     const section = element.querySelector(".mp-content-section");
     if (section) {
+      if (reading) {
+        setSafeInlineStyle(section, readingRootCss(reading, typography, this.currentBackground));
+        section.setAttribute("data-mp-reading-background", ((_a = this.currentBackground) == null ? void 0 : _a.id) === "default" ? "theme" : "custom");
+        return;
+      }
+      section.removeAttribute("data-mp-reading-background");
       if (!this.currentBackground) {
         section.removeAttribute("style");
         return;
@@ -13614,448 +13842,6 @@ var ThemeGalleryPreview = class {
     this.imageCache.clear();
   }
 };
-
-// src/settings/ThemeGalleryModal.ts
-var CURATED_SCENE_ORDER = [...new Set(curatedThemeEntries.map((entry) => entry.scene))];
-var SCENE_ORDER = [
-  "\u5168\u90E8",
-  ...CURATED_SCENE_ORDER,
-  "\u81EA\u5B9A\u4E49\u4E3B\u9898"
-];
-function getThemeScene(template) {
-  if (!template.isPreset) return "\u81EA\u5B9A\u4E49\u4E3B\u9898";
-  const entry = getCuratedThemeEntry(template.id);
-  return (entry == null ? void 0 : entry.status) === "legacy" ? "\u5386\u53F2\u4E3B\u9898" : (entry == null ? void 0 : entry.scene) || "\u901A\u7528\u957F\u6587";
-}
-var ThemeGalleryModal = class extends import_obsidian6.Modal {
-  constructor(app, settingsManager, currentTemplateId, onSelect, previewCallback, options) {
-    var _a, _b;
-    super(app);
-    this.options = options;
-    this.selectedScene = "\u5168\u90E8";
-    this.searchQuery = "";
-    this.hasApplied = false;
-    this.gridContainer = null;
-    this.applyButton = null;
-    this.tryHintEl = null;
-    this.historyButton = null;
-    this.sceneBar = null;
-    this.preview = null;
-    this.previewGeneration = 0;
-    this.example = false;
-    this.compareSaved = false;
-    this.observer = null;
-    this.selector = null;
-    this.isClosed = false;
-    this.returnFocus = null;
-    this.statusEl = null;
-    this.cancelButton = null;
-    this.onKeyDown = (event) => {
-      var _a, _b, _c;
-      if (event.key === "Escape") {
-        event.preventDefault();
-        event.stopPropagation();
-        this.close();
-        return;
-      }
-      const target = event.target;
-      if (!(target == null ? void 0 : target.classList.contains("mp-theme-card")) || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
-      event.preventDefault();
-      const cards = Array.from((_b = (_a = this.gridContainer) == null ? void 0 : _a.querySelectorAll(".mp-theme-card")) != null ? _b : []);
-      const index = cards.indexOf(target);
-      (_c = cards[(index + (["ArrowLeft", "ArrowUp"].includes(event.key) ? -1 : 1) + cards.length) % cards.length]) == null ? void 0 : _c.focus();
-    };
-    this.transaction = new ThemeTrialSession(() => this.updateSavingState(), 1e4, (_a = this.contentEl.ownerDocument.defaultView) != null ? _a : window);
-    this.templates = settingsManager.getVisibleTemplates();
-    const hiddenCurrent = (_b = settingsManager.getTemplate) == null ? void 0 : _b.call(settingsManager, currentTemplateId);
-    if (hiddenCurrent && !this.templates.some((template) => template.id === currentTemplateId)) this.templates.push(hiddenCurrent);
-    this.originalTemplateId = currentTemplateId;
-    this.currentTemplateId = currentTemplateId;
-    this.onSelect = onSelect;
-    this.previewCallback = previewCallback;
-    const currentTemplate = this.templates.find((template) => template.id === currentTemplateId);
-    if (currentTemplate) this.selectedScene = getThemeScene(currentTemplate);
-  }
-  onOpen() {
-    const { contentEl, modalEl } = this;
-    modalEl.addClass("mp-theme-gallery-modal");
-    this.returnFocus = contentEl.ownerDocument.activeElement;
-    contentEl.empty();
-    const header = contentEl.createDiv("mp-gallery-header");
-    const heading = header.createDiv("mp-gallery-heading");
-    heading.createEl("h2", { text: "\u516C\u4F17\u53F7\u4E3B\u9898\u753B\u5ECA" });
-    heading.createEl("p", { text: "\u6BCF\u4E2A\u573A\u666F\u4E24\u5957\u4E0D\u540C\u7684\u9605\u8BFB\u7248\u5F0F\uFF1B\u70B9\u51FB\u4E3B\u9898\u5148\u8BD5\u7528\uFF0C\u518D\u786E\u8BA4\u5E94\u7528\u3002" });
-    const headerActions = header.createDiv("mp-gallery-header-actions");
-    const search = headerActions.createEl("input", {
-      cls: "mp-gallery-search",
-      attr: { type: "search", placeholder: "\u641C\u7D22\u4E3B\u9898\u6216\u6587\u7AE0\u573A\u666F", "aria-label": "\u641C\u7D22\u4E3B\u9898\u6216\u6587\u7AE0\u573A\u666F" }
-    });
-    search.addEventListener("input", () => {
-      this.searchQuery = search.value.trim().toLowerCase();
-      this.renderGallery();
-    });
-    this.historyButton = headerActions.createEl("button", {
-      cls: `mp-gallery-history-btn ${this.selectedScene === "\u5386\u53F2\u4E3B\u9898" ? "is-active" : ""}`,
-      attr: { type: "button", "aria-label": "\u67E5\u770B\u5386\u53F2\u4E3B\u9898", "aria-pressed": String(this.selectedScene === "\u5386\u53F2\u4E3B\u9898") }
-    });
-    (0, import_obsidian6.setIcon)(this.historyButton, "archive");
-    this.historyButton.createSpan({ text: "\u5386\u53F2\u4E3B\u9898" });
-    this.historyButton.addEventListener("click", () => this.activateScene("\u5386\u53F2\u4E3B\u9898"));
-    const body = contentEl.createDiv("mp-gallery-body");
-    const selector = body.createEl("details", { cls: "mp-gallery-selector" });
-    selector.open = false;
-    this.selector = selector;
-    const selectionSummary = selector.createEl("summary", { cls: "mp-gallery-selection-summary", text: "\u9009\u62E9\u4E3B\u9898" });
-    selectionSummary.setAttribute("aria-label", "\u5C55\u5F00\u4E3B\u9898\u9009\u62E9");
-    const sceneBar = selector.createDiv("mp-gallery-scenes");
-    this.sceneBar = sceneBar;
-    sceneBar.setAttribute("aria-label", "\u516C\u4F17\u53F7\u4E3B\u9898\u573A\u666F");
-    SCENE_ORDER.forEach((scene) => {
-      const count = this.getTemplatesForScene(scene).length;
-      if (count === 0 && scene !== "\u5168\u90E8") return;
-      const button = sceneBar.createEl("button", {
-        text: `${scene === "\u5168\u90E8" ? "\u5168\u90E8\u4E3B\u9898" : scene} \xB7 ${count}`,
-        cls: `mp-gallery-scene ${scene === this.selectedScene ? "is-active" : ""}`,
-        attr: { type: "button", "aria-pressed": String(scene === this.selectedScene) }
-      });
-      button.dataset.scene = scene;
-      button.addEventListener("click", () => this.activateScene(scene));
-    });
-    this.gridContainer = selector.createDiv("mp-gallery-grid");
-    this.renderGallery();
-    if (this.options) {
-      const previewColumn = body.createDiv("mp-gallery-preview-column");
-      const toggles = previewColumn.createDiv("mp-gallery-preview-toggles");
-      const addToggle = (labels, label, change) => {
-        const group = toggles.createDiv("mp-gallery-toggle-group");
-        group.setAttribute("role", "group");
-        group.setAttribute("aria-label", label);
-        labels.forEach((text2, index) => {
-          const button = group.createEl("button", { text: text2, attr: { type: "button", "aria-pressed": String(index === 0) } });
-          button.addEventListener("click", () => {
-            group.querySelectorAll("button").forEach((item, position) => item.setAttribute("aria-pressed", String(position === index)));
-            change(index === 1);
-            void this.refreshPreview().catch((error) => new import_obsidian6.Notice(`\u9884\u89C8\u5931\u8D25\uFF1A${error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF"}`));
-          });
-        });
-      };
-      addToggle(["\u5F53\u524D\u6587\u7AE0", "\u7EDF\u4E00\u793A\u4F8B"], "\u753B\u5ECA\u9884\u89C8\u6765\u6E90", (value) => {
-        this.example = value;
-      });
-      addToggle(["\u6B63\u5728\u8BD5\u7528", "\u5DF2\u4FDD\u5B58"], "\u753B\u5ECA\u5916\u89C2\u5BF9\u7167", (value) => {
-        this.compareSaved = value;
-      });
-      const previewHost = previewColumn.createDiv("mp-gallery-preview-host");
-      this.preview = new ThemeGalleryPreview(previewHost, this.options.fontFamily, this.options.fontSize, contentEl.ownerDocument.body.classList.contains("theme-dark"));
-      void this.refreshPreview().catch((error) => new import_obsidian6.Notice(`\u9884\u89C8\u5931\u8D25\uFF1A${error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF"}`));
-    } else selector.open = true;
-    const footer = contentEl.createDiv("mp-gallery-footer");
-    const trialInfo = footer.createDiv("mp-gallery-trial-info");
-    this.tryHintEl = trialInfo.createDiv("mp-gallery-try-hint");
-    this.statusEl = trialInfo.createDiv({ cls: "mp-gallery-trial-note", text: "\u8BD5\u7528\u4E0D\u4F1A\u4FDD\u5B58\u5230\u7B14\u8BB0\u8BBE\u7F6E\u3002" });
-    this.statusEl.setAttribute("role", "status");
-    this.updateTryHint();
-    const actions = footer.createDiv("mp-gallery-actions");
-    const cancel = actions.createEl("button", { text: "\u53D6\u6D88\u8BD5\u7528", cls: "mp-gallery-btn-cancel" });
-    this.cancelButton = cancel;
-    cancel.addEventListener("click", () => this.close());
-    this.applyButton = actions.createEl("button", { cls: "mp-gallery-btn-apply" });
-    this.updateApplyButton();
-    this.applyButton.addEventListener("click", () => {
-      const button = this.applyButton;
-      if (!button || button.disabled) return;
-      void this.transaction.apply(async () => {
-        if (this.options && !this.options.isValid()) throw new Error("\u6587\u7AE0\u6216\u5916\u89C2\u5DF2\u53D8\u5316\uFF0C\u8BF7\u91CD\u65B0\u6253\u5F00\u753B\u5ECA\u3002");
-        await this.onSelect(this.currentTemplateId);
-      }).then(() => {
-        var _a;
-        if (this.transaction.state !== "applied") return;
-        (_a = this.options) == null ? void 0 : _a.settled(true);
-        this.hasApplied = true;
-        this.close();
-      }).catch((error) => {
-        var _a;
-        if (this.isClosed) (_a = this.options) == null ? void 0 : _a.settled(false);
-        new import_obsidian6.Notice(`\u4E3B\u9898\u4FDD\u5B58\u5931\u8D25\uFF1A${error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF"}`);
-      });
-    });
-    contentEl.addEventListener("keydown", this.onKeyDown, true);
-    const win = contentEl.ownerDocument.defaultView;
-    if (this.options && (win == null ? void 0 : win.ResizeObserver)) {
-      this.observer = new win.ResizeObserver(() => this.updateLayout());
-      this.observer.observe(modalEl);
-    }
-    this.updateLayout();
-  }
-  get isSaving() {
-    return this.transaction.busy;
-  }
-  invalidate() {
-    this.close(true);
-  }
-  close(force = false) {
-    if (this.isClosed || !this.transaction.close(force)) return;
-    super.close();
-  }
-  onClose() {
-    var _a, _b, _c, _d;
-    this.isClosed = true;
-    ++this.previewGeneration;
-    (_a = this.observer) == null ? void 0 : _a.disconnect();
-    this.observer = null;
-    (_b = this.preview) == null ? void 0 : _b.destroy();
-    this.preview = null;
-    this.contentEl.removeEventListener("keydown", this.onKeyDown, true);
-    if (!this.transaction.busy && this.options && !this.hasApplied) this.options.cancel();
-    else if (!this.options && !this.hasApplied && this.currentTemplateId !== this.originalTemplateId) {
-      this.previewCallback(this.originalTemplateId);
-    }
-    (_c = this.options) == null ? void 0 : _c.disposed();
-    this.contentEl.empty();
-    if ((_d = this.returnFocus) == null ? void 0 : _d.isConnected) this.returnFocus.focus();
-  }
-  updateLayout() {
-    if (!this.options || this.isClosed) return;
-    const compact = this.modalEl.clientWidth < 820 || this.modalEl.clientHeight < 560;
-    this.modalEl.toggleClass("is-compact", compact);
-    this.modalEl.toggleClass("is-tiny", this.modalEl.clientWidth < 360 || this.modalEl.clientHeight < 430);
-    if (this.selector && compact !== this.compactLayout) this.selector.open = !compact;
-    this.compactLayout = compact;
-  }
-  updateSavingState() {
-    var _a;
-    if (this.isClosed) return;
-    const busy = this.transaction.busy;
-    this.contentEl.querySelectorAll("button,input").forEach((control) => {
-      control.disabled = busy;
-    });
-    if (this.cancelButton) {
-      this.cancelButton.disabled = this.transaction.state === "saving";
-      this.cancelButton.setText(this.transaction.state === "saving-unknown" ? "\u5173\u95ED\u7A97\u53E3" : "\u53D6\u6D88\u8BD5\u7528");
-    }
-    if (this.applyButton) {
-      this.applyButton.disabled = busy;
-      if (busy) this.applyButton.setText("\u4FDD\u5B58\u4E2D\u2026");
-      else this.updateApplyButton();
-    }
-    (_a = this.statusEl) == null ? void 0 : _a.setText(this.transaction.state === "saving-unknown" ? "\u4FDD\u5B58\u4ECD\u5728\u5904\u7406\u4E2D\uFF0C\u53EF\u5173\u95ED\u7A97\u53E3\u4F46\u7ED3\u679C\u5C1A\u672A\u786E\u5B9A\u3002" : busy ? "\u6B63\u5728\u4FDD\u5B58\uFF0C\u8BF7\u7A0D\u5019\u2026" : "\u8BD5\u7528\u4E0D\u4F1A\u4FDD\u5B58\u5230\u7B14\u8BB0\u8BBE\u7F6E\u3002");
-  }
-  async refreshPreview() {
-    var _a, _b;
-    if (!this.options || this.isClosed) return;
-    const generation = ++this.previewGeneration;
-    try {
-      const article = await this.options.renderPreview(this.currentTemplateId, this.compareSaved, this.example);
-      if (!this.isClosed && generation === this.previewGeneration) (_a = this.preview) == null ? void 0 : _a.show(article);
-    } catch (error) {
-      if (!this.isClosed && generation === this.previewGeneration) {
-        (_b = this.statusEl) == null ? void 0 : _b.setText("\u9884\u89C8\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5\u6216\u53D6\u6D88\u3002");
-        throw error;
-      }
-    }
-  }
-  activateScene(scene) {
-    var _a, _b, _c;
-    this.selectedScene = scene;
-    (_a = this.sceneBar) == null ? void 0 : _a.querySelectorAll(".mp-gallery-scene").forEach((element) => {
-      const button = element;
-      const active = button.dataset.scene === scene;
-      button.toggleClass("is-active", active);
-      button.setAttribute("aria-pressed", String(active));
-    });
-    (_b = this.historyButton) == null ? void 0 : _b.toggleClass("is-active", scene === "\u5386\u53F2\u4E3B\u9898");
-    (_c = this.historyButton) == null ? void 0 : _c.setAttribute("aria-pressed", String(scene === "\u5386\u53F2\u4E3B\u9898"));
-    this.renderGallery();
-  }
-  getTemplatesForScene(scene) {
-    return this.templates.filter((template) => {
-      const themeScene = getThemeScene(template);
-      return scene === "\u5168\u90E8" ? themeScene !== "\u5386\u53F2\u4E3B\u9898" : themeScene === scene;
-    });
-  }
-  matchesSearch(template) {
-    if (!this.searchQuery) return true;
-    return [template.id, template.name, template.description || "", getThemeScene(template)].join(" ").toLowerCase().includes(this.searchQuery);
-  }
-  getVisibleTemplates() {
-    return this.getTemplatesForScene(this.selectedScene).filter((template) => this.matchesSearch(template));
-  }
-  renderGallery() {
-    if (!this.gridContainer) return;
-    this.gridContainer.empty();
-    const templates2 = this.getVisibleTemplates();
-    if (templates2.length === 0) {
-      this.gridContainer.createDiv({ cls: "mp-gallery-empty", text: "\u6CA1\u6709\u5339\u914D\u7684\u4E3B\u9898\uFF0C\u6362\u4E2A\u573A\u666F\u6216\u5173\u952E\u8BCD\u8BD5\u8BD5\u3002" });
-      return;
-    }
-    const grouped = this.selectedScene === "\u5168\u90E8";
-    const scenes = grouped ? SCENE_ORDER.filter((scene) => scene !== "\u5168\u90E8" && scene !== "\u5386\u53F2\u4E3B\u9898") : [this.selectedScene];
-    scenes.forEach((scene) => {
-      const sceneTemplates = grouped ? templates2.filter((template) => getThemeScene(template) === scene) : templates2;
-      if (sceneTemplates.length === 0) return;
-      this.gridContainer.createEl("h3", {
-        cls: "mp-gallery-section-title",
-        text: grouped ? scene : `${scene} \xB7 ${sceneTemplates.length} \u4E2A\u4E3B\u9898`
-      });
-      const cardGrid = this.gridContainer.createDiv("mp-gallery-card-grid");
-      sceneTemplates.forEach((template) => this.renderThemeCard(cardGrid, template));
-    });
-  }
-  renderThemeCard(container, template) {
-    const selected = template.id === this.currentTemplateId;
-    const card = container.createEl("button", {
-      cls: `mp-theme-card ${selected ? "is-selected" : ""}`,
-      attr: {
-        type: "button",
-        "aria-pressed": selected ? "true" : "false",
-        title: `\u8BD5\u7528\u4E3B\u9898\uFF1A${template.name}`
-      }
-    });
-    card.dataset.themeId = template.id;
-    const info = card.createDiv("mp-theme-info");
-    info.createEl("strong", { text: template.name, cls: "mp-theme-name" });
-    if (selected) {
-      const check = info.createDiv("mp-theme-checkmark");
-      (0, import_obsidian6.setIcon)(check, "check");
-    }
-    card.addEventListener("click", () => {
-      var _a;
-      if (this.transaction.busy) return;
-      this.currentTemplateId = template.id;
-      void this.transaction.preview(async (isCurrent) => {
-        if (!isCurrent()) return;
-        this.previewCallback(template.id);
-        await this.refreshPreview();
-      });
-      this.updateApplyButton();
-      this.updateTryHint();
-      (_a = this.gridContainer) == null ? void 0 : _a.querySelectorAll(".mp-theme-card").forEach((button) => {
-        var _a2, _b;
-        const active = button.dataset.themeId === template.id;
-        button.toggleClass("is-selected", active);
-        button.setAttribute("aria-pressed", String(active));
-        (_a2 = button.querySelector(".mp-theme-checkmark")) == null ? void 0 : _a2.remove();
-        if (active) {
-          const check = (_b = button.querySelector(".mp-theme-info")) == null ? void 0 : _b.createDiv("mp-theme-checkmark");
-          if (check) (0, import_obsidian6.setIcon)(check, "check");
-        }
-      });
-    });
-  }
-  updateApplyButton() {
-    var _a, _b;
-    if (!this.applyButton) return;
-    const template = this.templates.find((item) => item.id === this.currentTemplateId);
-    (_b = (_a = this.selector) == null ? void 0 : _a.querySelector("summary")) == null ? void 0 : _b.setText(`\u9009\u62E9\u4E3B\u9898 \xB7 ${(template == null ? void 0 : template.name) || "\u5F53\u524D\u4E3B\u9898"}`);
-    this.applyButton.setText(`\u5E94\u7528\u300C${(template == null ? void 0 : template.name) || "\u4E3B\u9898"}\u300D`);
-  }
-  updateTryHint() {
-    if (!this.tryHintEl) return;
-    const template = this.templates.find((item) => item.id === this.currentTemplateId);
-    const description = template ? this.getTemplateDescription(template) : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
-    this.tryHintEl.setText(`\u63A8\u8350\u4F5C\u7528\uFF1A${description}`);
-  }
-  getTemplateDescription(template) {
-    var _a, _b, _c;
-    const curatedRecommendation = ((_a = getCuratedThemeEntry(template.id)) == null ? void 0 : _a.recommendation) || ((_b = template.themeMeta) == null ? void 0 : _b.recommendation);
-    if (curatedRecommendation) return curatedRecommendation;
-    const description = (_c = template.description) == null ? void 0 : _c.trim();
-    return description ? description.split("\uFF08")[0].trim() : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
-  }
-};
-
-// src/ui/CustomSelect.ts
-var import_obsidian7 = require("obsidian");
-function createCustomSelect(parent, className, initialOptions, onChange) {
-  const container = parent.createDiv({ cls: `custom-select-container ${className}` });
-  const select = container.createEl("select", { cls: "custom-select dropdown", attr: { "aria-label": className.includes("font") ? "\u5B57\u4F53" : className.includes("background") ? "\u80CC\u666F" : "\u5C40\u90E8\u6392\u7248\u589E\u5F3A" } });
-  const updateTitle = () => {
-    var _a;
-    select.title = ((_a = select.selectedOptions[0]) == null ? void 0 : _a.textContent) || "";
-  };
-  const render = (options) => {
-    const current = select.value;
-    select.empty();
-    let group = null;
-    for (const option of options) {
-      if (option.header) {
-        group = select.createEl("optgroup", { attr: { label: option.label } });
-        continue;
-      }
-      (group || select).createEl("option", { text: option.label, attr: { value: option.value } });
-    }
-    if (options.some((option) => !option.header && option.value === current)) select.value = current;
-    select.dataset.value = select.value;
-    updateTitle();
-  };
-  render(initialOptions);
-  select.addEventListener("change", () => {
-    const previous = select.dataset.value || "";
-    const value = select.value;
-    select.disabled = true;
-    void Promise.resolve().then(() => onChange(value)).then(() => {
-      select.dataset.value = value;
-    }).catch((error) => {
-      select.value = previous;
-      select.dataset.value = previous;
-      new import_obsidian7.Notice(`\u8BBE\u7F6E\u5931\u8D25\uFF1A${error instanceof Error ? error.message : String(error)}`);
-    }).finally(() => {
-      updateTitle();
-      select.disabled = false;
-    });
-  });
-  return { container, updateOptions: render, setValue: (value) => {
-    if (!Array.from(select.options).some((option) => option.value === value)) select.createEl("option", { text: className.includes("font") ? "\u5F53\u524D\u5B57\u4F53" : className.includes("background") ? "\u5F53\u524D\u80CC\u666F" : "\u5F53\u524D\u589E\u5F3A\u6548\u679C", attr: { value } });
-    select.value = value;
-    select.dataset.value = value;
-    updateTitle();
-  } };
-}
-
-// src/ui/ImageAltModal.ts
-var import_obsidian8 = require("obsidian");
-async function handleImageAltEdit(app, currentFile, img) {
-  const currentAlt = img.getAttribute("alt") || "";
-  const linktext = img.dataset.linktext;
-  const newAlt = window.prompt("\u7F16\u8F91\u56FE\u7247\u6CE8\u91CA (Alt Text):", currentAlt);
-  if (newAlt === null || newAlt === currentAlt) return;
-  try {
-    let fileContent = await app.vault.read(currentFile);
-    let newFileContent = fileContent;
-    let replaced = false;
-    if (linktext) {
-      const escapedLinktext = linktext.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      const wikiRegex = new RegExp(`!\\[\\[\\s*${escapedLinktext}\\s*(?:\\|.*?)?\\]\\]`);
-      if (wikiRegex.test(newFileContent)) {
-        newFileContent = newFileContent.replace(wikiRegex, `![[${linktext}|${newAlt}]]`);
-        replaced = true;
-      }
-    }
-    if (!replaced) {
-      const escapedAlt = currentAlt.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      const stdRegex = new RegExp(`!\\[\\s*${escapedAlt}\\s*\\]\\(`);
-      if (stdRegex.test(newFileContent)) {
-        newFileContent = newFileContent.replace(stdRegex, `![${newAlt}](`);
-        replaced = true;
-      } else if (currentAlt) {
-        const wikiAltRegex = new RegExp(`\\|\\s*${escapedAlt}\\s*\\]\\]`);
-        if (wikiAltRegex.test(newFileContent)) {
-          newFileContent = newFileContent.replace(wikiAltRegex, `|${newAlt}]]`);
-          replaced = true;
-        }
-      }
-    }
-    if (replaced) {
-      await app.vault.modify(currentFile, newFileContent);
-      new import_obsidian8.Notice("\u56FE\u7247\u6CE8\u91CA\u5DF2\u66F4\u65B0");
-    } else {
-      new import_obsidian8.Notice("\u65E0\u6CD5\u5728\u6587\u6863\u4E2D\u7CBE\u786E\u5B9A\u4F4D\u6B64\u56FE\u7247\uFF0C\u8BF7\u68C0\u67E5\u662F\u5426\u4E3A\u6807\u51C6\u683C\u5F0F\u3002");
-    }
-  } catch (err) {
-    console.error("Failed to update image alt text", err);
-    new import_obsidian8.Notice("\u66F4\u65B0\u5931\u8D25");
-  }
-}
 
 // src/core/theme/legacy-3.19.1.json
 var legacy_3_19_1_default = {
@@ -15382,21 +15168,505 @@ function legacyTheme(id) {
   const definition = legacy_3_19_1_default[id];
   return definition ? { ...structuredClone(definition), isPreset: true } : void 0;
 }
+function readingTheme(id) {
+  const base = legacyTheme(id);
+  return base ? buildReadingTheme(base) : void 0;
+}
+function latestThemeReference(template) {
+  return template.isPreset && hasReadingTheme(template.id) ? { id: template.id, kind: "builtin", revision: READING_THEME_REVISION } : themeReference(template);
+}
+function isSupportedThemeRevision(id, revision) {
+  return revision === LEGACY_THEME_REVISION || revision === READING_THEME_REVISION && hasReadingTheme(id);
+}
 function isAppearanceV1(value) {
   if (!value || typeof value !== "object") return false;
   const object = value;
   return object.schemaVersion === 1 && !!object.referencesById && typeof object.referencesById === "object" && !Array.isArray(object.referencesById) && !!object.preferencesByReference && typeof object.preferencesByReference === "object" && !Array.isArray(object.preferencesByReference);
 }
-function migrateWechatAppearance(value, templates2) {
+function migrateWechatAppearance(value, templates2, fresh = false) {
   if (value !== void 0) return structuredClone(value);
-  return {
-    schemaVersion: 1,
-    referencesById: Object.fromEntries(templates2.map((template) => [template.id, themeReference(template)])),
-    preferencesByReference: Object.fromEntries(templates2.map((template) => {
-      const ref = themeReference(template);
-      return [`${ref.id}@${ref.revision}`, originalPreferences()];
-    }))
+  const references = templates2.map((template) => fresh ? latestThemeReference(template) : themeReference(template));
+  const referencesById = /* @__PURE__ */ Object.create(null);
+  const preferencesByReference = {};
+  for (const ref of references) {
+    referencesById[ref.id] = ref;
+    preferencesByReference[`${ref.id}@${ref.revision}`] = originalPreferences();
+  }
+  return { schemaVersion: 1, referencesById, preferencesByReference };
+}
+
+// src/settings/ThemeGalleryModal.ts
+var CURATED_SCENE_ORDER = [...new Set(curatedThemeEntries.map((entry) => entry.scene))];
+var SCENE_ORDER = [
+  "\u5168\u90E8",
+  ...CURATED_SCENE_ORDER,
+  "\u81EA\u5B9A\u4E49\u4E3B\u9898"
+];
+function getThemeScene(template) {
+  if (!template.isPreset) return "\u81EA\u5B9A\u4E49\u4E3B\u9898";
+  const entry = getCuratedThemeEntry(template.id);
+  return (entry == null ? void 0 : entry.status) === "legacy" ? "\u5386\u53F2\u4E3B\u9898" : (entry == null ? void 0 : entry.scene) || "\u901A\u7528\u957F\u6587";
+}
+var ThemeGalleryModal = class extends import_obsidian6.Modal {
+  constructor(app, settingsManager, currentTemplateId, onSelect, previewCallback, options) {
+    var _a, _b, _c, _d, _e;
+    super(app);
+    this.options = options;
+    this.revisionButton = null;
+    this.revisionHint = null;
+    this.selectedScene = "\u5168\u90E8";
+    this.searchQuery = "";
+    this.hasApplied = false;
+    this.gridContainer = null;
+    this.applyButton = null;
+    this.tryHintEl = null;
+    this.historyButton = null;
+    this.sceneBar = null;
+    this.preview = null;
+    this.previewGeneration = 0;
+    this.example = false;
+    this.compareSaved = false;
+    this.observer = null;
+    this.selector = null;
+    this.isClosed = false;
+    this.returnFocus = null;
+    this.statusEl = null;
+    this.cancelButton = null;
+    this.onKeyDown = (event) => {
+      var _a, _b, _c;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        this.close();
+        return;
+      }
+      const target = event.target;
+      if (!(target == null ? void 0 : target.classList.contains("mp-theme-card")) || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
+      event.preventDefault();
+      const cards = Array.from((_b = (_a = this.gridContainer) == null ? void 0 : _a.querySelectorAll(".mp-theme-card")) != null ? _b : []);
+      const index = cards.indexOf(target);
+      (_c = cards[(index + (["ArrowLeft", "ArrowUp"].includes(event.key) ? -1 : 1) + cards.length) % cards.length]) == null ? void 0 : _c.focus();
+    };
+    this.transaction = new ThemeTrialSession(() => this.updateSavingState(), 1e4, (_a = this.contentEl.ownerDocument.defaultView) != null ? _a : window);
+    this.templates = settingsManager.getVisibleTemplates();
+    const hiddenCurrent = (_b = settingsManager.getTemplate) == null ? void 0 : _b.call(settingsManager, currentTemplateId);
+    if (hiddenCurrent && !this.templates.some((template) => template.id === currentTemplateId)) this.templates.push(hiddenCurrent);
+    this.originalTemplateId = currentTemplateId;
+    this.currentTemplateId = currentTemplateId;
+    const settings = (_c = settingsManager.getSettings) == null ? void 0 : _c.call(settingsManager);
+    const saved = settings && isAppearanceV1(settings.wechatAppearance) ? settings.wechatAppearance.referencesById[currentTemplateId] : void 0;
+    this.originalRevision = (saved == null ? void 0 : saved.id) === currentTemplateId && isSupportedThemeRevision(currentTemplateId, saved.revision) ? saved.revision : LEGACY_THEME_REVISION;
+    this.currentRevision = this.originalRevision;
+    this.enhancementLabel = (_e = (_d = recipeOptions.find((item) => item.value === (settings == null ? void 0 : settings.v3.selectedRecipeId))) == null ? void 0 : _d.label) != null ? _e : "\u4E0D\u989D\u5916\u589E\u5F3A";
+    this.onSelect = onSelect;
+    this.previewCallback = previewCallback;
+    const currentTemplate = this.templates.find((template) => template.id === currentTemplateId);
+    if (currentTemplate) this.selectedScene = getThemeScene(currentTemplate);
+  }
+  onOpen() {
+    const { contentEl, modalEl } = this;
+    modalEl.addClass("mp-theme-gallery-modal");
+    this.returnFocus = contentEl.ownerDocument.activeElement;
+    contentEl.empty();
+    const header = contentEl.createDiv("mp-gallery-header");
+    const heading2 = header.createDiv("mp-gallery-heading");
+    heading2.createEl("h2", { text: "\u516C\u4F17\u53F7\u4E3B\u9898\u753B\u5ECA" });
+    heading2.createEl("p", { text: "\u6BCF\u4E2A\u573A\u666F\u4E24\u5957\u4E0D\u540C\u7684\u9605\u8BFB\u7248\u5F0F\uFF1B\u70B9\u51FB\u4E3B\u9898\u5148\u8BD5\u7528\uFF0C\u518D\u786E\u8BA4\u5E94\u7528\u3002" });
+    const headerActions = header.createDiv("mp-gallery-header-actions");
+    const search = headerActions.createEl("input", {
+      cls: "mp-gallery-search",
+      attr: { type: "search", placeholder: "\u641C\u7D22\u4E3B\u9898\u6216\u6587\u7AE0\u573A\u666F", "aria-label": "\u641C\u7D22\u4E3B\u9898\u6216\u6587\u7AE0\u573A\u666F" }
+    });
+    search.addEventListener("input", () => {
+      this.searchQuery = search.value.trim().toLowerCase();
+      this.renderGallery();
+    });
+    this.historyButton = headerActions.createEl("button", {
+      cls: `mp-gallery-history-btn ${this.selectedScene === "\u5386\u53F2\u4E3B\u9898" ? "is-active" : ""}`,
+      attr: { type: "button", "aria-label": "\u67E5\u770B\u5386\u53F2\u4E3B\u9898", "aria-pressed": String(this.selectedScene === "\u5386\u53F2\u4E3B\u9898") }
+    });
+    (0, import_obsidian6.setIcon)(this.historyButton, "archive");
+    this.historyButton.createSpan({ text: "\u5386\u53F2\u4E3B\u9898" });
+    this.historyButton.addEventListener("click", () => this.activateScene("\u5386\u53F2\u4E3B\u9898"));
+    const body = contentEl.createDiv("mp-gallery-body");
+    const selector = body.createEl("details", { cls: "mp-gallery-selector" });
+    selector.open = false;
+    this.selector = selector;
+    const selectionSummary = selector.createEl("summary", { cls: "mp-gallery-selection-summary", text: "\u9009\u62E9\u4E3B\u9898" });
+    selectionSummary.setAttribute("aria-label", "\u5C55\u5F00\u4E3B\u9898\u9009\u62E9");
+    const sceneBar = selector.createDiv("mp-gallery-scenes");
+    this.sceneBar = sceneBar;
+    sceneBar.setAttribute("aria-label", "\u516C\u4F17\u53F7\u4E3B\u9898\u573A\u666F");
+    SCENE_ORDER.forEach((scene) => {
+      const count = this.getTemplatesForScene(scene).length;
+      if (count === 0 && scene !== "\u5168\u90E8") return;
+      const button = sceneBar.createEl("button", {
+        text: `${scene === "\u5168\u90E8" ? "\u5168\u90E8\u4E3B\u9898" : scene} \xB7 ${count}`,
+        cls: `mp-gallery-scene ${scene === this.selectedScene ? "is-active" : ""}`,
+        attr: { type: "button", "aria-pressed": String(scene === this.selectedScene) }
+      });
+      button.dataset.scene = scene;
+      button.addEventListener("click", () => this.activateScene(scene));
+    });
+    this.gridContainer = selector.createDiv("mp-gallery-grid");
+    this.renderGallery();
+    if (this.options) {
+      const previewColumn = body.createDiv("mp-gallery-preview-column");
+      const toggles = previewColumn.createDiv("mp-gallery-preview-toggles");
+      const addToggle = (labels, label, change) => {
+        const group = toggles.createDiv("mp-gallery-toggle-group");
+        group.setAttribute("role", "group");
+        group.setAttribute("aria-label", label);
+        labels.forEach((text2, index) => {
+          const button = group.createEl("button", { text: text2, attr: { type: "button", "aria-pressed": String(index === 0) } });
+          button.addEventListener("click", () => {
+            group.querySelectorAll("button").forEach((item, position) => item.setAttribute("aria-pressed", String(position === index)));
+            change(index === 1);
+            void this.refreshPreview().catch((error) => new import_obsidian6.Notice(`\u9884\u89C8\u5931\u8D25\uFF1A${error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF"}`));
+          });
+        });
+      };
+      addToggle(["\u5F53\u524D\u6587\u7AE0", "\u7EDF\u4E00\u793A\u4F8B"], "\u753B\u5ECA\u9884\u89C8\u6765\u6E90", (value) => {
+        this.example = value;
+      });
+      addToggle(["\u6B63\u5728\u8BD5\u7528", "\u5DF2\u4FDD\u5B58"], "\u753B\u5ECA\u5916\u89C2\u5BF9\u7167", (value) => {
+        this.compareSaved = value;
+      });
+      const previewHost = previewColumn.createDiv("mp-gallery-preview-host");
+      this.preview = new ThemeGalleryPreview(previewHost, this.options.fontFamily, this.options.fontSize, contentEl.ownerDocument.body.classList.contains("theme-dark"));
+      void this.refreshPreview().catch((error) => new import_obsidian6.Notice(`\u9884\u89C8\u5931\u8D25\uFF1A${error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF"}`));
+    } else selector.open = true;
+    const footer = contentEl.createDiv("mp-gallery-footer");
+    const trialInfo = footer.createDiv("mp-gallery-trial-info");
+    this.tryHintEl = trialInfo.createDiv("mp-gallery-try-hint");
+    const revisionRow = trialInfo.createDiv("mp-gallery-revision-row");
+    this.revisionHint = revisionRow.createDiv("mp-gallery-trial-note");
+    this.revisionButton = revisionRow.createEl("button", { cls: "mp-gallery-revision-btn", attr: { type: "button" } });
+    this.revisionButton.addEventListener("click", () => {
+      if (this.transaction.busy) return;
+      this.currentRevision = this.currentRevision === READING_THEME_REVISION ? LEGACY_THEME_REVISION : READING_THEME_REVISION;
+      void this.transaction.preview(async (isCurrent) => {
+        if (!isCurrent()) return;
+        this.previewCallback(this.currentTemplateId, this.currentRevision);
+        await this.refreshPreview();
+      });
+      this.updateTryHint();
+    });
+    this.statusEl = trialInfo.createDiv({ cls: "mp-gallery-trial-note", text: "\u8BD5\u7528\u4E0D\u4F1A\u4FDD\u5B58\u5230\u7B14\u8BB0\u8BBE\u7F6E\u3002" });
+    this.statusEl.setAttribute("role", "status");
+    this.updateTryHint();
+    const actions = footer.createDiv("mp-gallery-actions");
+    const cancel = actions.createEl("button", { text: "\u53D6\u6D88\u8BD5\u7528", cls: "mp-gallery-btn-cancel" });
+    this.cancelButton = cancel;
+    cancel.addEventListener("click", () => this.close());
+    this.applyButton = actions.createEl("button", { cls: "mp-gallery-btn-apply" });
+    this.updateApplyButton();
+    this.applyButton.addEventListener("click", () => {
+      const button = this.applyButton;
+      if (!button || button.disabled) return;
+      void this.transaction.apply(async () => {
+        if (this.options && !this.options.isValid()) throw new Error("\u6587\u7AE0\u6216\u5916\u89C2\u5DF2\u53D8\u5316\uFF0C\u8BF7\u91CD\u65B0\u6253\u5F00\u753B\u5ECA\u3002");
+        await this.onSelect(this.currentTemplateId, this.currentRevision);
+      }).then(() => {
+        var _a;
+        if (this.transaction.state !== "applied") return;
+        (_a = this.options) == null ? void 0 : _a.settled(true);
+        this.hasApplied = true;
+        this.close();
+      }).catch((error) => {
+        var _a;
+        if (this.isClosed) (_a = this.options) == null ? void 0 : _a.settled(false);
+        new import_obsidian6.Notice(`\u4E3B\u9898\u4FDD\u5B58\u5931\u8D25\uFF1A${error instanceof Error ? error.message : "\u672A\u77E5\u9519\u8BEF"}`);
+      });
+    });
+    contentEl.addEventListener("keydown", this.onKeyDown, true);
+    const win = contentEl.ownerDocument.defaultView;
+    if (this.options && (win == null ? void 0 : win.ResizeObserver)) {
+      this.observer = new win.ResizeObserver(() => this.updateLayout());
+      this.observer.observe(modalEl);
+    }
+    this.updateLayout();
+  }
+  get isSaving() {
+    return this.transaction.busy;
+  }
+  invalidate() {
+    this.close(true);
+  }
+  close(force = false) {
+    if (this.isClosed || !this.transaction.close(force)) return;
+    super.close();
+  }
+  onClose() {
+    var _a, _b, _c, _d;
+    this.isClosed = true;
+    ++this.previewGeneration;
+    (_a = this.observer) == null ? void 0 : _a.disconnect();
+    this.observer = null;
+    (_b = this.preview) == null ? void 0 : _b.destroy();
+    this.preview = null;
+    this.contentEl.removeEventListener("keydown", this.onKeyDown, true);
+    if (!this.transaction.busy && this.options && !this.hasApplied) this.options.cancel();
+    else if (!this.options && !this.hasApplied && (this.currentTemplateId !== this.originalTemplateId || this.currentRevision !== this.originalRevision)) {
+      this.previewCallback(this.originalTemplateId, this.originalRevision);
+    }
+    (_c = this.options) == null ? void 0 : _c.disposed();
+    this.contentEl.empty();
+    if ((_d = this.returnFocus) == null ? void 0 : _d.isConnected) this.returnFocus.focus();
+  }
+  updateLayout() {
+    if (!this.options || this.isClosed) return;
+    const compact = this.modalEl.clientWidth < 820 || this.modalEl.clientHeight < 560;
+    this.modalEl.toggleClass("is-compact", compact);
+    this.modalEl.toggleClass("is-tiny", this.modalEl.clientWidth < 360 || this.modalEl.clientHeight < 430);
+    if (this.selector && compact !== this.compactLayout) this.selector.open = !compact;
+    this.compactLayout = compact;
+  }
+  updateSavingState() {
+    var _a;
+    if (this.isClosed) return;
+    const busy = this.transaction.busy;
+    this.modalEl.toggleClass("is-saving", busy);
+    this.contentEl.querySelectorAll("button,input").forEach((control) => {
+      control.disabled = busy;
+    });
+    if (this.cancelButton) {
+      this.cancelButton.disabled = this.transaction.state === "saving";
+      this.cancelButton.setText(this.transaction.state === "saving-unknown" ? "\u5173\u95ED\u7A97\u53E3" : "\u53D6\u6D88\u8BD5\u7528");
+    }
+    if (this.applyButton) {
+      this.applyButton.disabled = busy;
+      if (busy) this.applyButton.setText("\u4FDD\u5B58\u4E2D\u2026");
+      else this.updateApplyButton();
+    }
+    (_a = this.statusEl) == null ? void 0 : _a.setText(this.transaction.state === "saving-unknown" ? "\u4FDD\u5B58\u4ECD\u5728\u5904\u7406\u4E2D\uFF0C\u53EF\u5173\u95ED\u7A97\u53E3\u4F46\u7ED3\u679C\u5C1A\u672A\u786E\u5B9A\u3002" : busy ? "\u6B63\u5728\u4FDD\u5B58\uFF0C\u8BF7\u7A0D\u5019\u2026" : "\u8BD5\u7528\u4E0D\u4F1A\u4FDD\u5B58\u5230\u7B14\u8BB0\u8BBE\u7F6E\u3002");
+  }
+  async refreshPreview() {
+    var _a, _b;
+    if (!this.options || this.isClosed) return;
+    const generation = ++this.previewGeneration;
+    try {
+      const article = await this.options.renderPreview(this.currentTemplateId, this.compareSaved, this.example, this.currentRevision);
+      if (!this.isClosed && generation === this.previewGeneration) (_a = this.preview) == null ? void 0 : _a.show(article);
+    } catch (error) {
+      if (!this.isClosed && generation === this.previewGeneration) {
+        (_b = this.statusEl) == null ? void 0 : _b.setText("\u9884\u89C8\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5\u6216\u53D6\u6D88\u3002");
+        throw error;
+      }
+    }
+  }
+  activateScene(scene) {
+    var _a, _b, _c;
+    this.selectedScene = scene;
+    (_a = this.sceneBar) == null ? void 0 : _a.querySelectorAll(".mp-gallery-scene").forEach((element) => {
+      const button = element;
+      const active = button.dataset.scene === scene;
+      button.toggleClass("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    (_b = this.historyButton) == null ? void 0 : _b.toggleClass("is-active", scene === "\u5386\u53F2\u4E3B\u9898");
+    (_c = this.historyButton) == null ? void 0 : _c.setAttribute("aria-pressed", String(scene === "\u5386\u53F2\u4E3B\u9898"));
+    this.renderGallery();
+  }
+  getTemplatesForScene(scene) {
+    return this.templates.filter((template) => {
+      const themeScene = getThemeScene(template);
+      return scene === "\u5168\u90E8" ? themeScene !== "\u5386\u53F2\u4E3B\u9898" : themeScene === scene;
+    });
+  }
+  matchesSearch(template) {
+    if (!this.searchQuery) return true;
+    return [template.id, template.name, template.description || "", getThemeScene(template)].join(" ").toLowerCase().includes(this.searchQuery);
+  }
+  getVisibleTemplates() {
+    return this.getTemplatesForScene(this.selectedScene).filter((template) => this.matchesSearch(template));
+  }
+  renderGallery() {
+    if (!this.gridContainer) return;
+    this.gridContainer.empty();
+    const templates2 = this.getVisibleTemplates();
+    if (templates2.length === 0) {
+      this.gridContainer.createDiv({ cls: "mp-gallery-empty", text: "\u6CA1\u6709\u5339\u914D\u7684\u4E3B\u9898\uFF0C\u6362\u4E2A\u573A\u666F\u6216\u5173\u952E\u8BCD\u8BD5\u8BD5\u3002" });
+      return;
+    }
+    const grouped = this.selectedScene === "\u5168\u90E8";
+    const scenes = grouped ? SCENE_ORDER.filter((scene) => scene !== "\u5168\u90E8" && scene !== "\u5386\u53F2\u4E3B\u9898") : [this.selectedScene];
+    scenes.forEach((scene) => {
+      const sceneTemplates = grouped ? templates2.filter((template) => getThemeScene(template) === scene) : templates2;
+      if (sceneTemplates.length === 0) return;
+      this.gridContainer.createEl("h3", {
+        cls: "mp-gallery-section-title",
+        text: grouped ? scene : `${scene} \xB7 ${sceneTemplates.length} \u4E2A\u4E3B\u9898`
+      });
+      const cardGrid = this.gridContainer.createDiv("mp-gallery-card-grid");
+      sceneTemplates.forEach((template) => this.renderThemeCard(cardGrid, template));
+    });
+  }
+  renderThemeCard(container, template) {
+    const selected = template.id === this.currentTemplateId;
+    const card = container.createEl("button", {
+      cls: `mp-theme-card ${selected ? "is-selected" : ""}`,
+      attr: {
+        type: "button",
+        "aria-pressed": selected ? "true" : "false",
+        title: `\u8BD5\u7528\u4E3B\u9898\uFF1A${template.name}`
+      }
+    });
+    card.dataset.themeId = template.id;
+    const info = card.createDiv("mp-theme-info");
+    info.createEl("strong", { text: template.name, cls: "mp-theme-name" });
+    if (selected) {
+      const check = info.createDiv("mp-theme-checkmark");
+      (0, import_obsidian6.setIcon)(check, "check");
+    }
+    card.addEventListener("click", () => {
+      var _a;
+      if (this.transaction.busy) return;
+      this.currentTemplateId = template.id;
+      this.currentRevision = latestThemeReference(template).revision;
+      void this.transaction.preview(async (isCurrent) => {
+        if (!isCurrent()) return;
+        this.previewCallback(template.id, this.currentRevision);
+        await this.refreshPreview();
+      });
+      this.updateApplyButton();
+      this.updateTryHint();
+      (_a = this.gridContainer) == null ? void 0 : _a.querySelectorAll(".mp-theme-card").forEach((button) => {
+        var _a2, _b;
+        const active = button.dataset.themeId === template.id;
+        button.toggleClass("is-selected", active);
+        button.setAttribute("aria-pressed", String(active));
+        (_a2 = button.querySelector(".mp-theme-checkmark")) == null ? void 0 : _a2.remove();
+        if (active) {
+          const check = (_b = button.querySelector(".mp-theme-info")) == null ? void 0 : _b.createDiv("mp-theme-checkmark");
+          if (check) (0, import_obsidian6.setIcon)(check, "check");
+        }
+      });
+    });
+  }
+  updateApplyButton() {
+    var _a, _b;
+    if (!this.applyButton) return;
+    const template = this.templates.find((item) => item.id === this.currentTemplateId);
+    (_b = (_a = this.selector) == null ? void 0 : _a.querySelector("summary")) == null ? void 0 : _b.setText(`\u9009\u62E9\u4E3B\u9898 \xB7 ${(template == null ? void 0 : template.name) || "\u5F53\u524D\u4E3B\u9898"}`);
+    this.applyButton.setText(`\u5E94\u7528\u300C${(template == null ? void 0 : template.name) || "\u4E3B\u9898"}\u300D`);
+  }
+  updateTryHint() {
+    var _a, _b;
+    if (!this.tryHintEl) return;
+    const template = this.templates.find((item) => item.id === this.currentTemplateId);
+    const description = template ? this.getTemplateDescription(template) : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
+    this.tryHintEl.setText(`\u63A8\u8350\u4F5C\u7528\uFF1A${description}`);
+    const saved = this.currentTemplateId === this.originalTemplateId && this.currentRevision === this.originalRevision;
+    const modern = this.currentRevision === READING_THEME_REVISION;
+    const custom = template && !template.isPreset;
+    (_a = this.revisionHint) == null ? void 0 : _a.setText(`${saved ? "\u5DF2\u4FDD\u5B58" : "\u8BD5\u7528"}${custom ? "\u81EA\u5B9A\u4E49" : modern ? "\u5347\u7EA7\u7248" : "\u65E7\u7248"} \xB7 ${this.enhancementLabel}`);
+    (_b = this.revisionHint) == null ? void 0 : _b.setAttribute("title", "\u5F53\u524D\u6587\u7AE0\u4FDD\u7559\u5C40\u90E8\u589E\u5F3A\uFF1B\u7EDF\u4E00\u793A\u4F8B\u4E0D\u989D\u5916\u589E\u5F3A\u3002");
+    if (this.revisionButton) {
+      this.revisionButton.hidden = !template || latestThemeReference(template).revision !== READING_THEME_REVISION;
+      this.revisionButton.setText(modern ? "\u4F7F\u7528\u65E7\u7248\u6392\u7248" : "\u8BD5\u7528\u5347\u7EA7\u7248");
+    }
+  }
+  getTemplateDescription(template) {
+    var _a, _b, _c;
+    const curatedRecommendation = ((_a = getCuratedThemeEntry(template.id)) == null ? void 0 : _a.recommendation) || ((_b = template.themeMeta) == null ? void 0 : _b.recommendation);
+    if (curatedRecommendation) return curatedRecommendation;
+    const description = (_c = template.description) == null ? void 0 : _c.trim();
+    return description ? description.split("\uFF08")[0].trim() : "\u9002\u5408\u5F53\u524D\u6587\u7AE0\u7684\u89C6\u89C9\u6392\u7248";
+  }
+};
+
+// src/ui/CustomSelect.ts
+var import_obsidian7 = require("obsidian");
+function createCustomSelect(parent, className, initialOptions, onChange) {
+  const container = parent.createDiv({ cls: `custom-select-container ${className}` });
+  const select = container.createEl("select", { cls: "custom-select dropdown", attr: { "aria-label": className.includes("font") ? "\u5B57\u4F53" : className.includes("background") ? "\u80CC\u666F" : "\u5C40\u90E8\u6392\u7248\u589E\u5F3A" } });
+  const updateTitle = () => {
+    var _a;
+    select.title = ((_a = select.selectedOptions[0]) == null ? void 0 : _a.textContent) || "";
   };
+  const render = (options) => {
+    const current = select.value;
+    select.empty();
+    let group = null;
+    for (const option of options) {
+      if (option.header) {
+        group = select.createEl("optgroup", { attr: { label: option.label } });
+        continue;
+      }
+      (group || select).createEl("option", { text: option.label, attr: { value: option.value } });
+    }
+    if (options.some((option) => !option.header && option.value === current)) select.value = current;
+    select.dataset.value = select.value;
+    updateTitle();
+  };
+  render(initialOptions);
+  select.addEventListener("change", () => {
+    const previous = select.dataset.value || "";
+    const value = select.value;
+    select.disabled = true;
+    void Promise.resolve().then(() => onChange(value)).then(() => {
+      select.dataset.value = value;
+    }).catch((error) => {
+      select.value = previous;
+      select.dataset.value = previous;
+      new import_obsidian7.Notice(`\u8BBE\u7F6E\u5931\u8D25\uFF1A${error instanceof Error ? error.message : String(error)}`);
+    }).finally(() => {
+      updateTitle();
+      select.disabled = false;
+    });
+  });
+  return { container, updateOptions: render, setValue: (value) => {
+    if (!Array.from(select.options).some((option) => option.value === value)) select.createEl("option", { text: className.includes("font") ? "\u5F53\u524D\u5B57\u4F53" : className.includes("background") ? "\u5F53\u524D\u80CC\u666F" : "\u5F53\u524D\u589E\u5F3A\u6548\u679C", attr: { value } });
+    select.value = value;
+    select.dataset.value = value;
+    updateTitle();
+  } };
+}
+
+// src/ui/ImageAltModal.ts
+var import_obsidian8 = require("obsidian");
+async function handleImageAltEdit(app, currentFile, img) {
+  const currentAlt = img.getAttribute("alt") || "";
+  const linktext = img.dataset.linktext;
+  const newAlt = window.prompt("\u7F16\u8F91\u56FE\u7247\u6CE8\u91CA (Alt Text):", currentAlt);
+  if (newAlt === null || newAlt === currentAlt) return;
+  try {
+    let fileContent = await app.vault.read(currentFile);
+    let newFileContent = fileContent;
+    let replaced = false;
+    if (linktext) {
+      const escapedLinktext = linktext.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const wikiRegex = new RegExp(`!\\[\\[\\s*${escapedLinktext}\\s*(?:\\|.*?)?\\]\\]`);
+      if (wikiRegex.test(newFileContent)) {
+        newFileContent = newFileContent.replace(wikiRegex, `![[${linktext}|${newAlt}]]`);
+        replaced = true;
+      }
+    }
+    if (!replaced) {
+      const escapedAlt = currentAlt.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const stdRegex = new RegExp(`!\\[\\s*${escapedAlt}\\s*\\]\\(`);
+      if (stdRegex.test(newFileContent)) {
+        newFileContent = newFileContent.replace(stdRegex, `![${newAlt}](`);
+        replaced = true;
+      } else if (currentAlt) {
+        const wikiAltRegex = new RegExp(`\\|\\s*${escapedAlt}\\s*\\]\\]`);
+        if (wikiAltRegex.test(newFileContent)) {
+          newFileContent = newFileContent.replace(wikiAltRegex, `|${newAlt}]]`);
+          replaced = true;
+        }
+      }
+    }
+    if (replaced) {
+      await app.vault.modify(currentFile, newFileContent);
+      new import_obsidian8.Notice("\u56FE\u7247\u6CE8\u91CA\u5DF2\u66F4\u65B0");
+    } else {
+      new import_obsidian8.Notice("\u65E0\u6CD5\u5728\u6587\u6863\u4E2D\u7CBE\u786E\u5B9A\u4F4D\u6B64\u56FE\u7247\uFF0C\u8BF7\u68C0\u67E5\u662F\u5426\u4E3A\u6807\u51C6\u683C\u5F0F\u3002");
+    }
+  } catch (err) {
+    console.error("Failed to update image alt text", err);
+    new import_obsidian8.Notice("\u66F4\u65B0\u5931\u8D25");
+  }
 }
 
 // src/core/theme/wechatAppearance.ts
@@ -15406,15 +15676,20 @@ function fingerprint(value) {
   for (let index = 0; index < source.length; index++) hash = Math.imul(hash ^ source.charCodeAt(index), 16777619);
   return `legacy-${(hash >>> 0).toString(16)}`;
 }
-function resolveWechatAppearance(settings, id = settings.templateId) {
+function resolveWechatAppearance(settings, id = settings.templateId, trialRevision) {
   var _a, _b, _c;
   const catalog = settings.templates.concat(settings.customTemplates);
   const selected = (_b = (_a = catalog.find((template2) => template2.id === id)) != null ? _a : catalog.find((template2) => template2.id === "default")) != null ? _b : legacyTheme("default");
-  const reference = themeReference(selected);
-  const template = reference.kind === "builtin" ? (_c = legacyTheme(reference.id)) != null ? _c : selected : structuredClone(selected);
+  let reference = themeReference(selected);
+  const saved = isAppearanceV1(settings.wechatAppearance) ? settings.wechatAppearance.referencesById[id] : void 0;
+  const revision = trialRevision != null ? trialRevision : (saved == null ? void 0 : saved.id) === id && saved.kind === reference.kind ? saved.revision : void 0;
+  const updated = reference.kind === "builtin" && revision === READING_THEME_REVISION ? readingTheme(reference.id) : void 0;
+  if (updated) reference = { ...reference, revision: READING_THEME_REVISION };
+  const template = updated != null ? updated : reference.kind === "builtin" ? (_c = legacyTheme(reference.id)) != null ? _c : selected : structuredClone(selected);
+  if (!updated) delete template.reading;
   const preferences = originalPreferences();
   const palette = resolveWechatPalette(template);
-  const renderRevision = "legacy-presentation-3.19.1";
+  const renderRevision = updated ? "reading-presentation-2026.1" : "legacy-presentation-3.19.1";
   return {
     reference,
     preferences,
@@ -15422,7 +15697,7 @@ function resolveWechatAppearance(settings, id = settings.templateId) {
     palette,
     renderRevision,
     fingerprint: fingerprint({ reference, template, fontFamily: settings.fontFamily, fontSize: settings.fontSize, background: settings.backgrounds.concat(settings.customBackgrounds).find((item) => item.id === settings.backgroundId), recipe: settings.v3.selectedRecipeId }),
-    ...reference.kind === "custom" ? { customDefinition: structuredClone(template) } : {}
+    ...reference.kind === "custom" ? { customDefinition: structuredClone(selected) } : {}
   };
 }
 function snapshotAppearance(settings) {
@@ -15495,11 +15770,11 @@ var MPView = class extends import_obsidian9.ItemView {
     this.recipeSummary.setText(recipeSummaryLabel(recipeId));
     (_a = this.recipeSummary.parentElement) == null ? void 0 : _a.toggleClass("is-active", active);
   }
-  applyThemeTrial(templateId) {
+  applyThemeTrial(templateId, revision) {
     var _a, _b;
     const savedId = this.settingsManager.getSettings().templateId;
     this.trialTemplateId = templateId === savedId ? null : templateId;
-    this.trialAppearance = resolveWechatAppearance(this.settingsManager.getSettings(), templateId);
+    this.trialAppearance = resolveWechatAppearance(this.settingsManager.getSettings(), templateId, revision);
     const article = this.previewEl.querySelector(".mp-content-section");
     const anchor = article ? capturePreviewAnchor(this.previewEl, article) : null;
     if (this.galleryBaseline && article) article.replaceWith(this.galleryBaseline.cloneNode(true));
@@ -15524,20 +15799,20 @@ var MPView = class extends import_obsidian9.ItemView {
     (_c = this.renderComponent) == null ? void 0 : _c.unload();
     this.renderComponent = null;
   }
-  applyPresentation(host, themeId = this.getActiveWechatTemplateId()) {
+  applyPresentation(host, themeId = this.getActiveWechatTemplateId(), override, recipeId) {
     var _a;
     const section = host.querySelector(".mp-content-section");
     if (!section) return;
     resetArticleRecipe(section);
     const settings = this.settingsManager.getSettings();
-    const appearance = ((_a = this.trialAppearance) == null ? void 0 : _a.reference.id) === themeId ? this.trialAppearance : resolveWechatAppearance(settings, themeId);
+    const appearance = override != null ? override : ((_a = this.trialAppearance) == null ? void 0 : _a.reference.id) === themeId ? this.trialAppearance : resolveWechatAppearance(settings, themeId);
     this.templateManager.setCurrentTemplate(themeId);
     this.templateManager.setFont(settings.fontFamily);
     this.templateManager.setFontSize(settings.fontSize);
     this.templateManager.applyTemplate(host, appearance.template);
     this.backgroundManager.setBackground(settings.backgroundId);
-    this.backgroundManager.applyBackground(host);
-    applyArticleRecipe(section, settings.v3.selectedRecipeId, appearance.palette);
+    this.backgroundManager.applyBackground(host, appearance.template.reading, { family: settings.fontFamily, size: settings.fontSize });
+    applyArticleRecipe(section, recipeId != null ? recipeId : settings.v3.selectedRecipeId, appearance.palette);
     normalizeArticleText(section);
   }
   getDisplayText() {
@@ -15643,8 +15918,7 @@ var MPView = class extends import_obsidian9.ItemView {
         await this.settingsManager.updateSettings({
           backgroundId: value
         });
-        this.backgroundManager.setBackground(value);
-        this.backgroundManager.applyBackground(this.previewEl);
+        this.applyPresentation(this.previewEl);
       }
     );
     const galleryBtn = controlsGroup.createEl("button", {
@@ -16028,7 +16302,7 @@ var MPView = class extends import_obsidian9.ItemView {
         `font-size: ${computed.fontSize}`,
         `line-height: ${computed.lineHeight}`,
         `color: ${computed.color}`,
-        "background: #ffffff"
+        ...this.getActiveWechatAppearance().template.reading ? [] : ["background: #ffffff"]
       ].join(";")};` });
       snapshotHost.appendChild(snapshot);
       exportDocument.body.appendChild(snapshotHost);
@@ -16539,17 +16813,17 @@ var MPView = class extends import_obsidian9.ItemView {
       this.settingsManager,
       currentTemplateId,
       // onSelect 回调
-      async (templateId) => {
+      async (templateId, revision) => {
         var _a2;
         if (!valid || ((_a2 = this.currentFile) == null ? void 0 : _a2.path) !== (filePath != null ? filePath : void 0) || appearanceConflictKey(this.settingsManager.getSettings()) !== expectedKey) throw new Error("\u6587\u7AE0\u6216\u5168\u5C40\u5916\u89C2\u5DF2\u53D8\u5316\uFF0C\u8BF7\u91CD\u65B0\u6253\u5F00\u753B\u5ECA\u3002");
-        const appearance = resolveWechatAppearance(settings, templateId);
+        const appearance = resolveWechatAppearance(settings, templateId, revision);
         await this.settingsManager.commitWechatAppearance(appearance.reference, appearance.preferences, expectedKey);
         const template = this.settingsManager.getTemplate(templateId);
         new import_obsidian9.Notice(`\u5DF2\u5E94\u7528\u4E3B\u9898: ${(template == null ? void 0 : template.name) || templateId}`);
       },
       // previewCallback 回调 - 实时预览
-      (templateId) => {
-        this.applyThemeTrial(templateId);
+      (templateId, revision) => {
+        this.applyThemeTrial(templateId, revision);
       },
       {
         fontFamily: (_g = (_f = this.previewEl.ownerDocument.defaultView) == null ? void 0 : _f.getComputedStyle(this.previewEl).fontFamily) != null ? _g : settings.fontFamily,
@@ -16583,7 +16857,7 @@ var MPView = class extends import_obsidian9.ItemView {
             this.refreshValidationReport();
           } else if (!settled) cleanup();
         },
-        renderPreview: async (id, saved, example) => {
+        renderPreview: async (id, saved, example, revision) => {
           let source = saved ? this.galleryBaseline : this.previewEl.querySelector(".mp-content-section");
           if (example) {
             if (!examplePromise) examplePromise = (async () => {
@@ -16605,7 +16879,8 @@ var MPView = class extends import_obsidian9.ItemView {
           if (!example) return source;
           const host = this.previewEl.ownerDocument.defaultView.createDiv();
           host.appendChild(source.cloneNode(true));
-          if (example) this.applyPresentation(host, saved ? currentTemplateId : id);
+          const sampleId = saved ? currentTemplateId : id;
+          this.applyPresentation(host, sampleId, resolveWechatAppearance(settings, sampleId, saved ? void 0 : revision), "legacy-compatible");
           return host.querySelector(".mp-content-section");
         }
       }
@@ -16768,10 +17043,10 @@ var SettingsManager = class {
       new import_obsidian10.Notice(`\u5DF2\u9009\u4E3B\u9898\u300C${loaded.templateId}\u300D\u65E0\u6CD5\u627E\u5230\uFF0C\u6682\u7528\u901A\u7528\u957F\u6587\uFF1B\u539F\u8BB0\u5F55\u5DF2\u4FDD\u7559\u3002`);
       loaded.templateId = DEFAULT_SETTINGS.templateId;
     }
-    loaded.wechatAppearance = migrateWechatAppearance(loaded.wechatAppearance, loaded.templates.concat(loaded.customTemplates));
+    loaded.wechatAppearance = migrateWechatAppearance(loaded.wechatAppearance, loaded.templates.concat(loaded.customTemplates), Object.keys(object).length === 0);
     if (isAppearanceV1(loaded.wechatAppearance)) {
       const reference = loaded.wechatAppearance.referencesById[loaded.templateId];
-      if ((reference == null ? void 0 : reference.revision) && loaded.templates.some((template) => template.id === loaded.templateId) && reference.revision !== LEGACY_THEME_REVISION) {
+      if ((reference == null ? void 0 : reference.revision) && loaded.templates.some((template) => template.id === loaded.templateId) && !isSupportedThemeRevision(loaded.templateId, reference.revision)) {
         new import_obsidian10.Notice("\u672C\u7248\u6682\u4E0D\u652F\u6301\u5DF2\u4FDD\u5B58\u7684\u4E3B\u9898\u4FEE\u8BA2\uFF0C\u4F7F\u7528\u540C\u4E3B\u9898\u7684 3.19.1 \u6392\u7248\uFF1B\u539F\u5916\u89C2\u8BB0\u5F55\u672A\u6539\u5199\u3002");
       }
     }
@@ -17285,9 +17560,9 @@ var CreateBackgroundModal = class extends import_obsidian15.Modal {
 // src/settings/ConfirmModal.ts
 var import_obsidian16 = require("obsidian");
 var ConfirmModal = class extends import_obsidian16.Modal {
-  constructor(app, heading, message, action) {
+  constructor(app, heading2, message, action) {
     super(app);
-    this.heading = heading;
+    this.heading = heading2;
     this.message = message;
     this.action = action;
     this.pending = false;
@@ -17422,6 +17697,7 @@ function exportTemplateManifest(template) {
 }
 function createTemplateFromThemeManifest(manifest, baseTemplate) {
   const template = JSON.parse(JSON.stringify(baseTemplate));
+  delete template.reading;
   const componentStyles = new Map(manifest.components.map((component) => [component.id, component.legacyStyle]));
   Object.entries(componentStyleKeys).forEach(([componentId, styleKey]) => {
     const style = componentStyles.get(componentId);
@@ -17599,9 +17875,9 @@ var NoteThemeGalleryModal = class extends import_obsidian18.Modal {
     modalEl.addClass("mp-theme-gallery-modal");
     contentEl.empty();
     const header = contentEl.createDiv("mp-gallery-header");
-    const heading = header.createDiv("mp-gallery-heading");
-    heading.createEl("h2", { text: "\u7B14\u8BB0\u9605\u8BFB\u4E3B\u9898" });
-    heading.createEl("p", { text: "\u53EA\u6539\u53D8 Obsidian \u7684\u663E\u793A\u65B9\u5F0F\uFF0C\u4E0D\u4FEE\u6539 Markdown \u5185\u5BB9\u3002" });
+    const heading2 = header.createDiv("mp-gallery-heading");
+    heading2.createEl("h2", { text: "\u7B14\u8BB0\u9605\u8BFB\u4E3B\u9898" });
+    heading2.createEl("p", { text: "\u53EA\u6539\u53D8 Obsidian \u7684\u663E\u793A\u65B9\u5F0F\uFF0C\u4E0D\u4FEE\u6539 Markdown \u5185\u5BB9\u3002" });
     const sceneBar = contentEl.createDiv("mp-gallery-scenes");
     sceneBar.createEl("button", {
       text: "\u7B14\u8BB0\u9605\u8BFB \xB7 3",

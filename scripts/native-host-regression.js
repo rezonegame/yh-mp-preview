@@ -119,7 +119,7 @@
             } else check('HTML contains header, footer and final article text', new TextDecoder().decode(bytes).includes('END - OF - ARTICLE') && new TextDecoder().decode(bytes).includes('测试头部') && new TextDecoder().decode(bytes).includes('测试尾部'));
         }
         check('long image covers full article', pngSizes[0].height > view.previewEl.clientHeight * 3);
-        if(document.visibilityState === 'visible' && document.hasFocus()) {
+        if(document.visibilityState === 'visible' && document.hasFocus() && !globalThis.mpNativeClipboardUnavailableReason) {
             const copyButton = view.containerEl.querySelector('.mp-copy-button');
             check('copy action is enabled after export', !copyButton.disabled);
             copyButton.click();
@@ -135,7 +135,7 @@
             const htmlBlob = await clipboard[0].getType('text/html');
             const copied = await htmlBlob.text();
             check('real system clipboard contains full canonical article', copied.includes('END - OF - ARTICLE') && copied.includes('测试头部') && copied.includes('测试尾部'));
-        } else results.push({name:'real system clipboard contains full canonical article',pass:null,skipped:'background-clipboard',detail:'Foreground access required; do not claim background clipboard verification.'});
+        } else results.push({name:'real system clipboard contains full canonical article',pass:null,skipped:globalThis.mpNativeClipboardUnavailableReason ? 'environment-clipboard-empty' : 'background-clipboard',detail:globalThis.mpNativeClipboardUnavailableReason || 'Foreground access required; do not claim background clipboard verification.'});
         check('source Markdown remains unchanged', await app.vault.read(file) === source);
         return JSON.stringify({vault:app.vault.getName(),platform:navigator.platform,devicePixelRatio,results,dimensions,pngSizes,artifacts});
     } finally {

@@ -33,6 +33,10 @@ export function resetArticleRecipe(section: HTMLElement): void {
 }
 
 function styleLists(section: HTMLElement, palette: WechatPalette, prefix: string): void {
+    if(section.hasAttribute('data-mp-reading-background')){
+        styleReadingLists(section,palette,prefix);
+        return;
+    }
     section.querySelectorAll('ol, ul').forEach(list => setStyles(list, {
         margin: '18px 0', padding: '0', 'list-style': 'none',
     }));
@@ -52,6 +56,24 @@ function styleLists(section: HTMLElement, palette: WechatPalette, prefix: string
         label.className = className;
         label.textContent = prefix === '步骤' ? `步骤 ${index + 1}\u3000` : '✓\u3000';
         setStyles(label, { 'font-weight': '700', color: palette.accentText });
+    });
+}
+
+/** New revisions keep each ordered list's own numbering and do not turn references into steps. */
+function styleReadingLists(section: HTMLElement,palette:WechatPalette,prefix:string):void {
+    section.querySelectorAll<HTMLOListElement|HTMLUListElement>(prefix==='步骤'?'ol':'ol,ul').forEach(list=>{
+        if(list.closest('.mp-reference-section,.mp-layout-card,.mp-frontmatter-card,.mp-custom-header,.mp-custom-footer'))return;
+        const items=Array.from(list.children).filter((node):node is HTMLLIElement=>node.tagName==='LI');
+        const reversed=list.hasAttribute('reversed');
+        const start=list.getAttribute('start');let number=start!==null?Number(start):reversed?items.length:1;
+        if(!Number.isFinite(number))number=1;
+        setStyles(list,{margin:'18px 0',padding:'0','list-style':'none'});
+        items.forEach(item=>{
+            const value=item.getAttribute('value');if(value!==null&&Number.isFinite(Number(value)))number=Number(value);
+            setStyles(item,{display:'block',margin:'10px 0',padding:'12px 14px','border-left':`3px solid ${palette.accent}`,background:palette.surface,'line-height':'1.72'});
+            const label=createSpan();label.className=prefix==='步骤'?'mp-recipe-step-label':'mp-recipe-check';
+            label.textContent=prefix==='步骤'?`步骤 ${number}\u3000`:'✓\u3000';item.prepend(label);setStyles(label,{'font-weight':'700',color:palette.accentText});number+=reversed?-1:1;
+        });
     });
 }
 

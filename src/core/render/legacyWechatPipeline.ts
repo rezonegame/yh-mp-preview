@@ -52,10 +52,11 @@ export function prepareLegacyWechatFragment(element: HTMLElement, options: Legac
     normalizeArticleText(clone);
     const outputValidation = validateWechatHtml(clone);
     const blockingIssues = sourceValidation.issues.filter((issue) => issue.severity === 'error');
+    const backgroundWarnings = sourceValidation.issues.filter(issue=>issue.code.startsWith('reading-background-'));
     const validation: ValidationReport = {
-        issues: [...blockingIssues, ...outputValidation.issues],
+        issues: [...blockingIssues, ...backgroundWarnings, ...outputValidation.issues],
         errors: blockingIssues.length + outputValidation.errors,
-        warnings: outputValidation.warnings,
+        warnings: outputValidation.warnings + backgroundWarnings.length,
     };
     return {
         article,

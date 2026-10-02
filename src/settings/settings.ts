@@ -6,7 +6,7 @@ import { DEFAULT_WECHAT_FONT_STACK } from '../core/theme/wechatReadingBaseline';
 import { cloneSettings, SettingsRepository } from '../core/settings/settingsRepository';
 import { mergePresetCatalog } from '../core/settings/catalogMerge';
 import { Notice } from 'obsidian';
-import { migrateWechatAppearance, type ThemeReference, type AppearancePreferences, isAppearanceV1, themeReference, originalPreferences, LEGACY_THEME_REVISION } from '../core/theme/themeRevisionRegistry';
+import { migrateWechatAppearance, type ThemeReference, type AppearancePreferences, isAppearanceV1, themeReference, originalPreferences, isSupportedThemeRevision } from '../core/theme/themeRevisionRegistry';
 import { recordAppearance, appearanceConflictKey, type AppearanceSnapshot } from '../core/theme/wechatAppearance';
 
 export interface MPSettings {
@@ -157,10 +157,10 @@ export class SettingsManager {
             new Notice(`已选主题「${loaded.templateId}」无法找到，暂用通用长文；原记录已保留。`);
             loaded.templateId = DEFAULT_SETTINGS.templateId;
         }
-        loaded.wechatAppearance = migrateWechatAppearance(loaded.wechatAppearance, loaded.templates.concat(loaded.customTemplates));
+        loaded.wechatAppearance = migrateWechatAppearance(loaded.wechatAppearance, loaded.templates.concat(loaded.customTemplates), Object.keys(object).length === 0);
         if (isAppearanceV1(loaded.wechatAppearance)) {
             const reference = loaded.wechatAppearance.referencesById[loaded.templateId];
-            if (reference?.revision && loaded.templates.some(template => template.id === loaded.templateId) && reference.revision !== LEGACY_THEME_REVISION) {
+            if (reference?.revision && loaded.templates.some(template => template.id === loaded.templateId) && !isSupportedThemeRevision(loaded.templateId, reference.revision)) {
                 new Notice('本版暂不支持已保存的主题修订，使用同主题的 3.19.1 排版；原外观记录未改写。');
             }
         }

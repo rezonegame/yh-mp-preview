@@ -37,6 +37,8 @@ export function exportTemplateManifest(template: Template): string {
  */
 export function createTemplateFromThemeManifest(manifest: ThemeManifest, baseTemplate: Template): Template {
     const template = JSON.parse(JSON.stringify(baseTemplate)) as Template;
+    // Portable manifests describe their own styles, not a built-in reading revision.
+    delete template.reading;
     const componentStyles = new Map(manifest.components.map(component => [component.id, component.legacyStyle]));
     Object.entries(componentStyleKeys).forEach(([componentId, styleKey]) => {
         const style = componentStyles.get(componentId);

@@ -75,10 +75,10 @@ export class MPView extends ItemView {
         this.recipeSummary.parentElement?.toggleClass('is-active', active);
     }
 
-    private applyThemeTrial(templateId: string): void {
+    private applyThemeTrial(templateId: string, revision?: string): void {
         const savedId = this.settingsManager.getSettings().templateId;
         this.trialTemplateId = templateId === savedId ? null : templateId;
-        this.trialAppearance = resolveWechatAppearance(this.settingsManager.getSettings(),templateId);
+        this.trialAppearance = resolveWechatAppearance(this.settingsManager.getSettings(),templateId,revision);
         const article = this.previewEl.querySelector<HTMLElement>('.mp-content-section');
         const anchor = article ? capturePreviewAnchor(this.previewEl, article) : null;
         if (this.galleryBaseline && article) article.replaceWith(this.galleryBaseline.cloneNode(true));
@@ -112,19 +112,19 @@ export class MPView extends ItemView {
         this.renderComponent?.unload(); this.renderComponent=null;
     }
 
-    private applyPresentation(host: HTMLElement, themeId = this.getActiveWechatTemplateId()): void {
+    private applyPresentation(host: HTMLElement, themeId = this.getActiveWechatTemplateId(), override?: ResolvedWechatAppearance, recipeId?: string): void {
         const section=host.querySelector<HTMLElement>('.mp-content-section');
         if(!section) return;
         resetArticleRecipe(section);
         const settings=this.settingsManager.getSettings();
-        const appearance=this.trialAppearance?.reference.id === themeId ? this.trialAppearance : resolveWechatAppearance(settings,themeId);
+        const appearance=override ?? (this.trialAppearance?.reference.id === themeId ? this.trialAppearance : resolveWechatAppearance(settings,themeId));
         this.templateManager.setCurrentTemplate(themeId);
         this.templateManager.setFont(settings.fontFamily);
         this.templateManager.setFontSize(settings.fontSize);
         this.templateManager.applyTemplate(host,appearance.template);
         this.backgroundManager.setBackground(settings.backgroundId);
-        this.backgroundManager.applyBackground(host);
-        applyArticleRecipe(section,settings.v3.selectedRecipeId,appearance.palette);
+        this.backgroundManager.applyBackground(host,appearance.template.reading,{family:settings.fontFamily,size:settings.fontSize});
+        applyArticleRecipe(section,recipeId ?? settings.v3.selectedRecipeId,appearance.palette);
         normalizeArticleText(section);
     }
 
@@ -261,8 +261,7 @@ export class MPView extends ItemView {
                 await this.settingsManager.updateSettings({
                     backgroundId: value
                 });
-                this.backgroundManager.setBackground(value);
-                this.backgroundManager.applyBackground(this.previewEl);
+                this.applyPresentation(this.previewEl);
             }
         );
 
@@ -701,7 +700,7 @@ export class MPView extends ItemView {
                 `font-size: ${computed.fontSize}`,
                 `line-height: ${computed.lineHeight}`,
                 `color: ${computed.color}`,
-                'background: #ffffff',
+                ...(this.getActiveWechatAppearance().template.reading ? [] : ['background: #ffffff']),
             ].join(';')};`) });
             snapshotHost.appendChild(snapshot);
             exportDocument.body.appendChild(snapshotHost);
@@ -1253,16 +1252,16 @@ export class MPView extends ItemView {
             this.settingsManager,
             currentTemplateId,
             // onSelect 回调
-            async (templateId: string) => {
+            async (templateId: string, revision?: string) => {
                 if (!valid || this.currentFile?.path !== (filePath ?? undefined) || appearanceConflictKey(this.settingsManager.getSettings()) !== expectedKey) throw new Error('文章或全局外观已变化，请重新打开画廊。');
-                const appearance = resolveWechatAppearance(settings, templateId);
+                const appearance = resolveWechatAppearance(settings, templateId, revision);
                 await this.settingsManager.commitWechatAppearance(appearance.reference, appearance.preferences, expectedKey);
                 const template = this.settingsManager.getTemplate(templateId);
                 new Notice(`已应用主题: ${template?.name || templateId}`);
             },
             // previewCallback 回调 - 实时预览
-            (templateId: string) => {
-                this.applyThemeTrial(templateId);
+            (templateId: string, revision?: string) => {
+                this.applyThemeTrial(templateId, revision);
             },
             {
                 fontFamily: this.previewEl.ownerDocument.defaultView?.getComputedStyle(this.previewEl).fontFamily ?? settings.fontFamily,
@@ -1279,7 +1278,7 @@ export class MPView extends ItemView {
                         this.applyPresentation(this.previewEl); this.refreshValidationReport();
                     } else if (!settled) cleanup();
                 },
-                renderPreview: async (id, saved, example) => {
+                renderPreview: async (id, saved, example, revision) => {
                     let source = saved ? this.galleryBaseline : this.previewEl.querySelector<HTMLElement>('.mp-content-section');
                     if (example) {
                         if (!examplePromise) examplePromise = (async () => {
@@ -1295,7 +1294,8 @@ export class MPView extends ItemView {
                     if (!source) return null;
                     if (!example) return source;
                     const host = this.previewEl.ownerDocument.defaultView!.createDiv(); host.appendChild(source.cloneNode(true));
-                    if (example) this.applyPresentation(host, saved ? currentTemplateId : id);
+                    const sampleId = saved ? currentTemplateId : id;
+                    this.applyPresentation(host, sampleId, resolveWechatAppearance(settings,sampleId,saved ? undefined : revision),'legacy-compatible');
                     return host.querySelector<HTMLElement>('.mp-content-section');
                 },
             }

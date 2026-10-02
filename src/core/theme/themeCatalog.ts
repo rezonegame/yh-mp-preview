@@ -2,7 +2,7 @@
  * The curated default catalogue intentionally contains different reading
  * structures, not colour-only copies of the same structure.
  */
-export const CURATED_THEME_CATALOG_VERSION = 4;
+export const CURATED_THEME_CATALOG_VERSION = 5;
 
 export type WechatReadingProfile = 'compact' | 'standard' | 'airy';
 export type ThemeCatalogStatus = 'featured' | 'legacy';

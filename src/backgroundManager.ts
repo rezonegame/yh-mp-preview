@@ -1,6 +1,9 @@
 import { hasUnsafeCss, setSafeInlineStyle } from './core/security/safeDom';
 import { Notice } from 'obsidian';
 import { SettingsManager } from "./settings/settings";
+import { readingRootCss, type ReadingThemeTokens } from './core/theme/wechatThemeTokens';
+import { DEFAULT_WECHAT_FONT_STACK } from './core/theme/wechatReadingBaseline';
+import type { Typography } from './core/theme/templateStylePlan';
 
 export interface Background {
     id: string;
@@ -43,9 +46,15 @@ export class BackgroundManager {
 
     private static readonly BASE_CONTENT_PADDING = 'padding: 16px 20px;';
 
-    public applyBackground(element: HTMLElement) {
+    public applyBackground(element: HTMLElement, reading?: ReadingThemeTokens, typography: Typography = {family:DEFAULT_WECHAT_FONT_STACK,size:16}) {
         const section = element.querySelector('.mp-content-section');
         if (section) {
+            if(reading){
+                setSafeInlineStyle(section,readingRootCss(reading,typography,this.currentBackground));
+                section.setAttribute('data-mp-reading-background',this.currentBackground?.id === 'default' ? 'theme' : 'custom');
+                return;
+            }
+            section.removeAttribute('data-mp-reading-background');
             if (!this.currentBackground) {
                 // 无背景时使用基础间距，CSS padding 会生效
                 section.removeAttribute('style');

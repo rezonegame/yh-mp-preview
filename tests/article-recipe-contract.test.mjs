@@ -20,7 +20,7 @@ test('article recipes accept the supported local layouts and safely fall back', 
 test('selected article recipes are applied in both preview and copy paths', () => {
   const view = readFileSync(new URL('../src/view.ts', import.meta.url), 'utf8');
   const copyPipeline = readFileSync(new URL('../src/core/render/legacyWechatPipeline.ts', import.meta.url), 'utf8');
-  assert.match(view, /applyArticleRecipe\(section,settings\.v3\.selectedRecipeId,/);
+  assert.match(view, /applyArticleRecipe\(section,recipeId \?\? settings\.v3\.selectedRecipeId,/);
   assert.match(copyPipeline, /applyArticleRecipe\(clone, plan\.recipeId, options\.palette\)/);
-  assert.match(view, /applyThemeTrial\(templateId\)/);
+  assert.match(view, /applyThemeTrial\(templateId, revision\)/);
 });

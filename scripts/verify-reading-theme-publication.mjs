@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {basename} from 'node:path';
+const repo='rezonegame/yh-mp-preview',tag='3.21.0-beta.1';
+const gh=(...args)=>execFileSync('gh',args,{encoding:'utf8',maxBuffer:8*1024*1024});
+const release=JSON.parse(gh('api',`repos/${repo}/releases/tags/${tag}`));
+assert.equal(release.tag_name,tag);assert.equal(release.draft,false);assert.equal(release.prerelease,true);
+const commit=execFileSync('git',['rev-parse',`${tag}^{commit}`],{encoding:'utf8'}).trim();
+const runs=JSON.parse(gh('run','list','--repo',repo,'--workflow','release.yml','--limit','10','--json','databaseId,headSha,headBranch,status,conclusion'));
+const ci=runs.find(run=>run.headSha===commit&&run.headBranch===tag);assert.ok(ci);assert.equal(ci.status,'completed');assert.equal(ci.conclusion,'success');
+const native=JSON.parse(readFileSync('reports/reading-theme-host-regression.json','utf8'));
+const paths=['main.js','manifest.json','styles.css','LICENSE','NOTICE','THIRD_PARTY_NOTICES.md','LICENSES/MIT-original.txt','LICENSES/DOMPurify.txt','LICENSES/html2canvas.txt','LICENSES/nanoid.txt','LICENSES/pangu.txt','LICENSES/Microsoft-helpers.txt','LICENSES/babel-helpers.txt'];
+assert.deepEqual(release.assets.map(a=>a.name).sort(),paths.map(path=>basename(path)).sort());
+const assets=paths.map(path=>{
+    const name=basename(path),bytes=readFileSync(`output/refactor/release-${tag}-assets/${name}`),sha256=createHash('sha256').update(bytes).digest('hex'),remote=release.assets.find(a=>a.name===name);
+    const tagged=execFileSync('git',['show',`${tag}:${path}`],{maxBuffer:8*1024*1024});assert.equal(Buffer.compare(bytes,tagged),0,`Tag mismatch: ${name}`);
+    assert.equal(remote.digest,`sha256:${sha256}`);assert.equal(remote.size,bytes.length);if(native.assets[name])assert.equal(sha256,native.assets[name],`Tested asset mismatch: ${name}`);
+    return {name,size:bytes.length,sha256,url:remote.browser_download_url};
+});
+const manifest=JSON.parse(readFileSync(`output/refactor/release-${tag}-assets/manifest.json`,'utf8'));assert.equal(manifest.id,'yh-mp-preview');assert.equal(manifest.version,tag);assert.equal(manifest.minAppVersion,'1.7.2');
+const main=JSON.parse(Buffer.from(JSON.parse(gh('api',`repos/${repo}/contents/manifest.json?ref=main`)).content,'base64').toString());assert.equal(main.version,'3.20.0');
+const report={version:tag,commit,repo,url:release.html_url,publishedAt:release.published_at,verifiedAt:new Date().toISOString(),ci,assets,isPrerelease:true,mainStable:main.version,marketingModified:false,
+  status:'Original CI passed; 13 real downloaded assets match tag, GitHub digests and tested runtime hashes',
+  pending:['User BRAT installation and acceptance','Foreground clipboard/WeChat backend paste','All 14 new themes in WeChat mobile preview'],officialDirectory:'Stable remains 3.20.0; beta is not an official update'};
+writeFileSync('reports/reading-theme-release-verification.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({version:tag,assets:assets.length,url:release.html_url,status:report.status}));

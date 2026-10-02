@@ -7,6 +7,7 @@ import { applyStylePlan } from './core/theme/templateStylePlan';
 import { resolveWechatPalette } from './core/theme/wechatPalette';
 import { applyWechatComponentPalette } from './core/theme/applyWechatComponentPalette';
 import type { Template } from './core/theme/templateTypes';
+import { applyReadingComponentRoles, ownStyle } from './core/theme/wechatThemeTokens';
 export type { Template } from './core/theme/templateTypes';
 
 function unsafeStyleTree(value: unknown): boolean {
@@ -34,8 +35,11 @@ export class TemplateManager {
             this.warned.add(theme.id);
             new Notice('此主题含不安全 CSS，预览会过滤；保存的主题保持不变。');
         }
-        applyStylePlan(root, theme.styles, this.typography, getCuratedThemeEntry(theme.id)?.readingProfile ?? 'standard');
-        applyWechatComponentPalette(root, resolveWechatPalette(theme));
+        applyStylePlan(root, theme.styles, this.typography, getCuratedThemeEntry(theme.id)?.readingProfile ?? 'standard', !!theme.reading);
+        if(theme.reading) {
+            root.querySelectorAll('.mp-image-caption,figcaption').forEach(node=>ownStyle(node,theme.reading!.captionCss));
+            applyReadingComponentRoles(root,resolveWechatPalette(theme),theme.reading);
+        } else applyWechatComponentPalette(root, resolveWechatPalette(theme));
     }
 }
 export const templateManager = (app: App, settings: SettingsManager) => new TemplateManager(app, settings);
