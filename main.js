@@ -10733,14 +10733,109 @@ async function boundedCanvasRender(host, signal, render, timeoutMs = 3e4) {
 
 // src/ui/workbenchControls.ts
 function createWorkbenchControls(container) {
-  const toolbar = container.createDiv("mp-toolbar");
+  const header = container.createDiv("mp-workspace-header");
+  const disclosure = header.createEl("details", { cls: "mp-settings-disclosure" });
+  disclosure.open = true;
+  disclosure.createEl("summary", { text: "\u6392\u7248\u8BBE\u7F6E", cls: "mp-settings-summary" });
+  const toolbar = disclosure.createDiv("mp-toolbar");
   toolbar.setAttribute("role", "group");
   toolbar.setAttribute("aria-label", "\u6587\u7AE0\u5916\u89C2\u4E0E\u6392\u7248");
   const controlsGroup = toolbar.createDiv("mp-controls-group mp-compact-controls");
   const secondaryRow = toolbar.createDiv("mp-controls-group mp-secondary-row");
   secondaryRow.setAttribute("role", "group");
   secondaryRow.setAttribute("aria-label", "\u6587\u7AE0\u64CD\u4F5C");
-  return { toolbar, controlsGroup, secondaryRow };
+  return { toolbar, controlsGroup, secondaryRow, disclosure, header };
+}
+
+// src/ui/previewWorkspace.ts
+function needsCompactWorkspace(width, height) {
+  return width < 520 || height < 560;
+}
+function observePreviewWorkspace(root, settings) {
+  const win = root.ownerDocument.defaultView;
+  if (!win) return () => {
+  };
+  let previous;
+  const refresh = () => {
+    if (!root.clientWidth || !root.clientHeight) return;
+    const compact = needsCompactWorkspace(root.clientWidth, root.clientHeight);
+    root.classList.toggle("mp-compact-workspace", compact);
+    root.style.setProperty("--mp-workspace-height", `${root.clientHeight}px`);
+    if (compact !== previous) {
+      if (!settings.contains(root.ownerDocument.activeElement)) settings.open = !compact;
+      previous = compact;
+    }
+  };
+  const observer = new win.ResizeObserver(refresh);
+  observer.observe(root);
+  win.addEventListener("resize", refresh);
+  const dismiss = (event) => {
+    var _a;
+    if (!root.classList.contains("mp-compact-workspace") || !settings.open) return;
+    if (event instanceof win.KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      if (settings.contains(root.ownerDocument.activeElement)) (_a = settings.querySelector("summary")) == null ? void 0 : _a.focus();
+    } else if (event.target instanceof win.Node && settings.contains(event.target)) return;
+    settings.open = false;
+  };
+  win.addEventListener("click", dismiss);
+  win.addEventListener("keydown", dismiss);
+  refresh();
+  return () => {
+    observer.disconnect();
+    win.removeEventListener("resize", refresh);
+    win.removeEventListener("click", dismiss);
+    win.removeEventListener("keydown", dismiss);
+  };
+}
+function togglePreviewFocus(root, button) {
+  const focused = !root.classList.contains("mp-preview-focused");
+  root.classList.toggle("mp-preview-focused", focused);
+  button.setAttribute("aria-pressed", String(focused));
+  button.setAttribute("aria-label", focused ? "\u9000\u51FA\u4E13\u6CE8\u9884\u89C8" : "\u4E13\u6CE8\u9884\u89C8");
+  button.title = focused ? "\u9000\u51FA\u4E13\u6CE8\u9884\u89C8\uFF0C\u6062\u590D\u6392\u7248\u8BBE\u7F6E" : "\u4E13\u6CE8\u9884\u89C8\uFF0C\u6536\u8D77\u8F85\u52A9\u533A\u57DF";
+  return focused;
+}
+function groupValidationIssues(issues) {
+  const groups2 = /* @__PURE__ */ new Map();
+  for (const issue of issues) {
+    const key = JSON.stringify([issue.severity, issue.code, issue.message]);
+    const group = groups2.get(key) || [];
+    group.push(issue);
+    groups2.set(key, group);
+  }
+  return [...groups2.values()].sort((a, b) => Number(b[0].severity === "error") - Number(a[0].severity === "error"));
+}
+function renderPreviewValidation(panel, report) {
+  var _a;
+  const previous = panel.querySelector(".mp-validation-details");
+  const wasOpen = (_a = previous == null ? void 0 : previous.open) != null ? _a : false;
+  const hadErrors = panel.classList.contains("mp-has-errors");
+  panel.empty();
+  panel.hidden = !report;
+  panel.classList.toggle("mp-has-errors", Boolean(report == null ? void 0 : report.errors));
+  if (!report) return;
+  const details = panel.createEl("details", { cls: "mp-validation-details" });
+  details.open = wasOpen || report.errors > 0 && !hadErrors;
+  const status = details.createEl("summary", {
+    cls: `mp-validation-summary ${report.errors ? "is-error" : report.warnings ? "is-warning" : "is-ok"}`,
+    text: report.errors ? `\u68C0\u67E5\uFF1A${report.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u5DF2\u7981\u6B62\u590D\u5236` : report.warnings ? `\u53EF\u590D\u5236 \xB7 ${report.warnings} \u9879\u517C\u5BB9\u6027\u63D0\u793A` : "\u53EF\u590D\u5236 \xB7 \u68C0\u67E5\u901A\u8FC7"
+  });
+  status.title = "\u5C55\u5F00\u6216\u6536\u8D77\u5B8C\u6574\u68C0\u67E5\u8BE6\u60C5";
+  if (!report.issues.length) {
+    details.createDiv({ cls: "mp-validation-body", text: "\u672A\u53D1\u73B0\u517C\u5BB9\u6027\u95EE\u9898\u3002" });
+    return;
+  }
+  const body = details.createDiv("mp-validation-body");
+  const list = body.createEl("ul", { cls: "mp-validation-issues" });
+  for (const group of groupValidationIssues(report.issues)) {
+    const issue = group[0];
+    const item = list.createEl("li", { cls: `is-${issue.severity}` });
+    const locations = item.createEl("details");
+    locations.createEl("summary", { text: `${issue.severity === "error" ? "\u963B\u65AD" : "\u63D0\u793A"} \xB7 ${issue.message}${group.length > 1 ? ` \xD7 ${group.length}` : ""}` });
+    const paths = locations.createEl("ul");
+    for (const entry of group) paths.createEl("li", { text: entry.path });
+  }
 }
 
 // src/ui/recipeLabels.ts
@@ -13650,9 +13745,10 @@ var MPView = class extends import_obsidian9.ItemView {
     var _a;
     const container = this.containerEl.children[1];
     container.empty();
-    container.classList.remove("view-content");
+    container.classList.remove("view-content", "mp-preview-focused", "mp-compact-workspace");
     container.classList.add("mp-view-content");
-    const { toolbar, controlsGroup, secondaryRow } = createWorkbenchControls(container);
+    const { toolbar, controlsGroup, secondaryRow, disclosure, header } = createWorkbenchControls(container);
+    this.register(observePreviewWorkspace(container, disclosure));
     const headerBtn = secondaryRow.createEl("button", {
       cls: "mp-action-button mp-icon-btn",
       attr: { "aria-label": "\u63D2\u5165\u81EA\u5B9A\u4E49\u5934\u90E8", "title": "\u63D2\u5165\u5934\u90E8" }
@@ -13863,8 +13959,8 @@ var MPView = class extends import_obsidian9.ItemView {
       }
     });
     bindAsyncEvent(this.fontSizeSelect, "change", updateFontSize);
-    const previewWidthBar = container.createDiv("mp-preview-width-bar");
-    previewWidthBar.createSpan({ cls: "mp-preview-width-label", text: "\u9884\u89C8\u5BBD\u5EA6" });
+    const previewWidthBar = header.createDiv("mp-preview-width-bar");
+    previewWidthBar.setAttribute("aria-label", "\u9884\u89C8\u89C6\u56FE\u63A7\u5236");
     const widthChoices = previewWidthBar.createDiv("mp-preview-width-choices");
     const adaptiveButton = widthChoices.createEl("button", {
       text: "\u81EA\u9002\u5E94",
@@ -13878,6 +13974,15 @@ var MPView = class extends import_obsidian9.ItemView {
       cls: "mp-preview-width-hint",
       text: "\u4EC5\u5F71\u54CD\u9884\u89C8\uFF0C\u4E0D\u5F71\u54CD\u590D\u5236\u4E0E\u5BFC\u51FA"
     });
+    const focusButton = previewWidthBar.createEl("button", {
+      cls: "mp-focus-button mp-icon-btn",
+      attr: { type: "button", "aria-label": "\u4E13\u6CE8\u9884\u89C8", "aria-pressed": "false", title: "\u4E13\u6CE8\u9884\u89C8\uFF0C\u6536\u8D77\u8F85\u52A9\u533A\u57DF" }
+    });
+    (0, import_obsidian9.setIcon)(focusButton, "maximize");
+    focusButton.addEventListener("click", () => {
+      (0, import_obsidian9.setIcon)(focusButton, togglePreviewFocus(container, focusButton) ? "minimize" : "maximize");
+    });
+    widthChoices.title = "\u4EC5\u5F71\u54CD\u9884\u89C8\uFF0C\u4E0D\u5F71\u54CD\u590D\u5236\u4E0E\u5BFC\u51FA";
     this.previewEl = container.createDiv({ cls: "mp-preview-area" });
     const setPreviewWidth = (phone) => {
       this.isPhonePreview = phone;
@@ -13914,21 +14019,21 @@ var MPView = class extends import_obsidian9.ItemView {
       text: "Pub \u590D\u5236",
       cls: "mp-copy-button"
     });
-    const exportImageButton = primaryRow.createEl("button", {
-      text: "\u5BFC\u51FA\u957F\u56FE",
-      cls: "mp-export-button"
+    const exportButton = primaryRow.createEl("button", {
+      text: "\u5BFC\u51FA\u2026",
+      cls: "mp-export-button",
+      attr: { type: "button", "aria-label": "\u5BFC\u51FA\u6587\u7AE0", "aria-haspopup": "menu" }
     });
-    bindAsyncEvent(exportImageButton, "click", () => this.exportLongImage(exportImageButton));
-    const exportHtmlButton = primaryRow.createEl("button", {
-      text: "\u5BFC\u51FA HTML",
-      cls: "mp-export-button"
+    exportButton.addEventListener("click", (event) => {
+      const menu = new import_obsidian9.Menu();
+      menu.addItem((item) => item.setTitle("\u5BFC\u51FA\u957F\u56FE").setIcon("image").onClick(() => runAction(() => this.exportLongImage(exportButton))));
+      menu.addItem((item) => item.setTitle("\u5BFC\u51FA HTML").setIcon("file-code").onClick(() => runAction(() => this.exportHtmlFragment(exportButton))));
+      menu.addItem((item) => item.setTitle("\u5BFC\u51FA\u5206\u6BB5\u56FE").setIcon("images").onClick(() => runAction(() => this.exportSegmentedImages(exportButton))));
+      if (event.detail === 0) {
+        const bounds = exportButton.getBoundingClientRect();
+        menu.showAtPosition({ x: bounds.left, y: bounds.top });
+      } else menu.showAtMouseEvent(event);
     });
-    bindAsyncEvent(exportHtmlButton, "click", () => this.exportHtmlFragment(exportHtmlButton));
-    const exportSegmentsButton = primaryRow.createEl("button", {
-      text: "\u5BFC\u51FA\u5206\u6BB5\u56FE",
-      cls: "mp-export-button"
-    });
-    bindAsyncEvent(exportSegmentsButton, "click", () => this.exportSegmentedImages(exportSegmentsButton));
     bindAsyncEvent(this.copyButton, "click", async () => {
       if (this.previewEl) {
         const validation = this.refreshValidationReport();
@@ -14012,32 +14117,7 @@ var MPView = class extends import_obsidian9.ItemView {
     return this.validationReport;
   }
   renderValidationReport() {
-    this.validationPanel.empty();
-    const report = this.validationReport;
-    if (!report) {
-      this.validationPanel.setCssStyles({ display: "none" });
-      return;
-    }
-    this.validationPanel.setCssStyles({ display: "block" });
-    const status = this.validationPanel.createDiv({
-      cls: `mp-validation-summary ${report.errors > 0 ? "is-error" : report.warnings > 0 ? "is-warning" : "is-ok"}`
-    });
-    status.setText(report.errors > 0 ? `\u68C0\u67E5\uFF1A${report.errors} \u9879\u963B\u65AD\u95EE\u9898\uFF0C\u5DF2\u7981\u6B62\u590D\u5236` : report.warnings > 0 ? `\u68C0\u67E5\uFF1A\u53EF\u590D\u5236\uFF0C${report.warnings} \u9879\u517C\u5BB9\u6027\u63D0\u793A` : "\u68C0\u67E5\uFF1A\u53EF\u590D\u5236\uFF0C\u672A\u53D1\u73B0\u517C\u5BB9\u6027\u95EE\u9898");
-    if (report.issues.length > 0) {
-      const list = this.validationPanel.createEl("ul", { cls: "mp-validation-issues" });
-      report.issues.slice(0, 4).forEach((issue) => {
-        list.createEl("li", {
-          text: `${issue.severity === "error" ? "\u963B\u65AD" : "\u63D0\u793A"} \xB7 ${issue.message}\uFF08${issue.path}\uFF09`,
-          cls: issue.severity === "error" ? "is-error" : "is-warning"
-        });
-      });
-      if (report.issues.length > 4) {
-        this.validationPanel.createDiv({
-          text: `\u53E6\u6709 ${report.issues.length - 4} \u9879\u63D0\u793A\u672A\u5C55\u5F00`,
-          cls: "mp-validation-more"
-        });
-      }
-    }
+    renderPreviewValidation(this.validationPanel, this.validationReport);
   }
   async saveCurrentSnapshot() {
     var _a;

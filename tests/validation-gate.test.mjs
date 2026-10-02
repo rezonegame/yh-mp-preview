@@ -6,6 +6,7 @@ const validator = readFileSync(new URL('../src/core/validation/wechatHtmlValidat
 const pipeline = readFileSync(new URL('../src/core/render/legacyWechatPipeline.ts', import.meta.url), 'utf8');
 const copyManager = readFileSync(new URL('../src/copyManager.ts', import.meta.url), 'utf8');
 const view = readFileSync(new URL('../src/view.ts', import.meta.url), 'utf8');
+const validationUi = readFileSync(new URL('../src/ui/previewWorkspace.ts', import.meta.url), 'utf8');
 
 test('validator treats missing image sources as a blocking issue', () => {
   assert.match(validator, /missing-image-source/);
@@ -15,6 +16,8 @@ test('validator treats missing image sources as a blocking issue', () => {
 test('copy uses the source validation gate and the view renders its report', () => {
   assert.match(pipeline, /const sourceValidation = validateWechatHtml\(clone\)/);
   assert.match(copyManager, /已取消复制/);
-  assert.match(view, /检查：\$\{report\.errors\} 项阻断问题，已禁止复制/);
+  assert.match(validationUi, /检查：\$\{report\.errors\} 项阻断问题，已禁止复制/);
+  assert.match(view, /renderPreviewValidation\(this\.validationPanel, this\.validationReport\)/);
+  assert.match(view, /this\.copyButton\.disabled = this\.validationReport\.errors > 0/);
   assert.match(view, /refreshValidationReport\(\)/);
 });

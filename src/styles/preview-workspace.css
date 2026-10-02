@@ -1,0 +1,43 @@
+/* Host chrome only. Do not select article descendants or export snapshots. */
+.mp-view-content { min-block-size: 0; overflow: hidden; }
+.mp-workspace-header { flex: 0 0 auto; position: relative; z-index: 2; }
+.mp-settings-summary { padding: 6px 10px; cursor: pointer; font-size: 12px; font-weight: 600; color: var(--text-muted); }
+.mp-settings-disclosure:not([open]) > .mp-toolbar { display: none; }
+.mp-settings-disclosure > .mp-toolbar { border-radius: 8px; }
+.mp-view-content .mp-primary-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(80px,120px); }
+.mp-view-content .mp-primary-row :is(.mp-copy-button,button:last-child) { grid-column: auto; }
+.mp-view-content .mp-bottom-bar { padding: 8px; margin: 0 0 6px; border-radius: 8px; }
+.mp-view-content .mp-preview-width-bar { flex-wrap: nowrap; border: 0; background: transparent; padding: 4px 0; }
+.mp-view-content .mp-preview-width-choices { flex: 0 1 auto; min-width: 0; }
+.mp-view-content .mp-preview-width-choices button { white-space: nowrap; padding-inline: 8px; }
+.mp-view-content .mp-preview-width-hint { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mp-view-content .mp-focus-button { margin-inline-start: auto; }
+.mp-view-content .mp-validation-panel { margin: 4px 0; flex: 0 1 auto; min-height: 0; }
+.mp-validation-summary { cursor: pointer; overflow-wrap: anywhere; }
+.mp-validation-body { max-height: min(180px,calc(var(--mp-workspace-height,600px) * .24)); overflow-y: auto; padding: 8px 12px; font-size: 12px; }
+.mp-view-content .mp-validation-issues { margin: 0; padding: 0 0 0 16px; }
+.mp-validation-issues :is(summary,li) { overflow-wrap: anywhere; }
+.mp-validation-issues summary { cursor: pointer; }
+.mp-validation-issues ul { padding-inline-start: 16px; }
+.mp-compact-workspace > .mp-workspace-header { display: grid; grid-template-columns: 88px minmax(0,1fr); align-items: center; gap: 4px; }
+.mp-compact-workspace .mp-settings-summary { padding: 4px; }
+.mp-compact-workspace .mp-settings-disclosure[open] > .mp-toolbar {
+    position: absolute; inset-block-start: 100%; inset-inline: 0; z-index: 3;
+    max-height: min(380px,calc(var(--mp-workspace-height,600px) * .6)); overflow-y: auto;
+    box-shadow: 0 6px 18px rgb(0 0 0 / .18);
+}
+.mp-compact-workspace .mp-preview-width-hint { display: none; }
+.mp-compact-workspace .mp-validation-summary { padding-block: 5px; }
+.mp-compact-workspace .mp-bottom-bar { padding-block: 4px; }
+.mp-compact-workspace .mp-bottom-bar { margin-block-end: 2px; }
+.mp-compact-workspace .mp-preview-width-bar { padding-block: 2px; }
+.mp-compact-workspace > .mp-preview-area { margin-block: 4px; }
+.mp-preview-focused .mp-settings-disclosure { display: none; }
+.mp-preview-focused > .mp-workspace-header { display: block; }
+.mp-preview-focused > .mp-validation-panel:not(.mp-has-errors) { display: none; }
+@container (max-width: 280px) {
+    .mp-compact-workspace > .mp-workspace-header { grid-template-columns: 68px minmax(0,1fr); gap: 2px; }
+    .mp-compact-workspace .mp-settings-summary { font-size: 11px; padding-inline: 2px; }
+    .mp-view-content .mp-primary-row { grid-template-columns: minmax(0,1fr) 72px; gap: 4px; }
+    .mp-view-content .mp-preview-width-choices button { padding-inline: 5px; font-size: 11px; }
+}

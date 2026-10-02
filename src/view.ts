@@ -1,8 +1,9 @@
-import { ItemView, WorkspaceLeaf, MarkdownRenderer, TFile, setIcon, Notice, Modal, Component } from 'obsidian';
+import { ItemView, WorkspaceLeaf, MarkdownRenderer, TFile, setIcon, Notice, Modal, Component, Menu } from 'obsidian';
 import { replaceWithSafeHtml } from './core/security/safeDom';
 import { PreviewSession } from './core/render/previewSession';
 import { boundedCanvasRender, queueCanvasRender, shouldIgnoreExportElement } from './core/render/exportCanvas';
 import { createWorkbenchControls } from './ui/workbenchControls';
+import { observePreviewWorkspace, togglePreviewFocus, renderPreviewValidation } from './ui/previewWorkspace';
 import { recipeOptions, recipeSummaryLabel } from './ui/recipeLabels';
 import { bindAsyncEvent, runAction } from './ui/asyncActions';
 import { MPConverter } from './converter';
@@ -118,11 +119,12 @@ export class MPView extends ItemView {
     async onOpen() {
         const container = this.containerEl.children[1] as HTMLElement;
         container.empty();
-        container.classList.remove('view-content');
+        container.classList.remove('view-content', 'mp-preview-focused', 'mp-compact-workspace');
         container.classList.add('mp-view-content');
 
         // 顶部工具栏
-        const { toolbar, controlsGroup, secondaryRow } = createWorkbenchControls(container);
+        const { toolbar, controlsGroup, secondaryRow, disclosure, header } = createWorkbenchControls(container);
+        this.register(observePreviewWorkspace(container, disclosure));
 
         // Inject Header
         const headerBtn = secondaryRow.createEl('button', {
@@ -382,8 +384,8 @@ export class MPView extends ItemView {
 
         bindAsyncEvent(this.fontSizeSelect,'change', updateFontSize);
         // Preview width controls belong to the preview, not the article styling toolbar.
-        const previewWidthBar = container.createDiv('mp-preview-width-bar');
-        previewWidthBar.createSpan({ cls: 'mp-preview-width-label', text: '预览宽度' });
+        const previewWidthBar = header.createDiv('mp-preview-width-bar');
+        previewWidthBar.setAttribute('aria-label', '预览视图控制');
         const widthChoices = previewWidthBar.createDiv('mp-preview-width-choices');
         const adaptiveButton = widthChoices.createEl('button', {
             text: '自适应',
@@ -397,6 +399,15 @@ export class MPView extends ItemView {
             cls: 'mp-preview-width-hint',
             text: '仅影响预览，不影响复制与导出',
         });
+        const focusButton = previewWidthBar.createEl('button', {
+            cls: 'mp-focus-button mp-icon-btn',
+            attr: { type: 'button', 'aria-label': '专注预览', 'aria-pressed': 'false', title: '专注预览，收起辅助区域' },
+        });
+        setIcon(focusButton, 'maximize');
+        focusButton.addEventListener('click', () => {
+            setIcon(focusButton, togglePreviewFocus(container, focusButton) ? 'minimize' : 'maximize');
+        });
+        widthChoices.title = '仅影响预览，不影响复制与导出';
         this.previewEl = container.createDiv({ cls: 'mp-preview-area' });
         const setPreviewWidth = (phone: boolean) => {
             this.isPhonePreview = phone;
@@ -444,26 +455,20 @@ export class MPView extends ItemView {
             cls: 'mp-copy-button',
         });
 
-        // 导出长图按钮
-        const exportImageButton = primaryRow.createEl('button', {
-            text: '导出长图',
-            cls: 'mp-export-button'
+        const exportButton = primaryRow.createEl('button', {
+            text: '导出…', cls: 'mp-export-button',
+            attr: { type: 'button', 'aria-label': '导出文章', 'aria-haspopup': 'menu' },
         });
-
-        bindAsyncEvent(exportImageButton,'click', () => this.exportLongImage(exportImageButton));
-
-        // 添加复制按钮点击事件
-        const exportHtmlButton = primaryRow.createEl('button', {
-            text: '导出 HTML',
-            cls: 'mp-export-button',
+        exportButton.addEventListener('click', (event) => {
+            const menu = new Menu();
+            menu.addItem(item => item.setTitle('导出长图').setIcon('image').onClick(() => runAction(() => this.exportLongImage(exportButton))));
+            menu.addItem(item => item.setTitle('导出 HTML').setIcon('file-code').onClick(() => runAction(() => this.exportHtmlFragment(exportButton))));
+            menu.addItem(item => item.setTitle('导出分段图').setIcon('images').onClick(() => runAction(() => this.exportSegmentedImages(exportButton))));
+            if (event.detail === 0) {
+                const bounds = exportButton.getBoundingClientRect();
+                menu.showAtPosition({ x: bounds.left, y: bounds.top });
+            } else menu.showAtMouseEvent(event);
         });
-        bindAsyncEvent(exportHtmlButton,'click', () => this.exportHtmlFragment(exportHtmlButton));
-
-        const exportSegmentsButton = primaryRow.createEl('button', {
-            text: '导出分段图',
-            cls: 'mp-export-button',
-        });
-        bindAsyncEvent(exportSegmentsButton,'click', () => this.exportSegmentedImages(exportSegmentsButton));
 
         bindAsyncEvent(this.copyButton,'click', async () => {
             if (this.previewEl) {
@@ -561,38 +566,7 @@ export class MPView extends ItemView {
     }
 
     private renderValidationReport(): void {
-        this.validationPanel.empty();
-        const report = this.validationReport;
-        if (!report) {
-            this.validationPanel.setCssStyles({ display: 'none' });
-            return;
-        }
-
-        this.validationPanel.setCssStyles({ display: 'block' });
-        const status = this.validationPanel.createDiv({
-            cls: `mp-validation-summary ${report.errors > 0 ? 'is-error' : report.warnings > 0 ? 'is-warning' : 'is-ok'}`,
-        });
-        status.setText(report.errors > 0
-            ? `检查：${report.errors} 项阻断问题，已禁止复制`
-            : report.warnings > 0
-                ? `检查：可复制，${report.warnings} 项兼容性提示`
-                : '检查：可复制，未发现兼容性问题');
-
-        if (report.issues.length > 0) {
-            const list = this.validationPanel.createEl('ul', { cls: 'mp-validation-issues' });
-            report.issues.slice(0, 4).forEach((issue) => {
-                list.createEl('li', {
-                    text: `${issue.severity === 'error' ? '阻断' : '提示'} · ${issue.message}（${issue.path}）`,
-                    cls: issue.severity === 'error' ? 'is-error' : 'is-warning',
-                });
-            });
-            if (report.issues.length > 4) {
-                this.validationPanel.createDiv({
-                    text: `另有 ${report.issues.length - 4} 项提示未展开`,
-                    cls: 'mp-validation-more',
-                });
-            }
-        }
+        renderPreviewValidation(this.validationPanel, this.validationReport);
     }
 
     private async saveCurrentSnapshot(): Promise<void> {

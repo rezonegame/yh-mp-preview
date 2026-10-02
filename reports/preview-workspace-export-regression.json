@@ -1,0 +1,289 @@
+{
+  "version": "3.19.1-beta.1",
+  "date": "2026-10-02",
+  "vault": "MPPreview-Refactor-Test",
+  "platform": "Win32",
+  "devicePixelRatio": 2,
+  "results": [
+    {
+      "name": "real Markdown renderer preserves both dialogue blocks",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "header and footer inside article boundary",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 320",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 375",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 375",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 414",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 414",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "actual article width 320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 469",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 469",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "actual article width 375",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 508",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 508",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "actual article width 414",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 600",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 600",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "phone mode does not change export width or article height",
+      "pass": true,
+      "detail": {
+        "adaptive": {
+          "width": 506,
+          "height": 6598
+        },
+        "phone": {
+          "width": 506,
+          "height": 6598
+        }
+      }
+    },
+    {
+      "name": "full export includes article below viewport",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "gallery keeps keyboard focus after selection",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "gallery cancel restores persisted theme without writes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "repeated recipe does not duplicate labels",
+      "pass": true,
+      "detail": {
+        "labels": 30
+      }
+    },
+    {
+      "name": "theme trial is isolated per preview pane",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "late previous render cannot overwrite new article",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all export adapters generate complete artifacts",
+      "pass": true,
+      "detail": {
+        "names": [
+          "yh-mp-preview-1790914800760.png",
+          "yh-mp-preview-1790914801066.html",
+          "yh-mp-preview-1790914801095-1.png",
+          "yh-mp-preview-1790914801095-2.png",
+          "yh-mp-preview-1790914801095-3.png",
+          "yh-mp-preview-1790914801095-4.png",
+          "yh-mp-preview-1790914801095-5.png",
+          "yh-mp-preview-1790914801095-6.png",
+          "yh-mp-preview-1790914801095-7.png",
+          "yh-mp-preview-1790914801095-8.png",
+          "yh-mp-preview-1790914801095-9.png",
+          "yh-mp-preview-1790914801095-10.png"
+        ]
+      }
+    },
+    {
+      "name": "HTML contains header, footer and final article text",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "long image covers full article",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "real system clipboard contains full canonical article",
+      "pass": null,
+      "skipped": "background-clipboard",
+      "detail": "Foreground access required; do not claim background clipboard verification."
+    },
+    {
+      "name": "source Markdown remains unchanged",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "dimensions": [
+    {
+      "width": 320,
+      "paneWidth": 320,
+      "articleWidth": 226,
+      "articleHeight": 7788,
+      "previewHeight": 619,
+      "overflow": []
+    },
+    {
+      "width": 375,
+      "paneWidth": 375,
+      "articleWidth": 281,
+      "articleHeight": 6900,
+      "previewHeight": 619,
+      "overflow": []
+    },
+    {
+      "width": 414,
+      "paneWidth": 414,
+      "articleWidth": 320,
+      "articleHeight": 6861,
+      "previewHeight": 619,
+      "overflow": []
+    },
+    {
+      "width": 469,
+      "paneWidth": 469,
+      "articleWidth": 375,
+      "articleHeight": 6088,
+      "previewHeight": 619,
+      "overflow": []
+    },
+    {
+      "width": 508,
+      "paneWidth": 508,
+      "articleWidth": 414,
+      "articleHeight": 6088,
+      "previewHeight": 619,
+      "overflow": []
+    },
+    {
+      "width": 600,
+      "paneWidth": 600,
+      "articleWidth": 506,
+      "articleHeight": 6088,
+      "previewHeight": 619,
+      "overflow": []
+    }
+  ],
+  "pngSizes": [
+    {
+      "name": "yh-mp-preview-1790914800760.png",
+      "width": 1012,
+      "height": 13196
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-1.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-2.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-3.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-4.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-5.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-6.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-7.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-8.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-9.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-10.png",
+      "width": 1012,
+      "height": 1046
+    }
+  ],
+  "artifacts": "_test-artifacts"
+}

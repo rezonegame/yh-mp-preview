@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-02",
+  "version": "3.19.1",
+  "candidateVersion": "3.19.1-beta.1",
+  "status": "prepared stable promotion; publication is recorded separately",
+  "acceptance": "User confirmed testing passed and explicitly authorized publication.",
+  "runtimeAndStylesByteIdentical": true,
+  "manifestOnlyVersionChanged": true,
+  "assets": {
+    "main.js": "1b1c424935992a941af257783e15516b07cd822d89daa27f3c41673fc64a79bc",
+    "styles.css": "2f49becbf4fdfb336b8e0ce82f97dd98a5902f2ed1978a2810d90af06f69fcdf",
+    "manifest.json": "93752f9d1f3e4cc32575db9208e3446d72ed25958f58c45238cd1ee222a37bea"
+  },
+  "retainedCandidateEvidence": "reports/preview-workspace-regression.json",
+  "rollbackVersion": "3.19.0",
+  "minimumHost": "1.7.2",
+  "desktopOnly": true,
+  "limits": [
+    "No new stable-version native host matrix: runtime and stylesheet bytes are identical to the accepted final candidate.",
+    "Background system clipboard skip and cross-platform limitations remain as recorded in candidate evidence.",
+    "GitHub publication does not prove official application-directory synchronization or installation."
+  ]
+}

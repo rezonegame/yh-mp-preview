@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.19.1
+
+- Promote the user-accepted preview-priority workbench to a stable release. Keep the tested JavaScript and CSS unchanged from the final 3.19.1-beta.1 candidate; only version metadata and publication records change.
+- Adapt to actual pane width and height, provide bounded appearance settings and session-only Focus Preview, collapse/group complete validation details, and keep Copy plus a native Export menu in one footer row.
+- Retain all three export modes, existing themes/recipes/settings, source Markdown, note enhancements and plugin ID. Stable 3.19.0 remains available for rollback.
+- Record 131 passing automated tests, 92 native workbench checks and the prior 28 passing export/host checks with one explicit background-clipboard skip. User acceptance is separate from cross-platform coverage and official application-directory installation.
+
+## 3.19.1-beta.1 (unpublished development candidate)
+
+- Prioritize the article viewport using the actual pane width and height, not screen resolution. Collapse appearance settings in narrow/short panes; keep them accessible in a bounded overlay and add session-only Focus Preview.
+- Keep Copy and one native Export menu in a single footer row. Preserve long-image, HTML and segmented-image export implementations and widths.
+- Collapse nonblocking validation details by default, group repeated warnings without dropping locations, and surface new blocking errors. Bound expanded detail height to protect preview space.
+- Preserve Markdown, saved preferences, themes, recipes, note enhancements and stable 3.19.0. This candidate is not yet published to GitHub/BRAT or the official directory.
+
 ## 3.19.0
 
 - Rebuild the identified retained background editor/presets, font and confirmation dialogs, settings catalog merge/disclosures, preview lock state, theme application and seven stylesheet files around existing behavior contracts.

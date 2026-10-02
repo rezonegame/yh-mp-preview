@@ -1,0 +1,876 @@
+{
+  "version": "3.19.1-beta.1",
+  "date": "2026-10-02",
+  "status": "local candidate; not published",
+  "host": "Obsidian 1.13.7",
+  "platform": "Windows",
+  "devicePixelRatio": 2,
+  "scope": "Isolated MPPreview-Refactor-Test; Marketing untouched",
+  "assets": {
+    "main.js": "1b1c424935992a941af257783e15516b07cd822d89daa27f3c41673fc64a79bc",
+    "manifest.json": "f873a99217186017c0944a463a8cf936be92cb4f3b10c671a3a86d75629ce3e6",
+    "styles.css": "2f49becbf4fdfb336b8e0ce82f97dd98a5902f2ed1978a2810d90af06f69fcdf"
+  },
+  "checks": [
+    {
+      "name": "theme-light responsive settings 900x700",
+      "pass": true,
+      "detail": {
+        "compact": false,
+        "open": true
+      }
+    },
+    {
+      "name": "theme-light controls fit 900x700",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light preview gets majority 900x700",
+      "pass": true,
+      "detail": 0.5742857142857143
+    },
+    {
+      "name": "theme-light footer stays one row 900x700",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light responsive settings 600x460",
+      "pass": true,
+      "detail": {
+        "compact": true,
+        "open": false
+      }
+    },
+    {
+      "name": "theme-light controls fit 600x460",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light preview gets majority 600x460",
+      "pass": true,
+      "detail": 0.6934782608695652
+    },
+    {
+      "name": "theme-light footer stays one row 600x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light settings remain reachable 600x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light settings overlay does not shrink preview 600x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light focus remains usable 600x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light responsive settings 375x700",
+      "pass": true,
+      "detail": {
+        "compact": true,
+        "open": false
+      }
+    },
+    {
+      "name": "theme-light controls fit 375x700",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light preview gets majority 375x700",
+      "pass": true,
+      "detail": 0.7985714285714286
+    },
+    {
+      "name": "theme-light footer stays one row 375x700",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light settings remain reachable 375x700",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light settings overlay does not shrink preview 375x700",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light focus remains usable 375x700",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light responsive settings 320x460",
+      "pass": true,
+      "detail": {
+        "compact": true,
+        "open": false
+      }
+    },
+    {
+      "name": "theme-light controls fit 320x460",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light preview gets majority 320x460",
+      "pass": true,
+      "detail": 0.6934782608695652
+    },
+    {
+      "name": "theme-light footer stays one row 320x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light settings remain reachable 320x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light settings overlay does not shrink preview 320x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light focus remains usable 320x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light responsive settings 260x360",
+      "pass": true,
+      "detail": {
+        "compact": true,
+        "open": false
+      }
+    },
+    {
+      "name": "theme-light controls fit 260x360",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light preview gets majority 260x360",
+      "pass": true,
+      "detail": 0.6083333333333333
+    },
+    {
+      "name": "theme-light footer stays one row 260x360",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light settings remain reachable 260x360",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light settings overlay does not shrink preview 260x360",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light focus remains usable 260x360",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light responsive settings 900x320",
+      "pass": true,
+      "detail": {
+        "compact": true,
+        "open": false
+      }
+    },
+    {
+      "name": "theme-light controls fit 900x320",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-light preview gets majority 900x320",
+      "pass": true,
+      "detail": 0.559375
+    },
+    {
+      "name": "theme-light footer stays one row 900x320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light settings remain reachable 900x320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light settings overlay does not shrink preview 900x320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-light focus remains usable 900x320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark responsive settings 900x700",
+      "pass": true,
+      "detail": {
+        "compact": false,
+        "open": true
+      }
+    },
+    {
+      "name": "theme-dark controls fit 900x700",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark preview gets majority 900x700",
+      "pass": true,
+      "detail": 0.5742857142857143
+    },
+    {
+      "name": "theme-dark footer stays one row 900x700",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark responsive settings 600x460",
+      "pass": true,
+      "detail": {
+        "compact": true,
+        "open": false
+      }
+    },
+    {
+      "name": "theme-dark controls fit 600x460",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark preview gets majority 600x460",
+      "pass": true,
+      "detail": 0.6934782608695652
+    },
+    {
+      "name": "theme-dark footer stays one row 600x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark settings remain reachable 600x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark settings overlay does not shrink preview 600x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark focus remains usable 600x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark responsive settings 375x700",
+      "pass": true,
+      "detail": {
+        "compact": true,
+        "open": false
+      }
+    },
+    {
+      "name": "theme-dark controls fit 375x700",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark preview gets majority 375x700",
+      "pass": true,
+      "detail": 0.7985714285714286
+    },
+    {
+      "name": "theme-dark footer stays one row 375x700",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark settings remain reachable 375x700",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark settings overlay does not shrink preview 375x700",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark focus remains usable 375x700",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark responsive settings 320x460",
+      "pass": true,
+      "detail": {
+        "compact": true,
+        "open": false
+      }
+    },
+    {
+      "name": "theme-dark controls fit 320x460",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark preview gets majority 320x460",
+      "pass": true,
+      "detail": 0.6934782608695652
+    },
+    {
+      "name": "theme-dark footer stays one row 320x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark settings remain reachable 320x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark settings overlay does not shrink preview 320x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark focus remains usable 320x460",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark responsive settings 260x360",
+      "pass": true,
+      "detail": {
+        "compact": true,
+        "open": false
+      }
+    },
+    {
+      "name": "theme-dark controls fit 260x360",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark preview gets majority 260x360",
+      "pass": true,
+      "detail": 0.6083333333333333
+    },
+    {
+      "name": "theme-dark footer stays one row 260x360",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark settings remain reachable 260x360",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark settings overlay does not shrink preview 260x360",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark focus remains usable 260x360",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark responsive settings 900x320",
+      "pass": true,
+      "detail": {
+        "compact": true,
+        "open": false
+      }
+    },
+    {
+      "name": "theme-dark controls fit 900x320",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "theme-dark preview gets majority 900x320",
+      "pass": true,
+      "detail": 0.559375
+    },
+    {
+      "name": "theme-dark footer stays one row 900x320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark settings remain reachable 900x320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark settings overlay does not shrink preview 900x320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "theme-dark focus remains usable 900x320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "focus preserves exact export dimensions and HTML",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "nonblocking warnings initially collapsed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all warning paths retained",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "actual blocking issue disables copy and opens details",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "blocking status remains visible in focus preview",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "copy recovers after blocking issue removed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "native export menu contains 导出长图",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "native export menu invokes exportLongImage",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "native export menu contains 导出 HTML",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "native export menu invokes exportHtmlFragment",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "native export menu contains 导出分段图",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "native export menu invokes exportSegmentedImages",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "settings are unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown is unchanged",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "dimensions": [
+    {
+      "mode": "theme-light",
+      "width": 900,
+      "height": 700,
+      "paneWidth": 900,
+      "previewHeight": 402,
+      "ratio": 0.5742857142857143,
+      "compact": false
+    },
+    {
+      "mode": "theme-light",
+      "width": 600,
+      "height": 460,
+      "paneWidth": 600,
+      "previewHeight": 319,
+      "ratio": 0.6934782608695652,
+      "compact": true
+    },
+    {
+      "mode": "theme-light",
+      "width": 375,
+      "height": 700,
+      "paneWidth": 375,
+      "previewHeight": 559,
+      "ratio": 0.7985714285714286,
+      "compact": true
+    },
+    {
+      "mode": "theme-light",
+      "width": 320,
+      "height": 460,
+      "paneWidth": 320,
+      "previewHeight": 319,
+      "ratio": 0.6934782608695652,
+      "compact": true
+    },
+    {
+      "mode": "theme-light",
+      "width": 260,
+      "height": 360,
+      "paneWidth": 260,
+      "previewHeight": 219,
+      "ratio": 0.6083333333333333,
+      "compact": true
+    },
+    {
+      "mode": "theme-light",
+      "width": 900,
+      "height": 320,
+      "paneWidth": 900,
+      "previewHeight": 179,
+      "ratio": 0.559375,
+      "compact": true
+    },
+    {
+      "mode": "theme-dark",
+      "width": 900,
+      "height": 700,
+      "paneWidth": 900,
+      "previewHeight": 402,
+      "ratio": 0.5742857142857143,
+      "compact": false
+    },
+    {
+      "mode": "theme-dark",
+      "width": 600,
+      "height": 460,
+      "paneWidth": 600,
+      "previewHeight": 319,
+      "ratio": 0.6934782608695652,
+      "compact": true
+    },
+    {
+      "mode": "theme-dark",
+      "width": 375,
+      "height": 700,
+      "paneWidth": 375,
+      "previewHeight": 559,
+      "ratio": 0.7985714285714286,
+      "compact": true
+    },
+    {
+      "mode": "theme-dark",
+      "width": 320,
+      "height": 460,
+      "paneWidth": 320,
+      "previewHeight": 319,
+      "ratio": 0.6934782608695652,
+      "compact": true
+    },
+    {
+      "mode": "theme-dark",
+      "width": 260,
+      "height": 360,
+      "paneWidth": 260,
+      "previewHeight": 219,
+      "ratio": 0.6083333333333333,
+      "compact": true
+    },
+    {
+      "mode": "theme-dark",
+      "width": 900,
+      "height": 320,
+      "paneWidth": 900,
+      "previewHeight": 179,
+      "ratio": 0.559375,
+      "compact": true
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "output/refactor/MPPreview-Refactor-Test/_test-artifacts/preview-priority-600x460-theme-light.png",
+      "sha256": "efbd5e61898be2d0096fa98184c88a5af812e73a6a82a00739662fdcc3a19ca3",
+      "inspected": true
+    },
+    {
+      "path": "output/refactor/MPPreview-Refactor-Test/_test-artifacts/preview-priority-375x700-theme-dark.png",
+      "sha256": "5d94b06525580b07ce253c64064525b56333c75d6233223d44fc6202670f171d",
+      "inspected": true
+    },
+    {
+      "path": "output/refactor/MPPreview-Refactor-Test/_test-artifacts/preview-priority-320x460-theme-dark-settings.png",
+      "sha256": "4748114fb5477f36653a776e50bea2459220116e99e1eabfb761af99c61d4ddb",
+      "inspected": true
+    }
+  ],
+  "exportChecks": [
+    {
+      "name": "real Markdown renderer preserves both dialogue blocks",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "header and footer inside article boundary",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 320",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 375",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 375",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 414",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 414",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "actual article width 320",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 469",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 469",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "actual article width 375",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 508",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 508",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "actual article width 414",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "workbench controls fit 600",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "article has no horizontal overflow 600",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "phone mode does not change export width or article height",
+      "pass": true,
+      "detail": {
+        "adaptive": {
+          "width": 506,
+          "height": 6598
+        },
+        "phone": {
+          "width": 506,
+          "height": 6598
+        }
+      }
+    },
+    {
+      "name": "full export includes article below viewport",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "gallery keeps keyboard focus after selection",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "gallery cancel restores persisted theme without writes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "repeated recipe does not duplicate labels",
+      "pass": true,
+      "detail": {
+        "labels": 30
+      }
+    },
+    {
+      "name": "theme trial is isolated per preview pane",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "late previous render cannot overwrite new article",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "all export adapters generate complete artifacts",
+      "pass": true,
+      "detail": {
+        "names": [
+          "yh-mp-preview-1790914800760.png",
+          "yh-mp-preview-1790914801066.html",
+          "yh-mp-preview-1790914801095-1.png",
+          "yh-mp-preview-1790914801095-2.png",
+          "yh-mp-preview-1790914801095-3.png",
+          "yh-mp-preview-1790914801095-4.png",
+          "yh-mp-preview-1790914801095-5.png",
+          "yh-mp-preview-1790914801095-6.png",
+          "yh-mp-preview-1790914801095-7.png",
+          "yh-mp-preview-1790914801095-8.png",
+          "yh-mp-preview-1790914801095-9.png",
+          "yh-mp-preview-1790914801095-10.png"
+        ]
+      }
+    },
+    {
+      "name": "HTML contains header, footer and final article text",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "long image covers full article",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "real system clipboard contains full canonical article",
+      "pass": null,
+      "skipped": "background-clipboard",
+      "detail": "Foreground access required; do not claim background clipboard verification."
+    },
+    {
+      "name": "source Markdown remains unchanged",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "pngSizes": [
+    {
+      "name": "yh-mp-preview-1790914800760.png",
+      "width": 1012,
+      "height": 13196
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-1.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-2.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-3.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-4.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-5.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-6.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-7.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-8.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-9.png",
+      "width": 1012,
+      "height": 1350
+    },
+    {
+      "name": "yh-mp-preview-1790914801095-10.png",
+      "width": 1012,
+      "height": 1046
+    }
+  ],
+  "limits": [
+    "Native size matrix explicitly triggers window resize to avoid background ResizeObserver throttling.",
+    "Foreground system clipboard was skipped in this run; canonical rich-text copy is covered by automated tests.",
+    "Other computers, operating systems, host versions and DPI combinations were not tested.",
+    "CLI screenshots returning preceding painted frames were rejected; accepted screenshots use double native owner-WebContents capture."
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "auditDate": "2026-10-01",
-  "pluginVersion": "3.19.0",
-  "baselineCommit": "37b09006265fcb5449c7445fa04f4541bfe68de4",
+  "auditDate": "2026-10-02",
+  "pluginVersion": "3.19.1",
+  "baselineCommit": "9b3f850cb3292385da0c70b6641a49836328c24c",
   "scope": "Current working-tree src files; all pinned upstream src blobs; runtime package metadata. Git history and existing release assets are preserved.",
   "upstream": {
     "repository": "Yeban8090/mp-preview",
@@ -23,7 +23,7 @@
     ]
   },
   "summary": {
-    "localSourceFiles": 95,
+    "localSourceFiles": 97,
     "identicalFiles": 0,
     "identicalMethodBodies": 0,
     "longTokenRuns": 0,
@@ -458,11 +458,19 @@
     },
     {
       "path": "src/styles/index.css",
-      "sha256": "a6d40227d3089a2a196d1ad276689a7e6fd14c495cccdc57b742b3d8c758228e",
-      "workingTreeSha256": "4c556dccb2d9ee1eed1f4d6d754197572a15bdb6d7f683b7d15962b877b7b214",
+      "sha256": "73c5ad17281b2849b1d8ecd15d8729f0e9d384892bfaf744c361a970c01ce507",
+      "workingTreeSha256": "113505044efaa741fd23477d3d924c78da9aeae7ca3b5761f73bd980d6ae54f5",
       "upstreamPath": "src/styles/index.css",
       "identicalUpstreamPaths": [],
       "classification": "changed-upstream-path-not-independent-proof"
+    },
+    {
+      "path": "src/styles/preview-workspace.css",
+      "sha256": "125d35a7dfa8c0e95b00722f303fece837732c540134a32d0482db7081f4ff59",
+      "workingTreeSha256": "125d35a7dfa8c0e95b00722f303fece837732c540134a32d0482db7081f4ff59",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
     },
     {
       "path": "src/styles/settings/background-modal.css",
@@ -753,6 +761,14 @@
       "classification": "added-path-not-independent-proof"
     },
     {
+      "path": "src/ui/previewWorkspace.ts",
+      "sha256": "8d6a787138ebbb538c642b6c3f98e3b7e6f9bd8fd987d6a6d21d6a8ecc38d140",
+      "workingTreeSha256": "8d6a787138ebbb538c642b6c3f98e3b7e6f9bd8fd987d6a6d21d6a8ecc38d140",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
       "path": "src/ui/recipeLabels.ts",
       "sha256": "06aafb8fc61c795374a98c26a9cba84cde5dc29e64a0b6e49de6b543dcb641fa",
       "workingTreeSha256": "06aafb8fc61c795374a98c26a9cba84cde5dc29e64a0b6e49de6b543dcb641fa",
@@ -778,16 +794,16 @@
     },
     {
       "path": "src/ui/workbenchControls.ts",
-      "sha256": "9f15b3460614ce291403a2740a6285870a6901229e008826cb12f475786b0b4a",
-      "workingTreeSha256": "9f15b3460614ce291403a2740a6285870a6901229e008826cb12f475786b0b4a",
+      "sha256": "51e8f06004bceec0d72e004e407d452bf8e770a4d88fc3bc1574feb6f30ab549",
+      "workingTreeSha256": "51e8f06004bceec0d72e004e407d452bf8e770a4d88fc3bc1574feb6f30ab549",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
     },
     {
       "path": "src/view.ts",
-      "sha256": "ff2553c115041144a67a19fbc5f73580340973683198c81d5828e8446d1fccbb",
-      "workingTreeSha256": "ff2553c115041144a67a19fbc5f73580340973683198c81d5828e8446d1fccbb",
+      "sha256": "ca8e513522f2df7fa70d5ce2ab949953f10b5604f3bc22862e1980f402ee1309",
+      "workingTreeSha256": "ca8e513522f2df7fa70d5ce2ab949953f10b5604f3bc22862e1980f402ee1309",
       "upstreamPath": "src/view.ts",
       "identicalUpstreamPaths": [],
       "classification": "changed-upstream-path-not-independent-proof"

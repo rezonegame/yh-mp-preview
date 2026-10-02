@@ -15,6 +15,8 @@ const hash = value => createHash('sha256').update(value).digest('hex');
 const gitBlob = value => createHash('sha1').update(`blob ${value.length}\0`).update(value).digest('hex');
 const normalize = text => text.replace(/\r\n/g, '\n');
 const offline = process.argv.includes('--offline');
+const auditDate = process.argv.find(arg => arg.startsWith('--date='))?.slice(7) || new Date().toISOString().slice(0, 10);
+if (!/^\d{4}-\d{2}-\d{2}$/.test(auditDate)) throw new Error('Use --date=YYYY-MM-DD for an explicit audit date.');
 mkdirSync(cache, { recursive: true });
 const treePath = resolve(cache, 'tree.json');
 if (!offline) {
@@ -150,7 +152,7 @@ const dependencies = Object.keys(packageJson.dependencies).map(name => {
     projectLicenseFiles: [`LICENSES/${name === 'dompurify' ? 'DOMPurify' : name}.txt`].filter(file => existsSync(resolve(root, file))) };
 });
 const report = {
-  schemaVersion: 1, auditDate: '2026-10-01', pluginVersion: packageJson.version, baselineCommit: git('rev-parse', 'HEAD'),
+  schemaVersion: 1, auditDate, pluginVersion: packageJson.version, baselineCommit: git('rev-parse', 'HEAD'),
   scope: 'Current working-tree src files; all pinned upstream src blobs; runtime package metadata. Git history and existing release assets are preserved.',
   upstream: { repository: upstreamRepository, commit: upstreamCommit, sourceFiles: originalFiles.length, blobIntegrityVerified: true },
   methodology: { textNormalization: 'CRLF to LF only for whole-file comparison',
