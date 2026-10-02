@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-03",
+  "version": "3.20.0",
+  "acceptedCandidate": "3.20.0-beta.1",
+  "candidateCommit": "5aa9420870328fd3901f6d7b90df4a98e03deba9",
+  "acceptance": "User explicitly replied: 好的，已验收",
+  "status": "Stable promotion verified locally; publication tracked separately",
+  "runtimeAndStylesByteIdentical": true,
+  "runtimeSourceAndDependenciesUnchanged": true,
+  "manifestOnlyVersionChanged": true,
+  "assets": {
+    "main.js": "1dcc2ec591222a64a62411780cb042d254b2b185487171c8b723b1d4ee7c36e0",
+    "styles.css": "722d3b5ee4b066448f244e470ff775ed0601ee7b59475783178d5ecee5537860",
+    "manifest.json": "96d3aa5119ac4d5e96382b973b1add24a44c7606990cf4c4cd4d6b6db9274dd6"
+  },
+  "automatedTests": {
+    "passed": 141,
+    "failed": 0
+  },
+  "candidateNativeEvidence": "reports/theme-experience-host-regression.json",
+  "rollbackVersion": "3.19.1",
+  "minimumHost": "1.7.2",
+  "marketingVaultModified": false,
+  "limits": [
+    "No new native-host matrix: stable JS and CSS are byte-identical to accepted candidate.",
+    "Candidate clipboard skip and platform limits remain.",
+    "GitHub publication, official synchronization and actual app installation are separate."
+  ]
+}

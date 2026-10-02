@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.20.0
+
+- Promote the user-accepted 3.20.0-beta.1 shared theme-gallery preview to stable. Runtime source, JavaScript, CSS, theme definitions and dependencies are unchanged from the accepted candidate; only version metadata and publication records change.
+- Retain current-article/local-example and trial/saved comparison, responsive name-only theme selection, exact cancellation recovery, conflict handling, safe appearance transactions and compatible snapshots.
+- Keep all 19 legacy theme outputs unchanged. The 14-theme structural refresh belongs to the next 3.21.0 stage; palette/density controls belong to 3.22.0.
+- Preserve plugin ID, source Markdown, note themes, Marketing vault and historical license notices. User acceptance does not imply untested-platform coverage, a new native-host run or official-directory synchronization; those are tracked separately.
+
 ## 3.20.0-beta.1
 
 - Add one shared, read-only theme-gallery preview with Current Article / Local Example and Trial / Saved comparison. Keep name-only cards, scene pairs and the small historical-theme entry; compact windows prioritize the article.

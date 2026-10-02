@@ -1,7 +1,7 @@
 {
   "id": "yh-mp-preview",
   "name": "yh-mp-preview",
-  "version": "3.20.0-beta.1",
+  "version": "3.20.0",
   "minAppVersion": "1.7.2",
   "description": "Typeset Markdown for WeChat with themes, rich-text copying, image exports, and optional note layout enhancements.",
   "author": "yhwang",
