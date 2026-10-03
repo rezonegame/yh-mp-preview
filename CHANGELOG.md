@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.22.0
+
+- Promote user-accepted 3.22.0-beta.1 to stable without changing runtime source, JavaScript, CSS or dependencies. Add three theme-scoped palettes and theme/compact/airy reading density in the existing collapsed gallery controls.
+- Preserve confirmation-only saving, cancellation, per-revision preferences, snapshots, legacy/custom themes, all 19 IDs, source Markdown, note enhancement and copy/export contracts. Do not add theme cards, AI or automatic publishing.
+- User accepted the candidate and authorized publication. Re-run all 154 automated gates and compare stable JS/CSS byte-for-byte with the accepted candidate. Retain candidate native matrix, performance failures and platform/provenance limitations; publication, official synchronization and native installation are recorded separately.
+- Keep 3.21.0 available for rollback. P4 is not included in this promotion.
+
 ## 3.22.0-beta.1
 
 - Add P3 theme-scoped tuning inside a collapsed gallery disclosure: exactly three named role palettes per featured reading revision, plus theme/compact/airy density. Keep 14 name-only featured cards, five historical themes and the workbench toolbar.

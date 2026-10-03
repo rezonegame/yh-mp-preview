@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-03",
+  "version": "3.22.0",
+  "acceptedCandidate": "3.22.0-beta.1",
+  "candidateCommit": "3d1a7f811c0b57fc6166b92a7c75610476b4cb01",
+  "acceptance": {
+    "reply": "可以了，你直接发布吧",
+    "scope": "User accepted the P3 candidate and authorized stable publication; not an agent-run WeChat backend inspection"
+  },
+  "status": "Local stable promotion verified; publication and official synchronization tracked separately",
+  "runtimeAndStylesByteIdentical": true,
+  "runtimeSourceAndDependenciesUnchanged": true,
+  "manifestOnlyVersionChanged": true,
+  "assets": {
+    "main.js": "ed0e90e37712d3bfa60439f1752ddf653bd556fe559d5285438747860b40088a",
+    "styles.css": "e465ae61408f5bd2a87fa9cd72fee1e188d6c9f34eee97d940b3e6950b8494f6",
+    "manifest.json": "5eb98f4dcd0cc9494f85dfe155958eb674b6d98184400e9d909149e6f7ea36b5"
+  },
+  "automatedTests": {
+    "passed": 154,
+    "failed": 0
+  },
+  "candidateNativeEvidence": [
+    "reports/appearance-tuning-beta1-host.json",
+    "reports/appearance-tuning-beta1-release.json"
+  ],
+  "rollbackVersion": "3.21.0",
+  "minimumHost": "1.7.2",
+  "marketingVaultModified": false,
+  "limits": [
+    "No new native matrix during promotion; identical accepted JS/CSS.",
+    "User acceptance does not erase initial failed performance/fixture probes or untested-platform limits.",
+    "Historical source and license notices retained; scans do not establish independent authorship."
+  ]
+}

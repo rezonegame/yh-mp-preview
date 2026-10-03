@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { basename } from 'node:path';
 
 const repository = 'rezonegame/yh-mp-preview', tag = process.argv[2] || '3.20.0';
-assert(['3.20.0','3.21.0'].includes(tag));
+assert(['3.20.0','3.21.0','3.22.0'].includes(tag));
 const gh = (...args) => execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
 const release = JSON.parse(gh('api', `repos/${repository}/releases/tags/${tag}`));
 const latest = JSON.parse(gh('api', `repos/${repository}/releases/latest`));
