@@ -13230,11 +13230,19 @@ function buildReadingTheme(base) {
     h6: heading(0.98, 1.15, 0.4, "", secondary),
     base: heading(1, 1.2, 0.5, "", foreground)
   };
-  const quote = {
-    side: `border-left:3px solid ${palette.accent};background:${palette.surface};padding:.7em .9em;`,
-    open: `border:0;border-top:1px solid ${palette.border};border-bottom:1px solid ${palette.border};background:transparent;padding:1em .25em;`,
-    note: `border:0;border-top:1px solid ${palette.border};background:transparent;padding:.7em .2em;`,
-    box: `border:1px solid ${palette.border};background:${palette.surface};padding:.8em 1em;`
+  const clearEdge = "0px solid transparent";
+  const quoteEdges = {
+    side: [clearEdge, clearEdge, clearEdge, `3px solid ${palette.accent}`],
+    open: [`1px solid ${palette.border}`, clearEdge, `1px solid ${palette.border}`, clearEdge],
+    note: [`1px solid ${palette.border}`, clearEdge, clearEdge, clearEdge],
+    box: Array(4).fill(`1px solid ${palette.border}`)
+  }[design.quote];
+  const quoteBorder = ["top", "right", "bottom", "left"].map((edge, index) => `border-${edge}:${quoteEdges[index]};`).join("");
+  const quote = quoteBorder + {
+    side: `background:${palette.surface};padding:.7em .9em;`,
+    open: "background:transparent;padding:1em .25em;",
+    note: "background:transparent;padding:.7em .2em;",
+    box: `background:${palette.surface};padding:.8em 1em;`
   }[design.quote];
   const styles = {
     container: `background:${(_c = design.paper) != null ? _c : "#ffffff"};padding:16px 20px;color:${foreground};`,
@@ -13246,7 +13254,7 @@ function buildReadingTheme(base) {
       item: `color:${foreground};line-height:${line};margin:0 0 ${design.listGap}em;padding:0 0 ${design.listRule ? ".3em" : "0"};${design.listRule ? `border-bottom:1px solid ${palette.border};` : ""}`,
       taskList: `list-style:none;color:${foreground};line-height:${line};margin-bottom:${design.listGap}em;`
     },
-    quote: `margin:${design.quoteGap}em 0;${quote}color:${secondary};font-style:normal;line-height:${line};`,
+    quote: `display:block;width:auto;min-width:0;max-width:100%;box-sizing:border-box;margin:${design.quoteGap}em 0;${quote}color:${secondary};font-style:normal;line-height:${line};`,
     code: {
       header: { container: "display:none;", dot: "display:none;", colors: [design.accent, design.accent, design.accent] },
       block: `margin:1.2em 0;padding:14px;background:${palette.surface};border:1px solid ${palette.border};color:${foreground};font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:14px;line-height:1.65;`,

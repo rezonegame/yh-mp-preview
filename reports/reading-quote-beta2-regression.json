@@ -1,0 +1,6089 @@
+{
+  "version": "3.21.0-beta.2",
+  "checkedAt": "2026-10-03T04:19:12.733Z",
+  "checks": [
+    {
+      "name": "default quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "default no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 289.6015625,
+          "width": 248.203125,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "default/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "default/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 289.6015625,
+          "width": 248.203125,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "default/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "default/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 344.6015625,
+          "width": 303.203125,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "default/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "default/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 344.6015625,
+          "width": 303.203125,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "default/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "default/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 383.6015625,
+          "width": 342.203125,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "default/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "default/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 383.6015625,
+          "width": 342.203125,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "default/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "default production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "deep-reading no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "deep-reading/320/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "deep-reading/320/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "deep-reading/375/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "deep-reading/375/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "deep-reading/414/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "deep-reading/414/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "deep-reading production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "clear-guide no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 289.6015625,
+          "width": 248.203125,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "clear-guide/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "clear-guide/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 289.6015625,
+          "width": 248.203125,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "clear-guide/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "clear-guide/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 344.6015625,
+          "width": 303.203125,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "clear-guide/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "clear-guide/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 344.6015625,
+          "width": 303.203125,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "clear-guide/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "clear-guide/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 383.6015625,
+          "width": 342.203125,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "clear-guide/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "clear-guide/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 383.6015625,
+          "width": 342.203125,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "clear-guide/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "clear-guide production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "knowledge-notes no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 300.8046875,
+          "width": 273.609375,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "knowledge-notes/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "knowledge-notes/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 300.8046875,
+          "width": 273.609375,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "knowledge-notes/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "knowledge-notes/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 355.8046875,
+          "width": 328.609375,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "knowledge-notes/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "knowledge-notes/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 355.8046875,
+          "width": 328.609375,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "knowledge-notes/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "knowledge-notes/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 394.8046875,
+          "width": 367.609375,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "knowledge-notes/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "knowledge-notes/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 394.8046875,
+          "width": 367.609375,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "knowledge-notes/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "knowledge-notes production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "apple-product no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "apple-product/320/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "apple-product/320/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "apple-product/375/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "apple-product/375/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "apple-product/414/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "apple-product/414/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "apple-product production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "product-review no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 287,
+          "width": 246,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "product-review/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "product-review/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 287,
+          "width": 246,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "product-review/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "product-review/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 342,
+          "width": 301,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "product-review/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "product-review/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 342,
+          "width": 301,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "product-review/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "product-review/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 381,
+          "width": 340,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "product-review/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "product-review/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 381,
+          "width": 340,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "product-review/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "product-review production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "red-white-editorial no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 289.6015625,
+          "width": 248.203125,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "red-white-editorial/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "red-white-editorial/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 289.6015625,
+          "width": 248.203125,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "red-white-editorial/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "red-white-editorial/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 344.6015625,
+          "width": 303.203125,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "red-white-editorial/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "red-white-editorial/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 344.6015625,
+          "width": 303.203125,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "red-white-editorial/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "red-white-editorial/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 383.6015625,
+          "width": 342.203125,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "red-white-editorial/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "red-white-editorial/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 383.6015625,
+          "width": 342.203125,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "red-white-editorial/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "red-white-editorial production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "ink-opinion no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "ink-opinion/320/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "ink-opinion/320/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "ink-opinion/375/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "ink-opinion/375/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "ink-opinion/414/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "ink-opinion/414/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "ink-opinion production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "data-blueprint no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 289.6015625,
+          "width": 248.203125,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "data-blueprint/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "data-blueprint/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 289.6015625,
+          "width": 248.203125,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "data-blueprint/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "data-blueprint/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 344.6015625,
+          "width": 303.203125,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "data-blueprint/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "data-blueprint/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 344.6015625,
+          "width": 303.203125,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "data-blueprint/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "data-blueprint/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 383.6015625,
+          "width": 342.203125,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "data-blueprint/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "data-blueprint/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 383.6015625,
+          "width": 342.203125,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "data-blueprint/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "data-blueprint production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "briefing-grid no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 300.8046875,
+          "width": 273.609375,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "briefing-grid/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "briefing-grid/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 300.8046875,
+          "width": 273.609375,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "briefing-grid/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "briefing-grid/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 355.8046875,
+          "width": 328.609375,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "briefing-grid/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "briefing-grid/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 355.8046875,
+          "width": 328.609375,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "briefing-grid/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "briefing-grid/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 394.8046875,
+          "width": 367.609375,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "briefing-grid/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "briefing-grid/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 394.8046875,
+          "width": 367.609375,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "briefing-grid/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "briefing-grid production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "zen-essence no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "zen-essence/320/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "zen-essence/320/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 300,
+          "width": 272,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "zen-essence/375/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "zen-essence/375/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 355,
+          "width": 327,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "zen-essence/414/false no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "zen-essence/414/true no lateral border",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 28,
+          "right": 394,
+          "width": 366,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "zen-essence production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "warm-paper no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 287,
+          "width": 246,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "warm-paper/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "warm-paper/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 287,
+          "width": 246,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "warm-paper/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "warm-paper/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 342,
+          "width": 301,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "warm-paper/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "warm-paper/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 342,
+          "width": 301,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "warm-paper/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "warm-paper/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 381,
+          "width": 340,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "warm-paper/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "warm-paper/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "left": 41,
+          "right": 381,
+          "width": 340,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    },
+    {
+      "name": "warm-paper/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "1px",
+        "borderRight": "1px"
+      }
+    },
+    {
+      "name": "warm-paper production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "olive-journal no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 289.6015625,
+          "width": 248.203125,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "olive-journal/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "olive-journal/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 289.6015625,
+          "width": 248.203125,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "olive-journal/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "olive-journal/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 344.6015625,
+          "width": 303.203125,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "olive-journal/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "olive-journal/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 344.6015625,
+          "width": 303.203125,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "olive-journal/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "olive-journal/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 383.6015625,
+          "width": 342.203125,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "olive-journal/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "olive-journal/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 41.3984375,
+          "right": 383.6015625,
+          "width": 342.203125,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "3px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "olive-journal/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "3px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "olive-journal production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file quote nesting and text preserved",
+      "pass": true,
+      "detail": {
+        "quotes": 2,
+        "emphasis": "重点",
+        "tail": "\n这是用于手机阅读的正文。\n\n引用第一段应保持完整，中文 English 与链接、强调都不能丢失。\n第二段 重点。\n\n嵌套引用仍要保持层级。\n\n\n完整末尾 QUOTE - END。"
+      }
+    },
+    {
+      "name": "case-file no initial quote border declarations",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/320/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 300.8046875,
+          "width": 273.609375,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "case-file/320/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "case-file/320/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 304,
+          "width": 280,
+          "parentLeft": 4,
+          "parentRight": 324,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 300.8046875,
+          "width": 273.609375,
+          "parentLeft": 24,
+          "parentRight": 304,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "case-file/320/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 304,
+        "width": 280,
+        "parentLeft": 4,
+        "parentRight": 324,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "case-file/375/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 355.8046875,
+          "width": 328.609375,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "case-file/375/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "case-file/375/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 359,
+          "width": 335,
+          "parentLeft": 4,
+          "parentRight": 379,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 355.8046875,
+          "width": 328.609375,
+          "parentLeft": 24,
+          "parentRight": 359,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "case-file/375/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 359,
+        "width": 335,
+        "parentLeft": 4,
+        "parentRight": 379,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "case-file/414/false nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 394.8046875,
+          "width": 367.609375,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "case-file/414/false paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "case-file/414/true nested quotes bounded",
+      "pass": true,
+      "detail": [
+        {
+          "left": 24,
+          "right": 398,
+          "width": 374,
+          "parentLeft": 4,
+          "parentRight": 418,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        },
+        {
+          "left": 27.1953125,
+          "right": 394.8046875,
+          "width": 367.609375,
+          "parentLeft": 24,
+          "parentRight": 398,
+          "borderLeft": "0px",
+          "borderRight": "0px"
+        }
+      ]
+    },
+    {
+      "name": "case-file/414/true paper padding remains",
+      "pass": true,
+      "detail": {
+        "left": 24,
+        "right": 398,
+        "width": 374,
+        "parentLeft": 4,
+        "parentRight": 418,
+        "borderLeft": "0px",
+        "borderRight": "0px"
+      }
+    },
+    {
+      "name": "case-file production source DOM unchanged by output",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown fixture unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data.json unchanged",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "outputs": [
+    {
+      "id": "default",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 289.6015625,
+              "width": 248.203125,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 289.6015625,
+              "width": 248.203125,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 344.6015625,
+              "width": 303.203125,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 344.6015625,
+              "width": 303.203125,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 383.6015625,
+              "width": 342.203125,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 383.6015625,
+              "width": 342.203125,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deep-reading",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 300,
+              "width": 272,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 300,
+              "width": 272,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 355,
+              "width": 327,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 355,
+              "width": 327,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 394,
+              "width": 366,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 394,
+              "width": 366,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clear-guide",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 289.6015625,
+              "width": 248.203125,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 289.6015625,
+              "width": 248.203125,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 344.6015625,
+              "width": 303.203125,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 344.6015625,
+              "width": 303.203125,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 383.6015625,
+              "width": 342.203125,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 383.6015625,
+              "width": 342.203125,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "knowledge-notes",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 300.8046875,
+              "width": 273.609375,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 300.8046875,
+              "width": 273.609375,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 355.8046875,
+              "width": 328.609375,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 355.8046875,
+              "width": 328.609375,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 394.8046875,
+              "width": 367.609375,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 394.8046875,
+              "width": 367.609375,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "apple-product",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 300,
+              "width": 272,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 300,
+              "width": 272,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 355,
+              "width": 327,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 355,
+              "width": 327,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 394,
+              "width": 366,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 394,
+              "width": 366,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "product-review",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 287,
+              "width": 246,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 287,
+              "width": 246,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 342,
+              "width": 301,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 342,
+              "width": 301,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 381,
+              "width": 340,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 381,
+              "width": 340,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "red-white-editorial",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 289.6015625,
+              "width": 248.203125,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 289.6015625,
+              "width": 248.203125,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 344.6015625,
+              "width": 303.203125,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 344.6015625,
+              "width": 303.203125,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 383.6015625,
+              "width": 342.203125,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 383.6015625,
+              "width": 342.203125,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ink-opinion",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 300,
+              "width": 272,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 300,
+              "width": 272,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 355,
+              "width": 327,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 355,
+              "width": 327,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 394,
+              "width": 366,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 394,
+              "width": 366,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data-blueprint",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 289.6015625,
+              "width": 248.203125,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 289.6015625,
+              "width": 248.203125,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 344.6015625,
+              "width": 303.203125,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 344.6015625,
+              "width": 303.203125,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 383.6015625,
+              "width": 342.203125,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 383.6015625,
+              "width": 342.203125,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "briefing-grid",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 300.8046875,
+              "width": 273.609375,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 300.8046875,
+              "width": 273.609375,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 355.8046875,
+              "width": 328.609375,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 355.8046875,
+              "width": 328.609375,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 394.8046875,
+              "width": 367.609375,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 394.8046875,
+              "width": 367.609375,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zen-essence",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 300,
+              "width": 272,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 300,
+              "width": 272,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 355,
+              "width": 327,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 355,
+              "width": 327,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 394,
+              "width": 366,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 28,
+              "right": 394,
+              "width": 366,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "warm-paper",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 287,
+              "width": 246,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 287,
+              "width": 246,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 342,
+              "width": 301,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 342,
+              "width": 301,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 381,
+              "width": 340,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            },
+            {
+              "left": 41,
+              "right": 381,
+              "width": 340,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "1px",
+              "borderRight": "1px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "olive-journal",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 289.6015625,
+              "width": 248.203125,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 289.6015625,
+              "width": 248.203125,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 344.6015625,
+              "width": 303.203125,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 344.6015625,
+              "width": 303.203125,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 383.6015625,
+              "width": 342.203125,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 41.3984375,
+              "right": 383.6015625,
+              "width": 342.203125,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "3px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "case-file",
+      "widths": [
+        {
+          "width": 320,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 300.8046875,
+              "width": 273.609375,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 320,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 304,
+              "width": 280,
+              "parentLeft": 4,
+              "parentRight": 324,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 300.8046875,
+              "width": 273.609375,
+              "parentLeft": 24,
+              "parentRight": 304,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 355.8046875,
+              "width": 328.609375,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 359,
+              "width": 335,
+              "parentLeft": 4,
+              "parentRight": 379,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 355.8046875,
+              "width": 328.609375,
+              "parentLeft": 24,
+              "parentRight": 359,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": false,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 394.8046875,
+              "width": 367.609375,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        },
+        {
+          "width": 414,
+          "hostDefaults": true,
+          "geometry": [
+            {
+              "left": 24,
+              "right": 398,
+              "width": 374,
+              "parentLeft": 4,
+              "parentRight": 418,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            },
+            {
+              "left": 27.1953125,
+              "right": 394.8046875,
+              "width": 367.609375,
+              "parentLeft": 24,
+              "parentRight": 398,
+              "borderLeft": "0px",
+              "borderRight": "0px"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "path": "reports/assets/deep-reading-quote-fixed.png",
+      "sha256": "384fa1214621be060728fa5cca57a419a00fd97f9bc4da5e404e59a43bab7109",
+      "scope": "Native 375px canonical output with simulated foreign quote defaults; not WeChat backend"
+    }
+  ],
+  "bundleSha256": "7f424cb3936f9ab8216414fb693d1a4f80f53d03fdee848200abbe6d933ce805",
+  "limits": [
+    "Simulated ordinary quote defaults are not an actual WeChat parser or paste/save/mobile test.",
+    "User reported deep-reading defect in WeChat mobile; backend reacceptance is still required.",
+    "Native Windows Obsidian 1.13.7 only."
+  ],
+  "scope": "Real production presentation and canonical image-export snapshot; detached native layout under synthetic normal/foreign CSS defaults; not actual WeChat",
+  "automatedTests": {
+    "pass": 150,
+    "fail": 0
+  },
+  "userFeedback": {
+    "theme": "deep-reading",
+    "destination": "WeChat mobile preview",
+    "acceptedBeforeFix": false,
+    "issue": "Unexpected left closing border and right edge extending to phone boundary",
+    "afterFixAcceptance": false
+  },
+  "hypothesis": "Concrete quote-edge declarations and width:auto avoid initial-valued border resets and native quote width defaults. The actual remote paste transformation cannot be inspected in this environment.",
+  "firstAttempt": "Tail assertion did not account for the existing text normalization of QUOTE-END to QUOTE - END; only the harness assertion was corrected, then the complete 236-check run passed.",
+  "assets": {
+    "main.js": "7f424cb3936f9ab8216414fb693d1a4f80f53d03fdee848200abbe6d933ce805",
+    "manifest.json": "06810d9575d516288bf8d8e5f67bcd9c45763250155a461929a1c21f26a24b9d",
+    "styles.css": "b09dccae461bc394a84268fe8f74857a6fa8ae8450f306ebb1b6f6505c26194f"
+  },
+  "stableVersion": "3.20.0",
+  "stableChanged": false,
+  "marketingModified": false
+}

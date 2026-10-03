@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "auditDate": "2026-10-03",
-  "pluginVersion": "3.21.0",
-  "baselineCommit": "b7b969ab125e8fe169a8c104990f8c347abc83c2",
+  "pluginVersion": "3.21.0-beta.2",
+  "baselineCommit": "967446542b30efded10370eb263fab27182856f9",
   "scope": "Current working-tree src files; all pinned upstream src blobs; runtime package metadata. Git history and existing release assets are preserved.",
   "upstream": {
     "repository": "Yeban8090/mp-preview",
@@ -386,8 +386,8 @@
     },
     {
       "path": "src/core/theme/wechatThemeTokens.ts",
-      "sha256": "04093d7efcbcb1bc56f7d4fc72fb6f6845ceb9881ac02f8f15f6f77e503e5c7a",
-      "workingTreeSha256": "04093d7efcbcb1bc56f7d4fc72fb6f6845ceb9881ac02f8f15f6f77e503e5c7a",
+      "sha256": "485e0b32c50648355fa25f151c95380d4052a860795f30576521b36643eea92c",
+      "workingTreeSha256": "485e0b32c50648355fa25f151c95380d4052a860795f30576521b36643eea92c",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"

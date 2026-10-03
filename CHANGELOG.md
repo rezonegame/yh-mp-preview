@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.21.0-beta.2
+
+- Harden all 14 upgraded themes' quote styles for pasting into another editor: declare all four border edges with concrete values instead of implicit `initial` resets, and keep quote width automatic and bounded within article padding. Open deep-reading quotes still have only top/bottom rules; side, note and box designs retain their intended shapes.
+- Keep semantic blockquote nesting, emphasis, source Markdown, legacy themes and snapshots. The reading revision identity is unchanged because this is a compatibility fix, not a new theme design.
+- Add 2 automated regressions (150 total) and 236 native-host checks covering 14 themes at 320/375/414px with normal and simulated foreign quote defaults. These simulations are not a WeChat backend acceptance test: the reported phone-preview defect still requires rechecking after this candidate.
+- Stable and official channels remain 3.20.0. The earlier numeric preview scan covers beta.1 source, not this changed candidate; no stable publication or P3 palette/density changes are included.
+
 ## 3.21.0-beta.1
 
 - Add the reading-2026.1 revision for all 14 featured themes. Each scene pair differs in chapter hierarchy, quotations, list rhythm and image/component framing, rather than colour alone. Keep all 19 IDs and frozen legacy-3.19.1 definitions.
