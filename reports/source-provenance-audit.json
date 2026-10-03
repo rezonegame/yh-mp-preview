@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "auditDate": "2026-10-03",
-  "pluginVersion": "3.21.0-beta.1",
+  "pluginVersion": "3.21.0",
   "baselineCommit": "b7b969ab125e8fe169a8c104990f8c347abc83c2",
   "scope": "Current working-tree src files; all pinned upstream src blobs; runtime package metadata. Git history and existing release assets are preserved.",
   "upstream": {

@@ -1,0 +1,38 @@
+{
+  "version": "3.21.0",
+  "verifiedAt": "2026-10-03T00:14:09.267Z",
+  "baseline": "3.21.0-beta.1",
+  "candidateCommit": "383e20b81d758c8c475556833e93314ac5a77085",
+  "branch": "review/reading-themes-3.21.0",
+  "status": "Prepared numeric-version review only; not released or accepted",
+  "assets": {
+    "main.js": "85c77f49f02811033378cdf8ef21ac05e275129336fa969807040e9e7decd813",
+    "styles.css": "b09dccae461bc394a84268fe8f74857a6fa8ae8450f306ebb1b6f6505c26194f",
+    "manifest.json": "b8370ea2075adb683ddc05e90b41b9e00da328abd17d51be0fd388149927b6c6"
+  },
+  "runtimeByteIdentical": true,
+  "stylesByteIdentical": true,
+  "sourceDependenciesBuildNoticesUnchanged": true,
+  "manifestOnlyVersionChanged": true,
+  "auditFindingsUnchanged": true,
+  "automatedTests": {
+    "passed": 148,
+    "failed": 0
+  },
+  "publication": {
+    "tagCreated": false,
+    "releaseCreated": false,
+    "mainChanged": false,
+    "officialUpdateSubmitted": false
+  },
+  "gates": {
+    "wechatBackend": false,
+    "userP2Acceptance": false,
+    "clipboardRoundTrip": false
+  },
+  "limits": [
+    "Numeric metadata only for non-publishing official branch preview.",
+    "Final stable publication and official synchronization are separate, pending manual acceptance.",
+    "Native evidence remains labelled beta; identical runtime does not turn skipped clipboard checks into passes."
+  ]
+}
