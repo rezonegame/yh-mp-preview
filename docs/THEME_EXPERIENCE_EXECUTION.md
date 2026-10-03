@@ -191,3 +191,5 @@ beta.2 标签实际指向 `a4d68e06d71a7f4b5872ac2bc2e16db31f308def`；[CI 37096
 本轮未解决用户图中的正文粗细差异。真实剪贴板／微信后台保存和手机复验仍待用户；只发布预发行，不推进官方稳定 main 或 P3/P4，Marketing 不修改。
 
 导出补测 508 项检查通过，14 主题 × 6 配方共 84 组实际生产快照保留适配引用、文字、纸底和末尾，手机模式输出不变。代表性 case-file/review 实际 HTML、长图和分段图生成共 9 张 PNG；不是每组合均生成图片。`reports/reading-quote-beta3-output.json` 记录真实尺寸、快照指纹和范围，收集程序确认 data.json 与 beta.2 备份逐字节一致，安装三文件与测试候选一致。
+
+beta.3 已由既有 [CI 37097717749](https://github.com/rezonegame/yh-mp-preview/actions/runs/37097717749) completed/success 发布；不可变标签指向 `29e90985a11e7810934aecab57ac7038188d5d7d`。[预发行](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.21.0-beta.3) 发布时间 `2026-10-03T04:48:13Z`，说明已补充真实限制。重新下载全部 13 资产，逐字节匹配标签文件、GitHub 摘要／大小，JS/CSS/manifest 匹配隔离宿主运行指纹；证据 `reports/reading-quote-beta3-release-verification.json`。main／GitHub latest 再次确认仍为 3.20.0。未实际运行 beta.3 BRAT 安装，不挪用 beta.1 的安装证明；请用户固定 beta.3、明确应用升级修订、重新复制到新草稿保存并查手机。证据追加提交不移动 beta.3 标签。
