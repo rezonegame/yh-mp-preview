@@ -205,3 +205,13 @@ beta.3 已由既有 [CI 37097717749](https://github.com/rezonegame/yh-mp-preview
 智能体明确询问长文、教程、报告三类文章，以及其他主题的复制、后台保存和手机预览是否均正常，用户回复“都测试过了”。据此完整 P2 用户验收通过，包括真实粘贴／保存／手机结果；不改写本地系统剪贴板探针的历史失败，不声称智能体进入后台。按既有完整升级和官方交付授权开始稳定晋级，不再次索取已提供的验收。
 
 准备 `release/3.21.0`，只改版本、审计版本及发行记录，保持 beta.3 的运行源码、依赖和 JS/CSS；来源披露不变。重新正式构建／151 项自动门和字节比较，以晋级报告记录实际通过。旧数字预检不能覆盖 beta.3 的引用输出变更，先重跑官方预检再推进发布／目录同步／隔离安装。P3/P4 尚未实施，Marketing 不改。
+
+### 3.21.0 稳定发行与官方同步实际结果（2026-10-03）
+
+晋级检查通过：正式构建、151 项自动门，源码／依赖／JS/CSS 与验收 beta.3 保持，manifest 仅改版本。固定提交 `17fceeca5b6a7a34115023505e6430df827845f3` 的官方非发布预检 Completed：0 Error、15 组 Warning、3 组 Recommendation，依赖 Pass。见 `reports/official-3.21-stable-preview.json` 和截图。旧预检没有冒充此轮结果。
+
+main 快进并与不可变 3.21.0 标签原子推送；[CI 37098626493](https://github.com/rezonegame/yh-mp-preview/actions/runs/37098626493) success，GitHub stable/latest 为 3.21.0。全部 13 个发行文件重新下载，匹配标签、GitHub 摘要和晋级指纹，记录 `reports/release-3.21.0-publication.json`。没有覆盖 beta／旧稳定标签和发行。
+
+只提交一次官方发行检查，识别版本／提交后正式扫描 Completed：0 Error、16 组警告、7 组建议，依赖和构建复现 Pass。管理及实际打开的公开版本卡都为 3.21.0，截图 `reports/assets/official-3.21.0-public-version.png`，记录 `reports/official-3.21.0-update.json`。发行说明在扫描排队之后填入，保留其缓存的缺说明建议；实查 GitHub 说明非空，不重复检查来隐藏结果。不删许可资产消除建议，不接受新的政策承诺，不改条目所有权，来源限制仍保留。
+
+应用内安装分开核验：CLI 拒绝覆盖已有 beta，首次验证因此失败；自动更新检查未发现候选，旧 GitHub 插件目录无此 ID。随后正常调用宿主安装器，按官方页面同一仓库及已核验版本实际下载／启用稳定 3.21.0，12 项检查通过。设置、社区启用列表和 Markdown 不变，工作台和导出完整末尾可用；安装器追加的已知 `/* nosourcemap */` 尾注之外 JS 主体一致，CSS／manifest 一致。`reports/reading-stable-native-install.json` 保留失败与成功的不同路径，不称为自动目录更新通过，不覆盖 beta.3 已验收测试。Marketing 未改；P3/P4 未开始。

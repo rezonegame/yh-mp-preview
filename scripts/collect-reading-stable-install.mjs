@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const line=fs.readFileSync('output/refactor/reading-stable-install-verify.log','utf8').split(/\r?\n/).filter(line=>line.startsWith('=> {')).at(-1);
+assert(line,'Completed native result required');
+const report=JSON.parse(line.slice(3));
+assert.equal(report.version,'3.21.0');assert.equal(report.checks.length,12);assert(report.checks.every(check=>check.pass));
+const installLog=fs.readFileSync('output/refactor/reading-stable-native-install.log','utf8');
+const installed=JSON.parse(installLog.split(/\r?\n/).find(line=>line.startsWith('=> {')).slice(3));
+assert.equal(installed.version,'3.21.0');assert.equal(installed.repository,'rezonegame/yh-mp-preview');
+report.installMethod="app.plugins.installPlugin('rezonegame/yh-mp-preview','3.21.0',verifiedManifest)";
+report.installOutput=installed;
+report.firstCliAttempt=fs.readFileSync('output/refactor/reading-stable-install.log','utf8').trim();
+report.firstVerificationAttempt='Failed because CLI refused to replace existing beta; not counted as passed.';
+report.updateDiscovery=JSON.parse(fs.readFileSync('output/refactor/reading-stable-update-discovery.log','utf8').split(/\r?\n/).find(line=>line.startsWith('=> {')).slice(3)).update;
+assert.equal(report.updateDiscovery,null);
+fs.writeFileSync('reports/reading-stable-native-install.json',JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({version:report.version,checks:report.checks.length,nativeInstallerPassed:true,automaticCatalogUpdateDetected:false}));

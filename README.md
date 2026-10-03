@@ -14,15 +14,15 @@ The plugin is free and desktop-only. It requires Obsidian 1.7.2 or later; this r
 
 Version 3.19.0 rebuilds the remaining implementations identified by the source audit and embeds the maintainer-supplied personal-contact QR image offline. It continues in the original repository with the same plugin ID and BRAT address; previous releases remain available. Historical MIT attribution and dependency licenses are preserved. Exact-match checks are not proof of independent authorship or official-directory approval.
 
-The [official Community website listing](https://community.obsidian.md/plugins/yh-mp-preview) now shows current version 3.20.0 after its completed release scan. The beta was accepted by the maintainer; an actual official in-app stable-update installation has not yet been verified. BRAT remains available using `rezonegame/yh-mp-preview`. Open the preview from the ribbon or command palette, choose a layout, and use the copy or export controls. See [source provenance](docs/SOURCE_PROVENANCE.md), [license notices](THIRD_PARTY_NOTICES.md), and [submission status](docs/COMMUNITY_SUBMISSION.md).
+The [official Community website listing](https://community.obsidian.md/plugins/yh-mp-preview) now shows current version 3.21.0 after its completed release scan. The maintainer accepted the complete P2 beta. Native installation from the listing's repository/version passed in the isolated vault, but automatic in-app update detection returned no candidate; the legacy GitHub directory does not contain this ID. BRAT remains available using `rezonegame/yh-mp-preview`, with stable version `3.21.0`. Open the preview from the ribbon or command palette, choose a layout, and use the copy or export controls. See [source provenance](docs/SOURCE_PROVENANCE.md), [license notices](THIRD_PARTY_NOTICES.md), and [submission status](docs/COMMUNITY_SUBMISSION.md).
 
 ![version](https://img.shields.io/github/v/tag/rezonegame/yh-mp-preview?color=blue&label=version&style=flat) ![license](https://img.shields.io/badge/license-AGPL--3.0--or--later-blue)
 
 ## 最新版本
 
-当前稳定发行：[`3.20.0`](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.20.0)，已同步官方公开条目。`3.20.0-beta.1` 已于 2026-10-03 由用户确认验收；稳定 JS/CSS 与验收候选逐字节相同，13 个发行资产已下载核验。官方扫描 Completed、0 Error；网站同步与应用内实际安装分别记录。
+当前稳定发行：[`3.21.0`](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.21.0)，已同步官方公开条目。`3.21.0-beta.3` 已于 2026-10-03 由用户确认完整 P2 验收；稳定 JS/CSS 与验收候选逐字节相同，151 项自动门及 CI 通过，13 个发行资产已下载核验。官方扫描 Completed、0 Error，16 组警告与 7 组建议保留；网站同步、原生安装器安装和自动更新检测分别记录。
 
-P2 的 `3.21.0-beta.3` 已由用户确认完整验收，覆盖长文、教程、报告和其他主题的复制／后台保存／手机预览。正在准备稳定 `3.21.0`：保持已验收的运行源码、JS/CSS 和依赖，重新验证 151 项自动门及官方数字扫描。GitHub 发行、官方同步和实际安装分别记录，不提前当成全部完成；见[稳定版说明](docs/RELEASE_3.21.0.md)。
+P2 稳定 `3.21.0` 保持已验收的运行源码、JS/CSS 和依赖。隔离宿主从官方条目指向的仓库／版本实际下载启用，12 项安装与渲染检查通过；原生安装器添加的 `/* nosourcemap */` 尾注单独记录，运行主体与发布包一致。自动更新检查未发现候选，不把此安装当作自动更新链路通过；见[稳定版说明](docs/RELEASE_3.21.0.md)和[安装记录](reports/reading-stable-native-install.json)。
 
 新版画廊有一个共享文章预览，可切换“当前文章／统一示例”和“正在试用／已保存”。窄窗口点击“选择主题”展开名称列表；试用不会保存，确认应用后才写入设置。统一示例及对照不会替换当前文章，不会进入复制或导出。保存失败可重试；保存仍在处理中时不会谎报取消。
 
@@ -55,7 +55,7 @@ P2 提供 14 套精选主题的新阅读修订，保留全部 19 个 ID 及旧�
 
 ### 3.21.0 主题阅读升级
 
-十四套精选主题新版式的 `3.21.0-beta.3` 已完整验收，正在稳定晋级。旧稿件和旧快照不会自动换版，打开画廊后点选主题卡片才试用升级版，也可通过小按钮切回旧版。当前文章保留局部增强，统一示例不额外增强；确认应用之前不保存试用。
+十四套精选主题新版式已在稳定 `3.21.0` 交付。旧稿件和旧快照不会自动换版，打开画廊后点选主题卡片才试用升级版，也可通过小按钮切回旧版。当前文章保留局部增强，统一示例不额外增强；确认应用之前不保存试用。
 
 本轮以手机阅读的标题层级、引用、列表、图注和信息块结构为重点，不加入配色／密度控制或自动发布。自定义背景优先保留，低对比度或复杂背景会提示人工核对。公众号后台粘贴和手机预览用户验收已完成；未测平台等限制继续保留。
 
@@ -71,13 +71,13 @@ P2 提供 14 套精选主题的新阅读修订，保留全部 19 个 ID 及旧�
 
 ## 官方页面与 BRAT 安装
 
-`3.20.0` 已同步到 [Obsidian 官方社区网站](https://community.obsidian.md/plugins/yh-mp-preview)，管理页和公开页 Current version 均已核验，页面提供 Add to Obsidian 入口。官方应用内稳定更新安装尚未实测；也可继续通过 Obsidian BRAT 添加：
+`3.21.0` 已同步到 [Obsidian 官方社区网站](https://community.obsidian.md/plugins/yh-mp-preview)，管理页和公开页 Current version 均已核验，页面提供 Add to Obsidian 入口。原生安装器按已核验仓库／版本的稳定安装通过，但当前宿主自动更新检查未发现候选，旧 GitHub 插件索引也未包含此 ID，不保证应用内搜索／自动更新已覆盖。可继续通过 Obsidian BRAT 添加：
 
 ```text
 rezonegame/yh-mp-preview
 ```
 
-发行文件为 `main.js`、`manifest.json` 和 `styles.css`；如固定了 `3.20.0-beta.1`，可切换到已验收晋级的 `3.20.0`，需要回退时保留 `3.19.1`。网站公开、技术扫描、应用内安装和来源独立性是不同结论，分别见提交与验证记录。
+发行文件为 `main.js`、`manifest.json` 和 `styles.css`；如固定了 `3.21.0-beta.3`，可切换到已验收晋级的 `3.21.0`，需要回退时保留 `3.20.0`。网站公开、技术扫描、原生稳定安装、自动更新检测和来源独立性是不同结论，分别见提交与验证记录。
 
 ## 组件示例
 

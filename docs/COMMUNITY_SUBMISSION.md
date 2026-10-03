@@ -2,6 +2,14 @@
 
 ## 当前状态（2026-10-03）
 
+### 3.21.0 已完整验收、稳定发布并同步官方条目
+
+维护者先确认 beta.3 引用修复正常，又在明确询问长文／教程／报告及其他主题的复制、后台保存和手机预览后回复“都测试过了”。据此完整 P2 验收通过。稳定标签固定 `17fceeca5b6a7a34115023505e6430df827845f3`，源码、依赖、JS/CSS 与 beta.3 不变；151 项自动门和 CI 37098626493 通过，13 资产重新下载核验。证据见 `reports/release-3.21.0-promotion.json` 与 `reports/release-3.21.0-publication.json`。
+
+先对同一数字提交做非发布预检（Completed、0 Error），再发布稳定标签，只提交一次官方发行检查。正式扫描 Completed：0 Error、16 组 Warning、7 组 Recommendation，依赖及 main.js 逐字节复现 Pass。管理页 Current release 和公开页 Current version 均为 3.21.0。缺少发行说明建议为扫描先于补充说明的缓存结果，当前 GitHub 说明非空，不重复扫描掩盖历史。许可附加资产保留；不将扫描解释为来源认证。详见 `reports/official-3.21.0-update.json`。
+
+隔离 Windows Obsidian 1.13.7 的普通 CLI 安装拒绝覆盖已有 beta；自动更新检查返回无候选，旧 `obsidianmd/obsidian-releases/community-plugins.json` 未包含此 ID。没有把失败改成目录自动更新成功。随后用宿主原生安装器按官方条目指向的仓库及已核验版本实际下载／启用稳定包，12 项检查通过，设置和原文不变。安装器会追加 `/* nosourcemap */` 尾注，排除这一已知尾注后 JS 主体与发布包相同，CSS／manifest 一致。证据 `reports/reading-stable-native-install.json`。不是应用内自动目录发现或全部旧版迁移；Marketing 未改。
+
 ### 3.20.0 已验收稳定晋级并同步官方条目
 
 维护者于 2026-10-03 回复“好的，已验收”，确认 `3.20.0-beta.1`。已按原升级与发布授权提升为 [3.20.0](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.20.0)，固定提交 `0221c342575c5083153a2fd570f383cfbf47334d`。JS/CSS、源码、依赖与验收候选不变，manifest 仅改版本；141 项自动测试和原 CI 通过，13 个下载资产与标签及 GitHub 摘要一致。证据见 [晋级核验](../reports/release-3.20.0-promotion.json) 与 [发行核验](../reports/release-3.20.0-publication.json)。

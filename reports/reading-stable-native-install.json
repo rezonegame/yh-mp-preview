@@ -1,0 +1,91 @@
+{
+  "version": "3.21.0",
+  "checkedAt": "2026-10-03T05:10:28.361Z",
+  "scope": "Native Obsidian installPlugin using exact repository/version from the official listing and verified stable release; existing beta.3 to stable. Not automatic catalog detection or CLI installation.",
+  "checks": [
+    {
+      "name": "native installed stable plugin enabled",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "plugin ID preserved",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "installed JavaScript matches published body excluding known host footer",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "styles.css installed bytes match published asset",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "manifest fields match official stable asset",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "user settings byte-identical after installation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "community enabled list preserved",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "installed workbench renders complete fixture",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "local source quote structure retained",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "stable export retains article end",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown fixture unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "settings unchanged after render/export",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "assets": {
+    "main.js": "f5253c4abc919ef3f844593ffb399a57a99a289320dfa88e9a454964919b79da",
+    "manifest.json": "b8370ea2075adb683ddc05e90b41b9e00da328abd17d51be0fd388149927b6c6",
+    "styles.css": "b09dccae461bc394a84268fe8f74857a6fa8ae8450f306ebb1b6f6505c26194f"
+  },
+  "hostJavaScriptFooter": "/* nosourcemap */",
+  "automaticUpdateDetected": false,
+  "marketingModified": false,
+  "limits": [
+    "Windows Obsidian 1.13.7 only.",
+    "No new WeChat backend or full theme matrix; accepted JS/CSS unchanged.",
+    "CLI refused an existing install; update detector returned no candidate and the legacy GitHub directory lacks this ID."
+  ],
+  "installMethod": "app.plugins.installPlugin('rezonegame/yh-mp-preview','3.21.0',verifiedManifest)",
+  "installOutput": {
+    "version": "3.21.0",
+    "installer": "native installPlugin",
+    "repository": "rezonegame/yh-mp-preview",
+    "automaticUpdateDetected": false,
+    "tail": "/DOMPurify/blob/3.4.16/LICENSE *)\n  (*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE *)\n*/\n\n/* nosourcemap */"
+  },
+  "firstCliAttempt": "Error: Plugin \"yh-mp-preview\" is already installed.",
+  "firstVerificationAttempt": "Failed because CLI refused to replace existing beta; not counted as passed.",
+  "updateDiscovery": null
+}
