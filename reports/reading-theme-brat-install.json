@@ -1,0 +1,128 @@
+{
+  "status": "passed",
+  "checkedAt": "2026-10-03T00:21:45.945Z",
+  "scope": "Isolated forced reinstall of an existing beta via real BRAT 2.2.0; not a stable-to-beta migration, UI click test, or human acceptance",
+  "vault": "C:/AgentTest/github/mp-preview/output/refactor/MPPreview-Refactor-Test",
+  "version": "3.21.0-beta.1",
+  "checks": [
+    {
+      "name": "BRAT forced pinned install succeeded",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "actual release downloader ran once",
+      "pass": true,
+      "detail": [
+        {
+          "repository": "rezonegame/yh-mp-preview",
+          "manifestBeta": true,
+          "specifiedVersion": "3.21.0-beta.1",
+          "mainSha256": "85c77f49f02811033378cdf8ef21ac05e275129336fa969807040e9e7decd813",
+          "stylesSha256": "b09dccae461bc394a84268fe8f74857a6fa8ae8450f306ebb1b6f6505c26194f",
+          "manifestVersion": "3.21.0-beta.1"
+        }
+      ]
+    },
+    {
+      "name": "release was pinned",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "plugin folder was written once",
+      "pass": true,
+      "detail": [
+        {
+          "id": "yh-mp-preview",
+          "mainSha256": "85c77f49f02811033378cdf8ef21ac05e275129336fa969807040e9e7decd813"
+        }
+      ]
+    },
+    {
+      "name": "installed ID preserved",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "installed version preserved",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "main.js matches published beta byte for byte",
+      "pass": true,
+      "detail": {
+        "sha256": "85c77f49f02811033378cdf8ef21ac05e275129336fa969807040e9e7decd813"
+      }
+    },
+    {
+      "name": "styles.css matches published beta byte for byte",
+      "pass": true,
+      "detail": {
+        "sha256": "b09dccae461bc394a84268fe8f74857a6fa8ae8450f306ebb1b6f6505c26194f"
+      }
+    },
+    {
+      "name": "manifest metadata equals published beta",
+      "pass": true,
+      "detail": {
+        "byteIdentical": false,
+        "scope": "BRAT serializes manifest JSON; compare all parsed fields rather than formatting"
+      }
+    },
+    {
+      "name": "plugin enabled after reload",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "live plugin reports beta version",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "settings preserved byte for byte",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "source Markdown unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "BRAT frozen version registered",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "downloads": [
+    {
+      "repository": "rezonegame/yh-mp-preview",
+      "manifestBeta": true,
+      "specifiedVersion": "3.21.0-beta.1",
+      "mainSha256": "85c77f49f02811033378cdf8ef21ac05e275129336fa969807040e9e7decd813",
+      "stylesSha256": "b09dccae461bc394a84268fe8f74857a6fa8ae8450f306ebb1b6f6505c26194f",
+      "manifestVersion": "3.21.0-beta.1"
+    }
+  ],
+  "writes": [
+    {
+      "id": "yh-mp-preview",
+      "mainSha256": "85c77f49f02811033378cdf8ef21ac05e275129336fa969807040e9e7decd813"
+    }
+  ],
+  "stableReleased": false,
+  "userAccepted": false,
+  "initialAttempt": {
+    "passed": false,
+    "reason": "An overly strict manifest byte comparison rejected BRAT JSON serialization; all parsed fields were identical. Only the test expectation was corrected; no plugin changes."
+  },
+  "cleanup": {
+    "bratInstalledOnlyInIsolatedVault": true,
+    "bratRemovedAfterTest": true,
+    "originalCommunityPluginListRestored": true,
+    "originalSettingsByteIdentical": true
+  }
+}

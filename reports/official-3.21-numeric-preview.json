@@ -1,0 +1,250 @@
+{
+  "checkedAt": "2026-10-03T00:21:08.876Z",
+  "previewOnly": true,
+  "version": "3.21.0",
+  "ref": "906fd05e2392cadca6d5c895399d646852a78f27",
+  "stableVersion": "3.20.0",
+  "published": false,
+  "findings": [
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/note-layout/noteLayoutStore.ts#L86",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/note-layout/noteLayoutStore.ts#L86",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/note-layout/noteLayoutStore.ts#L114",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/recipe/articleRecipeFormatter.ts#L22",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/recipe/articleRecipeFormatter.ts#L22",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/settings/backgroundDraft.ts#L45",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/settings/styleFields.ts#L5",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/settings/styleFields.ts#L5",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/theme/templateStylePlan.ts#L98",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/theme/themeManifestBridge.ts#L43",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/theme/themeManifestBridge.ts#L43",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/theme/wechatPalette.ts#L18",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L65",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L73",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L92",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L139",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L139",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L139",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/CreateTemplateModal.ts#L70",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/settings.ts#L142",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/templateManager.ts#L15",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/templateManager.ts#L15",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/ui/CustomSelect.ts#L26-L29"
+      ],
+      "text": "Warning\nUnsafe call of an error or any typed value\n@typescript-eslint/no-unsafe-call\nsrc/core/note-layout/noteLayoutStore.ts:86\nsrc/core/note-layout/noteLayoutStore.ts:86\nsrc/core/note-layout/noteLayoutStore.ts:114\nsrc/core/recipe/articleRecipeFormatter.ts:22\nsrc/core/recipe/articleRecipeFormatter.ts:22\nsrc/core/settings/backgroundDraft.ts:45\nsrc/core/settings/styleFields.ts:5\nsrc/core/settings/styleFields.ts:5\nsrc/core/theme/templateStylePlan.ts:98\nsrc/core/theme/themeManifestBridge.ts:43\nsrc/core/theme/themeManifestBridge.ts:43\nsrc/core/theme/wechatPalette.ts:18\nsrc/layoutEnhancer.ts:65\nsrc/layoutEnhancer.ts:73\nsrc/layoutEnhancer.ts:92\nsrc/layoutEnhancer.ts:139\nsrc/layoutEnhancer.ts:139\nsrc/layoutEnhancer.ts:139\nsrc/settings/CreateTemplateModal.ts:70\nsrc/settings/settings.ts:142\nsrc/templateManager.ts:15\nsrc/templateManager.ts:15\nsrc/ui/CustomSelect.ts:26"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/note-layout/noteLayoutStore.ts#L86",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/note-layout/noteLayoutStore.ts#L89",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/note-layout/noteLayoutStore.ts#L91",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/recipe/articleRecipeFormatter.ts#L22",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/settings/styleFields.ts#L5",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/settings/styleFields.ts#L7",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/theme/themeManifestBridge.ts#L43",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L139",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L139",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/templateManager.ts#L15"
+      ],
+      "text": "Warning\nUnsafe member access on an error or any typed value\n@typescript-eslint/no-unsafe-member-access\nsrc/core/note-layout/noteLayoutStore.ts:86\nsrc/core/note-layout/noteLayoutStore.ts:89\nsrc/core/note-layout/noteLayoutStore.ts:91\nsrc/core/recipe/articleRecipeFormatter.ts:22\nsrc/core/settings/styleFields.ts:5\nsrc/core/settings/styleFields.ts:7\nsrc/core/theme/themeManifestBridge.ts:43\nsrc/layoutEnhancer.ts:139\nsrc/layoutEnhancer.ts:139\nsrc/templateManager.ts:15"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/note-layout/noteLayoutStore.ts#L114",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/settings/backgroundDraft.ts#L45",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/settings/styleFields.ts#L5-L9",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/theme/wechatPalette.ts#L18",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L64-L68"
+      ],
+      "text": "Warning\nReturns unsafe values from typed code\n@typescript-eslint/no-unsafe-return\nsrc/core/note-layout/noteLayoutStore.ts:114\nsrc/core/settings/backgroundDraft.ts:45\nsrc/core/settings/styleFields.ts:5\nsrc/core/theme/wechatPalette.ts:18\nsrc/layoutEnhancer.ts:64"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/recipe/articleRecipeFormatter.ts#L22",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/recipe/articleRecipeFormatter.ts#L22",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/settings/styleFields.ts#L8",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/theme/templateStylePlan.ts#L99",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/theme/themeManifestBridge.ts#L44",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/theme/themeManifestBridge.ts#L45",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L77",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L78",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L78",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L96",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/CreateTemplateModal.ts#L73",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/CreateTemplateModal.ts#L73",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/CreateTemplateModal.ts#L73",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/CreateTemplateModal.ts#L75",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/CreateTemplateModal.ts#L75"
+      ],
+      "text": "Warning\nPasses unsafe values into typed parameters\n@typescript-eslint/no-unsafe-argument\nsrc/core/recipe/articleRecipeFormatter.ts:22\nsrc/core/recipe/articleRecipeFormatter.ts:22\nsrc/core/settings/styleFields.ts:8\nsrc/core/theme/templateStylePlan.ts:99\nsrc/core/theme/themeManifestBridge.ts:44\nsrc/core/theme/themeManifestBridge.ts:45\nsrc/layoutEnhancer.ts:77\nsrc/layoutEnhancer.ts:78\nsrc/layoutEnhancer.ts:78\nsrc/layoutEnhancer.ts:96\nsrc/settings/CreateTemplateModal.ts:73\nsrc/settings/CreateTemplateModal.ts:73\nsrc/settings/CreateTemplateModal.ts:73\nsrc/settings/CreateTemplateModal.ts:75\nsrc/settings/CreateTemplateModal.ts:75"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/resources/imageResources.ts#L16"
+      ],
+      "text": "Warning\nUnexpected use of 'fetch'. Use the built-in requestUrl function instead of fetch for network requests in Obsidian.\nsrc/core/resources/imageResources.ts:16"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/settings/styleFields.ts#L6",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/core/settings/styleFields.ts#L7",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L73",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L74",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L75",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L92",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/layoutEnhancer.ts#L138-L139"
+      ],
+      "text": "Warning\nUnsafe assignment of an error or any typed value\n@typescript-eslint/no-unsafe-assignment\nsrc/core/settings/styleFields.ts:6\nsrc/core/settings/styleFields.ts:7\nsrc/layoutEnhancer.ts:73\nsrc/layoutEnhancer.ts:74\nsrc/layoutEnhancer.ts:75\nsrc/layoutEnhancer.ts:92\nsrc/layoutEnhancer.ts:138"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/main.ts#L70"
+      ],
+      "text": "Warning\nThe command ID should not include the plugin ID. Obsidian will make sure that there are no conflicts with other plugins.\nsrc/main.ts:70"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/main.ts#L71"
+      ],
+      "text": "Warning\nThe command name should not include the plugin name, the plugin name is already shown next to the command name in the UI.\nsrc/main.ts:71"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/CreateTemplateModal.ts#L64",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/CreateTemplateModal.ts#L71",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/view.ts#L666",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/view.ts#L1097",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/view.ts#L1155"
+      ],
+      "text": "Warning\nUses document.createElement instead of Obsidian's createEl helpers\nobsidianmd/prefer-create-el\nsrc/settings/CreateTemplateModal.ts:64\nsrc/settings/CreateTemplateModal.ts:71\nsrc/view.ts:666\nsrc/view.ts:1097\nsrc/view.ts:1155"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/MPSettingTab.ts#L16"
+      ],
+      "text": "Warning\nThis PluginSettingTab does not implement getSettingDefinitions(); its settings will not appear in Obsidian's settings search for users on 1.13.0 or later. Consider adopting the declarative settings API.\nsrc/settings/MPSettingTab.ts:16"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/ui/ImageAltModal.ts#L17"
+      ],
+      "text": "Warning\nUnexpected prompt.\nsrc/ui/ImageAltModal.ts:17"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/converter.ts#L364"
+      ],
+      "text": "Recommendation\n'href' is assigned a value but never used.\nsrc/converter.ts:364"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/MPSettingTab.ts#L219",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/settings/ThemeManifestImportModal.ts#L31"
+      ],
+      "text": "Recommendation\n'_' is defined but never used.\nsrc/settings/MPSettingTab.ts:219\nsrc/settings/ThemeManifestImportModal.ts:31"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/view.ts#L518"
+      ],
+      "text": "Recommendation\n'error' is defined but never used.\nsrc/view.ts:518"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L722",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L752",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L836",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/settings/background-modal.css#L6",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/settings/font-modal.css#L9",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/settings/template-modal.css#L13"
+      ],
+      "text": "Warning\nUnexpected browser feature \"multicolumn\" is only partially supported by Obsidian 1.6.5\nstyles.css:722\nstyles.css:752\nstyles.css:836\nsrc/styles/settings/background-modal.css:6\nsrc/styles/settings/font-modal.css:9\nsrc/styles/settings/template-modal.css:13"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L474",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L484",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/note-layout.css#L65",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/note-layout.css#L76"
+      ],
+      "text": "Warning\nUnexpected duplicate \"background\"\nstyles.css:474\nstyles.css:484\nsrc/styles/view/note-layout.css:65\nsrc/styles/view/note-layout.css:76"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L480",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/note-layout.css#L72"
+      ],
+      "text": "Warning\nUnexpected duplicate \"border\"\nstyles.css:480\nsrc/styles/view/note-layout.css:72"
+    },
+    {
+      "links": [
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L62",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L63",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L64",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L65",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L66",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L389",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L390",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L391",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L392",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L393",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L394",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L395",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L396",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L881",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L882",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L883",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L884",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L885",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L886",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L1266",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L1267",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L1342",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/styles.css#L1723",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/ui-polish.css#L28",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/ui-polish.css#L193",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/layout.css#L11",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/layout.css#L11",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/layout.css#L11",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/layout.css#L11",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/layout.css#L11",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/preview.css#L17",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/preview.css#L17",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/preview.css#L17",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/preview.css#L17",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/preview.css#L17",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/preview.css#L17",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/preview.css#L17",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/view/preview.css#L17",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/settings/theme-gallery.css#L2",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/settings/theme-gallery.css#L2",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/settings/theme-gallery.css#L3",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/settings/theme-gallery.css#L3",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/settings/theme-gallery.css#L4",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/settings/theme-gallery.css#L4",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/settings/theme-gallery.css#L74",
+        "https://github.com/rezonegame/yh-mp-preview/blob/906fd05e2392cadca6d5c895399d646852a78f27/src/styles/settings/theme-gallery.css#L74"
+      ],
+      "text": "Warning\nAvoid !important — override styles by increasing selector specificity or using CSS variables instead.\nstyles.css:62\nstyles.css:63\nstyles.css:64\nstyles.css:65\nstyles.css:66\nstyles.css:389\nstyles.css:390\nstyles.css:391\nstyles.css:392\nstyles.css:393\nstyles.css:394\nstyles.css:395\nstyles.css:396\nstyles.css:881\nstyles.css:882\nstyles.css:883\nstyles.css:884\nstyles.css:885\nstyles.css:886\nstyles.css:1266\nstyles.css:1267\nstyles.css:1342\nstyles.css:1723\nsrc/styles/ui-polish.css:28\nsrc/styles/ui-polish.css:193\nsrc/styles/view/layout.css:11\nsrc/styles/view/layout.css:11\nsrc/styles/view/layout.css:11\nsrc/styles/view/layout.css:11\nsrc/styles/view/layout.css:11\nsrc/styles/view/preview.css:17\nsrc/styles/view/preview.css:17\nsrc/styles/view/preview.css:17\nsrc/styles/view/preview.css:17\nsrc/styles/view/preview.css:17\nsrc/styles/view/preview.css:17\nsrc/styles/view/preview.css:17\nsrc/styles/view/preview.css:17\nsrc/styles/settings/theme-gallery.css:2\nsrc/styles/settings/theme-gallery.css:2\nsrc/styles/settings/theme-gallery.css:3\nsrc/styles/settings/theme-gallery.css:3\nsrc/styles/settings/theme-gallery.css:4\nsrc/styles/settings/theme-gallery.css:4\nsrc/styles/settings/theme-gallery.css:74\nsrc/styles/settings/theme-gallery.css:74"
+    },
+    {
+      "links": [],
+      "text": "Pass\nNo vulnerable dependencies found."
+    }
+  ],
+  "summary": "PreviewDate: Oct 3, 2026Ref: 906fd05e2392cadca6d5c895399d646852a78f27Commit: 906fd05Completed",
+  "counts": {
+    "errors": 0,
+    "warnings": 15,
+    "recommendations": 3,
+    "dependencyPass": 1
+  },
+  "warningComparison": {
+    "stableVersion": "3.20.0",
+    "scope": "Grouped warning messages compared, not every location or occurrence",
+    "stableWarningGroups": 16,
+    "newGroupedWarningMessages": []
+  },
+  "evidence": "reports/assets/official-3.21-numeric-preview.png"
+}

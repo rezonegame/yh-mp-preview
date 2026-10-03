@@ -1,0 +1,24 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+
+const text = fs.readFileSync('output/refactor/reading-brat-install.log', 'utf8').replace(/^\uFEFF/, '');
+const marker = text.indexOf('=> ');
+assert(marker >= 0, 'Native result is required');
+const report = JSON.parse(text.slice(marker + 3).trim());
+assert.equal(report.status, 'passed');
+assert.equal(report.version, '3.21.0-beta.1');
+assert.equal(report.checks.length, 14);
+assert(report.checks.every(check => check.pass));
+assert.equal(report.downloads.length, 1);
+assert.equal(report.writes.length, 1);
+assert.equal(report.downloads[0].mainSha256, '85c77f49f02811033378cdf8ef21ac05e275129336fa969807040e9e7decd813');
+assert.equal(report.downloads[0].stylesSha256, 'b09dccae461bc394a84268fe8f74857a6fa8ae8450f306ebb1b6f6505c26194f');
+report.initialAttempt = { passed: false, reason: 'An overly strict manifest byte comparison rejected BRAT JSON serialization; all parsed fields were identical. Only the test expectation was corrected; no plugin changes.' };
+report.cleanup = { bratInstalledOnlyInIsolatedVault: true, bratRemovedAfterTest: true, originalCommunityPluginListRestored: true, originalSettingsByteIdentical: true };
+assert(!fs.existsSync('output/refactor/MPPreview-Refactor-Test/.obsidian/plugins/obsidian42-brat'));
+const community = fs.readFileSync('output/refactor/MPPreview-Refactor-Test/.obsidian/community-plugins.json');
+const original = fs.readFileSync('output/refactor/reading-brat-test-backup/community-plugins.json');
+assert.deepEqual(JSON.parse(community), JSON.parse(original));
+assert(fs.readFileSync('output/refactor/MPPreview-Refactor-Test/.obsidian/plugins/yh-mp-preview/data.json').equals(fs.readFileSync('output/refactor/reading-brat-test-backup/mp-data.json')));
+fs.writeFileSync('reports/reading-theme-brat-install.json', JSON.stringify(report, null, 2) + '\n');
+console.log('Real isolated BRAT install: 14 checks passed; test BRAT removed, settings preserved.');
