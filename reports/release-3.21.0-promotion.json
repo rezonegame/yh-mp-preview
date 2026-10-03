@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-03",
+  "version": "3.21.0",
+  "acceptedCandidate": "3.21.0-beta.3",
+  "candidateCommit": "29e90985a11e7810934aecab57ac7038188d5d7d",
+  "acceptance": {
+    "quoteReply": "好了没问题了",
+    "fullRequestedScopeReply": "都测试过了",
+    "scope": "Long-form/tutorial/report and other themes: copy, backend save, phone preview; user-reported, not agent-run backend inspection"
+  },
+  "status": "Local stable promotion verified; publication and official synchronization tracked separately",
+  "runtimeAndStylesByteIdentical": true,
+  "runtimeSourceAndDependenciesUnchanged": true,
+  "manifestOnlyVersionChanged": true,
+  "assets": {
+    "main.js": "907f3b46045402c4454d62ebe429229446e9fb104402219f1c21312756f2c71b",
+    "styles.css": "b09dccae461bc394a84268fe8f74857a6fa8ae8450f306ebb1b6f6505c26194f",
+    "manifest.json": "b8370ea2075adb683ddc05e90b41b9e00da328abd17d51be0fd388149927b6c6"
+  },
+  "automatedTests": {
+    "passed": 151,
+    "failed": 0
+  },
+  "candidateNativeEvidence": [
+    "reports/reading-quote-beta3-regression.json",
+    "reports/reading-quote-beta3-output.json"
+  ],
+  "rollbackVersion": "3.20.0",
+  "minimumHost": "1.7.2",
+  "marketingVaultModified": false,
+  "limits": [
+    "No new native matrix during promotion; identical accepted JS/CSS.",
+    "User acceptance does not change failed local clipboard probes or untested-platform limits.",
+    "Historical source and license notices retained; scans do not establish independent authorship."
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "auditDate": "2026-10-03",
-  "pluginVersion": "3.21.0-beta.3",
-  "baselineCommit": "182e19f5c93dba02967cfc084e8f572cf578d34f",
+  "pluginVersion": "3.21.0",
+  "baselineCommit": "32befe7e0f54c8a75bd283e08b74163f6e58dc50",
   "scope": "Current working-tree src files; all pinned upstream src blobs; runtime package metadata. Git history and existing release assets are preserved.",
   "upstream": {
     "repository": "Yeban8090/mp-preview",

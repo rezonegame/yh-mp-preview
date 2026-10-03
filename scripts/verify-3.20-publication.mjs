@@ -4,7 +4,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { basename } from 'node:path';
 
-const repository = 'rezonegame/yh-mp-preview', tag = '3.20.0';
+const repository = 'rezonegame/yh-mp-preview', tag = process.argv[2] || '3.20.0';
+assert(['3.20.0','3.21.0'].includes(tag));
 const gh = (...args) => execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
 const release = JSON.parse(gh('api', `repos/${repository}/releases/tags/${tag}`));
 const latest = JSON.parse(gh('api', `repos/${repository}/releases/latest`));
@@ -22,9 +23,9 @@ const paths = ['main.js', 'manifest.json', 'styles.css', 'LICENSE', 'NOTICE', 'T
   'LICENSES/MIT-original.txt', 'LICENSES/DOMPurify.txt', 'LICENSES/html2canvas.txt',
   'LICENSES/nanoid.txt', 'LICENSES/pangu.txt', 'LICENSES/Microsoft-helpers.txt', 'LICENSES/babel-helpers.txt'];
 assert.deepEqual(release.assets.map(item => item.name).sort(), paths.map(path => basename(path)).sort());
-const promotion = JSON.parse(readFileSync('reports/release-3.20.0-promotion.json', 'utf8'));
+const promotion = JSON.parse(readFileSync(`reports/release-${tag}-promotion.json`, 'utf8'));
 const assets = paths.map(path => {
-  const name = basename(path), bytes = readFileSync(`output/refactor/release-3.20.0-assets/${name}`);
+  const name = basename(path), bytes = readFileSync(`output/refactor/release-${tag}-assets/${name}`);
   assert.deepEqual(bytes, execFileSync('git', ['show', `${tag}:${path}`], { maxBuffer: 8 * 1024 * 1024 }), `Tagged bytes differ: ${name}`);
   const sha256 = createHash('sha256').update(bytes).digest('hex');
   const remote = release.assets.find(item => item.name === name);
@@ -33,7 +34,7 @@ const assets = paths.map(path => {
   if (promotion.assets[name]) assert.equal(sha256, promotion.assets[name], `Promotion bytes differ: ${name}`);
   return { name, size: bytes.length, sha256, url: remote.browser_download_url };
 });
-const manifest = JSON.parse(readFileSync('output/refactor/release-3.20.0-assets/manifest.json', 'utf8'));
+const manifest = JSON.parse(readFileSync(`output/refactor/release-${tag}-assets/manifest.json`, 'utf8'));
 assert.equal(manifest.version, tag);
 assert.equal(manifest.id, 'yh-mp-preview');
 assert.equal(manifest.minAppVersion, '1.7.2');
@@ -42,10 +43,10 @@ const report = {
   status: 'GitHub stable published; CI passed; all 13 downloaded assets match tagged source and GitHub digests',
   latestStable: latest.tag_name, isDraft: false, isPrerelease: false,
   ci: { ...run, url: `https://github.com/${repository}/actions/runs/${run.databaseId}` }, assets,
-  acceptedBeta: '3.20.0-beta.1', acceptedRuntimeAndStylesUnchanged: true,
+  acceptedBeta: promotion.acceptedCandidate, acceptedRuntimeAndStylesUnchanged: true,
   priorReleaseAssetsOverwritten: false, pluginIdMigrated: false, marketingVaultModified: false,
   brat: 'User accepted beta; no new stable-version installation run during promotion',
   officialDirectory: 'Tracked separately; GitHub publication is not official-directory or application-installation verification'
 };
-writeFileSync('reports/release-3.20.0-publication.json', JSON.stringify(report, null, 2) + '\n');
+writeFileSync(`reports/release-${tag}-publication.json`, JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify({ version: tag, commit, assets: assets.length, status: report.status, url: report.url }));

@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.21.0
+
+- Promote the user-accepted 3.21.0-beta.3 P2 reading upgrade to stable. All 14 featured reading revisions, mobile quote-output adaptation, and export paths retain the accepted runtime; no new runtime feature is added during promotion.
+- Keep all 19 IDs and frozen legacy definitions, saved revision preferences, snapshots, custom themes, note enhancement and source Markdown. Older articles do not automatically switch to new reading revisions.
+- User confirmed all requested themes and long-form/tutorial/report copy, backend-save and phone-preview tests. This is user-reported acceptance, not an agent-run WeChat backend inspection. Retain host/platform and provenance limitations.
+- P3 palette/density and P4 work are not included. GitHub publication, official scan/public listing and actual stable installation are verified separately.
+
 ## 3.21.0-beta.3
 
 - Follow up the user's failed beta.2 WeChat mobile check: adapt upgraded quotes to ordinary styled sections only in canonical copy/export output, avoiding native blockquote import decoration. Keep the local semantic DOM and ArticleModel, nested content, emphasis and citation attributes; legacy/custom output without the reading marker is unchanged.
