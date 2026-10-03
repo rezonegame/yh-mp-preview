@@ -177,3 +177,17 @@ Windows Obsidian 1.13.7、DPR 2；未实测最低宿主、其他系统、完整 
 完整构建、150 项自动测试通过；236 项新原生检查覆盖 14 主题、三宽度和两种测试 CSS 环境，源文和 data.json 保持。来源审计重跑，合法来源记录保留。一次夹具尾部断言未考虑既有文本规范化空格，修正测试断言重跑，不把该次失败算通过。模拟样式不是微信真实粘贴，仍需用户重新复制、保存并复验手机效果。旧 906fd05 官方预检和 beta.1 原生证据仍作为历史留存，不当成本次代码的发布门。详情见 beta.2 发行说明与新原生报告。
 
 beta.2 标签实际指向 `a4d68e06d71a7f4b5872ac2bc2e16db31f308def`；[CI 37096292865](https://github.com/rezonegame/yh-mp-preview/actions/runs/37096292865) completed/success，[预发行](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.21.0-beta.2) 于 `2026-10-03T04:22:24Z` 发布。13 个资产均重新下载并匹配标签、GitHub 摘要及原生测试 JS/CSS/manifest 指纹，见 `reports/reading-quote-beta2-release-verification.json`；发行说明已填入真实限制。main 和 GitHub latest 再次确认保持 3.20.0，不称为官方稳定更新。beta.2 用户 BRAT 安装与微信实际复验尚未确认，不复用 beta.1 的安装记录冒充。
+
+### beta.2 手机复验未通过与 beta.3 输出适配（2026-10-03）
+
+用户随后明确回答“是的”，确认 beta.2 重贴后左灰线仍存在。手机截图的右边与代码／正文基本对齐，当前明确失败项是原生引用左线；不将上轮本地 CSS 测试视为真实微信修复通过。
+
+参考公开 doocs/md #447 的原生引用转换反馈，推断导入器按标签重写样式，但没有查看用户远端 DOM。仅在升级版 canonical 克隆中把 blockquote 转为有引用标签的 section，保留样式、来源属性及全部嵌套节点。转换前 ArticleModel、本地源 DOM 保持真实 blockquote，配方先应用、之后仍走安全清理。旧版／无标记自定义输出不转换。不是上游代码移植，不通过后台访问绕过安全限制。
+
+151 项自动测试和正式构建通过；完整推荐 lint 零错误、30 个既有警告。348 项隔离原生引用检查覆盖 14 主题 × 3 手机宽度 × 两种 CSS 环境，模拟强制原生标签规则与伪元素灰条；输出无原生标签、源语义仍在、引用和正文留白不越界，文章与 data.json 不变。截图 `reports/assets/deep-reading-quote-adapter.png` 实际复查，无左灰线、上下横线和嵌套内容完整；不是微信截图。报告 `reports/reading-quote-beta3-regression.json`。
+
+中间一次完整测试因源码注释变更后未及时更新来源指纹失败；另一次不合适的 lint 禁用被质量门拒绝，窗口辅助 API 的类型编译也失败。已删除禁用、改用宿主元素创建 API、重生指纹并完整重跑；失败运行不算通过，没有放宽质量门或伪造来源认证。历史许可保留，来源门仍未取得公共同意证据。
+
+本轮未解决用户图中的正文粗细差异。真实剪贴板／微信后台保存和手机复验仍待用户；只发布预发行，不推进官方稳定 main 或 P3/P4，Marketing 不修改。
+
+导出补测 508 项检查通过，14 主题 × 6 配方共 84 组实际生产快照保留适配引用、文字、纸底和末尾，手机模式输出不变。代表性 case-file/review 实际 HTML、长图和分段图生成共 9 张 PNG；不是每组合均生成图片。`reports/reading-quote-beta3-output.json` 记录真实尺寸、快照指纹和范围，收集程序确认 data.json 与 beta.2 备份逐字节一致，安装三文件与测试候选一致。

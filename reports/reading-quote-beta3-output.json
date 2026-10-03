@@ -1,0 +1,3963 @@
+{
+  "version": "3.21.0-beta.3",
+  "checks": [
+    {
+      "name": "default/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "default/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "default/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "default/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "default/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "default/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "default/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "default/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "default/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "default/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "default/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "default/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "default/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "deep-reading/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "deep-reading/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "deep-reading/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "deep-reading/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "deep-reading/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "deep-reading/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "deep-reading/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "deep-reading/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "deep-reading/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "deep-reading/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "deep-reading/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "deep-reading/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "clear-guide/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "clear-guide/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "clear-guide/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "clear-guide/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "clear-guide/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "clear-guide/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "clear-guide/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "clear-guide/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "clear-guide/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "clear-guide/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "clear-guide/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "clear-guide/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 252, 250)",
+        "actual": "rgb(251, 252, 250)"
+      }
+    },
+    {
+      "name": "knowledge-notes/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "knowledge-notes/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 252, 250)",
+        "actual": "rgb(251, 252, 250)"
+      }
+    },
+    {
+      "name": "knowledge-notes/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "knowledge-notes/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 252, 250)",
+        "actual": "rgb(251, 252, 250)"
+      }
+    },
+    {
+      "name": "knowledge-notes/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "knowledge-notes/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 252, 250)",
+        "actual": "rgb(251, 252, 250)"
+      }
+    },
+    {
+      "name": "knowledge-notes/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "knowledge-notes/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 252, 250)",
+        "actual": "rgb(251, 252, 250)"
+      }
+    },
+    {
+      "name": "knowledge-notes/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "knowledge-notes/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 252, 250)",
+        "actual": "rgb(251, 252, 250)"
+      }
+    },
+    {
+      "name": "knowledge-notes/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "knowledge-notes/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "apple-product/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "apple-product/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "apple-product/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "apple-product/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "apple-product/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "apple-product/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "apple-product/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "apple-product/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "apple-product/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "apple-product/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "apple-product/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "apple-product/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "product-review/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "product-review/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "product-review/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "product-review/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "product-review/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "product-review/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "product-review/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "product-review/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "product-review/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "product-review/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "product-review/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "product-review/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "red-white-editorial/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "red-white-editorial/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "red-white-editorial/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "red-white-editorial/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "red-white-editorial/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "red-white-editorial/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "red-white-editorial/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "red-white-editorial/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "red-white-editorial/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "red-white-editorial/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "red-white-editorial/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "red-white-editorial/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "ink-opinion/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "ink-opinion/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "ink-opinion/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "ink-opinion/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "ink-opinion/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "ink-opinion/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "ink-opinion/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "ink-opinion/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "ink-opinion/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "ink-opinion/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "ink-opinion/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "ink-opinion/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "data-blueprint/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "data-blueprint/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "data-blueprint/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "data-blueprint/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "data-blueprint/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "data-blueprint/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "data-blueprint/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "data-blueprint/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "data-blueprint/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "data-blueprint/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "data-blueprint/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "data-blueprint/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "briefing-grid/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "briefing-grid/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "briefing-grid/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "briefing-grid/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "briefing-grid/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "briefing-grid/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "briefing-grid/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "briefing-grid/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "briefing-grid/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "briefing-grid/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "briefing-grid/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "briefing-grid/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "zen-essence/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "zen-essence/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "zen-essence/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "zen-essence/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "zen-essence/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "zen-essence/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "zen-essence/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "zen-essence/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "zen-essence/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "zen-essence/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "zen-essence/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "zen-essence/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 247, 239)",
+        "actual": "rgb(251, 247, 239)"
+      }
+    },
+    {
+      "name": "warm-paper/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "warm-paper/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 247, 239)",
+        "actual": "rgb(251, 247, 239)"
+      }
+    },
+    {
+      "name": "warm-paper/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "warm-paper/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 247, 239)",
+        "actual": "rgb(251, 247, 239)"
+      }
+    },
+    {
+      "name": "warm-paper/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "warm-paper/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 247, 239)",
+        "actual": "rgb(251, 247, 239)"
+      }
+    },
+    {
+      "name": "warm-paper/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "warm-paper/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 247, 239)",
+        "actual": "rgb(251, 247, 239)"
+      }
+    },
+    {
+      "name": "warm-paper/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "warm-paper/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(251, 247, 239)",
+        "actual": "rgb(251, 247, 239)"
+      }
+    },
+    {
+      "name": "warm-paper/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "warm-paper/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "olive-journal/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "olive-journal/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "olive-journal/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "olive-journal/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "olive-journal/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "olive-journal/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "olive-journal/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "olive-journal/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "olive-journal/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "olive-journal/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "olive-journal/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "olive-journal/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/legacy-compatible idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/legacy-compatible output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/legacy-compatible image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "case-file/legacy-compatible export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "case-file/legacy-compatible export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/legacy-compatible phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/tutorial idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/tutorial output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/tutorial image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "case-file/tutorial export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "case-file/tutorial export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/tutorial phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/checklist idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/checklist output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/checklist image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "case-file/checklist export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "case-file/checklist export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/checklist phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/product-intro idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/product-intro output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/product-intro image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "case-file/product-intro export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "case-file/product-intro export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/product-intro phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/commentary idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/commentary output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/commentary image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "case-file/commentary export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "case-file/commentary export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/commentary phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/review idempotent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/review output quote adapter retains all quotes",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/review image paper matches preview",
+      "pass": true,
+      "detail": {
+        "expected": "rgb(255, 255, 255)",
+        "actual": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "name": "case-file/review export preserves text",
+      "pass": true,
+      "detail": {
+        "same": true,
+        "sourceTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。",
+        "exportTail": "  保留完整内容\n        \n    \n    \n\n        \n            \n        简洁结构\n        原生序号少装饰\n    \n            \n        信息结构\n        明显分区提示清晰\n    \n        \n    \n\n最后一次检查\nEND-OF-READING-ARTICLE。这是一篇自有本地验证文章，不使用上游模板或远程图片。\n这里有一个脚注[1]。\n\n\n参考资料本地说明，核对脚注文字和返回链接。"
+      }
+    },
+    {
+      "name": "case-file/review export strips private markers",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file/review phone snapshot unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "new theme produces HTML, long and segmented artifacts",
+      "pass": true,
+      "detail": [
+        "yh-mp-preview-1791002761726.html",
+        "yh-mp-preview-1791002762189.png",
+        "yh-mp-preview-1791002762452-1.png",
+        "yh-mp-preview-1791002762452-2.png",
+        "yh-mp-preview-1791002762452-3.png",
+        "yh-mp-preview-1791002762452-4.png",
+        "yh-mp-preview-1791002762452-5.png",
+        "yh-mp-preview-1791002762452-6.png",
+        "yh-mp-preview-1791002762452-7.png",
+        "yh-mp-preview-1791002762452-8.png"
+      ]
+    },
+    {
+      "name": "new HTML retains complete tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "new long image covers complete article",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "fixture source unchanged",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "outputs": [
+    {
+      "id": "default",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4345,
+      "htmlHash": "a5311bbbdc50a3d85234587a7bcdad9816ca5a60dd84d0052cfe642383a31750",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "default",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4516,
+      "htmlHash": "b4a520f96e2fa850a1acc2ecd3f4e7502fa0516f651de4b2980b56c5f0cf2067",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "default",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4625,
+      "htmlHash": "e91e97e7fc9e74bf40228d4810693385cc2cfbd8039fffb02b6fe0c005938b7d",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "default",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4402,
+      "htmlHash": "e2e303f59ce885390a1ed73b540c420a74aa61755ebb716699a9333947aefc94",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "default",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4381,
+      "htmlHash": "fb4903bb1d5fca723234d8bebac2b47e46a2f70ac2fd72619c8a671e1d0824cb",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "default",
+      "recipe": "review",
+      "width": 459,
+      "height": 4345,
+      "htmlHash": "b569942e2988105bfcf9cd6d820c58d688ce4b03aa631e80889e6bc1853efd81",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "deep-reading",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4260,
+      "htmlHash": "ab8396ece8bfdb0bf7f541da55debb7bfecdd4b470f6111e81ac53655a622286",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "deep-reading",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4422,
+      "htmlHash": "5b8794a941e879605b2574a277171a7972e9c66deb0ad495b0ea9e058a525cb5",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "deep-reading",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4523,
+      "htmlHash": "94fee55921943bd6730ce578898135ff74ae6520f0272cc61b7bcfb1091af67c",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "deep-reading",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4314,
+      "htmlHash": "ef7d26311300c5a69b1907f55c7671917cd132bfa831f70a4f75b027af4dc524",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "deep-reading",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4297,
+      "htmlHash": "4a5b2175860274feee2c6cd4784b48d985d92f78363a96adbb7242f8ca7c6303",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "deep-reading",
+      "recipe": "review",
+      "width": 459,
+      "height": 4260,
+      "htmlHash": "eb4e654b25363a7d1c9b9c3e098a33fb208c6c00898c7f43e007b1a8e73a016b",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "clear-guide",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4350,
+      "htmlHash": "4b4ca6eca690b6a7cdebbfaa336737f3a17a103e5b868cc8172220d2d4bf4a2d",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "clear-guide",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4507,
+      "htmlHash": "8359a7c4b87470bb9b0363c926def3a0138fbf5e2e251a9a44c0c5ab1ffc786c",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "clear-guide",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4610,
+      "htmlHash": "4c6f80e20c2e2ca805b003a7de6ebb5344511b95148d12230efe1828de80bdbe",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "clear-guide",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4411,
+      "htmlHash": "e9b60b9da58c169b461d1453846d5bc02caa9d58d8089b9e6b8933c4eb22a119",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "clear-guide",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4387,
+      "htmlHash": "cce99613510827c7f2580415b1b64dd693387a64f2b0e0360ba9c3272b6fb339",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "clear-guide",
+      "recipe": "review",
+      "width": 459,
+      "height": 4350,
+      "htmlHash": "e3ca4dadd8b6fe356695fda71fe2e0157339fc347a98d068613e3f19dfd2b219",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "knowledge-notes",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4279,
+      "htmlHash": "4589b36f33787ddc7157e7bace72390a8334805ab9cd81d350116e88107a01b2",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(251, 252, 250)"
+    },
+    {
+      "id": "knowledge-notes",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4449,
+      "htmlHash": "1246b11cbefb0ef947d7c7e3f7561faad87ec08a1a9caa924fc14097d812aa4c",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(251, 252, 250)"
+    },
+    {
+      "id": "knowledge-notes",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4557,
+      "htmlHash": "933d2f8cf518454b3228b7ee325c823eb0ae0197ca9852e12b933cc01e90dbe5",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(251, 252, 250)"
+    },
+    {
+      "id": "knowledge-notes",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4340,
+      "htmlHash": "b90516bdae6421e41847c25519732755b50d63f283e42e946ee242e782d426fd",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(251, 252, 250)"
+    },
+    {
+      "id": "knowledge-notes",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4315,
+      "htmlHash": "869cbc21471024e285b8f635733a057c64a7169795ff67d4773afd118aacb998",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(251, 252, 250)"
+    },
+    {
+      "id": "knowledge-notes",
+      "recipe": "review",
+      "width": 459,
+      "height": 4279,
+      "htmlHash": "77185e8d96c742ff60c3b774ecd988a798a007cf4e4154b6f5dfb8e08fe2b212",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(251, 252, 250)"
+    },
+    {
+      "id": "apple-product",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4275,
+      "htmlHash": "908a3a442fd5242139d674f1895a1d7651fc2411ffd6e25a91129214ac325a71",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "apple-product",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4441,
+      "htmlHash": "9c3e4ec1e89426d899fc09d5567b6b8b54539c3bd4dab79011562b2ba994c89a",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "apple-product",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4546,
+      "htmlHash": "01c5f844f44fc5592647d461d5534c1a2cca63db76e713d9cd2bf160ba026599",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "apple-product",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4332,
+      "htmlHash": "d4fed2892970455c11dd35f2aae9bce4cb03fae92aaa0af970e0ca328f2b626c",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "apple-product",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4312,
+      "htmlHash": "4dd37097364be9fa41939efdb449efcd49e2f3db76a9a03c1d0158255ac8a988",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "apple-product",
+      "recipe": "review",
+      "width": 459,
+      "height": 4275,
+      "htmlHash": "ac6fc77e961b6ad34c6bee1f0ae636c5a3b5670669d43f80856bee2d31c8ab73",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "product-review",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4373,
+      "htmlHash": "d61c155f2ceac924adcd5588750949d002e409f280215e02eeaf0f106c24e07d",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "product-review",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4531,
+      "htmlHash": "4b59fd3ac636c2ec27e85234a1ab70cb8d265f2785e5f77c983ca437976b75f1",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "product-review",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4634,
+      "htmlHash": "19042225d9de1ea4da8d41080417573a407812c3e07492b7c7ee86bb7573f5c8",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "product-review",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4434,
+      "htmlHash": "b99b648ca02d755c900c3b2d5b75252aa63640fbd43d58d61822c5a044c40834",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "product-review",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4409,
+      "htmlHash": "24310e5442cc5c2c179d324f012b772e71cebb86b5740583c63979b3a1fd15e1",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "product-review",
+      "recipe": "review",
+      "width": 459,
+      "height": 4373,
+      "htmlHash": "962033e7105f99a93be73042dde3f2b1d64fabe911457a9831682be248e96a85",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "red-white-editorial",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4333,
+      "htmlHash": "b8c636c0daa029f6ebc01782aa760ac047d0f5c0c743af339fc769c23950bb82",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "red-white-editorial",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4505,
+      "htmlHash": "5e4bfc4059ff5d436e43029943f7abcf8888d3d02702884b51a3e7cb918df1d1",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "red-white-editorial",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4615,
+      "htmlHash": "a9a19e86535292064c26e61065b5ea0babd2677143e6d23ae002156ce4e2930f",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "red-white-editorial",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4390,
+      "htmlHash": "5b54a0745832e73bfbb4b6e8ad88a6464dbdbb09686f5950521e71350fa7fce9",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "red-white-editorial",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4370,
+      "htmlHash": "b8e555339409e3527cc639e2b4c8df95002e152fbf7e07fe647f7e6d2cde5a70",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "red-white-editorial",
+      "recipe": "review",
+      "width": 459,
+      "height": 4333,
+      "htmlHash": "f0ee005ea1f3c9f23a1782eb4934f9a83007f7ab69aa5a150512a7bb7ab6fc71",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "ink-opinion",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4450,
+      "htmlHash": "9b74acd102a588cddd6635e4cf2c38aab13ea865404f522ad222b93664723910",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "ink-opinion",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4613,
+      "htmlHash": "0212bc7baaf3d69b6f96d82151ec8ed19c9eb7fb8ff0f77c9abcb91d88532f65",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "ink-opinion",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4716,
+      "htmlHash": "d9689049b737c1a2eede05adfbe9e12b0096cc26c1976032374f78305ece152d",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "ink-opinion",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4506,
+      "htmlHash": "a6edf34faa2c421480b2d096d04ba7364ee53859287355416d1b2de26ac7c8b9",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "ink-opinion",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4486,
+      "htmlHash": "1fc5a95b82961cb5a92ba6a24a12720a9d9e5fe25550a90493cb0ce3fd76b815",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "ink-opinion",
+      "recipe": "review",
+      "width": 459,
+      "height": 4450,
+      "htmlHash": "dac25391977916e6f268d0a7fb0fa0ffc4be1595cebee87b621ddf75a3feba4a",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "data-blueprint",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4373,
+      "htmlHash": "c789cf25bf48c4479e252c170b6f1c5162c8a3a76b2b7f409e4cddfce4638e9e",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "data-blueprint",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4530,
+      "htmlHash": "3945d1f9b51fbed8542e65c64a66bf85d3f585b5384a6ab6332d72e7b4741a95",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "data-blueprint",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4633,
+      "htmlHash": "0e5538daf0f821d789f9df2662b6043d8b1030b3e63f55023e8338b94613928f",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "data-blueprint",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4434,
+      "htmlHash": "a96e4cac36ddad6243118575cea5c6a43df88bcf8459c7f10b6a1ed7cfe6b0b3",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "data-blueprint",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4409,
+      "htmlHash": "cff2732f0f67a44906e0484478b8b5917103107a8357e6e579d113166426d13a",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "data-blueprint",
+      "recipe": "review",
+      "width": 459,
+      "height": 4373,
+      "htmlHash": "3fde58282142dfa58c1f89e617916bc5b15a9e2a9620495819c3175584ed3148",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "briefing-grid",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4277,
+      "htmlHash": "f19315f8d0b78d554b06f283a5e23c87c642a7fc69939fee7d53e767853e719e",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "briefing-grid",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4447,
+      "htmlHash": "77bcc83f441d3fa9db840c161c0bff542e30d2cadbbd700d8403738c6a5b03bb",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "briefing-grid",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4556,
+      "htmlHash": "eb79435e81c9b774101a73d88ef4e2e6a9e21ecb07ad9c24bf141ce1ea6449e4",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "briefing-grid",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4338,
+      "htmlHash": "fed96e77d808919cedecf12d5d39923d4001c6a60c2c78a0b1cb411588481c5a",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "briefing-grid",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4313,
+      "htmlHash": "a2e3e73406f701ec6af602782a0bf377eb95abb3cdcb1db01653760e339de95a",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "briefing-grid",
+      "recipe": "review",
+      "width": 459,
+      "height": 4277,
+      "htmlHash": "381e727803f079edead284574ee234ceb0d4ede0b667c48d6774b6c2ea09de7f",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "zen-essence",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4228,
+      "htmlHash": "db65625da4893e0cfc57742436e7e27efe1d9af45026793aca11d9784af351df",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "zen-essence",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4389,
+      "htmlHash": "83e5f9e07cfda5a4559df09283406a9b9d58305ed8d3e28f08f42323f9afd4cc",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "zen-essence",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4490,
+      "htmlHash": "85e2514a0559c9186c83839d7fc17f93774b47d7e6bdb05e1d0aaba16f2b82c5",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "zen-essence",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4281,
+      "htmlHash": "a2a425b9353bf9d74c3193c07ce078c5b4e0057783807d56e35f1748b695fd5f",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "zen-essence",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4264,
+      "htmlHash": "750f630840d7b6f9dea76d8e6307b4c64fb15a47774113c05117702ae1e60132",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "zen-essence",
+      "recipe": "review",
+      "width": 459,
+      "height": 4228,
+      "htmlHash": "0891775e1a2d9e1f9108b1611ee0491afcc19a66622e4660b0c209f2e9d9eefc",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "warm-paper",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4399,
+      "htmlHash": "3f4d1e03f75e23dafa49cacc59c92b84c613815691140c4c6c3f48e90ff7ea77",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(251, 247, 239)"
+    },
+    {
+      "id": "warm-paper",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4568,
+      "htmlHash": "1ad1aaf48fda1986f7352b23ee7970f3b9478e949cb0da98c52a6c19ac6bb76d",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(251, 247, 239)"
+    },
+    {
+      "id": "warm-paper",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4676,
+      "htmlHash": "722c547df6fe15269269005f4edec86f12d650a3777a351dcd00248f596d8e7b",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(251, 247, 239)"
+    },
+    {
+      "id": "warm-paper",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4452,
+      "htmlHash": "03bca069afab2940076dcb761bbd50bfa00efc8bbf3594b95956d3175237d6dd",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(251, 247, 239)"
+    },
+    {
+      "id": "warm-paper",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4436,
+      "htmlHash": "7902d2a753620a98941880677a132e03a18290cc6542268316bdb853c41bd5df",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(251, 247, 239)"
+    },
+    {
+      "id": "warm-paper",
+      "recipe": "review",
+      "width": 459,
+      "height": 4399,
+      "htmlHash": "33aadeef9a339f3ae16fbc01be452b0fd7871c32ca634ebe8a24b2e5ed2f28ee",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(251, 247, 239)"
+    },
+    {
+      "id": "olive-journal",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4341,
+      "htmlHash": "377ed718a2e57230efeea709d470eda3306a6b9008555c9a7149626390a745f1",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "olive-journal",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4510,
+      "htmlHash": "93fa299091c639b18906a37516a00ad3998e3367e8050fc955d1bd0008511432",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "olive-journal",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4619,
+      "htmlHash": "048ad3bf37ac79946123a243ebc203658202a484307867da4826f8b84653d167",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "olive-journal",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4397,
+      "htmlHash": "37388779f82c6caaee670bbd10a14daab5ff7f70a63b8d7a2e9ee543b9deabbd",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "olive-journal",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4377,
+      "htmlHash": "ae1f31be5852acb8636db437a7614e400c00251eefd5f3ad6cf2d514e420e4e7",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "olive-journal",
+      "recipe": "review",
+      "width": 459,
+      "height": 4341,
+      "htmlHash": "34e8b62ce97550adb8b424856e5b51c144eb4c216e6bb7f853812c986ab4197b",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "case-file",
+      "recipe": "legacy-compatible",
+      "width": 459,
+      "height": 4401,
+      "htmlHash": "3c962144f5d4c9bd6962293f120c92d81e39e345dccf47c4c636fc54c400e0d0",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "case-file",
+      "recipe": "tutorial",
+      "width": 459,
+      "height": 4539,
+      "htmlHash": "ecf14c17fb2fac8a009227d02fc4223ff5976aee9bd0ad693463505f59099853",
+      "textHash": "669146d17a61045dc4fb756acdf2b7c885827d3dda598843d247954b9aca37fb",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "case-file",
+      "recipe": "checklist",
+      "width": 459,
+      "height": 4633,
+      "htmlHash": "0ffa1cd9c5e4d1fdc427e6f723e9c93a17cb917d35564218df0a967db665fdef",
+      "textHash": "cb976d7746efb97624db1e73091f2f1159031020a9baed4815bab92a968d02d6",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "case-file",
+      "recipe": "product-intro",
+      "width": 459,
+      "height": 4457,
+      "htmlHash": "df5de184ed4e9c59c84b6a3bbbbbd68634af2a9ed2c8026cabb634b817e49053",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "case-file",
+      "recipe": "commentary",
+      "width": 459,
+      "height": 4437,
+      "htmlHash": "cd7950cfbdb861cf94c3e09e9817b12647854c9fe3452999c8fb728d20bb6992",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "case-file",
+      "recipe": "review",
+      "width": 459,
+      "height": 4401,
+      "htmlHash": "8fe7de05619f783b291532503149200cf612eb14412f90593129a4988d259476",
+      "textHash": "9a6c0fb8e354a0b5610083244cd79499c07082d83a8e3c25f75a72ba723e6614",
+      "background": "rgb(255, 255, 255)"
+    }
+  ],
+  "sizes": [
+    {
+      "name": "yh-mp-preview-1791002762189.png",
+      "width": 918,
+      "height": 8802
+    },
+    {
+      "name": "yh-mp-preview-1791002762452-1.png",
+      "width": 918,
+      "height": 1224
+    },
+    {
+      "name": "yh-mp-preview-1791002762452-2.png",
+      "width": 918,
+      "height": 1224
+    },
+    {
+      "name": "yh-mp-preview-1791002762452-3.png",
+      "width": 918,
+      "height": 1224
+    },
+    {
+      "name": "yh-mp-preview-1791002762452-4.png",
+      "width": 918,
+      "height": 1224
+    },
+    {
+      "name": "yh-mp-preview-1791002762452-5.png",
+      "width": 918,
+      "height": 1224
+    },
+    {
+      "name": "yh-mp-preview-1791002762452-6.png",
+      "width": 918,
+      "height": 1224
+    },
+    {
+      "name": "yh-mp-preview-1791002762452-7.png",
+      "width": 918,
+      "height": 1224
+    },
+    {
+      "name": "yh-mp-preview-1791002762452-8.png",
+      "width": 918,
+      "height": 234
+    }
+  ],
+  "limitations": [
+    "Full PNG generation is representative case-file/review, not all 84 combinations.",
+    "84 production snapshots cover all themes/recipes and phone-mode export equality.",
+    "No WeChat backend paste claim."
+  ],
+  "checkedAt": "2026-10-03T04:47:14.329Z",
+  "assets": {
+    "main.js": "907f3b46045402c4454d62ebe429229446e9fb104402219f1c21312756f2c71b",
+    "manifest.json": "8aa44a24f855eb2afd1939e1cffb70d4becf2400482d783ded23c9ff60976fe8",
+    "styles.css": "b09dccae461bc394a84268fe8f74857a6fa8ae8450f306ebb1b6f6505c26194f"
+  },
+  "scope": "84 real native canonical export snapshots; representative case-file/review full HTML, long PNG and segmented PNG generation. Not all 84 PNG combinations or WeChat acceptance.",
+  "marketingModified": false,
+  "backendAccepted": false
+}

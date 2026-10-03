@@ -1,6 +1,8 @@
 (async()=>{
-    if(app.vault.getName()!=='MPPreview-Refactor-Test')throw new Error('Refusing a real vault');
+    const base='C:/AgentTest/github/mp-preview/output/refactor/MPPreview-Refactor-Test',path=require('path');
+    if(app.vault.getName()!=='MPPreview-Refactor-Test'||path.resolve(app.vault.adapter.getBasePath()).toLowerCase()!==path.resolve(base).toLowerCase())throw new Error('Refusing a real vault');
     const plugin=app.plugins.plugins['yh-mp-preview'],manager=plugin.settingsManager,view=app.workspace.getLeavesOfType('yh-mp-preview')[0].view;
+    if(plugin.manifest.version!=='3.21.0-beta.3')throw new Error('Install current quote candidate first');
     const original=manager.getSettings(),oldFile=view.currentFile,file=app.vault.getAbstractFileByPath('_test-artifacts/Reading-Themes.md'),source=await app.vault.read(file),checks=[],outputs=[];
     const article=()=>view.previewEl.querySelector('.mp-content-section');
     const check=(name,pass,detail=null)=>{checks.push({name,pass:!!pass,detail});if(!pass)throw new Error(name+': '+JSON.stringify(detail));};
@@ -15,6 +17,7 @@
             check(id+'/'+recipe+' idempotent',article().outerHTML===before&&article().querySelectorAll('[data-mp-step-label]').length===labels);
             const adaptive=await view.createExportSnapshot();let record;
             try{
+                check(id+'/'+recipe+' output quote adapter retains all quotes',adaptive.element.querySelectorAll('blockquote').length===0&&adaptive.element.querySelectorAll('section[role="note"][aria-label="引用"]').length===article().querySelectorAll('blockquote').length);
                 const expected=getComputedStyle(article()).backgroundColor;check(id+'/'+recipe+' image paper matches preview',getComputedStyle(adaptive.element).backgroundColor===expected,{expected,actual:getComputedStyle(adaptive.element).backgroundColor});
                 check(id+'/'+recipe+' export preserves text',adaptive.element.textContent===text&&/END\s*-\s*OF\s*-\s*READING\s*-\s*ARTICLE/.test(adaptive.element.textContent),{same:adaptive.element.textContent===text,sourceTail:text.slice(-240),exportTail:adaptive.element.textContent.slice(-240)});
                 check(id+'/'+recipe+' export strips private markers',!adaptive.element.querySelector('[data-mp-reading-base-style],[data-mp-recipe-base-style]'));

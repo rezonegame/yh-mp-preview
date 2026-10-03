@@ -12948,6 +12948,17 @@ function normalizeArticleText(root) {
 
 // src/core/render/legacyWechatPipeline.ts
 var removableTags = /* @__PURE__ */ new Set(["SCRIPT", "STYLE", "IFRAME", "FORM", "INPUT", "BUTTON", "TEXTAREA", "SELECT"]);
+function adaptReadingQuotes(root) {
+  if (!root.hasAttribute("data-mp-reading-background")) return;
+  root.querySelectorAll("blockquote").forEach((quote) => {
+    const section = root.createEl("section");
+    for (const attribute of Array.from(quote.attributes)) section.setAttribute(attribute.name, attribute.value);
+    section.setAttribute("role", "note");
+    section.setAttribute("aria-label", "\u5F15\u7528");
+    section.append(...Array.from(quote.childNodes));
+    quote.replaceWith(section);
+  });
+}
 function removeTransientAttributes(root) {
   [root, ...Array.from(root.querySelectorAll("*"))].forEach((element) => {
     Array.from(element.attributes).forEach((attribute) => {
@@ -12969,6 +12980,7 @@ function prepareLegacyWechatFragment(element, options = {}) {
     recipeId: options.recipeId || "legacy-compatible"
   });
   if (clone2.getAttribute("data-mp-recipe") !== plan.recipeId) applyArticleRecipe(clone2, plan.recipeId, options.palette);
+  adaptReadingQuotes(clone2);
   const blocks = Array.from(clone2.children).map((block, index) => ({ id: block.getAttribute("data-mp-block-id") || `block-${index}`, tag: block.tagName.toLowerCase() }));
   removeTransientAttributes(clone2);
   clone2 = element.ownerDocument.importNode(safeHtmlToElement(new XMLSerializer().serializeToString(clone2)), true);

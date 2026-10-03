@@ -35,6 +35,33 @@ test('modern quotes declare concrete edges and bounded widths after actual canon
   }
 });
 
+test('upgraded output escapes native quote import without changing source, legacy output or semantic model', async () => {
+  createDom();
+  const { prepareLegacyWechatFragment } = await loadModule('src/core/render/legacyWechatPipeline.ts');
+  const root = document.createElement('section');
+  root.setAttribute('data-mp-reading-background', 'theme');
+  root.innerHTML = '<blockquote cite="https://example.com/source" style="border-top:1px solid #ccc;border-bottom:1px solid #ccc;border-left:0px solid transparent;width:auto;"><p>引用 <strong>重点</strong></p><blockquote><p>嵌套</p><ol><li>完整步骤</li></ol></blockquote></blockquote><p>末尾</p>';
+  const before = root.outerHTML, result = prepareLegacyWechatFragment(root);
+  assert.equal(root.outerHTML, before);
+  assert.equal(root.querySelectorAll('blockquote').length, 2);
+  assert.equal(result.article.stats.quotes, 2);
+  assert.equal(result.root.querySelectorAll('blockquote').length, 0);
+  const quotes = result.root.querySelectorAll('section[role="note"][aria-label="引用"]');
+  assert.equal(quotes.length, 2);
+  assert.equal(quotes[0].querySelector('section[role="note"]'), quotes[1]);
+  assert.equal(quotes[0].getAttribute('cite'), 'https://example.com/source');
+  assert.equal(quotes[0].querySelector('strong').textContent, '重点');
+  assert.equal(quotes[1].querySelector('ol > li').textContent, '完整步骤');
+  assert.equal(result.text, root.textContent);
+  assert.equal(quotes[0].style.borderTopWidth, '1px');
+  assert.equal(quotes[0].style.borderLeftWidth, '0px');
+  assert.equal(prepareLegacyWechatFragment(result.root).html, result.html);
+  root.removeAttribute('data-mp-reading-background');
+  const legacy = prepareLegacyWechatFragment(root);
+  assert.equal(legacy.root.querySelectorAll('blockquote').length, 2);
+  assert.equal(legacy.root.querySelectorAll('section[role="note"]').length, 0);
+});
+
 test('open quotes remain open and switching back restores legacy styles exactly', async () => {
   createDom();
   const { readingTheme, legacyTheme } = await loadModule('src/core/theme/themeRevisionRegistry.ts');

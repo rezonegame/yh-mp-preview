@@ -20,6 +20,22 @@ export interface LegacyWechatOptions {
 
 const removableTags = new Set(['SCRIPT', 'STYLE', 'IFRAME', 'FORM', 'INPUT', 'BUTTON', 'TEXTAREA', 'SELECT']);
 
+/** WeChat's native quote importer can replace inline styles with its own frame.
+ * Only upgraded output is adapted. The source DOM and ArticleModel keep real
+ * blockquotes; styled sections retain the exact nested children in output.
+ */
+function adaptReadingQuotes(root: HTMLElement): void {
+    if (!root.hasAttribute('data-mp-reading-background')) return;
+    root.querySelectorAll('blockquote').forEach(quote => {
+        const section = root.createEl('section');
+        for (const attribute of Array.from(quote.attributes)) section.setAttribute(attribute.name, attribute.value);
+        section.setAttribute('role', 'note');
+        section.setAttribute('aria-label', '引用');
+        section.append(...Array.from(quote.childNodes));
+        quote.replaceWith(section);
+    });
+}
+
 function removeTransientAttributes(root: HTMLElement): void {
     [root, ...Array.from(root.querySelectorAll('*'))].forEach((element) => {
         Array.from(element.attributes).forEach((attribute) => {
@@ -46,6 +62,7 @@ export function prepareLegacyWechatFragment(element: HTMLElement, options: Legac
         recipeId: options.recipeId || 'legacy-compatible',
     });
     if (clone.getAttribute('data-mp-recipe') !== plan.recipeId) applyArticleRecipe(clone, plan.recipeId, options.palette);
+    adaptReadingQuotes(clone);
     const blocks = Array.from(clone.children).map((block,index) => ({id:block.getAttribute('data-mp-block-id') || `block-${index}`,tag:block.tagName.toLowerCase()}));
     removeTransientAttributes(clone);
     clone = element.ownerDocument.importNode(safeHtmlToElement(new XMLSerializer().serializeToString(clone)),true);

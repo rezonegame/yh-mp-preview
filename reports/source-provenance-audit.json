@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "auditDate": "2026-10-03",
-  "pluginVersion": "3.21.0-beta.2",
-  "baselineCommit": "967446542b30efded10370eb263fab27182856f9",
+  "pluginVersion": "3.21.0-beta.3",
+  "baselineCommit": "182e19f5c93dba02967cfc084e8f572cf578d34f",
   "scope": "Current working-tree src files; all pinned upstream src blobs; runtime package metadata. Git history and existing release assets are preserved.",
   "upstream": {
     "repository": "Yeban8090/mp-preview",
@@ -194,8 +194,8 @@
     },
     {
       "path": "src/core/render/legacyWechatPipeline.ts",
-      "sha256": "fcd3bf0e08c15e64c29b478d945da73989cc9afc262ed4e2c650f6f349756f8c",
-      "workingTreeSha256": "e47da00d670f09a1de18127e4fef0e47a4e474d85124fbd6df6140206b3fe1ff",
+      "sha256": "321beec448894e4007bf071f7d21b89c271fcc19b166f0b8de1a283b7a76c26a",
+      "workingTreeSha256": "22a58c18a3d86219a01a2ca4affdde48cff55d000d27d878d525079f11ed7945",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"

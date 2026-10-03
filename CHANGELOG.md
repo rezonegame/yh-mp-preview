@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.21.0-beta.3
+
+- Follow up the user's failed beta.2 WeChat mobile check: adapt upgraded quotes to ordinary styled sections only in canonical copy/export output, avoiding native blockquote import decoration. Keep the local semantic DOM and ArticleModel, nested content, emphasis and citation attributes; legacy/custom output without the reading marker is unchanged.
+- Retain explicit quote edges and bounded widths from beta.2. Copy, HTML and image snapshots share the same adapter; source Markdown, themes and revision IDs do not change.
+- Add an automated source/model/output/legacy/idempotency regression (151 total). Pass 348 native quote checks at 320/375/414px against synthetic native-tag styling and pseudo decoration, plus 508 output checks with 84 theme/recipe snapshots and representative HTML/long/segmented generation. Not an actual WeChat parser or phone acceptance.
+- This candidate still needs fresh-copy mobile acceptance. The heavier phone typography shown in the user's screenshot is not diagnosed or fixed here. Stable/official remain 3.20.0; P3/P4 and official promotion are not included.
+
 ## 3.21.0-beta.2
 
 - Harden all 14 upgraded themes' quote styles for pasting into another editor: declare all four border edges with concrete values instead of implicit `initial` resets, and keep quote width automatic and bounded within article padding. Open deep-reading quotes still have only top/bottom rules; side, note and box designs retain their intended shapes.
