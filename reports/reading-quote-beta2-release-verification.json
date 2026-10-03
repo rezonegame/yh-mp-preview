@@ -1,0 +1,105 @@
+{
+  "version": "3.21.0-beta.2",
+  "commit": "a4d68e06d71a7f4b5872ac2bc2e16db31f308def",
+  "repo": "rezonegame/yh-mp-preview",
+  "url": "https://github.com/rezonegame/yh-mp-preview/releases/tag/3.21.0-beta.2",
+  "publishedAt": "2026-10-03T04:22:24Z",
+  "verifiedAt": "2026-10-03T04:23:18.360Z",
+  "ci": {
+    "conclusion": "success",
+    "databaseId": 37096292865,
+    "headBranch": "3.21.0-beta.2",
+    "headSha": "a4d68e06d71a7f4b5872ac2bc2e16db31f308def",
+    "status": "completed"
+  },
+  "assets": [
+    {
+      "name": "main.js",
+      "sha256": "7f424cb3936f9ab8216414fb693d1a4f80f53d03fdee848200abbe6d933ce805",
+      "size": 1189500,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/main.js"
+    },
+    {
+      "name": "manifest.json",
+      "sha256": "06810d9575d516288bf8d8e5f67bcd9c45763250155a461929a1c21f26a24b9d",
+      "size": 294,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/manifest.json"
+    },
+    {
+      "name": "styles.css",
+      "sha256": "b09dccae461bc394a84268fe8f74857a6fa8ae8450f306ebb1b6f6505c26194f",
+      "size": 50896,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/styles.css"
+    },
+    {
+      "name": "LICENSE",
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+      "size": 34523,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/LICENSE"
+    },
+    {
+      "name": "NOTICE",
+      "sha256": "63a9677f3091b93912b771103fbca3deffe65026137e32fcb9dfdd4946853c7f",
+      "size": 2067,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/NOTICE"
+    },
+    {
+      "name": "THIRD_PARTY_NOTICES.md",
+      "sha256": "9fd299732d668c328658e5f56c21512d42a2bbd9e2c223a3dbf348e890224165",
+      "size": 6346,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/THIRD_PARTY_NOTICES.md"
+    },
+    {
+      "name": "MIT-original.txt",
+      "sha256": "f34e537197d9fdd7e2f33a37e07ea93e8b830ecdd13daf2e013e80e0a6e5e301",
+      "size": 1068,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/MIT-original.txt"
+    },
+    {
+      "name": "DOMPurify.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "size": 11358,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/DOMPurify.txt"
+    },
+    {
+      "name": "html2canvas.txt",
+      "sha256": "f3eca6ff762533fa5a77caf954a143e48afa204668cf97dce758c45a9e006be3",
+      "size": 1062,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/html2canvas.txt"
+    },
+    {
+      "name": "nanoid.txt",
+      "sha256": "4383cb2c3608397ce7a4159502614ed66890f8999c2a9c056dd3b1024d6721f0",
+      "size": 1095,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/nanoid.txt"
+    },
+    {
+      "name": "pangu.txt",
+      "sha256": "eeccd5776471b1e421a3b647c616722db5439e38a62f07bf378d8de476979c9d",
+      "size": 1072,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/pangu.txt"
+    },
+    {
+      "name": "Microsoft-helpers.txt",
+      "sha256": "5989359645911c04a140c49d89496b13feca980bbf36d2250a12d3b9d06250d6",
+      "size": 645,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/Microsoft-helpers.txt"
+    },
+    {
+      "name": "babel-helpers.txt",
+      "sha256": "4be9d87b56a306293223b490c0d0b245e9e94f39884147bf051a6c7b825aeb30",
+      "size": 1189,
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.21.0-beta.2/babel-helpers.txt"
+    }
+  ],
+  "isPrerelease": true,
+  "mainStable": "3.20.0",
+  "latestStable": "3.20.0",
+  "marketingModified": false,
+  "status": "13 downloaded CI assets match tag, remote digests and tested native runtime; not a stable or official update",
+  "pending": [
+    "User BRAT beta.2 install and new-copy WeChat mobile quote reacceptance",
+    "Actual clipboard/paste/save checks",
+    "Complete P2 acceptance before stable promotion"
+  ]
+}

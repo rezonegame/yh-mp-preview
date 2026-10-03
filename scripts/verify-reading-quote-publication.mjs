@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { basename } from 'node:path';
+
+const repo = 'rezonegame/yh-mp-preview', tag = '3.21.0-beta.2';
+const gh = (...args) => execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+const release = JSON.parse(gh('api', `repos/${repo}/releases/tags/${tag}`));
+assert.equal(release.tag_name, tag); assert.equal(release.draft, false); assert.equal(release.prerelease, true);
+const commit = execFileSync('git', ['rev-parse', `${tag}^{commit}`], { encoding: 'utf8' }).trim();
+const ci = JSON.parse(gh('run', 'list', '--repo', repo, '--workflow', 'release.yml', '--branch', tag, '--limit', '5', '--json', 'databaseId,headSha,headBranch,status,conclusion')).find(run => run.headSha === commit && run.headBranch === tag);
+assert(ci); assert.equal(ci.status, 'completed'); assert.equal(ci.conclusion, 'success');
+const native = JSON.parse(readFileSync('reports/reading-quote-beta2-regression.json', 'utf8'));
+assert.equal(native.version, tag);
+assert.equal(native.checks.length, 236);
+const paths = ['main.js','manifest.json','styles.css','LICENSE','NOTICE','THIRD_PARTY_NOTICES.md','LICENSES/MIT-original.txt','LICENSES/DOMPurify.txt','LICENSES/html2canvas.txt','LICENSES/nanoid.txt','LICENSES/pangu.txt','LICENSES/Microsoft-helpers.txt','LICENSES/babel-helpers.txt'];
+assert.deepEqual(release.assets.map(asset => asset.name).sort(), paths.map(path => basename(path)).sort());
+const assets = paths.map(path => {
+  const name = basename(path), bytes = readFileSync(`output/refactor/release-${tag}-assets/${name}`);
+  const remote = release.assets.find(asset => asset.name === name), sha256 = createHash('sha256').update(bytes).digest('hex');
+  const tagged = execFileSync('git', ['show', `${tag}:${path}`], { maxBuffer: 8 * 1024 * 1024 });
+  assert(bytes.equals(tagged), name + ' tag bytes');
+  assert.equal(remote.digest, `sha256:${sha256}`); assert.equal(remote.size, bytes.length);
+  if (native.assets[name]) assert.equal(native.assets[name], sha256, name + ' tested production bytes');
+  return { name, sha256, size: bytes.length, url: remote.browser_download_url };
+});
+const manifest = JSON.parse(readFileSync(`output/refactor/release-${tag}-assets/manifest.json`, 'utf8'));
+assert.equal(manifest.id, 'yh-mp-preview'); assert.equal(manifest.version, tag); assert.equal(manifest.minAppVersion, '1.7.2');
+const main = JSON.parse(Buffer.from(JSON.parse(gh('api', `repos/${repo}/contents/manifest.json?ref=main`)).content, 'base64').toString());
+assert.equal(main.version, '3.20.0');
+const latest = JSON.parse(gh('api', `repos/${repo}/releases/latest`)); assert.equal(latest.tag_name, '3.20.0');
+const report = { version: tag, commit, repo, url: release.html_url, publishedAt: release.published_at, verifiedAt: new Date().toISOString(), ci, assets, isPrerelease: true, mainStable: main.version, latestStable: latest.tag_name, marketingModified: false, status: '13 downloaded CI assets match tag, remote digests and tested native runtime; not a stable or official update', pending: ['User BRAT beta.2 install and new-copy WeChat mobile quote reacceptance', 'Actual clipboard/paste/save checks', 'Complete P2 acceptance before stable promotion'] };
+writeFileSync('reports/reading-quote-beta2-release-verification.json', JSON.stringify(report, null, 2) + '\n');
+console.log(JSON.stringify({ version: tag, assets: assets.length, url: release.html_url, ci: ci.databaseId }));

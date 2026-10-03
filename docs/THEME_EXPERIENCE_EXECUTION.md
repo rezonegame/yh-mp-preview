@@ -175,3 +175,5 @@ Windows Obsidian 1.13.7、DPR 2；未实测最低宿主、其他系统、完整 
 用户确认升级版主题总体正常，随后明确反馈深度阅读引用在微信手机预览出现左竖线和右贴边。因此没有把反馈记录成完整 P2 验收，也没有稳定晋级。仅在 `beta/reading-themes-3.21.0-quote-fix` 修正升级版引用：四边具体声明、自动／受限宽度，保持设计与语义；旧修订无变化。
 
 完整构建、150 项自动测试通过；236 项新原生检查覆盖 14 主题、三宽度和两种测试 CSS 环境，源文和 data.json 保持。来源审计重跑，合法来源记录保留。一次夹具尾部断言未考虑既有文本规范化空格，修正测试断言重跑，不把该次失败算通过。模拟样式不是微信真实粘贴，仍需用户重新复制、保存并复验手机效果。旧 906fd05 官方预检和 beta.1 原生证据仍作为历史留存，不当成本次代码的发布门。详情见 beta.2 发行说明与新原生报告。
+
+beta.2 标签实际指向 `a4d68e06d71a7f4b5872ac2bc2e16db31f308def`；[CI 37096292865](https://github.com/rezonegame/yh-mp-preview/actions/runs/37096292865) completed/success，[预发行](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.21.0-beta.2) 于 `2026-10-03T04:22:24Z` 发布。13 个资产均重新下载并匹配标签、GitHub 摘要及原生测试 JS/CSS/manifest 指纹，见 `reports/reading-quote-beta2-release-verification.json`；发行说明已填入真实限制。main 和 GitHub latest 再次确认保持 3.20.0，不称为官方稳定更新。beta.2 用户 BRAT 安装与微信实际复验尚未确认，不复用 beta.1 的安装记录冒充。
