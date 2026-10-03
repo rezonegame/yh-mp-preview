@@ -1,0 +1,1588 @@
+{
+  "version": "3.21.0-beta.1",
+  "verifiedAt": "2026-10-03T00:10:13.265Z",
+  "scope": "Isolated Windows Obsidian 1.13.7; production binary unchanged",
+  "checks": [
+    {
+      "name": "zoom 1 theme-light 600 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1 theme-light 600 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1 theme-light 375 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1 theme-light 375 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1 theme-light 320 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1 theme-light 320 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1 theme-light 260 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1 theme-light 260 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1 theme-dark 600 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1 theme-dark 600 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1 theme-dark 375 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1 theme-dark 375 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1 theme-dark 320 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1 theme-dark 320 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1 theme-dark 260 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1 theme-dark 260 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.25 theme-light 600 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.25 theme-light 600 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.25 theme-light 375 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.25 theme-light 375 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.25 theme-light 320 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.25 theme-light 320 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.25 theme-light 260 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.25 theme-light 260 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.25 theme-dark 600 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.25 theme-dark 600 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.25 theme-dark 375 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.25 theme-dark 375 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.25 theme-dark 320 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.25 theme-dark 320 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.25 theme-dark 260 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.25 theme-dark 260 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.5 theme-light 600 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.5 theme-light 600 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.5 theme-light 375 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.5 theme-light 375 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.5 theme-light 320 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.5 theme-light 320 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.5 theme-light 260 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.5 theme-light 260 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.5 theme-dark 600 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.5 theme-dark 600 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.5 theme-dark 375 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.5 theme-dark 375 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.5 theme-dark 320 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.5 theme-dark 320 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zoom 1.5 theme-dark 260 controls fit",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "zoom 1.5 theme-dark 260 actions reachable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "default coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "default coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "deep-reading coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "deep-reading coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "clear-guide coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "clear-guide coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "knowledge-notes coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "knowledge-notes coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "apple-product coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "apple-product coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "product-review coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "product-review coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "red-white-editorial coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "red-white-editorial coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "ink-opinion coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "ink-opinion coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "data-blueprint coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "data-blueprint coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "briefing-grid coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "briefing-grid coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "zen-essence coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "zen-essence coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "warm-paper coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "warm-paper coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "olive-journal coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "olive-journal coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "case-file coloured paper is 375 CSS px",
+      "pass": true,
+      "detail": 375
+    },
+    {
+      "name": "case-file coloured render retains tail",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "generated large fixture matches",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "legacy-3.19.1 large render complete",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "legacy-3.19.1 final large switch complete",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "reading-2026.1 large render complete",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "reading-2026.1 final large switch complete",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "large warm pipeline performance gate",
+      "pass": true,
+      "detail": {
+        "p95": 336,
+        "threshold": 800
+      }
+    },
+    {
+      "name": "reading fixture unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "large fixture unchanged after render",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "settings disk unchanged",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "dimensions": [
+    {
+      "factor": 1,
+      "mode": "theme-light",
+      "requestedWidth": 600,
+      "requestedHeight": 460,
+      "width": 600,
+      "height": 460,
+      "viewport": {
+        "width": 1024,
+        "height": 800
+      },
+      "preview": {
+        "x": 213,
+        "y": 342.4375,
+        "width": 598,
+        "height": 163.3671875,
+        "top": 342.4375,
+        "right": 811,
+        "bottom": 505.8046875,
+        "left": 213
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1,
+      "mode": "theme-light",
+      "requestedWidth": 375,
+      "requestedHeight": 700,
+      "width": 375,
+      "height": 680,
+      "viewport": {
+        "width": 1024,
+        "height": 800
+      },
+      "preview": {
+        "x": 325.5,
+        "y": 232.4375,
+        "width": 373,
+        "height": 383.3671875,
+        "top": 232.4375,
+        "right": 698.5,
+        "bottom": 615.8046875,
+        "left": 325.5
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1,
+      "mode": "theme-light",
+      "requestedWidth": 320,
+      "requestedHeight": 460,
+      "width": 320,
+      "height": 460,
+      "viewport": {
+        "width": 1024,
+        "height": 800
+      },
+      "preview": {
+        "x": 353,
+        "y": 330.84375,
+        "width": 318,
+        "height": 200.7578125,
+        "top": 330.84375,
+        "right": 671,
+        "bottom": 531.6015625,
+        "left": 353
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1,
+      "mode": "theme-light",
+      "requestedWidth": 260,
+      "requestedHeight": 360,
+      "width": 260,
+      "height": 360,
+      "viewport": {
+        "width": 1024,
+        "height": 800
+      },
+      "preview": {
+        "x": 383,
+        "y": 380.84375,
+        "width": 258,
+        "height": 85.359375,
+        "top": 380.84375,
+        "right": 641,
+        "bottom": 466.203125,
+        "left": 383
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1,
+      "mode": "theme-dark",
+      "requestedWidth": 600,
+      "requestedHeight": 460,
+      "width": 600,
+      "height": 460,
+      "viewport": {
+        "width": 1024,
+        "height": 800
+      },
+      "preview": {
+        "x": 213,
+        "y": 342.4375,
+        "width": 598,
+        "height": 163.3671875,
+        "top": 342.4375,
+        "right": 811,
+        "bottom": 505.8046875,
+        "left": 213
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1,
+      "mode": "theme-dark",
+      "requestedWidth": 375,
+      "requestedHeight": 700,
+      "width": 375,
+      "height": 680,
+      "viewport": {
+        "width": 1024,
+        "height": 800
+      },
+      "preview": {
+        "x": 325.5,
+        "y": 232.4375,
+        "width": 373,
+        "height": 383.3671875,
+        "top": 232.4375,
+        "right": 698.5,
+        "bottom": 615.8046875,
+        "left": 325.5
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1,
+      "mode": "theme-dark",
+      "requestedWidth": 320,
+      "requestedHeight": 460,
+      "width": 320,
+      "height": 460,
+      "viewport": {
+        "width": 1024,
+        "height": 800
+      },
+      "preview": {
+        "x": 353,
+        "y": 330.84375,
+        "width": 318,
+        "height": 200.7578125,
+        "top": 330.84375,
+        "right": 671,
+        "bottom": 531.6015625,
+        "left": 353
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1,
+      "mode": "theme-dark",
+      "requestedWidth": 260,
+      "requestedHeight": 360,
+      "width": 260,
+      "height": 360,
+      "viewport": {
+        "width": 1024,
+        "height": 800
+      },
+      "preview": {
+        "x": 383,
+        "y": 380.84375,
+        "width": 258,
+        "height": 85.359375,
+        "top": 380.84375,
+        "right": 641,
+        "bottom": 466.203125,
+        "left": 383
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.25,
+      "mode": "theme-light",
+      "requestedWidth": 600,
+      "requestedHeight": 460,
+      "width": 600,
+      "height": 460,
+      "viewport": {
+        "width": 819,
+        "height": 640
+      },
+      "preview": {
+        "x": 110.4000015258789,
+        "y": 261.6499938964844,
+        "width": 598.4000244140625,
+        "height": 164.5500030517578,
+        "top": 261.6499938964844,
+        "right": 708.8000259399414,
+        "bottom": 426.1999969482422,
+        "left": 110.4000015258789
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.25,
+      "mode": "theme-light",
+      "requestedWidth": 375,
+      "requestedHeight": 700,
+      "width": 375,
+      "height": 544,
+      "viewport": {
+        "width": 819,
+        "height": 640
+      },
+      "preview": {
+        "x": 222.90000915527344,
+        "y": 219.65000915527344,
+        "width": 373.3999938964844,
+        "height": 248.5500030517578,
+        "top": 219.65000915527344,
+        "right": 596.3000030517578,
+        "bottom": 468.20001220703125,
+        "left": 222.90000915527344
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.25,
+      "mode": "theme-light",
+      "requestedWidth": 320,
+      "requestedHeight": 460,
+      "width": 320,
+      "height": 460,
+      "viewport": {
+        "width": 819,
+        "height": 640
+      },
+      "preview": {
+        "x": 250.40000915527344,
+        "y": 250.0500030517578,
+        "width": 318.3999938964844,
+        "height": 201.9499969482422,
+        "top": 250.0500030517578,
+        "right": 568.8000030517578,
+        "bottom": 452,
+        "left": 250.40000915527344
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.25,
+      "mode": "theme-light",
+      "requestedWidth": 260,
+      "requestedHeight": 360,
+      "width": 260,
+      "height": 360,
+      "viewport": {
+        "width": 819,
+        "height": 640
+      },
+      "preview": {
+        "x": 280.3999938964844,
+        "y": 300.0500183105469,
+        "width": 258.3999938964844,
+        "height": 86.55000305175781,
+        "top": 300.0500183105469,
+        "right": 538.7999877929688,
+        "bottom": 386.6000213623047,
+        "left": 280.3999938964844
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.25,
+      "mode": "theme-dark",
+      "requestedWidth": 600,
+      "requestedHeight": 460,
+      "width": 600,
+      "height": 460,
+      "viewport": {
+        "width": 819,
+        "height": 640
+      },
+      "preview": {
+        "x": 110.4000015258789,
+        "y": 261.6499938964844,
+        "width": 598.4000244140625,
+        "height": 164.5500030517578,
+        "top": 261.6499938964844,
+        "right": 708.8000259399414,
+        "bottom": 426.1999969482422,
+        "left": 110.4000015258789
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.25,
+      "mode": "theme-dark",
+      "requestedWidth": 375,
+      "requestedHeight": 700,
+      "width": 375,
+      "height": 544,
+      "viewport": {
+        "width": 819,
+        "height": 640
+      },
+      "preview": {
+        "x": 222.90000915527344,
+        "y": 219.65000915527344,
+        "width": 373.3999938964844,
+        "height": 248.5500030517578,
+        "top": 219.65000915527344,
+        "right": 596.3000030517578,
+        "bottom": 468.20001220703125,
+        "left": 222.90000915527344
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.25,
+      "mode": "theme-dark",
+      "requestedWidth": 320,
+      "requestedHeight": 460,
+      "width": 320,
+      "height": 460,
+      "viewport": {
+        "width": 819,
+        "height": 640
+      },
+      "preview": {
+        "x": 250.40000915527344,
+        "y": 250.0500030517578,
+        "width": 318.3999938964844,
+        "height": 201.9499969482422,
+        "top": 250.0500030517578,
+        "right": 568.8000030517578,
+        "bottom": 452,
+        "left": 250.40000915527344
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.25,
+      "mode": "theme-dark",
+      "requestedWidth": 260,
+      "requestedHeight": 360,
+      "width": 260,
+      "height": 360,
+      "viewport": {
+        "width": 819,
+        "height": 640
+      },
+      "preview": {
+        "x": 280.3999938964844,
+        "y": 300.0500183105469,
+        "width": 258.3999938964844,
+        "height": 86.55000305175781,
+        "top": 300.0500183105469,
+        "right": 538.7999877929688,
+        "bottom": 386.6000213623047,
+        "left": 280.3999938964844
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.5,
+      "mode": "theme-light",
+      "requestedWidth": 600,
+      "requestedHeight": 460,
+      "width": 600,
+      "height": 453.3333435058594,
+      "viewport": {
+        "width": 682,
+        "height": 533
+      },
+      "preview": {
+        "x": 42.333335876464844,
+        "y": 212.4479217529297,
+        "width": 598,
+        "height": 156.69271850585938,
+        "top": 212.4479217529297,
+        "right": 640.3333358764648,
+        "bottom": 369.14064025878906,
+        "left": 42.333335876464844
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.5,
+      "mode": "theme-light",
+      "requestedWidth": 375,
+      "requestedHeight": 700,
+      "width": 375,
+      "height": 453.3333435058594,
+      "viewport": {
+        "width": 682,
+        "height": 533
+      },
+      "preview": {
+        "x": 154.83334350585938,
+        "y": 212.4479217529297,
+        "width": 373,
+        "height": 156.69271850585938,
+        "top": 212.4479217529297,
+        "right": 527.8333435058594,
+        "bottom": 369.14064025878906,
+        "left": 154.83334350585938
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.5,
+      "mode": "theme-light",
+      "requestedWidth": 320,
+      "requestedHeight": 460,
+      "width": 320,
+      "height": 453.3333435058594,
+      "viewport": {
+        "width": 682,
+        "height": 533
+      },
+      "preview": {
+        "x": 182.33334350585938,
+        "y": 200.84896850585938,
+        "width": 318,
+        "height": 194.0885467529297,
+        "top": 200.84896850585938,
+        "right": 500.3333435058594,
+        "bottom": 394.93751525878906,
+        "left": 182.33334350585938
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.5,
+      "mode": "theme-light",
+      "requestedWidth": 260,
+      "requestedHeight": 360,
+      "width": 260,
+      "height": 360,
+      "viewport": {
+        "width": 682,
+        "height": 533
+      },
+      "preview": {
+        "x": 212.33334350585938,
+        "y": 247.515625,
+        "width": 258,
+        "height": 85.359375,
+        "top": 247.515625,
+        "right": 470.3333435058594,
+        "bottom": 332.875,
+        "left": 212.33334350585938
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.5,
+      "mode": "theme-dark",
+      "requestedWidth": 600,
+      "requestedHeight": 460,
+      "width": 600,
+      "height": 453.3333435058594,
+      "viewport": {
+        "width": 682,
+        "height": 533
+      },
+      "preview": {
+        "x": 42.333335876464844,
+        "y": 212.4479217529297,
+        "width": 598,
+        "height": 156.69271850585938,
+        "top": 212.4479217529297,
+        "right": 640.3333358764648,
+        "bottom": 369.14064025878906,
+        "left": 42.333335876464844
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.5,
+      "mode": "theme-dark",
+      "requestedWidth": 375,
+      "requestedHeight": 700,
+      "width": 375,
+      "height": 453.3333435058594,
+      "viewport": {
+        "width": 682,
+        "height": 533
+      },
+      "preview": {
+        "x": 154.83334350585938,
+        "y": 212.4479217529297,
+        "width": 373,
+        "height": 156.69271850585938,
+        "top": 212.4479217529297,
+        "right": 527.8333435058594,
+        "bottom": 369.14064025878906,
+        "left": 154.83334350585938
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.5,
+      "mode": "theme-dark",
+      "requestedWidth": 320,
+      "requestedHeight": 460,
+      "width": 320,
+      "height": 453.3333435058594,
+      "viewport": {
+        "width": 682,
+        "height": 533
+      },
+      "preview": {
+        "x": 182.33334350585938,
+        "y": 200.84896850585938,
+        "width": 318,
+        "height": 194.0885467529297,
+        "top": 200.84896850585938,
+        "right": 500.3333435058594,
+        "bottom": 394.93751525878906,
+        "left": 182.33334350585938
+      },
+      "overflow": []
+    },
+    {
+      "factor": 1.5,
+      "mode": "theme-dark",
+      "requestedWidth": 260,
+      "requestedHeight": 360,
+      "width": 260,
+      "height": 360,
+      "viewport": {
+        "width": 682,
+        "height": 533
+      },
+      "preview": {
+        "x": 212.33334350585938,
+        "y": 247.515625,
+        "width": 258,
+        "height": 85.359375,
+        "top": 247.515625,
+        "right": 470.3333435058594,
+        "bottom": 332.875,
+        "left": 212.33334350585938
+      },
+      "overflow": []
+    }
+  ],
+  "captures": [
+    {
+      "id": "default",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-default-top.png",
+      "top": 0,
+      "articleHeight": 4555.40625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "43d79b86a2071b2324546dc78a48f5b433e5437addbd8244cd258a42fe0bc70d"
+    },
+    {
+      "id": "default",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-default-middle.png",
+      "top": 1958,
+      "articleHeight": 4555.40625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "01934ed2a0a0f23a4712b3ca6effbd3e6d1ea61b3fd308bdb2fc2ea4b1cb2c39"
+    },
+    {
+      "id": "default",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-default-end.png",
+      "top": 3916,
+      "articleHeight": 4555.40625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "f8b393f00a89f5745acf23eadbcb54f48596a16d72fcd9b54ad341ef713786a5"
+    },
+    {
+      "id": "deep-reading",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-deep-reading-top.png",
+      "top": 0,
+      "articleHeight": 4536.8828125,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "6e4f5359ce6a3582368a0a853fca90db1872d3485fd3465acd65656bf1a2d7a7"
+    },
+    {
+      "id": "deep-reading",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-deep-reading-middle.png",
+      "top": 1948,
+      "articleHeight": 4536.8828125,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "0d864532797a39787ba72e46e6d4a317158d00de3063ffa9edb3ac09c73492bc"
+    },
+    {
+      "id": "deep-reading",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-deep-reading-end.png",
+      "top": 3897,
+      "articleHeight": 4536.8828125,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "8a37ac6454d24ea657b70fafcd966291e98f6b888b8de02286859d67143e56d6"
+    },
+    {
+      "id": "clear-guide",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-clear-guide-top.png",
+      "top": 0,
+      "articleHeight": 4555.6484375,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "93290797739685c24f9eac52bf19b707be60ef1d9bfcee7095bdfdd868846a59"
+    },
+    {
+      "id": "clear-guide",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-clear-guide-middle.png",
+      "top": 1958,
+      "articleHeight": 4555.6484375,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "5e0ee52ce35cff06ae0116e6a399af3b08cee6067f3a144f92e910d484806d07"
+    },
+    {
+      "id": "clear-guide",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-clear-guide-end.png",
+      "top": 3916,
+      "articleHeight": 4555.6484375,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "1bb4a5f84dddebf6ea5898cbf18b2120ad164ecfc57212a86d2c4e711b535f48"
+    },
+    {
+      "id": "knowledge-notes",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-knowledge-notes-top.png",
+      "top": 0,
+      "articleHeight": 4537.40625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "24c22e70a037943f6ea7e1114b5a5382a0374e8fc1b91d6890a25c45eda25443"
+    },
+    {
+      "id": "knowledge-notes",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-knowledge-notes-middle.png",
+      "top": 1949,
+      "articleHeight": 4537.40625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "e86e702526d8b62ac981752f07b93fc94b0bc06202dd69f49bcafed46d404495"
+    },
+    {
+      "id": "knowledge-notes",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-knowledge-notes-end.png",
+      "top": 3898,
+      "articleHeight": 4537.40625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "fbc85468885468fe029dfe43eed5394a7d4b020ed22212c28ca48e75e1bd3b87"
+    },
+    {
+      "id": "apple-product",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-apple-product-top.png",
+      "top": 0,
+      "articleHeight": 4500.765625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "875ca1813ad55eee22ce96e4a32a6c0b6f57e3ab89451fac9bbe6bc99cd861cf"
+    },
+    {
+      "id": "apple-product",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-apple-product-middle.png",
+      "top": 1930,
+      "articleHeight": 4500.765625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "616f127c57185524231a7d2ab9a817d98da69367ca5e306a143eb09fe3b051b1"
+    },
+    {
+      "id": "apple-product",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-apple-product-end.png",
+      "top": 3861,
+      "articleHeight": 4500.765625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "2acd1473f65c944629fb85c6e7940744dd88b191a39d0275f78800fff7138971"
+    },
+    {
+      "id": "product-review",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-product-review-top.png",
+      "top": 0,
+      "articleHeight": 4578.046875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "ce276edd74773badc59b383dea55ab053f084a55bde3d025eba2182d5bf9ff9c"
+    },
+    {
+      "id": "product-review",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-product-review-middle.png",
+      "top": 1969,
+      "articleHeight": 4578.046875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "ef634050bd4178bd02c8af59175a5c8e46e082a7fe1a9fbbada1f168edd6e0c4"
+    },
+    {
+      "id": "product-review",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-product-review-end.png",
+      "top": 3939,
+      "articleHeight": 4578.046875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "3752080c881ab4b1023e972274c7beb15d361c0de9898c99118d435a3668aeaf"
+    },
+    {
+      "id": "red-white-editorial",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-red-white-editorial-top.png",
+      "top": 0,
+      "articleHeight": 4546.03125,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "2272947f7096bfec68338347103e2855c5f880f74fae7ec0079ce82e10c6c177"
+    },
+    {
+      "id": "red-white-editorial",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-red-white-editorial-middle.png",
+      "top": 1953,
+      "articleHeight": 4546.03125,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "469dc4b4a3d7f55ef73d249f794d8b0734eabd4d8bad46b327734b29533a677f"
+    },
+    {
+      "id": "red-white-editorial",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-red-white-editorial-end.png",
+      "top": 3907,
+      "articleHeight": 4546.03125,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "6e8eb38acad64a3cfdb75030c3d1cbbf992ef8856021c99a3f1df9f6b3235fa9"
+    },
+    {
+      "id": "ink-opinion",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-ink-opinion-top.png",
+      "top": 0,
+      "articleHeight": 4675.421875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "cd5c3044fe0384121a08108e585523e386c8d26231ccc026cae47ab313cca616"
+    },
+    {
+      "id": "ink-opinion",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-ink-opinion-middle.png",
+      "top": 2018,
+      "articleHeight": 4675.421875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "42015e870a0732d5e080d9b8210dd34d1c4fb7aa28e9d31218dad6405ae70e91"
+    },
+    {
+      "id": "ink-opinion",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-ink-opinion-end.png",
+      "top": 4036,
+      "articleHeight": 4675.421875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "d766788c10a3a629602994ec7965b30d7c578da3b63bb93a90f0d0815eaac155"
+    },
+    {
+      "id": "data-blueprint",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-data-blueprint-top.png",
+      "top": 0,
+      "articleHeight": 4578.5,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "5ddf7e7a0ba14af573bccf5244ebf246919460df95c8278fee766181f078a727"
+    },
+    {
+      "id": "data-blueprint",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-data-blueprint-middle.png",
+      "top": 1969,
+      "articleHeight": 4578.5,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "807d1b0bc1397142d943dc82cd0f5f01713b542164de40b61621c66989a3d08c"
+    },
+    {
+      "id": "data-blueprint",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-data-blueprint-end.png",
+      "top": 3939,
+      "articleHeight": 4578.5,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "4e16588f059330e100d20b0470388bedfb70a232cf2b92fd856260704730e1dc"
+    },
+    {
+      "id": "briefing-grid",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-briefing-grid-top.png",
+      "top": 0,
+      "articleHeight": 4535.546875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "39b89bb1b477ae377b8c75f9f0e7196df4b46e08a7137f7aa36df1dacadc5aff"
+    },
+    {
+      "id": "briefing-grid",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-briefing-grid-middle.png",
+      "top": 1948,
+      "articleHeight": 4535.546875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "c786e3affa83ea69f06d77af7892fb9f072a4b89d05e3ebae5cf536685ca788a"
+    },
+    {
+      "id": "briefing-grid",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-briefing-grid-end.png",
+      "top": 3896,
+      "articleHeight": 4535.546875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "54a1baddd92173bf72e689f855c96e3ca5da58c647158d6ef2627173eefc8f5b"
+    },
+    {
+      "id": "zen-essence",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-zen-essence-top.png",
+      "top": 0,
+      "articleHeight": 4499.828125,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "492c202027ffc8c80b93bbcd5a60e2fd3c17b62db0835d7cc32bbfffa64a2e5e"
+    },
+    {
+      "id": "zen-essence",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-zen-essence-middle.png",
+      "top": 1930,
+      "articleHeight": 4499.828125,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "c3ca7afbb335e03c50959f82a49eb92e54ae6bb6c0d5181e05e57432780e0466"
+    },
+    {
+      "id": "zen-essence",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-zen-essence-end.png",
+      "top": 3860,
+      "articleHeight": 4499.828125,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "7ec39b1fcba027d708e474b757a1a31ce99dc99e1e4430b096f9ce3cf840836e"
+    },
+    {
+      "id": "warm-paper",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-warm-paper-top.png",
+      "top": 0,
+      "articleHeight": 4611.765625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "312ebbdfb4ce3328b9612ddded493b218662cc6ef7fd4c213172da66949a236e"
+    },
+    {
+      "id": "warm-paper",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-warm-paper-middle.png",
+      "top": 1986,
+      "articleHeight": 4611.765625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "3b7d5f7e72a8058a424b3c2f43e97e0faf2bb99980d3bf60e9b708c71d60c626"
+    },
+    {
+      "id": "warm-paper",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-warm-paper-end.png",
+      "top": 3972,
+      "articleHeight": 4611.765625,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "6b6e29b96c0b5440733d5ff9adc846581604dd3858689325edc4830e2b3dd9c5"
+    },
+    {
+      "id": "olive-journal",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-olive-journal-top.png",
+      "top": 0,
+      "articleHeight": 4551.9609375,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "08ca122bf8fc2930e7a3b1d02c37075c953892beaad11a797d949ed07d3c8397"
+    },
+    {
+      "id": "olive-journal",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-olive-journal-middle.png",
+      "top": 1956,
+      "articleHeight": 4551.9609375,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "1ed60306a28329fcd2d9d2fab3ea83f5f68bc01117bbd1231a971e09fa3e884d"
+    },
+    {
+      "id": "olive-journal",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-olive-journal-end.png",
+      "top": 3912,
+      "articleHeight": 4551.9609375,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "4d9f7c8a4fda8bed9fe30346eb27910fcce99c4a31cd0788021a34877d68159c"
+    },
+    {
+      "id": "case-file",
+      "label": "top",
+      "path": "_test-artifacts/reading-colour-case-file-top.png",
+      "top": 0,
+      "articleHeight": 4666.171875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "60c99a9dd000671b2172b30f042e674ee526f2a1df19941884344ce3302988c4"
+    },
+    {
+      "id": "case-file",
+      "label": "middle",
+      "path": "_test-artifacts/reading-colour-case-file-middle.png",
+      "top": 2013,
+      "articleHeight": 4666.171875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "43e3d01641be47baca47561bb6ef90e357b9c4956486cb63465fe4331cfc8301"
+    },
+    {
+      "id": "case-file",
+      "label": "end",
+      "path": "_test-artifacts/reading-colour-case-file-end.png",
+      "top": 4027,
+      "articleHeight": 4666.171875,
+      "size": {
+        "width": 750,
+        "height": 1280
+      },
+      "sha256": "6120e0faac221557abc45cff7e7083d6acea46cf46cc601f775883cb5984cc1f"
+    }
+  ],
+  "performance": [
+    {
+      "revision": "legacy-3.19.1",
+      "characters": 61368,
+      "articleCharacters": 59995,
+      "firstFixtureRenderMs": 394.59999990463257,
+      "iterations": 20,
+      "p50": 270.69999980926514,
+      "p95": 429.30000019073486,
+      "values": [
+        288.30000019073486,
+        287.40000009536743,
+        232.89999985694885,
+        262.10000014305115,
+        240.09999990463257,
+        259.40000009536743,
+        270.69999980926514,
+        235.20000004768372,
+        278.90000009536743,
+        268.5,
+        255.09999990463257,
+        276.10000014305115,
+        355.59999990463257,
+        459.90000009536743,
+        371.69999980926514,
+        429.30000019073486,
+        388.09999990463257,
+        347.2000000476837,
+        222.79999995231628,
+        252.09999990463257
+      ],
+      "scope": "production applyThemeTrial and actual layout, no gallery projection"
+    },
+    {
+      "revision": "reading-2026.1",
+      "characters": 61368,
+      "articleCharacters": 59995,
+      "firstFixtureRenderMs": 340.7000000476837,
+      "iterations": 20,
+      "p50": 287.69999980926514,
+      "p95": 336,
+      "values": [
+        296.2999999523163,
+        266.2999999523163,
+        316.7000000476837,
+        274.2000000476837,
+        303.5,
+        269.5,
+        296.2999999523163,
+        258.60000014305115,
+        287.69999980926514,
+        264.2000000476837,
+        305.7000000476837,
+        258.5,
+        336,
+        273.2000000476837,
+        269.7000000476837,
+        292,
+        306,
+        282.5,
+        305.39999985694885,
+        346.60000014305115
+      ],
+      "scope": "production applyThemeTrial and actual layout, no gallery projection"
+    }
+  ],
+  "largeWarmThresholdMs": 800,
+  "assetHash": "85c77f49f02811033378cdf8ef21ac05e275129336fa969807040e9e7decd813",
+  "limitations": [
+    "Electron per-window zoom only; OS scaling not changed or measured.",
+    "First fixture render is on an already-running host, not cold process startup.",
+    "Coloured top/middle/end captures do not prove WeChat backend rendering.",
+    "System clipboard unavailable; actual WeChat backend must be checked by the user."
+  ],
+  "firstAttempt": "Harness selector corrected; first complete measurement failed report serialization of ArrayBuffer. Neither failed attempt counted as a pass.",
+  "clipboardDiagnostics": {
+    "foreground": true,
+    "documentVisible": true,
+    "webWriteRead": "OS formats=[]; ClipboardItem types=[[]]",
+    "electronWriteRead": "OS formats=[]; plain/html marker reads both false",
+    "ui": "Window activation failed; capture returned black window. No input sent to an unknown surface.",
+    "verified": false
+  },
+  "wechatBackend": {
+    "status": "Blocked by browser site-safety policy; no alternate surface or workaround attempted",
+    "manualAcceptanceRequested": true,
+    "passed": false
+  },
+  "stablePublication": {
+    "version": "3.20.0",
+    "changed": false,
+    "reason": "P2 backend/manual acceptance gate not yet satisfied"
+  }
+}
