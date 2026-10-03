@@ -231,3 +231,5 @@ main 快进并与不可变 3.21.0 标签原子推送；[CI 37098626493](https://
 - 耗时证据保留全部：大矩阵之后初次主题切换 p95 601.7ms 超预算，不能算通过，波动原因未证明。随后在同一夹具、同一 5,524 字数、双方都重载后进行直接对照：3.21.0 p95 249.3ms，候选 260.7ms（约 +4.6%），低于本阶段相对预算 311.625ms；不是绝对 ≤150ms。微调两手势同轮合并后 5,556/22,056 字 p95 133.6/369.3ms，最后完整稿与关闭清理通过；不把此微调基准冒充解析启动耗时。报告附原始值及失败运行，不只选最小值。
 
 完整本机证据 `reports/appearance-tuning-beta1-host.json`。当前允许发布 BRAT 候选；用户需重新验收长文／教程／报告换色、密度、确认／取消与快照，并核对微信保存和手机效果。未验收前 main／GitHub latest／官方稳定仍 3.21.0，不能标完整计划完成。
+
+候选实际发布：不可变 `3.22.0-beta.1` 标签指向 `3d1a7f811c0b57fc6166b92a7c75610476b4cb01`，既有 [CI 37101967705](https://github.com/rezonegame/yh-mp-preview/actions/runs/37101967705) completed/success（Node 22.22.2）。[GitHub 预发行](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.22.0-beta.1) 说明已填入，13 个实际发行文件重新下载并逐字节匹配标签、GitHub 摘要及本机测试 JS/CSS/manifest 指纹，记录 `reports/appearance-tuning-beta1-release.json`。远程 main 与 GitHub latest 实查仍为 3.21.0，没有 beta 官方扫描、稳定晋级或修改条目。仅发布候选分支／标签；证据追加提交不移动标签。BRAT 实际安装与微信用户验收仍待反馈。
