@@ -9,11 +9,12 @@ import type { Template } from '../templateManager';
 import { curatedThemeEntries, getCuratedThemeEntry, type CuratedThemeScene } from '../core/theme/themeCatalog';
 import { ThemeTrialSession } from '../core/render/themeTrialSession';
 import { ThemeGalleryPreview } from '../ui/themeGalleryPreview';
-import { latestThemeReference, isAppearanceV1, isSupportedThemeRevision, LEGACY_THEME_REVISION, READING_THEME_REVISION } from '../core/theme/themeRevisionRegistry';
+import { latestThemeReference, isAppearanceV1, isSupportedThemeRevision, LEGACY_THEME_REVISION, READING_THEME_REVISION, originalPreferences, type AppearancePreferences } from '../core/theme/themeRevisionRegistry';
 import { recipeOptions } from '../ui/recipeLabels';
+import { readingPalettes, densityChoices, normalizeReadingPreferences } from '../core/theme/readingPreferences';
 
 export interface ThemeGalleryOptions {
-    renderPreview: (id: string, saved: boolean, example: boolean, revision?: string) => Promise<HTMLElement | null>;
+    renderPreview: (id: string, saved: boolean, example: boolean, revision?: string, preferences?: AppearancePreferences) => Promise<HTMLElement | null>;
     fontFamily: string; fontSize: number;
     cancel: () => void;
     settled: (applied: boolean) => void;
@@ -38,8 +39,13 @@ export class ThemeGalleryModal extends Modal {
     private readonly templates: Template[];
     private readonly originalTemplateId: string;
     private currentTemplateId: string;
-    private readonly onSelect: (templateId: string, revision?: string) => void | Promise<void>;
-    private readonly previewCallback: (templateId: string, revision?: string) => void;
+    private readonly onSelect: (templateId: string, revision?: string, preferences?: AppearancePreferences) => void | Promise<void>;
+    private readonly previewCallback: (templateId: string, revision?: string, preferences?: AppearancePreferences) => void;
+    private currentPreferences: AppearancePreferences;
+    private readonly originalPreferences: AppearancePreferences;
+    private readonly savedPreferences: Record<string, AppearancePreferences>;
+    private tuning: HTMLElement | null = null;
+    private readonly tuningWritable: boolean;
     private currentRevision: string;
     private readonly originalRevision: string;
     private readonly enhancementLabel: string;
@@ -70,8 +76,8 @@ export class ThemeGalleryModal extends Modal {
         app: App,
         settingsManager: SettingsManager,
         currentTemplateId: string,
-        onSelect: (templateId: string, revision?: string) => void | Promise<void>,
-        previewCallback: (templateId: string, revision?: string) => void,
+        onSelect: (templateId: string, revision?: string, preferences?: AppearancePreferences) => void | Promise<void>,
+        previewCallback: (templateId: string, revision?: string, preferences?: AppearancePreferences) => void,
         private readonly options?: ThemeGalleryOptions,
     ) {
         super(app);
@@ -85,6 +91,10 @@ export class ThemeGalleryModal extends Modal {
         const saved = settings && isAppearanceV1(settings.wechatAppearance) ? settings.wechatAppearance.referencesById[currentTemplateId] : undefined;
         this.originalRevision = saved?.id === currentTemplateId && isSupportedThemeRevision(currentTemplateId,saved.revision) ? saved.revision : LEGACY_THEME_REVISION;
         this.currentRevision = this.originalRevision;
+        this.savedPreferences = settings && isAppearanceV1(settings.wechatAppearance) ? structuredClone(settings.wechatAppearance.preferencesByReference) : {};
+        this.tuningWritable = !!settings && isAppearanceV1(settings.wechatAppearance);
+        this.originalPreferences = this.savedPreference(currentTemplateId,this.originalRevision);
+        this.currentPreferences = {...this.originalPreferences};
         this.enhancementLabel = recipeOptions.find(item => item.value === settings?.v3.selectedRecipeId)?.label ?? '不额外增强';
         this.onSelect = onSelect;
         this.previewCallback = previewCallback;
@@ -158,6 +168,9 @@ export class ThemeGalleryModal extends Modal {
             addToggle(['当前文章', '统一示例'], '画廊预览来源', value => { this.example = value; });
             addToggle(['正在试用', '已保存'], '画廊外观对照', value => { this.compareSaved = value; });
             const previewHost = previewColumn.createDiv('mp-gallery-preview-host');
+            const tuning = previewColumn.createEl('details', {cls:'mp-gallery-tuning'});
+            tuning.createEl('summary',{text:'配色与阅读密度',attr:{'aria-label':'展开配色与阅读密度'}});
+            this.tuning = tuning.createDiv('mp-gallery-tuning-body');
             this.preview = new ThemeGalleryPreview(previewHost, this.options.fontFamily, this.options.fontSize, contentEl.ownerDocument.body.classList.contains('theme-dark'));
             void this.refreshPreview().catch(error => new Notice(`预览失败：${error instanceof Error ? error.message : '未知错误'}`));
         } else selector.open = true;
@@ -171,9 +184,10 @@ export class ThemeGalleryModal extends Modal {
         this.revisionButton.addEventListener('click', () => {
             if (this.transaction.busy) return;
             this.currentRevision = this.currentRevision === READING_THEME_REVISION ? LEGACY_THEME_REVISION : READING_THEME_REVISION;
+            this.currentPreferences = this.savedPreference(this.currentTemplateId,this.currentRevision);
             void this.transaction.preview(async isCurrent => {
                 if (!isCurrent()) return;
-                this.previewCallback(this.currentTemplateId, this.currentRevision);
+                this.previewCallback(this.currentTemplateId, this.currentRevision, this.currentPreferences);
                 await this.refreshPreview();
             });
             this.updateTryHint();
@@ -192,7 +206,7 @@ export class ThemeGalleryModal extends Modal {
             if(!button || button.disabled) return;
             void this.transaction.apply(async () => {
                 if (this.options && !this.options.isValid()) throw new Error('文章或外观已变化，请重新打开画廊。');
-                await this.onSelect(this.currentTemplateId, this.currentRevision);
+                await this.onSelect(this.currentTemplateId, this.currentRevision, this.currentPreferences);
             }).then(() => {
                 if (this.transaction.state !== 'applied') return;
                 this.options?.settled(true);
@@ -223,8 +237,8 @@ export class ThemeGalleryModal extends Modal {
         this.preview?.destroy(); this.preview = null;
         this.contentEl.removeEventListener('keydown', this.onKeyDown, true);
         if (!this.transaction.busy && this.options && !this.hasApplied) this.options.cancel();
-        else if (!this.options && !this.hasApplied && (this.currentTemplateId !== this.originalTemplateId || this.currentRevision !== this.originalRevision)) {
-            this.previewCallback(this.originalTemplateId, this.originalRevision);
+        else if (!this.options && !this.hasApplied && (this.currentTemplateId !== this.originalTemplateId || this.currentRevision !== this.originalRevision || JSON.stringify(this.currentPreferences) !== JSON.stringify(this.originalPreferences))) {
+            this.previewCallback(this.originalTemplateId, this.originalRevision, this.originalPreferences);
         }
         this.options?.disposed();
         this.contentEl.empty();
@@ -264,7 +278,7 @@ export class ThemeGalleryModal extends Modal {
         if (!this.options || this.isClosed) return;
         const generation = ++this.previewGeneration;
         try {
-            const article = await this.options.renderPreview(this.currentTemplateId, this.compareSaved, this.example, this.currentRevision);
+            const article = await this.options.renderPreview(this.currentTemplateId, this.compareSaved, this.example, this.currentRevision, this.currentPreferences);
             if (!this.isClosed && generation === this.previewGeneration) this.preview?.show(article);
         } catch (error) {
             if (!this.isClosed && generation === this.previewGeneration) { this.statusEl?.setText('预览失败，请重试或取消。'); throw error; }
@@ -346,9 +360,10 @@ export class ThemeGalleryModal extends Modal {
             if (this.transaction.busy) return;
             this.currentTemplateId = template.id;
             this.currentRevision = latestThemeReference(template).revision;
+            this.currentPreferences = this.savedPreference(template.id,this.currentRevision);
             void this.transaction.preview(async isCurrent => {
                 if (!isCurrent()) return;
-                this.previewCallback(template.id, this.currentRevision);
+                this.previewCallback(template.id, this.currentRevision, this.currentPreferences);
                 await this.refreshPreview();
             });
             this.updateApplyButton();
@@ -360,6 +375,55 @@ export class ThemeGalleryModal extends Modal {
                 if(active) {const check=button.querySelector('.mp-theme-info')?.createDiv('mp-theme-checkmark');if(check)setIcon(check,'check');}
             });
         });
+    }
+
+    private savedPreference(id: string, revision: string): AppearancePreferences {
+        return revision === READING_THEME_REVISION ? normalizeReadingPreferences(id,this.savedPreferences?.[`${id}@${revision}`]) : originalPreferences();
+    }
+
+    private tune(preferences: AppearancePreferences): void {
+        if (this.transaction.busy || !this.tuningWritable) return;
+        this.currentPreferences = {...preferences};
+        void this.transaction.preview(async isCurrent => {
+            // Coalesce gestures in the same event turn; only the last draft paints.
+            await Promise.resolve();
+            if (!isCurrent()) return;
+            this.previewCallback(this.currentTemplateId,this.currentRevision,this.currentPreferences);
+            await this.refreshPreview();
+        });
+        this.updateTryHint();
+    }
+
+    private renderTuning(): void {
+        const host=this.tuning;if (!host) return;
+        const focused=host.ownerDocument.activeElement;
+        const focusKey=focused instanceof HTMLElement ? focused.getAttribute('data-tuning-key') : null;
+        host.empty();
+        const choices=this.currentRevision===READING_THEME_REVISION && this.templates.find(item=>item.id===this.currentTemplateId)?.isPreset ? readingPalettes[this.currentTemplateId] : undefined;
+        if (!choices || !this.tuningWritable) {
+            host.createDiv({cls:'mp-gallery-tuning-note',text:!this.tuningWritable?'外观数据来自其他版本；微调暂不可保存。':'旧版和自定义主题保留原样；精选主题切换升级版后可微调。'});
+            return;
+        }
+        const group=(label:string) => {
+            const row=host.createDiv('mp-gallery-tuning-row');row.createSpan({text:label,cls:'mp-gallery-tuning-label'});
+            return row.createDiv({cls:'mp-gallery-tuning-options',attr:{role:'group','aria-label':label}});
+        };
+        const palette=group('配色');
+        for(const choice of choices){
+            const button=palette.createEl('button',{cls:'mp-gallery-swatch',attr:{type:'button','data-palette-id':choice.id,'data-tuning-key':`palette-${choice.id}`,'aria-pressed':String(choice.id===this.currentPreferences.paletteId)}});
+            button.createSpan({cls:'mp-gallery-swatch-dot',attr:{'aria-hidden':'true'}}).setCssStyles({backgroundColor:choice.color});
+            button.createSpan({text:choice.name});button.addEventListener('click',()=>this.tune({...this.currentPreferences,paletteId:choice.id}));
+        }
+        const density=group('阅读密度');
+        for(const choice of densityChoices){
+            const button=density.createEl('button',{text:choice.name,attr:{type:'button','data-density':choice.id,'data-tuning-key':`density-${choice.id}`,'aria-pressed':String(choice.id===this.currentPreferences.density)}});
+            button.addEventListener('click',()=>this.tune({...this.currentPreferences,density:choice.id}));
+        }
+        const reset=host.createEl('button',{cls:'mp-gallery-tuning-reset',text:'重置本版式微调',attr:{type:'button','data-tuning-key':'reset'}});
+        reset.addEventListener('click',()=>this.tune(originalPreferences()));
+        host.createDiv({cls:'mp-gallery-tuning-note',text:'仅确认应用后保存。微调不改字号、纸底或原文；对照“已保存”不改变试用。'});
+        this.updateSavingState();
+        if(focusKey)host.querySelector<HTMLElement>(`[data-tuning-key="${focusKey}"]`)?.focus();
     }
 
     private updateApplyButton(): void {
@@ -374,7 +438,8 @@ export class ThemeGalleryModal extends Modal {
         const template = this.templates.find(item => item.id === this.currentTemplateId);
         const description = template ? this.getTemplateDescription(template) : '适合当前文章的视觉排版';
         this.tryHintEl.setText(`推荐作用：${description}`);
-        const saved = this.currentTemplateId === this.originalTemplateId && this.currentRevision === this.originalRevision;
+        this.renderTuning();
+        const saved = this.currentTemplateId === this.originalTemplateId && this.currentRevision === this.originalRevision && JSON.stringify(this.currentPreferences) === JSON.stringify(this.originalPreferences);
         const modern = this.currentRevision === READING_THEME_REVISION;
         const custom = template && !template.isPreset;
         this.revisionHint?.setText(`${saved ? '已保存' : '试用'}${custom ? '自定义' : modern ? '升级版' : '旧版'} · ${this.enhancementLabel}`);

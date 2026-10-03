@@ -20,8 +20,8 @@ export function legacyTheme(id: string): Template | undefined {
     const definition = (legacyDefinitions as unknown as Record<string, Template>)[id];
     return definition ? { ...structuredClone(definition), isPreset: true } : undefined;
 }
-export function readingTheme(id: string): Template | undefined {
-    const base = legacyTheme(id); return base ? buildReadingTheme(base) : undefined;
+export function readingTheme(id: string, preferences?: AppearancePreferences): Template | undefined {
+    const base = legacyTheme(id); return base ? buildReadingTheme(base, preferences) : undefined;
 }
 export function latestThemeReference(template: Template): ThemeReference {
     return template.isPreset && hasReadingTheme(template.id) ? { id:template.id,kind:'builtin',revision:READING_THEME_REVISION } : themeReference(template);

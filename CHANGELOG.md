@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.22.0-beta.1
+
+- Add P3 theme-scoped tuning inside a collapsed gallery disclosure: exactly three named role palettes per featured reading revision, plus theme/compact/airy density. Keep 14 name-only featured cards, five historical themes and the workbench toolbar.
+- Resolve colour roles and explicit vertical spacing in the shared appearance path, not CSS replacement. Keep paper, body colour, font size, horizontal indentation, image ratios, semantic status colours and source Markdown. Coalesce same-turn tuning gestures so stale drafts do not paint.
+- Save preferences only on confirmation, scoped by theme ID and revision. Restore them when returning to a theme; reset affects only the current draft. Snapshots retain complete appearance and fingerprints; legacy/custom revisions and opaque future settings keep their compatibility paths.
+- Test 378 native mobile-width combinations, 126 complete production export snapshots, original stable legacy output equality, actual isolated save/reopen/reset/snapshot restoration, responsive controls and representative HTML/long/segmented exports. BRAT and actual WeChat acceptance remain pending; no stable/official promotion in this release.
+
 ## 3.21.0
 
 - Promote the user-accepted 3.21.0-beta.3 P2 reading upgrade to stable. All 14 featured reading revisions, mobile quote-output adaptation, and export paths retain the accepted runtime; no new runtime feature is added during promotion.

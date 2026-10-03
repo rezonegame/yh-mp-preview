@@ -22,5 +22,5 @@ test('selected article recipes are applied in both preview and copy paths', () =
   const copyPipeline = readFileSync(new URL('../src/core/render/legacyWechatPipeline.ts', import.meta.url), 'utf8');
   assert.match(view, /applyArticleRecipe\(section,recipeId \?\? settings\.v3\.selectedRecipeId,/);
   assert.match(copyPipeline, /applyArticleRecipe\(clone, plan\.recipeId, options\.palette\)/);
-  assert.match(view, /applyThemeTrial\(templateId, revision\)/);
+  assert.match(view, /applyThemeTrial\(templateId, revision, preferences\)/);
 });

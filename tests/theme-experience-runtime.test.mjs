@@ -95,5 +95,5 @@ test('layout refresh respects an explicitly expanded compact selector and displa
   const modal=new ThemeGalleryModal({}, {getVisibleTemplates:()=>themes,getSettings:()=>({templates:themes,customTemplates:[],v3:{selectedRecipeId:'legacy-compatible'}})},'default',()=>{},id=>selected.push(id),{fontFamily:'serif',fontSize:15,renderPreview:async(...args)=>{events.push(args);return null},isValid:()=>true,cancel:()=>{},settled:()=>{},disposed:()=>{}});
   modal.open();const selector=modal.contentEl.querySelector('.mp-gallery-selector');selector.open=true;modal.updateLayout();assert.equal(selector.open,true);
   modal.contentEl.querySelector('[aria-label="画廊预览来源"] button:nth-child(2)').click();modal.contentEl.querySelector('[aria-label="画廊外观对照"] button:nth-child(2)').click();await delay(5);
-  assert.deepEqual(selected,[]);assert.deepEqual(events.at(-1),['default',true,true,'legacy-3.19.1']);modal.close();
+  assert.deepEqual(selected,[]);assert.deepEqual(events.at(-1),['default',true,true,'legacy-3.19.1',{paletteId:'original',density:'theme'}]);modal.close();
 });

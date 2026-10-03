@@ -3,6 +3,8 @@ import { getCuratedThemeEntry, type WechatReadingProfile } from './themeCatalog'
 import { resolveWechatPalette, type WechatPalette } from './wechatPalette';
 import { setSafeInlineStyle } from '../security/safeDom';
 import type { Typography } from './templateStylePlan';
+import type { AppearancePreferences } from './themeRevisionRegistry';
+import { readingPalettes, normalizeReadingPreferences, densityScale } from './readingPreferences';
 
 export const READING_THEME_REVISION = 'reading-2026.1';
 export interface ReadingThemeTokens {
@@ -36,12 +38,16 @@ const designs: Readonly<Record<string, ReadingDesign>> = {
     'case-file': { accent:'#40505c',h1:1.72,h2:1.25,chapterGap:2.3,chapter:'double',quote:'note',quoteGap:1.5,listGap:.72,listRule:true,imageGap:1.55,imageFrame:true,component:'rule' },
 };
 export function hasReadingTheme(id: string): boolean { return Boolean(Object.prototype.hasOwnProperty.call(designs, id)); }
-export function buildReadingTheme(base: Template): Template | undefined {
+export function buildReadingTheme(base: Template, preferences?: AppearancePreferences): Template | undefined {
     const design = designs[base.id]; if (!design) return undefined;
-    const palette = resolveWechatPalette({ ...base, styles: { ...base.styles, accentColor: design.accent } });
+    const effective = normalizeReadingPreferences(base.id, preferences);
+    const accent = readingPalettes[base.id].find(choice => choice.id === effective.paletteId)!.color;
+    const scale = densityScale(effective.density);
+    const space = (value: number): number => Math.round(value * scale.spacing * 10000) / 10000;
+    const palette = resolveWechatPalette({ ...base, styles: { ...base.styles, accentColor: accent } }, design.paper);
     const profile = getCuratedThemeEntry(base.id)?.readingProfile ?? 'standard';
-    const line = profile === 'airy' ? 1.82 : profile === 'compact' ? 1.72 : 1.78;
-    const gap = profile === 'airy' ? 1.05 : profile === 'compact' ? .85 : .95;
+    const line = Math.min(1.95,Math.max(1.65,Math.round((profile === 'airy' ? 1.82 : profile === 'compact' ? 1.72 : 1.78) * scale.line * 10000) / 10000));
+    const gap = space(profile === 'airy' ? 1.05 : profile === 'compact' ? .85 : .95);
     const foreground = '#263238', secondary = '#52606d';
     const chapter = {
         line:`border-bottom:1px solid ${palette.border};padding-bottom:.5em;`, open:'border:0;padding:0;',
@@ -49,9 +55,10 @@ export function buildReadingTheme(base: Template): Template | undefined {
         bar:`border-left:3px solid ${palette.accent};background:${palette.surface};padding:.5em .65em;`,
         double:`border-bottom:3px double ${palette.border};padding-bottom:.55em;`,
     }[design.chapter];
-    const title: TemplateStyles['title'] = { h1: heading(design.h1,1.9,.8,'',foreground), h2:heading(design.h2,design.chapterGap,.75,chapter,foreground),
-        h3:heading(1.14,1.65,.55,design.chapter==='anchor'?`border-left:2px solid ${palette.border};padding-left:.65em;`:'',palette.accentText),
-        h4:heading(1.07,1.4,.5,'',foreground),h5:heading(1.02,1.25,.45,'',foreground),h6:heading(.98,1.15,.4,'',secondary),base:heading(1,1.2,.5,'',foreground) };
+    const h = (size:number,before:number,after:number,decoration:string,color:string) => heading(size,space(before),space(after),decoration,color);
+    const title: TemplateStyles['title'] = { h1: h(design.h1,1.9,.8,'',foreground), h2:h(design.h2,design.chapterGap,.75,chapter,foreground),
+        h3:h(1.14,1.65,.55,design.chapter==='anchor'?`border-left:2px solid ${palette.border};padding-left:.65em;`:'',palette.accentText),
+        h4:h(1.07,1.4,.5,'',foreground),h5:h(1.02,1.25,.45,'',foreground),h6:h(.98,1.15,.4,'',secondary),base:h(1,1.2,.5,'',foreground) };
     // Avoid border:0: Chromium expands it to initial style/color values, which
     // a paste destination may drop and replace with its native quote decoration.
     // Every edge has concrete values, including invisible (zero-width) edges.
@@ -70,27 +77,27 @@ export function buildReadingTheme(base: Template): Template | undefined {
         box:`background:${palette.surface};padding:.8em 1em;`,
     }[design.quote];
     const styles: TemplateStyles = {
-        container:`background:${design.paper ?? '#ffffff'};padding:16px 20px;color:${foreground};`,accentColor:design.accent,title,
+        container:`background:${design.paper ?? '#ffffff'};padding:16px 20px;color:${foreground};`,accentColor:accent,title,
         paragraph:`color:${foreground};font-weight:400;line-height:${line};letter-spacing:0;text-align:left;margin:0 0 ${gap}em;`,
-        list:{container:`margin:.85em 0 1.15em;padding:0 0 0 1.45em;color:${foreground};text-align:left;`,
-            item:`color:${foreground};line-height:${line};margin:0 0 ${design.listGap}em;padding:0 0 ${design.listRule?'.3em':'0'};${design.listRule?`border-bottom:1px solid ${palette.border};`:''}`,
-            taskList:`list-style:none;color:${foreground};line-height:${line};margin-bottom:${design.listGap}em;`},
-        quote:`display:block;width:auto;min-width:0;max-width:100%;box-sizing:border-box;margin:${design.quoteGap}em 0;${quote}color:${secondary};font-style:normal;line-height:${line};`,
-        code:{header:{container:'display:none;',dot:'display:none;',colors:[design.accent,design.accent,design.accent]},
-            block:`margin:1.2em 0;padding:14px;background:${palette.surface};border:1px solid ${palette.border};color:${foreground};font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:14px;line-height:1.65;`,
+        list:{container:`margin:${scale.spacing===1?'.85':space(.85)}em 0 ${space(1.15)}em;padding:0 0 0 1.45em;color:${foreground};text-align:left;`,
+            item:`color:${foreground};line-height:${line};margin:0 0 ${space(design.listGap)}em;padding:0 0 ${design.listRule?scale.spacing===1?'.3em':`${space(.3)}em`:'0'};${design.listRule?`border-bottom:1px solid ${palette.border};`:''}`,
+            taskList:`list-style:none;color:${foreground};line-height:${line};margin-bottom:${space(design.listGap)}em;`},
+        quote:`display:block;width:auto;min-width:0;max-width:100%;box-sizing:border-box;margin:${space(design.quoteGap)}em 0;${quote}color:${secondary};font-style:normal;line-height:${line};`,
+        code:{header:{container:'display:none;',dot:'display:none;',colors:[accent,accent,accent]},
+            block:`margin:${space(1.2)}em 0;padding:14px;background:${palette.surface};border:1px solid ${palette.border};color:${foreground};font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:14px;line-height:1.65;`,
             inline:`padding:.1em .3em;background:${palette.surface};color:${foreground};font-family:ui-monospace,Consolas,monospace;font-size:.9em;line-height:1.5;`},
-        image:`display:block;margin:${design.imageGap}em auto;border:${design.imageFrame?`1px solid ${palette.border}`:'0'};border-radius:${design.imageFrame?'2px':'0'};`,
+        image:`display:block;margin:${space(design.imageGap)}em auto;border:${design.imageFrame?`1px solid ${palette.border}`:'0'};border-radius:${design.imageFrame?'2px':'0'};`,
         link:`color:${palette.accentText};text-decoration:underline;background-image:none;`,
         emphasis:{strong:`font-weight:700;color:${foreground};`,em:`color:${foreground};font-style:italic;`,del:`color:${secondary};text-decoration:line-through;`},
-        table:{container:`margin:1.2em 0;border-collapse:collapse;border-top:${design.chapter==='double'?'3px double':'2px solid'} ${palette.accent};`,
+        table:{container:`margin:${space(1.2)}em 0;border-collapse:collapse;border-top:${design.chapter==='double'?'3px double':'2px solid'} ${palette.accent};`,
             header:`padding:8px;background:${palette.surface};color:${foreground};font-weight:700;border:0;border-bottom:1px solid ${palette.border};font-size:.9em;line-height:1.6;`,
             cell:`padding:8px;background:transparent;color:${foreground};border:0;border-bottom:1px solid ${palette.border};font-size:.9em;line-height:1.65;`},
-        hr:`margin:1.8em 0;border:0;border-top:1px solid ${palette.border};`,footnote:{ref:`color:${palette.accentText};`,backref:`color:${palette.accentText};`},
+        hr:`margin:${space(1.8)}em 0;border:0;border-top:1px solid ${palette.border};`,footnote:{ref:`color:${palette.accentText};`,backref:`color:${palette.accentText};`},
     };
     return { ...structuredClone(base),styles,reading:{revision:READING_THEME_REVISION,profile,
         rootCss:`background:${design.paper??'#ffffff'};margin:0;padding:16px 20px;color:${foreground};box-sizing:border-box;max-width:100%;`,
-        captionCss:`font-size:.85em;line-height:1.6;color:${secondary};text-align:left;margin:.4em 0 ${design.imageGap}em;`,
-        component:{shape:design.component,padding:design.component==='open'?4:14,gap:design.component==='open'?1.6:1.1,radius:design.component==='box'?4:0}} };
+        captionCss:`font-size:.85em;line-height:1.6;color:${secondary};text-align:left;margin:${scale.spacing===1?'.4':space(.4)}em 0 ${space(design.imageGap)}em;`,
+        component:{shape:design.component,padding:design.component==='open'?4:14,gap:space(design.component==='open'?1.6:1.1),radius:design.component==='box'?4:0}} };
 }
 function heading(size:number,before:number,after:number,decoration:string,color:string): HeadingStyle {
     return {base:`font-size:${size}em;font-weight:700;line-height:1.45;letter-spacing:0;text-align:left;margin:${before}em 0 ${after}em;${decoration}`,content:`color:${color};font-weight:inherit;`,after:'display:none;'};

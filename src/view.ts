@@ -19,6 +19,7 @@ import { applyArticleRecipe, resetArticleRecipe } from './core/recipe/articleRec
 import { normalizeArticleText } from './core/render/articleText';
 import { prepareLegacyWechatFragment } from './core/render/legacyWechatPipeline';
 import { resolveWechatAppearance, snapshotAppearance, appearanceConflictKey, type ResolvedWechatAppearance } from './core/theme/wechatAppearance';
+import type { AppearancePreferences } from './core/theme/themeRevisionRegistry';
 import { capturePreviewAnchor, restorePreviewAnchor } from './core/render/previewAnchor';
 import { galleryExampleMarkdown } from './ui/themeGalleryPreview';
 import type { ValidationReport } from './core/validation/wechatHtmlValidator';
@@ -75,10 +76,10 @@ export class MPView extends ItemView {
         this.recipeSummary.parentElement?.toggleClass('is-active', active);
     }
 
-    private applyThemeTrial(templateId: string, revision?: string): void {
+    private applyThemeTrial(templateId: string, revision?: string, preferences?: AppearancePreferences): void {
         const savedId = this.settingsManager.getSettings().templateId;
         this.trialTemplateId = templateId === savedId ? null : templateId;
-        this.trialAppearance = resolveWechatAppearance(this.settingsManager.getSettings(),templateId,revision);
+        this.trialAppearance = resolveWechatAppearance(this.settingsManager.getSettings(),templateId,revision,preferences);
         const article = this.previewEl.querySelector<HTMLElement>('.mp-content-section');
         const anchor = article ? capturePreviewAnchor(this.previewEl, article) : null;
         if (this.galleryBaseline && article) article.replaceWith(this.galleryBaseline.cloneNode(true));
@@ -1252,16 +1253,16 @@ export class MPView extends ItemView {
             this.settingsManager,
             currentTemplateId,
             // onSelect 回调
-            async (templateId: string, revision?: string) => {
+            async (templateId: string, revision?: string, preferences?: AppearancePreferences) => {
                 if (!valid || this.currentFile?.path !== (filePath ?? undefined) || appearanceConflictKey(this.settingsManager.getSettings()) !== expectedKey) throw new Error('文章或全局外观已变化，请重新打开画廊。');
-                const appearance = resolveWechatAppearance(settings, templateId, revision);
+                const appearance = resolveWechatAppearance(settings, templateId, revision, preferences);
                 await this.settingsManager.commitWechatAppearance(appearance.reference, appearance.preferences, expectedKey);
                 const template = this.settingsManager.getTemplate(templateId);
                 new Notice(`已应用主题: ${template?.name || templateId}`);
             },
             // previewCallback 回调 - 实时预览
-            (templateId: string, revision?: string) => {
-                this.applyThemeTrial(templateId, revision);
+            (templateId: string, revision?: string, preferences?: AppearancePreferences) => {
+                this.applyThemeTrial(templateId, revision, preferences);
             },
             {
                 fontFamily: this.previewEl.ownerDocument.defaultView?.getComputedStyle(this.previewEl).fontFamily ?? settings.fontFamily,
@@ -1278,7 +1279,7 @@ export class MPView extends ItemView {
                         this.applyPresentation(this.previewEl); this.refreshValidationReport();
                     } else if (!settled) cleanup();
                 },
-                renderPreview: async (id, saved, example, revision) => {
+                renderPreview: async (id, saved, example, revision, preferences) => {
                     let source = saved ? this.galleryBaseline : this.previewEl.querySelector<HTMLElement>('.mp-content-section');
                     if (example) {
                         if (!examplePromise) examplePromise = (async () => {
@@ -1295,7 +1296,7 @@ export class MPView extends ItemView {
                     if (!example) return source;
                     const host = this.previewEl.ownerDocument.defaultView!.createDiv(); host.appendChild(source.cloneNode(true));
                     const sampleId = saved ? currentTemplateId : id;
-                    this.applyPresentation(host, sampleId, resolveWechatAppearance(settings,sampleId,saved ? undefined : revision),'legacy-compatible');
+                    this.applyPresentation(host, sampleId, resolveWechatAppearance(settings,sampleId,saved ? undefined : revision,saved ? undefined : preferences),'legacy-compatible');
                     return host.querySelector<HTMLElement>('.mp-content-section');
                 },
             }

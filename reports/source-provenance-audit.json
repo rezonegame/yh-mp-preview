@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "auditDate": "2026-10-03",
-  "pluginVersion": "3.21.0",
-  "baselineCommit": "32befe7e0f54c8a75bd283e08b74163f6e58dc50",
+  "pluginVersion": "3.22.0-beta.1",
+  "baselineCommit": "4c8b9ba7d0e9f6c91f5bc7722d996e0bfaeffbb4",
   "scope": "Current working-tree src files; all pinned upstream src blobs; runtime package metadata. Git history and existing release assets are preserved.",
   "upstream": {
     "repository": "Yeban8090/mp-preview",
@@ -23,7 +23,7 @@
     ]
   },
   "summary": {
-    "localSourceFiles": 106,
+    "localSourceFiles": 107,
     "identicalFiles": 0,
     "identicalMethodBodies": 0,
     "longTokenRuns": 0,
@@ -51,7 +51,7 @@
     {
       "path": "src/backgroundManager.ts",
       "sha256": "efa7208f5da7e50b6fb4c87791a106349e6f3b8960a7f3369de09e121ed68ab5",
-      "workingTreeSha256": "2350f21ff2853729c28016aa4bd2b3710f2e69e8399aa5a75699d860f530c784",
+      "workingTreeSha256": "899a9df48c16b8bad7e41b898ea8eaf13cdd808c03b47aa910508ef9876a3a0c",
       "upstreamPath": "src/backgroundManager.ts",
       "identicalUpstreamPaths": [],
       "classification": "changed-upstream-path-not-independent-proof"
@@ -171,7 +171,7 @@
     {
       "path": "src/core/recipe/articleRecipeFormatter.ts",
       "sha256": "a524e231de0f6b6d7f178bae2f6b7e482312880094af715700d50a1b96f3b6c2",
-      "workingTreeSha256": "a524e231de0f6b6d7f178bae2f6b7e482312880094af715700d50a1b96f3b6c2",
+      "workingTreeSha256": "e673aa2701b524516ae8133ac9c980df601e47d35efceecc0d52c216a5090345",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
@@ -195,7 +195,7 @@
     {
       "path": "src/core/render/legacyWechatPipeline.ts",
       "sha256": "321beec448894e4007bf071f7d21b89c271fcc19b166f0b8de1a283b7a76c26a",
-      "workingTreeSha256": "22a58c18a3d86219a01a2ca4affdde48cff55d000d27d878d525079f11ed7945",
+      "workingTreeSha256": "6bb19e27dcdb25442fe7483621387eb430732e22ea8d17eadce299f80255e198",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
@@ -297,9 +297,17 @@
       "classification": "added-path-not-independent-proof"
     },
     {
+      "path": "src/core/theme/readingPreferences.ts",
+      "sha256": "8651d26eb8f3ca6742d58bd571c4f1f244787599b92e2857567b72528c632eab",
+      "workingTreeSha256": "8651d26eb8f3ca6742d58bd571c4f1f244787599b92e2857567b72528c632eab",
+      "upstreamPath": null,
+      "identicalUpstreamPaths": [],
+      "classification": "added-path-not-independent-proof"
+    },
+    {
       "path": "src/core/theme/templateStylePlan.ts",
       "sha256": "afad51bc08c754dae57d7e52e97b6ecf10e30293a7e861320abae995945804f3",
-      "workingTreeSha256": "afad51bc08c754dae57d7e52e97b6ecf10e30293a7e861320abae995945804f3",
+      "workingTreeSha256": "69e3e5a83876d9e5a52398de2d2de7d3859f3768c08461ad7ac7dce7a011fedd",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
@@ -307,7 +315,7 @@
     {
       "path": "src/core/theme/templateTypes.ts",
       "sha256": "560ff6ae2b3037950a95efcb2fc368576fb7f7ba402957586087445d851c964c",
-      "workingTreeSha256": "560ff6ae2b3037950a95efcb2fc368576fb7f7ba402957586087445d851c964c",
+      "workingTreeSha256": "ad9d93451610009f20c62002442441c3a2c128fc7752a1cb1275646d49ea4eff",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
@@ -315,7 +323,7 @@
     {
       "path": "src/core/theme/themeCatalog.ts",
       "sha256": "726ae595a63e3238e271130769eff750dd5d362280645bdc212161d67721326d",
-      "workingTreeSha256": "726ae595a63e3238e271130769eff750dd5d362280645bdc212161d67721326d",
+      "workingTreeSha256": "fb2767322af77c162563001441769930e320aac10a993e0ae0a67f26cb0a337a",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
@@ -331,7 +339,7 @@
     {
       "path": "src/core/theme/themeManifestBridge.ts",
       "sha256": "54a2d9c1cb49881643a08574b2d445cb560942117d515e6cb4b1748506dfe642",
-      "workingTreeSha256": "54a2d9c1cb49881643a08574b2d445cb560942117d515e6cb4b1748506dfe642",
+      "workingTreeSha256": "ac61ba6b932639f9bde28e713ed54e9e0b022f50fc45ad1823e4cd7da0d43d2f",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
@@ -354,24 +362,24 @@
     },
     {
       "path": "src/core/theme/themeRevisionRegistry.ts",
-      "sha256": "a77c150bb62a4103048ea7f3b2ccd4879f091dce37d3e6809dd41dba341fb2f2",
-      "workingTreeSha256": "db7c565958df1e91e17f40eff618d8e87e9b2300c5a210920bb2a4363fe862b5",
+      "sha256": "6118198f0b8368776827c9bc9dd7e1a06f77c8eb5246a3a71af4b5ea1bb34586",
+      "workingTreeSha256": "81f7f00be364576a41a6956d8df775b7a59321577340c53b33d45f534bad568f",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
     },
     {
       "path": "src/core/theme/wechatAppearance.ts",
-      "sha256": "6e3c5911cd5f348958d2fe6bc4cb9dd7b26d61e17593c6ffc7be6dcf9f8b3915",
-      "workingTreeSha256": "778625e5a9581328a51cc3d0f1de1b0a0f9dc5f69ff3b9d43ec22d13375a480a",
+      "sha256": "a36cf6220b8f15e88dab471526028d1572637b6302e56477a9357b475b83f0cf",
+      "workingTreeSha256": "99d47bd279aed6c92db538df712b57c5eb3cb8d07908ce2ba2e2497822159c67",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
     },
     {
       "path": "src/core/theme/wechatPalette.ts",
-      "sha256": "0a148ae87cc2e37ab946a6bcf5a37b83d249a8a8b2dac4f24117331c69f8b0a2",
-      "workingTreeSha256": "0a148ae87cc2e37ab946a6bcf5a37b83d249a8a8b2dac4f24117331c69f8b0a2",
+      "sha256": "ceb34894998e50e6c9e4af736d4263a57e9c0397068f415cb2ad4b77bb39cfdb",
+      "workingTreeSha256": "ceb34894998e50e6c9e4af736d4263a57e9c0397068f415cb2ad4b77bb39cfdb",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
@@ -386,8 +394,8 @@
     },
     {
       "path": "src/core/theme/wechatThemeTokens.ts",
-      "sha256": "485e0b32c50648355fa25f151c95380d4052a860795f30576521b36643eea92c",
-      "workingTreeSha256": "485e0b32c50648355fa25f151c95380d4052a860795f30576521b36643eea92c",
+      "sha256": "c7cc7487a25c98797db738a86be6c37089498f186cacf29079f6afa5b03607f7",
+      "workingTreeSha256": "92954d3e32769fd58867c24485c098a87684b4a856197927343ba9f4a63d1e1e",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
@@ -395,7 +403,7 @@
     {
       "path": "src/core/validation/wechatHtmlValidator.ts",
       "sha256": "81f63ae8154c811e634cfde4b2549742d117599008c925d293d9610464c7d5af",
-      "workingTreeSha256": "61b9ff43a7ff3fad01704c819460bfdd7d0fecfe426ed1135923f1d055212123",
+      "workingTreeSha256": "8c032d5787120a91a2c5d795c1fa89569b49b1fe08ca46451683b4bec9c89928",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
@@ -474,8 +482,8 @@
     },
     {
       "path": "src/settings/ThemeGalleryModal.ts",
-      "sha256": "c7490e73e45f82b9948baafc7084de25d2dcec34519ece76709596c3b70c74ac",
-      "workingTreeSha256": "22201e1e6911d1ee767e521189c07b81254e8bcdbc0e1cc34248111d8dcc01d2",
+      "sha256": "903d02d63413e5cf01b73eb19a9c4adf290f7a7e992255dcc4e94e10a6cc1365",
+      "workingTreeSha256": "5056121f1e01ff4cc3862ff9e7e03b7fd554fa7a72d151cdad8abfb59228f913",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
@@ -491,7 +499,7 @@
     {
       "path": "src/settings/settings.ts",
       "sha256": "0a274be987b6a8f403f02a9ec2409245c5c441b11824af27de5216788cf253bf",
-      "workingTreeSha256": "0f3f0b5e52031c00475e7e37e201167b4f5cad7c7c387d543ae37f1cb2a24cc3",
+      "workingTreeSha256": "e36889159e8564d33cd9e9455c3611f9204ab029f3e4699c637282ac98b5b258",
       "upstreamPath": "src/settings/settings.ts",
       "identicalUpstreamPaths": [],
       "classification": "changed-upstream-path-not-independent-proof"
@@ -562,8 +570,8 @@
     },
     {
       "path": "src/styles/settings/theme-gallery.css",
-      "sha256": "19b5367d67c65f427dc6ecefd3c13684b0ca9e2638890ad799d46fd205ef765f",
-      "workingTreeSha256": "97bbc1bd665e55080fef4fd77e569714997bd841a5e24177c563050304233d95",
+      "sha256": "0a6af0523df4f440b8b06056701553e72e35dd910531133feb54721a174f47ed",
+      "workingTreeSha256": "cbbca0c8e7a85052bcee8c624fdfef7a8b73922ecef95ebc6b21f327681fe4fc",
       "upstreamPath": null,
       "identicalUpstreamPaths": [],
       "classification": "added-path-not-independent-proof"
@@ -619,7 +627,7 @@
     {
       "path": "src/templateManager.ts",
       "sha256": "369fcd9f4b2ea36785faf68110040cebf1595abb9dd3ddc072987116f7b538a6",
-      "workingTreeSha256": "369fcd9f4b2ea36785faf68110040cebf1595abb9dd3ddc072987116f7b538a6",
+      "workingTreeSha256": "c0b916e4683ea43db1efcac67c1a99dfb577e4e3f6dbef51755604fdd7fd7f9e",
       "upstreamPath": "src/templateManager.ts",
       "identicalUpstreamPaths": [],
       "classification": "changed-upstream-path-not-independent-proof"
@@ -874,8 +882,8 @@
     },
     {
       "path": "src/view.ts",
-      "sha256": "1c632729f2914c617b129af78a854280cab014d48087d391ddca8c60b4f2c3dc",
-      "workingTreeSha256": "6ad799666db40845be3b2bc1445040174921605cd833f4029beb661f663b4b37",
+      "sha256": "7b84e39d5f4850ae61ab3e67f27aa082b301346ea3e37ae4893506af3f3c56d4",
+      "workingTreeSha256": "d4098ddd5dd3e767ee1237935ff3229f0a4e5cf1da78ea727ece70fd208c97c0",
       "upstreamPath": "src/view.ts",
       "identicalUpstreamPaths": [],
       "classification": "changed-upstream-path-not-independent-proof"

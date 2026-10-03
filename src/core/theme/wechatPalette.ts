@@ -37,12 +37,12 @@ function contrast(first: string, second: string): number {
     return (lighter + 0.05) / (darker + 0.05);
 }
 
-export function resolveWechatPalette(template?: Template): WechatPalette {
+export function resolveWechatPalette(template?: Template, paper = '#ffffff'): WechatPalette {
     const rawAccent = template?.styles.accentColor || '#475569';
     const accent = /^#[\da-f]{6}$/i.test(rawAccent) ? rawAccent.toLowerCase() : '#475569';
     const surface = mix(accent, '#ffffff', 0.06);
     let accentText = accent;
-    while (contrast(accentText, '#ffffff') < 4.6 || contrast(accentText, surface) < 4.6) {
+    while (contrast(accentText, paper) < 4.6 || contrast(accentText, '#ffffff') < 4.6 || contrast(accentText, surface) < 4.6) {
         accentText = mix(accentText, '#000000', 0.9);
     }
     return {

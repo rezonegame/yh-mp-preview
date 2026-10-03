@@ -12,8 +12,8 @@ test('theme gallery is scene-first and preserves a safe try-before-apply flow', 
   assert.match(modal, /mp-gallery-history-btn/);
   assert.match(modal, /getThemeScene/);
   assert.doesNotMatch(modal, /selectedLayoutFamily/);
-  assert.match(modal, /!this\.hasApplied && \(this\.currentTemplateId !== this\.originalTemplateId \|\| this\.currentRevision !== this\.originalRevision\)/);
-  assert.match(modal, /this\.previewCallback\(this\.originalTemplateId, this\.originalRevision\)/);
+  assert.match(modal, /!this\.hasApplied && \(this\.currentTemplateId !== this\.originalTemplateId \|\| this\.currentRevision !== this\.originalRevision/);
+  assert.match(modal, /this\.previewCallback\(this\.originalTemplateId, this\.originalRevision, this\.originalPreferences\)/);
   assert.match(modal, /应用「\$\{template\?\.name/);
   assert.match(modal, /推荐作用：\$\{description\}/);
   assert.doesNotMatch(modal, /info\.createEl\('span', \{ text: this\.getTemplateDescription/);

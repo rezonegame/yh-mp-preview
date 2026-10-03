@@ -2,6 +2,7 @@ import type { MPSettings } from '../../settings/settings';
 import type { Template } from './templateTypes';
 import { isAppearanceV1, legacyTheme, readingTheme, READING_THEME_REVISION, originalPreferences, themeReference, type ThemeReference, type AppearancePreferences } from './themeRevisionRegistry';
 import { resolveWechatPalette, type WechatPalette } from './wechatPalette';
+import { normalizeReadingPreferences } from './readingPreferences';
 
 export interface AppearanceSnapshot {
     reference: ThemeReference; preferences: AppearancePreferences; fingerprint: string; renderRevision: string; customDefinition?: Template;
@@ -12,18 +13,20 @@ function fingerprint(value: unknown): string {
     for (let index = 0; index < source.length; index++) hash = Math.imul(hash ^ source.charCodeAt(index), 16777619);
     return `legacy-${(hash >>> 0).toString(16)}`;
 }
-export function resolveWechatAppearance(settings: MPSettings, id = settings.templateId, trialRevision?: string): ResolvedWechatAppearance {
+export function resolveWechatAppearance(settings: MPSettings, id = settings.templateId, trialRevision?: string, trialPreferences?: AppearancePreferences): ResolvedWechatAppearance {
     const catalog = settings.templates.concat(settings.customTemplates);
     const selected = catalog.find(template => template.id === id) ?? catalog.find(template => template.id === 'default') ?? legacyTheme('default')!;
     let reference = themeReference(selected);
     const saved=isAppearanceV1(settings.wechatAppearance)?settings.wechatAppearance.referencesById[id]:undefined;
     const revision=trialRevision??(saved?.id===id&&saved.kind===reference.kind?saved.revision:undefined);
-    const updated=reference.kind==='builtin'&&revision===READING_THEME_REVISION?readingTheme(reference.id):undefined;
+    const stored = isAppearanceV1(settings.wechatAppearance) ? settings.wechatAppearance.preferencesByReference[`${reference.id}@${revision}`] : undefined;
+    let preferences = normalizeReadingPreferences(reference.id, trialPreferences ?? stored);
+    const updated=reference.kind==='builtin'&&revision===READING_THEME_REVISION?readingTheme(reference.id,preferences):undefined;
     if(updated)reference={...reference,revision:READING_THEME_REVISION};
     const template = updated ?? (reference.kind === 'builtin' ? legacyTheme(reference.id) ?? selected : structuredClone(selected));
     // A user-defined extension cannot silently opt into a built-in renderer revision.
     if (!updated) delete template.reading;
-    const preferences = originalPreferences();
+    if (!updated) preferences = originalPreferences();
     const palette = resolveWechatPalette(template);
     const renderRevision = updated ? 'reading-presentation-2026.1' : 'legacy-presentation-3.19.1';
     return { reference, preferences, template, palette, renderRevision,
@@ -44,5 +47,6 @@ export function recordAppearance(settings: MPSettings, reference: ThemeReference
     if (!isAppearanceV1(settings.wechatAppearance)) throw new Error('外观设置来自较新版本，本版只能预览；请先升级插件。');
     settings.templateId = reference.id;
     settings.wechatAppearance.referencesById[reference.id] = structuredClone(reference);
-    settings.wechatAppearance.preferencesByReference[`${reference.id}@${reference.revision}`] = structuredClone(preferences);
+    const key = `${reference.id}@${reference.revision}`;
+    settings.wechatAppearance.preferencesByReference[key] = { ...settings.wechatAppearance.preferencesByReference[key], ...structuredClone(preferences) };
 }
