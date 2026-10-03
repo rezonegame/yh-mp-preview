@@ -17,3 +17,9 @@
 沿用既有 CI 发布不可变数字标签 `3.22.0`，下载并核验全部 13 个资产，再分别记录官方扫描／公开版本与隔离库原生安装结果。不将 GitHub 发布冒充官方同步或自动更新检测通过。历史来源、许可和来源审计限制保留。
 
 BRAT 固定 beta 的用户可改选稳定 `3.22.0`；回退版本为 `3.21.0`，旧发行和标签不覆盖。Marketing 库不修改。P4 不属于本次稳定晋级。
+
+实际发布：不可变标签指向 `36106769a6fbbd003248c16bfcd91fbf2128df35`，既有 CI [37103458526](https://github.com/rezonegame/yh-mp-preview/actions/runs/37103458526) completed/success。[GitHub 稳定发行](https://github.com/rezonegame/yh-mp-preview/releases/tag/3.22.0) 已设为 latest，13 个资产逐字节匹配标签、GitHub 摘要及晋级指纹，见 `reports/release-3.22.0-publication.json`。
+
+隔离测试库经原生 `installPlugin` 从已核验仓库／版本实际下载启用，12 项检查通过，设置／启用列表／Markdown 字节不变，完整渲染与导出保留尾部。宿主追加的 `/* nosourcemap */` 尾注单独排除后 JS 主体一致；安装器返回值无布尔成功信号，以安装文件、启用版本和功能检查作为依据。这不是 BRAT 安装或自动目录更新检测，见 `reports/appearance-stable-native-install.json`。
+
+官方既有条目只触发一次新发行检查，扫描 Completed、0 Error，16 组警告与 6 组建议保留；依赖检查通过，官方构建逐字节复现发行 main.js。管理页和[公开页](https://community.obsidian.md/plugins/yh-mp-preview) 当前版本均为 `3.22.0`，见 `reports/official-3.22.0-update.json`。不重建条目，不改归属或新增政策承诺；网站同步不表示应用内搜索／自动更新覆盖。

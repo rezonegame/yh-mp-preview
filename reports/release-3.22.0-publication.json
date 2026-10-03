@@ -1,0 +1,107 @@
+{
+  "version": "3.22.0",
+  "repository": "rezonegame/yh-mp-preview",
+  "commit": "36106769a6fbbd003248c16bfcd91fbf2128df35",
+  "verifiedAt": "2026-10-03T06:34:56.741Z",
+  "publishedAt": "2026-10-03T06:34:13Z",
+  "url": "https://github.com/rezonegame/yh-mp-preview/releases/tag/3.22.0",
+  "status": "GitHub stable published; CI passed; all 13 downloaded assets match tagged source and GitHub digests",
+  "latestStable": "3.22.0",
+  "isDraft": false,
+  "isPrerelease": false,
+  "ci": {
+    "conclusion": "success",
+    "databaseId": 37103458526,
+    "headBranch": "3.22.0",
+    "headSha": "36106769a6fbbd003248c16bfcd91fbf2128df35",
+    "status": "completed",
+    "url": "https://github.com/rezonegame/yh-mp-preview/actions/runs/37103458526"
+  },
+  "assets": [
+    {
+      "name": "main.js",
+      "size": 1199260,
+      "sha256": "ed0e90e37712d3bfa60439f1752ddf653bd556fe559d5285438747860b40088a",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/main.js"
+    },
+    {
+      "name": "manifest.json",
+      "size": 287,
+      "sha256": "5eb98f4dcd0cc9494f85dfe155958eb674b6d98184400e9d909149e6f7ea36b5",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/manifest.json"
+    },
+    {
+      "name": "styles.css",
+      "size": 52492,
+      "sha256": "e465ae61408f5bd2a87fa9cd72fee1e188d6c9f34eee97d940b3e6950b8494f6",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/styles.css"
+    },
+    {
+      "name": "LICENSE",
+      "size": 34523,
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/LICENSE"
+    },
+    {
+      "name": "NOTICE",
+      "size": 2067,
+      "sha256": "63a9677f3091b93912b771103fbca3deffe65026137e32fcb9dfdd4946853c7f",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/NOTICE"
+    },
+    {
+      "name": "THIRD_PARTY_NOTICES.md",
+      "size": 6346,
+      "sha256": "9fd299732d668c328658e5f56c21512d42a2bbd9e2c223a3dbf348e890224165",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/THIRD_PARTY_NOTICES.md"
+    },
+    {
+      "name": "MIT-original.txt",
+      "size": 1068,
+      "sha256": "f34e537197d9fdd7e2f33a37e07ea93e8b830ecdd13daf2e013e80e0a6e5e301",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/MIT-original.txt"
+    },
+    {
+      "name": "DOMPurify.txt",
+      "size": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/DOMPurify.txt"
+    },
+    {
+      "name": "html2canvas.txt",
+      "size": 1062,
+      "sha256": "f3eca6ff762533fa5a77caf954a143e48afa204668cf97dce758c45a9e006be3",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/html2canvas.txt"
+    },
+    {
+      "name": "nanoid.txt",
+      "size": 1095,
+      "sha256": "4383cb2c3608397ce7a4159502614ed66890f8999c2a9c056dd3b1024d6721f0",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/nanoid.txt"
+    },
+    {
+      "name": "pangu.txt",
+      "size": 1072,
+      "sha256": "eeccd5776471b1e421a3b647c616722db5439e38a62f07bf378d8de476979c9d",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/pangu.txt"
+    },
+    {
+      "name": "Microsoft-helpers.txt",
+      "size": 645,
+      "sha256": "5989359645911c04a140c49d89496b13feca980bbf36d2250a12d3b9d06250d6",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/Microsoft-helpers.txt"
+    },
+    {
+      "name": "babel-helpers.txt",
+      "size": 1189,
+      "sha256": "4be9d87b56a306293223b490c0d0b245e9e94f39884147bf051a6c7b825aeb30",
+      "url": "https://github.com/rezonegame/yh-mp-preview/releases/download/3.22.0/babel-helpers.txt"
+    }
+  ],
+  "acceptedBeta": "3.22.0-beta.1",
+  "acceptedRuntimeAndStylesUnchanged": true,
+  "priorReleaseAssetsOverwritten": false,
+  "pluginIdMigrated": false,
+  "marketingVaultModified": false,
+  "brat": "User accepted beta; no new stable-version installation run during promotion",
+  "officialDirectory": "Tracked separately; GitHub publication is not official-directory or application-installation verification"
+}

@@ -237,3 +237,7 @@ main 快进并与不可变 3.21.0 标签原子推送；[CI 37098626493](https://
 ### P3 稳定晋级（2026-10-03）
 
 用户回复“可以了，你直接发布吧”，接受候选并明确授权正式发布。只晋级数字版本 `3.22.0`，不加入 P4 或新运行功能；比较验收标签的源码、依赖、JS/CSS 与本次构建，manifest 只改版本，重跑 154 项自动门。发布、官方技术扫描／公开版本、隔离库原生安装按实际结果分别追加，不改写此前未测试／失败记录。回退点 `3.21.0`，Marketing 库与原文不修改，来源及许可记录保留。
+
+全部自动门通过，154/154；正式标签 `36106769a6fbbd003248c16bfcd91fbf2128df35`，CI 37103458526 completed/success，13 个实际下载发行资产全部一致。main 与 GitHub latest 已为 3.22.0。切换本机 main 后 Git 自动检出 CRLF，使再次原始字节比较失败；确认仅换行不同后重跑既有 build 与 sync-version，canonical 构建和晋级指纹重新通过，不放宽发行包字节核验，未改运行逻辑。
+
+官方数字提交预检完成后只触发一次正式发行检查，说明先补齐；正式扫描 Completed、0 Error、16 组 Warning／6 组 Recommendation，依赖与发行构建逐字节复现 Pass。管理页和公开版本均为 3.22.0。隔离库原生安装器实际下载启用稳定版，12 项安装／渲染／导出检查通过，设置、启用列表和原文保留；宿主尾注单独处理。不是自动更新检测或 BRAT 实测，不改来源／归属／政策承诺。证据分别在 `reports/release-3.22.0-publication.json`、`reports/official-3.22-stable-preview.json`、`reports/official-3.22.0-update.json`、`reports/appearance-stable-native-install.json`。本轮 P3 已稳定交付，P4 待后续授权单独推进。

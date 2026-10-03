@@ -1,0 +1,69 @@
+{
+  "version": "3.22.0",
+  "checkedAt": "2026-10-03T06:35:23.372Z",
+  "repository": "rezonegame/yh-mp-preview",
+  "installMethod": "app.plugins.installPlugin(repository,'3.22.0',verifiedManifest)",
+  "installReturned": false,
+  "checks": [
+    {
+      "name": "native installed stable plugin enabled",
+      "pass": true
+    },
+    {
+      "name": "plugin ID preserved",
+      "pass": true
+    },
+    {
+      "name": "installed JS equals release except exact known host EOF footer",
+      "pass": true
+    },
+    {
+      "name": "styles match release bytes",
+      "pass": true
+    },
+    {
+      "name": "manifest matches release fields",
+      "pass": true
+    },
+    {
+      "name": "settings bytes preserved",
+      "pass": true
+    },
+    {
+      "name": "enabled list bytes preserved",
+      "pass": true
+    },
+    {
+      "name": "workbench renders full article",
+      "pass": true
+    },
+    {
+      "name": "local semantic quote structure retained",
+      "pass": true
+    },
+    {
+      "name": "export retains article end",
+      "pass": true
+    },
+    {
+      "name": "Markdown source unchanged",
+      "pass": true
+    },
+    {
+      "name": "settings preserved after render/export",
+      "pass": true
+    }
+  ],
+  "assets": {
+    "main.js": "65c4b1867ace88592f1759af765a27f986b014e247ffe965bd746352b0d20483",
+    "manifest.json": "5eb98f4dcd0cc9494f85dfe155958eb674b6d98184400e9d909149e6f7ea36b5",
+    "styles.css": "e465ae61408f5bd2a87fa9cd72fee1e188d6c9f34eee97d940b3e6950b8494f6"
+  },
+  "hostJavaScriptFooter": "/* nosourcemap */",
+  "marketingModified": false,
+  "limits": [
+    "Native exact repository/version update, not BRAT or automatic catalog update detection.",
+    "Windows Obsidian 1.13.7 only; accepted JS/CSS unchanged, no repeated full theme matrix.",
+    "User-reported WeChat acceptance, not agent backend inspection."
+  ]
+}

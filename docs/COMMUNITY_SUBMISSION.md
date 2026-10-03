@@ -2,6 +2,14 @@
 
 ## 当前状态（2026-10-03）
 
+### 3.22.0 已验收稳定晋级并同步官方条目
+
+用户回复“可以了，你直接发布吧”，接受 P3 候选并授权发布。稳定标签固定 `36106769a6fbbd003248c16bfcd91fbf2128df35`，源码／依赖／JS/CSS 与 `3.22.0-beta.1` 不变；154 项自动门和既有 CI 37103458526 通过，13 个实际发行资产逐字节匹配标签、GitHub 摘要及晋级指纹。旧稳定 `3.21.0` 可回退，不改历史标签。见 `reports/release-3.22.0-promotion.json` 与 `reports/release-3.22.0-publication.json`。
+
+精确数字提交预检 Completed、0 Error 后，正式说明先补齐，再对现有条目只触发一次发行检查。正式扫描 Completed、0 Error、16 组 Warning、6 组 Recommendation，依赖及 main.js 逐字节复现 Pass。管理页 Current release 与公开 Current version 均为 `3.22.0`；不是来源认证，不新增政策承诺，不改条目归属，历史与第三方许可保留。见 `reports/official-3.22.0-update.json`。
+
+隔离库原生安装器实际下载并启用已核验仓库／版本，12 项检查通过，设置、启用列表和原文不变；不是 BRAT 实测或自动目录发现，本轮没有验证应用内自动更新。详见 `reports/appearance-stable-native-install.json`，Marketing 未改。P4 尚未执行。
+
 ### 3.21.0 已完整验收、稳定发布并同步官方条目
 
 维护者先确认 beta.3 引用修复正常，又在明确询问长文／教程／报告及其他主题的复制、后台保存和手机预览后回复“都测试过了”。据此完整 P2 验收通过。稳定标签固定 `17fceeca5b6a7a34115023505e6430df827845f3`，源码、依赖、JS/CSS 与 beta.3 不变；151 项自动门和 CI 37098626493 通过，13 资产重新下载核验。证据见 `reports/release-3.21.0-promotion.json` 与 `reports/release-3.21.0-publication.json`。
